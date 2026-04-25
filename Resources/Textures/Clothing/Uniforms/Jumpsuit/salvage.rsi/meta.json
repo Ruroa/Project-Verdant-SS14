@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/0a1ae39f0fb7353b0704f27d1599a567891f727c, edited by Flareguy. In hand sprite scaled down by potato1234_x, monkey made by brainfood1183 (github) for ss14, rolled by https://github.com/GentleButter | Recolor by itsmaitake for Starlight",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/52678d41b527120f13f585eb64e9c659ef1426e0, inhands made by thebiggestbruh (discord), monkey made by brainfood1183 (github) for ss14",
   "size": {
     "x": 32,
     "y": 32
@@ -15,19 +15,7 @@
       "directions": 4
     },
     {
-      "name": "rolled-equipped-INNERCLOTHING",
-      "directions": 4
-    },
-    {
-      "name": "folded-equipped-INNERCLOTHING",
-      "directions": 4
-    },
-    {
       "name": "equipped-INNERCLOTHING-monkey",
-      "directions": 4
-    },
-    {
-      "name": "equipped-INNERCLOTHING-vox",
       "directions": 4
     },
     {
