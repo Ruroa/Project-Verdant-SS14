@@ -1,4 +1,5 @@
-﻿using Content.Shared.Body.Part;
+﻿using Content.Shared._Starlight.Medical.Body.Part;
+using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Chemistry.Reagent;
@@ -22,6 +23,13 @@ namespace Content.Shared.Starlight.Medical.Surgery;
 public abstract partial class SharedSurgerySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
+
+    // limb attachment blacklist, array because,,, future proofing.
+    private static readonly string[] _nonImplantableTags =
+    {
+        "CyberHandItem",
+    };
+
     private void InitializeSteps()
     {
         SubscribeLocalEvent<SurgeryStepComponent, SurgeryStepCompleteEvent>(OnStepComplete);
@@ -31,6 +39,7 @@ public abstract partial class SharedSurgerySystem
         SubscribeLocalEvent<SurgeryTargetComponent, AccessibleOverrideEvent>(OnOverrideAccess);
 
         SubscribeLocalEvent<SurgeryStepComponent, SurgeryCanPerformStepEvent>(OnCanPerformStep);
+        SubscribeLocalEvent<SurgeryStepAttachLimbEffectComponent, SurgeryCanPerformStepEvent>(OnStepAttachCanPerform);
 
         Subs.BuiEvents<SurgeryTargetComponent>(SurgeryUIKey.Key, subs => subs.Event<SurgeryStepChosenBuiMsg>(OnSurgeryTargetStepChosen));
     }
@@ -118,7 +127,7 @@ public abstract partial class SharedSurgerySystem
 
             SoundSpecifier? endSound = null;
             foreach(var usedTool in specificToolComp)
-            {  
+            {
                 var requestedTool = stepComp.Tools?.FirstOrDefault().Key;
                 if(requestedTool != null)
                     if(usedTool.ToolType.Contains(requestedTool))
@@ -244,6 +253,18 @@ public abstract partial class SharedSurgerySystem
 
             args.ValidTools.Add(tool);
         }
+    }
+
+    // block blacklisted items, the UI for surgury can act a bit strange so it does a little double check and lets the player know.
+    private void OnStepAttachCanPerform(Entity<SurgeryStepAttachLimbEffectComponent> ent, ref SurgeryCanPerformStepEvent args)
+    {
+        if (args.Tools.FirstOrDefault() is not { Valid: true } itemId
+            || HasComp<BodyPartComponent>(itemId)
+            || !_nonImplantableTags.Any(tag => _tag.HasTag(itemId, tag)))
+            return;
+
+        args.Invalid = StepInvalidReason.MissingLimb;
+        args.Popup = $"You can't attach {Name(itemId)} as a limb!";
     }
 
     private void OnSurgeryTargetStepChosen(Entity<SurgeryTargetComponent> ent, ref SurgeryStepChosenBuiMsg args)

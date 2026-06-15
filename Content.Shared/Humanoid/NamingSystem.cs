@@ -38,10 +38,18 @@ namespace Content.Shared.Humanoid
                 case SpeciesNaming.FirstDashFirst:
                     return Loc.GetString("namepreset-firstdashfirst",
                         ("first1", GetFirstName(speciesProto, gender)), ("first2", GetFirstName(speciesProto, gender)));
+                case SpeciesNaming.LastFirst: // 🌟Starlight begin - Rodentia
+                    return Loc.GetString("namepreset-lastfirst",
+                        ("last", GetLastName(speciesProto)), ("first", GetFirstName(speciesProto, gender))); // 🌟Starlight end
                 case SpeciesNaming.FirstLast:
                 default:
                     return Loc.GetString("namepreset-firstlast",
                         ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto)));
+                // Starlight begin
+                case SpeciesNaming.PrefixSuffix:
+                    return Loc.GetString("namepreset-prefixsuffix",
+                        ("prefix", GetFirstName(speciesProto, gender)), ("suffix", GetLastName(speciesProto)));
+                // Starlight end
             }
         }
 

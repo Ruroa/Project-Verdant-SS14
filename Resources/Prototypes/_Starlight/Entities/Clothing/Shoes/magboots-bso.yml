@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingShoesBootsMagBase, BaseBlueShieldContraband, ClothingShoesMilitaryBaseUntieable ]
+  parent: [ClothingShoesBootsMagBase, BaseBlueShieldContraband, ClothingShoesMilitaryBase ]
   id: ClothingShoesBootsMagBSO
   name: TSFO Magboots
   description: A pair of standard magnetic boots, issued alongside the TSFO Hybrid hardsuit.

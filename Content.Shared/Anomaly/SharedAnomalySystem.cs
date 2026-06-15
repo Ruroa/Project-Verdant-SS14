@@ -72,6 +72,11 @@ public abstract class SharedAnomalySystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+        // Starlight Start
+        if (!component.CanPulse)
+            return;
+        // Starlight End
+
         if (!Timing.IsFirstTimePredicted)
             return;
 
@@ -114,6 +119,11 @@ public abstract class SharedAnomalySystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return;
+
+        // Starlight Start
+        if (!component.CanPulse)
+            return;
+        // Starlight End
 
         var variation = Random.NextFloat(-component.PulseVariation, component.PulseVariation) + 1;
         component.NextPulseTime = Timing.CurTime + GetPulseLength(component) * variation;
@@ -187,7 +197,7 @@ public abstract class SharedAnomalySystem : EntitySystem
     /// <param name="supercritical">Whether or not the anomaly ended via supercritical event</param>
     /// <param name="spawnCore">Create anomaly cores based on the result of completing an anomaly?</param>
     /// <param name="logged">Whether or not the anomaly decaying/going supercritical is logged</param>
-    public void EndAnomaly(EntityUid uid, AnomalyComponent? component = null, bool supercritical = false, bool spawnCore = true, bool logged = false)
+    public void EndAnomaly(EntityUid uid, AnomalyComponent? component = null, bool supercritical = false, bool spawnCore = true, bool logged = false, bool removeComponent = true) // Starlight Edit: Added removeComponent
     {
         if (logged)
         {
@@ -202,6 +212,14 @@ public abstract class SharedAnomalySystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+        // Starlight Start
+        if (component.Ending)
+            return;
+
+        component.Ending = true;
+        Dirty(uid, component);
+        // Starlight End
+
         var ev = new AnomalyShutdownEvent(uid, supercritical);
         RaiseLocalEvent(uid, ref ev, true);
 
@@ -213,11 +231,22 @@ public abstract class SharedAnomalySystem : EntitySystem
             var core = Spawn(supercritical ? component.CorePrototype : component.CoreInertPrototype, Transform(uid).Coordinates);
             _transform.PlaceNextTo(core, uid);
         }
+        // Starlight Start
+        if (!removeComponent)
+            return;
+        // Starlight End
 
         if (component.DeleteEntity)
             QueueDel(uid);
         else
-            RemCompDeferred<AnomalySupercriticalComponent>(uid);
+        // Starlight edit Start
+        {
+            if (HasComp<AnomalySupercriticalComponent>(uid))
+                RemCompDeferred<AnomalySupercriticalComponent>(uid);
+
+            RemCompDeferred<AnomalyComponent>(uid);
+        }
+        // Starlight edit End
     }
 
     /// <summary>
@@ -341,6 +370,11 @@ public abstract class SharedAnomalySystem : EntitySystem
             {
                 ChangeAnomalyHealth(ent, anomaly.HealthChangePerSecond * frameTime, anomaly);
             }
+
+            // Starlight Start
+            if (!anomaly.CanPulse)
+                continue;
+            // Starlight End
 
             var secondsUntilNextPulse = (anomaly.NextPulseTime - Timing.CurTime).TotalSeconds;
             if (secondsUntilNextPulse < 0)

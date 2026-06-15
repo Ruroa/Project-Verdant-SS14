@@ -23,7 +23,6 @@ using Robust.Shared.Random;
 using Content.Shared.Popups;
 using Content.Shared.Damage;
 using Robust.Shared.Prototypes;
-using Content.Server.Body.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Polymorph;
 using Robust.Shared.Serialization.Manager;
@@ -65,6 +64,7 @@ using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Reagent;
 // Starlight edit end
 using Content.Shared.Zombies;
+using Content.Server._Starlight.Medical.Body.Systems;
 
 namespace Content.Server.Changeling;
 
@@ -119,6 +119,7 @@ public sealed partial class ChangelingSystem : EntitySystem
 
     public static readonly EntProtoId SpacesuitPrototype = "ChangelingClothingOuterHardsuit";
     public static readonly EntProtoId SpacesuitHelmetPrototype = "ChangelingClothingHeadHelmetHardsuit";
+    public static readonly EntProtoId ProtogenDisguisePrototype = "ChangelingClothingProtogenArmor"; // Starlight
 
     public static readonly EntProtoId SlowdownPrototype = "StatusEffectStaminaLow";
 
@@ -573,7 +574,7 @@ public sealed partial class ChangelingSystem : EntitySystem
     {
         RemComp<HungerComponent>(uid);
         RemComp<ThirstComponent>(uid);
-        EnsureComp<ZombieImmuneComponent>(uid);
+        //EnsureComp<ZombieImmuneComponent>(uid); Starlight, we're bringing Lings into Zombies!
 
         // add actions
         foreach (var actionId in comp.BaseChangelingActions)

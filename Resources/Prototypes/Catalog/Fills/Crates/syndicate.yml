@@ -36,7 +36,7 @@
   suffix: Filled
   parent: CrateSyndicate
   name: Cybersun gygax bundle
-  description: Contains a set of Cybersan light armored mechs.
+  description: Contains a set of Cybersun light armored mechs.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -45,6 +45,7 @@
         - id: MechGygaxSyndieFilled
         - id: DoubleEmergencyOxygenTankFilled
         - id: DoubleEmergencyNitrogenTankFilled
+        - id: EmergencyCoolingUnit # Starlight
         - id: ToolboxSyndicateFilled
         - id: PlushieNuke
 
@@ -53,7 +54,7 @@
   suffix: Filled
   parent: CrateSyndicate
   name: Cybersun mauler bundle
-  description: Contains a set of Cybersan heavy armored mechs.
+  description: Contains a set of Cybersun heavy armored mechs.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -62,5 +63,6 @@
         - id: MechMaulerSyndieFilled
         - id: DoubleEmergencyOxygenTankFilled
         - id: DoubleEmergencyNitrogenTankFilled
+        - id: EmergencyCoolingUnit # Starlight
         - id: ToolboxSyndicateFilled
         - id: PlushieNuke

@@ -226,7 +226,7 @@ namespace Content.Shared.Preferences
 
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var speciesProto = prototypeManager.Index<SpeciesPrototype>(species);
-            
+
             var profile = new HumanoidCharacterProfile()
             {
                 Species = species,
@@ -754,6 +754,12 @@ namespace Content.Shared.Preferences
             {
                 SpeciesLoadout ??= new RoleLoadout(speciesPrototype.Loadout.Value);
                 SpeciesLoadout.Role = speciesPrototype.Loadout.Value;
+
+                var loadout = prototypeManager.Index(SpeciesLoadout.Role);
+                foreach (var (group, _) in SpeciesLoadout.SelectedLoadouts.ShallowClone())
+                    if (!loadout.Groups.Contains(group))
+                        SpeciesLoadout.SelectedLoadouts.Remove(group);
+
                 SpeciesLoadout.SetDefault(this, session, prototypeManager);
             }
             // Far Horizons end
