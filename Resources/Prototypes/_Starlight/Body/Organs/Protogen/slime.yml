@@ -66,20 +66,10 @@
 
 - type: entity
   id: OrganProtoSlimePeepoids
-  parent: OrganSlimePeepoids
+  parent: OrganHumanEyes # Project Verdant does not have Starlight's OrganSlimePeepoids parent.
   name: augmented peepoids
   description: "Primitive and goopy, but more or less just as good as the human equivalent."
   components:
-  - type: Sprite
-    sprite: _Starlight/Mobs/Species/Slime/organs.rsi
-    state: peepoids
-  - type: Item
-    size: Small
-    heldPrefix: peepoids
-  - type: OrganVisualization
-    layer: Eyes
-    prototypes:
-      Default: MobHumanoidEyes
   - type: OrganDamage
     damage:
       types:
@@ -91,13 +81,10 @@
 
 - type: entity
   id: OrganProtoSlimeSlurpoid
-  parent: OrganSlimeSlurpoid
+  parent: OrganHumanTongue # Project Verdant does not have Starlight's OrganSlimeSlurpoid parent.
   name: augmented slurpoid
   description: "It has all the consistency of gelatin."
   components:
-  - type: Sprite
-    sprite: _Starlight/Mobs/Species/Slime/organs.rsi
-    state: slurpoid
   - type: OrganDamage
     damage:
       types:
