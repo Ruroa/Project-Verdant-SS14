@@ -177,7 +177,7 @@
 - type: humanoidBaseSprite
   id: MobProtogenRArm
   baseSprite:
-    sprite: _Starlight/Mobs/Species/Protogen/parts.rsi # Starlight modified
+    sprite: _FarHorizons/Mobs/Species/Protogen/parts.rsi
     state: r_arm
 
 - type: humanoidBaseSprite
