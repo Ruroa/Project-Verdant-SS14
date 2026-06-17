@@ -52,17 +52,6 @@
   - type: Inventory
     speciesId: lagomorph #to be replaced with proto[species] when new sprites are made
     templateId: protogen
-    displacements:
-      jumpsuit:
-        sizeMaps:
-          32:
-            sprite: _Starlight/Mobs/Species/Lagomorph/displacement.rsi
-            state: jumpsuit
-      outerClothing:
-        sizeMaps:
-          32:
-            sprite: _Starlight/Mobs/Species/Lagomorph/displacement.rsi
-            state: jumpsuit
   - type: MeleeWeapon
     animation: WeaponArcClaw
     soundHit:
@@ -190,14 +179,3 @@
   - type: Inventory
     speciesId: lagomorph #to be replaced with proto[species] when new sprites are made
     templateId: protogen
-    displacements:
-      jumpsuit:
-        sizeMaps:
-          32:
-            sprite: _Starlight/Mobs/Species/Lagomorph/displacement.rsi
-            state: jumpsuit
-      outerClothing:
-        sizeMaps:
-          32:
-            sprite: _Starlight/Mobs/Species/Lagomorph/displacement.rsi
-            state: jumpsuit
