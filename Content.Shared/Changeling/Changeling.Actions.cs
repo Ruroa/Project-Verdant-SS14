@@ -65,7 +65,6 @@ public sealed partial class ActionFleshmendEvent : InstantActionEvent { }
 public sealed partial class ActionLastResortEvent : InstantActionEvent { }
 public sealed partial class ActionLesserFormEvent : InstantActionEvent { }
 public sealed partial class ActionSpacesuitEvent : InstantActionEvent { }
-public sealed partial class ActionProtogenDisguiseEvent : InstantActionEvent { }
 public sealed partial class ActionHivemindAccessEvent : InstantActionEvent { }
 public sealed partial class ActionContortBodyEvent : InstantActionEvent { }
 
