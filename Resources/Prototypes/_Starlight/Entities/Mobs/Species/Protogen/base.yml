@@ -31,7 +31,7 @@
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
     - map: ["enum.HumanoidVisualLayers.LHand"]
-    - map: [ "outerClothing2" ] # FH
+    - map: [ "outerClothing2" ]
     - map: ["enum.HumanoidVisualLayers.RHand"]
     - map: [ "gloves" ]
     - map: [ "shoes" ]
@@ -57,17 +57,17 @@
       sprite: Objects/Misc/handcuffs.rsi
       state: body-overlay-2
       visible: false
-    - map: [ "clownedon" ] # Dynamically generated
+    - map: [ "clownedon" ]
       sprite: "Effects/creampie.rsi"
       state: "creampie_human"
       visible: false
-  - type: Repairable # So welder is just a special little snowflake in the code. I tried making healing with welder work through ConditionalHealing component, but it would require too many changes in too many places. So we will keep on the trend and have brute healing defined here. /shrug
-    doAfterDelay: 1 # Faster than normal so using welding to heal isn't absolute ass for protogens
+  - type: Repairable
+    doAfterDelay: 1
     allowSelfRepair: true
     fuelCost: 10
     damage:
       groups:
-        Brute: -30 # 5 for each type with reduction applied
+        Brute: -30
   - type: Hunger
   - type: Icon
     sprite: _FarHorizons/Mobs/Species/Protogen/parts.rsi
@@ -86,13 +86,13 @@
         type: StoreBoundUserInterface
       enum.SurgeryUIKey.Key:
         type: SurgeryBui
-      enum.ThavenMoodsUiKey.Key: # impstation edit
+      enum.ThavenMoodsUiKey.Key:
         type: ThavenMoodsBoundUserInterface
         requireInputValidation: false
   - type: GlitchOnIonStorm
     duration: 25
     ramp: 3
-  - type: HumanoidEMP # HumanoidEMP is needed to receive EMP effects, it may carry its own innate effects, but doesn't have to
+  - type: HumanoidEMP
     effectCooldown: 2
     effect:
       stunAmount: 5.0
@@ -116,11 +116,11 @@
       amount: 5
   - type: MeleeWeapon
     soundHit:
-      collection: Punch # Starlight
-    animation: WeaponArcFist # Starlight, blunt base, change on a case by case basis
+      collection: Punch
+    animation: WeaponArcFist
     damage:
       types:
-        Blunt: 5 # Starlight
+        Blunt: 5
   - type: Body
     prototype: Protogen
     requiredLegs: 2
@@ -136,27 +136,27 @@
       - TrueProtogen
   - type: Temperature
     currentTemperature: 310.15
-    specificHeat: 42 # Starlight
-  - type: TemperatureDamage # Starlight, changed to base stats, since not every species has fur; we can change on a case by case per species
+    specificHeat: 42
+  - type: TemperatureDamage
     heatDamageThreshold: 325
-    coldDamageThreshold: 260 # Starlight
+    coldDamageThreshold: 260
     coldDamage:
       types:
-        Cold : 0.1 #per second, scales with temperature & other constants
+        Cold : 0.1
     heatDamage:
       types:
-        Heat : 1.5 #per second, scales with temperature & other constants
+        Heat : 1.5
   - type: TemperatureSpeed
     thresholds:
-      293: 0.9 # Starlight start
+      293: 0.9
       280: 0.8
-      260: 0.7 # Starlight end
+      260: 0.7
   - type: HumanoidAppearance
     species: Protogen
     hideLayersOnEquip:
     - Hair
   - type: Inventory
-    speciesId: protogen #to be replaced with proto[species] when new sprites are made
+    speciesId: protogen
     templateId: protogen
     femaleDisplacements:
       jumpsuit:
@@ -172,8 +172,8 @@
       - outerClothing2
     damage:
       types:
-        Blunt: 0.9 #per second, halved compared to normal. / Starlight, changed back to base 0.9.
-  - type: TypingIndicator # TODO - Find "protogen" noises. Idk.
+        Blunt: 0.9
+  - type: TypingIndicator
     proto: robot
   - type: Speech
     speechVerb: Robotic
@@ -181,9 +181,9 @@
     allowedEmotes: ['Chirp', 'Hisses', 'Squish', 'Purr', 'Growl', 'Trill', 'Scree', 'Call', 'Squawk', 'Bark', 'Snarl', 'Whine', 'Howl', 'Yip', 'Mew', 'Meow','Thump', 'Liss', 'Lurr', 'Rattle', "Marr", "Wurble", 'Chitter', 'Squeak', 'Click', 'Beep', 'Ping', 'Buzz', 'Buzz-Two', 'Chime', 'Honk']
   - type: Vocal
     sounds:
-      Male: MaleHuman
-      Female: FemaleHuman
-      Unsexed: MaleHuman
+      Male: ProtoHumanMSounds
+      Female: ProtoHumanFSounds
+      Unsexed: ProtoHumanMSounds
   - type: UniversalHealModifier
     modifier: 0.5
 
@@ -212,7 +212,7 @@
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
     - map: ["enum.HumanoidVisualLayers.LHand"]
-    - map: [ "outerClothing2" ] # FH
+    - map: [ "outerClothing2" ]
     - map: ["enum.HumanoidVisualLayers.RHand"]
     - map: [ "gloves" ]
     - map: [ "shoes" ]
@@ -238,11 +238,10 @@
       sprite: Objects/Misc/handcuffs.rsi
       state: body-overlay-2
       visible: false
-    - map: [ "clownedon" ] # Dynamically generated
+    - map: [ "clownedon" ]
       sprite: "Effects/creampie.rsi"
       state: "creampie_human"
       visible: false
-
 
 - type: entity
   parent: [BaseProtogenAppearance, BaseSpeciesDummy]
@@ -252,7 +251,7 @@
   - type: HumanoidAppearance
     species: Protogen
   - type: Inventory
-    speciesId: protogen #to be replaced with proto[species] when new sprites are made
+    speciesId: protogen
     templateId: protogen
     femaleDisplacements:
       jumpsuit:
