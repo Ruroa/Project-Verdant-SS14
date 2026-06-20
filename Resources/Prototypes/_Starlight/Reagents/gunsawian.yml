@@ -1,0 +1,10 @@
+- type: reagent
+  parent: Blood
+  id: GunsawianBlood
+  name: reagent-name-gunsawian-blood
+  group: Biological
+  desc: reagent-desc-gunsawian-blood
+  flavor: metallic
+  color: "#d9c942"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-ferrous
