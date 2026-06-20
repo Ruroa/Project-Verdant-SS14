@@ -5,6 +5,6 @@
   group: Biological
   desc: reagent-desc-gunsawian-blood
   flavor: metallic
-  color: "#d9c942"
+  color: "#d9a342"
   recognizable: true
   physicalDesc: reagent-physical-desc-ferrous
