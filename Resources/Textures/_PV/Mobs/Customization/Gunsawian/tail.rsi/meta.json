@@ -10,6 +10,10 @@
     {
       "name": "tail_basic",
       "directions": 4
+    },
+    {
+      "name": "tail_basic_tip",
+      "directions": 4
     }
   ]
 }
