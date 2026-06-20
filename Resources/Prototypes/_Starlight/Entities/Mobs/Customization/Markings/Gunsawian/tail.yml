@@ -1,0 +1,8 @@
+- type: marking
+  id: GunsawianTailBasic
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Gunsawian ]
+  sprites:
+  - sprite: Mobs/Customization/Gunsawian/tail.rsi
+    state: tail_basic
