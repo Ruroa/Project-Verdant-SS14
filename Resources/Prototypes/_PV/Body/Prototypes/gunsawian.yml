@@ -1,0 +1,57 @@
+- type: body
+  id: Gunsawian
+  name: gunsawian
+  root: torso
+  slots:
+    head:
+      part: HeadVulpkanin
+      connections:
+      - torso
+      organs:
+        brain: OrganHumanBrain
+        eyes: OrganGunsawianEyes
+        tongue: OrganHumanTongue
+        eye_implant: null
+        brain_implant: null
+    torso:
+      part: TorsoVulpkanin
+      connections:
+      - right arm
+      - left arm
+      - right leg
+      - left leg
+      organs:
+        heart: OrganVulpkaninHeart
+        lungs: OrganHumanLungs
+        stomach: OrganVulpkaninStomach
+        liver: OrganAnimalLiver
+        kidneys: OrganHumanKidneys
+        cavity: null
+    right arm:
+      part: RightArmVulpkanin
+      connections:
+      - right hand
+    left arm:
+      part: LeftArmVulpkanin
+      connections:
+      - left hand
+    right hand:
+      part: RightHandVulpkanin
+      organs:
+        hand_implant: null
+    left hand:
+      part: LeftHandVulpkanin
+      organs:
+        hand_implant: null
+    right leg:
+      part: RightLegVulpkanin
+      connections:
+      - right foot
+    left leg:
+      part: LeftLegVulpkanin
+      connections:
+      - left foot
+    right foot:
+      part: RightFootVulpkanin
+    left foot:
+      part: LeftFootVulpkanin
