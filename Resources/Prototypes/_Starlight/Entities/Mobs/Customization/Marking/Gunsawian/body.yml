@@ -1,0 +1,89 @@
+- type: marking
+  id: GunsawianScarChest
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_scars
+
+- type: marking
+  id: GunsawianScarLArm
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_scars
+
+- type: marking
+  id: GunsawianScarRArm
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_scars
+
+- type: marking
+  id: GunsawianScarLLeg
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_scars
+
+- type: marking
+  id: GunsawianScarRLeg
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_scars
+
+- type: marking
+  id: GunsawianGauzeChest
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_Gauze
+
+- type: marking
+  id: GunsawianGauzeLArm
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_Gauze
+
+- type: marking
+  id: GunsawianGauzeRArm
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_Gauze
+
+- type: marking
+  id: GunsawianGauzeLLeg
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_Gauze
+
+- type: marking
+  id: GunsawianGauzeRLeg
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: overlay_body_Gauze
