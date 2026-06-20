@@ -8,11 +8,43 @@
   },
   "states": [
     {
-      "name": "overlay_body_scars",
+      "name": "overlay_Larm_gauze",
       "directions": 4
     },
     {
-      "name": "overlay_body_Gauze",
+      "name": "overlay_Larm_scar",
+      "directions": 4
+    },
+    {
+      "name": "overlay_Lleg_gauze",
+      "directions": 4
+    },
+    {
+      "name": "overlay_Lleg_scar",
+      "directions": 4
+    },
+    {
+      "name": "overlay_Rarm_gauze",
+      "directions": 4
+    },
+    {
+      "name": "overlay_Rarm_scar",
+      "directions": 4
+    },
+    {
+      "name": "overlay_Rleg_gauze",
+      "directions": 4
+    },
+    {
+      "name": "overlay_Rleg_scar",
+      "directions": 4
+    },
+    {
+      "name": "overlay_torso_gauze",
+      "directions": 4
+    },
+    {
+      "name": "overlay_torso_scar",
       "directions": 4
     }
   ]
