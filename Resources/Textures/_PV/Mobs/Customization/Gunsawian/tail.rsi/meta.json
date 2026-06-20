@@ -8,7 +8,11 @@
   },
   "states": [
     {
-      "name": "tail_basic",
+      "name": "tail_base",
+      "directions": 4
+    },
+    {
+      "name": "tail_tip",
       "directions": 4
     }
   ]
