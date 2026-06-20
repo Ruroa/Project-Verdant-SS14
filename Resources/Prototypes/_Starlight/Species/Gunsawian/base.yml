@@ -33,8 +33,6 @@
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
-    TailExtras: MobHumanoidAnyMarking
-    BodyCover: MobHumanoidAnyMarking
     Eyes: MobGunsawianEyes
     LArm: MobGunsawianLArm
     RArm: MobGunsawianRArm
@@ -64,12 +62,8 @@
     Tail:
       points: 1
       required: true
-      defaultMarkings: [GunsawianTailBase]
-    TailExtras:
-      points: 1
-      required: false
-      defaultMarkings: [GunsawianTailTip]
-    BodyCover:
+      defaultMarkings: [GunsawianTailBasic]
+    Chest:
       points: 2
       required: false
     Head:
