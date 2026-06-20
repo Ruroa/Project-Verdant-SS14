@@ -5,7 +5,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/tail.rsi
-    state: tail_base
+    state: tail_basic
 
 - type: marking
   id: GunsawianTailTip
@@ -14,4 +14,4 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/tail.rsi
-    state: tail_tip
+    state: tail_basic_tip
