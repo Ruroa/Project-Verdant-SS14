@@ -1,0 +1,79 @@
+- type: entity
+  abstract: true
+  save: false
+  parent: BaseMobVulpkanin
+  id: BaseMobGunsawian
+  name: Urist McGunsaw
+  components:
+  - type: Icon
+    sprite: Mobs/Species/Gunsawian/parts.rsi
+    state: full
+  - type: HumanoidAppearance
+    species: Gunsawian
+    undergarmentTop: UndergarmentTopTanktopVulpkanin
+    undergarmentBottom: UndergarmentBottomBoxersVulpkanin
+    hideLayersOnEquip:
+    - Snout
+    - SnoutCover
+    - HeadTop
+    - HeadSide
+    - FacialHair
+    - Hair
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: GunsawianBlood
+        Quantity: 300
+  - type: Inventory
+    speciesId: gunsawian
+    displacements:
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Gunsawian/displacement.rsi
+            state: head
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
+            state: outerClothing
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
+            state: jumpsuit
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
+            state: shoes
+
+- type: entity
+  parent: MobVulpkaninDummy
+  id: MobGunsawianDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: Gunsawian
+    hideLayersOnEquip:
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: Inventory
+    speciesId: gunsawian
+    displacements:
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Gunsawian/displacement.rsi
+            state: head
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
+            state: jumpsuit
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
+            state: shoes
