@@ -4,5 +4,5 @@
   markingCategory: HeadTop
   speciesRestriction: [ Gunsawian ]
   sprites:
-  - sprite: Mobs/Customization/Gunsawian/ears.rsi
+  - sprite: _PV/Mobs/Customization/Gunsawian/ears.rsi
     state: ear_basic
