@@ -89,89 +89,89 @@
 - type: humanoidBaseSprite
   id: MobGunsawianEyes
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: eyes
 
 - type: humanoidBaseSprite
   id: MobGunsawianHead
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: head_m
 
 - type: humanoidBaseSprite
   id: MobGunsawianHeadMale
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: head_m
 
 - type: humanoidBaseSprite
   id: MobGunsawianHeadFemale
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: head_f
 
 - type: humanoidBaseSprite
   id: MobGunsawianTorso
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: torso_m
 
 - type: humanoidBaseSprite
   id: MobGunsawianTorsoMale
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: torso_m
 
 - type: humanoidBaseSprite
   id: MobGunsawianTorsoFemale
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: torso_f
 
 - type: humanoidBaseSprite
   id: MobGunsawianLLeg
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: l_leg
 
 - type: humanoidBaseSprite
   id: MobGunsawianLArm
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: l_arm
 
 - type: humanoidBaseSprite
   id: MobGunsawianLHand
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: l_hand
 
 - type: humanoidBaseSprite
   id: MobGunsawianLFoot
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: l_foot
 
 - type: humanoidBaseSprite
   id: MobGunsawianRLeg
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: r_leg
 
 - type: humanoidBaseSprite
   id: MobGunsawianRArm
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: r_arm
 
 - type: humanoidBaseSprite
   id: MobGunsawianRHand
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: r_hand
 
 - type: humanoidBaseSprite
   id: MobGunsawianRFoot
   baseSprite:
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: r_foot
