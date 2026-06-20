@@ -10,8 +10,6 @@
     state: full
   - type: HumanoidAppearance
     species: Gunsawian
-    undergarmentTop: UndergarmentTopTanktopVulpkanin
-    undergarmentBottom: UndergarmentBottomBoxersVulpkanin
     hideLayersOnEquip:
     - Snout
     - SnoutCover
