@@ -8,6 +8,8 @@
   - type: Icon
     sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: full
+  - type: Body
+    prototype: Gunsawian
   - type: HumanoidAppearance
     species: Gunsawian
     hideLayersOnEquip:
