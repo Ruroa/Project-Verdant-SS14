@@ -1,0 +1,8 @@
+- type: entity
+  id: OrganGunsawianEyes
+  parent: OrganHumanEyes
+  components:
+  - type: OrganVisualization
+    layer: Eyes
+    prototypes:
+      Default: MobGunsawianEyes
