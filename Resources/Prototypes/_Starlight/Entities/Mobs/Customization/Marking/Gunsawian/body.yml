@@ -5,7 +5,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_scars
+    state: overlay_torso_scar
 
 - type: marking
   id: GunsawianScarLArm
@@ -14,7 +14,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_scars
+    state: overlay_Larm_scar
 
 - type: marking
   id: GunsawianScarRArm
@@ -23,7 +23,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_scars
+    state: overlay_Rarm_scar
 
 - type: marking
   id: GunsawianScarLLeg
@@ -32,7 +32,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_scars
+    state: overlay_Lleg_scar
 
 - type: marking
   id: GunsawianScarRLeg
@@ -41,7 +41,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_scars
+    state: overlay_Rleg_scar
 
 - type: marking
   id: GunsawianGauzeChest
@@ -50,7 +50,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_Gauze
+    state: overlay_torso_gauze
 
 - type: marking
   id: GunsawianGauzeLArm
@@ -59,7 +59,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_Gauze
+    state: overlay_Larm_gauze
 
 - type: marking
   id: GunsawianGauzeRArm
@@ -68,7 +68,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_Gauze
+    state: overlay_Rarm_gauze
 
 - type: marking
   id: GunsawianGauzeLLeg
@@ -77,7 +77,7 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_Gauze
+    state: overlay_Lleg_gauze
 
 - type: marking
   id: GunsawianGauzeRLeg
@@ -86,4 +86,4 @@
   speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
-    state: overlay_body_Gauze
+    state: overlay_Rleg_gauze
