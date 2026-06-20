@@ -1,0 +1,33 @@
+- type: marking
+  id: GunsawianBodyScar
+  bodyPart: BodyCover
+  markingCategory: BodyCover
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: scar_torso
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: scar_l_arm
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: scar_r_arm
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: scar_l_leg
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: scar_r_leg
+
+- type: marking
+  id: GunsawianBodyGuaze
+  bodyPart: BodyCover
+  markingCategory: BodyCover
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: guaze_torso
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: guaze_l_arm
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: guaze_r_arm
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: guaze_l_leg
+  - sprite: _PV/Mobs/Customization/Gunsawian/body.rsi
+    state: guaze_r_leg
