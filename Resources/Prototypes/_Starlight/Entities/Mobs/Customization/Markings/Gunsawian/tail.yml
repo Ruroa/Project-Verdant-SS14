@@ -1,8 +1,17 @@
 - type: marking
-  id: GunsawianTailBasic
+  id: GunsawianTailBase
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [ Gunsawian ]
+  speciesRestriction: [Gunsawian]
   sprites:
   - sprite: _PV/Mobs/Customization/Gunsawian/tail.rsi
-    state: tail_basic
+    state: tail_base
+
+- type: marking
+  id: GunsawianTailTip
+  bodyPart: TailExtras
+  markingCategory: TailExtras
+  speciesRestriction: [Gunsawian]
+  sprites:
+  - sprite: _PV/Mobs/Customization/Gunsawian/tail.rsi
+    state: tail_tip
