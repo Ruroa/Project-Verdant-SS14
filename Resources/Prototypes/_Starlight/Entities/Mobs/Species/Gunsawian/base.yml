@@ -6,7 +6,7 @@
   name: Urist McGunsaw
   components:
   - type: Icon
-    sprite: Mobs/Species/Gunsawian/parts.rsi
+    sprite: _PV/Mobs/Species/Gunsawian/parts.rsi
     state: full
   - type: HumanoidAppearance
     species: Gunsawian
@@ -30,7 +30,7 @@
       head:
         sizeMaps:
           32:
-            sprite: Mobs/Species/Gunsawian/displacement.rsi
+            sprite: _PV/Mobs/Species/Gunsawian/displacement.rsi
             state: head
       outerClothing:
         sizeMaps:
@@ -65,7 +65,7 @@
       head:
         sizeMaps:
           32:
-            sprite: Mobs/Species/Gunsawian/displacement.rsi
+            sprite: _PV/Mobs/Species/Gunsawian/displacement.rsi
             state: head
       jumpsuit:
         sizeMaps:
