@@ -1,0 +1,8 @@
+- type: marking
+  id: GunsawianEarsBasic
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Gunsawian ]
+  sprites:
+  - sprite: Mobs/Customization/Gunsawian/ears.rsi
+    state: ear_basic
