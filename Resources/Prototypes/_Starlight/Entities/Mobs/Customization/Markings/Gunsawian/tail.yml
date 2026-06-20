@@ -4,5 +4,5 @@
   markingCategory: Tail
   speciesRestriction: [ Gunsawian ]
   sprites:
-  - sprite: Mobs/Customization/Gunsawian/tail.rsi
+  - sprite: _PV/Mobs/Customization/Gunsawian/tail.rsi
     state: tail_basic
