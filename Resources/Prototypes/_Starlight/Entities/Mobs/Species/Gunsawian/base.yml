@@ -32,21 +32,6 @@
           32:
             sprite: _PV/Mobs/Species/Gunsawian/displacement.rsi
             state: head
-      outerClothing:
-        sizeMaps:
-          32:
-            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
-            state: outerClothing
-      jumpsuit:
-        sizeMaps:
-          32:
-            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
-            state: jumpsuit
-      shoes:
-        sizeMaps:
-          32:
-            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
-            state: shoes
 
 - type: entity
   parent: MobVulpkaninDummy
@@ -67,13 +52,3 @@
           32:
             sprite: _PV/Mobs/Species/Gunsawian/displacement.rsi
             state: head
-      jumpsuit:
-        sizeMaps:
-          32:
-            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
-            state: jumpsuit
-      shoes:
-        sizeMaps:
-          32:
-            sprite: _Starlight/Mobs/Species/Vulpkanin/displacement.rsi
-            state: shoes
