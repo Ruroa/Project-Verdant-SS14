@@ -60,19 +60,6 @@
     Heat: 0.75
     Bloodloss: 0
 
-# Thaven
-- type: damageModifierSet
-  id: Thaven
-  coefficients:
-    Blunt: 1.1
-    Slash: 1.1
-    Piercing: 1.1
-    Cold: 0.9
-    Heat: 0.9
-    Poison: 0.9
-    Cellular: 1.1
-    Radiation: 1.2
-
 # ProtoDwarf
 - type: damageModifierSet
   id: ProtoDwarf
@@ -111,14 +98,6 @@
     Poison: 0.75
     Blunt: 1.25 # blunt's gonna be fatal to them
 # Cellular resist gone, half body machine is fighting against magic skin.
-
-# Lagomorph
-- type: damageModifierSet
-  id: Lagomorph
-  coefficients:
-    Blunt: 0.9
-    Cold: 0.75
-    Heat: 1.25
 
 # ProtoLagomorph
 - type: damageModifierSet
