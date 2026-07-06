@@ -1,81 +1,77 @@
 - type: gameMap
-  id: VPHorusStation
-  mapName: 'Horus Station'
-  mapPath: /Maps/_PV/Stations/HorosStation.yml
-  minPlayers: 20
-  maxPlayers: 100
+  id: Horos
+  mapName: 'Horos Station'
+  mapPath: /Maps/_PV/Stations/Horos.yml
+  minPlayers: 50
+  maxPlayers: 180
   stations:
-    VPHorusStation:
+    Horos:
       stationProto: StandardNanotrasenStation
       components:
         - type: StationNameSetup
-          mapNameTemplate: '{0} Horus Station {1}'
+          mapNameTemplate: '{0} Horos Station {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
-            prefixCreator: 'DS'
+            prefixCreator: 'HR'
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency_elkridge.yml
-        - type: StationCargoShuttle
-          path: /Maps/Shuttles/cargo_elkridge.yml
+          emergencyShuttlePath: /Maps/_Starlight/Shuttles/emergency_manor.yml
         - type: StationJobs
           availableJobs:
             #service
             Captain: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 2, 2 ]
-            Botanist: [ 2, 2 ]
-            Chef: [ 1, 2 ]
+            Botanist: [ 2, 3 ]
+            Chef: [ 2, 2 ]
             Janitor: [ 2, 3 ]
             Chaplain: [ 1, 1 ]
             Librarian: [ 1, 1 ]
-            ServiceWorker: [ 2, 3 ]
-            Reporter: [ 1, 1 ]
+            ServiceWorker: [ 4, 4 ]
+            Reporter: [ 2, 2 ]
             #engineering
-            ChiefEngineer: [ 2, 2 ]
+            ChiefEngineer: [ 1, 1 ]
             AtmosphericTechnician: [ 3, 3 ]
-            StationEngineer: [ 6, 8 ]
-            TechnicalAssistant: [ 4, 6 ]
+            StationEngineer: [ 5, 5 ]
+            TechnicalAssistant: [ 4, 4 ]
             #medical
             ChiefMedicalOfficer: [ 1, 1 ]
             Chemist: [ 2, 2 ]
-            MedicalDoctor: [ 3, 4 ]
-            Paramedic: [ 1, 2 ]
-            MedicalIntern: [ 2, 3 ]
+            MedicalDoctor: [ 4, 5 ]
+            Paramedic: [ 2, 2 ]
+            MedicalIntern: [ 3, 3 ]
             Psychologist: [ 1, 1 ]
-            Surgeon: [ 1, 1 ]
+            Surgeon: [ 2, 2 ]
             #science
             ResearchDirector: [ 1, 1 ]
-            Scientist: [ 3, 4 ]
-            ResearchAssistant: [ 2, 3 ]
-            Roboticist: [ 1, 2 ]
+            Scientist: [ 5, 5 ]
+            ResearchAssistant: [ 3, 4 ]
+            Roboticist: [ 2, 2 ]
             #security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
-            SecurityOfficer: [ 4, 6 ]
+            DutyOfficer: [ 1, 2 ]
+            SecurityOfficer: [ 10, 13 ]
             Detective: [ 1, 1 ]
-            SecurityCadet: [ 3, 4 ]
-            Brigmedic: [ 1, 1 ]
-            DutyOfficer: [ 1, 2]
+            SecurityCadet: [ 4, 4 ]
+            Brigmedic: [ 2, 2 ]
             #supply
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 3, 4 ]
-            MiningSpecialist: [ 3, 4 ]
-            CargoTechnician: [ 5, 6 ]
-            MailTech: [ 1, 2 ]
+            MiningSpecialist: [ 3, 3 ]
+            CargoTechnician: [ 5, 7 ]
             SalvageLead: [ 1, 1 ]
             #civilian
             Assistant: [ -1, -1 ]
             Clown: [ 1, 1 ]
             Mime: [ 1, 1 ]
-            Musician: [ 1, 2 ]
-            Boxer: [ 1, 1 ]
+            Musician: [ 2, 2 ]
             #silicon
             StationAi: [ 1, 1 ]
-            Borg: [ 6, 8 ]
+            Borg: [ 3, 5 ]
             #law
             Magistrate: [ 1, 1 ]
-            IAA: [ 1, 1 ]
-            #Representives
+            IAA: [ 1, 2 ]
+            #Representatives
             BlueShield: [ 1, 1 ]
             NanoTrasenRepresentative: [ 1, 1 ]
             NanotrasenCareerTrainer: [ 1, 2 ]
