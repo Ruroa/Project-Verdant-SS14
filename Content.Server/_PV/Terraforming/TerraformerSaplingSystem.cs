@@ -1,11 +1,12 @@
+using Content.Server.Power.Components;
 using Content.Shared._PV.Terraforming;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Server._PV.Terraforming;
 
@@ -16,13 +17,38 @@ public sealed class TerraformerSaplingSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
+    private const float MinimumProcessDelay = 5f;
+    private const float MaximumProcessDelay = 10f;
+    private const float NoValidTileRetryCooldown = 1f;
+
+    private readonly Dictionary<EntityUid, Queue<QueuedSapling>> _saplingQueues = new();
+
+    private sealed class QueuedSapling
+    {
+        public readonly string TreePrototype;
+        public float ProcessDelayRemaining;
+        public float RetryAccumulator;
+
+        public QueuedSapling(string treePrototype, float processDelay)
+        {
+            TreePrototype = treePrototype;
+            ProcessDelayRemaining = processDelay;
+        }
+    }
+
     public override void Initialize()
     {
         base.Initialize();
 
-        // The main TerraformerSystem already subscribes to TerraformerComponent + InteractUsingEvent.
-        // Subscribe through TransformComponent instead and filter for terraformers to avoid duplicate subscriptions.
+        // The main TerraformerSystem already subscribes to TerraformerComponent events.
+        // Subscribe through TransformComponent and filter for terraformers to avoid duplicate subscriptions.
         SubscribeLocalEvent<TransformComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<TransformComponent, ComponentShutdown>(OnTransformShutdown);
+    }
+
+    private void OnTransformShutdown(EntityUid uid, TransformComponent component, ComponentShutdown args)
+    {
+        _saplingQueues.Remove(uid);
     }
 
     private void OnInteractUsing(EntityUid uid, TransformComponent xformComp, InteractUsingEvent args)
@@ -40,34 +66,91 @@ public sealed class TerraformerSaplingSystem : EntitySystem
             ? _random.Pick(sapling.TreePrototypes)
             : sapling.TreePrototype;
 
-        var spawnDelay = sapling.SpawnDelay;
+        if (string.IsNullOrWhiteSpace(treePrototype))
+        {
+            _popup.PopupEntity("This sapling has no tree prototype configured.", uid, args.User);
+            args.Handled = true;
+            return;
+        }
 
+        if (!_saplingQueues.TryGetValue(uid, out var queue))
+        {
+            queue = new Queue<QueuedSapling>();
+            _saplingQueues[uid] = queue;
+        }
+
+        // Each sapling gets its own 5-10 second processing delay. Only the front item is processed,
+        // so loading several saplings never causes them to grow all at once.
+        var processDelay = _random.NextFloat(MinimumProcessDelay, MaximumProcessDelay);
+        queue.Enqueue(new QueuedSapling(treePrototype, processDelay));
+
+        // The physical sapling is now stored logically in the Terraformer's queue.
         QueueDel(args.Used);
         args.Handled = true;
 
-        _popup.PopupEntity("You load the sapling into the terraformer.", uid, args.User);
-
-        Timer.Spawn(TimeSpan.FromSeconds(spawnDelay), () => TrySpawnSaplingTree(uid, treePrototype));
+        _popup.PopupEntity($"You load the sapling into the terraformer. Queue: {queue.Count}", uid, args.User);
     }
 
-    private void TrySpawnSaplingTree(EntityUid uid, string treePrototype)
+    public override void Update(float frameTime)
     {
-        if (Deleted(uid))
-            return;
+        base.Update(frameTime);
 
-        if (!TryComp<TerraformerComponent>(uid, out var terraformer))
-            return;
+        var query = EntityQueryEnumerator<TerraformerComponent, TransformComponent>();
 
-        if (!TryComp<TransformComponent>(uid, out var xform))
-            return;
+        while (query.MoveNext(out var uid, out var terraformer, out var xform))
+        {
+            if (!_saplingQueues.TryGetValue(uid, out var queue) || queue.Count == 0)
+                continue;
 
+            // Saplings only process while the Terraformer is active and powered.
+            // Pausing power also pauses the current sapling's processing delay.
+            if (!terraformer.Active || !IsPowered(uid))
+                continue;
+
+            var current = queue.Peek();
+
+            if (current.ProcessDelayRemaining > 0f)
+            {
+                current.ProcessDelayRemaining -= frameTime;
+
+                if (current.ProcessDelayRemaining > 0f)
+                    continue;
+
+                current.ProcessDelayRemaining = 0f;
+                current.RetryAccumulator = NoValidTileRetryCooldown;
+            }
+
+            current.RetryAccumulator += frameTime;
+
+            if (current.RetryAccumulator < NoValidTileRetryCooldown)
+                continue;
+
+            current.RetryAccumulator = 0f;
+
+            // Do not dequeue the sapling when there is no valid grass tile.
+            // It remains at the front of the queue and retries until a spot opens up.
+            if (!TrySpawnSaplingTree(terraformer, xform, current.TreePrototype))
+                continue;
+
+            queue.Dequeue();
+
+            if (queue.Count == 0)
+                _saplingQueues.Remove(uid);
+        }
+    }
+
+    private bool TrySpawnSaplingTree(
+        TerraformerComponent terraformer,
+        TransformComponent xform,
+        string treePrototype)
+    {
         if (xform.GridUid == null)
-            return;
+            return false;
 
         var gridUid = xform.GridUid.Value;
 
         if (!TryComp<MapGridComponent>(gridUid, out var grid))
-            return;
+            return false;
 
         var validTiles = new List<TileRef>();
 
@@ -85,12 +168,13 @@ public sealed class TerraformerSaplingSystem : EntitySystem
         }
 
         if (validTiles.Count == 0)
-            return;
+            return false;
 
         var selectedTile = _random.Pick(validTiles);
         var coords = _map.GridTileToLocal(gridUid, grid, selectedTile.GridIndices);
 
         Spawn(treePrototype, coords);
+        return true;
     }
 
     private bool IsTileFreeForTree(MapGridComponent grid, Vector2i tileIndices)
@@ -100,10 +184,28 @@ public sealed class TerraformerSaplingSystem : EntitySystem
             if (Deleted(anchored))
                 continue;
 
+            // Sub-floor cables, pipes, atmosphere-fix markers and similar anchored utility entities
+            // should not make an otherwise valid grass tile unusable. Only real colliding occupants
+            // block tree placement. Existing trees and normal structures are collidable, so this also
+            // prevents trees from spawning on top of each other or inside walls/machines.
+            if (!TryComp<PhysicsComponent>(anchored, out var physics))
+                continue;
+
+            if (!physics.CanCollide)
+                continue;
+
             return false;
         }
 
         return true;
+    }
+
+    private bool IsPowered(EntityUid uid)
+    {
+        if (!TryComp<ApcPowerReceiverComponent>(uid, out var power))
+            return true;
+
+        return power.Powered;
     }
 
     private IEnumerable<TileRef> GetTilesInRadius(
