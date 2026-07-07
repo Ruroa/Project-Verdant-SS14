@@ -5,6 +5,7 @@ using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 
 namespace Content.Server._PV.Terraforming;
@@ -181,6 +182,16 @@ public sealed class TerraformerSaplingSystem : EntitySystem
         foreach (var anchored in grid.GetAnchoredEntities(tileIndices))
         {
             if (Deleted(anchored))
+                continue;
+
+            // Sub-floor cables, pipes, atmosphere-fix markers and similar anchored utility entities
+            // should not make an otherwise valid grass tile unusable. Only real colliding occupants
+            // block tree placement. Existing trees and normal structures are collidable, so this also
+            // prevents trees from spawning on top of each other or inside walls/machines.
+            if (!TryComp<PhysicsComponent>(anchored, out var physics))
+                continue;
+
+            if (!physics.CanCollide)
                 continue;
 
             return false;
