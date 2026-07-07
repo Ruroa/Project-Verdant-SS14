@@ -7381,8 +7381,6 @@ entities:
             Plasma: 6666.982
         chunkSize: 4
     - type: GasTileOverlay
-    - type: Shuttle
-      dampingModifier: 0.25
     - type: LightCycle
       initialOffset: False
       offset: 1200
