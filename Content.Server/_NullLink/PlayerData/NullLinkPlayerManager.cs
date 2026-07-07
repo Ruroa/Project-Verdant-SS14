@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server._NullLink.Core;
@@ -80,7 +80,13 @@ public sealed partial class NullLinkPlayerManager : INullLinkPlayerManager
     }
 
     public bool TryGetPlayerData(Guid userId, [NotNullWhen(true)] out PlayerData? playerData)
-        => _playerById.TryGetValue(userId, out playerData);
+    {
+        if (!_playerById.TryGetValue(userId, out playerData))
+            return false;
+
+        RebuildTitle(userId, playerData);
+        return true;
+    }
 
     private void PlayerStatusChanged(object? sender, SessionStatusEventArgs e)
     {
