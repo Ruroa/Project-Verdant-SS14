@@ -39,13 +39,13 @@ public sealed class TerraformerSaplingSystem : EntitySystem
     {
         base.Initialize();
 
-        // The main TerraformerSystem already subscribes to TerraformerComponent + InteractUsingEvent.
-        // Subscribe through TransformComponent instead and filter for terraformers to avoid duplicate subscriptions.
+        // The main TerraformerSystem already subscribes to TerraformerComponent events.
+        // Subscribe through TransformComponent and filter for terraformers to avoid duplicate subscriptions.
         SubscribeLocalEvent<TransformComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<TerraformerComponent, ComponentShutdown>(OnTerraformerShutdown);
+        SubscribeLocalEvent<TransformComponent, ComponentShutdown>(OnTransformShutdown);
     }
 
-    private void OnTerraformerShutdown(EntityUid uid, TerraformerComponent component, ComponentShutdown args)
+    private void OnTransformShutdown(EntityUid uid, TransformComponent component, ComponentShutdown args)
     {
         _saplingQueues.Remove(uid);
     }
