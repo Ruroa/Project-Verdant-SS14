@@ -174,7 +174,6 @@ namespace Content.Client.Inventory
             // _strippingMenu.Contents.Measure(Vector2Helpers.Infinity);
 
             // TODO allow windows to resize based on content's desired size
-
             // for now: shit-code
             // calculate the window size manually
             // +20 horizontally and vertically from the ContentsContainer margin
@@ -250,11 +249,6 @@ namespace Content.Client.Inventory
         {
             if (!_inv.TryGetSlotContainer(invUid, slotId, out var container, out var slotDef, inv))
                 return;
-
-            // Starlight start
-            if (slotDef.HideFromStrip && _player.LocalEntity != invUid)
-                return;
-            // Starlight end
 
             var entity = container.ContainedEntity;
 
