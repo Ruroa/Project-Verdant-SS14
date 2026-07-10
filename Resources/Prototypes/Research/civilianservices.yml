@@ -56,6 +56,7 @@
   - TelecomServerCircuitboard
   - HolopadMachineCircuitboard
   - BladeServerRackMachineCircuitboard # Moffstation - Blade Server Rack constructible
+  - SurveillanceWirelessCameraHandheld # Moffstation - wireless handheld camera
   radioChannels:
   - Service
 
