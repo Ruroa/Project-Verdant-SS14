@@ -20,13 +20,10 @@ jobs:
           ref: LoujackalTesting
           fetch-depth: 0
 
-      - name: Configure git
+      - name: Configure git and fetch Starlight
         run: |
           git config user.name "Project Verdant Automation"
           git config user.email "actions@users.noreply.github.com"
-
-      - name: Fetch Starlight feature commits
-        run: |
           git remote add starlight https://github.com/ss14Starlight/space-station-14.git
           for sha in \
             f280d05afc341b7ffa11a3ec83aded61ede33dd3 \
@@ -40,12 +37,45 @@ jobs:
           done
 
       - name: Cherry-pick feature integration commits
+        shell: bash
         run: |
-          git cherry-pick f280d05afc341b7ffa11a3ec83aded61ede33dd3
-          git cherry-pick 661c1a4b742d3abb4084f7bd6802de7e34408af3
-          git cherry-pick 74dedf65671a1449882c3a633377be34e5bb5461
-          git cherry-pick -m 1 c922ee5eb580d7850f3e539b606a47641561451a
-          git cherry-pick 644db33ffc1ba7b64646c1e0f2db796372f9d039
+          set -euo pipefail
+
+          resolve_known_asset_conflicts() {
+            local conflicts
+            conflicts="$(git diff --name-only --diff-filter=U)"
+
+            for prefix in \
+              Resources/Textures/_Moffstation/Objects/Misc/Cards/ \
+              Resources/Textures/_Moffstation/Objects/Tools/handheld_camera.rsi/
+            do
+              if printf '%s\n' "$conflicts" | grep -q "^${prefix}"; then
+                git checkout --theirs -- "$prefix"
+                git add "$prefix"
+              fi
+            done
+
+            conflicts="$(git diff --name-only --diff-filter=U)"
+            if [ -n "$conflicts" ]; then
+              echo "Unresolved non-asset conflicts:"
+              printf '%s\n' "$conflicts"
+              exit 1
+            fi
+
+            GIT_EDITOR=true git cherry-pick --continue
+          }
+
+          pick() {
+            if ! git cherry-pick "$@"; then
+              resolve_known_asset_conflicts
+            fi
+          }
+
+          pick f280d05afc341b7ffa11a3ec83aded61ede33dd3
+          pick 661c1a4b742d3abb4084f7bd6802de7e34408af3
+          pick 74dedf65671a1449882c3a633377be34e5bb5461
+          pick -m 1 c922ee5eb580d7850f3e539b606a47641561451a
+          pick 644db33ffc1ba7b64646c1e0f2db796372f9d039
 
       - name: Overlay current Starlight feature files
         run: |
@@ -64,7 +94,7 @@ jobs:
           mkdir -p Resources/Prototypes/_Moffstation/Entities/Objects/Tools
           mkdir -p Resources/Prototypes/_Moffstation/SoundCollections
           mkdir -p Resources/Textures/_Moffstation/Objects/Misc/Cards
-          mkdir -p Resources/Textures/_Moffstation/Objects/Tools
+          mkdir -p Resources/Textures/_Moffstation/Objects/Tools/handheld_camera.rsi
 
           rsync -a /tmp/starlight-current/Content.Client/_Moffstation/Cards/ Content.Client/_Moffstation/Cards/
           cp /tmp/starlight-current/Content.Client/_Moffstation/GameObjects/ManagedLayerVisualizerSystem.cs Content.Client/_Moffstation/GameObjects/
@@ -99,12 +129,7 @@ jobs:
               path.write_text(text, encoding='utf-8')
           PY
 
-          git add Content.Client/_Moffstation Content.Server/_Moffstation Content.Shared/_Moffstation \
-            Resources/Audio/_Moffstation/Effects/Cards \
-            Resources/Locale/en-US/_Moffstation/cards Resources/Locale/en-US/_Starlight/cards/cards.ftl \
-            Resources/Prototypes/_Moffstation Resources/Prototypes/_Starlight/Entities/Objects/base_contraband.yml \
-            Resources/Textures/_Moffstation/Objects/Misc/Cards Resources/Textures/_Moffstation/Objects/Tools/handheld_camera.rsi
-
+          git add -A
           if ! git diff --cached --quiet; then
             git commit -m "Sync current Starlight cards and handheld camera files"
           fi
