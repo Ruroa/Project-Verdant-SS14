@@ -117,3 +117,15 @@ jobs:
           fi
 
           exit "$build_status"
+
+      - name: Run Content.Tests
+        run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj --logger trx -- NUnit.ConsoleOut=0
+
+      - name: Install RSI validator dependencies
+        run: pip3 install --ignore-installed --user pillow jsonschema
+
+      - name: Validate RSIs
+        run: python3 Tools/Schemas/validate_rsis.py Resources/
+
+      - name: Run YAML linter
+        run: dotnet run --project Content.YAMLLinter/Content.YAMLLinter.csproj --configuration DebugOpt --no-build
