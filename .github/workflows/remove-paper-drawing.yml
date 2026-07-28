@@ -1,16 +1,17 @@
 name: Remove Paper Drawing Feature
 
 on:
-  push:
+  pull_request:
+    types: [reopened]
     branches:
-      - LoujackalTesting-UpstreamMerge
+      - LoujackalTesting
 
 permissions:
   contents: write
 
 jobs:
   remove-paper-drawing:
-    if: github.actor != 'github-actions[bot]'
+    if: github.head_ref == 'LoujackalTesting-UpstreamMerge'
     runs-on: ubuntu-latest
     steps:
       - name: Check out merge branch
