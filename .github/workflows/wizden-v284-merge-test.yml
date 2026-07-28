@@ -6,6 +6,11 @@ on:
       - testing/wizden-v284-integration
     paths-ignore:
       - .github/merge-tests/wizden-v284-results.txt
+  pull_request:
+    branches:
+      - LoujackalTesting
+    paths-ignore:
+      - .github/merge-tests/wizden-v284-results.txt
   workflow_dispatch:
 
 permissions:
@@ -15,9 +20,10 @@ jobs:
   merge-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out Project Verdant
+      - name: Check out disposable integration branch
         uses: actions/checkout@v4
         with:
+          ref: testing/wizden-v284-integration
           fetch-depth: 0
           submodules: false
 
