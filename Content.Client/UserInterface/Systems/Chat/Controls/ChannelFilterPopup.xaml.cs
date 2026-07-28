@@ -246,7 +246,8 @@ public sealed partial class ChannelFilterPopup : Popup
         var list = autoHighlights
             .Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .Select(h => h.TrimStart('@'))
-            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .GroupBy(h => h.ToUpperInvariant())
+              .Select(group => group.First())
             .Select(FormattedMessage.EscapeText)
             .Select(h => Loc.GetString("hud-chatbox-auto-highlights-bullet", ("item", h)));
 

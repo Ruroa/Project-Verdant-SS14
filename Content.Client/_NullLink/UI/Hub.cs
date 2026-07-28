@@ -201,7 +201,7 @@ internal sealed partial class Hub : PanelContainer, IDisposable
 
         foreach (var group in groups
                      .Where(g => !string.Equals(g.Key, current, StringComparison.OrdinalIgnoreCase))
-                     .OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase))
+                     .OrderBy(g => g.Key.ToUpperInvariant()))
         {
             if (group.Value.Count == 1)
             {
@@ -477,7 +477,7 @@ internal sealed partial class Hub : PanelContainer, IDisposable
 
     private static IEnumerable<KeyValuePair<string, NullLink.Server>> OrderServers(
         List<KeyValuePair<string, NullLink.Server>> list)
-        => list.OrderBy(kv => kv.Value.Title, StringComparer.OrdinalIgnoreCase);
+        => list.OrderBy(kv => kv.Value.Title.ToUpperInvariant());
 
     protected override void Dispose(bool disposing)
     {
