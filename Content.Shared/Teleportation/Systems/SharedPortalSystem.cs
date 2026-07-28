@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Ghost;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
@@ -36,7 +36,6 @@ public abstract partial class SharedPortalSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedGrapplingGunSystem _grappling = default!;
     [Dependency] private SharedJointSystem _joints = default!;
-    [Dependency] private EntityQuery<PortalBlacklistComponent> _portalBlacklistQuery; // Moffstation - Portal Blacklist
 
     private const string PortalFixture = "portalFixture";
     private const string ProjectileFixture = "projectile";
@@ -108,7 +107,7 @@ public abstract partial class SharedPortalSystem : EntitySystem
         // Starlight - OnAttemptPortalEvent - End
 
         // Moffstation - Begin
-        if (_portalBlacklistQuery.HasComp(subject))
+        if (HasComp<PortalBlacklistComponent>(subject))
             return;
         // Moffstation - End
 

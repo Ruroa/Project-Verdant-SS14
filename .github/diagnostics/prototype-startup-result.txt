@@ -1,25 +1,7 @@
-Server startup exit status: 134
+Server startup exit status: 124
 
-[FATL] unhandled: Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Server.Teleportation.PortalSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Content.Shared._Moffstation.Teleportation.Components.PortalBlacklistComponent]: _portalBlacklistQuery
-Unhandled exception. Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Server.Teleportation.PortalSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Content.Shared._Moffstation.Teleportation.Components.PortalBlacklistComponent]: _portalBlacklistQuery
 
 --- final 120 lines ---
-[INFO] root: Server -> Starting
-[INFO] cfg: Configuration loaded from file
-[DEBG] root: OS: Ubuntu 24.04.4 LTS X64
-[DEBG] root: .NET Runtime: .NET 10.0.10 linux-x64
-[DEBG] root: Server GC: True
-[DEBG] root: Processor: 4x AMD EPYC 7763 64-Core Processor
-[DEBG] root: Available Memory: 15.61 GiB
-[DEBG] root: Architecture: X64
-[DEBG] root: Robust Version: 272.0.0.0
-[DEBG] root: Compile Options: DEVELOPMENT;TOOLS;DEBUG;CLIENT_SCRIPTING
-[DEBG] root: Intrinsics: X86Aes;Avx;Avx2;Bmi1;Bmi2;Fma;Lzcnt;Pclmulqdq;Popcnt;Sse;Sse2;Sse3;Ssse3;Sse41;Sse42;X86Base
-[INFO] srv: Timescale changed to: 1 on tick 1
-[INFO] srv: Name: MyServer
-[INFO] srv: TickRate: 30(33.33ms)
-[INFO] srv: Max players: 256
-[DEBG] auth: Public key is y0AliT3/qzm/QS7udkEWfPw8dhpC+iYfr2st3BN71Vw=
 [DEBG] res.mod: DISABLING assembly load context
 [DEBG] res.mod: DISABLING sandboxing
 [DEBG] res.mod: Found module '/Assemblies/Content.Server.dll'
@@ -33,7 +15,7 @@ Unhandled exception. Robust.Shared.IoC.Exceptions.UnregisteredDependencyExceptio
 [DEBG] res.mod: Loading module: '/Assemblies/Content.Server.Database.dll'
 [DEBG] res.mod: Loading module: '/Assemblies/Content.Shared.dll'
 [DEBG] res.mod: Loading module: '/Assemblies/Content.Server.dll'
-[DEBG] res.mod: DONE loading modules: 00:00:00.3991279
+[DEBG] res.mod: DONE loading modules: 00:00:00.3928948
 [INFO] szr: Serializer Types Hash: 40C0B09E9FFCA47D76F6FEA7675992F8CC318E63D053C4CE9EF642A96FB591AD
 [INFO] configpreset: Loaded config preset: "/ConfigPresets/Build/development.toml"
 [INFO] configpreset: Loaded config preset: "/ConfigPresets/Build/debug.toml"
@@ -65,25 +47,78 @@ Unhandled exception. Robust.Shared.IoC.Exceptions.UnregisteredDependencyExceptio
 ' from migration 'MultiCharacter' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
 [WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
 ' from migration 'RemoveDiscordIdAndRoles' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
-[FATL] unhandled: Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Server.Teleportation.PortalSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Content.Shared._Moffstation.Teleportation.Components.PortalBlacklistComponent]: _portalBlacklistQuery
-   at Robust.Shared.IoC.DependencyCollection.InjectDependenciesReflection(Object obj, FrozenDictionary`2 services) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 527
-   at Robust.Shared.IoC.DependencyCollection.BuildGraph() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 454
-   at Robust.Shared.GameObjects.EntitySystemManager.Initialize(Boolean discover) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntitySystemManager.cs:line 195
-   at Robust.Shared.GameObjects.EntityManager.Startup() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntityManager.cs:line 235
-   at Robust.Server.GameObjects.ServerEntityManager.Startup() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/GameObjects/ServerEntityManager.cs:line 60
-   at Robust.Server.BaseServer.Start(ServerOptions options, Func`1 logHandlerFactory) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/BaseServer.cs:line 399
-   at Robust.Server.Program.ParsedMain(CommandLineArgs args, Boolean contentStart, ServerOptions options) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/Program.cs:line 64
-   at Robust.Server.Program.Start(String[] args, ServerOptions options, Boolean contentStart) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/Program.cs:line 42
-   at Robust.Server.ContentStart.Start(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/ContentStart.cs:line 10
-   at Content.Server.Program.Main(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/Content.Server/Program.cs:line 9
-Unhandled exception. Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Server.Teleportation.PortalSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Content.Shared._Moffstation.Teleportation.Components.PortalBlacklistComponent]: _portalBlacklistQuery
-   at Robust.Shared.IoC.DependencyCollection.InjectDependenciesReflection(Object obj, FrozenDictionary`2 services) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 527
-   at Robust.Shared.IoC.DependencyCollection.BuildGraph() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 454
-   at Robust.Shared.GameObjects.EntitySystemManager.Initialize(Boolean discover) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntitySystemManager.cs:line 195
-   at Robust.Shared.GameObjects.EntityManager.Startup() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntityManager.cs:line 235
-   at Robust.Server.GameObjects.ServerEntityManager.Startup() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/GameObjects/ServerEntityManager.cs:line 60
-   at Robust.Server.BaseServer.Start(ServerOptions options, Func`1 logHandlerFactory) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/BaseServer.cs:line 399
-   at Robust.Server.Program.ParsedMain(CommandLineArgs args, Boolean contentStart, ServerOptions options) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/Program.cs:line 64
-   at Robust.Server.Program.Start(String[] args, ServerOptions options, Boolean contentStart) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/Program.cs:line 42
-   at Robust.Server.ContentStart.Start(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/ContentStart.cs:line 10
-   at Content.Server.Program.Main(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/Content.Server/Program.cs:line 9
+[DEBG] system.guidebook_data: Collected 1283 Guidebook Protodata value(s) - 662 matched prototype(s), 23 component(s), 48 member(s)
+[DEBG] system.map: Starting...
+[DEBG] szr: Finalized string mapping of size 370251 in 808ms
+[DEBG] szr: Wrote string package in 264ms size 1.89 MiB
+[DEBG] szr: String hash is CJaV4dVR5C4mUFc0QVRirMFNgcH-giXPa-2WNBXBs4U
+[INFO] toolshed: Initialized new toolshed context in 00:00:00.1679403
+[INFO] discord.link: No Discord token specified, not connecting.
+[INFO] ticker: Restarting round!
+[WARN] system.round_end_vote: Not enought players, player count: 0
+[DEBG] play_time: Saved 0 trackers
+[INFO] system.mind: Wiping all minds
+[INFO] entity: Flushing entities. Entity count: 0
+[DEBG] system.map: Restarting...
+[INFO] ticker: Starting round!
+[INFO] ticker: Added game rule  (1/n1, Sandbox)
+[INFO] system.game_ticker: Running event  (1/n1, Sandbox)
+[INFO] system.map_loader: Loading file: /Maps/Test/dev_map.yml
+[DEBG] system.map_loader: Loaded yml stream in 00:00:00.0386117
+[DEBG] system.map_loader: Loaded map in 00:00:02.2249656
+[INFO] station: Set up station Dev (3158).
+[INFO] system.map_loader: Loading file: /Maps/_Starlight/Centcomms/CC_Outpost_GNT9.yml
+[DEBG] system.map_loader: Loaded yml stream in 00:00:00.1087397
+[DEBG] system.npc: Waking bee (13540/n13540, MobBee)
+[DEBG] system.npc: Waking bee (13563/n13563, MobBee)
+[DEBG] system.npc: Waking bee (13586/n13586, MobBee)
+[DEBG] system.npc: Waking bee (13609/n13609, MobBee)
+[DEBG] system.npc: Waking bee (13632/n13632, MobBee)
+[DEBG] system.npc: Waking bee (13655/n13655, MobBee)
+[DEBG] system.npc: Waking bee (13678/n13678, MobBee)
+[DEBG] system.npc: Waking bee (13701/n13701, MobBee)
+[DEBG] system.npc: Waking space bear (17239/n17239, MobBearSpace)
+[DEBG] system.npc: Waking butterfly (17262/n17262, MobButterfly)
+[DEBG] system.npc: Waking butterfly (17285/n17285, MobButterfly)
+[DEBG] system.npc: Waking cleanbot (17308/n17308, MobCleanBot)
+[DEBG] system.npc: Waking cleanbot (17312/n17312, MobCleanBot)
+[DEBG] system.npc: Waking crab (17316/n17316, MobCrab)
+[DEBG] system.npc: Waking crab (17336/n17336, MobCrab)
+[DEBG] system.npc: Waking goat (17356/n17356, MobGoat)
+[DEBG] system.npc: Waking medibot (17378/n17378, MobMedibot)
+[DEBG] system.npc: Waking parrot (17381/n17381, MobParrot)
+[DEBG] system.npc: Waking sentry turret (11769/n11769, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11770/n11770, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11771/n11771, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11772/n11772, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11773/n11773, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11774/n11774, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11775/n11775, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11776/n11776, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11777/n11777, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11778/n11778, WeaponEnergyTurretCommand)
+[DEBG] system.npc: Waking sentry turret (11783/n11783, WeaponEnergyTurretSecurity)
+[DEBG] system.npc: Waking ballistic turret (11824/n11824, WeaponTurretSyndicate)
+[DEBG] system.map_loader: Loaded map in 00:00:06.3979769
+[INFO] system.emergency_shuttle: Created centcomm grid Central Command GNT-9 (3160/n3160) on map Central Command (3159/n3159) for station Dev (3158/n3158, StandardNanotrasenStation)
+[INFO] station: Adding grid 2 to station Dev (3158)
+[INFO] system.map_loader: Loading file: /Maps/Shuttles/emergency.yml
+[DEBG] system.map_loader: Loaded yml stream in 00:00:00.0044220
+[DEBG] system.map_loader: Loaded map in 00:00:00.2339684
+[INFO] system.emergency_shuttle: Added emergency shuttle NT Evac Pill (19378/n19378) for station Dev (3158/n3158, StandardNanotrasenStation) and centcomm Central Command GNT-9 (3160/n3160)
+[INFO] ticker: Started game rule  (1/n1, Sandbox)
+[INFO] system.map_loader: Loading file: /Maps/_Starlight/Other/cosmicvoid.yml
+[DEBG] system.map_loader: Loaded yml stream in 00:00:00.0076454
+[DEBG] system.map_loader: Loaded map in 00:00:00.1769707
+[INFO] ticker: Attempting to start preset 'Sandbox'
+[DEBG] system.npc: Waking real mouse (22570/n22570, MobCorgiMouse)
+[DEBG] system.station_jobs: Station "Dev" on extended access: True
+[WARN] vgroid.spawn: No VGRoid grid found during round start.
+[INFO] SERVER: OOC chat has been disabled.
+[INFO] cvarcontrol: Registered 39 CVars.
+[INFO] root: Server Version 272.0.0.0 -> Ready
+[WARN] eng: MainLoop: Cannot keep up!
+[INFO] net: "::": "Socket bound to [::]:1212: True"
+[INFO] net: "::": "Network thread started"
+[INFO] net: "0.0.0.0": "Socket bound to 0.0.0.0:1212: True"
+[INFO] net: "0.0.0.0": "Network thread started"

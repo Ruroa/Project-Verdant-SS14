@@ -1,0 +1,2 @@
+Content.Client/SubFloor/TrayScannerSystem.cs:34:    [Dependency] private EntityQuery<TrayScannerComponent> _trayScannerQuery = default!; // starlight edit: removed readonly
+Content.Client/SubFloor/TrayScannerSystem.cs:35:    [Dependency] private EntityQuery<SubFloorHideComponent> _subFloorHideQuery = default!; // starlight edit: removed readonly
