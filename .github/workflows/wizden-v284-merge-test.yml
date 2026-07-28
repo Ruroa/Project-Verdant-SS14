@@ -1,0 +1,60 @@
+name: WizDen v284 Merge Test
+
+on:
+  push:
+    branches:
+      - testing/wizden-v284-integration
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  merge-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Project Verdant
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+
+      - name: Attempt WizDen stable merge
+        shell: bash
+        run: |
+          set -u
+          git config user.name "Project Verdant Merge Test"
+          git config user.email "merge-test@invalid.local"
+
+          git remote add wizden https://github.com/space-wizards/space-station-14.git
+          git fetch --no-tags wizden stable
+
+          set +e
+          git merge --no-commit --no-ff wizden/stable > /tmp/merge-output.txt 2>&1
+          merge_status=$?
+          set -e
+
+          cat /tmp/merge-output.txt
+          git status --short
+
+          git diff --name-only --diff-filter=U | sort | tee /tmp/conflicts.txt
+          conflict_count=$(wc -l < /tmp/conflicts.txt | tr -d ' ')
+
+          {
+            echo "## WizDen v284 merge test"
+            echo
+            echo "- Merge command exit status: ${merge_status}"
+            echo "- Unmerged conflict files: ${conflict_count}"
+            echo
+            echo "### Conflict files"
+            echo '```text'
+            cat /tmp/conflicts.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if git rev-parse -q --verify MERGE_HEAD >/dev/null; then
+            git merge --abort
+          fi
+
+          echo "MERGE_STATUS=${merge_status}"
+          echo "CONFLICT_COUNT=${conflict_count}"
