@@ -19,6 +19,46 @@ jobs:
           ref: port/wizden-sheep
           fetch-depth: 0
 
+      - name: Apply Project Verdant compatibility fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+
+          path = Path("Content.Shared/Animals/ShearableSystem.cs")
+          text = path.read_text(encoding="utf-8-sig")
+
+          old_using = "using Content.Shared.Chemistry.Components;\n"
+          new_using = old_using + "using Content.Shared.Chemistry.Components.SolutionManager;\n"
+          if "using Content.Shared.Chemistry.Components.SolutionManager;" not in text:
+              if old_using not in text:
+                  raise RuntimeError("Solution component using anchor missing")
+              text = text.replace(old_using, new_using, 1)
+
+          old_random = "        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));"
+          new_random = "        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);\n        var rand = new System.Random(seed);"
+          if old_random in text:
+              text = text.replace(old_random, new_random, 1)
+
+          old_solution_check = "        if (args.Solution.Comp.Id != ent.Comp.TargetSolutionName)\n            return;"
+          new_solution_check = "        if (!TryComp<ContainedSolutionComponent>(args.Solution.Owner, out var containedSolution) ||\n            containedSolution.ContainerName != ent.Comp.TargetSolutionName)\n            return;"
+          if old_solution_check in text:
+              text = text.replace(old_solution_check, new_solution_check, 1)
+
+          path.write_text(text, encoding="utf-8")
+          PY
+
+          rm -f .github/merge-tests/wizden-sheep-build-errors.txt
+          git config user.name "Project Verdant Port Bot"
+          git config user.email "progamerlp12@gmail.com"
+          git add Content.Shared/Animals/ShearableSystem.cs
+          git add -u .github/merge-tests/wizden-sheep-build-errors.txt || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Adapt Sheep shearing to Project Verdant APIs"
+            git push origin HEAD:port/wizden-sheep
+          fi
+
       - name: Set up submodules
         run: git submodule update --init --recursive
 
