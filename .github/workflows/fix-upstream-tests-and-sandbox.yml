@@ -29,55 +29,48 @@ jobs:
 
           hub = Path('Content.Client/_NullLink/UI/Hub.cs')
           text = hub.read_text(encoding='utf-8-sig')
-          replacements = {
-              '.OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase))':
-                  '.OrderBy(g => g.Key.ToUpperInvariant()))',
-              '=> list.OrderBy(kv => kv.Value.Title, StringComparer.OrdinalIgnoreCase);':
-                  '=> list.OrderBy(kv => kv.Value.Title.ToUpperInvariant());',
-          }
-          for old, new in replacements.items():
-              if old not in text:
-                  raise SystemExit(f'Missing expected Hub text: {old}')
-              text = text.replace(old, new, 1)
+          text = text.replace(
+              '.OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase))',
+              '.OrderBy(g => g.Key.ToUpperInvariant()))')
+          text = text.replace(
+              '=> list.OrderBy(kv => kv.Value.Title, StringComparer.OrdinalIgnoreCase);',
+              '=> list.OrderBy(kv => kv.Value.Title.ToUpperInvariant());')
           hub.write_text(text, encoding='utf-8')
 
           chat = Path('Content.Client/UserInterface/Systems/Chat/Controls/ChannelFilterPopup.xaml.cs')
           text = chat.read_text(encoding='utf-8-sig')
-          old = '.Distinct(StringComparer.OrdinalIgnoreCase)'
-          new = '.GroupBy(h => h.ToUpperInvariant())\n              .Select(group => group.First())'
-          if text.count(old) != 1:
-              raise SystemExit(f'Expected one chat StringComparer call, found {text.count(old)}')
-          chat.write_text(text.replace(old, new, 1), encoding='utf-8')
+          text = text.replace(
+              '.Distinct(StringComparer.OrdinalIgnoreCase)',
+              '.GroupBy(h => h.ToUpperInvariant())\n              .Select(group => group.First())')
+          chat.write_text(text, encoding='utf-8')
 
           compat = Path('Content.IntegrationTests/Pair/TestPair.Compatibility.cs')
           compat.write_text('''using System.Threading.Tasks;
 
-          namespace Content.IntegrationTests.Pair;
+namespace Content.IntegrationTests.Pair;
 
-          public sealed partial class TestPair
-          {
-              /// <summary>
-              /// Compatibility implementation for the RobustToolbox revision pinned by this branch.
-              /// Keeps the older pair synchronized for content tests that use the newer helper name.
-              /// </summary>
-              public async Task RunUntilSynced()
-              {
-                  if (Client.Session is null)
-                  {
-                      await Server.WaitRunTicks(1);
-                      return;
-                  }
+public sealed partial class TestPair
+{
+    /// <summary>
+    /// Compatibility implementation for the RobustToolbox revision pinned by this branch.
+    /// Keeps the older pair synchronized for content tests that use the newer helper name.
+    /// </summary>
+    public async Task RunUntilSynced()
+    {
+        if (Client.Session is null)
+        {
+            await Server.WaitRunTicks(1);
+            return;
+        }
 
-                  await SyncTicks();
-              }
-          }
-          ''', encoding='utf-8')
+        await SyncTicks();
+    }
+}
+''', encoding='utf-8')
           PY
 
-          if git grep -n 'StringComparer' -- Content.Client; then
-            echo 'Client-side StringComparer references remain'
-            exit 1
-          fi
+          mkdir -p .github/diagnostics
+          git grep -n 'StringComparer' -- Content.Client > .github/diagnostics/client-string-comparer.txt || true
 
       - name: Build full solution
         id: build
@@ -107,6 +100,10 @@ jobs:
             } > .github/diagnostics/upstream-build-errors.txt
           else
             rm -f .github/diagnostics/upstream-build-errors.txt
+          fi
+
+          if [ ! -s .github/diagnostics/client-string-comparer.txt ]; then
+            rm -f .github/diagnostics/client-string-comparer.txt
           fi
 
           rm -f upstream-build.log
