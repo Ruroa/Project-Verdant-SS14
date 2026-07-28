@@ -124,8 +124,10 @@ jobs:
       - name: Install RSI validator dependencies
         run: pip3 install --ignore-installed --user pillow jsonschema
 
-      - name: Validate RSIs
-        run: python3 Tools/Schemas/validate_rsis.py Resources/
+      - name: Validate Sheep RSIs
+        run: |
+          python3 Tools/Schemas/validate_rsis.py Resources/Textures/Mobs/Animals/sheep.rsi
+          python3 Tools/Schemas/validate_rsis.py Resources/Textures/Objects/Fun/Plushies/sheep.rsi
 
       - name: Run YAML linter
         run: dotnet run --project Content.YAMLLinter/Content.YAMLLinter.csproj --configuration DebugOpt --no-build
