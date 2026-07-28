@@ -2,7 +2,7 @@ name: Remove Paper Drawing Feature
 
 on:
   pull_request:
-    types: [opened]
+    types: [synchronize]
     branches:
       - LoujackalTesting
 
@@ -41,22 +41,28 @@ jobs:
           # Remove the dedicated freehand/SVG drawing implementation.
           git rm -f Content.Client/Paper/UI/PaperDrawingControl.cs
 
-          # Verify that no identifiers belonging to the paper drawing feature remain.
+          # Globally verify identifiers unique to the paper drawing feature.
           set +e
-          leftovers=$(git grep -I -n -i -E \
-            'PaperDrawing|DrawingData|PaperInputDrawing|PaperClearDrawing|CopyDrawing|OnDrawing|DrawModeButton|SaveDrawingButton|ClearDrawingButton|ColorPanel|Thickness[1-5]Button' \
+          unique_leftovers=$(git grep -I -n -i -E \
+            'PaperDrawing|DrawingData|PaperInputDrawing|PaperClearDrawing|CopyDrawing|OnDrawing|DrawModeButton|SaveDrawingButton|ClearDrawingButton' \
             -- \
             ':!.github/workflows/remove-paper-drawing.yml')
-          grep_status=$?
+          unique_status=$?
+
+          # Check broader UI names only inside the paper UI directory.
+          ui_leftovers=$(git grep -I -n -E \
+            'DrawingControl|WriteModeButton|ColorPanel|Thickness[1-5]Button' \
+            -- Content.Client/Paper || true)
           set -e
 
-          if [ "$grep_status" -eq 0 ]; then
+          if [ "$unique_status" -eq 0 ] || [ -n "$ui_leftovers" ]; then
             echo "Paper drawing references still remain:"
-            echo "$leftovers"
+            [ -n "$unique_leftovers" ] && echo "$unique_leftovers"
+            [ -n "$ui_leftovers" ] && echo "$ui_leftovers"
             exit 1
-          elif [ "$grep_status" -ne 1 ]; then
-            echo "git grep failed with status $grep_status"
-            exit "$grep_status"
+          elif [ "$unique_status" -ne 1 ]; then
+            echo "git grep failed with status $unique_status"
+            exit "$unique_status"
           fi
 
           # Remove this one-time workflow from the resulting branch.
