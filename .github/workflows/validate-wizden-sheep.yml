@@ -1,0 +1,39 @@
+name: Validate WizDen Sheep Port
+
+on:
+  pull_request:
+    branches:
+      - LoujackalTesting
+
+jobs:
+  build:
+    if: github.head_ref == 'port/wizden-sheep'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Sheep port branch
+        uses: actions/checkout@v4
+        with:
+          ref: port/wizden-sheep
+          fetch-depth: 0
+
+      - name: Set up submodules
+        run: git submodule update --init --recursive
+
+      - name: Pull engine dependency updates
+        uses: space-wizards/submodule-dependency@v0.1.5
+
+      - name: Update engine submodules
+        run: |
+          cd RobustToolbox
+          git submodule update --init --recursive
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build DebugOpt
+        run: dotnet build --configuration DebugOpt --no-restore /m
