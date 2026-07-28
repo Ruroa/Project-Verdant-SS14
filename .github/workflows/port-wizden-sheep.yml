@@ -20,13 +20,13 @@ jobs:
           fetch-depth: 0
           submodules: false
 
-      - name: Cherry-pick WizDen Sheep
+      - name: Cherry-pick and adapt WizDen Sheep
         shell: bash
         run: |
           set -euo pipefail
 
-          if [ -f Content.Shared/Animals/ShearableComponent.cs ] || [ -f .github/merge-tests/wizden-sheep-port-results.txt ]; then
-            echo "Sheep port already completed or conflict report already recorded."
+          if [ -f Content.Shared/Animals/ShearableComponent.cs ]; then
+            echo "Sheep is already present on this branch."
             exit 0
           fi
 
@@ -36,43 +36,348 @@ jobs:
           git fetch --no-tags wizden 463a5772f1f4d69cee1d3d651e7f8fa055c8e417
 
           set +e
-          git cherry-pick 463a5772f1f4d69cee1d3d651e7f8fa055c8e417 > /tmp/sheep-port-output.txt 2>&1
+          git cherry-pick 463a5772f1f4d69cee1d3d651e7f8fa055c8e417
           port_status=$?
           set -e
 
-          cat /tmp/sheep-port-output.txt
+          if [ "$port_status" -ne 0 ]; then
+            conflicts=$(git diff --name-only --diff-filter=U | sort)
+            expected=$(cat <<'EOF'
+          Resources/Prototypes/Entities/Mobs/NPCs/animals.yml
+          Resources/Prototypes/Entities/Mobs/NPCs/space.yml
+          Resources/Prototypes/Entities/Objects/Specific/Service/barber.yml
+          Resources/Prototypes/Entities/Structures/Machines/Computers/arcades.yml
+          EOF
+          )
 
-          if [ "$port_status" -eq 0 ]; then
-            git rm .github/workflows/port-wizden-sheep.yml
-            git commit -m "Remove temporary Sheep port workflow"
-            git push origin HEAD:port/wizden-sheep
-            exit 0
+            if [ "$conflicts" != "$expected" ]; then
+              echo "Unexpected Sheep port conflicts:"
+              printf '%s\n' "$conflicts"
+              exit 1
+            fi
+
+            git checkout --ours -- \
+              Resources/Prototypes/Entities/Mobs/NPCs/animals.yml \
+              Resources/Prototypes/Entities/Mobs/NPCs/space.yml \
+              Resources/Prototypes/Entities/Objects/Specific/Service/barber.yml \
+              Resources/Prototypes/Entities/Structures/Machines/Computers/arcades.yml
+
+            python3 <<'PY'
+          from pathlib import Path
+
+          def insert_before(path: str, anchor: str, block: str) -> None:
+              file = Path(path)
+              text = file.read_text(encoding="utf-8-sig")
+              if block.strip() in text:
+                  return
+              if anchor not in text:
+                  raise RuntimeError(f"Anchor not found in {path}: {anchor!r}")
+              text = text.replace(anchor, block.rstrip() + "\n\n" + anchor, 1)
+              file.write_text(text, encoding="utf-8")
+
+          sheep_block = r'''- type: entity
+            abstract: true
+            id: MobSheepBase
+            name: sheepBase
+            description: A sheep.
+            components:
+            - type: Sprite
+              drawdepth: Mobs
+              layers:
+              - state: sheep_bare
+                map: [ "enum.DamageStateVisualLayers.Base" ]
+                visible: true
+                sprite: Mobs/Animals/sheep.rsi
+              - state: sheep_wool
+                map: [ "wooly" ]
+                visible: true
+                sprite: Mobs/Animals/sheep.rsi
+            - type: GenericVisualizer
+              visuals:
+                enum.ShearableVisuals.Shearable:
+                  wooly:
+                    True: {visible: true}
+                    False: {visible: false}
+                enum.MobStateVisuals.State:
+                  wooly:
+                    Alive: {state: sheep_wool}
+                    Dead: {state: sheep_wool_dead}
+                    Critical: {state: sheep_wool_dead}
+            - type: Fixtures
+              fixtures:
+                fix1:
+                  shape:
+                    !type:PhysShapeCircle
+                    radius: 0.35
+                  density: 150
+                  mask:
+                  - MobMask
+                  layer:
+                  - MobLayer
+            - type: Tag
+              tags:
+              - ClothMade
+              - DoorBumpOpener
+              - Sheep
+            - type: Reproductive
+              partnerWhitelist:
+                tags:
+                - Sheep
+              offspring:
+              - id: MobSheep
+            - type: ReproductivePartner
+            - type: Appearance
+            - type: DamageStateVisuals
+              states:
+                Alive:
+                  Base: sheep_bare
+                Critical:
+                  Base: sheep_dead
+                Dead:
+                  Base: sheep_dead
+            - type: SolutionContainerManager
+              solutions:
+                udder:
+                  maxVol: 250
+                  reagents:
+                  - ReagentId: MilkSheep
+                    Quantity: 25
+                wool:
+                  maxVol: 250
+                  reagents:
+                  - ReagentId: Fiber
+                    Quantity: 25
+            - type: Udder
+              reagentId: MilkSheep
+              quantityPerUpdate: 25
+              growthDelay: 20
+            - type: ExaminableHunger
+            - type: Wooly
+            - type: Shearable
+              targetSolutionName: wool
+              shearedProductId: MaterialCotton1
+              solutionPerProduct: 2.5
+              toolQuality: Shearing
+              shearableMarkupText: sheep-shearable-examine-markup
+              unShearableMarkupText: sheep-not-shearable-examine-markup
+            - type: Edible
+              destroyOnEmpty: false
+              solution: wool
+              requiresSpecialDigestion: true
+              requireDead: false
+            - type: FlavorProfile
+              flavors:
+              - fiber
+            - type: Butcherable
+              spawned:
+              - id: FoodMeat
+                amount: 4
+            - type: Grammar
+              attributes:
+                gender: female
+            - type: Speech
+              speechSounds: Sheep
+              speechVerb: Sheep
+            - type: Vocal
+              sounds:
+                Female: Sheep
+                Male: Sheep
+                Unsexed: Sheep
+            - type: BleatingAccent
+            - type: InteractionPopup
+              successChance: 0.8
+              interactDelay: 1
+              interactSuccessString: petting-success-sheep
+              interactFailureString: petting-failure-sheep
+              interactSuccessSpawn: EffectHearts
+              interactSuccessSound:
+                collection: Sheep
+                params:
+                  variation: 0.05
+            - type: Perishable
+              molsPerSecondPerUnitMass: 0.0015
+            - type: NpcFactionMember
+              factions:
+              - Passive
+            - type: Body
+              prototype: AnimalRuminant
+            - type: HTN
+              rootTask:
+                task: RuminantCompound
+            - type: MovementSpeedModifier
+              baseWalkSpeed: 0.6
+              baseSprintSpeed: 0.8
+
+          - type: entity
+            parent: [ SimpleMobBase, MobSheepBase ]
+            id: MobSheep
+            name: sheep
+            description: An adorable genetically engineered chemical factory producing milk and cotton.
+
+          - type: entity
+            parent: MobSheep
+            id: MobSheepRainbow
+            name: rainbow sheep
+            description: A sheep; this one seems... glowy.
+            components:
+            - type: PointLight
+              radius: 1.5
+              energy: 0.5
+            - type: RgbLightController
+              layers: [ 1 ]
+            - type: Wooly
+              reagentId: SpaceDrugs
+            - type: Shearable
+              targetSolutionName: wool
+              shearedProductId: LeavesCannabisRainbow
+              solutionPerProduct: 6
+              toolQuality: Shearing
+              shearableMarkupText: rainbow-sheep-shearable-examine-markup
+              unShearableMarkupText: rainbow-sheep-not-shearable-examine-markup
+              verb: rainbow-sheep-shearable-verb
+            - type: SolutionContainerManager
+              solutions:
+                udder:
+                  maxVol: 250
+                  reagents:
+                  - ReagentId: MilkSheep
+                    Quantity: 25
+                wool:
+                  maxVol: 250
+                  reagents:
+                  - ReagentId: SpaceDrugs
+                    Quantity: 25
+            - type: FlavorProfile
+              flavors:
+              - leafy'''
+
+          space_sheep_block = r'''- type: entity
+            parent: [ SimpleSpaceMobBase, FlyingMobBase, MobSheepBase ]
+            id: MobSheepSpace
+            name: space sheep
+            description: A sheep... in space!
+            components:
+            - type: Sprite
+              drawdepth: Mobs
+              layers:
+              - state: space_sheep_bare
+                map: [ "enum.DamageStateVisualLayers.Base" ]
+                visible: true
+                sprite: Mobs/Animals/sheep.rsi
+              - state: space_sheep_wool_glowmask
+                map: [ "wooly" ]
+                visible: true
+                sprite: Mobs/Animals/sheep.rsi
+            - type: GenericVisualizer
+              visuals:
+                enum.ShearableVisuals.Shearable:
+                  wooly:
+                    True: {visible: true}
+                    False: {visible: false}
+                enum.MobStateVisuals.State:
+                  wooly:
+                    Alive: {state: space_sheep_wool_glowmask}
+                    Dead: {state: space_sheep_wool_dead}
+                    Critical: {state: space_sheep_wool_dead}
+            - type: Fixtures
+              fixtures:
+                fix1:
+                  shape: !type:PhysShapeCircle
+                    radius: 0.35
+                  density: 150
+                  mask:
+                  - FlyingMobMask
+                  layer:
+                  - FlyingMobLayer
+            - type: DamageStateVisuals
+              states:
+                Alive:
+                  Base: space_sheep_bare
+                Critical:
+                  Base: space_sheep_dead
+                Dead:
+                  Base: space_sheep_dead
+            - type: Shearable
+              targetSolutionName: wool
+              shearedProductId: MaterialDurathread1
+              solutionPerProduct: 10
+              toolQuality: Shearing
+              shearableMarkupText: space-sheep-shearable-examine-markup
+              unShearableMarkupText: space-sheep-not-shearable-examine-markup
+            - type: MovementSpeedModifier
+              baseWalkSpeed: 0.6
+              baseSprintSpeed: 2.0
+            - type: PointLight
+              radius: 2.0
+              energy: 1.0
+              color: "#4795ff"
+            - type: InteractionPopup
+              successChance: 0.8
+              interactDelay: 1
+              interactSuccessString: petting-success-sheep
+              interactFailureString: petting-failure-sheep
+              interactSuccessSpawn: EffectHearts
+              interactSuccessSound:
+                collection: SheepSpace
+                params:
+                  variation: 0.05
+            - type: MobPrice
+              price: 600
+            - type: Wooly
+              quantity: 10
+              growthDelay: 120
+            - type: Speech
+              speechSounds: SheepSpace
+              speechVerb: Sheep
+            - type: Vocal
+              sounds:
+                Female: SheepSpace
+                Male: SheepSpace
+                Unsexed: SheepSpace'''
+
+          insert_before(
+              "Resources/Prototypes/Entities/Mobs/NPCs/animals.yml",
+              "# Note that we gotta make this bitch vomit someday",
+              sheep_block,
+          )
+          insert_before(
+              "Resources/Prototypes/Entities/Mobs/NPCs/space.yml",
+              "- type: entity\n  parent: SimpleSpaceMobBase\n  id: MobSnail",
+              space_sheep_block,
+          )
+
+          barber = Path("Resources/Prototypes/Entities/Objects/Specific/Service/barber.yml")
+          barber_text = barber.read_text(encoding="utf-8-sig")
+          barber_anchor = "  - type: PhysicalComposition\n"
+          barber_addition = "  - type: Tool\n    qualities:\n    - Shearing\n"
+          if barber_addition not in barber_text:
+              if barber_anchor not in barber_text:
+                  raise RuntimeError("Barber scissors insertion anchor missing")
+              barber_text = barber_text.replace(barber_anchor, barber_addition + barber_anchor, 1)
+              barber.write_text(barber_text, encoding="utf-8")
+
+          arcades = Path("Resources/Prototypes/Entities/Structures/Machines/Computers/arcades.yml")
+          arcade_text = arcades.read_text(encoding="utf-8-sig")
+          arcade_anchor = "#STARLIGHT-Start\n"
+          arcade_addition = "    - PlushieSpaceSheep\n    - PlushieSheep\n"
+          if arcade_addition not in arcade_text:
+              if arcade_anchor not in arcade_text:
+                  raise RuntimeError("Arcade prize insertion anchor missing")
+              arcade_text = arcade_text.replace(arcade_anchor, arcade_addition + arcade_anchor, 1)
+              arcades.write_text(arcade_text, encoding="utf-8")
+          PY
+
+            git add \
+              Resources/Prototypes/Entities/Mobs/NPCs/animals.yml \
+              Resources/Prototypes/Entities/Mobs/NPCs/space.yml \
+              Resources/Prototypes/Entities/Objects/Specific/Service/barber.yml \
+              Resources/Prototypes/Entities/Structures/Machines/Computers/arcades.yml
+            git cherry-pick --continue
           fi
 
-          mkdir -p .github/merge-tests
-          conflict_files=$(git diff --name-only --diff-filter=U | sort)
-          conflict_count=$(printf '%s\n' "$conflict_files" | sed '/^$/d' | wc -l | tr -d ' ')
-
-          {
-            echo "WizDen Sheep port test"
-            echo "======================"
-            echo
-            echo "Source commit: 463a5772f1f4d69cee1d3d651e7f8fa055c8e417"
-            echo "Cherry-pick exit status: $port_status"
-            echo "Conflict files: $conflict_count"
-            echo
-            echo "Conflicts"
-            echo "---------"
-            printf '%s\n' "$conflict_files"
-            echo
-            echo "Command output"
-            echo "--------------"
-            cat /tmp/sheep-port-output.txt
-          } > /tmp/wizden-sheep-port-results.txt
-
-          git cherry-pick --abort
-          cp /tmp/wizden-sheep-port-results.txt .github/merge-tests/wizden-sheep-port-results.txt
-          git add .github/merge-tests/wizden-sheep-port-results.txt
-          git commit -m "Record WizDen Sheep port conflicts"
+          git rm -f .github/workflows/port-wizden-sheep.yml
+          if [ -f .github/merge-tests/wizden-sheep-port-results.txt ]; then
+            git rm -f .github/merge-tests/wizden-sheep-port-results.txt
+          fi
+          git commit -m "Remove temporary Sheep port files"
           git push origin HEAD:port/wizden-sheep
-          exit 1
