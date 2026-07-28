@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Content.Shared._NullLink;
 using Robust.Shared.Network;
@@ -19,7 +19,7 @@ public sealed partial class NullLinkPlayerManager : INullLinkPlayerManager
         MentorCheck(ev.Player, playerData);
         AdminCheck(ev.Player, playerData);
 
-        RebuildTitle(_playerManager.GetSessionById(new NetUserId(ev.Player)), playerData);
+        RebuildTitle(ev.Player, playerData);
 
         SendPlayerRoles(playerData.Session, playerData.Roles);
         return ValueTask.CompletedTask;
@@ -35,7 +35,7 @@ public sealed partial class NullLinkPlayerManager : INullLinkPlayerManager
         MentorCheck(ev.Player, playerData);
         AdminCheck(ev.Player, playerData);
 
-        RebuildTitle(_playerManager.GetSessionById(new NetUserId(ev.Player)), playerData);
+        RebuildTitle(ev.Player, playerData);
 
         SendPlayerRoles(playerData.Session, playerData.Roles);
         return ValueTask.CompletedTask;

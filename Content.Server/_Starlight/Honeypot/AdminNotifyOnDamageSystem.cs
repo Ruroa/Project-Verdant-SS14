@@ -35,7 +35,8 @@ public sealed partial class AdminNotifyOnDamageSystem : EntitySystem
                 $"{entity.Comp.Subject} \"{ToPrettyString(entity)}\" got damaged at Pos:{(posFound ? $"{gridPos:coordinates}" : "[Grid or Map not found]")}");
 
         // Follow up with a second line of only cmdlinks to the entity and aggressor.
-        var links = $"[color=#ff0000]Click to [/color][cmdlink=\"Warp to {FormattedMessage.EscapeStringParameter(entity.Comp.Subject)}\" command=\"tpto {GetNetEntity(entity.Owner)}\"/]";
+        var escapedSubject = FormattedMessage.EscapeText(entity.Comp.Subject).Replace("\"", "\\\"");
+var links = $"[color=#ff0000]Click to [/color][cmdlink=\"Warp to {escapedSubject}\" command=\"tpto {GetNetEntity(entity.Owner)}\"/]";
         if (args.Origin != null)
             links += $"[color=#ff0000] or [/color][cmdlink=\"Warp to attacker\" command=\"tpto {GetNetEntity(args.Origin.Value)}\"/]";
         _chat.SendAdminAlertNoFormatOrEscape(links);
