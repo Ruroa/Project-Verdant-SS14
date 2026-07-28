@@ -1,0 +1,78 @@
+name: Port WizDen Sheep
+
+on:
+  pull_request:
+    branches:
+      - LoujackalTesting
+
+permissions:
+  contents: write
+
+jobs:
+  port-sheep:
+    if: github.head_ref == 'port/wizden-sheep'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Sheep port branch
+        uses: actions/checkout@v4
+        with:
+          ref: port/wizden-sheep
+          fetch-depth: 0
+          submodules: false
+
+      - name: Cherry-pick WizDen Sheep
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -f Content.Shared/Animals/ShearableComponent.cs ] || [ -f .github/merge-tests/wizden-sheep-port-results.txt ]; then
+            echo "Sheep port already completed or conflict report already recorded."
+            exit 0
+          fi
+
+          git config user.name "Project Verdant Port Bot"
+          git config user.email "progamerlp12@gmail.com"
+          git remote add wizden https://github.com/space-wizards/space-station-14.git
+          git fetch --no-tags wizden 463a5772f1f4d69cee1d3d651e7f8fa055c8e417
+
+          set +e
+          git cherry-pick 463a5772f1f4d69cee1d3d651e7f8fa055c8e417 > /tmp/sheep-port-output.txt 2>&1
+          port_status=$?
+          set -e
+
+          cat /tmp/sheep-port-output.txt
+
+          if [ "$port_status" -eq 0 ]; then
+            git rm .github/workflows/port-wizden-sheep.yml
+            git commit -m "Remove temporary Sheep port workflow"
+            git push origin HEAD:port/wizden-sheep
+            exit 0
+          fi
+
+          mkdir -p .github/merge-tests
+          conflict_files=$(git diff --name-only --diff-filter=U | sort)
+          conflict_count=$(printf '%s\n' "$conflict_files" | sed '/^$/d' | wc -l | tr -d ' ')
+
+          {
+            echo "WizDen Sheep port test"
+            echo "======================"
+            echo
+            echo "Source commit: 463a5772f1f4d69cee1d3d651e7f8fa055c8e417"
+            echo "Cherry-pick exit status: $port_status"
+            echo "Conflict files: $conflict_count"
+            echo
+            echo "Conflicts"
+            echo "---------"
+            printf '%s\n' "$conflict_files"
+            echo
+            echo "Command output"
+            echo "--------------"
+            cat /tmp/sheep-port-output.txt
+          } > /tmp/wizden-sheep-port-results.txt
+
+          git cherry-pick --abort
+          cp /tmp/wizden-sheep-port-results.txt .github/merge-tests/wizden-sheep-port-results.txt
+          git add .github/merge-tests/wizden-sheep-port-results.txt
+          git commit -m "Record WizDen Sheep port conflicts"
+          git push origin HEAD:port/wizden-sheep
+          exit 1
