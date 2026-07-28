@@ -5,6 +5,9 @@ on:
     branches:
       - LoujackalTesting
 
+permissions:
+  contents: write
+
 jobs:
   build:
     if: github.head_ref == 'port/wizden-sheep'
@@ -35,5 +38,42 @@ jobs:
       - name: Restore
         run: dotnet restore
 
-      - name: Build DebugOpt
-        run: dotnet build --configuration DebugOpt --no-restore /m
+      - name: Build DebugOpt and record errors
+        shell: bash
+        run: |
+          set +e
+          dotnet build --configuration DebugOpt --no-restore /m > /tmp/sheep-build.log 2>&1
+          build_status=$?
+          set -e
+
+          cat /tmp/sheep-build.log
+
+          if [ "$build_status" -eq 0 ]; then
+            exit 0
+          fi
+
+          mkdir -p .github/merge-tests
+          {
+            echo "WizDen Sheep build errors"
+            echo "========================="
+            echo
+            echo "Build exit status: $build_status"
+            echo
+            echo "Compiler and analyzer errors"
+            echo "----------------------------"
+            grep -E "(^|[[:space:]])error ([A-Z]+[0-9]+|MSB[0-9]+|NETSDK[0-9]+)" /tmp/sheep-build.log || true
+            echo
+            echo "Final build output"
+            echo "------------------"
+            tail -n 300 /tmp/sheep-build.log
+          } > .github/merge-tests/wizden-sheep-build-errors.txt
+
+          git config user.name "Project Verdant Port Bot"
+          git config user.email "progamerlp12@gmail.com"
+          git add .github/merge-tests/wizden-sheep-build-errors.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "Record Sheep port build errors"
+            git push origin HEAD:port/wizden-sheep
+          fi
+
+          exit "$build_status"
