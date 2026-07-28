@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - testing/wizden-v284-integration
+    paths-ignore:
+      - .github/merge-tests/wizden-v284-results.txt
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   merge-test:
@@ -19,7 +21,7 @@ jobs:
           fetch-depth: 0
           submodules: false
 
-      - name: Attempt WizDen stable merge
+      - name: Attempt WizDen stable merge and record results
         shell: bash
         run: |
           set -u
@@ -28,33 +30,46 @@ jobs:
 
           git remote add wizden https://github.com/space-wizards/space-station-14.git
           git fetch --no-tags wizden stable
+          wizden_sha=$(git rev-parse wizden/stable)
+          verdant_sha=$(git rev-parse HEAD)
 
           set +e
           git merge --no-commit --no-ff wizden/stable > /tmp/merge-output.txt 2>&1
           merge_status=$?
           set -e
 
+          git diff --name-only --diff-filter=U | sort > /tmp/conflicts.txt
+          conflict_count=$(wc -l < /tmp/conflicts.txt | tr -d ' ')
+          staged_count=$(git diff --cached --name-only | wc -l | tr -d ' ')
+
           cat /tmp/merge-output.txt
           git status --short
-
-          git diff --name-only --diff-filter=U | sort | tee /tmp/conflicts.txt
-          conflict_count=$(wc -l < /tmp/conflicts.txt | tr -d ' ')
-
-          {
-            echo "## WizDen v284 merge test"
-            echo
-            echo "- Merge command exit status: ${merge_status}"
-            echo "- Unmerged conflict files: ${conflict_count}"
-            echo
-            echo "### Conflict files"
-            echo '```text'
-            cat /tmp/conflicts.txt
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
 
           if git rev-parse -q --verify MERGE_HEAD >/dev/null; then
             git merge --abort
           fi
 
-          echo "MERGE_STATUS=${merge_status}"
-          echo "CONFLICT_COUNT=${conflict_count}"
+          mkdir -p .github/merge-tests
+          {
+            echo "WizDen v284 merge test"
+            echo "======================"
+            echo
+            echo "Project Verdant branch: testing/wizden-v284-integration"
+            echo "Project Verdant SHA before test: ${verdant_sha}"
+            echo "WizDen stable SHA tested: ${wizden_sha}"
+            echo "Merge command exit status: ${merge_status}"
+            echo "Files staged cleanly before abort: ${staged_count}"
+            echo "Unmerged conflict files: ${conflict_count}"
+            echo
+            echo "Conflict files"
+            echo "--------------"
+            cat /tmp/conflicts.txt
+            echo
+            echo "Raw merge output"
+            echo "----------------"
+            cat /tmp/merge-output.txt
+          } > .github/merge-tests/wizden-v284-results.txt
+
+          git add .github/merge-tests/wizden-v284-results.txt
+          git commit -m "Record WizDen v284 merge test results"
+          git push origin HEAD:testing/wizden-v284-integration
