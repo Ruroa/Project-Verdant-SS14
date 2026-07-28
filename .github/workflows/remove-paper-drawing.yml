@@ -1,0 +1,68 @@
+name: Remove Paper Drawing Feature
+
+on:
+  push:
+    branches:
+      - LoujackalTesting-UpstreamMerge
+
+permissions:
+  contents: write
+
+jobs:
+  remove-paper-drawing:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out merge branch
+        uses: actions/checkout@v4
+        with:
+          ref: LoujackalTesting-UpstreamMerge
+          fetch-depth: 0
+          submodules: false
+
+      - name: Remove paper drawing feature
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "Project Verdant Upstream Merge"
+          git config user.email "upstream-merge@invalid.local"
+          git fetch origin Upstreamtest LoujackalTesting-UpstreamMerge
+
+          # Restore the clean Starlight paper implementation. These files contain
+          # the drawing UI hooks, drawing network messages/state, and server handlers.
+          git checkout origin/Upstreamtest -- \
+            Content.Client/Paper/UI/PaperBoundUserInterface.cs \
+            Content.Client/Paper/UI/PaperWindow.xaml \
+            Content.Shared/Paper/PaperComponent.cs \
+            Content.Shared/Paper/PaperSystem.cs
+
+          # Remove the dedicated freehand/SVG drawing implementation.
+          git rm -f Content.Client/Paper/UI/PaperDrawingControl.cs
+
+          # Verify that no identifiers belonging to the paper drawing feature remain.
+          set +e
+          leftovers=$(git grep -I -n -i -E \
+            'PaperDrawing|DrawingData|PaperInputDrawing|PaperClearDrawing|CopyDrawing|OnDrawing|DrawModeButton|SaveDrawingButton|ClearDrawingButton|ColorPanel|Thickness[1-5]Button' \
+            -- \
+            ':!.github/workflows/remove-paper-drawing.yml')
+          grep_status=$?
+          set -e
+
+          if [ "$grep_status" -eq 0 ]; then
+            echo "Paper drawing references still remain:"
+            echo "$leftovers"
+            exit 1
+          elif [ "$grep_status" -ne 1 ]; then
+            echo "git grep failed with status $grep_status"
+            exit "$grep_status"
+          fi
+
+          # Remove this one-time workflow from the resulting branch.
+          git rm -f .github/workflows/remove-paper-drawing.yml
+
+          git add -A
+          git commit -m "Remove paper drawing feature"
+          git push origin HEAD:LoujackalTesting-UpstreamMerge
+
+          echo "Paper drawing feature removed and branch updated."
