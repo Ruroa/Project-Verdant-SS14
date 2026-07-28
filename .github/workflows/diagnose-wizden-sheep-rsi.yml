@@ -1,0 +1,54 @@
+name: Diagnose WizDen Sheep RSI
+
+on:
+  pull_request:
+    branches:
+      - LoujackalTesting
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    if: github.head_ref == 'port/wizden-sheep'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Sheep port branch
+        uses: actions/checkout@v4
+        with:
+          ref: port/wizden-sheep
+          fetch-depth: 0
+
+      - name: Install validator dependencies
+        run: pip3 install --ignore-installed --user pillow jsonschema
+
+      - name: Validate and record RSI errors
+        shell: bash
+        run: |
+          set +e
+          python3 Tools/Schemas/validate_rsis.py Resources/ > /tmp/rsi.log 2>&1
+          status=$?
+          set -e
+          cat /tmp/rsi.log
+
+          if [ "$status" -eq 0 ]; then
+            exit 0
+          fi
+
+          mkdir -p .github/merge-tests
+          {
+            echo "WizDen Sheep RSI validation errors"
+            echo "=================================="
+            echo
+            cat /tmp/rsi.log
+          } > .github/merge-tests/wizden-sheep-rsi-errors.txt
+
+          git config user.name "Project Verdant Port Bot"
+          git config user.email "progamerlp12@gmail.com"
+          git add .github/merge-tests/wizden-sheep-rsi-errors.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "Record Sheep RSI validation errors"
+            git push origin HEAD:port/wizden-sheep
+          fi
+
+          exit "$status"
