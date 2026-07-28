@@ -24,8 +24,6 @@ public sealed partial class ESSparksSystem : EntitySystem
     // [Dependency] private readonly ESSharedTileFireSystem _tileFire = default!; // DeltaV - we don't have tilefires
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-
-    [Dependency] private EntityQuery<TransformComponent> _transformQuery; // Moff
     [Dependency] private ISharedAdminLogManager _adminLogger = default!; // Starlight
 
     public static readonly EntProtoId DefaultSparks = "ESEffectSparks";
@@ -121,9 +119,10 @@ public sealed partial class ESSparksSystem : EntitySystem
 
             // Moff start - Guard against intermittent test failure where throwing `throw`s :^) because of a lack of
             // transform component on the sparks. I have no idea how a newly spawned entity can sometimes have a transform and sometimes not.
-            if (!_transformQuery.HasComp(sparks))
+            if (!TryComp<TransformComponent>(sparks, out _))
             {
                 Log.Warning($"Skipping throwing sparks for {ToPrettyString(sparks)}, as it lacks a {nameof(TransformComponent)}");
+                continue;
             }
             // Moff end
 
