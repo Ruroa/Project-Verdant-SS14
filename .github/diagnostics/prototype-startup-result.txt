@@ -1,14 +1,15 @@
 Server startup exit status: 134
 
-[FATL] unhandled: Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Shared._ES.Sparks.ESSparksSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Robust.Shared.GameObjects.TransformComponent]: _transformQuery
+[FATL] unhandled: Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Server.Teleportation.PortalSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Content.Shared._Moffstation.Teleportation.Components.PortalBlacklistComponent]: _portalBlacklistQuery
+Unhandled exception. Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Server.Teleportation.PortalSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Content.Shared._Moffstation.Teleportation.Components.PortalBlacklistComponent]: _portalBlacklistQuery
 
---- final 100 lines ---
+--- final 120 lines ---
 [INFO] root: Server -> Starting
 [INFO] cfg: Configuration loaded from file
 [DEBG] root: OS: Ubuntu 24.04.4 LTS X64
 [DEBG] root: .NET Runtime: .NET 10.0.10 linux-x64
 [DEBG] root: Server GC: True
-[DEBG] root: Processor: 4x AMD EPYC 9V74 80-Core Processor
+[DEBG] root: Processor: 4x AMD EPYC 7763 64-Core Processor
 [DEBG] root: Available Memory: 15.61 GiB
 [DEBG] root: Architecture: X64
 [DEBG] root: Robust Version: 272.0.0.0
@@ -18,7 +19,7 @@ Server startup exit status: 134
 [INFO] srv: Name: MyServer
 [INFO] srv: TickRate: 30(33.33ms)
 [INFO] srv: Max players: 256
-[DEBG] auth: Public key is ylyvA4uyC9DTCDfme3YyRXOIpC8Qti8IUZZWTfmq83U=
+[DEBG] auth: Public key is y0AliT3/qzm/QS7udkEWfPw8dhpC+iYfr2st3BN71Vw=
 [DEBG] res.mod: DISABLING assembly load context
 [DEBG] res.mod: DISABLING sandboxing
 [DEBG] res.mod: Found module '/Assemblies/Content.Server.dll'
@@ -32,7 +33,7 @@ Server startup exit status: 134
 [DEBG] res.mod: Loading module: '/Assemblies/Content.Server.Database.dll'
 [DEBG] res.mod: Loading module: '/Assemblies/Content.Shared.dll'
 [DEBG] res.mod: Loading module: '/Assemblies/Content.Server.dll'
-[DEBG] res.mod: DONE loading modules: 00:00:00.4902441
+[DEBG] res.mod: DONE loading modules: 00:00:00.3991279
 [INFO] szr: Serializer Types Hash: 40C0B09E9FFCA47D76F6FEA7675992F8CC318E63D053C4CE9EF642A96FB591AD
 [INFO] configpreset: Loaded config preset: "/ConfigPresets/Build/development.toml"
 [INFO] configpreset: Loaded config preset: "/ConfigPresets/Build/debug.toml"
@@ -64,7 +65,7 @@ Server startup exit status: 134
 ' from migration 'MultiCharacter' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
 [WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
 ' from migration 'RemoveDiscordIdAndRoles' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
-[FATL] unhandled: Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Shared._ES.Sparks.ESSparksSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Robust.Shared.GameObjects.TransformComponent]: _transformQuery
+[FATL] unhandled: Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Server.Teleportation.PortalSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Content.Shared._Moffstation.Teleportation.Components.PortalBlacklistComponent]: _portalBlacklistQuery
    at Robust.Shared.IoC.DependencyCollection.InjectDependenciesReflection(Object obj, FrozenDictionary`2 services) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 527
    at Robust.Shared.IoC.DependencyCollection.BuildGraph() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 454
    at Robust.Shared.GameObjects.EntitySystemManager.Initialize(Boolean discover) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntitySystemManager.cs:line 195
@@ -75,7 +76,7 @@ Server startup exit status: 134
    at Robust.Server.Program.Start(String[] args, ServerOptions options, Boolean contentStart) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/Program.cs:line 42
    at Robust.Server.ContentStart.Start(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/ContentStart.cs:line 10
    at Content.Server.Program.Main(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/Content.Server/Program.cs:line 9
-Unhandled exception. Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Shared._ES.Sparks.ESSparksSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Robust.Shared.GameObjects.TransformComponent]: _transformQuery
+Unhandled exception. Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Server.Teleportation.PortalSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Content.Shared._Moffstation.Teleportation.Components.PortalBlacklistComponent]: _portalBlacklistQuery
    at Robust.Shared.IoC.DependencyCollection.InjectDependenciesReflection(Object obj, FrozenDictionary`2 services) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 527
    at Robust.Shared.IoC.DependencyCollection.BuildGraph() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 454
    at Robust.Shared.GameObjects.EntitySystemManager.Initialize(Boolean discover) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntitySystemManager.cs:line 195
