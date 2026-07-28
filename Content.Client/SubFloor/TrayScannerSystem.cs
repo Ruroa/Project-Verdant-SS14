@@ -31,8 +31,6 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
     [Dependency] private SpriteSystem _sprite = default!; // starlight edit: removed readonly
     [Dependency] private TrayScanRevealSystem _trayScanReveal = default!; // starlight edit: removed readonly
     [Dependency] private IInputManager _inputManager = default!; // starlight edit: removed readonly
-    [Dependency] private EntityQuery<TrayScannerComponent> _trayScannerQuery = default!; // starlight edit: removed readonly
-    [Dependency] private EntityQuery<SubFloorHideComponent> _subFloorHideQuery = default!; // starlight edit: removed readonly
 
     private const string TRayAnimationKey = "trays";
     private const double AnimationLength = 0.3;
@@ -70,7 +68,7 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
 
         foreach (var item in _inventory.GetHandOrInventoryEntities(player.Value, SlotFlags.POCKET))
         {
-            if (!_trayScannerQuery.TryGetComponent(item, out var scanner) || !scanner.Enabled)
+            if (!TryComp<TrayScannerComponent>(item, out var scanner) || !scanner.Enabled)
                 continue;
 
             range = MathF.Max(scanner.Range, range);
@@ -104,7 +102,7 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
         {
             // Revealing
             // Add buffer range to avoid flickers.
-            if (_subFloorHideQuery.TryGetComponent(uid, out var subfloor) &&
+            if (TryComp<SubFloorHideComponent>(uid, out var subfloor) &&
                 inRange.Contains((uid, subfloor)))
             {
                 // Due to the fact client is predicting this server states will reset it constantly
