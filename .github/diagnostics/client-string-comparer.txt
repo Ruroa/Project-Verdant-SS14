@@ -1,1 +1,0 @@
-Content.Client/_Starlight/Character/Info/UI/CharacterBackgroundInfoControl.xaml.cs:50:            backgrounds.Sort(StringComparer.CurrentCulture);
