@@ -1,5 +1,6 @@
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -202,7 +203,8 @@ public sealed partial class SharedShearableSystem : EntitySystem
         // Psuedo shared randomness
         // Can be replaced with SharedRandom once #5849 is merged.
 
-        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
+        var rand = new System.Random(seed);
         var center = ent.Owner.ToCoordinates();
         // Spawn product.
         for (var i = 0; i < removedSolution.Volume / ent.Comp.SolutionPerProduct; i++)
@@ -334,7 +336,8 @@ public sealed partial class SharedShearableSystem : EntitySystem
             return;
 
         // Only interested in shearable solution, ignore the rest.
-        if (args.Solution.Comp.Id != ent.Comp.TargetSolutionName)
+        if (!TryComp<ContainedSolutionComponent>(args.Solution.Owner, out var containedSolution) ||
+            containedSolution.ContainerName != ent.Comp.TargetSolutionName)
             return;
 
         UpdateShearingLayer(ent, args.Solution.Comp.Solution);
