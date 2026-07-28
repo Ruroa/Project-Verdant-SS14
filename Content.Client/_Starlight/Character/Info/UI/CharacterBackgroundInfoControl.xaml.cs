@@ -47,7 +47,7 @@ public sealed partial class CharacterBackgroundInfoControl : Control
 
         if (backgrounds.Count > 0)
         {
-            backgrounds.Sort(StringComparer.CurrentCulture);
+            backgrounds.Sort((left, right) => string.Compare(left, right, StringComparison.CurrentCulture));
             BackgroundLabel.Text = Loc.GetString("character-info-background-label");
             Background.Text = string.Join(", ", backgrounds);
         }
