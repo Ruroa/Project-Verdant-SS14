@@ -2,7 +2,7 @@ name: Fix Upstream Tests And Sandbox
 
 on:
   pull_request:
-    types: [opened]
+    types: [synchronize]
 
 permissions:
   contents: write
@@ -45,28 +45,26 @@ jobs:
           chat.write_text(text, encoding='utf-8')
 
           compat = Path('Content.IntegrationTests/Pair/TestPair.Compatibility.cs')
-          compat.write_text('''using System.Threading.Tasks;
-
-namespace Content.IntegrationTests.Pair;
-
-public sealed partial class TestPair
-{
-    /// <summary>
-    /// Compatibility implementation for the RobustToolbox revision pinned by this branch.
-    /// Keeps the older pair synchronized for content tests that use the newer helper name.
-    /// </summary>
-    public async Task RunUntilSynced()
-    {
-        if (Client.Session is null)
-        {
-            await Server.WaitRunTicks(1);
-            return;
-        }
-
-        await SyncTicks();
-    }
-}
-''', encoding='utf-8')
+          compat.write_text(
+              'using System.Threading.Tasks;\n\n'
+              'namespace Content.IntegrationTests.Pair;\n\n'
+              'public sealed partial class TestPair\n'
+              '{\n'
+              '    /// <summary>\n'
+              '    /// Compatibility implementation for the RobustToolbox revision pinned by this branch.\n'
+              '    /// Keeps the older pair synchronized for content tests that use the newer helper name.\n'
+              '    /// </summary>\n'
+              '    public async Task RunUntilSynced()\n'
+              '    {\n'
+              '        if (Client.Session is null)\n'
+              '        {\n'
+              '            await Server.WaitRunTicks(1);\n'
+              '            return;\n'
+              '        }\n\n'
+              '        await SyncTicks();\n'
+              '    }\n'
+              '}\n',
+              encoding='utf-8')
           PY
 
           mkdir -p .github/diagnostics
