@@ -1,5 +1,5 @@
 - type: entity
-  id: EffectFlashBluespace
+  id: EffectFlashBluespaceSimple # Starlight, name changed; the simple one provides the old one for whoever wants to use it without the large flash the new one uses
   categories: [ HideSpawnMenu ]
   components:
   - type: PointLight
@@ -9,5 +9,5 @@
   - type: TimedDespawn
     lifetime: 1
   - type: EmitSoundOnSpawn
-    sound: 
+    sound:
       path: /Audio/Effects/Lightning/lightningbolt.ogg

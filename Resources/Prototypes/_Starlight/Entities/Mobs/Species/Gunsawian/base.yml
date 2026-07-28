@@ -34,7 +34,7 @@
             state: head
 
 - type: entity
-  parent: MobVulpkaninDummy
+  parent: BaseMobGunsawian
   id: MobGunsawianDummy
   categories: [ HideSpawnMenu ]
   components:

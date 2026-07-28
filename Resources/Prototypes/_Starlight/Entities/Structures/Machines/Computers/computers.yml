@@ -6,7 +6,9 @@
   components:
   - type: RecruitmentComputer
   - type: ActivatableUI
+    adminOnly: true
     key: enum.RecruitmentComputerUiKey.Key
+  - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
       enum.RecruitmentComputerUiKey.Key:
@@ -42,14 +44,14 @@
   - type: ContainerContainer
     containers:
       board: !type:Container
-
+      pai_slot: !type:ContainerSlot
 #abductor
 
 - type: entity
   parent: BaseComputer
   id: AbductorConsole
   name: abductor console
-  description: A computer that is used for spying on the station.
+  description: retrieve people marked by scientist tools. Also used for buying replacement gear and linking the agent's vest.
   components:
   - type: AbductorConsole
   - type: Sprite
@@ -62,6 +64,8 @@
       enum.EdgeConnectionVisuals.ConnectionMask:
         console:
           None: { state: console, sprite: _Starlight/Structures/Machines/abductor_console.rsi }
+  - type: EdgeConnection
+    connectionKey: other
   - type: ActivatableUI
     key: enum.AbductorConsoleUIKey.Key
   - type: UserInterface
@@ -97,6 +101,8 @@
     - type: CommunicationsConsole
       title: comms-console-announcement-title-centcom
       global: true
+    - type: SecureCommandTerminalConsole
+      enabled: false
     - type: PointLight
       enabled: true
       radius: 1.5
@@ -107,13 +113,20 @@
   parent: BaseComputer
   id: AbductorHumanObservationConsole
   name: human observation console
-  description: Use this to set teleporter destination or retrieve people marked by scientist tools. Also used for buying replacement gear and linking the agent's vest.
+  description: A computer that is used for spying and teleporting on the station.
   components:
   - type: Sprite
     sprite: _Starlight/Structures/Machines/abductor_camera_console.rsi
     layers:
     - map: ["console"]
       state: console
+  - type: GenericVisualizer  # Override to prevent edge connection sprites
+    visuals:
+      enum.EdgeConnectionVisuals.ConnectionMask:
+        console:
+          None: { state: console }
+  - type: EdgeConnection
+    connectionKey: other
   - type: RemoteEyeConsole
     remoteEntityProto: AbductorHumanObservationConsoleEye
     color: "#A04B81"
@@ -157,6 +170,7 @@
     layer: 32768
   - type: Sprite
     sprite: _Starlight/Mobs/Net/net_eye.rsi
+    drawdepth: CyberspaceObjects
     layers:
     - map: ["base"]
       state: enemy
@@ -198,6 +212,7 @@
     layer: 32768
   - type: Sprite
     sprite: _Starlight/Mobs/Net/net_eye.rsi
+    drawdepth: CyberspaceObjects
     layers:
     - map: ["base"]
       state: enemy
@@ -209,7 +224,9 @@
 - type: entity
   parent: BaseComputerShuttle
   id: CompuerShuttleSalvage
-  name: salvage shuttle console
+  categories: [ ShouldMapStation ]
+  name: remote salvage shuttle console
+  description: Used to pilot the salvage shuttle remotely.
   components:
   - type: Sprite
     layers:
@@ -287,7 +304,8 @@
   - type: ContainerContainer
     containers:
       board: !type:Container
-    
+      pai_slot: !type:ContainerSlot
+
 # Universal ID Console
 - type: entity
   parent: BaseComputerAiAccess
@@ -308,6 +326,7 @@
     - Law
     - Misc
     - CentralCommand
+    - NanoTrasen
     - Syndicate
     - Silicon
     - Xenoborg
@@ -377,12 +396,14 @@
       board: !type:Container
       IdCardConsole-privilegedId: !type:ContainerSlot
       IdCardConsole-targetId: !type:ContainerSlot
-
+      pai_slot: !type:ContainerSlot
 # Mining Shuttle Console
 - type: entity
   parent: BaseComputerShuttle
   id: ComputerShuttleMining
-  name: mining shuttle console
+  categories: [ ShouldMapStation ]
+  name: remote mining shuttle console
+  description: Used to pilot the mining shuttle remotely.
   components:
     - type: Sprite
       layers:
@@ -418,7 +439,8 @@
 - type: entity
   parent: BaseComputerShuttle
   id: ComputerShuttleSecurity
-  name: security shuttle console
+  name: remote security shuttle console
+  description: Used to pilot the security shuttle remotely.
   components:
     - type: Sprite
       layers:
@@ -473,13 +495,13 @@
     canShuttle: false
     global: true
     sound: /Audio/_Starlight/Announcements/tsf_announce.ogg
-  # Starlight Start - Immersive Lighting PR
+  - type: SecureCommandTerminalConsole
+    enabled: false
   - type: PointLight
     radius: 2.5
     energy: 1.8
     color: "#e0da69"
     castShadows: false
-  # Starlight End
 
 ## Departmental Communications Consoles BEGIN
 
@@ -487,6 +509,7 @@
 - type: entity
   parent: ComputerComms
   id: ComputerCommsEngineering
+  categories: [ ShouldMapStation ]
   name: engineering communications console
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
@@ -515,6 +538,8 @@
         - orange
       canBroadcast: false
       canShuttle: false
+    - type: SecureCommandTerminalConsole
+      enabled: false
     - type: Computer
       board: EngineeringCommsComputerCircuitboard
     - type: PointLight
@@ -526,6 +551,7 @@
 - type: entity
   parent: ComputerComms
   id: ComputerCommsMedical
+  categories: [ ShouldMapStation ]
   name: medical communications console
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
@@ -548,11 +574,11 @@
       title: comms-console-announcement-title-med
       sound: /Audio/_Starlight/Announcements/announce2.ogg
       color: "#57b8f0"
-      settableAlertLevels:
-        - green
-        - violet
+      settableAlertLevels: []
       canBroadcast: false
       canShuttle: false
+    - type: SecureCommandTerminalConsole
+      enabled: false
     - type: Computer
       board: MedicalCommsComputerCircuitboard
     - type: PointLight
@@ -564,6 +590,7 @@
 - type: entity
   parent: ComputerComms
   id: ComputerCommsScience
+  categories: [ ShouldMapStation ]
   name: science communications console
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
@@ -589,6 +616,8 @@
       settableAlertLevels: []
       canBroadcast: false
       canShuttle: false
+    - type: SecureCommandTerminalConsole
+      enabled: false
     - type: Computer
       board: ScienceCommsComputerCircuitboard
     - type: PointLight
@@ -600,6 +629,7 @@
 - type: entity
   parent: ComputerComms
   id: ComputerCommsSecurity
+  categories: [ ShouldMapStation ]
   name: security communications console
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
@@ -628,6 +658,8 @@
         - red
       canBroadcast: false
       canShuttle: false
+    - type: SecureCommandTerminalConsole
+      enabled: false
     - type: Computer
       board: SecurityCommsComputerCircuitboard
     - type: PointLight
@@ -639,6 +671,7 @@
 - type: entity
   parent: ComputerComms
   id: ComputerCommsService
+  categories: [ ShouldMapStation ]
   name: service communications console
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
@@ -664,6 +697,8 @@
       settableAlertLevels: []
       canBroadcast: false
       canShuttle: false
+    - type: SecureCommandTerminalConsole
+      enabled: false
     - type: Computer
       board: ServiceCommsComputerCircuitboard
     - type: PointLight
@@ -675,6 +710,7 @@
 - type: entity
   parent: ComputerComms
   id: ComputerCommsCargo
+  categories: [ ShouldMapStation ]
   name: cargo communications console
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
@@ -700,6 +736,8 @@
       settableAlertLevels: []
       canBroadcast: false
       canShuttle: false
+    - type: SecureCommandTerminalConsole
+      enabled: false
     - type: Computer
       board: CargoCommsComputerCircuitboard
     - type: PointLight
@@ -711,6 +749,7 @@
 - type: entity
   parent: ComputerComms
   id: ComputerCommsLaw
+  categories: [ ShouldMapStation ]
   name: law communications console
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
@@ -736,6 +775,8 @@
       settableAlertLevels: []
       canBroadcast: false
       canShuttle: false
+    - type: SecureCommandTerminalConsole
+      enabled: false
     - type: Computer
       board: LawCommsComputerCircuitboard
     - type: PointLight
@@ -744,3 +785,41 @@
       color: "#ff178b"
 
 ## Departmental Communications Consoles END
+
+- type: entity
+  id: ComputerShipyard
+  parent: BaseComputer
+  name: shipyard console
+  description: Used to purchase shuttles.
+  components:
+  - type: Sprite
+    layers:
+      - map: ["computerLayerBody"]
+        state: computer
+      - map: ["computerLayerKeyboard"]
+        state: generic_keyboard
+      - map: ["computerLayerScreen"]
+        state: shipyard
+        sprite: _Starlight/Structures/Machines/computers.rsi
+      - map: ["computerLayerKeys"]
+        state: generic_keys
+      - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+        state: generic_panel_open
+  - type: ShipyardConsole
+  - type: AccessReader
+    access:
+    - [ Captain ]
+  - type: ActivatableUI
+    key: enum.ShipyardConsoleUiKey.Shipyard
+  - type: UserInterface
+    interfaces:
+      enum.ShipyardConsoleUiKey.Shipyard:
+        type: ShipyardConsoleBoundUserInterface
+  - type: Computer
+    board: ShipyardComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: StealTarget
+    stealGroup: ShipyardComputerCircuitboard

@@ -1,18 +1,18 @@
 using System.Linq;
 using Content.Shared._Starlight.CosmicCult.Components;
-using Content.Shared._Starlight.NullSpace;
+using Content.Shared._Starlight.NullSpace.Components;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
 using Robust.Shared.Random;
 
 namespace Content.Server._Starlight.CosmicCult.Abilities;
 
-public sealed class CosmicTransmuteSystem : EntitySystem
+public sealed partial class CosmicTransmuteSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -27,6 +27,7 @@ public sealed class CosmicTransmuteSystem : EntitySystem
             if (HasComp<NullSpaceBlockerComponent>(entity))
             {
                 _popup.PopupEntity(Loc.GetString("cosmicability-generic-fail"), uid, args.User);
+                args.Cancel();
                 return;
             }
 
@@ -48,7 +49,6 @@ public sealed class CosmicTransmuteSystem : EntitySystem
         Spawn(_random.Pick(uid.Comp.Transmutations), tgtpos);
         QueueDel(possibleTargets.First());
     }
-
 
     /// <summary>
     ///     Gets all whitelisted entities near a glyph.

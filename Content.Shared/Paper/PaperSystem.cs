@@ -18,22 +18,24 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
+using Content.Shared._Starlight.Time;
 // Starlight-end
 
 namespace Content.Shared.Paper;
 
-public sealed class PaperSystem : EntitySystem
+public sealed partial class PaperSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private MetaDataSystem _metaSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTimeSystem _timeSystem = default!; // Starlight-edit
 
     private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
     private static readonly ProtoId<TagPrototype> WriteTag = "Write";
@@ -50,8 +52,6 @@ public sealed class PaperSystem : EntitySystem
         SubscribeLocalEvent<PaperComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PaperComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<PaperComponent, PaperInputTextMessage>(OnInputTextMessage);
-        SubscribeLocalEvent<PaperComponent, PaperInputDrawingMessage>(OnInputDrawingMessage);
-        SubscribeLocalEvent<PaperComponent, PaperClearDrawingMessage>(OnClearDrawingMessage);
 
         SubscribeLocalEvent<RandomPaperContentComponent, MapInitEvent>(OnRandomPaperContentMapInit);
 
@@ -60,6 +60,7 @@ public sealed class PaperSystem : EntitySystem
         // Umbra - Signing alt verb event listener.
         SubscribeLocalEvent<PaperComponent, GetVerbsEvent<AlternativeVerb>>(AddSignVerb);
         SubscribeLocalEvent<PaperComponent, PaperSignatureRequestMessage>(OnSignatureRequest); // Starlight-edit
+        SubscribeLocalEvent<PaperComponent, PaperDateTimeRequestMessage>(OnDateTimeRequest); // Starlight-edit
 
         _paperQuery = GetEntityQuery<PaperComponent>();
     }
@@ -79,7 +80,7 @@ public sealed class PaperSystem : EntitySystem
 
         if (TryComp<AppearanceComponent>(entity, out var appearance))
         {
-            if (GetPaperStatus(entity.Comp) == PaperStatus.Written)
+            if (entity.Comp.Content != "")
                 _appearance.SetData(entity, PaperVisuals.Status, PaperStatus.Written, appearance);
 
             if (entity.Comp.StampState != null)
@@ -100,7 +101,7 @@ public sealed class PaperSystem : EntitySystem
 
         using (args.PushGroup(nameof(PaperComponent)))
         {
-            if (entity.Comp.Content != "" || !string.IsNullOrEmpty(entity.Comp.DrawingData))
+            if (entity.Comp.Content != "")
             {
                 args.PushMarkup(
                     Loc.GetString(
@@ -162,8 +163,9 @@ public sealed class PaperSystem : EntitySystem
                     return;
                 }
 
-                var ev = new PaperWriteAttemptEvent(entity.Owner);
+                var ev = new PaperWriteAttemptEvent(entity.Owner, args.User); // starlight
                 RaiseLocalEvent(args.User, ref ev);
+                RaiseLocalEvent(entity.Owner, ref ev); // starlight
                 if (ev.Cancelled)
                 {
                     if (ev.FailReason is not null)
@@ -223,14 +225,20 @@ public sealed class PaperSystem : EntitySystem
 
     private void OnInputTextMessage(Entity<PaperComponent> entity, ref PaperInputTextMessage args)
     {
-        var ev = new PaperWriteAttemptEvent(entity.Owner);
+        var ev = new PaperWriteAttemptEvent(entity.Owner, args.Actor); // starlight
         RaiseLocalEvent(args.Actor, ref ev);
+        RaiseLocalEvent(entity.Owner, ref ev); // starlight
         if (ev.Cancelled)
             return;
 
         if (args.Text.Length <= entity.Comp.ContentSize)
         {
             SetContent(entity, args.Text);
+
+            var paperStatus = string.IsNullOrWhiteSpace(args.Text) ? PaperStatus.Blank : PaperStatus.Written;
+
+            if (TryComp<AppearanceComponent>(entity, out var appearance))
+                _appearance.SetData(entity, PaperVisuals.Status, paperStatus, appearance);
 
             if (TryComp(entity, out MetaDataComponent? meta))
                 _metaSystem.SetEntityDescription(entity, "", meta);
@@ -244,99 +252,6 @@ public sealed class PaperSystem : EntitySystem
 
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
-    }
-
-    private void OnInputDrawingMessage(Entity<PaperComponent> entity, ref PaperInputDrawingMessage args)
-    {
-        var ev = new PaperWriteAttemptEvent(entity.Owner);
-        RaiseLocalEvent(args.Actor, ref ev);
-        if (ev.Cancelled)
-            return;
-
-        if (entity.Comp.EditingDisabled)
-            return;
-
-        if (!ValidateDrawingData(entity.Comp, args.DrawingData))
-            return;
-
-        entity.Comp.DrawingData = args.DrawingData;
-        Dirty(entity);
-
-        if (TryComp<AppearanceComponent>(entity, out var appearance))
-            _appearance.SetData(entity, PaperVisuals.Status, GetPaperStatus(entity.Comp), appearance);
-
-        _adminLogger.Add(LogType.Chat,
-            LogImpact.Low,
-            $"{ToPrettyString(args.Actor):player} has drawn on {ToPrettyString(entity):entity}.");
-
-        _audio.PlayPvs(entity.Comp.Sound, entity);
-
-        // Keep current mode when clearing so clearing does not kick the user out of drawing mode.
-        UpdateUserInterface(entity);
-    }
-
-    private void OnClearDrawingMessage(Entity<PaperComponent> entity, ref PaperClearDrawingMessage args)
-    {
-        var ev = new PaperWriteAttemptEvent(entity.Owner);
-        RaiseLocalEvent(args.Actor, ref ev);
-        if (ev.Cancelled)
-            return;
-
-        if (entity.Comp.EditingDisabled)
-            return;
-
-        if (string.IsNullOrEmpty(entity.Comp.DrawingData))
-            return;
-
-        entity.Comp.DrawingData = "";
-        Dirty(entity);
-
-        if (TryComp<AppearanceComponent>(entity, out var appearance))
-            _appearance.SetData(entity, PaperVisuals.Status, GetPaperStatus(entity.Comp), appearance);
-
-        _adminLogger.Add(LogType.Chat,
-            LogImpact.Low,
-            $"{ToPrettyString(args.Actor):player} has cleared the drawing on {ToPrettyString(entity):entity}.");
-
-        _audio.PlayPvs(entity.Comp.Sound, entity);
-
-        // Keep current mode when clearing so clearing does not kick the user out of drawing mode.
-        UpdateUserInterface(entity);
-    }
-
-    private bool ValidateDrawingData(PaperComponent component, string drawingData)
-    {
-        if (drawingData.Length > component.MaxDrawingDataLength)
-            return false;
-
-        foreach (var character in drawingData)
-        {
-            // Drawing format:
-            // thickness:colorNumber:x,y;x,y|thickness:colorNumber:x,y;x,y
-            //
-            // colorNumber is a decimal RGB integer from 0 to 16777215.
-            // This avoids NetSerializer / validation issues with hex letters.
-            if ((character >= '0' && character <= '9') ||
-                character == '.' ||
-                character == ',' ||
-                character == ';' ||
-                character == '|' ||
-                character == ':')
-            {
-                continue;
-            }
-
-            return false;
-        }
-
-        return true;
-    }
-
-    private PaperStatus GetPaperStatus(PaperComponent component)
-    {
-        return string.IsNullOrWhiteSpace(component.Content) && string.IsNullOrEmpty(component.DrawingData)
-            ? PaperStatus.Blank
-            : PaperStatus.Written;
     }
 
     private void OnRandomPaperContentMapInit(Entity<RandomPaperContentComponent> ent, ref MapInitEvent args)
@@ -435,6 +350,27 @@ public sealed class PaperSystem : EntitySystem
             Font = "/Fonts/_Starlight/Signature.ttf" // 🌟Starlight🌟
         };
 
+        // STARLIGHT START
+        // moved the paper signing event here, so that it becomes possible to cancel signing,
+        // making the event dual-use.
+        if (!paper.Comp.StampedBy.Contains(info))
+        {
+            // if this is met, it will be possible to stamp
+            // there is no "can stamp" or equivalent method,
+            // so this is as pretty as it gets.
+            var eve = new PaperSignedEvent(signer);
+            RaiseLocalEvent(paper, ref eve);
+
+            if (eve.Cancelled)
+            {
+                if (eve.FailReason != null)
+                    _popupSystem.PopupClient(eve.FailReason, signer, signer);
+
+                return false;
+            }
+        }
+        // STARLIGHT END
+
         // Try stamp with the info, return false if failed.
         if (TryStamp(paper, info, "paper_stamp-generic"))
         {
@@ -465,10 +401,7 @@ public sealed class PaperSystem : EntitySystem
                 $"{ToPrettyString(signer):player} has signed {ToPrettyString(paper):paper}.");
 
             UpdateUserInterface(paper);
-            // #region Starlight
-            var eve = new PaperSignedEvent(signer);
-            RaiseLocalEvent(paper, ref eve);
-            // #endregion
+
             return true;
         }
 
@@ -496,18 +429,6 @@ public sealed class PaperSystem : EntitySystem
         }
     }
 
-    public void CopyDrawing(Entity<PaperComponent?> source, Entity<PaperComponent?> target)
-    {
-        if (!Resolve(source, ref source.Comp) || !Resolve(target, ref target.Comp))
-            return;
-
-        target.Comp.DrawingData = source.Comp.DrawingData;
-        Dirty(target);
-
-        if (TryComp<AppearanceComponent>(target, out var appearance))
-            _appearance.SetData(target, PaperVisuals.Status, GetPaperStatus(target.Comp), appearance);
-    }
-
     public void SetContent(EntityUid entity, string content)
     {
         if (!TryComp<PaperComponent>(entity, out var paper))
@@ -524,16 +445,16 @@ public sealed class PaperSystem : EntitySystem
         if (!TryComp<AppearanceComponent>(entity, out var appearance))
             return;
 
-        _appearance.SetData(entity, PaperVisuals.Status, GetPaperStatus(entity.Comp), appearance);
+        var status = string.IsNullOrWhiteSpace(content)
+            ? PaperStatus.Blank
+            : PaperStatus.Written;
+
+        _appearance.SetData(entity, PaperVisuals.Status, status, appearance);
     }
 
     private void UpdateUserInterface(Entity<PaperComponent> entity)
     {
-        _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(
-            entity.Comp.Content,
-            entity.Comp.StampedBy,
-            entity.Comp.DrawingData,
-            entity.Comp.Mode)); // Starlight-edit
+        _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.StampedBy, entity.Comp.Mode)); // Starlight-edit
     }
 
     # region Starlight
@@ -546,6 +467,18 @@ public sealed class PaperSystem : EntitySystem
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} signed {ToPrettyString(entity):entity} with signature: {signature}");
+    }
+
+    private void OnDateTimeRequest(Entity<PaperComponent> entity, ref PaperDateTimeRequestMessage args)
+    {
+        var date = _timeSystem.GetDate();
+        var shiftTime = _timeSystem.GetShiftDuration();
+
+        // shift time is more helpful than the date for rounds, date is still included for the flavor
+        var formatted = $"{date} // {(int)shiftTime.TotalHours:D2}:{shiftTime.Minutes:D2} Shift Time";
+
+        var newText = ReplaceNthDateTimeTag(entity.Comp.Content, args.DateTimeIndex, formatted);
+        SetContent(entity, newText);
     }
 
     /// <summary>
@@ -629,7 +562,33 @@ public sealed class PaperSystem : EntitySystem
     }
 
     /// <summary>
-    /// Removes any unfilled [form] and [signature] tags, and converts [check] tags to ☐.
+    /// Replaces the nth occurrence of [datetime] tag with replacement text.
+    /// </summary>
+    private static string ReplaceNthDateTimeTag(string text, int index, string replacement)
+    {
+        const string dateTimeTag = "[datetime]";
+        var currentIndex = 0;
+        var pos = 0;
+
+        while (pos < text.Length)
+        {
+            var foundPos = text.IndexOf(dateTimeTag, pos);
+            if (foundPos == -1) break;
+
+            if (currentIndex == index)
+            {
+                return text.Substring(0, foundPos) + replacement + text.Substring(foundPos + dateTimeTag.Length);
+            }
+
+            currentIndex++;
+            pos = foundPos + dateTimeTag.Length;
+        }
+
+        return text;
+    }
+
+    /// <summary>
+    /// Removes any unfilled [form], [signature], and [datetime] tags, and converts [check] tags to ☐.
     /// Called when the paper is stamped to finalize the document.
     /// </summary>
     /// <param name="text">The paper text to clean</param>
@@ -638,6 +597,7 @@ public sealed class PaperSystem : EntitySystem
     {
         return text.Replace("[form]", string.Empty)
                   .Replace("[signature]", string.Empty)
+                  .Replace("[datetime]", string.Empty)
                   .Replace("[check]", "☐");
     }
 
@@ -651,9 +611,11 @@ public sealed class PaperSystem : EntitySystem
 [ByRefEvent]
 public record struct PaperWriteEvent(EntityUid User, EntityUid Paper);
 
+// starlight start - add editor field to event
 /// <summary>
 /// Cancellable event for attempting to write on a piece of paper.
 /// </summary>
 /// <param name="paper">The paper that the writing will take place on.</param>
 [ByRefEvent]
-public record struct PaperWriteAttemptEvent(EntityUid Paper, string? FailReason = null, bool Cancelled = false);
+public record struct PaperWriteAttemptEvent(EntityUid Paper, EntityUid Editor, string? FailReason = null, bool Cancelled = false);
+// starlight end

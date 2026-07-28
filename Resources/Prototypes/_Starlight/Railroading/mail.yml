@@ -12,13 +12,13 @@
     icon: 
     iconColor: '#9FED5896'
     color: '#515151'
-    image: /Textures/_Starlight/Railroading/letter.png
+    image: /Textures/_Starlight/Railroading/mail.png
     description: rr-mail-open-desc
   - type: RailroadDeliveryOpenTask
     icon:
       sprite: Objects/Specific/Cargo/mail.rsi
       state: icon
   - type: RailroadDonationReward
-    amount: 
+    amount:
       min: 5
       max: 15

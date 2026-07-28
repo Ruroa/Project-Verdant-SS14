@@ -1,5 +1,6 @@
 using Content.Shared._Starlight.Actions.EntitySystems;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -19,13 +20,25 @@ public sealed partial class StasisComponent : Component
     [DataField, AutoNetworkedField]
     public bool IsInStasis;
 
+    /// <summary>
+    /// How much damage the stasis has taken.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 DamageTaken;
+
+    /// <summary>
+    /// How much healing the stasis has done.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 DamageHealed;
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoNetworkedField, AutoPausedField]
     public TimeSpan NextHeal = TimeSpan.Zero;
 
     [DataField, AutoNetworkedField]
     public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
-    
+
     /// <summary>
     /// Whether the entity should be visible. This is synced to ensure proper PVS handling.
     /// </summary>
@@ -55,6 +68,18 @@ public sealed partial class StasisComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan StasisCooldown = TimeSpan.FromSeconds(300);
+
+    /// <summary>
+    /// The total amount of health the stasis has before breaking.
+    /// </summary>
+    [DataField]
+    public float StasisHealth = 50f;
+
+    /// <summary>
+    /// The threshold of healing before the stasis ends.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 HealingThreshold = 50f;
 
     /// <summary>
     /// How much the entity gets healed per update interval.

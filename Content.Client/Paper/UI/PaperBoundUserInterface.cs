@@ -23,9 +23,8 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindow<PaperWindow>();
         _window.OnSaved += InputOnTextEntered;
-        _window.OnDrawingSaved += InputOnDrawingSaved;
-        _window.OnDrawingCleared += InputOnDrawingCleared;
         _window.OnSignatureRequested += OnSignatureRequested; // Starlight-edit
+        _window.OnDateTimeRequested += OnDateTimeRequested; // Starlight-edit
 
         if (EntMan.TryGetComponent<PaperComponent>(Owner, out var paper))
         {
@@ -54,15 +53,6 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
         }
     }
 
-    private void InputOnDrawingSaved(string drawingData)
-    {
-        SendMessage(new PaperInputDrawingMessage(drawingData));
-    }
-
-    private void InputOnDrawingCleared()
-    {
-        SendMessage(new PaperClearDrawingMessage());
-    }
-
     private void OnSignatureRequested(int signatureIndex) => SendMessage(new PaperSignatureRequestMessage(signatureIndex)); // Starlight-edit
+    private void OnDateTimeRequested(int dateTimeIndex) => SendMessage(new PaperDateTimeRequestMessage(dateTimeIndex)); // Starlight-edit
 }

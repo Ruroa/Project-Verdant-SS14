@@ -1,12 +1,15 @@
 using System.Linq;
 using System.Numerics;
-using Content.Server.Shuttles.Components;
+using Content.Server._Starlight.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
+using Content.Shared._Starlight.Shuttles.Components;
 using Content.Shared._Starlight.Weapons.Gunnery;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Physics;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Server.GameObjects;
@@ -24,7 +27,7 @@ namespace Content.Server._Starlight.Weapons.Gunnery;
 /// containing the standard radar data, cannon blip positions, and guided-projectile
 /// tracking info. Also handles fire and guidance BUI messages from the client.
 /// </summary>
-public sealed class GunneryConsoleSystem : EntitySystem
+public sealed partial class GunneryConsoleSystem : EntitySystem
 {
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly ShuttleConsoleSystem _console = default!;
@@ -33,9 +36,19 @@ public sealed class GunneryConsoleSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
 
-    private const float UpdateInterval = 0.25f;
-    private float _updateTimer;
+    /// <summary>
+    /// How often to transmit UI updates when a player is actively looking at a console.
+    /// </summary>
+    private static readonly TimeSpan _activeUpdateInterval = TimeSpan.FromMilliseconds(250);
+
+    /// <summary>
+    /// How often to transmit UI updates when nobody is actively looking at a console. This makes it so that the
+    /// consoles show a slightly outdated state initially when opened, rather than just a blank screen.
+    /// </summary>
+    private static readonly TimeSpan _idleUpdateInterval = TimeSpan.FromSeconds(5);
 
     public override void Initialize()
     {
@@ -59,12 +72,6 @@ public sealed class GunneryConsoleSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        _updateTimer += frameTime;
-        if (_updateTimer < UpdateInterval)
-            return;
-
-        _updateTimer = 0f;
-
         var query = AllEntityQuery<GunneryConsoleComponent>();
         while (query.MoveNext(out var uid, out var comp))
             UpdateState(uid, comp);
@@ -73,9 +80,7 @@ public sealed class GunneryConsoleSystem : EntitySystem
     // ── Event handlers ─────────────────────────────────────────────────────
 
     private void OnStartup(EntityUid uid, GunneryConsoleComponent comp, ComponentStartup args)
-    {
-        UpdateState(uid, comp);
-    }
+        => UpdateState(uid, comp);
 
     /// <summary>
     /// When a new guided projectile spawns, claim it for the console that most
@@ -141,6 +146,13 @@ public sealed class GunneryConsoleSystem : EntitySystem
         if (!TryComp<GunComponent>(cannon, out var gunComp))
             return;
 
+        // Security: reject forged messages targeting guns not owned by this console's grid.
+        if (!TryComp<GunneryTrackableComponent>(cannon, out _))
+            return;
+        var consoleGrid = Transform(uid).GridUid;
+        if (consoleGrid == null || Transform(cannon).GridUid != consoleGrid)
+            return;
+
         var targetCoords = GetCoordinates(msg.Target);
 
         // Rotate cannon to face the target before firing so it visually aims correctly.
@@ -153,6 +165,14 @@ public sealed class GunneryConsoleSystem : EntitySystem
             var aimAngle = (targetMapPos.Position - cannonMapPos.Position).ToAngle() + new Angle(Math.PI / 2);
             _transform.SetWorldRotation(cannon, aimAngle);
         }
+
+        // Prevent firing at the same grid the cannon is mounted on.
+        var cannonGridUid = Transform(cannon).GridUid;
+        if (cannonGridUid != null
+            && cannonMapPos.MapId == targetMapPos.MapId
+            && _mapManager.TryFindGridAt(targetMapPos, out var targetGridUid, out _)
+            && targetGridUid == cannonGridUid.Value)
+            return;
 
         if (TryComp<RadarConsoleComponent>(uid, out var radar) && CannonBlocked(cannon, radar.MaxRange, cannonMapPos.Position, targetMapPos.Position))
             return;
@@ -196,6 +216,13 @@ public sealed class GunneryConsoleSystem : EntitySystem
         if (!_ui.HasUi(uid, GunneryConsoleUiKey.Key))
             return;
 
+        var shouldIdleUpdate = comp.LastInterfaceUpdateTime + _idleUpdateInterval  < _timing.CurTime;
+        var shouldActiveUpdate = comp.LastInterfaceUpdateTime + _activeUpdateInterval < _timing.CurTime &&
+                                 _ui.IsUiOpen(uid, GunneryConsoleUiKey.Key);
+        if (!shouldIdleUpdate && !shouldActiveUpdate)
+            return;
+        comp.LastInterfaceUpdateTime = _timing.CurTime;
+
         var xform = Transform(uid);
 
         // Check for Server.
@@ -226,7 +253,7 @@ public sealed class GunneryConsoleSystem : EntitySystem
         if (!serverfound)
         {
             _ui.SetUiState(uid, GunneryConsoleUiKey.Key,
-                new GunneryConsoleBoundUserInterfaceState(_console.GetNavState(uid, _console.GetAllDocks()), new List<CannonBlipData>(), null, false));
+                new GunneryConsoleBoundUserInterfaceState(_console.GetNavState(uid), _console.GetDockingPortStates(), new List<CannonBlipData>(), null, false));
 
             return;
         }
@@ -240,20 +267,23 @@ public sealed class GunneryConsoleSystem : EntitySystem
             angle = xform.LocalRotation;
         }
 
-        var docks = _console.GetAllDocks();
+        var dockingPortStates = _console.GetDockingPortStates();
         NavInterfaceState navState;
 
         if (coordinates != null && angle != null)
-            navState = _console.GetNavState(uid, docks, coordinates.Value, angle.Value);
+            navState = _console.GetNavState(uid, coordinates.Value, angle.Value);
         else
-            navState = _console.GetNavState(uid, docks);
+            navState = _console.GetNavState(uid);
 
         // Populate standard radar blips (rockets, shells, etc.)
+        // Exclude GunneryTrackable entities — they are rendered as cannon diamonds, not blips.
         var maxRangeSq = navState.MaxRange * navState.MaxRange;
 
         var blipQuery = AllEntityQuery<RadarBlipComponent, TransformComponent>();
         while (blipQuery.MoveNext(out var blipUid, out var blip, out var blipXform))
         {
+            if (HasComp<GunneryTrackableComponent>(blipUid))
+                continue; // Shown as cannon diamond instead
             if (blip.RequireInSpace && blipXform.GridUid != null)
                 continue;
             if (blipXform.MapID != consoleMapCoords.MapId)
@@ -294,7 +324,7 @@ public sealed class GunneryConsoleSystem : EntitySystem
         if (gridId != null && HasComp<MapGridComponent>(gridId.Value))
         {
             var gunQuery = AllEntityQuery<GunneryTrackableComponent, GunComponent, TransformComponent>();
-            while (gunQuery.MoveNext(out var gunUid, out _, out var gunComp, out var gunXform))
+            while (gunQuery.MoveNext(out var gunUid, out var trackable, out var gunComp, out var gunXform))
             {
                 if (gunXform.GridUid != gridId)
                     continue;
@@ -307,11 +337,16 @@ public sealed class GunneryConsoleSystem : EntitySystem
                     continue;
 
                 var cooldown = (float)Math.Max(0.0, (gunComp.NextFire - _timing.CurTime).TotalSeconds);
+                var shape = TryComp<RadarBlipComponent>(gunUid, out var blip) ? blip.Shape : BlipShape.Square;
+                var hasAmmo = DetectHasAmmo(gunUid);
                 cannons.Add(new CannonBlipData(
                     GetNetCoordinates(gunXform.Coordinates),
                     GetNetEntity(gunUid),
                     MetaData(gunUid).EntityName,
-                    cooldown));
+                    cooldown,
+                    shape,
+                    hasAmmo,
+                    trackable.Category));
             }
         }
 
@@ -324,10 +359,38 @@ public sealed class GunneryConsoleSystem : EntitySystem
             : (NetEntity?)null;
 
         _ui.SetUiState(uid, GunneryConsoleUiKey.Key,
-            new GunneryConsoleBoundUserInterfaceState(navState, cannons, trackedNet));
+            new GunneryConsoleBoundUserInterfaceState(navState, dockingPortStates, cannons, trackedNet));
     }
 
     // ── Helpers ────────────────────────────────────────────────────────────
+
+    /// <summary>Returns true if the cannon has at least one round/charge available.</summary>
+    private bool DetectHasAmmo(EntityUid gun)
+    {
+        // Battery-fed energy weapons.
+        if (TryComp<BatteryAmmoProviderComponent>(gun, out var battery))
+            return battery.Shots > 0;
+
+        // Ballistic chamber (single-load weapons like Leviathan/Charon/Tarnyx).
+        if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballistic))
+            return ballistic.Count > 0;
+
+        // Magazine-fed weapons: check whether the loaded magazine still has rounds.
+        if (HasComp<MagazineAmmoProviderComponent>(gun))
+        {
+            // The magazine slot is named "gun_magazine" by convention.
+            var magazine = _itemSlots.GetItemOrNull(gun, "gun_magazine");
+            if (magazine == null)
+                return false;
+            if (TryComp<BallisticAmmoProviderComponent>(magazine.Value, out var magBallistic))
+                return magBallistic.Count > 0;
+            // If we can't check the count, assume loaded.
+            return true;
+        }
+
+        // Unknown ammo provider — assume available.
+        return true;
+    }
 
     /// <summary>Scans for any <see cref="GuidedProjectileComponent"/> whose controller is this console.</summary>
     private EntityUid? FindControlledProjectile(EntityUid consoleUid)

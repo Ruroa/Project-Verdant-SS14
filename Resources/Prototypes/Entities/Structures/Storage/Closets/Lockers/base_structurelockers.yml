@@ -74,7 +74,7 @@
     group: Locker
   # Starlight-start: Wires panel
   - type: Tag
-    tags: 
+    tags:
       - Locker
   - type: PoweredLocker
   - type: StationAiWhitelist
@@ -96,6 +96,11 @@
           True: { visible: True }
           False: { visible: False }
   # Starlight-end
+  # ES START
+  - type: ESSparkOnHit
+    prob: 0.25
+    count: 2
+  # ES END
 
 - type: entity
   id: LockerBaseSecure
@@ -131,7 +136,7 @@
             max: 2
 # Starlight-start: Base Locker
   - type: Tag
-    tags: 
+    tags:
       - SecuredLocker
   - type: Appearance
   - type: EntityStorageVisuals
