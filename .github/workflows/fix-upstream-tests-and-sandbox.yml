@@ -43,19 +43,10 @@ jobs:
 
           chat = Path('Content.Client/UserInterface/Systems/Chat/Controls/ChannelFilterPopup.xaml.cs')
           text = chat.read_text(encoding='utf-8-sig')
-          old = '''        var list = autoHighlights
-              .Split('\\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-              .Select(h => h.TrimStart('@'))
-              .Distinct(StringComparer.OrdinalIgnoreCase)
-              .Select(FormattedMessage.EscapeText)'''
-          new = '''        var seenHighlights = new HashSet<string>();
-          var list = autoHighlights
-              .Split('\\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-              .Select(h => h.TrimStart('@'))
-              .Where(h => seenHighlights.Add(h.ToUpperInvariant()))
-              .Select(FormattedMessage.EscapeText)'''
-          if old not in text:
-              raise SystemExit('Missing expected chat highlight pipeline')
+          old = '.Distinct(StringComparer.OrdinalIgnoreCase)'
+          new = '.GroupBy(h => h.ToUpperInvariant())\n              .Select(group => group.First())'
+          if text.count(old) != 1:
+              raise SystemExit(f'Expected one chat StringComparer call, found {text.count(old)}')
           chat.write_text(text.replace(old, new, 1), encoding='utf-8')
 
           compat = Path('Content.IntegrationTests/Pair/TestPair.Compatibility.cs')
