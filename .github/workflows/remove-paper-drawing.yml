@@ -2,7 +2,7 @@ name: Remove Paper Drawing Feature
 
 on:
   pull_request:
-    types: [reopened]
+    types: [opened]
     branches:
       - LoujackalTesting
 
