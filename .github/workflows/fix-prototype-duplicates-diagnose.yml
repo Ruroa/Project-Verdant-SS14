@@ -1,15 +1,15 @@
 name: Fix Prototype Duplicates And Diagnose
 
 on:
-  push:
-    branches:
-      - LoujackalTesting-UpstreamMerge
+  pull_request:
+    types: [opened]
 
 permissions:
   contents: write
 
 jobs:
   fix-and-diagnose:
+    if: github.head_ref == 'LoujackalTesting-UpstreamMerge'
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
