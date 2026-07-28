@@ -2,7 +2,7 @@ name: Resolve Upstreamtest Merge
 
 on:
   pull_request:
-    types: [reopened]
+    types: [synchronize]
     branches:
       - LoujackalTesting
 
