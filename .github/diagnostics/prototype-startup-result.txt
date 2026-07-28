@@ -1,96 +1,88 @@
 Server startup exit status: 134
 
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseNanoTrasenContraband' was not present in the dictionary.
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseRoboticistContraband' was not present in the dictionary.
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerSurgeon' was not present in the dictionary.
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerCargoLarge' was not present in the dictionary.
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerRoboticist' was not present in the dictionary.
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseNanoTrasenContraband' was not present in the dictionary.
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerCargoLarge' was not present in the dictionary.
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerRoboticist' was not present in the dictionary.
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerSurgeon' was not present in the dictionary.
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseRoboticistContraband' was not present in the dictionary.
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseSecurityScienceCommandNanoTrasenContraband' was not present in the dictionary.
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseSecurityScienceCommandNanoTrasenContraband' was not present in the dictionary.
+[FATL] unhandled: Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Shared._ES.Sparks.ESSparksSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Robust.Shared.GameObjects.TransformComponent]: _transformQuery
 
---- final 80 lines ---
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseRoboticistContraband' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerSurgeon' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerCargoLarge' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerRoboticist' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseNanoTrasenContraband' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerCargoLarge' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerRoboticist' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerSurgeon' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseRoboticistContraband' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseSecurityScienceCommandNanoTrasenContraband' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseSecurityScienceCommandNanoTrasenContraband' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
-   at System.Threading.QueueUserWorkItemCallback.Execute()
-   at System.Threading.ThreadPoolWorkQueue.Dispatch()
-   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
-   at System.Threading.Thread.StartCallback()
+--- final 100 lines ---
+[INFO] root: Server -> Starting
+[INFO] cfg: Configuration loaded from file
+[DEBG] root: OS: Ubuntu 24.04.4 LTS X64
+[DEBG] root: .NET Runtime: .NET 10.0.10 linux-x64
+[DEBG] root: Server GC: True
+[DEBG] root: Processor: 4x AMD EPYC 9V74 80-Core Processor
+[DEBG] root: Available Memory: 15.61 GiB
+[DEBG] root: Architecture: X64
+[DEBG] root: Robust Version: 272.0.0.0
+[DEBG] root: Compile Options: DEVELOPMENT;TOOLS;DEBUG;CLIENT_SCRIPTING
+[DEBG] root: Intrinsics: X86Aes;Avx;Avx2;Bmi1;Bmi2;Fma;Lzcnt;Pclmulqdq;Popcnt;Sse;Sse2;Sse3;Ssse3;Sse41;Sse42;X86Base
+[INFO] srv: Timescale changed to: 1 on tick 1
+[INFO] srv: Name: MyServer
+[INFO] srv: TickRate: 30(33.33ms)
+[INFO] srv: Max players: 256
+[DEBG] auth: Public key is ylyvA4uyC9DTCDfme3YyRXOIpC8Qti8IUZZWTfmq83U=
+[DEBG] res.mod: DISABLING assembly load context
+[DEBG] res.mod: DISABLING sandboxing
+[DEBG] res.mod: Found module '/Assemblies/Content.Server.dll'
+[DEBG] res.mod: Found module '/Assemblies/Content.Server.Database.dll'
+[DEBG] res.mod: Found module '/Assemblies/Content.Shared.dll'
+[DEBG] res.mod: Found module '/Assemblies/Content.Shared.Database.dll'
+[DEBG] res.mod: Found module '/Assemblies/Content.Packaging.dll'
+[DEBG] res.mod: LOADING modules
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Shared.Database.dll'
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Packaging.dll'
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Server.Database.dll'
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Shared.dll'
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Server.dll'
+[DEBG] res.mod: DONE loading modules: 00:00:00.4902441
+[INFO] szr: Serializer Types Hash: 40C0B09E9FFCA47D76F6FEA7675992F8CC318E63D053C4CE9EF642A96FB591AD
+[INFO] configpreset: Loaded config preset: "/ConfigPresets/Build/development.toml"
+[INFO] configpreset: Loaded config preset: "/ConfigPresets/Build/debug.toml"
+[DEBG] admin.logs: Admin log converters found: EntityCoordinatesConverter EntityStringRepresentationConverter EntityUidConverter FixedPoint2Converter GasMixtureStringRepresentationConverter MindStringRepresentationConverter PlayerSessionConverter
+[DEBG] db.manager: Using SQLite DB "/home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/bin/Content.Server/data/preferences.db"
+[INFO] TTSClient: Redis TTS connection string is null, skipping connection
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'AdminLogs' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'Cleanup' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'ServerNameFts' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'MarkingsJsonb' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: An operation of type 'UpdateDataOperation' will be attempted while a rebuild of table 'admin_notes' is pending. The database may not be in an expected state. Review the SQL generated by this migration to help diagnose any failures. Consider moving these operations to a subsequent migration.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'AdminNotesImprovement' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'AdminNotesImprovementsForeignKeys' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'ConnectionLogServer' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'AdminLogPk' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'ClothingRemoval' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'AdminMessageDismiss' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'MultiCharacter' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[WARN] db.ef: The migration operation 'PRAGMA foreign_keys = 0;
+' from migration 'RemoveDiscordIdAndRoles' cannot be executed in a transaction. If the app is terminated or an unrecoverable error occurs while this operation is being executed then the migration will be left in a partially applied state and would need to be reverted manually before it can be applied again. Create a separate migration that contains just this operation.
+[FATL] unhandled: Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Shared._ES.Sparks.ESSparksSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Robust.Shared.GameObjects.TransformComponent]: _transformQuery
+   at Robust.Shared.IoC.DependencyCollection.InjectDependenciesReflection(Object obj, FrozenDictionary`2 services) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 527
+   at Robust.Shared.IoC.DependencyCollection.BuildGraph() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 454
+   at Robust.Shared.GameObjects.EntitySystemManager.Initialize(Boolean discover) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntitySystemManager.cs:line 195
+   at Robust.Shared.GameObjects.EntityManager.Startup() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntityManager.cs:line 235
+   at Robust.Server.GameObjects.ServerEntityManager.Startup() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/GameObjects/ServerEntityManager.cs:line 60
+   at Robust.Server.BaseServer.Start(ServerOptions options, Func`1 logHandlerFactory) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/BaseServer.cs:line 399
+   at Robust.Server.Program.ParsedMain(CommandLineArgs args, Boolean contentStart, ServerOptions options) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/Program.cs:line 64
+   at Robust.Server.Program.Start(String[] args, ServerOptions options, Boolean contentStart) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/Program.cs:line 42
+   at Robust.Server.ContentStart.Start(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/ContentStart.cs:line 10
+   at Content.Server.Program.Main(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/Content.Server/Program.cs:line 9
+Unhandled exception. Robust.Shared.IoC.Exceptions.UnregisteredDependencyException: Content.Shared._ES.Sparks.ESSparksSystem requested unregistered type with its field Robust.Shared.GameObjects.EntityQuery`1[Robust.Shared.GameObjects.TransformComponent]: _transformQuery
+   at Robust.Shared.IoC.DependencyCollection.InjectDependenciesReflection(Object obj, FrozenDictionary`2 services) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 527
+   at Robust.Shared.IoC.DependencyCollection.BuildGraph() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/IoC/DependencyCollection.cs:line 454
+   at Robust.Shared.GameObjects.EntitySystemManager.Initialize(Boolean discover) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntitySystemManager.cs:line 195
+   at Robust.Shared.GameObjects.EntityManager.Startup() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/GameObjects/EntityManager.cs:line 235
+   at Robust.Server.GameObjects.ServerEntityManager.Startup() in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/GameObjects/ServerEntityManager.cs:line 60
+   at Robust.Server.BaseServer.Start(ServerOptions options, Func`1 logHandlerFactory) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/BaseServer.cs:line 399
+   at Robust.Server.Program.ParsedMain(CommandLineArgs args, Boolean contentStart, ServerOptions options) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/Program.cs:line 64
+   at Robust.Server.Program.Start(String[] args, ServerOptions options, Boolean contentStart) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/Program.cs:line 42
+   at Robust.Server.ContentStart.Start(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Server/ContentStart.cs:line 10
+   at Content.Server.Program.Main(String[] args) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/Content.Server/Program.cs:line 9
