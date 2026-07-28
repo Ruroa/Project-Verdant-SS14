@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: BarberScissors
   name: barber scissors
   description: Is able to reshape the hairstyle of any crew cut to your liking.
@@ -36,6 +36,9 @@
     startSound:
       path: /Audio/_Starlight/Medical/Surgery/hemostat1.ogg
   # 🌟Starlight-end🌟
+  - type: Tool
+    qualities:
+    - Shearing
   - type: PhysicalComposition
     materialComposition:
       Steel: 200

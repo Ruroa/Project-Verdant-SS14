@@ -1,0 +1,133 @@
+name: Validate WizDen Sheep Port
+
+on:
+  pull_request:
+    branches:
+      - LoujackalTesting
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.head_ref == 'port/wizden-sheep'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Sheep port branch
+        uses: actions/checkout@v4
+        with:
+          ref: port/wizden-sheep
+          fetch-depth: 0
+
+      - name: Apply Project Verdant compatibility fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+
+          path = Path("Content.Shared/Animals/ShearableSystem.cs")
+          text = path.read_text(encoding="utf-8-sig")
+
+          old_using = "using Content.Shared.Chemistry.Components;\n"
+          new_using = old_using + "using Content.Shared.Chemistry.Components.SolutionManager;\n"
+          if "using Content.Shared.Chemistry.Components.SolutionManager;" not in text:
+              if old_using not in text:
+                  raise RuntimeError("Solution component using anchor missing")
+              text = text.replace(old_using, new_using, 1)
+
+          old_random = "        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));"
+          new_random = "        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);\n        var rand = new System.Random(seed);"
+          if old_random in text:
+              text = text.replace(old_random, new_random, 1)
+
+          old_solution_check = "        if (args.Solution.Comp.Id != ent.Comp.TargetSolutionName)\n            return;"
+          new_solution_check = "        if (!TryComp<ContainedSolutionComponent>(args.Solution.Owner, out var containedSolution) ||\n            containedSolution.ContainerName != ent.Comp.TargetSolutionName)\n            return;"
+          if old_solution_check in text:
+              text = text.replace(old_solution_check, new_solution_check, 1)
+
+          path.write_text(text, encoding="utf-8")
+          PY
+
+          rm -f .github/merge-tests/wizden-sheep-build-errors.txt
+          git config user.name "Project Verdant Port Bot"
+          git config user.email "progamerlp12@gmail.com"
+          git add Content.Shared/Animals/ShearableSystem.cs
+          git add -u .github/merge-tests/wizden-sheep-build-errors.txt || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Adapt Sheep shearing to Project Verdant APIs"
+            git push origin HEAD:port/wizden-sheep
+          fi
+
+      - name: Set up submodules
+        run: git submodule update --init --recursive
+
+      - name: Pull engine dependency updates
+        uses: space-wizards/submodule-dependency@v0.1.5
+
+      - name: Update engine submodules
+        run: |
+          cd RobustToolbox
+          git submodule update --init --recursive
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build DebugOpt and record errors
+        shell: bash
+        run: |
+          set +e
+          dotnet build --configuration DebugOpt --no-restore /m > /tmp/sheep-build.log 2>&1
+          build_status=$?
+          set -e
+
+          cat /tmp/sheep-build.log
+
+          if [ "$build_status" -eq 0 ]; then
+            exit 0
+          fi
+
+          mkdir -p .github/merge-tests
+          {
+            echo "WizDen Sheep build errors"
+            echo "========================="
+            echo
+            echo "Build exit status: $build_status"
+            echo
+            echo "Compiler and analyzer errors"
+            echo "----------------------------"
+            grep -E "(^|[[:space:]])error ([A-Z]+[0-9]+|MSB[0-9]+|NETSDK[0-9]+)" /tmp/sheep-build.log || true
+            echo
+            echo "Final build output"
+            echo "------------------"
+            tail -n 300 /tmp/sheep-build.log
+          } > .github/merge-tests/wizden-sheep-build-errors.txt
+
+          git config user.name "Project Verdant Port Bot"
+          git config user.email "progamerlp12@gmail.com"
+          git add .github/merge-tests/wizden-sheep-build-errors.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "Record Sheep port build errors"
+            git push origin HEAD:port/wizden-sheep
+          fi
+
+          exit "$build_status"
+
+      - name: Run Content.Tests
+        run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj --logger trx -- NUnit.ConsoleOut=0
+
+      - name: Install RSI validator dependencies
+        run: pip3 install --ignore-installed --user pillow jsonschema
+
+      - name: Validate Sheep RSIs
+        run: |
+          python3 Tools/Schemas/validate_rsis.py Resources/Textures/Mobs/Animals/sheep.rsi
+          python3 Tools/Schemas/validate_rsis.py Resources/Textures/Objects/Fun/Plushies/sheep.rsi
+
+      - name: Run YAML linter
+        run: dotnet run --project Content.YAMLLinter/Content.YAMLLinter.csproj --configuration DebugOpt --no-build
