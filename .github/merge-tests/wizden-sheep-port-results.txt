@@ -1,0 +1,47 @@
+WizDen Sheep v2 port
+====================
+
+Status: cherry-pick requires manual conflict resolution
+WizDen commit: 463a5772f1f4d69cee1d3d651e7f8fa055c8e417
+Conflict files: 4
+
+Conflict files
+--------------
+Resources/Prototypes/Entities/Mobs/NPCs/animals.yml
+Resources/Prototypes/Entities/Mobs/NPCs/space.yml
+Resources/Prototypes/Entities/Objects/Specific/Service/barber.yml
+Resources/Prototypes/Entities/Structures/Machines/Computers/arcades.yml
+
+Cherry-pick output
+------------------
+Auto-merging Resources/Audio/Animals/attributions.yml
+Auto-merging Resources/Locale/en-US/chat/managers/chat-manager.ftl
+Auto-merging Resources/Locale/en-US/interaction/interaction-popup-component.ftl
+Auto-merging Resources/Prototypes/Catalog/Cargo/cargo_livestock.yml
+Auto-merging Resources/Prototypes/Entities/Markers/Spawners/Mobs/animals.yml
+Auto-merging Resources/Prototypes/Entities/Markers/Spawners/Random/toy.yml
+Auto-merging Resources/Prototypes/Entities/Mobs/NPCs/animals.yml
+CONFLICT (content): Merge conflict in Resources/Prototypes/Entities/Mobs/NPCs/animals.yml
+Auto-merging Resources/Prototypes/Entities/Mobs/NPCs/space.yml
+CONFLICT (content): Merge conflict in Resources/Prototypes/Entities/Mobs/NPCs/space.yml
+Auto-merging Resources/Prototypes/Entities/Objects/Decoration/present.yml
+Auto-merging Resources/Prototypes/Entities/Objects/Fun/Plushies/plushies.yml
+Auto-merging Resources/Prototypes/Entities/Objects/Specific/Hydroponics/tools.yml
+Auto-merging Resources/Prototypes/Entities/Objects/Specific/Service/barber.yml
+CONFLICT (content): Merge conflict in Resources/Prototypes/Entities/Objects/Specific/Service/barber.yml
+Auto-merging Resources/Prototypes/Entities/Objects/Tools/tools.yml
+Auto-merging Resources/Prototypes/Entities/Structures/Machines/Computers/arcades.yml
+CONFLICT (content): Merge conflict in Resources/Prototypes/Entities/Structures/Machines/Computers/arcades.yml
+Auto-merging Resources/Prototypes/Reagents/Consumable/Drink/drinks.yml
+Auto-merging Resources/Prototypes/Voice/speech_emote_sounds.yml
+Auto-merging Resources/Prototypes/Voice/speech_verbs.yml
+Auto-merging Resources/Prototypes/tags.yml
+Auto-merging Resources/Textures/Interface/VerbIcons/ATTRIBUTION.txt
+error: could not apply 463a5772f1... Sheep v2 (#38505)
+hint: After resolving the conflicts, mark them with
+hint: "git add/rm <pathspec>", then run
+hint: "git cherry-pick --continue".
+hint: You can instead skip this commit with "git cherry-pick --skip".
+hint: To abort and get back to the state before "git cherry-pick",
+hint: run "git cherry-pick --abort".
+hint: Disable this message with "git config set advice.mergeConflict false"

@@ -1,0 +1,86 @@
+name: Port WizDen Sheep
+
+on:
+  pull_request:
+    branches:
+      - LoujackalTesting
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  port-sheep:
+    if: github.head_ref == 'feature/wizden-sheep-port' || github.ref_name == 'feature/wizden-sheep-port'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out sheep port branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/wizden-sheep-port
+          fetch-depth: 0
+          submodules: false
+
+      - name: Attempt Sheep v2 port
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -f .github/merge-tests/wizden-sheep-port-results.txt ]; then
+            echo "Port attempt already completed."
+            exit 0
+          fi
+
+          git config user.name "Project Verdant Port Bot"
+          git config user.email "port-bot@invalid.local"
+          git remote add wizden https://github.com/space-wizards/space-station-14.git
+          git fetch --no-tags wizden 463a5772f1f4d69cee1d3d651e7f8fa055c8e417
+
+          set +e
+          git cherry-pick -m 1 463a5772f1f4d69cee1d3d651e7f8fa055c8e417 > /tmp/sheep-port-output.txt 2>&1
+          port_status=$?
+          set -e
+
+          mkdir -p .github/merge-tests
+
+          if [ "$port_status" -eq 0 ]; then
+            {
+              echo "WizDen Sheep v2 port"
+              echo "===================="
+              echo
+              echo "Status: cherry-pick completed cleanly"
+              echo "WizDen commit: 463a5772f1f4d69cee1d3d651e7f8fa055c8e417"
+            } > .github/merge-tests/wizden-sheep-port-results.txt
+
+            git add .github/merge-tests/wizden-sheep-port-results.txt
+            git commit -m "Record successful WizDen sheep port"
+            git push origin HEAD:feature/wizden-sheep-port
+            exit 0
+          fi
+
+          git diff --name-only --diff-filter=U | sort > /tmp/sheep-conflicts.txt
+          conflict_count=$(wc -l < /tmp/sheep-conflicts.txt | tr -d ' ')
+
+          {
+            echo "WizDen Sheep v2 port"
+            echo "===================="
+            echo
+            echo "Status: cherry-pick requires manual conflict resolution"
+            echo "WizDen commit: 463a5772f1f4d69cee1d3d651e7f8fa055c8e417"
+            echo "Conflict files: ${conflict_count}"
+            echo
+            echo "Conflict files"
+            echo "--------------"
+            cat /tmp/sheep-conflicts.txt
+            echo
+            echo "Cherry-pick output"
+            echo "------------------"
+            cat /tmp/sheep-port-output.txt
+          } > /tmp/wizden-sheep-port-results.txt
+
+          git cherry-pick --abort
+          cp /tmp/wizden-sheep-port-results.txt .github/merge-tests/wizden-sheep-port-results.txt
+          git add .github/merge-tests/wizden-sheep-port-results.txt
+          git commit -m "Record WizDen sheep port conflicts"
+          git push origin HEAD:feature/wizden-sheep-port
+          exit 1
