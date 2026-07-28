@@ -1,0 +1,131 @@
+name: Fix Upstream Tests And Sandbox
+
+on:
+  pull_request:
+    types: [synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  fix-and-build:
+    if: github.head_ref == 'LoujackalTesting-UpstreamMerge'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out merge branch
+        uses: actions/checkout@v4
+        with:
+          ref: LoujackalTesting-UpstreamMerge
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Apply compatibility fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          hub = Path('Content.Client/_NullLink/UI/Hub.cs')
+          text = hub.read_text(encoding='utf-8-sig')
+          replacements = {
+              '.OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase))':
+                  '.OrderBy(g => g.Key.ToUpperInvariant()))',
+              '=> list.OrderBy(kv => kv.Value.Title, StringComparer.OrdinalIgnoreCase);':
+                  '=> list.OrderBy(kv => kv.Value.Title.ToUpperInvariant());',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'Missing expected Hub text: {old}')
+              text = text.replace(old, new, 1)
+          hub.write_text(text, encoding='utf-8')
+
+          chat = Path('Content.Client/UserInterface/Systems/Chat/Controls/ChannelFilterPopup.xaml.cs')
+          text = chat.read_text(encoding='utf-8-sig')
+          old = '''        var list = autoHighlights
+              .Split('\\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+              .Select(h => h.TrimStart('@'))
+              .Distinct(StringComparer.OrdinalIgnoreCase)
+              .Select(FormattedMessage.EscapeText)'''
+          new = '''        var seenHighlights = new HashSet<string>();
+          var list = autoHighlights
+              .Split('\\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+              .Select(h => h.TrimStart('@'))
+              .Where(h => seenHighlights.Add(h.ToUpperInvariant()))
+              .Select(FormattedMessage.EscapeText)'''
+          if old not in text:
+              raise SystemExit('Missing expected chat highlight pipeline')
+          chat.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          compat = Path('Content.IntegrationTests/Pair/TestPair.Compatibility.cs')
+          compat.write_text('''using System.Threading.Tasks;
+
+          namespace Content.IntegrationTests.Pair;
+
+          public sealed partial class TestPair
+          {
+              /// <summary>
+              /// Compatibility implementation for the RobustToolbox revision pinned by this branch.
+              /// Keeps the older pair synchronized for content tests that use the newer helper name.
+              /// </summary>
+              public async Task RunUntilSynced()
+              {
+                  if (Client.Session is null)
+                  {
+                      await Server.WaitRunTicks(1);
+                      return;
+                  }
+
+                  await SyncTicks();
+              }
+          }
+          ''', encoding='utf-8')
+          PY
+
+          if git grep -n 'StringComparer' -- Content.Client; then
+            echo 'Client-side StringComparer references remain'
+            exit 1
+          fi
+
+      - name: Build full solution
+        id: build
+        shell: bash
+        run: |
+          set +e
+          dotnet build --nologo 2>&1 | tee upstream-build.log
+          status=${PIPESTATUS[0]}
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Commit fixes and result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Project Verdant Upstream Merge"
+          git config user.email "upstream-merge@invalid.local"
+
+          if [ "${{ steps.build.outputs.status }}" -ne 0 ]; then
+            mkdir -p .github/diagnostics
+            {
+              echo "Build still failed after test and sandbox compatibility fixes."
+              echo
+              grep -E ': error [A-Z]+[0-9]+:' upstream-build.log || true
+              echo
+              tail -n 20 upstream-build.log
+            } > .github/diagnostics/upstream-build-errors.txt
+          else
+            rm -f .github/diagnostics/upstream-build-errors.txt
+          fi
+
+          rm -f upstream-build.log
+          git rm -f .github/workflows/fix-upstream-tests-and-sandbox.yml
+          git add -A
+
+          if [ "${{ steps.build.outputs.status }}" -eq 0 ]; then
+            git commit -m "Fix upstream test and client sandbox compatibility"
+          else
+            git commit -m "Fix upstream test and sandbox compatibility issues"
+          fi
+
+          git push origin HEAD:LoujackalTesting-UpstreamMerge
