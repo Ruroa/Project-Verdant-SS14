@@ -78,7 +78,6 @@ jobs:
             exit 1
           fi
 
-          # Remove files that existed only to run and document the temporary merge test.
           git rm -f --ignore-unmatch \
             .github/merge-tests/upstreamtest-merge-results.txt \
             .github/workflows/upstreamtest-merge.yml
