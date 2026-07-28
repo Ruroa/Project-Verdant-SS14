@@ -1,0 +1,77 @@
+name: Merge Upstreamtest Into Loujackal Copy
+
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - LoujackalTesting
+
+permissions:
+  contents: write
+
+jobs:
+  merge-upstream:
+    if: github.head_ref == 'LoujackalTesting-UpstreamMerge'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out merge branch
+        uses: actions/checkout@v4
+        with:
+          ref: LoujackalTesting-UpstreamMerge
+          fetch-depth: 0
+          submodules: false
+
+      - name: Merge Upstreamtest and save result
+        shell: bash
+        run: |
+          set -u
+          git config user.name "Project Verdant Upstream Merge"
+          git config user.email "upstream-merge@invalid.local"
+          git fetch origin LoujackalTesting Upstreamtest LoujackalTesting-UpstreamMerge
+
+          base_sha=$(git rev-parse HEAD)
+          upstream_sha=$(git rev-parse origin/Upstreamtest)
+
+          set +e
+          git merge --no-ff origin/Upstreamtest -m "Merge Upstreamtest into LoujackalTesting copy" > /tmp/merge-output.txt 2>&1
+          merge_status=$?
+          set -e
+
+          if [ "$merge_status" -eq 0 ]; then
+            git push origin HEAD:LoujackalTesting-UpstreamMerge
+            echo "Upstreamtest merged cleanly and was pushed."
+            exit 0
+          fi
+
+          git diff --name-only --diff-filter=U | sort > /tmp/conflicts.txt
+          conflict_count=$(wc -l < /tmp/conflicts.txt | tr -d ' ')
+
+          if git rev-parse -q --verify MERGE_HEAD >/dev/null; then
+            git merge --abort
+          fi
+
+          mkdir -p .github/merge-tests
+          {
+            echo "Upstreamtest merge attempt"
+            echo "=========================="
+            echo
+            echo "Target branch: LoujackalTesting-UpstreamMerge"
+            echo "Target SHA before merge: ${base_sha}"
+            echo "Upstreamtest SHA: ${upstream_sha}"
+            echo "Merge exit status: ${merge_status}"
+            echo "Conflict files: ${conflict_count}"
+            echo
+            echo "Merge output"
+            echo "------------"
+            cat /tmp/merge-output.txt
+            echo
+            echo "Conflict files"
+            echo "--------------"
+            cat /tmp/conflicts.txt
+          } > .github/merge-tests/upstreamtest-merge-results.txt
+
+          git add .github/merge-tests/upstreamtest-merge-results.txt
+          git commit -m "Record Upstreamtest merge conflicts"
+          git push origin HEAD:LoujackalTesting-UpstreamMerge
+
+          echo "The merge conflicted. A report was committed to the test branch."
