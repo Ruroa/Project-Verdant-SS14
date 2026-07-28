@@ -7,6 +7,7 @@
   startingGear: DoctorGear
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo
+  displayWeight: 1 # Starlight
   access:
   - Medical
   - Maintenance
@@ -25,10 +26,7 @@
   id: DoctorGear
   equipment:
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalFilled
-  #storage:
-    #back:
-    #- Stuff
+    belt: ClothingBeltMedicalFilled # Starlight - adding back belts
 
 - type: chameleonOutfit
   id: MedicalDoctorChameleonOutfit

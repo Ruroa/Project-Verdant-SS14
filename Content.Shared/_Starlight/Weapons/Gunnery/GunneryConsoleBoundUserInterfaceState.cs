@@ -1,4 +1,7 @@
+using Content.Shared._Starlight.Shuttles.BUIStates;
+using Content.Shared._Starlight.Shuttles.Components;
 using Content.Shared.Shuttles.BUIStates;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
@@ -12,8 +15,11 @@ namespace Content.Shared._Starlight.Weapons.Gunnery;
 [Serializable, NetSerializable]
 public sealed class GunneryConsoleBoundUserInterfaceState : BoundUserInterfaceState
 {
-    /// <summary>Standard radar state (grids, docks, blips, laser traces).</summary>
+    /// <summary>Standard radar state (grids, blips, laser traces).</summary>
     public readonly NavInterfaceState NavState;
+
+    /// <summary>Docking port states.</summary>
+    public readonly DockingPortStates DockPortStates;
 
     /// <summary>
     /// Positions and identities of all shuttle-mounted cannons on this grid
@@ -26,16 +32,18 @@ public sealed class GunneryConsoleBoundUserInterfaceState : BoundUserInterfaceSt
     /// console, or <c>null</c> if no guidance is active.
     /// </summary>
     public readonly NetEntity? TrackedGuidedProjectile;
-    
+
     public readonly bool HasServer = true;
 
     public GunneryConsoleBoundUserInterfaceState(
         NavInterfaceState navState,
+        DockingPortStates dockingPortStates,
         List<CannonBlipData> cannons,
         NetEntity? trackedGuidedProjectile,
         bool hasServer = true)
     {
         NavState       = navState;
+        DockPortStates = dockingPortStates;
         Cannons        = cannons;
         TrackedGuidedProjectile = trackedGuidedProjectile;
         HasServer      = hasServer;
@@ -60,11 +68,23 @@ public readonly struct CannonBlipData
     /// <summary>Remaining cooldown in seconds; 0 when the cannon is ready to fire.</summary>
     public readonly float CooldownSeconds;
 
-    public CannonBlipData(NetCoordinates coordinates, NetEntity entity, string name, float cooldownSeconds = 0f)
+    /// <summary>Radar blip shape; Triangle indicates a capital-class weapon.</summary>
+    public readonly BlipShape Shape;
+
+    /// <summary>Whether the cannon currently has ammunition available to fire.</summary>
+    public readonly bool HasAmmo;
+
+    /// <summary>Weapon category used for UI filtering.</summary>
+    public readonly CannonCategory Category;
+
+    public CannonBlipData(NetCoordinates coordinates, NetEntity entity, string name, float cooldownSeconds = 0f, BlipShape shape = BlipShape.Square, bool hasAmmo = true, CannonCategory category = CannonCategory.Unknown)
     {
         Coordinates     = coordinates;
         Entity          = entity;
         Name            = name;
         CooldownSeconds = cooldownSeconds;
+        Shape           = shape;
+        HasAmmo         = hasAmmo;
+        Category        = category;
     }
 }

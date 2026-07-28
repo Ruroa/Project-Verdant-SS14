@@ -9,6 +9,7 @@
   access:
   - Maintenance
   - Theatre
+  - Service # Starlight
   special:
   - !type:GiveItemOnHolidaySpecial
     holiday: MikuDay

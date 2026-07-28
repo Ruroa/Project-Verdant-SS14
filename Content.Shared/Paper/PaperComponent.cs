@@ -109,6 +109,18 @@ public sealed partial class PaperComponent : Component
             SignatureIndex = signatureIndex;
         }
     }
+
+    [Serializable, NetSerializable]
+    public sealed class PaperDateTimeRequestMessage : BoundUserInterfaceMessage
+    {
+        public readonly int DateTimeIndex;
+
+        public PaperDateTimeRequestMessage(int dateTimeIndex)
+        {
+            DateTimeIndex = dateTimeIndex;
+        }
+    }
+
     // Starlight-end
 
     [Serializable, NetSerializable]
@@ -141,5 +153,5 @@ public sealed partial class PaperComponent : Component
 
 //#region Starlight
 [ByRefEvent]
-public record struct PaperSignedEvent(EntityUid Signer);
+public record struct PaperSignedEvent(EntityUid Signer, string? FailReason = null, bool Cancelled = false);
 //#endregion Starlight

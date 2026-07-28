@@ -8,6 +8,7 @@
   icon: "JobIconParamedic"
   supervisors: job-supervisors-cmo
   canBeAntag: false # Starlight
+  displayWeight: 3 # Starlight
   access:
   - Medical
   - Maintenance
@@ -24,12 +25,11 @@
   id: ParamedicGear
   equipment:
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalEMTFilled
+    belt: ClothingBeltMedicalEMTFilled # Starlight start
   storage:
     back:
     - EmergencyRollerBedSpawnFolded
-    - BodyBagLockableFolded #Starlight
-    - DefibrillatorParamed #Starlight
+    - DefibrillatorParamed # Starlight end
 
 - type: chameleonOutfit
   id: ParamedicChameleonOutfit

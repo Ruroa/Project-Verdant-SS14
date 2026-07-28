@@ -47,7 +47,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RailroadSpawnFlow
-    count: 
+    count:
       min: 1
       max: 3
   - type: RailroadCard
@@ -55,7 +55,7 @@
     icon: ""
     iconColor: '#9FED5896'
     color: '#515151'
-    image: /Textures/_Starlight/Railroading/apple-pie.png
+    image: /Textures/_Starlight/Railroading/food.png
     description: rr-apple-pie-desc
   - type: RailroadConsumeTask
     objects:
@@ -64,7 +64,7 @@
       sprite: Objects/Consumable/Food/Baked/pie.rsi
       state: apple
   - type: RailroadDonationReward
-    amount: 
+    amount:
       min: 10
       max: 25
 
@@ -74,7 +74,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RailroadSpawnFlow
-    count: 
+    count:
       min: 1
       max: 3
   - type: RailroadCard
@@ -82,7 +82,7 @@
     icon: ""
     iconColor: '#9FED5896'
     color: '#515151'
-    image: /Textures/_Starlight/Railroading/dumplings.png
+    image: /Textures/_Starlight/Railroading/food.png
     description: rr-dumplings-desc
   - type: RailroadConsumeTask
     objects:
@@ -91,7 +91,7 @@
       sprite: Objects/Consumable/Food/Baked/misc.rsi
       state: dumplings
   - type: RailroadDonationReward
-    amount: 
+    amount:
       min: 10
       max: 25
 
@@ -101,7 +101,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RailroadSpawnFlow
-    count: 
+    count:
       min: 1
       max: 3
   - type: RailroadCard
@@ -109,7 +109,7 @@
     icon: ""
     iconColor: '#9FED5896'
     color: '#515151'
-    image: /Textures/_Starlight/Railroading/herb-salad.png
+    image: /Textures/_Starlight/Railroading/food.png
     description: rr-herb-salad-desc
   - type: RailroadConsumeTask
     objects:
@@ -118,7 +118,7 @@
       sprite: Objects/Consumable/Food/bowl.rsi
       state: herb
   - type: RailroadDonationReward
-    amount: 
+    amount:
       min: 10
       max: 25
 
@@ -128,7 +128,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RailroadSpawnFlow
-    count: 
+    count:
       min: 1
       max: 3
   - type: RailroadCard
@@ -136,7 +136,7 @@
     icon: ""
     iconColor: '#9FED5896'
     color: '#515151'
-    image: /Textures/_Starlight/Railroading/melon-fruit-bowl.png
+    image: /Textures/_Starlight/Railroading/food.png
     description: rr-melon-fruit-bowl-desc
   - type: RailroadConsumeTask
     objects:
@@ -145,7 +145,7 @@
       sprite: Objects/Consumable/Food/meals.rsi
       state: melonfruitbowl
   - type: RailroadDonationReward
-    amount: 
+    amount:
       min: 10
       max: 25
 
@@ -155,7 +155,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RailroadSpawnFlow
-    count: 
+    count:
       min: 1
       max: 3
   - type: RailroadCard
@@ -163,7 +163,7 @@
     icon: ""
     iconColor: '#9FED5896'
     color: '#515151'
-    image: /Textures/_Starlight/Railroading/stew.png
+    image: /Textures/_Starlight/Railroading/food.png
     description: rr-stew-desc
   - type: RailroadConsumeTask
     objects:
@@ -172,7 +172,7 @@
       sprite: Objects/Consumable/Food/bowl.rsi
       state: stew
   - type: RailroadDonationReward
-    amount: 
+    amount:
       min: 10
       max: 25
 
@@ -182,7 +182,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RailroadSpawnFlow
-    count: 
+    count:
       min: 0
       max: 3
   - type: RailroadCard
@@ -190,7 +190,7 @@
     icon: ""
     iconColor: '#9FED5896'
     color: "#01407f"
-    image: /Textures/_Starlight/Railroading/sashimi.png
+    image: /Textures/_Starlight/Railroading/fish.png
     description: rr-sashimi-desc
   - type: RailroadConsumeTask
     objects:

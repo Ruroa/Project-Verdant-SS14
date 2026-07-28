@@ -62,15 +62,17 @@ namespace Content.Shared.Chemistry
         public readonly uint Dosage;
         public readonly uint Number;
         public readonly string Label;
+        public readonly string? ContainerLabel; // Starlight
 
-        public ChemMasterCreatePillsMessage(uint dosage, uint number, string label)
+        public ChemMasterCreatePillsMessage(uint dosage, uint number, string label, string containerLabel) // Starlight - add containerLabel
         {
             Dosage = dosage;
             Number = number;
             Label = label;
+            ContainerLabel = containerLabel; // Starlight
         }
     }
-    
+
     //Starlight-start
     [Serializable, NetSerializable]
     public sealed class ChemMasterCreatePatchesMessage : BoundUserInterfaceMessage
@@ -78,12 +80,14 @@ namespace Content.Shared.Chemistry
         public readonly uint Dosage;
         public readonly uint Number;
         public readonly string Label;
+        public readonly string? ContainerLabel;
 
-        public ChemMasterCreatePatchesMessage(uint dosage, uint number, string label)
+        public ChemMasterCreatePatchesMessage(uint dosage, uint number, string label, string containerLabel)
         {
             Dosage = dosage;
             Number = number;
             Label = label;
+            ContainerLabel = containerLabel;
         }
     }
     //Starlight-end
@@ -189,12 +193,20 @@ namespace Content.Shared.Chemistry
         /// STARLIGHT: Edited to only be pills and not both pills and patches.
         /// </summary>
         public List<(string Id, FixedPoint2 Quantity)>? PillEntities { get; init; }
-        
+
         /// <summary>
         /// A list of the patch entities and their sizes within the container
         /// STARLIGHT: Added specifically for patches
         /// </summary>
-        public List<(string Id, FixedPoint2 Quantity)>? PatchEntities { get; init; }
+        public List<(string Id, FixedPoint2 Quantity)>? PatchEntities { get; init; } // Starlight
+
+        /// <summary>
+        /// The label of the container, if one exists at all, to allow us to change the label of the container separate from the pills/patches.
+        /// STARLIGHT:  Affects both pills and patches.
+        /// </summary>
+        public string? ContainerLabel { get; init;  } // Starlight
+
+        public NetEntity? Uid; // Starlight
 
         public List<ReagentQuantity>? Reagents { get; init; }
 
@@ -225,7 +237,7 @@ namespace Content.Shared.Chemistry
         public readonly uint SelectedPillType;
 
         public readonly uint PillDosageLimit;
-        
+
         public readonly uint PatchDosageLimit; //Starlight-edit
 
         public readonly bool UpdateLabel;

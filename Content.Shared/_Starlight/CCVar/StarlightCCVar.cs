@@ -2,7 +2,7 @@ using Robust.Shared.Configuration;
 using Content.Shared.CCVar.CVarAccess;
 using Content.Shared.Administration;
 
-namespace Content.Shared.Starlight.CCVar;
+namespace Content.Shared._Starlight.CCVar;
 
 [CVarDefs]
 public sealed partial class StarlightCCVars
@@ -43,4 +43,20 @@ public sealed partial class StarlightCCVars
 
     public static readonly CVarDef<string> ConfigFile =
         CVarDef.Create("config.file", "config.yml", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// Disables pathfinding system updates and path generation. Intended for integration tests.
+    /// </summary>
+    public static readonly CVarDef<bool> DisablePathfinding =
+        CVarDef.Create("starlight.pathfinding.disable", false, CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> DisableLoadMapRule =
+        CVarDef.Create("starlight.loadmaprule.disable", false, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Forces the Tester tab to appear in the ghost themes menu even without the Tester role
+    /// </summary>
+    public static readonly CVarDef<bool> ForceTestersTab =
+        CVarDef.Create("ghosttheme.forcetesterstab", false, CVar.CLIENTONLY | CVar.ARCHIVE,
+            "forces the Testers ghost theme tab to be visible even if you have no unlocks.");
 }

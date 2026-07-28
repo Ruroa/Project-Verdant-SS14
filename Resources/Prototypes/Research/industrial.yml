@@ -48,6 +48,7 @@
   - MechReactorHigh #Starlight
   - TurboItemRechargerCircuitboard
   - SMESAdvancedMachineCircuitboard
+  - SMESHyperAdvancedMachineCircuitboard #SL
   radioChannels:
   - Engineering
 
@@ -94,6 +95,7 @@
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
   - EmitterCircuitboard
+  - APCAdvancedElectronics # Starlight
   radioChannels:
   - Engineering
 

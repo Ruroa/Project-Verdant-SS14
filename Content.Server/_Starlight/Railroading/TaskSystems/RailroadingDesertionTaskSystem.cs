@@ -1,20 +1,18 @@
 using Content.Server._Starlight.Objectives.Events;
-using Content.Server._Starlight.Station;
 using Content.Server.GameTicking;
-using Content.Shared._Starlight.Railroading;
+using Content.Shared._Starlight.Railroading.Components;
+using Content.Shared._Starlight.Railroading.Components.Tasks;
 using Content.Shared._Starlight.Railroading.Events;
-using Content.Shared._Starlight.Station;
 using Content.Shared.Objectives;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
-using Robust.Shared.Map;
 
-namespace Content.Server._Starlight.Railroading;
+namespace Content.Server._Starlight.Railroading.TaskSystems;
 
 public sealed partial class RailroadingDesertionTaskSystem : EntitySystem
 {
-    [Dependency] private readonly RailroadingSystem _railroading = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private RailroadingSystem _railroading = default!;
+    [Dependency] private SharedStationSystem _station = default!;
 
     public override void Initialize()
     {
@@ -51,7 +49,7 @@ public sealed partial class RailroadingDesertionTaskSystem : EntitySystem
             Progress = ent.Comp.IsCompleted ? 1.0f : 0.0f,
         });
 
-    private void OnTaskCompletionQuery(Entity<RailroadDesertionTaskComponent> ent, ref RailroadingCardCompletionQueryEvent args) 
+    private void OnTaskCompletionQuery(Entity<RailroadDesertionTaskComponent> ent, ref RailroadingCardCompletionQueryEvent args)
         => args.IsCompleted = ent.Comp.IsCompleted;
 
     private bool IsOnStation(Entity<RailroadableComponent> subject)
