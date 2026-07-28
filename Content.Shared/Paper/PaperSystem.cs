@@ -52,8 +52,6 @@ public sealed partial class PaperSystem : EntitySystem
         SubscribeLocalEvent<PaperComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PaperComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<PaperComponent, PaperInputTextMessage>(OnInputTextMessage);
-        SubscribeLocalEvent<PaperComponent, PaperInputDrawingMessage>(OnInputDrawingMessage);
-        SubscribeLocalEvent<PaperComponent, PaperClearDrawingMessage>(OnClearDrawingMessage);
 
         SubscribeLocalEvent<RandomPaperContentComponent, MapInitEvent>(OnRandomPaperContentMapInit);
 
@@ -82,7 +80,7 @@ public sealed partial class PaperSystem : EntitySystem
 
         if (TryComp<AppearanceComponent>(entity, out var appearance))
         {
-            if (GetPaperStatus(entity.Comp) == PaperStatus.Written)
+            if (entity.Comp.Content != "")
                 _appearance.SetData(entity, PaperVisuals.Status, PaperStatus.Written, appearance);
 
             if (entity.Comp.StampState != null)
@@ -103,7 +101,7 @@ public sealed partial class PaperSystem : EntitySystem
 
         using (args.PushGroup(nameof(PaperComponent)))
         {
-            if (entity.Comp.Content != "" || !string.IsNullOrEmpty(entity.Comp.DrawingData))
+            if (entity.Comp.Content != "")
             {
                 args.PushMarkup(
                     Loc.GetString(
@@ -237,6 +235,11 @@ public sealed partial class PaperSystem : EntitySystem
         {
             SetContent(entity, args.Text);
 
+            var paperStatus = string.IsNullOrWhiteSpace(args.Text) ? PaperStatus.Blank : PaperStatus.Written;
+
+            if (TryComp<AppearanceComponent>(entity, out var appearance))
+                _appearance.SetData(entity, PaperVisuals.Status, paperStatus, appearance);
+
             if (TryComp(entity, out MetaDataComponent? meta))
                 _metaSystem.SetEntityDescription(entity, "", meta);
 
@@ -249,99 +252,6 @@ public sealed partial class PaperSystem : EntitySystem
 
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
-    }
-
-    private void OnInputDrawingMessage(Entity<PaperComponent> entity, ref PaperInputDrawingMessage args)
-    {
-        var ev = new PaperWriteAttemptEvent(entity.Owner);
-        RaiseLocalEvent(args.Actor, ref ev);
-        if (ev.Cancelled)
-            return;
-
-        if (entity.Comp.EditingDisabled)
-            return;
-
-        if (!ValidateDrawingData(entity.Comp, args.DrawingData))
-            return;
-
-        entity.Comp.DrawingData = args.DrawingData;
-        Dirty(entity);
-
-        if (TryComp<AppearanceComponent>(entity, out var appearance))
-            _appearance.SetData(entity, PaperVisuals.Status, GetPaperStatus(entity.Comp), appearance);
-
-        _adminLogger.Add(LogType.Chat,
-            LogImpact.Low,
-            $"{ToPrettyString(args.Actor):player} has drawn on {ToPrettyString(entity):entity}.");
-
-        _audio.PlayPvs(entity.Comp.Sound, entity);
-
-        // Keep current mode when clearing so clearing does not kick the user out of drawing mode.
-        UpdateUserInterface(entity);
-    }
-
-    private void OnClearDrawingMessage(Entity<PaperComponent> entity, ref PaperClearDrawingMessage args)
-    {
-        var ev = new PaperWriteAttemptEvent(entity.Owner);
-        RaiseLocalEvent(args.Actor, ref ev);
-        if (ev.Cancelled)
-            return;
-
-        if (entity.Comp.EditingDisabled)
-            return;
-
-        if (string.IsNullOrEmpty(entity.Comp.DrawingData))
-            return;
-
-        entity.Comp.DrawingData = "";
-        Dirty(entity);
-
-        if (TryComp<AppearanceComponent>(entity, out var appearance))
-            _appearance.SetData(entity, PaperVisuals.Status, GetPaperStatus(entity.Comp), appearance);
-
-        _adminLogger.Add(LogType.Chat,
-            LogImpact.Low,
-            $"{ToPrettyString(args.Actor):player} has cleared the drawing on {ToPrettyString(entity):entity}.");
-
-        _audio.PlayPvs(entity.Comp.Sound, entity);
-
-        // Keep current mode when clearing so clearing does not kick the user out of drawing mode.
-        UpdateUserInterface(entity);
-    }
-
-    private bool ValidateDrawingData(PaperComponent component, string drawingData)
-    {
-        if (drawingData.Length > component.MaxDrawingDataLength)
-            return false;
-
-        foreach (var character in drawingData)
-        {
-            // Drawing format:
-            // thickness:colorNumber:x,y;x,y|thickness:colorNumber:x,y;x,y
-            //
-            // colorNumber is a decimal RGB integer from 0 to 16777215.
-            // This avoids NetSerializer / validation issues with hex letters.
-            if ((character >= '0' && character <= '9') ||
-                character == '.' ||
-                character == ',' ||
-                character == ';' ||
-                character == '|' ||
-                character == ':')
-            {
-                continue;
-            }
-
-            return false;
-        }
-
-        return true;
-    }
-
-    private PaperStatus GetPaperStatus(PaperComponent component)
-    {
-        return string.IsNullOrWhiteSpace(component.Content) && string.IsNullOrEmpty(component.DrawingData)
-            ? PaperStatus.Blank
-            : PaperStatus.Written;
     }
 
     private void OnRandomPaperContentMapInit(Entity<RandomPaperContentComponent> ent, ref MapInitEvent args)
@@ -519,18 +429,6 @@ public sealed partial class PaperSystem : EntitySystem
         }
     }
 
-    public void CopyDrawing(Entity<PaperComponent?> source, Entity<PaperComponent?> target)
-    {
-        if (!Resolve(source, ref source.Comp) || !Resolve(target, ref target.Comp))
-            return;
-
-        target.Comp.DrawingData = source.Comp.DrawingData;
-        Dirty(target);
-
-        if (TryComp<AppearanceComponent>(target, out var appearance))
-            _appearance.SetData(target, PaperVisuals.Status, GetPaperStatus(target.Comp), appearance);
-    }
-
     public void SetContent(EntityUid entity, string content)
     {
         if (!TryComp<PaperComponent>(entity, out var paper))
@@ -547,16 +445,16 @@ public sealed partial class PaperSystem : EntitySystem
         if (!TryComp<AppearanceComponent>(entity, out var appearance))
             return;
 
-        _appearance.SetData(entity, PaperVisuals.Status, GetPaperStatus(entity.Comp), appearance);
+        var status = string.IsNullOrWhiteSpace(content)
+            ? PaperStatus.Blank
+            : PaperStatus.Written;
+
+        _appearance.SetData(entity, PaperVisuals.Status, status, appearance);
     }
 
     private void UpdateUserInterface(Entity<PaperComponent> entity)
     {
-        _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(
-            entity.Comp.Content,
-            entity.Comp.StampedBy,
-            entity.Comp.DrawingData,
-            entity.Comp.Mode)); // Starlight-edit
+        _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.StampedBy, entity.Comp.Mode)); // Starlight-edit
     }
 
     # region Starlight

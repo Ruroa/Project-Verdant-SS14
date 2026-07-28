@@ -8,7 +8,6 @@ namespace Content.Shared.Paper;
 public sealed partial class PaperComponent : Component
 {
     public PaperAction Mode;
-
     [DataField("content"), AutoNetworkedField]
     public string Content { get; set; } = "";
 
@@ -28,23 +27,6 @@ public sealed partial class PaperComponent : Component
     public bool EditingDisabled;
 
     /// <summary>
-    /// Drawing data saved on this paper.
-    /// Stored as a simple string instead of nested lists to avoid NetSerializer issues.
-    /// Format:
-    /// stroke|stroke|stroke
-    /// stroke = x,y;x,y;x,y
-    /// x/y are normalized paper coordinates from 0 to 1.
-    /// </summary>
-    [DataField("drawingData"), AutoNetworkedField]
-    public string DrawingData { get; set; } = "";
-
-    /// <summary>
-    /// Maximum encoded drawing string length allowed on one paper.
-    /// </summary>
-    [DataField("maxDrawingDataLength")]
-    public int MaxDrawingDataLength = 20000;
-
-    /// <summary>
     /// Sound played after writing to the paper.
     /// </summary>
     [DataField("sound")]
@@ -56,17 +38,11 @@ public sealed partial class PaperComponent : Component
         public readonly string Text;
         public readonly List<StampDisplayInfo> StampedBy;
         public readonly PaperAction Mode;
-        public readonly string DrawingData;
 
-        public PaperBoundUserInterfaceState(
-            string text,
-            List<StampDisplayInfo> stampedBy,
-            string drawingData,
-            PaperAction mode = PaperAction.Read)
+        public PaperBoundUserInterfaceState(string text, List<StampDisplayInfo> stampedBy, PaperAction mode = PaperAction.Read)
         {
             Text = text;
             StampedBy = stampedBy;
-            DrawingData = drawingData;
             Mode = mode;
         }
     }
@@ -80,22 +56,6 @@ public sealed partial class PaperComponent : Component
         {
             Text = text;
         }
-    }
-
-    [Serializable, NetSerializable]
-    public sealed class PaperInputDrawingMessage : BoundUserInterfaceMessage
-    {
-        public readonly string DrawingData;
-
-        public PaperInputDrawingMessage(string drawingData)
-        {
-            DrawingData = drawingData;
-        }
-    }
-
-    [Serializable, NetSerializable]
-    public sealed class PaperClearDrawingMessage : BoundUserInterfaceMessage
-    {
     }
 
     // Starlight-start
@@ -122,7 +82,6 @@ public sealed partial class PaperComponent : Component
     }
 
     // Starlight-end
-
     [Serializable, NetSerializable]
     public enum PaperUiKey
     {
