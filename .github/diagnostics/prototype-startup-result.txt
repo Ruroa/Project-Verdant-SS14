@@ -1,0 +1,96 @@
+Server startup exit status: 134
+
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseNanoTrasenContraband' was not present in the dictionary.
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseRoboticistContraband' was not present in the dictionary.
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerSurgeon' was not present in the dictionary.
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerCargoLarge' was not present in the dictionary.
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerRoboticist' was not present in the dictionary.
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseNanoTrasenContraband' was not present in the dictionary.
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerCargoLarge' was not present in the dictionary.
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerRoboticist' was not present in the dictionary.
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerSurgeon' was not present in the dictionary.
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseRoboticistContraband' was not present in the dictionary.
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseSecurityScienceCommandNanoTrasenContraband' was not present in the dictionary.
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseSecurityScienceCommandNanoTrasenContraband' was not present in the dictionary.
+
+--- final 80 lines ---
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseRoboticistContraband' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerSurgeon' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerCargoLarge' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'LockerRoboticist' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseNanoTrasenContraband' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerCargoLarge' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerRoboticist' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'LockerSurgeon' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseRoboticistContraband' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+[FATL] unhandled: System.Collections.Generic.KeyNotFoundException: The given key 'BaseSecurityScienceCommandNanoTrasenContraband' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'BaseSecurityScienceCommandNanoTrasenContraband' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Robust.Shared.Prototypes.PrototypeManager.<>c__DisplayClass52_1.<PushKindInheritance>b__3(Object _) in /home/runner/work/Project-Verdant-SS14/Project-Verdant-SS14/RobustToolbox/Robust.Shared/Prototypes/PrototypeManager.cs:line 640
+   at System.Threading.QueueUserWorkItemCallback.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
