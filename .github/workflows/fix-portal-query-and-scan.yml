@@ -1,0 +1,81 @@
+name: Fix Portal Query And Scan
+
+on:
+  pull_request:
+    types: [synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  fix-and-verify:
+    if: github.head_ref == 'LoujackalTesting-UpstreamMerge'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out merge branch
+        uses: actions/checkout@v4
+        with:
+          ref: LoujackalTesting-UpstreamMerge
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Fix portal query compatibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('Content.Shared/Teleportation/Systems/SharedPortalSystem.cs')
+          text = path.read_text(encoding='utf-8-sig')
+          field = '    [Dependency] private EntityQuery<PortalBlacklistComponent> _portalBlacklistQuery; // Moffstation - Portal Blacklist\n'
+          usage = '        if (_portalBlacklistQuery.HasComp(subject))'
+          if field not in text:
+              raise SystemExit('Portal blacklist query field was not found')
+          if usage not in text:
+              raise SystemExit('Portal blacklist query usage was not found')
+          text = text.replace(field, '', 1)
+          text = text.replace(usage, '        if (HasComp<PortalBlacklistComponent>(subject))', 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+
+          mkdir -p .github/diagnostics
+          grep -RInE '\[Dependency\].*EntityQuery<' \
+            Content.Client Content.Server Content.Shared \
+            > .github/diagnostics/dependency-entity-queries.txt || true
+
+      - name: Build full solution
+        shell: bash
+        run: dotnet build --nologo
+
+      - name: Verify server startup
+        shell: bash
+        run: |
+          set +e
+          timeout 120s dotnet run --project Content.Server --no-build > server-startup.log 2>&1
+          status=$?
+          {
+            echo "Server startup exit status: $status"
+            echo
+            grep -E "Duplicate ID:|KeyNotFoundException|PrototypeLoadException|UnregisteredDependencyException|Unhandled exception|\[FATL\]|\[ERRO\] eng:" server-startup.log || true
+            echo
+            echo "--- final 120 lines ---"
+            tail -n 120 server-startup.log
+          } > .github/diagnostics/prototype-startup-result.txt
+          exit 0
+
+      - name: Commit fix and diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Project Verdant Runtime Fix"
+          git config user.email "runtime-fix@invalid.local"
+          rm -f server-startup.log
+          if [ ! -s .github/diagnostics/dependency-entity-queries.txt ]; then
+            rm -f .github/diagnostics/dependency-entity-queries.txt
+          fi
+          git rm -f .github/workflows/fix-portal-query-and-scan.yml
+          git add -A
+          git commit -m "Fix portal query runtime compatibility"
+          git push origin HEAD:LoujackalTesting-UpstreamMerge
