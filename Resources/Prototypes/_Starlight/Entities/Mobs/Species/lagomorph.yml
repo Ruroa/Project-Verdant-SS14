@@ -127,4 +127,9 @@
       state: "creampie_human"
       visible: false
 # for fragile electronics like consoles or shuttle engines.
-
+- type: damageModifierSet
+  id: Lagomorph
+  coefficients:
+    Blunt: 0.9
+    Cold: 0.75
+    Heat: 1.25
