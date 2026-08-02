@@ -183,20 +183,20 @@
 
 - type: entity
   parent: EncryptionKey
-  id: EncryptionKeyBlackstar
-  name: Blackstar encryption key
-  description: An encryption key used by elite Blackstar mercenaries.
+  id: EncryptionKeyNeoEclipse
+  name: Neo-Eclipse encryption key
+  description: An encryption key used for Neo-Eclipse field communications.
   components:
     - type: EncryptionKey
       channels:
-        - Blackstar
-      defaultChannel: Blackstar
+        - NeoEclipse
+      defaultChannel: NeoEclipse
     - type: Sprite
       layers:
         - sprite: _Starlight/Objects/Devices/encryption_keys.rsi
           state: crypt_brown
         - sprite: _Starlight/Objects/Devices/encryption_keys.rsi
-          state: blackstar_label
+          state: neo_eclipse_label
 
 - type: entity
   parent: [ EncryptionKey, BaseMagicalContraband ]

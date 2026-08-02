@@ -1,9 +1,9 @@
-# Blackstar Tactical Visor
+# Neo-Eclipse tactical visor
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseMajorContraband]
-  id: ClothingEyesGlassesBlackstar
-  name: Blackstar tactical visor
-  description: A flash-resistant tactical visor issued to Blackstar Dreadwalker operatives. Provides complete flash immunity and a security HUD.
+  id: ClothingEyesGlassesNeoEclipse
+  name: Neo-Eclipse tactical visor
+  description: A flash-resistant tactical visor issued to Neo-Eclipse Agents. Provides complete flash immunity and a security HUD.
   components:
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/secglasses.rsi #WILL BE REPLACED AT A LATER DATE WHEN I HAVE SPRITES!!! - scarletlightweaver_ss14
@@ -17,12 +17,12 @@
     - Biological
     - Hybrid
 
-# Blackstar Combat Suit
+# Neo-Eclipse combat suit
 - type: entity
   parent: [ClothingOuterBaseLarge, BaseMajorContraband]
-  id: ClothingOuterHardsuitBlackstar
-  name: Blackstar 'Warlord' combat suit
-  description: A heavily armored combat suit issued to elite Dreadwalker operatives of the Blackstar mercenary group. Built to survive anything the frontier can throw at it.
+  id: ClothingOuterCombatSuitNeoEclipse
+  name: Neo-Eclipse combat suit
+  description: A heavily armored combat suit issued to Neo-Eclipse Agents and Operatives. It is built to carry its wearer through an eradication directive, regardless of resistance.
   components:
   - type: Sprite
     sprite: _Starlight/Admeme/Scarlet/wardlord.rsi
@@ -63,12 +63,12 @@
     - ScurretWearable
     - FootstepSound
 
-# Blackstar Mercenary Helmet
+# Neo-Eclipse combat helmet
 - type: entity
   parent: [ClothingHeadHelmetArmoredBase, BaseMajorContraband]
-  id: ClothingHeadHelmetBlackstar
-  name: Blackstar mercenary helmet
-  description: A reinforced combat helmet issued to Dreadwalker operatives of the Blackstar mercenary group. Offers superior protection over standard mercenary gear.
+  id: ClothingHeadHelmetNeoEclipse
+  name: Neo-Eclipse combat helmet
+  description: A reinforced combat helmet issued to Neo-Eclipse Agents and Operatives. It offers superior protection over standard combat gear.
   components:
   - type: Sprite
     sprite: _Starlight/Admeme/Scarlet/Blackmerc.rsi
@@ -92,17 +92,17 @@
       Hair: HEAD
 
 # =============================================
-# Blackstar Rank Clothing (PLACEHOLDER SPRITES)
+# Neo-Eclipse rank clothing (PLACEHOLDER SPRITES)
 # All sprites marked for replacement later.
 # =============================================
 
-# --- Legion Commander ---
+# --- Commander ---
 # Hat + Jumpsuit: Soviet Admiral RSIs
 - type: entity
   parent: [ClothingHeadBase, BaseMajorContraband]
-  id: ClothingHeadHatBlackstarLegionCommander
-  name: Legion Commander's cap
-  description: The cap of a Legion Commander. Only one exists at a time.
+  id: ClothingHeadHatNeoEclipseCommander
+  name: Neo-Eclipse Commander's cap
+  description: The cap of the officer entrusted with carrying Harbinger's doctrine forward.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Head/Hats/sovietadmiralhat.rsi # PLACEHOLDER
@@ -115,22 +115,22 @@
 
 - type: entity
   parent: [UnsensoredClothingUniformBase, BaseMajorContraband]
-  id: ClothingUniformJumpsuitBlackstarLegionCommander
-  name: Legion Commander's uniform
-  description: The uniform of a Legion Commander of the Blackstar Legion.
+  id: ClothingUniformJumpsuitNeoEclipseCommander
+  name: Neo-Eclipse Commander's uniform
+  description: The formal uniform of a Neo-Eclipse Commander.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/sovietadmiral.rsi # PLACEHOLDER
   - type: Clothing
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/sovietadmiral.rsi # PLACEHOLDER
 
-# --- High Legate ---
+# --- Overseer ---
 
 - type: entity
   parent: [ClothingHeadBase, BaseMajorContraband]
-  id: ClothingHeadHatBeretBlackstarHighLegate
-  name: High Legate beret
-  description: A beret worn by High Legate officers of the Blackstar Legion. # PLACEHOLDER
+  id: ClothingHeadHatBeretNeoEclipseOverseer
+  name: Neo-Eclipse Overseer beret
+  description: A beret worn by Neo-Eclipse Overseers responsible for directing eradication operations. # PLACEHOLDER
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_hos.rsi # PLACEHOLDER
@@ -140,13 +140,13 @@
     tags:
     - WhitelistChameleon
 
-# --- Legate ---
+# --- Handler ---
 
 - type: entity
   parent: [ClothingHeadBase, BaseMajorContraband]
-  id: ClothingHeadHatBeretBlackstarLegate
-  name: Legate beret
-  description: A beret worn by Legate officers of the Blackstar Legion. # PLACEHOLDER
+  id: ClothingHeadHatBeretNeoEclipseHandler
+  name: Neo-Eclipse Handler beret
+  description: A beret worn by Neo-Eclipse Handlers responsible for directing field personnel. # PLACEHOLDER
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Head/Hats/beret_corpsman.rsi # PLACEHOLDER
@@ -158,9 +158,9 @@
 
 - type: entity
   parent: [ClothingHeadHelmetArmoredBase, BaseMajorContraband]
-  id: ClothingHeadHelmetBlackstarLegate
-  name: Legate helmet
-  description: A helmet issued to Legate officers of the Blackstar Legion.
+  id: ClothingHeadHelmetNeoEclipseHandler
+  name: Neo-Eclipse Handler helmet
+  description: A reinforced helmet issued to Neo-Eclipse Handlers operating in the field.
   components:
   - type: Sprite
     sprite: _Starlight/Admeme/Scarlet/Blackmerc.rsi

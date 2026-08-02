@@ -27,7 +27,7 @@ job-title-borgi = Borgi
 job-title-tsf-Phantom = Phantom Marine
 job-title-tsf-MARSOC = MARSOC Marine
 
-job-name-blackstar = Blackstar Mercenary
+job-name-neo-eclipse = Neo-Eclipse Member
 
 job-name-medtak-dispatcher = MedTak Dispatcher
 job-name-medtak-leader = MedTak Team Leader

@@ -1,64 +1,64 @@
-# Blackstar Job Icons
+# Neo-Eclipse job icons
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlackstarLegionCommander
+  id: JobIconNeoEclipseCommander
   icon:
     sprite: /Textures/_Starlight/Interface/Misc/job_icons.rsi
-    state: Blackstar # PLACEHOLDER - replace when sprite ready
-  jobName: job-name-blackstar-legion-commander
+    state: NeoEclipse # PLACEHOLDER - replace when sprite ready
+  jobName: job-name-neo-eclipse-commander
   allowSelection: false
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlackstarHighLegate
+  id: JobIconNeoEclipseOverseer
   icon:
     sprite: /Textures/_Starlight/Interface/Misc/job_icons.rsi
-    state: Blackstar # PLACEHOLDER
-  jobName: job-name-blackstar-high-legate
+    state: NeoEclipse # PLACEHOLDER
+  jobName: job-name-neo-eclipse-overseer
   allowSelection: false
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlackstarLegate
+  id: JobIconNeoEclipseHandler
   icon:
     sprite: /Textures/_Starlight/Interface/Misc/job_icons.rsi
-    state: Blackstar # PLACEHOLDER
-  jobName: job-name-blackstar-legate
+    state: NeoEclipse # PLACEHOLDER
+  jobName: job-name-neo-eclipse-handler
   allowSelection: false
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlackstarDreadwalker
+  id: JobIconNeoEclipseAgent
   icon:
     sprite: /Textures/_Starlight/Interface/Misc/job_icons.rsi
-    state: Blackstar # PLACEHOLDER
-  jobName: job-name-blackstar-dreadwalker
+    state: NeoEclipse # PLACEHOLDER
+  jobName: job-name-neo-eclipse-agent
   allowSelection: false
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlackstarLegionnaire
+  id: JobIconNeoEclipseOperative
   icon:
     sprite: /Textures/_Starlight/Interface/Misc/job_icons.rsi
-    state: Blackstar # PLACEHOLDER
-  jobName: job-name-blackstar-legionnaire
+    state: NeoEclipse # PLACEHOLDER
+  jobName: job-name-neo-eclipse-operative
   allowSelection: false
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlackstarBlackguard
+  id: JobIconNeoEclipseEnforcer
   icon:
     sprite: /Textures/_Starlight/Interface/Misc/job_icons.rsi
-    state: Blackstar # PLACEHOLDER
-  jobName: job-name-blackstar-blackguard
+    state: NeoEclipse # PLACEHOLDER
+  jobName: job-name-neo-eclipse-enforcer
   allowSelection: false
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlackstarInitiate
+  id: JobIconNeoEclipseInitiate
   icon:
     sprite: /Textures/_Starlight/Interface/Misc/job_icons.rsi
-    state: Blackstar # PLACEHOLDER
-  jobName: job-name-blackstar-initiate
+    state: NeoEclipse # PLACEHOLDER
+  jobName: job-name-neo-eclipse-initiate
   allowSelection: false

@@ -1,7 +1,7 @@
 # Group
 - type: faxGroup
-  id: FaxGroupBlackstar
-  name: fax-group-blackstar
+  id: FaxGroupNeoEclipse
+  name: fax-group-neo-eclipse
   color: "#896e14"
   order: 1500 # All events: 1500
   selectable: false
@@ -9,8 +9,8 @@
 # Single fax -- can be edited for mapping/event purposes.
 - type: entity
   parent: FaxMachineBase
-  id: FaxMachineBlackstar
-  suffix: "Blackstar"
+  id: FaxMachineNeoEclipse
+  suffix: "Neo-Eclipse"
   categories: [ DoNotMap ]
   components:
     - type: Sprite
@@ -19,8 +19,8 @@
           map: [ "base" ]
           color: "#896e14"
     - type: FaxMachine
-      group: FaxGroupBlackstar
-      intrinsicGroup: FaxGroupBlackstar
+      group: FaxGroupNeoEclipse
+      intrinsicGroup: FaxGroupNeoEclipse
       intrinsicLocked: true # No impersonating unless emagged
-      name: "Blackstar"
+      name: "Neo-Eclipse"
       order: 500

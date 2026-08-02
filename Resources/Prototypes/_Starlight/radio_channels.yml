@@ -51,10 +51,10 @@
   keycode: "d"
   frequency: 1882
   color: "#ffce2e"
-  # For Blackstar mercenaries
+  # For Neo-Eclipse operations
 - type: radioChannel
-  id: Blackstar
-  name: chat-radio-blackstar
+  id: NeoEclipse
+  name: chat-radio-neo-eclipse
   keycode: "r"
   frequency: 1452
   color: "#896e14"

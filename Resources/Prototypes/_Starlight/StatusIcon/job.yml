@@ -206,15 +206,15 @@
     state: NanoTrasenCareerTrainer
   jobName: job-name-nct
 
-# Blackstar
+# Neo-Eclipse
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlackstar
+  id: JobIconNeoEclipse
   icon:
     sprite: *starlight-job-icon-rsi
-    state: Blackstar
-  jobName: job-name-blackstar
+    state: NeoEclipse
+  jobName: job-name-neo-eclipse
 
 # Admeme
 

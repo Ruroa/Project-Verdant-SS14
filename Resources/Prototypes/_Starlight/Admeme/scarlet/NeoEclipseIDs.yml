@@ -1,0 +1,112 @@
+# Neo-Eclipse ID cards
+- type: entity
+  parent: IDCardStandard
+  id: NeoEclipseIDCard
+  name: Neo-Eclipse ID card
+  components:
+    - type: Sprite
+      sprite: _Starlight/Objects/Misc/id_cards.rsi
+      layers:
+        - state: mercenary
+        - sprite: _Starlight/Interface/Misc/job_icons.rsi
+          offset: -0.09375, 0.0625
+          state: NeoEclipse
+    - type: IdCard
+      jobTitle: job-name-neo-eclipse
+      jobIcon: JobIconNeoEclipse
+    - type: Access
+      tags:
+        - NeoEclipse
+
+- type: entity
+  parent: IDCardStandard
+  id: NeoEclipseCommanderIDCard
+  name: Neo-Eclipse Commander ID card
+  components:
+    - type: Sprite
+      sprite: _Starlight/Objects/Misc/id_cards.rsi
+      layers:
+        - state: gold
+        - sprite: _Starlight/Interface/Misc/job_icons.rsi
+          offset: -0.09375, 0.0625
+          state: NeoEclipse
+    - type: IdCard
+      jobTitle: job-name-neo-eclipse-commander
+      jobIcon: JobIconNeoEclipseCommander
+    - type: Access
+      tags:
+        - NeoEclipse
+
+- type: entity
+  parent: IDCardStandard
+  id: NeoEclipseOverseerIDCard
+  name: Neo-Eclipse Overseer ID card
+  components:
+    - type: Sprite
+      sprite: _Starlight/Objects/Misc/id_cards.rsi
+      layers:
+        - state: silver
+        - sprite: _Starlight/Interface/Misc/job_icons.rsi
+          offset: -0.09375, 0.0625
+          state: NeoEclipse
+    - type: IdCard
+      jobTitle: job-name-neo-eclipse-overseer
+      jobIcon: JobIconNeoEclipseOverseer
+    - type: Access
+      tags:
+        - NeoEclipse
+
+- type: entity
+  parent: IDCardStandard
+  id: NeoEclipseHandlerIDCard
+  name: Neo-Eclipse Handler ID card
+  components:
+    - type: Sprite
+      sprite: _Starlight/Objects/Misc/id_cards.rsi
+      layers:
+        - state: silver
+        - sprite: _Starlight/Interface/Misc/job_icons.rsi
+          offset: -0.09375, 0.0625
+          state: NeoEclipse
+    - type: IdCard
+      jobTitle: job-name-neo-eclipse-handler
+      jobIcon: JobIconNeoEclipseHandler
+    - type: Access
+      tags:
+        - NeoEclipse
+
+- type: entity
+  parent: NeoEclipseIDCard
+  id: NeoEclipseAgentIDCard
+  name: Neo-Eclipse Agent ID card
+  components:
+    - type: IdCard
+      jobTitle: job-name-neo-eclipse-agent
+      jobIcon: JobIconNeoEclipseAgent
+
+- type: entity
+  parent: NeoEclipseIDCard
+  id: NeoEclipseOperativeIDCard
+  name: Neo-Eclipse Operative ID card
+  components:
+    - type: IdCard
+      jobTitle: job-name-neo-eclipse-operative
+      jobIcon: JobIconNeoEclipseOperative
+
+- type: entity
+  parent: NeoEclipseIDCard
+  id: NeoEclipseEnforcerIDCard
+  name: Neo-Eclipse Enforcer ID card
+  components:
+    - type: IdCard
+      jobTitle: job-name-neo-eclipse-enforcer
+      jobIcon: JobIconNeoEclipseEnforcer
+
+- type: entity
+  parent: NeoEclipseIDCard
+  id: NeoEclipseInitiateIDCard
+  name: Neo-Eclipse Initiate ID card
+  components:
+    - type: IdCard
+      jobTitle: job-name-neo-eclipse-initiate
+      jobIcon: JobIconNeoEclipseInitiate

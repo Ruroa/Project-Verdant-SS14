@@ -1,7 +1,7 @@
-# Blackstar NPC Faction
+# Neo-Eclipse NPC faction
 
 - type: npcFaction
-  id: Blackstar
+  id: NeoEclipse
   hostile:
   - NanoTrasen
   - NanoTrasenSilicon

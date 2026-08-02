@@ -889,12 +889,12 @@
 
 - type: entity
   parent: BasePDA
-  id: BlackstarPDA
-  name: Blackstar PDA
-  description: Why isn't it black?
+  id: NeoEclipsePDA
+  name: Neo-Eclipse PDA
+  description: A hardened PDA configured for Neo-Eclipse operations.
   components:
     - type: Pda
-      id: BlackstarIDCard
+      id: NeoEclipseIDCard
     - type: PdaBorderColor
       borderColor: "#717059"
 
