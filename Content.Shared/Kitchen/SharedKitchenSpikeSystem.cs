@@ -21,6 +21,7 @@ using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;
+using Content.Shared._PV.Kitchen.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
@@ -89,7 +90,23 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
 
     private void OnInsertAttempt(Entity<KitchenSpikeComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
-        if (args.Cancelled || TryComp<ButcherableComponent>(args.EntityUid, out var butcherable) && butcherable.Type == ButcheringType.Spike)
+        if (args.Cancelled)
+            return;
+
+        if (ent.Comp.ButcheringTable)
+        {
+            if (HasComp<TableButcherableComponent>(args.EntityUid) &&
+                HasComp<ButcherableComponent>(args.EntityUid) &&
+                _mobStateSystem.IsDead(args.EntityUid))
+            {
+                return;
+            }
+
+            args.Cancel();
+            return;
+        }
+
+        if (TryComp<ButcherableComponent>(args.EntityUid, out var butcherable) && butcherable.Type == ButcheringType.Spike)
             return;
 
         args.Cancel();
@@ -100,8 +117,11 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
         if (_gameTiming.ApplyingState)
             return;
 
-        EnsureComp<KitchenSpikeHookedComponent>(args.Entity);
-        _damageableSystem.TryChangeDamage(args.Entity, ent.Comp.SpikeDamage, true);
+        if (!ent.Comp.ButcheringTable)
+        {
+            EnsureComp<KitchenSpikeHookedComponent>(args.Entity);
+            _damageableSystem.TryChangeDamage(args.Entity, ent.Comp.SpikeDamage, true);
+        }
 
         ent.Comp.NextDamage = _gameTiming.CurTime + ent.Comp.DamageInterval;
         Dirty(ent);
@@ -115,8 +135,11 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
         if (_gameTiming.ApplyingState)
             return;
 
-        RemComp<KitchenSpikeHookedComponent>(args.Entity);
-        _damageableSystem.TryChangeDamage(args.Entity, ent.Comp.SpikeDamage, true);
+        if (!ent.Comp.ButcheringTable)
+        {
+            RemComp<KitchenSpikeHookedComponent>(args.Entity);
+            _damageableSystem.TryChangeDamage(args.Entity, ent.Comp.SpikeDamage, true);
+        }
 
         _appearanceSystem.SetData(ent.Owner, KitchenSpikeVisuals.Status, KitchenSpikeStatus.Empty);
     }
@@ -281,6 +304,9 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
         if (args.Handled || args.Cancelled || !args.Target.HasValue || !args.Used.HasValue || !TryComp<ButcherableComponent>(args.Target, out var butcherable))
             return;
 
+        if (ent.Comp.ButcheringTable && !_mobStateSystem.IsDead(args.Target.Value))
+            return;
+
         var victimIdentity = Identity.Entity(args.Target.Value, EntityManager);
 
         _popupSystem.PopupPredicted(Loc.GetString("comp-kitchen-spike-butcher-self", ("victim", victimIdentity)),
@@ -312,10 +338,36 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
         else
             butcherable.SpawnedEntities[index] = entry;
 
+        var finishedButchering = butcherable.SpawnedEntities.Count == 0;
+
+        if (ent.Comp.ButcheringTable && TryComp<TableButcherableComponent>(args.Target, out var tableButcherable))
+        {
+            tableButcherable.BonusAccumulator += MathF.Max(0f, tableButcherable.YieldMultiplier - 1f);
+
+            var bonusCount = (int) MathF.Floor(tableButcherable.BonusAccumulator);
+            var remainingFraction = tableButcherable.BonusAccumulator - bonusCount;
+
+            // Round the completed carcass up so even a one-product animal benefits from the table.
+            if (finishedButchering && remainingFraction > 0f)
+                bonusCount++;
+
+            for (var i = 0; i < bonusCount; i++)
+            {
+                var bonusUid = PredictedSpawnNextToOrDrop(entry.PrototypeId, ent);
+                _metaDataSystem.SetEntityName(bonusUid,
+                    Loc.GetString("comp-kitchen-spike-meat-name",
+                        ("name", Name(bonusUid)),
+                        ("victim", args.Target)));
+            }
+
+            tableButcherable.BonusAccumulator = MathF.Max(0f, tableButcherable.BonusAccumulator - bonusCount);
+            Dirty(args.Target.Value, tableButcherable);
+        }
+
         Dirty(args.Target.Value, butcherable);
 
         // Gib the victim if there is nothing else to butcher.
-        if (butcherable.SpawnedEntities.Count == 0)
+        if (finishedButchering)
         {
             _gibbing.Gib(args.Target.Value);
 
@@ -327,9 +379,11 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
         }
         else
         {
-            EnsureComp<KitchenSpikeVictimComponent>(args.Target.Value);
-
-            _damageableSystem.ChangeDamage(args.Target.Value, ent.Comp.ButcherDamage, true);
+            if (!ent.Comp.ButcheringTable)
+            {
+                EnsureComp<KitchenSpikeVictimComponent>(args.Target.Value);
+                _damageableSystem.ChangeDamage(args.Target.Value, ent.Comp.ButcherDamage, true);
+            }
 
             // Log severity for damaging other entities is normally medium.
             _logger.Add(LogType.Action,
@@ -357,7 +411,11 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
             return;
 
         // Show it at the end of the examine so it looks good.
-        args.PushMarkup(Loc.GetString("comp-kitchen-spike-hooked", ("victim", Identity.Entity(victim.Value, EntityManager))), -1);
+        var occupiedMessage = ent.Comp.ButcheringTable
+            ? "comp-butchering-table-occupied"
+            : "comp-kitchen-spike-hooked";
+
+        args.PushMarkup(Loc.GetString(occupiedMessage, ("victim", Identity.Entity(victim.Value, EntityManager))), -1);
         args.PushMessage(_examineSystem.GetExamineText(victim.Value, args.Examiner, out _), -2); // Starlight-edit
     }
 
@@ -372,7 +430,9 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
 
         args.Verbs.Add(new Verb()
         {
-            Text = Loc.GetString("comp-kitchen-spike-unhook-verb"),
+            Text = Loc.GetString(ent.Comp.ButcheringTable
+                ? "comp-butchering-table-remove-verb"
+                : "comp-kitchen-spike-unhook-verb"),
             Act = () => TryUnhook(ent, user, victim.Value),
             Impact = LogImpact.Medium,
         });
@@ -416,6 +476,9 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var kitchenSpike))
         {
+            if (kitchenSpike.ButcheringTable)
+                continue;
+
             var contained = kitchenSpike.BodyContainer.ContainedEntity;
 
             if (!contained.HasValue)

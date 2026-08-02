@@ -1,0 +1,59 @@
+- type: entity
+  id: ButcheringTable
+  categories: [ ShouldMapStation ]
+  parent: BaseStructure
+  name: butchering table
+  description: A sturdy table for processing livestock carcasses with improved meat yields.
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _PV/Structures/butcher-table.rsi
+    state: butchertable
+    layers:
+    - state: butchertable
+      map: ["base"]
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Transform
+    noRot: true
+  - type: KitchenSpike
+    butcheringTable: true
+    hookDelay: 2
+    unhookDelay: 2
+  - type: Anchorable
+  - type: Pullable
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.KitchenSpikeVisuals.Status:
+        base:
+          Empty: { state: butchertable }
+          Bloody: { state: butchertablebloody }
+  - type: StaticPrice
+    price: 250
+  - type: GuideHelp
+    guides:
+    - Chef
+    - FoodRecipes
+  - type: ContainerContainer
+    containers:
+      body: !type:ContainerSlot

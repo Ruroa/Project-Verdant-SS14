@@ -283,6 +283,8 @@
     spawned:
     - id: FoodMeatChicken
       amount: 1
+  - type: TableButcherable
+    yieldMultiplier: 1.5
   - type: InteractionPopup
     successChance: 0.8
     interactSuccessString: petting-success-bird
@@ -980,6 +982,8 @@
     spawned:
     - id: FoodMeat
       amount: 5
+  - type: TableButcherable
+    yieldMultiplier: 1.5
   - type: Grammar
     attributes:
       gender: female # Here because of UdderComponent
@@ -1160,6 +1164,8 @@
     spawned:
     - id: FoodMeat
       amount: 4
+  - type: TableButcherable
+    yieldMultiplier: 1.5
   - type: Grammar
     attributes:
       gender: female # Here because of UdderComponent
@@ -3890,6 +3896,8 @@
     spawned:
     - id: FoodMeatBacon
       amount: 6
+  - type: TableButcherable
+    yieldMultiplier: 1.5
   - type: Grammar
     attributes:
       gender: epicene
