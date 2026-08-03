@@ -151,6 +151,13 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
         if (args.Handled || !victim.HasValue)
             return;
 
+        if (ent.Comp.ButcheringTable)
+        {
+            TryUnhook(ent, args.User, victim.Value);
+            args.Handled = true;
+            return;
+        }
+
         _popupSystem.PopupClient(Loc.GetString("butcherable-need-knife",
             ("target", Identity.Entity(victim.Value, EntityManager))),
             ent,
@@ -188,12 +195,17 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
             args.User,
             PopupType.MediumCaution);
 
-        var delay = TimeSpan.FromSeconds(sharp.ButcherDelayModifier * butcherable.ButcherDelay);
+        var delay = ent.Comp.ButcheringTable
+            ? TimeSpan.FromSeconds(sharp.ButcherDelayModifier * ent.Comp.TableButcherDelay.TotalSeconds)
+            : TimeSpan.FromSeconds(sharp.ButcherDelayModifier * butcherable.ButcherDelay);
 
-        if (_mobStateSystem.IsAlive(victim.Value))
-            delay += ent.Comp.ButcherDelayAlive;
-        else
-            delay *= ent.Comp.ButcherModifierDead;
+        if (!ent.Comp.ButcheringTable)
+        {
+            if (_mobStateSystem.IsAlive(victim.Value))
+                delay += ent.Comp.ButcherDelayAlive;
+            else
+                delay *= ent.Comp.ButcherModifierDead;
+        }
 
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager,
             args.User,
@@ -206,6 +218,9 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
             BreakOnDamage = true,
             BreakOnMove = true,
             NeedHand = true,
+            // A table carcass is inside a container and is intentionally not given the spike's
+            // KitchenSpikeHookedComponent accessibility override. Check range against the table instead.
+            DistanceTarget = ent.Comp.ButcheringTable ? ent.Owner : null,
         });
     }
 
@@ -279,6 +294,9 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
         if (args.Handled || args.Cancelled || !args.Target.HasValue)
             return;
 
+        if (ent.Comp.BodyContainer.ContainedEntity != args.Target.Value)
+            return;
+
         if (_containerSystem.Remove(args.Target.Value, ent.Comp.BodyContainer))
         {
             ShowPopups("comp-kitchen-spike-unhook-self",
@@ -302,6 +320,9 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
     private void OnSpikeButcherDoAfter(Entity<KitchenSpikeComponent> ent, ref SpikeButcherDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || !args.Target.HasValue || !args.Used.HasValue || !TryComp<ButcherableComponent>(args.Target, out var butcherable))
+            return;
+
+        if (ent.Comp.BodyContainer.ContainedEntity != args.Target.Value)
             return;
 
         if (ent.Comp.ButcheringTable && !_mobStateSystem.IsDead(args.Target.Value))
@@ -548,6 +569,9 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
         {
             BreakOnDamage = user != target,
             BreakOnMove = true,
+            NeedHand = ent.Comp.ButcheringTable,
+            // The contained carcass itself is inaccessible; the user only needs access to the table.
+            DistanceTarget = ent.Comp.ButcheringTable ? ent.Owner : null,
         });
     }
 }

@@ -121,6 +121,13 @@ public sealed partial class KitchenSpikeComponent : Component
     public TimeSpan UnhookDelay = TimeSpan.FromSeconds(10);
 
     /// <summary>
+    /// Base time required for one butchering cut when this fixture is a butchering table.
+    /// The sharp tool's delay modifier is still applied.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan TableButcherDelay = TimeSpan.FromSeconds(4);
+
+    /// <summary>
     /// Time that it will take to butcher the victim while they are alive.
     /// </summary>
     /// <remarks>

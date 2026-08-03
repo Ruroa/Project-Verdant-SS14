@@ -37,8 +37,9 @@
     noRot: true
   - type: KitchenSpike
     butcheringTable: true
-    hookDelay: 2
-    unhookDelay: 2
+    hookDelay: 1.5
+    unhookDelay: 1
+    tableButcherDelay: 4
   - type: Anchorable
   - type: Pullable
   - type: Appearance
