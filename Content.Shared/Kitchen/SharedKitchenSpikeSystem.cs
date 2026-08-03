@@ -95,8 +95,8 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
 
         if (ent.Comp.ButcheringTable)
         {
-            if (HasComp<TableButcherableComponent>(args.EntityUid) &&
-                HasComp<ButcherableComponent>(args.EntityUid) &&
+            if (TryComp<ButcherableComponent>(args.EntityUid, out var tableButcherable) &&
+                tableButcherable.Type == ButcheringType.Knife &&
                 _mobStateSystem.IsDead(args.EntityUid))
             {
                 return;
@@ -117,7 +117,13 @@ public sealed partial class SharedKitchenSpikeSystem : EntitySystem
         if (_gameTiming.ApplyingState)
             return;
 
-        if (!ent.Comp.ButcheringTable)
+        if (ent.Comp.ButcheringTable)
+        {
+            // Keep the table-specific yield state separate from normal floor butchering.
+            // Every dead mob that uses normal knife butchering receives it when placed here.
+            EnsureComp<TableButcherableComponent>(args.Entity);
+        }
+        else
         {
             EnsureComp<KitchenSpikeHookedComponent>(args.Entity);
             _damageableSystem.TryChangeDamage(args.Entity, ent.Comp.SpikeDamage, true);

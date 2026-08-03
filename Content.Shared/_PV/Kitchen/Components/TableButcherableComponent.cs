@@ -3,8 +3,9 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._PV.Kitchen.Components;
 
 /// <summary>
-/// Marks a carcass as valid for processing on a butchering table.
-/// The table uses the entity's normal Butcherable drops and applies this yield multiplier.
+/// Stores the additional yield state used while processing a carcass on a butchering table.
+/// The table adds this component automatically to dead mobs that support normal knife butchering.
+/// Normal floor butchering remains unchanged.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
