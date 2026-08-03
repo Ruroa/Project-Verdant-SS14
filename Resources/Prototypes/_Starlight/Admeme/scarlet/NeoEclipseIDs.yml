@@ -5,12 +5,9 @@
   name: Neo-Eclipse ID card
   components:
     - type: Sprite
-      sprite: _Starlight/Objects/Misc/id_cards.rsi
+      sprite: _PV/Objects/Misc/eclipse_id_cards.rsi
       layers:
-        - state: mercenary
-        - sprite: _Starlight/Interface/Misc/job_icons.rsi
-          offset: -0.09375, 0.0625
-          state: NeoEclipse
+        - state: EclipseL1
     - type: IdCard
       jobTitle: job-name-neo-eclipse
       jobIcon: JobIconNeoEclipse
@@ -24,12 +21,9 @@
   name: Neo-Eclipse Commander ID card
   components:
     - type: Sprite
-      sprite: _Starlight/Objects/Misc/id_cards.rsi
+      sprite: _PV/Objects/Misc/eclipse_id_cards.rsi
       layers:
-        - state: gold
-        - sprite: _Starlight/Interface/Misc/job_icons.rsi
-          offset: -0.09375, 0.0625
-          state: NeoEclipse
+        - state: EclipseL3
     - type: IdCard
       jobTitle: job-name-neo-eclipse-commander
       jobIcon: JobIconNeoEclipseCommander
@@ -43,12 +37,9 @@
   name: Neo-Eclipse Overseer ID card
   components:
     - type: Sprite
-      sprite: _Starlight/Objects/Misc/id_cards.rsi
+      sprite: _PV/Objects/Misc/eclipse_id_cards.rsi
       layers:
-        - state: silver
-        - sprite: _Starlight/Interface/Misc/job_icons.rsi
-          offset: -0.09375, 0.0625
-          state: NeoEclipse
+        - state: EclipseL2
     - type: IdCard
       jobTitle: job-name-neo-eclipse-overseer
       jobIcon: JobIconNeoEclipseOverseer
@@ -62,12 +53,9 @@
   name: Neo-Eclipse Handler ID card
   components:
     - type: Sprite
-      sprite: _Starlight/Objects/Misc/id_cards.rsi
+      sprite: _PV/Objects/Misc/eclipse_id_cards.rsi
       layers:
-        - state: silver
-        - sprite: _Starlight/Interface/Misc/job_icons.rsi
-          offset: -0.09375, 0.0625
-          state: NeoEclipse
+        - state: EclipseL2
     - type: IdCard
       jobTitle: job-name-neo-eclipse-handler
       jobIcon: JobIconNeoEclipseHandler
