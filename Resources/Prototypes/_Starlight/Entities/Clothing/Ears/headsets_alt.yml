@@ -275,15 +275,15 @@
 
 - type: entity
   parent: ClothingHeadsetAlt
-  id: ClothingHeadsetAltBlackstar
-  name: Blackstar mercenary headset
-  description: A headset used by elite Blackstar mercenaries.
+  id: ClothingHeadsetAltNeoEclipse
+  name: Neo-Eclipse headset
+  description: A long-range encrypted headset used by Neo-Eclipse field personnel.
   components:
     - type: Headset
     - type: ContainerFill
       containers:
         key_slots:
-          - EncryptionKeyBlackstar
+          - EncryptionKeyNeoEclipse
     - type: Sprite
       sprite: _Starlight/Clothing/Ears/Headsets/merchant.rsi
     - type: Clothing

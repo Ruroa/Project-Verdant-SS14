@@ -827,111 +827,111 @@
       containers:
         board: [ DoorElectronicsWizard ]
 
-# Blackstar
+# Neo-Eclipse
 - type: entity
   parent: Airlock
-  id: AirlockBlackstarLocked
-  suffix: Blackstar, Locked
+  id: AirlockNeoEclipseLocked
+  suffix: Neo-Eclipse, Locked
   components:
     - type: ContainerFill
       containers:
-        board: [ DoorElectronicsBlackstar ]
+        board: [ DoorElectronicsNeoEclipse ]
     - type: Wires
-      layoutId: AirlockBlackstar
+      layoutId: AirlockNeoEclipse
 
 - type: entity
   parent: AirlockGlass
-  id: AirlockBlackstarGlassLocked
-  suffix: Blackstar, Locked
+  id: AirlockNeoEclipseGlassLocked
+  suffix: Neo-Eclipse, Locked
   components:
     - type: ContainerFill
       containers:
-        board: [ DoorElectronicsBlackstar ]
+        board: [ DoorElectronicsNeoEclipse ]
     - type: Wires
-      layoutId: AirlockBlackstar
+      layoutId: AirlockNeoEclipse
 
 - type: entity
-  parent: AirlockBlackstarLocked
-  id: AirlockMaintBlackstarLocked
-  suffix: Blackstar, Locked
+  parent: AirlockNeoEclipseLocked
+  id: AirlockMaintNeoEclipseLocked
+  suffix: Neo-Eclipse, Locked
   components:
     - type: Sprite
       sprite: Structures/Doors/Airlocks/Standard/maint.rsi
 
 - type: entity
   parent: AirlockHatch
-  id: AirlockHatchBlackstarLocked
-  suffix: Blackstar, Locked
+  id: AirlockHatchNeoEclipseLocked
+  suffix: Neo-Eclipse, Locked
   components:
     - type: ContainerFill
       containers:
-        board: [ DoorElectronicsBlackstar ]
+        board: [ DoorElectronicsNeoEclipse ]
     - type: Wires
-      layoutId: AirlockBlackstar
+      layoutId: AirlockNeoEclipse
 
 - type: entity
   parent: AirlockHatchMaintenance
-  id: AirlockHatchMaintenanceBlackstarLocked
-  suffix: Blackstar, Locked
+  id: AirlockHatchMaintenanceNeoEclipseLocked
+  suffix: Neo-Eclipse, Locked
   components:
     - type: ContainerFill
       containers:
-        board: [ DoorElectronicsBlackstar ]
+        board: [ DoorElectronicsNeoEclipse ]
     - type: Wires
-      layoutId: AirlockBlackstar
+      layoutId: AirlockNeoEclipse
 
 - type: entity
   parent: AirlockExternal
-  id: AirlockExternalBlackstarLocked
-  suffix: External, Blackstar, Locked
+  id: AirlockExternalNeoEclipseLocked
+  suffix: External, Neo-Eclipse, Locked
   components:
     - type: ContainerFill
       containers:
-        board: [ DoorElectronicsBlackstar ]
+        board: [ DoorElectronicsNeoEclipse ]
     - type: Wires
-      layoutId: AirlockBlackstar
+      layoutId: AirlockNeoEclipse
 
 - type: entity
   parent: AirlockExternalGlass
-  id: AirlockExternalGlassBlackstarLocked
-  suffix: Glass, External, Blackstar, Locked
+  id: AirlockExternalGlassNeoEclipseLocked
+  suffix: Glass, External, Neo-Eclipse, Locked
   components:
     - type: ContainerFill
       containers:
-        board: [ DoorElectronicsBlackstar ]
+        board: [ DoorElectronicsNeoEclipse ]
     - type: Wires
-      layoutId: AirlockBlackstar
+      layoutId: AirlockNeoEclipse
 
 - type: entity
   parent: AirlockShuttle
-  id: AirlockShuttleBlackstarLocked
-  suffix: Docking, Blackstar, Locked
+  id: AirlockShuttleNeoEclipseLocked
+  suffix: Docking, Neo-Eclipse, Locked
   components:
     - type: ContainerFill
       containers:
-        board: [ DoorElectronicsBlackstar ]
+        board: [ DoorElectronicsNeoEclipse ]
     - type: Wires
-      layoutId: AirlockBlackstar
+      layoutId: AirlockNeoEclipse
 
 - type: entity
   parent: AirlockGlassShuttle
-  id: AirlockGlassShuttleBlackstarLocked
-  suffix: Glass, Docking, Blackstar, Locked
+  id: AirlockGlassShuttleNeoEclipseLocked
+  suffix: Glass, Docking, Neo-Eclipse, Locked
   components:
     - type: ContainerFill
       containers:
-        board: [ DoorElectronicsBlackstar ]
+        board: [ DoorElectronicsNeoEclipse ]
     - type: Wires
-      layoutId: AirlockBlackstar
+      layoutId: AirlockNeoEclipse
 
 - type: entity
   parent: HighSecDoor
-  id: HighSecBlackstarLocked
-  suffix: Blackstar, Locked
+  id: HighSecNeoEclipseLocked
+  suffix: Neo-Eclipse, Locked
   components:
     - type: ContainerFill
       containers:
-        board: [ DoorElectronicsBlackstar ]
+        board: [ DoorElectronicsNeoEclipse ]
 
 #Visitors
 - type: entity

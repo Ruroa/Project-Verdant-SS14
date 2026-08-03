@@ -19,6 +19,13 @@ namespace Content.Shared.Kitchen.Components;
 public sealed partial class KitchenSpikeComponent : Component
 {
     /// <summary>
+    /// Whether this fixture acts as a butchering table instead of a meat spike.
+    /// Tables only accept dead entities with TableButcherableComponent and do not damage stored carcasses.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ButcheringTable;
+
+    /// <summary>
     /// Default sound to play when the victim is hooked or unhooked.
     /// </summary>
     private static readonly ProtoId<SoundCollectionPrototype> DefaultSpike = new("Spike");
@@ -112,6 +119,13 @@ public sealed partial class KitchenSpikeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan UnhookDelay = TimeSpan.FromSeconds(10);
+
+    /// <summary>
+    /// Base time required for one butchering cut when this fixture is a butchering table.
+    /// The sharp tool's delay modifier is still applied.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan TableButcherDelay = TimeSpan.FromSeconds(4);
 
     /// <summary>
     /// Time that it will take to butcher the victim while they are alive.

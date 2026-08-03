@@ -143,14 +143,14 @@
     - type: AccessReader
       access: [["Wizard"]]
 
-#Blackstar
+# Neo-Eclipse
 - type: entity
   parent: DoorElectronics
-  id: DoorElectronicsBlackstar
-  suffix: Blackstar, Locked
+  id: DoorElectronicsNeoEclipse
+  suffix: Neo-Eclipse, Locked
   components:
     - type: AccessReader
-      access: [["Blackstar"]]
+      access: [["NeoEclipse"]]
 
 #Visitor
 - type: entity

@@ -66,8 +66,8 @@
   name: id-card-access-level-communist
 
 - type: accessLevel
-  id: Blackstar
-  name: id-card-access-level-blackstar
+  id: NeoEclipse
+  name: id-card-access-level-neo-eclipse
 
 - type: accessGroup
   id: Misc
@@ -81,7 +81,7 @@
   - Communist
   - Wizard
   - Pirate
-  - Blackstar
+  - NeoEclipse
   - MedTak
   - Casino
   - Visitor

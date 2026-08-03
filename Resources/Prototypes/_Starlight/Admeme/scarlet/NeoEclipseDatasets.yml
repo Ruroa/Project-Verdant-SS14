@@ -1,0 +1,17 @@
+- type: localizedDataset
+  id: NamesNeoEclipseAgentLast
+  values:
+    prefix: names-neo-eclipse-agent-last-dataset-
+    count: 25
+
+- type: localizedDataset
+  id: NamesNeoEclipseOperativeLast
+  values:
+    prefix: names-neo-eclipse-operative-last-dataset-
+    count: 25
+
+- type: localizedDataset
+  id: NamesNeoEclipseEnforcerLast
+  values:
+    prefix: names-neo-eclipse-enforcer-last-dataset-
+    count: 25

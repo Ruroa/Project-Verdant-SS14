@@ -1,14 +1,14 @@
-# Blackstar Mercenary Turret
+# Neo-Eclipse sentry turret
 - type: entity
   parent: [BaseWeaponBallisticTurret, BaseMajorContraband]
-  id: WeaponTurretBlackstar
-  name: Blackstar sentry turret
-  description: A high-cycle ballistic auto-turret deployed by Blackstar mercenary operatives.
-  suffix: Blackstar
+  id: WeaponTurretNeoEclipse
+  name: Neo-Eclipse sentry turret
+  description: A high-cycle ballistic auto-turret deployed to secure Neo-Eclipse operations and purge zones.
+  suffix: Neo-Eclipse
   components:
   - type: NpcFactionMember
     factions:
-    - Blackstar
+    - NeoEclipse
   - type: Gun
     fireRate: 3.5
     selectedMode: FullAuto

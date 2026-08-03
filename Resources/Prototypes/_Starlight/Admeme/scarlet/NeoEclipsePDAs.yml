@@ -1,0 +1,80 @@
+# Neo-Eclipse PDAs
+
+- type: entity
+  parent: BasePDA
+  id: NeoEclipseCommanderPDA
+  name: Neo-Eclipse Commander PDA
+  description: Every order serves the completion of the Eclipse Project.
+  components:
+    - type: Pda
+      id: NeoEclipseCommanderIDCard
+    - type: PdaBorderColor
+      borderColor: "#1a1a1a"
+      accentHColor: "#C0A020"
+
+- type: entity
+  parent: BasePDA
+  id: NeoEclipseOverseerPDA
+  name: Neo-Eclipse Overseer PDA
+  description: Containment is temporary. Eradication is final.
+  components:
+    - type: Pda
+      id: NeoEclipseOverseerIDCard
+    - type: PdaBorderColor
+      borderColor: "#1a1a1a"
+      accentHColor: "#888888"
+
+- type: entity
+  parent: BasePDA
+  id: NeoEclipseHandlerPDA
+  name: Neo-Eclipse Handler PDA
+  description: Ensure every agent follows the directive.
+  components:
+    - type: Pda
+      id: NeoEclipseHandlerIDCard
+    - type: PdaBorderColor
+      borderColor: "#1a1a1a"
+
+- type: entity
+  parent: BasePDA
+  id: NeoEclipseAgentPDA
+  name: Neo-Eclipse Agent PDA
+  description: Precision decides what survives the purge.
+  components:
+    - type: Pda
+      id: NeoEclipseAgentIDCard
+    - type: PdaBorderColor
+      borderColor: "#1a1a1a"
+
+- type: entity
+  parent: BasePDA
+  id: NeoEclipseOperativePDA
+  name: Neo-Eclipse Operative PDA
+  description: The mission continues, regardless of cost.
+  components:
+    - type: Pda
+      id: NeoEclipseOperativeIDCard
+    - type: PdaBorderColor
+      borderColor: "#1a1a1a"
+
+- type: entity
+  parent: BasePDA
+  id: NeoEclipseEnforcerPDA
+  name: Neo-Eclipse Enforcer PDA
+  description: Doctrine permits no hesitation and no dissent.
+  components:
+    - type: Pda
+      id: NeoEclipseEnforcerIDCard
+    - type: PdaBorderColor
+      borderColor: "#1a1a1a"
+
+- type: entity
+  parent: BasePDA
+  id: NeoEclipseInitiatePDA
+  name: Neo-Eclipse Initiate PDA
+  description: Prove your devotion. Complete the directive.
+  components:
+    - type: Pda
+      id: NeoEclipseInitiateIDCard
+    - type: PdaBorderColor
+      borderColor: "#1a1a1a"

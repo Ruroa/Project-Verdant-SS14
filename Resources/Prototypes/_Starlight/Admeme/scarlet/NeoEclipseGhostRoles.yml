@@ -1,10 +1,10 @@
-# Blackstar Operative Ghost Role
-# Admin spawns RandomHumanoidSpawnerBlackstarOperative via the Spawn Entities panel.
+# Neo-Eclipse ghost roles
+# Admin spawns RandomHumanoidSpawnerNeoEclipseAgent via the Spawn Entities panel.
 # Ghosts claim the role and spawn fully equipped.
 
 - type: entity
-  id: RandomHumanoidSpawnerBlackstarOperative
-  name: Blackstar Dreadwalker
+  id: RandomHumanoidSpawnerNeoEclipseAgent
+  name: Neo-Eclipse Agent
   suffix: Admeme
   components:
   - type: Sprite
@@ -12,14 +12,14 @@
     state: icon
   - type: RandomMetadata
     nameSegments:
-    - NamesBlackstarLast
-    nameFormat: name-format-blackstar-dreadwalker
+    - NamesNeoEclipseAgentLast
+    nameFormat: name-format-neo-eclipse-agent
   - type: RandomHumanoidSpawner
-    settings: BlackstarOperative
+    settings: NeoEclipseAgent
 
 - type: entity
-  id: RandomHumanoidSpawnerBlackstarLegionnaire
-  name: Blackstar Legionnaire
+  id: RandomHumanoidSpawnerNeoEclipseOperative
+  name: Neo-Eclipse Operative
   suffix: Admeme
   components:
   - type: Sprite
@@ -27,14 +27,14 @@
     state: icon
   - type: RandomMetadata
     nameSegments:
-    - NamesBlackstarLegionnaireLast
-    nameFormat: name-format-blackstar-legionnaire
+    - NamesNeoEclipseOperativeLast
+    nameFormat: name-format-neo-eclipse-operative
   - type: RandomHumanoidSpawner
-    settings: BlackstarLegionnaire
+    settings: NeoEclipseOperative
 
 - type: entity
-  id: RandomHumanoidSpawnerBlackstarBlackguard
-  name: Blackstar Blackguard
+  id: RandomHumanoidSpawnerNeoEclipseEnforcer
+  name: Neo-Eclipse Enforcer
   suffix: Admeme
   components:
   - type: Sprite
@@ -42,29 +42,29 @@
     state: icon
   - type: RandomMetadata
     nameSegments:
-    - NamesBlackstarBlackguardLast
-    nameFormat: name-format-blackstar-blackguard
+    - NamesNeoEclipseEnforcerLast
+    nameFormat: name-format-neo-eclipse-enforcer
   - type: RandomHumanoidSpawner
-    settings: BlackstarBlackguardSettings
+    settings: NeoEclipseEnforcerSettings
 
 - type: entity
-  id: RandomHumanoidSpawnerBlackstarInitiate
-  name: Blackstar Initiate
+  id: RandomHumanoidSpawnerNeoEclipseInitiate
+  name: Neo-Eclipse Initiate
   suffix: Admeme
   components:
   - type: Sprite
     sprite: _Starlight/Admeme/Scarlet/wardlord.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: BlackstarInitiateSettings
+    settings: NeoEclipseInitiateSettings
 
 - type: randomHumanoidSettings
-  id: BlackstarOperative
+  id: NeoEclipseAgent
   parent: EventHumanoid
   components:
   - type: GhostRole
-    name: ghost-role-information-blackstar-operative-name
-    description: ghost-role-information-blackstar-operative-description
+    name: ghost-role-information-neo-eclipse-agent-name
+    description: ghost-role-information-neo-eclipse-agent-description
     rules: ghost-role-information-antagonist-rules
     raffle:
       settings: default
@@ -73,22 +73,22 @@
   - type: AntagImmune
   - type: NoObjectiveTarget
   - type: Loadout
-    prototypes: [ BlackstarOperativeGear ]
+    prototypes: [ NeoEclipseAgentGear ]
   - type: RandomMetadata
     nameSegments:
-    - NamesBlackstarLast
-    nameFormat: name-format-blackstar-dreadwalker
+    - NamesNeoEclipseAgentLast
+    nameFormat: name-format-neo-eclipse-agent
   - type: NpcFactionMember
     factions:
-    - Blackstar
+    - NeoEclipse
 
 - type: randomHumanoidSettings
-  id: BlackstarLegionnaire
+  id: NeoEclipseOperative
   parent: EventHumanoid
   components:
   - type: GhostRole
-    name: ghost-role-information-blackstar-legionnaire-name
-    description: ghost-role-information-blackstar-legionnaire-description
+    name: ghost-role-information-neo-eclipse-operative-name
+    description: ghost-role-information-neo-eclipse-operative-description
     rules: ghost-role-information-antagonist-rules
     raffle:
       settings: default
@@ -97,22 +97,22 @@
   - type: AntagImmune
   - type: NoObjectiveTarget
   - type: Loadout
-    prototypes: [ BlackstarLegionnaireGear ]
+    prototypes: [ NeoEclipseOperativeGear ]
   - type: RandomMetadata
     nameSegments:
-    - NamesBlackstarLegionnaireLast
-    nameFormat: name-format-blackstar-legionnaire
+    - NamesNeoEclipseOperativeLast
+    nameFormat: name-format-neo-eclipse-operative
   - type: NpcFactionMember
     factions:
-    - Blackstar
+    - NeoEclipse
 
 - type: randomHumanoidSettings
-  id: BlackstarBlackguardSettings
+  id: NeoEclipseEnforcerSettings
   parent: EventHumanoid
   components:
   - type: GhostRole
-    name: ghost-role-information-blackstar-blackguard-name
-    description: ghost-role-information-blackstar-blackguard-description
+    name: ghost-role-information-neo-eclipse-enforcer-name
+    description: ghost-role-information-neo-eclipse-enforcer-description
     rules: ghost-role-information-antagonist-rules
     raffle:
       settings: default
@@ -121,22 +121,22 @@
   - type: AntagImmune
   - type: NoObjectiveTarget
   - type: Loadout
-    prototypes: [ BlackstarBlackguardGear ]
+    prototypes: [ NeoEclipseEnforcerGear ]
   - type: RandomMetadata
     nameSegments:
-    - NamesBlackstarBlackguardLast
-    nameFormat: name-format-blackstar-blackguard
+    - NamesNeoEclipseEnforcerLast
+    nameFormat: name-format-neo-eclipse-enforcer
   - type: NpcFactionMember
     factions:
-    - Blackstar
+    - NeoEclipse
 
 - type: randomHumanoidSettings
-  id: BlackstarInitiateSettings
+  id: NeoEclipseInitiateSettings
   parent: EventHumanoid
   components:
   - type: GhostRole
-    name: ghost-role-information-blackstar-initiate-name
-    description: ghost-role-information-blackstar-initiate-description
+    name: ghost-role-information-neo-eclipse-initiate-name
+    description: ghost-role-information-neo-eclipse-initiate-description
     rules: ghost-role-information-antagonist-rules
     raffle:
       settings: default
@@ -145,26 +145,26 @@
   - type: AntagImmune
   - type: NoObjectiveTarget
   - type: Loadout
-    prototypes: [ BlackstarInitiateGear ]
+    prototypes: [ NeoEclipseInitiateGear ]
   - type: NpcFactionMember
     factions:
-    - Blackstar
+    - NeoEclipse
 
-# Dreadwalker — heavy combat, breach kit, high ammo load
+# Agent — heavy combat, breach kit, high ammo load
 - type: startingGear
-  id: BlackstarOperativeGear
+  id: NeoEclipseAgentGear
   equipment:
-    head: ClothingHeadHelmetBlackstar
+    head: ClothingHeadHelmetNeoEclipse
     mask: ClothingMaskGasSwat
-    outerClothing: ClothingOuterHardsuitBlackstar
+    outerClothing: ClothingOuterCombatSuitNeoEclipse
     jumpsuit: ClothingUniformJumpsuitColorBlack
     gloves: ClothingHandsGlovesCombat
     shoes: ClothingShoesBootsJackFilled
     back: ClothingBackpackSatchel
     belt: ClothingBeltMilitaryWebbing
-    id: BlackstarDreadwalkerPDA
-    ears: ClothingHeadsetAltBlackstar
-    eyes: ClothingEyesGlassesBlackstar
+    id: NeoEclipseAgentPDA
+    ears: ClothingHeadsetAltNeoEclipse
+    eyes: ClothingEyesGlassesNeoEclipse
     pocket1: WeaponTaser
     pocket2: PinpointerUniversal
     suitstorage: WeaponRiflePrometheus
@@ -193,22 +193,22 @@
     - Handcuffs
 
 # =============================================
-# Debug starting gear for all Blackstar ranks
+# Debug starting gear for all Neo-Eclipse ranks
 # =============================================
 
-# Legion Commander — admiral uniform, sabre sheath, no outer armor
+# Commander — admiral uniform, sabre sheath, no outer armor
 - type: startingGear
-  id: BlackstarLegionCommanderGear
+  id: NeoEclipseCommanderGear
   equipment:
-    head: ClothingHeadHatBlackstarLegionCommander
-    jumpsuit: ClothingUniformJumpsuitBlackstarLegionCommander
+    head: ClothingHeadHatNeoEclipseCommander
+    jumpsuit: ClothingUniformJumpsuitNeoEclipseCommander
     gloves: ClothingHandsSalvageMercGlovesCombat
     shoes: ClothingShoesBootsJackFilled
     back: ClothingBackpackSatchel
     belt: ClothingBeltSheathFilled
-    ears: ClothingHeadsetAltBlackstar
-    eyes: ClothingEyesGlassesBlackstar
-    id: BlackstarLegionCommanderPDA
+    ears: ClothingHeadsetAltNeoEclipse
+    eyes: ClothingEyesGlassesNeoEclipse
+    id: NeoEclipseCommanderPDA
     pocket1: PinpointerUniversal
     pocket2: WeaponTaser
   storage:
@@ -218,11 +218,11 @@
     - Brutepack
     - DrinkWaterBottleFull
 
-# High Legate — HoS beret, web vest, battle rifle, trench whistle
+# Overseer — HoS beret, web vest, battle rifle, trench whistle
 - type: startingGear
-  id: BlackstarHighLegateGear
+  id: NeoEclipseOverseerGear
   equipment:
-    head: ClothingHeadHatBeretBlackstarHighLegate
+    head: ClothingHeadHatBeretNeoEclipseOverseer
     neck: CommanderWhistle
     outerClothing: ClothingOuterVestWeb
     jumpsuit: ClothingUniformJumpsuitColorBlack
@@ -230,9 +230,9 @@
     shoes: ClothingShoesBootsJackFilled
     back: ClothingBackpackSatchel
     belt: ClothingBeltMilitaryWebbing
-    ears: ClothingHeadsetAltBlackstar
-    eyes: ClothingEyesGlassesBlackstar
-    id: BlackstarHighLegatePDA
+    ears: ClothingHeadsetAltNeoEclipse
+    eyes: ClothingEyesGlassesNeoEclipse
+    id: NeoEclipseOverseerPDA
     pocket1: WeaponTaser
     pocket2: PinpointerUniversal
     suitstorage: WeaponRiflePrometheus
@@ -251,11 +251,11 @@
     - GrenadeFlashBang
     - Handcuffs
 
-# Legate — corpsman beret, web vest, battle rifle, trench whistle
+# Handler — corpsman beret, web vest, battle rifle, trench whistle
 - type: startingGear
-  id: BlackstarLegateGear
+  id: NeoEclipseHandlerGear
   equipment:
-    head: ClothingHeadHatBeretBlackstarLegate
+    head: ClothingHeadHatBeretNeoEclipseHandler
     neck: CommanderWhistle
     outerClothing: ClothingOuterVestWeb
     jumpsuit: ClothingUniformJumpsuitColorBlack
@@ -263,9 +263,9 @@
     shoes: ClothingShoesBootsJackFilled
     back: ClothingBackpackSatchel
     belt: ClothingBeltMilitaryWebbing
-    ears: ClothingHeadsetAltBlackstar
-    eyes: ClothingEyesGlassesBlackstar
-    id: BlackstarLegatePDA
+    ears: ClothingHeadsetAltNeoEclipse
+    eyes: ClothingEyesGlassesNeoEclipse
+    id: NeoEclipseHandlerPDA
     pocket1: WeaponTaser
     pocket2: PinpointerUniversal
     suitstorage: WeaponRiflePrometheus
@@ -284,21 +284,21 @@
     - GrenadeFlashBang
     - Handcuffs
 
-# Legionnaire — general purpose combat kit
+# Operative — general purpose combat kit
 - type: startingGear
-  id: BlackstarLegionnaireGear
+  id: NeoEclipseOperativeGear
   equipment:
-    head: ClothingHeadHelmetBlackstar
+    head: ClothingHeadHelmetNeoEclipse
     mask: ClothingMaskNeckGaiter
-    outerClothing: ClothingOuterHardsuitBlackstar
+    outerClothing: ClothingOuterCombatSuitNeoEclipse
     jumpsuit: ClothingUniformJumpsuitColorBlack
     gloves: ClothingHandsGlovesCombat
     shoes: ClothingShoesBootsJackFilled
     back: ClothingBackpackSatchel
     belt: ClothingBeltMilitaryWebbing
-    ears: ClothingHeadsetAltBlackstar
-    eyes: ClothingEyesGlassesBlackstar
-    id: BlackstarLegionnairePDA
+    ears: ClothingHeadsetAltNeoEclipse
+    eyes: ClothingEyesGlassesNeoEclipse
+    id: NeoEclipseOperativePDA
     pocket1: WeaponTaser
     pocket2: PinpointerUniversal
     suitstorage: WeaponRiflePrometheus
@@ -317,9 +317,9 @@
     - MagazineRifleSP
     - Handcuffs
 
-# Blackguard — security / internal crew kit
+# Enforcer — security / internal crew kit
 - type: startingGear
-  id: BlackstarBlackguardGear
+  id: NeoEclipseEnforcerGear
   equipment:
     outerClothing: ClothingOuterArmorBasic
     jumpsuit: ClothingUniformJumpsuitColorBlack
@@ -327,9 +327,9 @@
     shoes: ClothingShoesBootsJackFilled
     back: ClothingBackpackSatchel
     belt: ClothingBeltMilitaryWebbing
-    ears: ClothingHeadsetAltBlackstar
-    eyes: ClothingEyesGlassesBlackstar
-    id: BlackstarBlackguardPDA
+    ears: ClothingHeadsetAltNeoEclipse
+    eyes: ClothingEyesGlassesNeoEclipse
+    id: NeoEclipseEnforcerPDA
     pocket1: WeaponTaser
     pocket2: Handcuffs
   storage:
@@ -343,7 +343,7 @@
 
 # Initiate — basic support kit
 - type: startingGear
-  id: BlackstarInitiateGear
+  id: NeoEclipseInitiateGear
   equipment:
     outerClothing: ClothingOuterArmorBasic
     jumpsuit: ClothingUniformJumpsuitColorBlack
@@ -351,12 +351,11 @@
     shoes: ClothingShoesBootsJackFilled
     back: ClothingBackpackSatchel
     belt: ClothingBeltUtilityFilled
-    ears: ClothingHeadsetAltBlackstar
-    id: BlackstarInitiatePDA
+    ears: ClothingHeadsetAltNeoEclipse
+    id: NeoEclipseInitiatePDA
   storage:
     back:
     - MedkitFilled
     - FlashlightSeclite
     - DoubleEmergencyOxygenTankFilled
-
 

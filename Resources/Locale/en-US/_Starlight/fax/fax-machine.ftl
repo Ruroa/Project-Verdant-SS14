@@ -19,7 +19,7 @@ fax-group-syndicate = Syndicate
 fax-group-itg = Interstellar Trade Guild
 
 # Event fax groups
-fax-group-blackstar = Blackstar
+fax-group-neo-eclipse = Neo-Eclipse
 fax-group-medtak = MedTak
 fax-group-ntsf = NTSF
 fax-group-tsf = TSF
