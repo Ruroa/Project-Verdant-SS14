@@ -8,6 +8,9 @@
       sprite: _PV/Objects/Misc/eclipse_id_cards.rsi
       layers:
         - state: EclipseL1
+        - sprite: &neo-eclipse-icon-rsi _Starlight/Interface/Misc/job_icons.rsi
+          offset: &neo-eclipse-icon-offset -0.09375, 0.0625
+          state: NeoEclipse
     - type: IdCard
       jobTitle: job-name-neo-eclipse
       jobIcon: JobIconNeoEclipse
@@ -24,6 +27,9 @@
       sprite: _PV/Objects/Misc/eclipse_id_cards.rsi
       layers:
         - state: EclipseL3
+        - sprite: *neo-eclipse-icon-rsi
+          offset: *neo-eclipse-icon-offset
+          state: NeoEclipse
     - type: IdCard
       jobTitle: job-name-neo-eclipse-commander
       jobIcon: JobIconNeoEclipseCommander
@@ -40,6 +46,9 @@
       sprite: _PV/Objects/Misc/eclipse_id_cards.rsi
       layers:
         - state: EclipseL2
+        - sprite: *neo-eclipse-icon-rsi
+          offset: *neo-eclipse-icon-offset
+          state: NeoEclipse
     - type: IdCard
       jobTitle: job-name-neo-eclipse-overseer
       jobIcon: JobIconNeoEclipseOverseer
@@ -56,6 +65,9 @@
       sprite: _PV/Objects/Misc/eclipse_id_cards.rsi
       layers:
         - state: EclipseL2
+        - sprite: *neo-eclipse-icon-rsi
+          offset: *neo-eclipse-icon-offset
+          state: NeoEclipse
     - type: IdCard
       jobTitle: job-name-neo-eclipse-handler
       jobIcon: JobIconNeoEclipseHandler
