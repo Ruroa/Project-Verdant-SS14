@@ -126,7 +126,7 @@ public sealed class TerraformerSystem : EntitySystem
             {
                 terraformer.Accumulator = 0f;
 
-                if (TryTerraformOneTile(terraformer, xform))
+                if (TryTerraformOneTile(terraformer, xform, out var reachedTarget) && reachedTarget)
                 {
                     terraformer.TilesTerraformed++;
                     AwardSciencePoints(uid, terraformer);
@@ -581,8 +581,13 @@ public sealed class TerraformerSystem : EntitySystem
         return false;
     }
 
-    private bool TryTerraformOneTile(TerraformerComponent terraformer, TransformComponent xform)
+    private bool TryTerraformOneTile(
+        TerraformerComponent terraformer,
+        TransformComponent xform,
+        out bool reachedTarget)
     {
+        reachedTarget = false;
+
         if (xform.GridUid == null)
             return false;
 
@@ -592,13 +597,16 @@ public sealed class TerraformerSystem : EntitySystem
             return false;
 
         var validTiles = new List<TileRef>();
+        var intermediateTile = _tileDefinition[terraformer.IntermediateTile];
         var targetTile = _tileDefinition[terraformer.TargetTile];
 
         foreach (var tile in GetTilesInRadius(gridUid, grid, xform.Coordinates, terraformer.Radius))
         {
             var tileDefinition = _tileDefinition[tile.Tile.TypeId];
+            var isSourceTile = terraformer.SourceTiles.Contains(tileDefinition.ID);
+            var isIntermediateTile = tileDefinition.ID == terraformer.IntermediateTile;
 
-            if (!terraformer.SourceTiles.Contains(tileDefinition.ID))
+            if (!isSourceTile && !isIntermediateTile)
                 continue;
 
             if (tile.Tile.TypeId == targetTile.TileId)
@@ -611,8 +619,13 @@ public sealed class TerraformerSystem : EntitySystem
             return false;
 
         var selectedTile = _random.Pick(validTiles);
+        var selectedDefinition = _tileDefinition[selectedTile.Tile.TypeId];
+        var nextTile = terraformer.SourceTiles.Contains(selectedDefinition.ID)
+            ? intermediateTile
+            : targetTile;
 
-        _map.SetTile(gridUid, grid, selectedTile.GridIndices, new Tile(targetTile.TileId));
+        _map.SetTile(gridUid, grid, selectedTile.GridIndices, new Tile(nextTile.TileId));
+        reachedTarget = nextTile.TileId == targetTile.TileId;
 
         return true;
     }
