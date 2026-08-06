@@ -67,6 +67,7 @@
     tileConvertCooldown: 2
     sourceTiles:
     - FloorAsteroidSand
+    intermediateTile: FloorDirt
     targetTile: FloorGrass
     atmosCooldown: 0.5
     targetPressure: 101.325
@@ -183,6 +184,7 @@
     tileConvertCooldown: 1.5
     sourceTiles:
     - FloorAsteroidSand
+    intermediateTile: FloorDirt
     targetTile: FloorGrass
     atmosCooldown: 0.5
     targetPressure: 101.325
@@ -299,6 +301,7 @@
     tileConvertCooldown: 1
     sourceTiles:
     - FloorAsteroidSand
+    intermediateTile: FloorDirt
     targetTile: FloorGrass
     atmosCooldown: 0.5
     targetPressure: 101.325

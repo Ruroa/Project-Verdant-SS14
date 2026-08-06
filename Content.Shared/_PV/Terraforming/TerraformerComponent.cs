@@ -47,6 +47,12 @@ public sealed partial class TerraformerComponent : Component
     [DataField]
     public List<string> SourceTiles = new();
 
+    /// <summary>
+    /// Tile used as the visible transition between barren terrain and the final terraformed tile.
+    /// </summary>
+    [DataField]
+    public string IntermediateTile = "FloorDirt";
+
     [DataField]
     public string TargetTile = "FloorGrass";
 
