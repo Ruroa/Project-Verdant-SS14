@@ -178,8 +178,8 @@ namespace Content.Client.Lobby.UI
             _allowExploitables = _cfgManager.GetCVar(StarlightCCVars.ExploitableSecrets);
             _allowRPNotes = _cfgManager.GetCVar(StarlightCCVars.OOCNotes);
 
-            OOCInfoTab.Visible = _allowRPNotes;
-            ICInfoTab.Visible = _allowFlavorText || _allowExploitables || _allowCharacterSecrets;
+            Robust.Client.UserInterface.Controls.TabContainer.SetTabVisible(OOCInfoTab, _allowRPNotes);
+            Robust.Client.UserInterface.Controls.TabContainer.SetTabVisible(ICInfoTab, _allowFlavorText || _allowExploitables || _allowCharacterSecrets);
             //end starlight
 
             ImportButton.OnPressed += args =>
@@ -698,8 +698,8 @@ namespace Content.Client.Lobby.UI
             _allowExploitables = _cfgManager.GetCVar(StarlightCCVars.ExploitableSecrets);
             _allowRPNotes = _cfgManager.GetCVar(StarlightCCVars.OOCNotes);
 
-            ICInfoTab.Visible = _allowFlavorText || _allowExploitables || _allowCharacterSecrets;
-            OOCInfoTab.Visible = _allowRPNotes;
+            Robust.Client.UserInterface.Controls.TabContainer.SetTabVisible(ICInfoTab, _allowFlavorText || _allowExploitables || _allowCharacterSecrets);
+            Robust.Client.UserInterface.Controls.TabContainer.SetTabVisible(OOCInfoTab, _allowRPNotes);
 
             ICInfoEditor.Physical.Visible = _allowFlavorText;
             ICInfoEditor.Personality.Visible = _allowFlavorText;
