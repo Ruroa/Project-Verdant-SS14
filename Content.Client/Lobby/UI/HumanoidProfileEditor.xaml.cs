@@ -178,8 +178,8 @@ namespace Content.Client.Lobby.UI
             _allowExploitables = _cfgManager.GetCVar(StarlightCCVars.ExploitableSecrets);
             _allowRPNotes = _cfgManager.GetCVar(StarlightCCVars.OOCNotes);
 
-            OOCInfoTab.Visible = _allowRPNotes;
-            ICInfoTab.Visible = _allowFlavorText || _allowExploitables || _allowCharacterSecrets;
+            Robust.Client.UserInterface.Controls.TabContainer.SetTabVisible(OOCInfoTab, _allowRPNotes);
+            Robust.Client.UserInterface.Controls.TabContainer.SetTabVisible(ICInfoTab, _allowFlavorText || _allowExploitables || _allowCharacterSecrets);
             //end starlight
 
             ImportButton.OnPressed += args =>
@@ -693,18 +693,20 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshCharacterInfo()
         {
-            if (ICInfoEditor.VisibleInTree)
-            {
-                ICInfoEditor.Physical.Visible = _allowFlavorText;
-                ICInfoEditor.Personality.Visible = _allowFlavorText;
-                ICInfoEditor.Secrets.Visible = _allowCharacterSecrets;
-                ICInfoEditor.Exploitable.Visible = _allowCharacterSecrets;
-            }
-            if (OOCInfoEditor.VisibleInTree)
-            {
-                OOCInfoEditor.OOCNotes.Visible = _allowRPNotes;
-                OOCInfoEditor.PersonalNotes.Visible = _allowRPNotes;
-            }
+            _allowFlavorText = _cfgManager.GetCVar(CCVars.FlavorText);
+            _allowCharacterSecrets = _cfgManager.GetCVar(StarlightCCVars.ICSecrets);
+            _allowExploitables = _cfgManager.GetCVar(StarlightCCVars.ExploitableSecrets);
+            _allowRPNotes = _cfgManager.GetCVar(StarlightCCVars.OOCNotes);
+
+            Robust.Client.UserInterface.Controls.TabContainer.SetTabVisible(ICInfoTab, _allowFlavorText || _allowExploitables || _allowCharacterSecrets);
+            Robust.Client.UserInterface.Controls.TabContainer.SetTabVisible(OOCInfoTab, _allowRPNotes);
+
+            ICInfoEditor.Physical.Visible = _allowFlavorText;
+            ICInfoEditor.Personality.Visible = _allowFlavorText;
+            ICInfoEditor.Secrets.Visible = _allowCharacterSecrets;
+            ICInfoEditor.Exploitable.Visible = _allowExploitables;
+            OOCInfoEditor.OOCNotes.Visible = _allowRPNotes;
+            OOCInfoEditor.PersonalNotes.Visible = _allowRPNotes;
         }
 
         // Begin Starlight - Traits Integration
@@ -1735,8 +1737,6 @@ namespace Content.Client.Lobby.UI
 
         private void UpdateCharacterInfoEditorText()
         {
-            if (!_allowFlavorText)
-                return;
             ICInfoEditor.PhysicalDescInput.TextRope = new Rope.Leaf(Profile?.PhysicalDescription ?? "");
             ICInfoEditor.PersonalityDescInput.TextRope = new Rope.Leaf(Profile?.PersonalityDescription ?? "");
             ICInfoEditor.ExploitableInput.TextRope = new Rope.Leaf(Profile?.ExploitableInfo ?? "");
@@ -2116,4 +2116,3 @@ namespace Content.Client.Lobby.UI
         }
     }
 }
-

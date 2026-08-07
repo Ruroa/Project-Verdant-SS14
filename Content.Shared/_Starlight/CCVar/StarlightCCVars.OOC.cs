@@ -8,5 +8,5 @@ public sealed partial class StarlightCCVars
     ///     Allow Roleplaying Notes, both public and personal
     /// </summary>
     public static readonly CVarDef<bool> OOCNotes =
-        CVarDef.Create("ooc.rp_notes", false, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("ooc.rp_notes", true, CVar.SERVER | CVar.REPLICATED);
 }

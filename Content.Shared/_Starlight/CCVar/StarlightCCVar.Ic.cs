@@ -14,13 +14,13 @@ public sealed partial class StarlightCCVars
     ///     Allows IC Secrets (flavor text only visible to the player possessing the character)
     /// </summary>
     public static readonly CVarDef<bool> ICSecrets =
-        CVarDef.Create("ic.secrets_text", false, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("ic.secrets_text", true, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     Allows IC Exploitables (flavor text only visible to the player possessing the player and certain antags)
     /// </summary>
     public static readonly CVarDef<bool> ExploitableSecrets =
-        CVarDef.Create("ic.secrets_exploitable", false, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("ic.secrets_exploitable", true, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// Whether or not players can open character inspect windows on other players
