@@ -508,6 +508,8 @@ namespace Content.Shared.Preferences
         {
             if (maybeOther is not HumanoidCharacterProfile other) return false;
             if (Name != other.Name) return false;
+            if (Voice != other.Voice) return false;
+            if (SiliconVoice != other.SiliconVoice) return false;
             if (Age != other.Age) return false;
             if (Sex != other.Sex) return false;
             if (Gender != other.Gender) return false;
@@ -520,6 +522,12 @@ namespace Content.Shared.Preferences
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
             if (FlavorText != other.FlavorText) return false;
+            if (PersonalityDescription != other.PersonalityDescription) return false;
+            if (PersonalNotes != other.PersonalNotes) return false;
+            if (OOCNotes != other.OOCNotes) return false;
+            if (Secrets != other.Secrets) return false;
+            if (ExploitableInfo != other.ExploitableInfo) return false;
+            if (ForcedPrototype != other.ForcedPrototype) return false;
             if (Enabled != other.Enabled) return false;
             if (!SpeciesLoadoutEquals(SpeciesLoadout, other.SpeciesLoadout)) return false; // Far Horizons
             // Cosmatic Drift Record System-start
@@ -541,6 +549,8 @@ namespace Content.Shared.Preferences
         {
             if (maybeOther is not HumanoidCharacterProfile other) throw new DebugAssertException($"other is not HumanoidCharacterProfile it is {maybeOther.GetType()}");
             if (Name != other.Name) throw new DebugAssertException($"Name doesn't match expected '{Name}' got '{other.Name}'");
+            if (Voice != other.Voice) throw new DebugAssertException($"Voice doesn't match expected '{Voice}' got '{other.Voice}'");
+            if (SiliconVoice != other.SiliconVoice) throw new DebugAssertException($"SiliconVoice doesn't match expected '{SiliconVoice}' got '{other.SiliconVoice}'");
             if (Age != other.Age) throw new DebugAssertException($"Age doesn't match expected '{Age}' got '{other.Age}'");
             if (Sex != other.Sex) throw new DebugAssertException($"Sex doesn't match expected '{Sex}' got '{other.Sex}'");
             if (Gender != other.Gender) throw new DebugAssertException($"Gender doesn't match expected '{Gender}' got '{other.Gender}'");;
@@ -553,6 +563,12 @@ namespace Content.Shared.Preferences
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) throw new DebugAssertException($"_traitPreferences doesn't match expected '{_traitPreferences}' got '{other._traitPreferences}'");
             if (!Loadouts.SequenceEqual(other.Loadouts))  throw new DebugAssertException($"Loadouts doesn't match expected '{Loadouts}' got '{other.Loadouts}'");
             if (FlavorText != other.FlavorText) throw new DebugAssertException($"FlavorText doesn't match expected '{FlavorText}' got '{other.FlavorText}'");
+            if (PersonalityDescription != other.PersonalityDescription) throw new DebugAssertException($"PersonalityDescription doesn't match expected '{PersonalityDescription}' got '{other.PersonalityDescription}'");
+            if (PersonalNotes != other.PersonalNotes) throw new DebugAssertException($"PersonalNotes doesn't match expected '{PersonalNotes}' got '{other.PersonalNotes}'");
+            if (OOCNotes != other.OOCNotes) throw new DebugAssertException($"OOCNotes doesn't match expected '{OOCNotes}' got '{other.OOCNotes}'");
+            if (Secrets != other.Secrets) throw new DebugAssertException($"Secrets doesn't match expected '{Secrets}' got '{other.Secrets}'");
+            if (ExploitableInfo != other.ExploitableInfo) throw new DebugAssertException($"ExploitableInfo doesn't match expected '{ExploitableInfo}' got '{other.ExploitableInfo}'");
+            if (ForcedPrototype != other.ForcedPrototype) throw new DebugAssertException($"ForcedPrototype doesn't match expected '{ForcedPrototype}' got '{other.ForcedPrototype}'");
             if (Enabled != other.Enabled) throw new DebugAssertException($"Enabled doesn't match expected '{Enabled}' got '{other.Enabled}'");
             if (!SpeciesLoadoutEquals(SpeciesLoadout, other.SpeciesLoadout)) throw new DebugAssertException($"SpeciesLoadout doesn't match"); // Far Horizons
             // Cosmatic Drift Record System-start
@@ -842,9 +858,17 @@ namespace Content.Shared.Preferences
             hashCode.Add(_traitPreferences);
             hashCode.Add(_loadouts);
             hashCode.Add(Name);
+            hashCode.Add(Voice);
+            hashCode.Add(SiliconVoice);
             hashCode.Add(FlavorText);
+            hashCode.Add(PersonalityDescription);
+            hashCode.Add(PersonalNotes);
+            hashCode.Add(OOCNotes);
+            hashCode.Add(Secrets);
+            hashCode.Add(ExploitableInfo);
             hashCode.Add(Species);
             hashCode.Add(CustomSpecieName); // Starlight
+            hashCode.Add(ForcedPrototype);
             hashCode.Add(Age);
             hashCode.Add((int)Sex);
             hashCode.Add((int)Gender);
