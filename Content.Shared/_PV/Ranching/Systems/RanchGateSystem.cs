@@ -65,11 +65,28 @@ public sealed class RanchGateSystem : EntitySystem
             return;
 
         var isAnimal = _whitelist.IsValid(entity.Comp.AnimalWhitelist, args.OtherEntity);
-        var isBeingPulled = TryComp(args.OtherEntity, out PullableComponent? pullable) && pullable.BeingPulled;
+        var isBeingPulled = IsActivelyPulled(args.OtherEntity);
 
         // Cancelling means there is no collision. Everyone can cross an open gate except
         // configured livestock that is not actively being dragged.
         if (!isAnimal || isBeingPulled)
             args.Cancelled = true;
+    }
+
+    private bool IsActivelyPulled(EntityUid animal)
+    {
+        // Pull state is networked on both participants. Accept either side so prediction does not
+        // temporarily treat a dragged animal as free-roaming while one component catches up.
+        if (TryComp(animal, out PullableComponent? pullable) && pullable.Puller != null)
+            return true;
+
+        var query = EntityQueryEnumerator<PullerComponent>();
+        while (query.MoveNext(out _, out var puller))
+        {
+            if (puller.Pulling == animal)
+                return true;
+        }
+
+        return false;
     }
 }
