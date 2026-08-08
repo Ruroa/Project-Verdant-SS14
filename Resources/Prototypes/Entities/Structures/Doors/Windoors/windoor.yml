@@ -92,6 +92,40 @@
 
 - type: entity
   parent: WindoorServiceLocked
+  id: WindoorRanchingLocked
+  suffix: Ranching Gate, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRanching ]
+  - type: RanchGate
+    animalWhitelist:
+      tags:
+      - Chicken
+      - Duck
+      - Cow
+      - Goat
+      - Pig
+
+- type: entity
+  parent: WindoorSecureServiceLocked
+  id: WindoorSecureRanchingLocked
+  suffix: Ranching Gate, Locked, Reinforced
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRanching ]
+  - type: RanchGate
+    animalWhitelist:
+      tags:
+      - Chicken
+      - Duck
+      - Cow
+      - Goat
+      - Pig
+
+- type: entity
+  parent: WindoorServiceLocked
   id: WindoorJanitorLocked
   suffix: Janitor, Locked
   components:

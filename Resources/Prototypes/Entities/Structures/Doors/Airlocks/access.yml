@@ -94,6 +94,15 @@
       board: [ DoorElectronicsHydroponics ]
 
 - type: entity
+  parent: AirlockHydroponics
+  id: AirlockRanchingLocked
+  suffix: Ranching, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRanching ]
+
+- type: entity
   parent: AirlockExternal
   id: AirlockExternalLocked
   suffix: External, Locked
@@ -603,6 +612,15 @@
       board: [ DoorElectronicsHydroponics ]
 
 - type: entity
+  parent: AirlockHydroponicsGlass
+  id: AirlockRanchingGlassLocked
+  suffix: Ranching, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRanching ]
+
+- type: entity
   parent: AirlockServiceGlassLocked
   id: AirlockChapelGlassLocked
   suffix: Shrine, Locked # Starlight: Chapel -> Shrine
@@ -961,6 +979,14 @@
 - type: entity
   parent: AirlockHydroponicsLocked
   id: AirlockMaintHydroLocked
+  components:
+  - type: Sprite
+    sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+
+- type: entity
+  parent: AirlockRanchingLocked
+  id: AirlockMaintRanchingLocked
+  suffix: Ranching, Locked
   components:
   - type: Sprite
     sprite: Structures/Doors/Airlocks/Standard/maint.rsi

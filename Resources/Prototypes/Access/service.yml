@@ -11,6 +11,10 @@
   name: id-card-access-level-hydroponics
 
 - type: accessLevel
+  id: Ranching
+  name: id-card-access-level-ranching
+
+- type: accessLevel
   id: Service
   name: id-card-access-level-service
 
@@ -37,6 +41,7 @@
   - Bar
   - Kitchen
   - Hydroponics
+  - Ranching
   - Service
   - Janitor
   - Theatre

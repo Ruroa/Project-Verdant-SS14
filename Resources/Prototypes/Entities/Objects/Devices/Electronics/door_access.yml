@@ -50,6 +50,14 @@
 
 - type: entity
   parent: DoorElectronics
+  id: DoorElectronicsRanching
+  suffix: Ranching, Locked
+  components:
+  - type: AccessReader
+    access: [["Ranching"]]
+
+- type: entity
+  parent: DoorElectronics
   id: DoorElectronicsChapel
   suffix: Chapel, Locked
   components:
