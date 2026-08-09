@@ -1,0 +1,55 @@
+- type: entity
+  parent: FoodBase
+  id: PVAnimalFeed
+  name: animal feed
+  description: Compressed feed made from fresh produce. Its color reflects what went into it.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Specific/Ranching/Feed.rsi
+    layers:
+    - state: feed
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: Item
+    sprite: _PV/Objects/Specific/Ranching/Feed.rsi
+    size: Tiny
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    solutionName: food
+    maxFillLevels: 0
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+  - type: FlavorProfile
+    flavors:
+    - vegetables
+  - type: Tag
+    tags:
+    - Ruminant
+
+- type: entity
+  parent: BaseItem
+  id: PVAnimalAnalyzer
+  name: animal analyzer
+  description: A handheld scanner that displays an animal's food, water, age, and breeding status.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Specific/Ranching/animalanalyzer.rsi
+    layers:
+    - state: icon
+    - state: analyzer
+      shader: unshaded
+  - type: Item
+    sprite: _PV/Objects/Specific/Ranching/animalanalyzer.rsi
+    heldPrefix: analyzer
+    storedRotation: -90
+  - type: ActivatableUI
+    key: enum.AnimalAnalyzerUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.AnimalAnalyzerUiKey.Key:
+        type: AnimalAnalyzerBoundUserInterface
+  - type: AnimalAnalyzer

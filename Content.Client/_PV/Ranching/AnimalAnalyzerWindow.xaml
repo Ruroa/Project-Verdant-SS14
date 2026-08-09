@@ -1,0 +1,15 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    MinWidth="340" MinHeight="230">
+  <BoxContainer Orientation="Vertical" Margin="10">
+    <Label Name="AnimalName" StyleClasses="LabelHeading" Margin="0 0 0 8" />
+    <Label Text="Food" />
+    <ProgressBar Name="FoodBar" MinValue="0" MaxValue="100" MinHeight="22" />
+    <Label Name="FoodValue" Margin="0 0 0 6" />
+    <Label Text="Water" />
+    <ProgressBar Name="WaterBar" MinValue="0" MaxValue="100" MinHeight="22" />
+    <Label Name="WaterValue" Margin="0 0 0 8" />
+    <Label Name="LifeStage" />
+    <Label Name="BreedingStatus" />
+  </BoxContainer>
+</controls:FancyWindow>
