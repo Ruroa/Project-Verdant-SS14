@@ -1,31 +1,29 @@
 - type: entity
   parent: FoodBase
   id: PVAnimalFeed
-  name: animal feed
-  description: Compressed feed made from fresh produce. Its color reflects what went into it.
+  name: wheat animal feed
+  description: Compressed wheat feed for livestock. Feed made by a feed maker takes on the color of its produce.
   components:
   - type: Sprite
     sprite: _PV/Objects/Specific/Ranching/Feed.rsi
     layers:
     - state: feed
-      map: [ "enum.SolutionContainerLayers.Fill" ]
+      map: [ "enum.AnimalFeedVisualLayers.Feed" ]
+      color: "#D2B15F"
   - type: Item
     sprite: _PV/Objects/Specific/Ranching/Feed.rsi
     size: Tiny
-  - type: Appearance
-  - type: SolutionContainerVisuals
-    solutionName: food
-    maxFillLevels: 0
+  - type: AnimalFeed
   - type: SolutionContainerManager
     solutions:
       food:
         maxVol: 10
         reagents:
-        - ReagentId: Nutriment
+        - ReagentId: Flour
           Quantity: 10
   - type: FlavorProfile
     flavors:
-    - vegetables
+    - chalky
   - type: Tag
     tags:
     - Ruminant

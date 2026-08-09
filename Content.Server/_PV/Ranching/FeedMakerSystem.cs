@@ -2,7 +2,6 @@ using Content.Server.Botany.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared._PV.Ranching;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -12,7 +11,6 @@ namespace Content.Server._PV.Ranching;
 
 public sealed class FeedMakerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -31,7 +29,11 @@ public sealed class FeedMakerSystem : EntitySystem
         for (var i = 0; i < ent.Comp.FeedAmount; i++)
         {
             var feed = Spawn(ent.Comp.FeedPrototype, Transform(ent).Coordinates);
-            _appearance.SetData(feed, SolutionContainerVisuals.Color, color);
+            if (TryComp<AnimalFeedComponent>(feed, out var animalFeed))
+            {
+                animalFeed.Color = color;
+                Dirty(feed, animalFeed);
+            }
         }
 
         _popup.PopupClient(Loc.GetString("feed-maker-success", ("produce", args.Used)), ent, args.User, PopupType.Medium);
