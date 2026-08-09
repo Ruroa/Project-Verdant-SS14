@@ -1,4 +1,5 @@
 feed-maker-success = {$produce} is processed into animal feed.
+animal-feed-produced-name = {$produce} animal feed
 
 animal-analyzer-not-an-animal = The analyzer cannot find readable animal vitals.
 animal-analyzer-unknown = Unknown
