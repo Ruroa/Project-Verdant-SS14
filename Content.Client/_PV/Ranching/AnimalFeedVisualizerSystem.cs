@@ -11,11 +11,11 @@ public sealed class AnimalFeedVisualizerSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<AnimalFeedComponent, MapInitEvent>(OnVisualUpdate);
-        SubscribeLocalEvent<AnimalFeedComponent, ComponentHandleState>(OnVisualUpdate);
+        SubscribeLocalEvent<AnimalFeedComponent, AfterAutoHandleStateEvent>(OnVisualUpdate);
     }
 
     private void OnVisualUpdate(Entity<AnimalFeedComponent> ent, ref MapInitEvent args) => UpdateVisuals(ent);
-    private void OnVisualUpdate(Entity<AnimalFeedComponent> ent, ref ComponentHandleState args) => UpdateVisuals(ent);
+    private void OnVisualUpdate(Entity<AnimalFeedComponent> ent, ref AfterAutoHandleStateEvent args) => UpdateVisuals(ent);
 
     private void UpdateVisuals(Entity<AnimalFeedComponent> ent)
     {
