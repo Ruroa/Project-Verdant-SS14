@@ -1,4 +1,5 @@
 using Content.Server.Botany.Components;
+using Content.Server.Botany.Systems;
 using Content.Server.Power.EntitySystems;
 using Content.Shared._PV.Ranching;
 using Content.Shared.Chemistry.EntitySystems;
@@ -15,6 +16,7 @@ public sealed class FeedMakerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly BotanySystem _botany = default!;
 
     public override void Initialize() => SubscribeLocalEvent<FeedMakerComponent, InteractUsingEvent>(OnInteractUsing);
 
@@ -31,7 +33,12 @@ public sealed class FeedMakerSystem : EntitySystem
         if (produce.SeedId == "banana")
             color = Color.FromHex("#E8D34F");
 
-        var feedName = Loc.GetString("animal-feed-produced-name", ("produce", Name(args.Used)));
+        // Seed names describe the crop itself and avoid harvested-item suffixes such as "bushel".
+        var produceName = Name(args.Used);
+        if (_botany.TryGetSeed(produce, out var seed) && !string.IsNullOrWhiteSpace(seed.Name))
+            produceName = Loc.GetString(seed.Name);
+
+        var feedName = Loc.GetString("animal-feed-produced-name", ("produce", produceName));
 
         for (var i = 0; i < ent.Comp.FeedAmount; i++)
         {
