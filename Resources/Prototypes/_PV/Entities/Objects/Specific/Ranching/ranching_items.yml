@@ -1,15 +1,15 @@
 - type: entity
   parent: FoodBase
   id: PVAnimalFeed
-  name: wheat animal feed
-  description: Compressed wheat feed for livestock. Feed made by a feed maker takes on the color of its produce.
+  name: animal feed
+  description: Compressed feed for livestock. The standard variety is made from wheat.
   components:
   - type: Sprite
     sprite: _PV/Objects/Specific/Ranching/Feed.rsi
     layers:
     - state: feed
       map: [ "enum.AnimalFeedVisualLayers.Feed" ]
-      color: "#D2B15F"
+      color: white
   - type: Item
     sprite: _PV/Objects/Specific/Ranching/Feed.rsi
     size: Tiny
