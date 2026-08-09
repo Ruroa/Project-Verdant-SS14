@@ -21,7 +21,7 @@ public readonly record struct AnimalAnalyzerUiState(string Name, float FoodPerce
     string LifeStage, string BreedingStatus);
 
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
 public sealed partial class AnimalFeedComponent : Component
 {
     /// <summary>
