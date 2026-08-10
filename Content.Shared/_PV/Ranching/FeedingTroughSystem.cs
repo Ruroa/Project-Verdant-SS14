@@ -1,4 +1,6 @@
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Nutrition;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 
@@ -13,6 +15,10 @@ public sealed class FeedingTroughSystem : EntitySystem
     {
         SubscribeLocalEvent<FeedingTroughComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<FeedingTroughComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<FeedingTroughComponent, IngestedEvent>(OnFeedingTroughIngested,
+            after: [typeof(IngestionSystem)]);
+        SubscribeLocalEvent<WaterTroughComponent, IngestedEvent>(OnWaterTroughIngested,
+            after: [typeof(IngestionSystem)]);
     }
 
     private void OnMapInit(Entity<FeedingTroughComponent> ent, ref MapInitEvent args)
@@ -24,6 +30,18 @@ public sealed class FeedingTroughSystem : EntitySystem
     {
         if (args.SolutionId == FeedingTroughComponent.SolutionName)
             UpdateVisuals(ent.Owner);
+    }
+
+    private void OnFeedingTroughIngested(Entity<FeedingTroughComponent> ent, ref IngestedEvent args)
+    {
+        // Large troughs must not use Edible's normal "repeat until empty" behavior.
+        // Replanning lets the animal stop once its hunger or thirst is satisfied.
+        args.Repeat = false;
+    }
+
+    private void OnWaterTroughIngested(Entity<WaterTroughComponent> ent, ref IngestedEvent args)
+    {
+        args.Repeat = false;
     }
 
     private void UpdateVisuals(EntityUid uid)

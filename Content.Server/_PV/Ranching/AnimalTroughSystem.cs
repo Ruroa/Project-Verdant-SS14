@@ -11,6 +11,8 @@ namespace Content.Server._PV.Ranching;
 /// </summary>
 public sealed class AnimalTroughSystem : EntitySystem
 {
+    private const string NutrimentReagent = "Nutriment";
+
     [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -33,7 +35,7 @@ public sealed class AnimalTroughSystem : EntitySystem
             return;
         }
 
-        if (!_solutions.TryTransferSolution(troughEntity.Value, feed, feed.Volume))
+        if (!_solutions.TryAddReagent(troughEntity.Value, NutrimentReagent, feed.Volume))
             return;
 
         QueueDel(args.Used);
