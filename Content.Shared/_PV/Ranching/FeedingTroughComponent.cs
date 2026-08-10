@@ -6,14 +6,7 @@ namespace Content.Shared._PV.Ranching;
 [RegisterComponent]
 public sealed partial class FeedingTroughComponent : Component
 {
-    [DataField]
-    public float UseRange = 1.5f;
-
-    [DataField]
-    public TimeSpan UseCooldown = TimeSpan.FromSeconds(2);
-
-    [ViewVariables]
-    public TimeSpan NextUse;
+    public const string SolutionName = "food";
 }
 
 /// <summary>
@@ -23,19 +16,4 @@ public sealed partial class FeedingTroughComponent : Component
 public sealed partial class WaterTroughComponent : Component
 {
     public const string SolutionName = "trough";
-
-    [DataField]
-    public float UseRange = 1.5f;
-
-    [DataField]
-    public int DrinkAmount = 5;
-
-    [DataField]
-    public float ThirstPerUnit = 4f;
-
-    [DataField]
-    public TimeSpan UseCooldown = TimeSpan.FromSeconds(2);
-
-    [ViewVariables]
-    public TimeSpan NextUse;
 }
