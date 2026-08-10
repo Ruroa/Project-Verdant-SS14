@@ -16,6 +16,7 @@
   - type: StorageFillVisualizer
     maxFillLevels: 2
     fillBaseName: feeding-trough
+  - type: FeedingTrough
   - type: Storage
     grid:
     - 0,0,5,0
