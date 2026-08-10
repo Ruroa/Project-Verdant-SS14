@@ -1,0 +1,25 @@
+- type: parallax
+  id: PVOcean
+  layers:
+  # Keep the ocean fixed to the planet surface instead of behaving like a distant background.
+  - texture:
+      !type:ImageParallaxTextureSource
+      path: "/Textures/Parallaxes/land.png"
+    slowness: 0
+    scale: "2, 2"
+
+  # Static surface detail. This deliberately has no scrolling.
+  - texture:
+      !type:ImageParallaxTextureSource
+      path: "/Textures/Parallaxes/noise.png"
+    slowness: 0
+    scale: "2, 2"
+
+  layersLQ:
+  - texture:
+      !type:ImageParallaxTextureSource
+      path: "/Textures/Parallaxes/land.png"
+    slowness: 0
+    scale: "2, 2"
+
+  layersLQUseHQ: false
