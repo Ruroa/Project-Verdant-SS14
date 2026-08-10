@@ -1,0 +1,121 @@
+- type: entity
+  id: PVFeedingTrough
+  parent: BaseStructure
+  name: feeding trough
+  description: A livestock trough that holds up to six portions of animal feed.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Ranching/feeding-trough.rsi
+    snapCardinals: true
+    layers:
+    - state: feeding-trough-0
+      map: [ "enum.StorageFillLayers.Fill" ]
+  - type: Appearance
+  - type: StorageFillVisualizer
+    maxFillLevels: 2
+    fillBaseName: feeding-trough
+  - type: Storage
+    grid:
+    - 0,0,5,0
+    maxItemSize: Tiny
+    whitelist:
+      components:
+      - AnimalFeed
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: InteractionOutline
+  - type: Anchorable
+  - type: Pullable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.35,0.45,0.35"
+        density: 80
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: PVWaterTrough
+  parent: BaseStructure
+  name: water trough
+  description: A livestock trough capable of holding up to 200 units of water.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Ranching/water-trough.rsi
+    snapCardinals: true
+    layers:
+    - state: water-trough
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: water-trough-
+    emptySpriteName: water-trough
+    solutionName: trough
+    changeColor: false
+  - type: SolutionContainerManager
+    solutions:
+      trough:
+        maxVol: 200
+  - type: RefillableSolution
+    solution: trough
+  - type: DrainableSolution
+    solution: trough
+  - type: ExaminableSolution
+    solution: trough
+  - type: InteractionOutline
+  - type: Anchorable
+  - type: Pullable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.35,0.45,0.35"
+        density: 80
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpillBehavior
+        solution: trough
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

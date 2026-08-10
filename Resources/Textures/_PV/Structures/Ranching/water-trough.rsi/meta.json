@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "size": { "x": 32, "y": 32 },
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by Ruroa for Project Verdant",
+  "states": [
+    { "name": "water-trough" },
+    { "name": "water-trough-1" },
+    { "name": "water-trough-2" }
+  ]
+}
