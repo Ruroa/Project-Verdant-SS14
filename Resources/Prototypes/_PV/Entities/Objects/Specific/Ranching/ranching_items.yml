@@ -14,6 +14,9 @@
     sprite: _PV/Objects/Specific/Ranching/Feed.rsi
     size: Tiny
   - type: AnimalFeed
+  - type: Edible
+    transferAmount: 10
+    delay: 0.5
   - type: SolutionContainerManager
     solutions:
       food:

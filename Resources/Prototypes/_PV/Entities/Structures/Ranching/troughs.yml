@@ -91,6 +91,7 @@
     solution: trough
   - type: ExaminableSolution
     solution: trough
+  - type: WaterTrough
   - type: InteractionOutline
   - type: Anchorable
   - type: Pullable
