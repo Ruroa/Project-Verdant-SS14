@@ -40,7 +40,7 @@ public sealed class AnimalTroughSystem : EntitySystem
             if (_timing.CurTime < trough.NextUse || storage.Container.ContainedEntities.Count == 0)
                 continue;
 
-            foreach (var animal in _lookup.GetEntitiesInRange<NpcFactionMemberComponent>(uid, trough.UseRange))
+            foreach (var animal in _lookup.GetEntitiesInRange<NpcFactionMemberComponent>(Transform(uid).Coordinates, trough.UseRange))
             {
                 if (!IsLivingAnimal(animal.Owner) ||
                     !TryComp<HungerComponent>(animal.Owner, out var hunger) ||
@@ -77,7 +77,7 @@ public sealed class AnimalTroughSystem : EntitySystem
             if (availableWater <= FixedPoint2.Zero)
                 continue;
 
-            foreach (var animal in _lookup.GetEntitiesInRange<NpcFactionMemberComponent>(uid, trough.UseRange))
+            foreach (var animal in _lookup.GetEntitiesInRange<NpcFactionMemberComponent>(Transform(uid).Coordinates, trough.UseRange))
             {
                 if (!IsLivingAnimal(animal.Owner) ||
                     !TryComp<ThirstComponent>(animal.Owner, out var thirst) ||
