@@ -29,3 +29,41 @@
     sprite: _PV/Objects/Fun/Plushies/Randall_Hunt_plushie.rsi
     slots:
     - HEAD
+
+- type: entity
+  parent: BasePlushie
+  id: PVCinderPlushie
+  name: Cinder Plushie
+  description: An adorable stuffed toy resembling Cinder. Soft, feathery, and prone to indignant squawking.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Fun/Plushies/cinderplushie.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: _PV/Objects/Fun/Plushies/cinderplushie.rsi
+  - type: Clothing
+    quickEquip: false
+    sprite: _PV/Objects/Fun/Plushies/cinderplushie.rsi
+    slots:
+    - HEAD
+  - type: EmitSoundOnUse
+    sound: &CinderSquawk
+      collection: ResomiSquawk
+  - type: EmitSoundOnActivate
+    sound: *CinderSquawk
+  - type: MeleeWeapon
+    attackRate: 1
+    wideAnimationRotation: 180
+    soundHit:
+      collection: PVCinderPlushieScreams
+    damage:
+      types:
+        Blunt: 0
+    hidden: true
+
+- type: soundCollection
+  id: PVCinderPlushieScreams
+  files:
+  - /Audio/_Starlight/Effects/avali_scream.ogg
+  - /Audio/_Starlight/Voice/Resomi/resomi_scream.ogg

@@ -39,6 +39,7 @@
     - id: PlushieArachind
     - id: PlushiePenguin
     - id: PlushieVulp
+    - id: PVCinderPlushie
     - !type:GroupSelector
       children:
       - id: PlushieBee

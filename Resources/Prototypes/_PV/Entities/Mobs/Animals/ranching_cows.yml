@@ -1,0 +1,148 @@
+- type: entity
+  id: PVMobCalf
+  parent: MobCow
+  name: calf
+  description: A young cow with an entire world of mooing ahead of it.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _PV/Mobs/Animals/calf.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: calf
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: calf
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: Udder
+    reagentId: Milk
+    quantityPerUpdate: 0
+  - type: Reproductive
+    breedChance: 0
+    offspring:
+    - id: PVMobCalf
+
+- type: entity
+  id: PVMobClownCow
+  parent: MobCow
+  name: clown cow
+  description: A jolly cow whose milk has been replaced by something considerably more slippery.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _PV/Mobs/Animals/mutationcow.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: clowncow
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: clowncow
+      Critical:
+        Base: clowncow-dead
+      Dead:
+        Base: clowncow-dead
+  - type: SolutionContainerManager
+    solutions:
+      udder:
+        maxVol: 250
+        reagents:
+        - ReagentId: SpaceLube
+          Quantity: 30
+  - type: Udder
+    reagentId: SpaceLube
+    quantityPerUpdate: 25
+    growthDelay: 30
+  - type: Reproductive
+    partnerWhitelist:
+      tags:
+      - Cow
+    offspring:
+    - id: PVMobClownCow
+
+- type: entity
+  id: PVMobHellCow
+  parent: MobCow
+  name: hell cow
+  description: A dangerously warm cow whose udder produces volatile napalm.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _PV/Mobs/Animals/mutationcow.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: hellcow
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: hellcow
+      Critical:
+        Base: hellcow-dead
+      Dead:
+        Base: hellcow-dead
+  - type: SolutionContainerManager
+    solutions:
+      udder:
+        maxVol: 250
+        reagents:
+        - ReagentId: Napalm
+          Quantity: 30
+  - type: Udder
+    reagentId: Napalm
+    quantityPerUpdate: 25
+    growthDelay: 30
+  - type: Reproductive
+    partnerWhitelist:
+      tags:
+      - Cow
+    offspring:
+    - id: PVMobHellCow
+
+- type: entity
+  id: PVMobReagentCowBicaridine
+  parent: MobCow
+  name: reagent cow
+  suffix: Bicaridine
+  description: A genetically unstable cow whose colour and udder contents reflect its dominant reagent.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _PV/Mobs/Animals/mutationcow.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base", "enum.ReagentCowVisualLayers.Base"]
+      state: regrentcow
+      color: "#ffaa00"
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: regrentcow
+      Critical:
+        Base: regrentcow-dead
+      Dead:
+        Base: regrentcow-dead
+  - type: SolutionContainerManager
+    solutions:
+      udder:
+        maxVol: 250
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 30
+  - type: Udder
+    reagentId: Bicaridine
+    quantityPerUpdate: 25
+    growthDelay: 30
+  - type: ReagentCow
+    reagent: Bicaridine
+  - type: Reproductive
+    partnerWhitelist:
+      tags:
+      - Cow
+    offspring:
+    - id: PVMobReagentCowBicaridine
