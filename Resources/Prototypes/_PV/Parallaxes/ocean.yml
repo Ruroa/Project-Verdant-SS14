@@ -5,16 +5,16 @@
       !type:ImageParallaxTextureSource
       path: "/Textures/_Starlight/Parallaxes/shoreline_water.png"
     slowness: 0
-    scale: "2, 2"
-    scrolling: "0, 0"
+    scale: "1, 1"
+    scrolling: "0.025, 0"
     tiled: true
     shader: ""
   - texture:
       !type:ImageParallaxTextureSource
       path: "/Textures/_Starlight/Parallaxes/shoreline_water.png"
     slowness: 0
-    scale: "2, 2"
-    scrolling: "0, 0"
+    scale: "1, 1"
+    scrolling: "-0.025, 0"
     tiled: true
     shader: ""
 
@@ -23,8 +23,8 @@
       !type:ImageParallaxTextureSource
       path: "/Textures/_Starlight/Parallaxes/shoreline_water.png"
     slowness: 0
-    scale: "2, 2"
-    scrolling: "0, 0"
+    scale: "1, 1"
+    scrolling: "-0.025, 0"
     tiled: true
     shader: ""
 
