@@ -1,25 +1,31 @@
 - type: parallax
   id: PVOcean
   layers:
-  # Keep the ocean fixed to the planet surface instead of behaving like a distant background.
   - texture:
       !type:ImageParallaxTextureSource
-      path: "/Textures/Parallaxes/land.png"
+      path: "/Textures/_Starlight/Parallaxes/shoreline_water.png"
     slowness: 0
     scale: "2, 2"
-
-  # Static surface detail. This deliberately has no scrolling.
+    scrolling: "0, 0"
+    tiled: true
+    shader: ""
   - texture:
       !type:ImageParallaxTextureSource
-      path: "/Textures/Parallaxes/noise.png"
+      path: "/Textures/_Starlight/Parallaxes/shoreline_water.png"
     slowness: 0
     scale: "2, 2"
+    scrolling: "0, 0"
+    tiled: true
+    shader: ""
 
   layersLQ:
   - texture:
       !type:ImageParallaxTextureSource
-      path: "/Textures/Parallaxes/land.png"
+      path: "/Textures/_Starlight/Parallaxes/shoreline_water.png"
     slowness: 0
     scale: "2, 2"
+    scrolling: "0, 0"
+    tiled: true
+    shader: ""
 
   layersLQUseHQ: false
