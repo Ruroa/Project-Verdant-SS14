@@ -48,22 +48,27 @@
     slots:
     - HEAD
   - type: EmitSoundOnUse
-    sound: &CinderSquawk
-      collection: ResomiSquawk
+    sound: &CinderProtoVulpSound
+      collection: ProtoVulpHowl
+      params:
+        volume: -5
+  - type: EmitSoundOnLand
+    sound: *CinderProtoVulpSound
   - type: EmitSoundOnActivate
-    sound: *CinderSquawk
+    sound: *CinderProtoVulpSound
+  - type: EmitSoundOnTrigger
+    sound: *CinderProtoVulpSound
+  - type: Edible
+    requiresSpecialDigestion: true
+    useSound:
+      collection: ProtoVulpScreams
+      params:
+        volume: -5
   - type: MeleeWeapon
     attackRate: 1
     wideAnimationRotation: 180
-    soundHit:
-      collection: PVCinderPlushieScreams
+    soundHit: *CinderProtoVulpSound
     damage:
       types:
         Blunt: 0
     hidden: true
-
-- type: soundCollection
-  id: PVCinderPlushieScreams
-  files:
-  - /Audio/_Starlight/Effects/avali_scream.ogg
-  - /Audio/_Starlight/Voice/Resomi/resomi_scream.ogg
