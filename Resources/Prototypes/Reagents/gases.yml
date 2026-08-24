@@ -200,13 +200,13 @@
         - !type:MetabolizerTypeCondition
           type: [ Plant, Vox ]
           inverted: true
-        # Don't want people to get toxin damage from the gas they just
-        # exhaled, right?
+        # Project Verdant: CO2 remains dangerous through oxygen displacement,
+        # but its direct poison damage is reduced for the planet's atmosphere.
         ignoreResistances: true
         damage:
           types:
             Poison:
-              0.8
+              0.1
       - !type:Oxygenate # carbon dioxide displaces oxygen from the bloodstream, causing asphyxiation
         conditions:
         - !type:MetabolizerTypeCondition
