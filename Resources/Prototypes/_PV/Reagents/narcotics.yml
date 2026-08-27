@@ -1,0 +1,71 @@
+- type: reagent
+  id: Fentanyl
+  name: reagent-name-fentanyl
+  group: Narcotics
+  desc: reagent-desc-fentanyl
+  physicalDesc: reagent-physical-desc-syrupy
+  contrabandSeverity: Major
+  flavor: bitter
+  color: "#00E5FF"
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.25
+      effects:
+      # Gunsawians have the inverted response associated with Expies.
+      - !type:MovementSpeedModifier
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
+        walkSpeedModifier: 1.20
+        sprintSpeedModifier: 1.20
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
+        effectProto: StatusEffectDesoxyStamina
+        time: 2
+      - !type:PopupMessage
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
+        type: Local
+        visualType: Medium
+        messages:
+        - fentanyl-effect-great
+        - fentanyl-effect-happy
+        - fentanyl-effect-okay
+        probability: 0.15
+
+      # Everyone else receives a conventional sedating narcotic response.
+      - !type:MovementSpeedModifier
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
+          inverted: true
+        walkSpeedModifier: 0.85
+        sprintSpeedModifier: 0.85
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
+          inverted: true
+        effectProto: StatusEffectPainNumbness
+        time: 2
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
+          inverted: true
+        effectProto: StatusEffectDrowsiness
+        time: 2
+
+      # High doses remain dangerous for every species, including Gunsawians.
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Fentanyl
+          min: 15
+        damage:
+          types:
+            Asphyxiation: 1.5
+            Poison: 0.5
