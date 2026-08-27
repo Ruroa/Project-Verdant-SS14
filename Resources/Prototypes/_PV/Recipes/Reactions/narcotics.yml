@@ -1,0 +1,13 @@
+# Fictional gameplay recipe; this does not represent real-world production.
+- type: reaction
+  id: Fentanyl
+  impact: Medium
+  reactants:
+    SpaceDrugs:
+      amount: 1
+    Psicodine:
+      amount: 1
+    Epinephrine:
+      amount: 1
+  products:
+    Fentanyl: 3
