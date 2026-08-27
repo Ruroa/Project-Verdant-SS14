@@ -11,6 +11,7 @@
   - Theatre
   - Maintenance
   - Service # Starlight
+  - Mime # Starlight
   special:
   - !type:AddComponentSpecial
     components:

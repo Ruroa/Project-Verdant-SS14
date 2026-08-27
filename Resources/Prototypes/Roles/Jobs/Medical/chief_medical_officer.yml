@@ -10,7 +10,6 @@
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
-  canBeAntag: false
   access:
   - Medical
   - Command
@@ -21,6 +20,8 @@
   - Cryogenics
   - Surgery # Starlight
   - Paramedic # Starlight
+  - Debrief # Starlight
+  - Shuttle # Starlight
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -33,7 +34,7 @@
   equipment:
     id: CMOPDA
     ears: ClothingHeadsetCMO
-    belt: ClothingBeltMedicalFilled
+    belt: ClothingBeltMedicalFilled # Starlight - adding back belts
   storage:
     back:
     - Flash

@@ -49,6 +49,11 @@
     price: 800
   - type: ResearchClient
   - type: TechnologyDatabase
+  - type: ApcPowerReceiver
+    powerLoad: 150
+  - type: PowerState
+    idlePowerDraw: 150
+    workingPowerDraw: 1000
   - type: StationAiWhitelist #Starlight
 # SL Start: Lighting Update
   - type: LitOnPowered
@@ -142,8 +147,10 @@
     - RollerBedsStatic
     - LightsStatic
     - ServiceStatic
+    - StarlightContainersStatic # Starlight
     - PowerCellsStatic
     - ElectronicsStatic
+    - ServiceBoardsStaticGoob # Goobstation - Radio Host boards
     # Starlight Start
     - CassetteTape
     - TapeRecorder
@@ -154,7 +161,7 @@
     - StarlightSyndicateAmmoStatic
     - StarlightSecurityEmagWeaponsStatic
     - StarlightSecurityAmmoStatic
-    - StarlightSecurityAmmoEmagStatic 
+    - StarlightSecurityAmmoEmagStatic
     # Starlight end
     #- SecurityAmmoStatic # SL disable in favor of prior three lines
     - SyndicateAmmoStatic
@@ -217,7 +224,6 @@
     - ChemistryStatic
     dynamicPacks:
     - ScienceBlueSpace # Starlight
-    - ScienceDarkBreacher # Starlight
     - AdvancedTools
     - ScienceEquipment
     - ScienceExplosives
@@ -233,7 +239,8 @@
     - Equipment
     - StarlightProtolatheLootable # Starlight start
     - StarlightScienceWeapons
-    - WirelessCameraHandheld # Moffstation - handheld reporter camera
+    - WirelessCameraHandheld # MOFFSTATION CHANGE - Adds wireless handheld camera
+    - StarlightCargoDynamic
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - StarlightSurgeryDynamic
@@ -292,6 +299,7 @@
     - MedicalBoardsStatic
     - EngineeringBoardsStatic
     - StarlightVendorBoards # Starlight
+    - ElectronicsStatic # Starlight
     dynamicPacks:
     - SecurityScienceBlueSpace # Starlight
     - StarlightShuttleBoards # Starlight
@@ -307,12 +315,16 @@
     - StarlightLawboards
     - StarlightCircuitImprinterLootable
     - ReactorCircuitboards # FH edit
+    - OublietteCircuitBoard # Starlight
+    - ScienceDarkBreacher # Starlight
+    - ServiceBoardsGoob # Goobstation - Radio Host boards
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - StarlightSecurityBoards
-    emagStaticPacks: # Starlight
-    - StarlightDangerousLawboards # Starlight
-    - StarlightSyndicateVendorBoards # Starlight
+    emagStaticPacks: # Starlight start
+    - StarlightDangerousLawboards
+    - StarlightSyndicateVendorBoards
+    - StarlightLatheBoardsEmag # Starlight end
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   - type: OreSiloClient
@@ -328,17 +340,6 @@
     sprite: Structures/Machines/circuit_imprinter_hypercon.rsi
   - type: Machine
     board: CircuitImprinterHyperConvectionMachineCircuitboard
-  - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
-  - type: EmagLatheRecipes
-    emagDynamicPacks:
-    - StarlightSecurityBoards
-    emagStaticPacks: # Starlight
-    - StarlightDangerousLawboards # Starlight
 
 - type: entity
   id: ExosuitFabricator
@@ -375,8 +376,10 @@
     - StarlightMechParts
   - type: EmagLatheRecipes
     emagStaticPacks:
-    - StarlightMechWeapon
     - StarlightSyndicateModules
+    emagDynamicPacks:
+    - StarlightMechWeapon
+
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   - type: OreSiloClient
@@ -427,6 +430,7 @@
 
 - type: entity
   id: SecurityTechFab
+  categories: [ ShouldMapStation ] # Starlight
   parent: BaseLatheLube
   name: security techfab
   description: Prints equipment for use by security crew.
@@ -454,14 +458,14 @@
     - NullSpaceDrainer
     - SecurityPracticeStatic
     - StarlightSecurityAmmoStatic
-    - SecurityWeaponsStatic # Starlight end
+    - SecurityWeaponsStatic
+    - TapeRecorder # Starlight end
     dynamicPacks:
     - SecurityScienceBlueSpace # Stalright
     - SalvageSecurityBoards
     - SalvageSecurityWeapons
     - SecurityDisablers
     - StarlightDefenseStatic # starlight start
-    - SecurityCyberLimbs
     - StarlightSecurityEquipment
     - StarlightSecurityBoards
     - StarlightSecurityExplosives
@@ -469,9 +473,9 @@
     - StarlightSecurityWeapons
     - SecurityDisablers
     - SecurityCyberLimbs
-    - SecurityImplants # 🌟Starlight🌟
+    - SecurityImplants
     - StarlightSecurityMechsWeapons
-    - StarlightSecurityTechFabLootable
+    - StarlightSecurityTechFabLootable # Starlight end
   #region Starlight secfab emagging
   - type: EmagLatheRecipes
     emagStaticPacks:
@@ -483,6 +487,8 @@
     - SyndicateAmmoStatic
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
+  - type: StealTarget # Starlight
+    stealGroup: SecureTechFabCircuitboard # Starlight
   - type: OreSiloClient
 
 - type: entity
@@ -522,6 +528,7 @@
 
 - type: entity
   id: MedicalTechFab
+  categories: [ ShouldMapStation ] # Starlight
   parent: BaseLatheLube
   name: medical techfab
   description: Prints equipment for use by the medbay.
@@ -560,15 +567,24 @@
     - Chemistry
     - StarlightBudgetCyberOrgansDynamic
     - StarlightMedicalTechFabLootable
+  - type: EmagLatheRecipes # Starlight start
+    emagStaticPacks:
+    - StarlightSecurityEmagWeaponsStatic
+    - StarlightSecurityAmmoStatic
+    - StarlightSyndicateAmmoStatic
+    emagDynamicPacks:
+    - SecurityCyberLimbs
+    - SecurityImplants # Starlight end
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: StealTarget
-    stealGroup: MedicalTechFabCircuitboard
+    stealGroup: DepartmentalTechFabCircuitboard # Starlight
   - type: OreSiloClient
 
 - type: entity
   parent: BaseLathe
   id: UniformPrinter
+  categories: [ ShouldMapStation ] # Starlight
   name: uniform printer
   description: Prints new or replacement uniforms.
   components:
@@ -613,6 +629,7 @@
 
 - type: entity
   id: Biogenerator
+  categories: [ ShouldMapStation ] # Starlight
   parent: BaseLathe
   name: biogenerator
   description: Converts plants into biomass, which can be used to construct useful items.
@@ -699,8 +716,8 @@
     - type: ItemToggle
       onUse: false
       onActivate: false
-      verbToggleOn: "Activate Magnet"
-      verbToggleOff: "Deactivate Magnet"
+      verbToggleOn: verb-toggle-magnet-activate
+      verbToggleOff: verb-toggle-magnet-deactivate
       soundActivate:
         collection: sparks
         params:

@@ -4,19 +4,29 @@
   description: job-description-iaa
   playTimeTracker: JobIAA
   requirements:
+  - !type:DepartmentTimeRequirement
+    department: Command
+    time: 36000 # 10h
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 36000 # 10h
+  - !type:TraitsRequirement # Starlight
+    traits:
+      - Iterator
+    inverted: true
   startingGear: IAAGear
   icon: "JobIconIAA"
   rules: job-rules-corporate-aligned
-  supervisors: job-supervisors-magistrate
-  canBeAntag: false
-  displayWeight: 40
+  supervisors: job-supervisors-nt-personnel
+  displayWeight: 3
   access:
   - IAA
   - Brig
   - Maintenance
-  - Lawyer
+# - Lawyer # Lawyer is now for Lawyers, not IAAs.
   - GenpopEnter
   - GenpopLeave
+# - Command # IAAs are not members of Command.
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

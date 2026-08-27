@@ -7,8 +7,8 @@
   startingGear: TSFOGear
   icon: JobIconTSFOfficer
   rules: job-rules-corporate-aligned
-  supervisors: job-supervisors-centcom
-  canBeAntag: false
+  supervisors: job-supervisors-nt-personnel
+  displayWeight: 4
   access:
     - Command
     - Bar
@@ -40,6 +40,10 @@
     - Paramedic
     - Mining
     - SalvageLead
+    - Debrief
+    - Journalism
+    - Clown
+    - Mime
   special:
     - !type:AddImplantSpecial
       implants: [TSFMindShieldImplant]

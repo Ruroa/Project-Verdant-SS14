@@ -15,6 +15,7 @@
   extendedAccess:
   - Salvage
   - Mail
+  - Shuttle
 
 - type: startingGear
   id: MiningSpecialistGear

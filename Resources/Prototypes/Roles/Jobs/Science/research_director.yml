@@ -8,7 +8,6 @@
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
   supervisors: job-supervisors-captain
-  canBeAntag: false
   access:
   - Research
   - Command
@@ -17,6 +16,8 @@
   - Brig
   - Cryogenics
   - Robotics # Starlight
+  - Debrief # Starlight
+  - Shuttle # Starlight
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
