@@ -374,7 +374,7 @@ public sealed class TerraformerSystem : EntitySystem
                     break;
                 }
 
-                if (IsTileBlockedByWall(grid, neighbor))
+                if (IsTileBlockedByWall(gridUid, grid, neighbor))
                 {
                     isBoundary = true;
                     break;
@@ -400,7 +400,7 @@ public sealed class TerraformerSystem : EntitySystem
         if (!TryGetUsableTile(gridUid, grid, centerIndices, out _))
             yield break;
 
-        if (IsTileBlockedByWall(grid, centerIndices))
+        if (IsTileBlockedByWall(gridUid, grid, centerIndices))
             yield break;
 
         var reachable = new HashSet<Vector2i>();
@@ -426,7 +426,7 @@ public sealed class TerraformerSystem : EntitySystem
                 if (!TryGetUsableTile(gridUid, grid, neighbor, out _))
                     continue;
 
-                if (IsTileBlockedByWall(grid, neighbor))
+                if (IsTileBlockedByWall(gridUid, grid, neighbor))
                     continue;
 
                 reachable.Add(neighbor);
@@ -556,9 +556,9 @@ public sealed class TerraformerSystem : EntitySystem
         return dx * dx + dy * dy <= radius * radius;
     }
 
-    private bool IsTileBlockedByWall(MapGridComponent grid, Vector2i tileIndices)
+    private bool IsTileBlockedByWall(EntityUid gridUid, MapGridComponent grid, Vector2i tileIndices)
     {
-        foreach (var anchored in grid.GetAnchoredEntities(tileIndices))
+        foreach (var anchored in _map.GetAnchoredEntities(gridUid, grid, tileIndices))
         {
             if (Deleted(anchored))
                 continue;
@@ -740,7 +740,7 @@ public sealed class TerraformerSystem : EntitySystem
             if (!terraformer.TreeSpawnTiles.Contains(tileDefinition.ID))
                 continue;
 
-            if (!IsTileFreeForTree(grid, tile.GridIndices))
+            if (!IsTileFreeForTree(gridUid, grid, tile.GridIndices))
                 continue;
 
             validTiles.Add(tile);
@@ -758,9 +758,9 @@ public sealed class TerraformerSystem : EntitySystem
         Dirty(uid, terraformer);
     }
 
-    private bool IsTileFreeForTree(MapGridComponent grid, Vector2i tileIndices)
+    private bool IsTileFreeForTree(EntityUid gridUid, MapGridComponent grid, Vector2i tileIndices)
     {
-        foreach (var anchored in grid.GetAnchoredEntities(tileIndices))
+        foreach (var anchored in _map.GetAnchoredEntities(gridUid, grid, tileIndices))
         {
             if (Deleted(anchored))
                 continue;
