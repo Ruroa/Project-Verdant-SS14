@@ -1,0 +1,8 @@
+- type: entity
+  id: OrganGunsawianHeart
+  parent: OrganVulpkaninHeart
+  name: gunsawian heart
+  suffix: Gunsawian
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [ Animal, Gunsawian ]
