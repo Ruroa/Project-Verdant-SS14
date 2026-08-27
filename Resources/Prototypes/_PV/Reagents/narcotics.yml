@@ -18,6 +18,17 @@
           type: [ Gunsawian ]
         walkSpeedModifier: 1.20
         sprintSpeedModifier: 1.20
+      - !type:Jitter
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 3
       - !type:ModifyStatusEffect
         conditions:
         - !type:MetabolizerTypeCondition
