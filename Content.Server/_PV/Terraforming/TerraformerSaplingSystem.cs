@@ -161,7 +161,7 @@ public sealed class TerraformerSaplingSystem : EntitySystem
             if (!terraformer.TreeSpawnTiles.Contains(tileDefinition.ID))
                 continue;
 
-            if (!IsTileFreeForTree(grid, tile.GridIndices))
+            if (!IsTileFreeForTree(gridUid, grid, tile.GridIndices))
                 continue;
 
             validTiles.Add(tile);
@@ -177,9 +177,9 @@ public sealed class TerraformerSaplingSystem : EntitySystem
         return true;
     }
 
-    private bool IsTileFreeForTree(MapGridComponent grid, Vector2i tileIndices)
+    private bool IsTileFreeForTree(EntityUid gridUid, MapGridComponent grid, Vector2i tileIndices)
     {
-        foreach (var anchored in grid.GetAnchoredEntities(tileIndices))
+        foreach (var anchored in _map.GetAnchoredEntities(gridUid, grid, tileIndices))
         {
             if (Deleted(anchored))
                 continue;
