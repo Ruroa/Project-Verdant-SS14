@@ -22,13 +22,13 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Gunsawian ]
+
+      # The Space Drugs visual applies to everyone.
       - !type:ModifyStatusEffect
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Gunsawian ]
         effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 3
+
       - !type:ModifyStatusEffect
         conditions:
         - !type:MetabolizerTypeCondition
