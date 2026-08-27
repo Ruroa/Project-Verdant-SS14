@@ -21,7 +21,7 @@
       - right leg
       - left leg
       organs:
-        heart: OrganVulpkaninHeart
+        heart: OrganGunsawianHeart
         lungs: OrganHumanLungs
         stomach: OrganVulpkaninStomach
         liver: OrganAnimalLiver
