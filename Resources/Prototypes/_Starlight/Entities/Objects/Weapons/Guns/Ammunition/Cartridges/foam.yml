@@ -6,8 +6,8 @@
   parent: BaseCartridgePistol
   id: CartridgePistolFoam
   categories: [ HideSpawnMenu ]
-  name: cartridge (9×19mm foam)
-  description: A 9×19mm casing with a foam dart wedged in. Whoever loaded this has a very particular sense of humor.
+  name: cartridge (9x19mm foam)
+  description: A 9x19mm casing with a foam dart wedged in. Whoever loaded this has a very particular sense of humor.
   components:
   - type: CartridgeAmmo
     proto: BulletFoam
@@ -23,7 +23,7 @@
   parent: BaseCartridgeRifle
   id: CartridgeRifleFoam
   categories: [ HideSpawnMenu ]
-  name: cartridge (5.56×45mm foam)
+  name: cartridge (5.56x45mm foam)
   description: A rifle cartridge casing with a foam dart inside it. Someone had very specific ideas about ammo economy.
   components:
   - type: CartridgeAmmo
@@ -40,7 +40,7 @@
   parent: BaseCartridgeLightRifleSP # Starlight
   id: CartridgeLightRifleFoam
   categories: [ HideSpawnMenu ]
-  name: cartridge (7.62×39mm foam)
+  name: cartridge (7.62x39mm foam)
   description: A light rifle cartridge with a foam dart tip. At these velocities it's still going to leave a bruise.
   components:
   - type: CartridgeAmmo
@@ -57,7 +57,7 @@
   parent: BaseCartridgeCaselessRifle
   id: CartridgeCaselessRifleFoam
   categories: [ HideSpawnMenu ]
-  name: cartridge (5.7×28mm caseless foam)
+  name: cartridge (5.7x28mm caseless foam)
   description: A caseless propellant block with a foam dart fused into the tip. The engineering is questionable but it's technically a projectile.
   components:
   - type: CartridgeAmmo

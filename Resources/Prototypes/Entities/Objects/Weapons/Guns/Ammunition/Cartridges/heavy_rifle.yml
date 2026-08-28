@@ -2,7 +2,7 @@
   abstract: true
   parent: [ BaseCartridge, BaseSecurityContraband ]
   id: BaseCartridgeHeavyRifle
-  name: cartridge (7.62×51mm NATO)
+  name: cartridge (7.62x51mm NATO)
   components:
   - type: Tag
     tags:
@@ -22,7 +22,7 @@
 - type: entity
   parent: BaseCartridgeHeavyRifle
   id: CartridgeMinigun
-  name: cartridge (7.62×51mm NATO)
+  name: cartridge (7.62x51mm NATO)
   components:
   - type: CartridgeAmmo
     proto: BulletMinigunTrace

@@ -133,7 +133,7 @@
   name: ARG
   parent: [BaseTSFContraband, BaseWeaponRifle]
   id: WeaponRifleARG
-  description: An old galactic standard assault rifle, used by various paramilitary groups and former SVS militias ever since. Uses 7.62×39mm ammo.
+  description: An old galactic standard assault rifle, used by various paramilitary groups and former SVS militias ever since. Uses 7.62x39mm ammo.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/arg.rsi
@@ -227,7 +227,7 @@
   name: Leikha
   parent: [ BaseWeaponRifle, BaseSecurityContraband ]
   id: WeaponRifleLeikha
-  description: A high end military grade assault rifle. This one has been retrofitted with a scope and a burst reciever. Uses 5.56×45mm ammo.
+  description: A high end military grade assault rifle. This one has been retrofitted with a scope and a burst reciever. Uses 5.56x45mm ammo.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16a4.rsi
@@ -390,7 +390,7 @@
   name: Peacemaker
   parent: [ BaseWeaponRifle, BaseSecurityContraband ]
   id: WeaponRiflePeacemaker
-  description: The best or worst thing you'll ever see, depending if it's pointed at you or not. Uses 5.56×45mm ammo.
+  description: The best or worst thing you'll ever see, depending if it's pointed at you or not. Uses 5.56x45mm ammo.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/ert.rsi
@@ -438,7 +438,7 @@
   name: M18-Militant
   parent: [BaseWeaponRifle, BaseSalvageContraband]
   id: WeaponRifleM18
-  description: Aged yet dependable, this old-world assault rifle is chambered in 5.56×45mm ammunition. Renowned for its reliability and ease of maintenance even in the harshest environments, it remains a staple among your station's merce- salvage forces.
+  description: Aged yet dependable, this old-world assault rifle is chambered in 5.56x45mm ammunition. Renowned for its reliability and ease of maintenance even in the harshest environments, it remains a staple among your station's merce- salvage forces.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16.rsi
@@ -500,7 +500,7 @@
   name: SPC-Lionhunter
   parent: [ BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband ]
   id: WeaponRifleLionhunter
-  description: A one of a kind bolt-action rifle fitted with an integrated scope. Chambered for a proprietary .338 Lapua Magnum round developed by parties unknown. Built to drop targets at range with authority. Each shot demands a deliberate recycle of the action.
+  description: A one-of-a-kind bolt-action precision rifle fitted with an integrated scope and chambered in .338 Lapua Magnum. Built to drop targets at extreme range with authority. Each shot demands a deliberate recycle of the action.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/lionhunter_icons.rsi
@@ -553,7 +553,7 @@
   parent: [ WeaponRifleAk, BaseSovietContraband ]
   id: WeaponRifleAkAdmeme
   suffix: Admeme
-  description: An iconic weapon of war. Uses 7.62×39mm ammo.
+  description: An iconic weapon of war. Uses 7.62x39mm ammo.
   components:
   - type: Tag
     tags:
@@ -563,7 +563,7 @@
   name: Lawbringer
   parent: [BaseWeaponRifle, BaseSecurityContraband]
   id: WeaponRifleLawbringer
-  description: "A bullpup carbine of modern design, commissioned by CentComm for their security forces.\nFeeds from 7.62×39mm magazines."
+  description: "A bullpup carbine of modern design, commissioned by CentComm for their security forces.\nFeeds from 7.62x39mm magazines."
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/lawbringer.rsi

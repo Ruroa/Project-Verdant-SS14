@@ -3,7 +3,7 @@
   name: CODE-6 "Arbitration"
   id: WeaponMedTakLightMachineGun
   parent: [ BaseWeaponLightMachineGun, BaseMedTakContraband ]
-  description: "An ultralight assault LMG developed for MedTak security.\nAccepts 7.62×39mm box magazines."
+  description: "An ultralight assault LMG developed for MedTak security.\nAccepts 7.62x39mm box magazines."
   components:
   - type: Sprite
     sprite: _Starlight/Admeme/MedTak/Weapons/LMG.rsi
@@ -63,7 +63,7 @@
   name: CODE-9 "Compliance"
   parent: [ BaseWeaponRifle, BaseMedTakContraband ]
   id: WeaponMedTakRifle
-  description: "A bullpuped heavy rifle designed for MedTak operators.\nAccepts heavy 5.56×45mm magazines."
+  description: "A bullpuped heavy rifle designed for MedTak operators.\nAccepts heavy 5.56x45mm magazines."
   components:
   - type: Sprite
     sprite: _Starlight/Admeme/MedTak/Weapons/Rifle.rsi

@@ -12,10 +12,10 @@
       - state: magazine
 
 - type: entity
-  name: box of 5.7×28mm caseless magazines
+  name: box of 5.7x28mm caseless magazines
   parent: BoxMagazine
   id: BoxMagazinePistolCaselessRifle
-  description: A box full of 5.7×28mm caseless magazines.
+  description: A box full of 5.7x28mm caseless magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -24,10 +24,10 @@
         amount: 4
 
 - type: entity
-  name: box of 5.7×28mm caseless (practice) magazines
+  name: box of 5.7x28mm caseless (practice) magazines
   parent: BoxMagazine
   id: BoxMagazinePistolCaselessRiflePractice
-  description: A box full of 5.7×28mm caseless practice magazines.
+  description: A box full of 5.7x28mm caseless practice magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -37,10 +37,10 @@
 
 # LightRifle
 - type: entity
-  name: box of 7.62×39mm magazines
+  name: box of 7.62x39mm magazines
   parent: BoxMagazine
   id: BoxMagazineLightRifle
-  description: A box full of 7.62×39mm magazines.
+  description: A box full of 7.62x39mm magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -56,10 +56,10 @@
           amount: 1
 
 - type: entity
-  name: box of 7.62×39mm (practice) magazines
+  name: box of 7.62x39mm (practice) magazines
   parent: BoxMagazine
   id: BoxMagazineLightRiflePractice
-  description: A box full of 7.62×39mm (practice) magazines.
+  description: A box full of 7.62x39mm (practice) magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -71,10 +71,10 @@
 
 # Pistol
 - type: entity
-  name: box of WT550 9×19mm magazines
+  name: box of WT550 9x19mm magazines
   parent: BoxMagazine
   id: BoxMagazinePistolSubMachineGunTopMounted
-  description: A box full of WT550 9×19mm magazines.
+  description: A box full of WT550 9x19mm magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -83,10 +83,10 @@
         amount: 3
 
 - type: entity
-  name: box of pistol 9×19mm magazines
+  name: box of pistol 9x19mm magazines
   parent: BoxMagazine
   id: BoxMagazinePistol
-  description: A box full of pistol 9×19mm magazines.
+  description: A box full of pistol 9x19mm magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -100,7 +100,7 @@
           amount: 1
 
 - type: entity
-  name: box of pistol 9×19mm (practice) magazines
+  name: box of pistol 9x19mm (practice) magazines
   parent: BoxMagazine
   id: BoxMagazinePistolPractice
   description: A box full of  magazines.
@@ -112,10 +112,10 @@
         amount: 4
 
 - type: entity
-  name: box of machine pistol 9×19mm magazines
+  name: box of machine pistol 9x19mm magazines
   parent: BoxMagazine
   id: BoxMagazinePistolHighCapacity
-  description: A box full of machine pistol 9×19mm magazines.
+  description: A box full of machine pistol 9x19mm magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -124,10 +124,10 @@
         amount: 4
 
 - type: entity
-  name: box of machine pistol 9×19mm (practice) magazines
+  name: box of machine pistol 9x19mm (practice) magazines
   parent: BoxMagazine
   id: BoxMagazinePistolHighCapacityPractice
-  description: A box full of machine pistol 9×19mm (practice) magazines.
+  description: A box full of machine pistol 9x19mm (practice) magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -136,10 +136,10 @@
         amount: 4
 
 - type: entity
-  name: box of SMG 9×19mm magazines
+  name: box of SMG 9x19mm magazines
   parent: BoxMagazine
   id: BoxMagazinePistolSubMachineGun
-  description: A box full of SMG 9×19mm magazines.
+  description: A box full of SMG 9x19mm magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -148,10 +148,10 @@
         amount: 3
 
 - type: entity
-  name: box of SMG 9×19mm (practice) magazines
+  name: box of SMG 9x19mm (practice) magazines
   parent: BoxMagazine
   id: BoxMagazinePistolSubMachineGunPractice
-  description: A box full of SMG 9×19mm (practice) magazines.
+  description: A box full of SMG 9x19mm (practice) magazines.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -210,10 +210,10 @@
 
 # Rifle
 - type: entity
-  name: box of 5.56×45mm magazines
+  name: box of 5.56x45mm magazines
   parent: BoxMagazine
   id: BoxMagazineRifleSP
-  description: A box full of 5.56×45mm magazines.
+  description: A box full of 5.56x45mm magazines.
   components:
   - type: Item
     size: Large
@@ -237,10 +237,10 @@
           amount: 1
 
 - type: entity
-  name: box of 5.56×45mm (practice) magazines
+  name: box of 5.56x45mm (practice) magazines
   parent: BoxMagazine
   id: BoxMagazineRiflePractice
-  description: A box full of 5.56×45mm (practice) magazines.
+  description: A box full of 5.56x45mm (practice) magazines.
   components:
   - type: EntityTableContainerFill
     containers:

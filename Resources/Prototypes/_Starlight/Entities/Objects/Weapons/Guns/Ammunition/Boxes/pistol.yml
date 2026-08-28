@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolRubber
-  name: ammunition box (9×19mm rubber)
+  name: ammunition box (9x19mm rubber)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolRubber
@@ -105,7 +105,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolFMJ
-  name: ammunition box (9×19mm FMJ)
+  name: ammunition box (9x19mm FMJ)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolFMJ
@@ -120,7 +120,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolAP
-  name: ammunition box (9×19mm AP)
+  name: ammunition box (9x19mm AP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolAP

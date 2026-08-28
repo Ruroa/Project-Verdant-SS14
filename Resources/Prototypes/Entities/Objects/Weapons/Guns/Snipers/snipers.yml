@@ -163,7 +163,7 @@
   name: Hristov
   parent: [BaseWeaponSniper, BaseGunWieldable, BaseSyndicateContraband]
   id: WeaponSniperHristov
-  description: For when you absolutely, positively need to make someone regret their life choices from a safe distance. Uses 12.7×99mm ammo.
+  description: For when you absolutely, positively need to make someone regret their life choices from a safe distance. Uses 12.7x99mm ammo.
   components:
   - type: Item
     size: Huge
@@ -202,7 +202,7 @@
   name: musket
   parent: [ BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband ]
   id: Musket
-  description: This should've been in a museum long before you were born. Uses 12.7×99mm ammo.
+  description: This should've been in a museum long before you were born. Uses 12.7x99mm ammo.
   components:
   - type: Sharp
   - type: Item

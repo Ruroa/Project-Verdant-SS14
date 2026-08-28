@@ -1,6 +1,6 @@
 - type: entity
   id: CartridgeRifleRubber
-  name: cartridge (5.56×45mm rubber)
+  name: cartridge (5.56x45mm rubber)
   parent: BaseCartridgeRifle
   components:
   - type: CartridgeAmmo
@@ -15,7 +15,7 @@
 
 - type: entity
   id: CartridgeRifleHP
-  name: cartridge (5.56×45mm HP)
+  name: cartridge (5.56x45mm HP)
   parent: BaseCartridgeRifle
   description: A modern intermediate cartridge for combat rifles. Standard kinetic ammunition is common and useful in most situations.
   components:
@@ -31,7 +31,7 @@
 
 - type: entity
   id: CartridgeRifleFMJ
-  name: cartridge (5.56×45mm FMJ)
+  name: cartridge (5.56x45mm FMJ)
   parent: BaseCartridgeRifle
   components:
   - type: CartridgeAmmo
@@ -46,7 +46,7 @@
 
 - type: entity
   id: CartridgeRifleAP
-  name: cartridge (5.56×45mm AP)
+  name: cartridge (5.56x45mm AP)
   parent: BaseCartridgeRifle
   components:
   - type: CartridgeAmmo

@@ -2,7 +2,7 @@
   parent: BaseBullet
   id: BulletPistol
   categories: [ HideSpawnMenu ]
-  name: bullet (9×19mm)
+  name: bullet (9x19mm)
   components:
   - type: Projectile
     damage:
@@ -13,7 +13,7 @@
   parent: BaseBulletPractice
   id: BulletPistolPractice
   categories: [ HideSpawnMenu ]
-  name: bullet (9×19mm practice)
+  name: bullet (9x19mm practice)
   components:
   - type: Projectile
     damage:
@@ -24,7 +24,7 @@
   parent: BaseBulletIncendiary
   id: BulletPistolIncendiary
   categories: [ HideSpawnMenu ]
-  name: bullet (9×19mm incendiary)
+  name: bullet (9x19mm incendiary)
   components:
   - type: Projectile
     damage:
@@ -36,7 +36,7 @@
   parent: BaseBulletUranium
   id: BulletPistolUranium
   categories: [ HideSpawnMenu ]
-  name: bullet (9×19mm uranium)
+  name: bullet (9x19mm uranium)
   components:
   - type: Projectile
     damage:

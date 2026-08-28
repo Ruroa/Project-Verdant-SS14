@@ -57,7 +57,7 @@
 
 - type: entity
   id: SpeedLoaderMagnumLeverImprovised
-  name: "speed loader (7.62×39mm / .45 ACP)"
+  name: "speed loader (7.62x39mm / .45 ACP)"
   parent: [BaseSpeedLoaderShotgun, BaseMinorContraband]
   components:
   - type: BallisticAmmoProvider

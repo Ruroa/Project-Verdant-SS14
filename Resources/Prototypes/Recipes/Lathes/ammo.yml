@@ -24,7 +24,7 @@
 
 ## Recipes
 
-# .20 Rifle
+# 5.56x45mm
 #- type: latheRecipe
 #  parent: BaseEmptyAmmoRecipe
 #  id: MagazineRifleEmpty
@@ -92,7 +92,7 @@
 #    Plastic: 500
 #    Uranium: 500
 
-# .25 Caseless
+# 5.7x28mm Caseless
 #- type: latheRecipe
 #  parent: BaseAmmoRecipe
 #  id: MagazinePistolCaselessRifle
@@ -100,7 +100,7 @@
 #  materials:
 #    Steel: 145
 
-# .30 Rifle
+# 7.62x39mm
 #- type: latheRecipe
 #  parent: BaseEmptyAmmoRecipe
 #  id: MagazineLightRifleEmpty
@@ -168,7 +168,7 @@
 #    Plastic: 600
 #    Uranium: 600
 #
-## 9×19mm
+## 9x19mm
 #- type: latheRecipe
 #  parent: BaseEmptyAmmoRecipe
 #  id: MagazinePistolEmpty
@@ -460,7 +460,7 @@
 #    Steel: 80
 #    Plastic: 80
 
-# 12.7×99mm
+# 12.7x99mm
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
   id: MagazineBoxAntiMateriel

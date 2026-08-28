@@ -7,7 +7,7 @@
   materials:
     Plastic: 5
     Steel: 5
-############ MAGAZINES (.25 CASELESS) ############
+############ MAGAZINES (5.7x28MM CASELESS) ############
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
@@ -24,7 +24,7 @@
     Steel: 100
     Plastic: 20
 
-############ BOXES (.25 CASELESS) ############
+############ BOXES (5.7x28MM CASELESS) ############
 
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
@@ -48,7 +48,7 @@
   materials:
     Steel: 100
 
-############ MAGAZINES (9×19mm) ############
+############ MAGAZINES (9x19mm) ############
 
 - type: latheRecipe
   parent: BaseEmptyAmmoRecipe
@@ -177,7 +177,7 @@
     Uranium: 90
     Plastic: 130
 
-############ BOXES (9×19mm) ############
+############ BOXES (9x19mm) ############
 
 - type: latheRecipe
   id: MagazineBoxPistolRubber

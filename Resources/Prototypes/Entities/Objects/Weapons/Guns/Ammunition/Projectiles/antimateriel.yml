@@ -2,7 +2,7 @@
   categories: [ HideSpawnMenu ]
   parent: BaseBullet
   id: BulletAntiMateriel
-  name: bullet (12.7×99mm)
+  name: bullet (12.7x99mm)
   components:
   - type: Projectile
     damage:

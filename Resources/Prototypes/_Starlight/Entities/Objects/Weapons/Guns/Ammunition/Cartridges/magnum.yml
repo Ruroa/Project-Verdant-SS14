@@ -41,7 +41,7 @@
   id: CartridgeMagnumHP
   name: cartridge (.45 ACP HP)
   parent: BaseCartridgeMagnum
-  description: Heavy magnum cartridge mostly used by revolvers. Chalk ammunition is generally non-harmful, used for practice.
+  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Chalk ammunition is generally non-harmful and used for practice.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceHP
@@ -57,7 +57,7 @@
   id: CartridgeMagnumFMJ
   name: cartridge (.45 ACP FMJ)
   parent: BaseCartridgeMagnum
-  description: Heavy magnum cartridge mostly used by revolvers. Incendiary ammunition contains a self-igniting compound that sets the target ablaze.
+  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Incendiary ammunition contains a self-igniting compound that sets the target ablaze.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceFMJ

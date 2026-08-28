@@ -2,7 +2,7 @@
   parent: BaseBullet
   id: BulletHeavyRifle
   categories: [ HideSpawnMenu ]
-  name: bullet (7.62×51mm NATO)
+  name: bullet (7.62x51mm NATO)
   components:
   - type: Projectile
     damage:
@@ -13,7 +13,7 @@
   parent: BulletHeavyRifle
   id: BulletMinigun
   categories: [ HideSpawnMenu ]
-  name: minigun bullet (7.62×51mm NATO)
+  name: minigun bullet (7.62x51mm NATO)
   components:
   - type: Projectile
     damage:

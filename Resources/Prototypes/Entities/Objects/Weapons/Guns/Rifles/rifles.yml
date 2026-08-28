@@ -86,7 +86,7 @@
   name: AKMS
   parent: [ BaseWeaponRifle, BaseSovietContraband ]
   id: WeaponRifleAk
-  description: A somewhat battered combat rifle of a design originating from old Earth. Favored by criminals, militias, and terrorists due to its famed reliability and easy-to-manufacture design. Feeds from 7.62×39mm magazines.
+  description: A somewhat battered combat rifle of a design originating from old Earth. Favored by criminals, militias, and terrorists due to its famed reliability and easy-to-manufacture design. Feeds from 7.62x39mm magazines.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/ak.rsi
@@ -135,7 +135,7 @@
 #  name: M90 GL
 #  parent: [BaseWeaponRifle, BaseSyndicateContraband]
 #  id: WeaponRifleM90GrenadeLauncher
-#  description: "An older bullpup carbine model, with an attached underbarrel grenade launcher.\nFeeds from 5.56×45mm magazines."
+#  description: "An older bullpup carbine model, with an attached underbarrel grenade launcher.\nFeeds from 5.56x45mm magazines."
 #  components:
 #  - type: Sprite
 #    sprite: Objects/Weapons/Guns/Rifles/carbine.rsi
@@ -179,7 +179,7 @@
   name: Lecter
   parent: [ BaseWeaponRifle, BaseSecurityContraband ]
   id: WeaponRifleLecter
-  description: "Popular gas-operated combat rifle used heavily by NanoTrasen and SolGov. Operating in semi or fully automatic, its accuracy, stopping power, and reliability make it excel in all manner of environments.\nFeeds from 5.56×45mm magazines." # SL
+  description: "Popular gas-operated combat rifle used heavily by NanoTrasen and SolGov. Operating in semi or fully automatic, its accuracy, stopping power, and reliability make it excel in all manner of environments.\nFeeds from 5.56x45mm magazines." # SL
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi
@@ -229,7 +229,7 @@
   description: |-
     The Experimental Lecter 8
     An unreasonably expensive military grade assault rifle with integrated optic.
-    Uses 5.56×45mm ammo.
+    Uses 5.56x45mm ammo.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/XL8.rsi
@@ -253,7 +253,7 @@
   name: Estoc DMR
   parent: [BaseWeaponRifle, BaseSyndicateContraband]
   id: WeaponRifleEstoc
-  description: "A designated marksman rifle firing in 3-round bursts. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from 5.56×45mm magazines."
+  description: "A designated marksman rifle firing in 3-round bursts. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from 5.56x45mm magazines."
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi

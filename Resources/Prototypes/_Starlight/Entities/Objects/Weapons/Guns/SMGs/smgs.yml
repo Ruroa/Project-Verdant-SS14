@@ -121,7 +121,7 @@
   name: PPSH 59 SMG
   parent: [BaseWeaponSubMachineGun, BaseSovietContraband]
   id: WeaponSubMachineGunPPSH
-  description: Beloved by USSP veterans and feared by friendly fire protocols everywhere. Uses 9×19mm ammunition.
+  description: Beloved by USSP veterans and feared by friendly fire protocols everywhere. Uses 9x19mm ammunition.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/SMGs/PPSh59.rsi
@@ -345,7 +345,7 @@
   name: WT550r
   parent: [WeaponSubMachineGunWt550, BaseGrandTheftContraband] # Starlight, grand theft
   id: WeaponSubMachineGunWt550r
-  description: A special red-colored limited edition of the WT550, the WT550r.  Designed by NanoTrasen's Small Arms Division as a compact submachine gun fully controllable with one hand. It contains an exotic internal recoil buffer and feeds from special top-mounted 9×19mm magazines.
+  description: A special red-colored limited edition of the WT550, the WT550r.  Designed by NanoTrasen's Small Arms Division as a compact submachine gun fully controllable with one hand. It contains an exotic internal recoil buffer and feeds from special top-mounted 9x19mm magazines.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/SMGs/wt550r.rsi
@@ -370,7 +370,7 @@
   name: WT550g
   parent: [ WeaponSubMachineGunWt550 ]
   id: WeaponSubMachineGunWt550g
-  description: A special green-colored limited edition of the WT550, the WT550g.  Designed by NanoTrasen's Small Arms Division as a compact submachine gun fully controllable with one hand. It contains an exotic internal recoil buffer and feeds from special top-mounted 9×19mm magazines.
+  description: A special green-colored limited edition of the WT550, the WT550g.  Designed by NanoTrasen's Small Arms Division as a compact submachine gun fully controllable with one hand. It contains an exotic internal recoil buffer and feeds from special top-mounted 9x19mm magazines.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/SMGs/wt550g.rsi
