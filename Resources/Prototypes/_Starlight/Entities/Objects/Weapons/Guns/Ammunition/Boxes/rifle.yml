@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleBigRubber
-  name: ammunition box (.20 rifle rubber)
+  name: ammunition box (5.56×45mm rubber)
   components:
   - type: BallisticAmmoProvider
     capacity: 200
@@ -22,7 +22,7 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleRubber
-  name: ammunition box (.20 rifle rubber)
+  name: ammunition box (5.56×45mm rubber)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleRubber
@@ -37,7 +37,7 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleFMJ
-  name: ammunition box (.20 rifle FMJ)
+  name: ammunition box (5.56×45mm FMJ)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleFMJ
@@ -52,7 +52,7 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleAP
-  name: ammunition box (.20 rifle AP)
+  name: ammunition box (5.56×45mm AP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleAP

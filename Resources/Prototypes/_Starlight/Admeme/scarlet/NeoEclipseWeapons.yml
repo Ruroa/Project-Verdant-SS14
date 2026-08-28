@@ -4,7 +4,7 @@
   parent: [WeaponRifleLecter, BaseMajorContraband]
   id: WeaponRiflePrometheus
   suffix: Admeme
-  description: "A heavily modified Lecter battle rifle issued to Neo-Eclipse Agents and Operatives. A 3-round burst mechanism has been machined into the action, making it lethal at any range. Feeds from .20 rifle magazines."
+  description: "A heavily modified Lecter battle rifle issued to Neo-Eclipse Agents and Operatives. A 3-round burst mechanism has been machined into the action, making it lethal at any range. Feeds from 5.56×45mm magazines."
   components:
   - type: Sprite
     sprite: _Starlight/Admeme/Scarlet/Prometheus.rsi

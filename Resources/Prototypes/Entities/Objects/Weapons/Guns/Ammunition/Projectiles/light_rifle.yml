@@ -2,7 +2,7 @@
   parent: BaseBullet
   id: BulletLightRifle
   categories: [ HideSpawnMenu ]
-  name: bullet (.30 rifle)
+  name: bullet (7.62×39mm)
   components:
   - type: Projectile
     damage:
@@ -13,7 +13,7 @@
   parent: BaseBulletPractice
   id: BulletLightRiflePractice
   categories: [ HideSpawnMenu ]
-  name: bullet (.30 rifle practice)
+  name: bullet (7.62×39mm practice)
   components:
   - type: Projectile
     damage:
@@ -24,7 +24,7 @@
   parent: BaseBulletIncendiary
   id: BulletLightRifleIncendiary
   categories: [ HideSpawnMenu ]
-  name: bullet (.30 rifle incendiary)
+  name: bullet (7.62×39mm incendiary)
   components:
   - type: Projectile
     damage:
@@ -36,7 +36,7 @@
   parent: BaseBulletUranium
   id: BulletLightRifleUranium
   categories: [ HideSpawnMenu ]
-  name: bullet (.30 rifle uranium)
+  name: bullet (7.62×39mm uranium)
   components:
   - type: Projectile
     damage:

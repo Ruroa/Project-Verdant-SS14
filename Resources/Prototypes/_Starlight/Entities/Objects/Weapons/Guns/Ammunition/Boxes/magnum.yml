@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseMagazineBoxMagnum
   id: MagazineBoxMagnumRubber
-  name: ammunition box (.45 magnum rubber)
+  name: ammunition box (.45 ACP rubber)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumRubber
@@ -16,7 +16,7 @@
 - type: entity
   parent: BaseMagazineBoxMagnum
   id: MagazineBoxMagnumFMJ
-  name: ammunition box (.45 magnum FMJ)
+  name: ammunition box (.45 ACP FMJ)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumFMJ

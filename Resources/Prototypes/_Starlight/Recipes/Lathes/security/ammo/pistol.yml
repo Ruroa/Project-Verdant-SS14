@@ -48,7 +48,7 @@
   materials:
     Steel: 100
 
-############ MAGAZINES (.35) ############
+############ MAGAZINES (9×19mm) ############
 
 - type: latheRecipe
   parent: BaseEmptyAmmoRecipe
@@ -138,7 +138,7 @@
   materials:
     Steel: 25
 
-############ MAGAZINES (.40) ############
+############ MAGAZINES (.40 S&W) ############
 
 - type: latheRecipe
   parent: BaseEmptyAmmoRecipe
@@ -177,7 +177,7 @@
     Uranium: 90
     Plastic: 130
 
-############ BOXES (.35) ############
+############ BOXES (9×19mm) ############
 
 - type: latheRecipe
   id: MagazineBoxPistolRubber
@@ -241,7 +241,7 @@
     Steel: 300
     Uranium: 600
 
-############ BOXES (.40) ############
+############ BOXES (.40 S&W) ############
 
 - type: latheRecipe
   parent: BaseAmmoRecipe

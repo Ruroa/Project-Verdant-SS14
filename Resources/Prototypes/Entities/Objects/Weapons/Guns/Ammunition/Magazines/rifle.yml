@@ -2,7 +2,7 @@
 #  abstract: true
 #  parent: [ BaseItem, BaseSecurityContraband ]
 #  id: BaseMagazineRifle
-#  name: "magazine (.20 rifle)"
+#  name: "magazine (5.56×45mm)"
 #  components:
 #  - type: Tag
 #    tags:
@@ -34,7 +34,7 @@
 #- type: entity
 #  parent: BaseMagazineRifle
 #  id: MagazineRifle
-#  name: "magazine (.20 rifle)"
+#  name: "magazine (5.56×45mm)"
 #  description: 25-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
 #  components:
 #  - type: BallisticAmmoProvider
@@ -55,7 +55,7 @@
 #- type: entity
 #  parent: MagazineRifle
 #  id: MagazineRifleEmpty
-#  name: "magazine (.20 rifle any)"
+#  name: "magazine (5.56×45mm any)"
 #  suffix: empty
 #  description: 25-round double stack magazine for combat rifles.
 #  components:
@@ -77,7 +77,7 @@
 #- type: entity
 #  parent: MagazineRifle
 #  id: MagazineRifleIncendiary
-#  name: "magazine (.20 rifle incendiary)"
+#  name: "magazine (5.56×45mm incendiary)"
 #  description: 25-round double stack magazine for combat rifles. Intended to hold self-igniting incendiary ammunition.
 #  components:
 #  - type: BallisticAmmoProvider
@@ -104,7 +104,7 @@
 #- type: entity
 #  parent: BaseMagazineRifle
 #  id: MagazineRiflePractice
-#  name: "magazine (.20 rifle practice)"
+#  name: "magazine (5.56×45mm practice)"
 #  description: 25-round double stack magazine for combat rifles. Intended to hold harmless practice ammunition.
 #  components:
 #  - type: BallisticAmmoProvider
@@ -131,7 +131,7 @@
 #- type: entity
 #  parent: BaseMagazineRifle
 #  id: MagazineRifleUranium
-#  name: "magazine (.20 rifle uranium)"
+#  name: "magazine (5.56×45mm uranium)"
 #  description: 25-round double stack magazine for combat rifles. Intended to hold exotic uranium-core ammunition.
 #  components:
 #  - type: BallisticAmmoProvider

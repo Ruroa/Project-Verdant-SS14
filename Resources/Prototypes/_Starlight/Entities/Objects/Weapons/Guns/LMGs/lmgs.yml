@@ -2,7 +2,7 @@
   name: M492 Smart LMG
   id: WeaponLightMachineGunM492
   parent: [BaseWeaponLightMachineGun, BaseSecurityContraband]
-  description: A high tech non-traditional LMG built specifically for combating the big threats among us. Uses .30 ammo.
+  description: A high tech non-traditional LMG built specifically for combating the big threats among us. Uses 7.62×39mm ammunition.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/LMGs/M492.rsi
@@ -60,7 +60,7 @@
   name: DP-28 LMG
   id: WeaponLightMachineGunDP28
   parent: [BaseWeaponLightMachineGun, BaseSovietContraband]
-  description: From RA-TA-TA-TA with love. Uses .30 ammo.
+  description: From RA-TA-TA-TA with love. Uses 7.62×39mm ammunition.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/LMGs/DP28.rsi

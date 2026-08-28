@@ -119,7 +119,7 @@
   name: forged repeater rifle
   parent: WeaponSniperMakeshift
   id: WeaponSniperForged
-  description: The best a tider can achive, reliable fire-rate and accuracy with a satisfying lever-action system. What more can you ask for? Is fitted to be able to chamber both .35 / .45
+  description: The best a tider can achive, reliable fire-rate and accuracy with a satisfying lever-action system. What more can you ask for? Is fitted to be able to chamber both 9×19mm / .45 ACP
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Snipers/forged_rifle.rsi

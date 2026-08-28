@@ -65,7 +65,7 @@
   name: NCI AK-220K
   parent: [BaseWeaponSubMachineGun, BaseGunWieldable, BaseSovietContraband]
   id: WeaponSubMachineGunAK220
-  description: A shortened bullpup submachine gun derived from USSP service designs and chambered in .35 Auto. Its rugged construction and cheap stamped components make it popular with frontier garrisons, surplus brokers, and security units that value reliability over refinement.
+  description: A shortened bullpup submachine gun derived from USSP service designs and chambered in 9×19mm. Its rugged construction and cheap stamped components make it popular with frontier garrisons, surplus brokers, and security units that value reliability over refinement.
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/SMGs/ak220.rsi
@@ -124,7 +124,7 @@
   name: LWC Vector-35
   parent: [BaseWeaponSubMachineGun, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponSubMachineGunVector9x19mm
-  description: A high-performance submachine gun chambered in .35 Auto, produced for security forces requiring compact automatic fire in confined environments. Its burst-control system and high cyclic rate make it effective in corridors, facilities, and other places where missing is expensive.
+  description: A high-performance submachine gun chambered in 9×19mm, produced for security forces requiring compact automatic fire in confined environments. Its burst-control system and high cyclic rate make it effective in corridors, facilities, and other places where missing is expensive.
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/SMGs/vector.rsi
@@ -178,7 +178,7 @@
   name: LWC Vector-45M
   parent: [BaseWeaponSubMachineGun, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponSubMachineGunVectorNtsfHclm
-  description: A limited-production .45 Magnum Vector variant originally developed by TSF arms producers and licensed to NanoTrasen for use by the NTSF. Compact, expensive, and punishingly powerful, it was built for special security units that needed heavy stopping power in close quarters.
+  description: A limited-production .45 ACP Vector variant originally developed by TSF arms producers and licensed to NanoTrasen for use by the NTSF. Compact, expensive, and punishingly powerful, it was built for special security units that needed heavy stopping power in close quarters.
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/SMGs/NTSF-HCLM-45rsi

@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolRubber
-  name: ammunition box (.35 auto rubber)
+  name: ammunition box (9×19mm rubber)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolRubber
@@ -16,7 +16,7 @@
 - type: entity
   parent: BaseItem
   id: BaseMagazineBoxPistol40
-  name: ammunition box (.40)
+  name: ammunition box (.40 S&W)
   abstract: true
   components:
   - type: BallisticAmmoProvider
@@ -42,7 +42,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol40
   id: MagazineBoxPistol40SP
-  name: ammunition box (.40 SP)
+  name: ammunition box (.40 S&W Ball)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -58,7 +58,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol40
   id: MagazineBoxPistol40HP
-  name: ammunition box (.40 HP)
+  name: ammunition box (.40 S&W HP)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -73,7 +73,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol40
   id: MagazineBoxPistol40FMJ
-  name: ammunition box (.40 FMJ)
+  name: ammunition box (.40 S&W FMJ)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -89,7 +89,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol40
   id: MagazineBoxPistol40AP
-  name: ammunition box (.40 AP)
+  name: ammunition box (.40 S&W AP)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -105,7 +105,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolFMJ
-  name: ammunition box (.35 auto FMJ)
+  name: ammunition box (9×19mm FMJ)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolFMJ
@@ -120,7 +120,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolAP
-  name: ammunition box (.35 auto AP)
+  name: ammunition box (9×19mm AP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolAP

@@ -2,7 +2,7 @@
   name: makarov
   parent: [BaseWeaponPistol, BaseSovietContraband]
   id: WeaponPistolMakarov
-  description: A cheap and cumbersome pistol, with a dot on the rear sight indicating the direction in which it tends to misfire, as this model does not shoot straight. Uses .35 auto ammo.
+  description: A cheap and cumbersome pistol, with a dot on the rear sight indicating the direction in which it tends to misfire, as this model does not shoot straight. Uses 9×19mm ammo.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/makarov.rsi
@@ -100,7 +100,7 @@
   parent: WeaponPistolMk58
   id: WeaponPistolMk58HighCapacity
   suffix: 16 rounds
-  description: Designed by NanoTrasen’s Small Arms Division, the Mk58 is a conventional semi-automatic pistol with a simple recoil-operated action and excellent reliability. The standard sidearm of NanoTrasen’s station security and emergency response teams. Feeds from .35 pistol magazines.
+  description: Designed by NanoTrasen’s Small Arms Division, the Mk58 is a conventional semi-automatic pistol with a simple recoil-operated action and excellent reliability. The standard sidearm of NanoTrasen’s station security and emergency response teams. Feeds from 9×19mm pistol magazines.
   components:
   - type: ItemSlots
     slots:
@@ -121,7 +121,7 @@
   name: golden mk 58
   parent: [WeaponPistolMk58, BaseSecurityContraband]
   id: WeaponPistolGoldenMk58
-  description: An expensive and rare golden variant of the Mk58, only given out to the elite. Doesn't actually have any functional differences, though. Feeds from .35 pistol magazines.
+  description: An expensive and rare golden variant of the Mk58, only given out to the elite. Doesn't actually have any functional differences, though. Feeds from 9×19mm pistol magazines.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/golden_mk58.rsi
@@ -268,7 +268,7 @@
   name: stechkin pistol
   parent: [BaseSecurityContraband, WeaponPistolMk58]
   id: WeaponPistolStechkin
-  description: A small, easily concealable .40 handgun. Has a threaded barrel for suppressors. Uses .40 ammo.
+  description: A small, easily concealable .40 S&W handgun. Has a threaded barrel for suppressors. Uses .40 S&W ammunition.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/stechkin.rsi
@@ -301,7 +301,7 @@
   name: stechkin APS
   parent: [WeaponPistolMk58, BaseSovietContraband]
   id: WeaponPistolAPS
-  description: A high quality firearm issued to SNKVD elites and high ranking officials. It's half pistol, half closing argument. Uses .40 ammo.
+  description: A high quality firearm issued to SNKVD elites and high ranking officials. It's half pistol, half closing argument. Uses .40 S&W ammunition.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/aps.rsi
@@ -360,7 +360,7 @@
   name: m1911
   parent: [WeaponPistolN1984, BaseSecurityContraband]
   id: WeaponPistolM1911
-  description: A classic .45 handgun with a small magazine capacity.
+  description: A classic .45 ACP handgun with a small magazine capacity.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/m1911.rsi
@@ -555,7 +555,7 @@
   name: G17
   parent: [BaseBlueShieldContraband, BaseWeaponPistol]
   id: WeaponPistolTSFModel17
-  description: A standard-issue sidearm of the Trans Solar Federation, the Model 17 serves TSF peacekeepers across the galaxy. Built with proven reliability and chambered in .35 auto, this pistol remains a trusted tool of law enforcement. Feeds from .35 pistol magazines.
+  description: A standard-issue sidearm of the Trans Solar Federation, the Model 17 serves TSF peacekeepers across the galaxy. Built with proven reliability and chambered in 9×19mm, this pistol remains a trusted tool of law enforcement. Feeds from 9×19mm pistol magazines.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/tsf_model17.rsi

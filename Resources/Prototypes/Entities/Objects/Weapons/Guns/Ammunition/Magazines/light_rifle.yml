@@ -3,7 +3,7 @@
   abstract: true
   parent: [ BaseItem, BaseSecurityContraband ]
   id: BaseMagazineLightRifle
-  name: "magazine (.30 rifle)"
+  name: "magazine (7.62×39mm)"
   components:
   - type: Tag
     tags:
@@ -37,8 +37,8 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRifleBoxSP
-  name: "L6 SAW magazine box (.30 rifle SP)"
-  description: Box containing a 100-round belt of linked .30 rifle rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
+  name: "L6 SAW magazine box (7.62×39mm Ball)"
+  description: Box containing a 100-round belt of linked 7.62×39mm rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: Tag
     tags:
@@ -58,7 +58,7 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRifleSP
-  name: "magazine (.30 rifle SP)"
+  name: "magazine (7.62×39mm Ball)"
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
@@ -73,7 +73,7 @@
 - type: entity
   parent: MagazineLightRifleSP
   id: MagazineLightRifleEmpty
-  name: "magazine (.30 rifle any)"
+  name: "magazine (7.62×39mm any)"
   suffix: empty
   description: Curved 30-round double stack magazine for combat rifles.
   components:
@@ -95,7 +95,7 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRiflePractice
-  name: "magazine (.30 rifle practice)"
+  name: "magazine (7.62×39mm practice)"
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
@@ -122,7 +122,7 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRifleUranium
-  name: "magazine (.30 rifle uranium)"
+  name: "magazine (7.62×39mm uranium)"
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
@@ -149,7 +149,7 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRifleIncendiary
-  name: "magazine (.30 rifle incendiary)"
+  name: "magazine (7.62×39mm incendiary)"
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider

@@ -27,7 +27,7 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleBig
-  name: ammunition box (.20 rifle SP)
+  name: ammunition box (5.56×45mm Ball)
   components:
   - type: BallisticAmmoProvider
     capacity: 200
@@ -47,8 +47,8 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleSP
-  name: ammunition box (.20 rifle SP)
-  description: A cardboard box of .20 rifle rounds. Intended to hold general-purpose kinetic ammunition.
+  name: ammunition box (5.56×45mm Ball)
+  description: A cardboard box of 5.56×45mm rounds. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleSP
@@ -63,7 +63,7 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleHP
-  name: ammunition box (.20 rifle HP)
+  name: ammunition box (5.56×45mm HP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleHP
@@ -77,8 +77,8 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRiflePractice
-  name: ammunition box (.20 rifle practice)
-  description: A cardboard box of .20 rifle rounds. Intended to hold harmless practice ammunition.
+  name: ammunition box (5.56×45mm practice)
+  description: A cardboard box of 5.56×45mm rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRiflePractice
@@ -93,8 +93,8 @@
 - type: entity
   id: MagazineBoxRifleIncendiary
   parent: BaseMagazineBoxRifle
-  name: ammunition box (.20 rifle incendiary)
-  description: A cardboard box of .20 rifle rounds. Intended to hold self-igniting incendiary ammunition.
+  name: ammunition box (5.56×45mm incendiary)
+  description: A cardboard box of 5.56×45mm rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleIncendiary
@@ -109,8 +109,8 @@
 - type: entity
   id: MagazineBoxRifleUranium
   parent: BaseMagazineBoxRifle
-  name: ammunition box (.20 rifle uranium)
-  description: A cardboard box of .20 rifle rounds. Intended to hold exotic uranium-core ammunition.
+  name: ammunition box (5.56×45mm uranium)
+  description: A cardboard box of 5.56×45mm rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleUranium

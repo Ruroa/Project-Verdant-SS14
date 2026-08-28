@@ -1,6 +1,6 @@
 - type: entity
   id: BulletMagnumRubber
-  name: bullet (.45 magnum rubber)
+  name: bullet (.45 ACP rubber)
   parent: BaseBulletRubber
   categories: [ HideSpawnMenu ]
   components:

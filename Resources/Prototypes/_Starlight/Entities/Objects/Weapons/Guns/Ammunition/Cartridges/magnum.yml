@@ -1,6 +1,6 @@
 - type: entity
   id: CartridgeMagnumRubber
-  name: cartridge (.45 magnum rubber)
+  name: cartridge (.45 ACP rubber)
   parent: BaseCartridgeMagnum
   components:
   - type: CartridgeAmmo
@@ -15,7 +15,7 @@
 
 - type: entity
   id: CartridgeMagnumImprovised
-  name: improvised cartridge (.45 magnum)
+  name: improvised cartridge (.45 ACP)
   description: A handmade revolver bullet, stuffed to the brim with phosphorus for extra 'oomph'. Still not as good as a normal magnum bullet.
   parent: [BaseCartridgePistol, BaseMinorContraband]
   components:
@@ -39,7 +39,7 @@
 
 - type: entity
   id: CartridgeMagnumHP
-  name: cartridge (.45 magnum HP)
+  name: cartridge (.45 ACP HP)
   parent: BaseCartridgeMagnum
   description: Heavy magnum cartridge mostly used by revolvers. Chalk ammunition is generally non-harmful, used for practice.
   components:
@@ -55,7 +55,7 @@
 
 - type: entity
   id: CartridgeMagnumFMJ
-  name: cartridge (.45 magnum FMJ)
+  name: cartridge (.45 ACP FMJ)
   parent: BaseCartridgeMagnum
   description: Heavy magnum cartridge mostly used by revolvers. Incendiary ammunition contains a self-igniting compound that sets the target ablaze.
   components:

@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseItem
   id: BaseMagazineBoxPistol
-  name: ammunition box (.35 auto)
+  name: ammunition box (9×19mm)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -28,7 +28,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolSP
-  name: ammunition box (.35 auto SP)
+  name: ammunition box (9×19mm Ball)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolSP
@@ -43,7 +43,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolHP
-  name: ammunition box (.35 auto HP)
+  name: ammunition box (9×19mm HP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolHP
@@ -57,8 +57,8 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolPractice
-  name: ammunition box (.35 auto practice)
-  description: A cardboard box of .35 auto rounds. Intended to hold harmless practice ammunition.
+  name: ammunition box (9×19mm practice)
+  description: A cardboard box of 9×19mm rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolPractice
@@ -73,8 +73,8 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolIncendiary
-  name: ammunition box (.35 auto incendiary)
-  description: A cardboard box of .35 auto rounds. Intended to hold self-igniting incendiary ammunition.
+  name: ammunition box (9×19mm incendiary)
+  description: A cardboard box of 9×19mm rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolIncendiary
@@ -89,8 +89,8 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolUranium
-  name: ammunition box (.35 auto uranium)
-  description: A cardboard box of .35 auto rounds. Intended to hold exotic uranium-core ammunition.
+  name: ammunition box (9×19mm uranium)
+  description: A cardboard box of 9×19mm rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolUranium

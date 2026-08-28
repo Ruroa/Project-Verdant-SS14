@@ -168,7 +168,7 @@
 #    Plastic: 600
 #    Uranium: 600
 #
-## .35 Auto
+## 9×19mm
 #- type: latheRecipe
 #  parent: BaseEmptyAmmoRecipe
 #  id: MagazinePistolEmpty
@@ -288,7 +288,7 @@
 #    Plastic: 300
 #    Uranium: 600
 #
-## .45 Magnum
+## .45 ACP
 #- type: latheRecipe
 #  parent: BaseEmptyAmmoRecipe
 #  id: SpeedLoaderMagnumEmpty
@@ -460,7 +460,7 @@
 #    Steel: 80
 #    Plastic: 80
 
-# .60 anti-materiel
+# 12.7×99mm
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
   id: MagazineBoxAntiMateriel

@@ -1,6 +1,6 @@
 - type: entity
   id: BulletRifleRubber
-  name: bullet (0.20 rifle rubber)
+  name: bullet (05.56×45mm rubber)
   parent: BaseBulletRubber
   categories: [ HideSpawnMenu ]
   components:

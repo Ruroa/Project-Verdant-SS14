@@ -13,7 +13,7 @@
   name: M27A1
   parent: [BaseTSFContraband, BaseWeaponRifle]
   id: WeaponRifleAnnie
-  description: A heavy automatic rifle chambered in .45 Magnum for suppression and hard-target interdiction. Originally fielded by TSF expeditionary units, the M27A1 later became a common sight in corporate armories supporting hazardous frontier and terraforming operations.
+  description: A heavy automatic rifle chambered in .45 ACP for suppression and hard-target interdiction. Originally fielded by TSF expeditionary units, the M27A1 later became a common sight in corporate armories supporting hazardous frontier and terraforming operations.
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Rifles/annie.rsi # Mono
@@ -74,7 +74,7 @@
   name: CS WSPR-45
   parent: [BaseSyndicateContraband, BaseWeaponRifle]
   id: WeaponRifleWSPR
-  description: A suppressed .45 Magnum battle rifle developed by Cybersun for covert interdiction teams and deniable security operations. The WSPR-45 combines an integrated barrel suppressor with a compact burst-fire action, making it a favorite wherever discretion and overkill are both mission requirements.
+  description: A suppressed .45 ACP battle rifle developed by Cybersun for covert interdiction teams and deniable security operations. The WSPR-45 combines an integrated barrel suppressor with a compact burst-fire action, making it a favorite wherever discretion and overkill are both mission requirements.
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Rifles/wspr.rsi # Mono

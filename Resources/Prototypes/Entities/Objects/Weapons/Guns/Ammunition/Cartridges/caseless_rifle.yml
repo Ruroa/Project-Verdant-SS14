@@ -2,7 +2,7 @@
   abstract: true
   parent: [ BaseCartridge, BaseSecurityContraband ]
   id: BaseCartridgeCaselessRifle
-  name: cartridge (.25 caseless)
+  name: cartridge (5.7×28mm caseless)
   components:
   - type: Tag
     tags:
@@ -23,7 +23,7 @@
 - type: entity
   parent: BaseCartridgeCaselessRifle
   id: CartridgeCaselessRifle
-  name: cartridge (.25 caseless)
+  name: cartridge (5.7×28mm caseless)
   description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: CartridgeAmmo
@@ -32,7 +32,7 @@
 - type: entity
   parent: BaseCartridgeCaselessRifle
   id: CartridgeCaselessRiflePractice
-  name: cartridge (.25 caseless practice)
+  name: cartridge (5.7×28mm caseless practice)
   description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo

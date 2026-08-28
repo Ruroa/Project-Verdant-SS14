@@ -17,7 +17,7 @@
   name: VFD MR-8C Watchman
   parent: [BaseWeaponRifle, BaseGunWieldable, BaseMajorContraband]
   id: WeaponMR8CDMR
-  description: A TSF-designed MR-8C designated marksman rifle chambered in .45 Magnum. Originally intended for frontier patrol and overwatch teams, the platform has found steady use among corporate security forces assigned to long-term terraforming contracts.
+  description: A TSF-designed MR-8C designated marksman rifle chambered in .45 ACP. Originally intended for frontier patrol and overwatch teams, the platform has found steady use among corporate security forces assigned to long-term terraforming contracts.
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Rifles/mr8c.rsi
@@ -145,7 +145,7 @@
   name: VFD XLR 
   parent: [BaseWeaponRifle, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponRifleXlrTSF
-  description: A high-cyclic-rate infantry weapon developed for TSF trials and corporate security procurement. Chambered in .20 rifle, it offers exceptional volume of fire at the cost of demanding strict recoil discipline from the operator.
+  description: A high-cyclic-rate infantry weapon developed for TSF trials and corporate security procurement. Chambered in 5.56×45mm, it offers exceptional volume of fire at the cost of demanding strict recoil discipline from the operator.
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Rifles/xlr556.rsi

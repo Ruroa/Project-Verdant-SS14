@@ -2,7 +2,7 @@
 - type: entity
   parent: [ BaseCartridge, BaseMajorContraband ]
   id: Cartridge48Rifle
-  name: cartridge (.48 rifle)
+  name: cartridge (.338 Lapua Magnum)
   description: A heavy intermediate cartridge of uncertain origin. Sits somewhere between a magnum round and an anti-materiel shell. Proprietary — don't expect to find it on any shelf.
   components:
   - type: Tag
@@ -24,8 +24,8 @@
 - type: entity
   parent: [ BaseItem, BaseMajorContraband ]
   id: SpeedLoader48Rifle
-  name: "speed loader (.48 rifle)"
-  description: A stripper clip pre-loaded with .48 rifle rounds. Feeds directly into the Lionhunter's internal magazine. Proprietary and hard to come by.
+  name: "speed loader (.338 Lapua Magnum)"
+  description: A stripper clip pre-loaded with .338 Lapua Magnum rounds. Feeds directly into the Lionhunter's internal magazine. Proprietary and hard to come by.
   components:
   - type: Tag
     tags:
