@@ -13,14 +13,3 @@
 
   - node: roof
     entity: PVRoof
-    edges:
-    - to: start
-      completed:
-      - !type:SpawnPrototype
-        prototype: PartRodMetal1
-        amount: 1
-      - !type:DeleteEntity {}
-      steps:
-      - tool: Cutting
-        doAfter: 1
-
