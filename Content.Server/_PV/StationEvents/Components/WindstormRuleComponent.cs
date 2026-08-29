@@ -11,24 +11,12 @@ public sealed partial class WindstormRuleComponent : Component
     public TimeSpan WeatherDelay = TimeSpan.FromSeconds(15);
 
     [DataField]
-    public TimeSpan MinGustInterval = TimeSpan.FromSeconds(4);
+    public float WindAcceleration = 6f;
 
     [DataField]
-    public TimeSpan MaxGustInterval = TimeSpan.FromSeconds(7);
-
-    [DataField]
-    public float PushChance = 0.4f;
-
-    [DataField]
-    public float PushSpeed = 2.5f;
-
-    [DataField]
-    public float ObjectPushChance = 0.4f;
-
-    [DataField]
-    public float ObjectPushSpeed = 3.5f;
+    public float MaxWindSpeed = 4f;
 
     public Direction WindFrom;
     public MapId Map;
-    public TimeSpan NextGust;
+    public TimeSpan WindStartsAt;
 }
