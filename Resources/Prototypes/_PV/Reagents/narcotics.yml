@@ -8,7 +8,7 @@
   flavor: bitter
   color: "#00E5FF"
   metabolisms:
-    Narcotic:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
       # Gunsawians have the inverted response associated with Expies.
@@ -16,25 +16,16 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Gunsawian ]
-        walkSpeedModifier: 1.20
-        sprintSpeedModifier: 1.20
-      - !type:Jitter
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Gunsawian ]
+        walkSpeedModifier: 1.40
+        sprintSpeedModifier: 1.40
+        time: 60
 
-      # The Space Drugs visual applies to everyone.
+      # The Space Drugs/Space Mirage rainbow visual applies to everyone.
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
         type: Add
-        time: 3
+        time: 5
 
-      - !type:ModifyStatusEffect
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Gunsawian ]
-        effectProto: StatusEffectDesoxyStamina
-        time: 2
       - !type:PopupMessage
         conditions:
         - !type:MetabolizerTypeCondition
@@ -70,12 +61,28 @@
         effectProto: StatusEffectDrowsiness
         time: 2
 
-      # High doses remain dangerous for every species, including Gunsawians.
+      # Everyone except Gunsawians overdoses at 5u.
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Fentanyl
+          min: 5
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
+          inverted: true
+        damage:
+          types:
+            Asphyxiation: 1.5
+            Poison: 0.5
+
+      # Gunsawians tolerate fentanyl until 15u.
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Fentanyl
           min: 15
+        - !type:MetabolizerTypeCondition
+          type: [ Gunsawian ]
         damage:
           types:
             Asphyxiation: 1.5
