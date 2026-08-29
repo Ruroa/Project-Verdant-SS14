@@ -1,0 +1,13 @@
+- type: construction
+  id: PVRoof
+  graph: PVRoof
+  startNode: start
+  targetNode: roof
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
