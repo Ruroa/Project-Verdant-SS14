@@ -8,15 +8,13 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Light.Components;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Station.Components;
-using Content.Shared.Throwing;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -33,7 +31,7 @@ public sealed partial class WindstormRule : StationEventSystem<WindstormRuleComp
     ];
 
     [Dependency] private WeatherSystem _weather = default!;
-    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private ItemToggleSystem _itemToggle = default!;
@@ -80,8 +78,7 @@ public sealed partial class WindstormRule : StationEventSystem<WindstormRuleComp
             return;
 
         component.Map = Transform(grid.Value).MapID;
-        component.NextGust = Timing.CurTime + component.WeatherDelay + RandomGustInterval(component);
-
+        component.WindStartsAt = Timing.CurTime + component.WeatherDelay;
         Timer.Spawn(component.WeatherDelay, () =>
         {
             if (GameTicker.IsGameRuleActive(uid, gameRule))
@@ -93,11 +90,10 @@ public sealed partial class WindstormRule : StationEventSystem<WindstormRuleComp
     {
         base.ActiveTick(uid, component, gameRule, frameTime);
 
-        if (Timing.CurTime < component.NextGust)
+        if (Timing.CurTime < component.WindStartsAt)
             return;
 
-        component.NextGust = Timing.CurTime + RandomGustInterval(component);
-        ApplyGust(component);
+        ApplyWind(component, frameTime);
     }
 
     protected override void Ended(EntityUid uid, WindstormRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
@@ -106,54 +102,31 @@ public sealed partial class WindstormRule : StationEventSystem<WindstormRuleComp
         _weather.TryRemoveWeather(component.Map, "WeatherWindstorm");
     }
 
-    private void ApplyGust(WindstormRuleComponent component)
+    private void ApplyWind(WindstormRuleComponent component, float frameTime)
     {
-        var push = WindPushVector(component.WindFrom);
-        var query = EntityQueryEnumerator<MobStateComponent, TransformComponent>();
+        var direction = WindPushVector(component.WindFrom);
+        var query = EntityQueryEnumerator<PhysicsComponent, TransformComponent>();
 
-        while (query.MoveNext(out var uid, out var mobState, out var xform))
+        while (query.MoveNext(out var uid, out var body, out var xform))
         {
-            if (xform.MapID != component.Map ||
-                mobState.CurrentState == MobState.Dead ||
-                HasActiveMagboots(uid) ||
-                !_random.Prob(component.PushChance) ||
-                !CanPushSafely(xform, push, out var destination))
-                continue;
-
-            _throwing.TryThrow(
-                uid,
-                destination,
-                component.PushSpeed,
-                pushbackRatio: 0f,
-                compensateFriction: true,
-                recoil: false,
-                playSound: false,
-                doSpin: false);
-        }
-
-        var objectQuery = EntityQueryEnumerator<PhysicsComponent, TransformComponent>();
-        while (objectQuery.MoveNext(out var uid, out _, out var xform))
-        {
-            // Living mobs were handled above. Dead bodies behave like other loose objects.
-            if (TryComp<MobStateComponent>(uid, out var mobState) && mobState.CurrentState != MobState.Dead)
-                continue;
-
             if (xform.MapID != component.Map ||
                 xform.Anchored ||
                 _containers.IsEntityInContainer(uid) ||
-                !_random.Prob(component.ObjectPushChance) ||
-                !CanPushSafely(xform, push, out var destination))
+                HasActiveMagboots(uid) ||
+                !IsExposedToWeather(xform))
                 continue;
 
-            _throwing.TryThrow(
+            var downwindSpeed = Vector2.Dot(body.LinearVelocity, direction);
+            if (downwindSpeed >= component.MaxWindSpeed)
+                continue;
+
+            var acceleration = MathF.Min(
+                component.WindAcceleration,
+                (component.MaxWindSpeed - downwindSpeed) / frameTime);
+            _physics.ApplyLinearImpulse(
                 uid,
-                destination,
-                component.ObjectPushSpeed,
-                pushbackRatio: 0f,
-                compensateFriction: true,
-                recoil: false,
-                playSound: false,
-                doSpin: true);
+                direction * acceleration * body.Mass * frameTime,
+                body: body);
         }
     }
 
@@ -164,28 +137,16 @@ public sealed partial class WindstormRule : StationEventSystem<WindstormRuleComp
                _itemToggle.IsActivated(shoes.Value);
     }
 
-    private bool CanPushSafely(TransformComponent xform, Vector2 push, out EntityCoordinates destination)
+    private bool IsExposedToWeather(TransformComponent xform)
     {
-        destination = xform.Coordinates.Offset(push);
-
         if (xform.GridUid is not { } gridUid || !_gridQuery.TryGetComponent(gridUid, out var grid))
             return false;
 
         var currentTile = _map.GetTileRef(gridUid, grid, xform.Coordinates);
-        var destinationTile = _map.GetTileRef(gridUid, grid, destination);
         var roof = _roofQuery.TryGetComponent(gridUid, out var roofComp) ? roofComp : null;
         var gridEntity = new Entity<MapGridComponent?, RoofComponent?>(gridUid, grid, roof);
 
-        return !destinationTile.Tile.IsEmpty &&
-               _weather.CanWeatherAffect(gridEntity, currentTile) &&
-               _weather.CanWeatherAffect(gridEntity, destinationTile);
-    }
-
-    private TimeSpan RandomGustInterval(WindstormRuleComponent component)
-    {
-        return TimeSpan.FromSeconds(_random.NextFloat(
-            (float) component.MinGustInterval.TotalSeconds,
-            (float) component.MaxGustInterval.TotalSeconds));
+        return !currentTile.Tile.IsEmpty && _weather.CanWeatherAffect(gridEntity, currentTile);
     }
 
     private static Vector2 WindPushVector(Direction windFrom)
