@@ -1,4 +1,5 @@
 using Content.Server.Light.Components;
+using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Robust.Shared.Map.Components;
 
@@ -24,8 +25,19 @@ public sealed partial class RoofSystem : SharedRoofSystem
 
         if (_gridQuery.TryComp(xform.GridUid, out var grid))
         {
-            var index = _maps.LocalToTile(xform.GridUid.Value, grid, xform.Coordinates);
-            SetRoof((xform.GridUid.Value, grid, null), index, ent.Comp.Value);
+            var gridUid = xform.GridUid.Value;
+
+            // Shuttles and other fully enclosed grids use ImplicitRoof and must not
+            // be converted into a partially roofed grid by a single marker.
+            if (HasComp<ImplicitRoofComponent>(gridUid))
+            {
+                QueueDel(ent.Owner);
+                return;
+            }
+
+            var roof = EnsureComp<RoofComponent>(gridUid);
+            var index = _maps.LocalToTile(gridUid, grid, xform.Coordinates);
+            SetRoof((gridUid, grid, roof), index, ent.Comp.Value);
         }
 
         QueueDel(ent.Owner);
