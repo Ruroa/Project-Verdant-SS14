@@ -1,0 +1,20 @@
+- type: entity
+  id: PVRoof
+  name: roof
+  description: A simple overhead roof that protects the tile below from weather.
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: IsRoof
+  # The completed roof is intentionally invisible. This icon is used by the
+  # construction menu and its placement ghost.
+  - type: Icon
+    sprite: Markers/cross.rsi
+    state: green
+  - type: Construction
+    graph: PVRoof
+    node: roof
+
