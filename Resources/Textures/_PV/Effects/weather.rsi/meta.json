@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "copyright": "Based on the rain weather effect from Citadel Station 13 RP; radioactive recolor by Ruroa",
+  "license": "CC-BY-SA-3.0",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "radioactive_rain",
+      "delays": [
+        [
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02
+        ]
+      ]
+    }
+  ]
+}
