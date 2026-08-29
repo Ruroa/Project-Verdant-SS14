@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
-using Content.Shared.Maps;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Audio.Systems;
@@ -17,12 +16,12 @@ public abstract partial class SharedWeatherSystem : EntitySystem
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected IPrototypeManager ProtoMan = default!;
     [Dependency] protected SharedAudioSystem Audio = default!;
-    [Dependency] private ITileDefinitionManager _tileDefManager = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private SharedRoofSystem _roof = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
+    private EntityQuery<ImplicitRoofComponent> _implicitRoofQuery;
     private EntityQuery<WeatherStatusEffectComponent> _weatherQuery;
 
     public static readonly TimeSpan StartupTime = TimeSpan.FromSeconds(15);
@@ -33,6 +32,7 @@ public abstract partial class SharedWeatherSystem : EntitySystem
         base.Initialize();
 
         _blockQuery = GetEntityQuery<BlockWeatherComponent>();
+        _implicitRoofQuery = GetEntityQuery<ImplicitRoofComponent>();
         _weatherQuery = GetEntityQuery<WeatherStatusEffectComponent>();
     }
 
@@ -44,24 +44,15 @@ public abstract partial class SharedWeatherSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp1))
             return false;
 
-        // Grids with explicit roof data use that data as the authoritative division
-        // between indoors and outdoors. This allows weather on constructed outdoor
-        // tiles such as plating without making roofed station interiors weatherable.
-        var hasExplicitRoofs = Resolve(ent, ref ent.Comp2, false);
-        if (hasExplicitRoofs)
-        {
-            if (_roof.IsRooved((ent, ent.Comp1, ent.Comp2!), tileRef.GridIndices))
-                return false;
-        }
-        else
-        {
-            // Preserve the legacy tile opt-in behavior for space grids and maps that
-            // do not define individual roof tiles.
-            var tileDef = (ContentTileDefinition)_tileDefManager[tileRef.Tile.TypeId];
+        // Fully enclosed grids such as shuttles are roofed everywhere.
+        if (_implicitRoofQuery.HasComp(ent.Owner))
+            return false;
 
-            if (!tileDef.Weather)
-                return false;
-        }
+        // Tile material does not determine whether a tile is outdoors. Every
+        // non-empty tile is weather-exposed unless explicit roof data covers it.
+        if (Resolve(ent, ref ent.Comp2, false) &&
+            _roof.IsRooved((ent, ent.Comp1, ent.Comp2!), tileRef.GridIndices))
+            return false;
 
         var anchoredEntities = _mapSystem.GetAnchoredEntitiesEnumerator(ent, ent.Comp1, tileRef.GridIndices);
 
