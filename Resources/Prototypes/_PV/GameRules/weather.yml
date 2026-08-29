@@ -35,9 +35,5 @@
     maxOccurrences: 2
   - type: WindstormRule
     weatherDelay: 15
-    minGustInterval: 4
-    maxGustInterval: 7
-    pushChance: 0.4
-    pushSpeed: 2.5
-    objectPushChance: 0.4
-    objectPushSpeed: 3.5
+    windAcceleration: 6
+    maxWindSpeed: 4
