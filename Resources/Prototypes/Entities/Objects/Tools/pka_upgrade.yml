@@ -58,6 +58,11 @@
     examineText: gun-upgrade-examine-text-range
   - type: GunUpgradeSpeed
     coefficient: 1.5
+  # Far Horizons: PKS accepts range and fire-rate upgrades, but not damage upgrades.
+  - type: Tag
+    tags:
+    - PKAUpgrade
+    - PKSUpgrade
 
 - type: entity
   id: PKAUpgradeFireRate
@@ -78,3 +83,8 @@
     examineText: gun-upgrade-examine-text-reload
   - type: GunUpgradeFireRate
     coefficient: 1.5
+  # Far Horizons: PKS accepts range and fire-rate upgrades, but not damage upgrades.
+  - type: Tag
+    tags:
+    - PKAUpgrade
+    - PKSUpgrade
