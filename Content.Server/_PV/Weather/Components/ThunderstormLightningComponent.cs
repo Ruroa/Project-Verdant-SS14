@@ -9,6 +9,9 @@ namespace Content.Server._PV.Weather.Components;
 public sealed partial class ThunderstormLightningComponent : Component
 {
     [DataField]
+    public TimeSpan InitialStrikeDelay = TimeSpan.FromSeconds(3);
+
+    [DataField]
     public TimeSpan MinStrikeInterval = TimeSpan.FromSeconds(12);
 
     [DataField]

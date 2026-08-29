@@ -16,3 +16,26 @@
     maxOccurrences: 3
   - type: WeatherRule
     weather: WeatherRain
+
+- type: entity
+  parent: BaseGameRule
+  id: Windstorm
+  components:
+  - type: StationEvent
+    weight: 6
+    startAnnouncementColor: Yellow
+    startAudio:
+      path: /Audio/Misc/notice1.ogg
+    endAnnouncement: station-event-windstorm-end-announcement
+    endAudio:
+      path: /Audio/Announcements/announce.ogg
+    duration: 180
+    maxDuration: 300
+    reoccurrenceDelay: 20
+    maxOccurrences: 2
+  - type: WindstormRule
+    weatherDelay: 15
+    minGustInterval: 4
+    maxGustInterval: 7
+    pushChance: 0.4
+    pushSpeed: 2.5

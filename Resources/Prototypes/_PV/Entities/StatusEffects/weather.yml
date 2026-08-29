@@ -1,0 +1,11 @@
+- type: entity
+  parent: WeatherBase
+  id: WeatherWindstorm
+  name: windstorm
+  components:
+  - type: WeatherStatusEffect
+    sound:
+      path: /Audio/Effects/Weather/snowstorm_weak.ogg
+      params:
+        loop: true
+        volume: -8

@@ -36,6 +36,7 @@
           loop: true
           volume: -6
     - type: ThunderstormLightning
+      initialStrikeDelay: 3
       minStrikeInterval: 12
       maxStrikeInterval: 25
       mobTargetChance: 0.65

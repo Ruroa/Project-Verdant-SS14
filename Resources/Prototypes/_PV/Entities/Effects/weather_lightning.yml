@@ -13,6 +13,7 @@
   components:
   - type: Lightning
     canArc: false
+    maxLength: 8
   - type: Electrified
     requirePower: false
     shockDamage: 15

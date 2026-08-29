@@ -42,7 +42,7 @@ public sealed class ThunderstormLightningSystem : EntitySystem
 
     private void OnComponentInit(Entity<ThunderstormLightningComponent> ent, ref ComponentInit args)
     {
-        ent.Comp.NextStrike = _timing.CurTime + RandomInterval(ent.Comp);
+        ent.Comp.NextStrike = _timing.CurTime + ent.Comp.InitialStrikeDelay;
     }
 
     public override void Update(float frameTime)
@@ -88,7 +88,8 @@ public sealed class ThunderstormLightningSystem : EntitySystem
             target = Spawn(MarkerPrototype, strikeCoordinates);
         }
 
-        var sourceCoordinates = strikeCoordinates.Offset(new Vector2(0f, 6f));
+        // Base lightning only reaches five tiles. Keep the temporary sky source inside that range.
+        var sourceCoordinates = strikeCoordinates.Offset(new Vector2(0f, 4f));
         var source = Spawn(MarkerPrototype, sourceCoordinates);
 
         // The weather bolt uses Tesla's beam visual, but deliberately disables Tesla target events,
