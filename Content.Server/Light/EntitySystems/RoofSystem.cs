@@ -21,6 +21,17 @@ public sealed partial class RoofSystem : SharedRoofSystem
 
     private void OnFlagStartup(Entity<SetRoofComponent> ent, ref ComponentStartup args)
     {
+        // Dynamically spawned markers can start up before their transform has been
+        // attached to the target grid. Defer the one-shot write until placement is
+        // complete instead of deleting a marker that has not changed anything.
+        Timer.Spawn(0, () => ApplyRoofFlag(ent));
+    }
+
+    private void ApplyRoofFlag(Entity<SetRoofComponent> ent)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
         var xform = Transform(ent.Owner);
 
         if (_gridQuery.TryComp(xform.GridUid, out var grid))
