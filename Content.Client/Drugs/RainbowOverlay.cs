@@ -29,9 +29,11 @@ public sealed partial class RainbowOverlay : Overlay
     public float Intoxication = 0.0f;
     public float TimeTicker = 0.0f;
     public float Phase = 0.0f;
+    public bool Potent;
 
     private const float VisualThreshold = 10.0f;
     private const float PowerDivisor = 250.0f;
+    public const float MaximumIntoxication = VisualThreshold + PowerDivisor;
     private float _timeScale = 0.0f;
     private float _warpScale = 0.0f;
 
@@ -55,6 +57,13 @@ public sealed partial class RainbowOverlay : Overlay
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
+        if (Potent)
+        {
+            Intoxication = MaximumIntoxication;
+            TimeTicker = 0;
+            return;
+        }
+
         var playerEntity = _playerManager.LocalEntity;
 
         if (playerEntity == null)

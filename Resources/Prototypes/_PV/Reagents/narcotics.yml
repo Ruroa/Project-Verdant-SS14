@@ -20,10 +20,10 @@
         sprintSpeedModifier: 1.40
         time: 60
 
-      # The Space Drugs/Space Mirage rainbow visual applies to everyone.
+      # Fentanyl applies the strongest Space Drugs/Space Mirage visual immediately.
       - !type:ModifyStatusEffect
-        effectProto: StatusEffectSeeingRainbow
-        type: Add
+        effectProto: StatusEffectSeeingRainbowPotent
+        type: Update
         time: 5
 
       - !type:PopupMessage
