@@ -8,13 +8,12 @@
   components:
   - type: Transform
     anchored: true
-  - type: IsRoof
+  # Write directly to the grid's roof data, just like RoofMarker. SetRoof
+  # deletes this helper entity after applying the roof flag.
+  - type: SetRoof
+    value: true
   # The completed roof is intentionally invisible. This icon is used by the
   # construction menu and its placement ghost.
   - type: Icon
     sprite: Markers/cross.rsi
     state: green
-  - type: Construction
-    graph: PVRoof
-    node: roof
-
