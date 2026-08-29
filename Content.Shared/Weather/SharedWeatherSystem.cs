@@ -44,13 +44,24 @@ public abstract partial class SharedWeatherSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp1))
             return false;
 
-        if (Resolve(ent, ref ent.Comp2, false) && _roof.IsRooved((ent, ent.Comp1, ent.Comp2), tileRef.GridIndices))
-            return false;
+        // Grids with explicit roof data use that data as the authoritative division
+        // between indoors and outdoors. This allows weather on constructed outdoor
+        // tiles such as plating without making roofed station interiors weatherable.
+        var hasExplicitRoofs = Resolve(ent, ref ent.Comp2, false);
+        if (hasExplicitRoofs)
+        {
+            if (_roof.IsRooved((ent, ent.Comp1, ent.Comp2), tileRef.GridIndices))
+                return false;
+        }
+        else
+        {
+            // Preserve the legacy tile opt-in behavior for space grids and maps that
+            // do not define individual roof tiles.
+            var tileDef = (ContentTileDefinition)_tileDefManager[tileRef.Tile.TypeId];
 
-        var tileDef = (ContentTileDefinition)_tileDefManager[tileRef.Tile.TypeId];
-
-        if (!tileDef.Weather)
-            return false;
+            if (!tileDef.Weather)
+                return false;
+        }
 
         var anchoredEntities = _mapSystem.GetAnchoredEntitiesEnumerator(ent, ent.Comp1, tileRef.GridIndices);
 
