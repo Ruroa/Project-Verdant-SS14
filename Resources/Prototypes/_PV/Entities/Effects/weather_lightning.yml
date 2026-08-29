@@ -1,0 +1,23 @@
+- type: entity
+  id: PVWeatherLightningMarker
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+  - type: TimedDespawn
+    lifetime: 3
+
+- type: entity
+  id: PVWeatherLightning
+  parent: BaseLightning
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Lightning
+    canArc: false
+  - type: Electrified
+    requirePower: false
+    shockDamage: 15
+    shockTime: 2
+  - type: Beam
+    sound: /Audio/Effects/Lightning/lightningbolt.ogg
+  - type: TimedDespawn
+    lifetime: 0.8

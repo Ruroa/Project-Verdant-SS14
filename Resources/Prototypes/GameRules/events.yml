@@ -19,6 +19,7 @@
     - id: PowerGridCheck
     - id: RandomSentience
     - id: SlimesSpawn
+    - id: Rain
     - id: Thunderstorm
     - id: SnakeSpawn
     - id: SpiderClownSpawn
@@ -29,10 +30,7 @@
     - id: SecurityDrill
     #- id: DoorRuntime
     - id: RadioactiveRain
-    - id: AuroraCaelus
-    - id: SpaceWhale
     - id: CommunicationBlackout
-    - id: NightShift
     - id: SyndicateDeadDrop
     - id: NanoChatSpamTiny
     - id: NanoChatSpamLowPop

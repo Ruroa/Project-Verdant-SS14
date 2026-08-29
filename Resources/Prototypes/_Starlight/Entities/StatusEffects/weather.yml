@@ -5,14 +5,13 @@
   components:
     - type: WeatherStatusEffect
       sprite:
-        sprite: /Textures/Effects/weather.rsi
-        state: ashfall
-      color: green
+        sprite: /Textures/_PV/Effects/weather.rsi
+        state: radioactive_rain
       sound:
-        path: /Audio/_Starlight/Effects/Weather/blobalarm.ogg
+        path: /Audio/Effects/Weather/rain_heavy.ogg
         params:
           loop: true
-          volume: -16
+          volume: -6
     - type: WeatherEffects
     - type: WeatherEntityEffect
       effects:
@@ -30,23 +29,18 @@
     - type: WeatherStatusEffect
       sprite:
         sprite: /Textures/Effects/weather.rsi
-        state: ashfall_light
-      color: yellow
+        state: storm
       sound:
-        path: /Audio/_Starlight/Effects/Weather/blobalarm.ogg
+        path: /Audio/Effects/Weather/rain_heavy.ogg
         params:
           loop: true
-          volume: -16
-    - type: WeatherEffects
-    - type: WeatherEntityEffect
-      effects:
-      - !type:HealthChange
-        ignoreResistances: false
-        damage:
-          types:
-            Heat: 3
-      - !type:AdjustTemperature
-        amount: 5500
+          volume: -6
+    - type: ThunderstormLightning
+      minStrikeInterval: 12
+      maxStrikeInterval: 25
+      mobTargetChance: 0.65
+      shockDamage: 15
+      electrocutionTime: 2
 
 - type: entity
   parent: WeatherBase

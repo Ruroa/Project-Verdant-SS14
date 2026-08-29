@@ -23,6 +23,12 @@
       params:
         loop: true
         volume: -6
+  - type: WeatherEffects
+    minEffectFrequency: 2
+    maxEffectFrequency: 5
+  - type: WeatherEntityEffect
+    effects:
+    - !type:Extinguish
 
 - type: entity
   parent: WeatherBase

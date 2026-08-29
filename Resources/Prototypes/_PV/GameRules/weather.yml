@@ -1,0 +1,18 @@
+- type: entity
+  parent: BaseGameRule
+  id: Rain
+  components:
+  - type: StationEvent
+    weight: 10
+    startAnnouncement: station-event-rain-start-announcement
+    startAudio:
+      path: /Audio/Announcements/announce.ogg
+    endAnnouncement: station-event-rain-end-announcement
+    endAudio:
+      path: /Audio/Announcements/announce.ogg
+    duration: 180
+    maxDuration: 360
+    reoccurrenceDelay: 20
+    maxOccurrences: 3
+  - type: WeatherRule
+    weather: WeatherRain
