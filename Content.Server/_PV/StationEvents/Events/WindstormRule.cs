@@ -3,12 +3,17 @@ using Content.Server._PV.StationEvents.Components;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Server.Weather;
+using Content.Shared.Clothing;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Inventory;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Light.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Physics.Components;
 using Content.Shared.Station.Components;
 using Content.Shared.Throwing;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
@@ -30,6 +35,9 @@ public sealed partial class WindstormRule : StationEventSystem<WindstormRuleComp
     [Dependency] private WeatherSystem _weather = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private ItemToggleSystem _itemToggle = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private IRobustRandom _random = default!;
 
     private EntityQuery<MapGridComponent> _gridQuery;
@@ -107,6 +115,7 @@ public sealed partial class WindstormRule : StationEventSystem<WindstormRuleComp
         {
             if (xform.MapID != component.Map ||
                 mobState.CurrentState == MobState.Dead ||
+                HasActiveMagboots(uid) ||
                 !_random.Prob(component.PushChance) ||
                 !CanPushSafely(xform, push, out var destination))
                 continue;
@@ -121,6 +130,38 @@ public sealed partial class WindstormRule : StationEventSystem<WindstormRuleComp
                 playSound: false,
                 doSpin: false);
         }
+
+        var objectQuery = EntityQueryEnumerator<PhysicsComponent, TransformComponent>();
+        while (objectQuery.MoveNext(out var uid, out _, out var xform))
+        {
+            // Living mobs were handled above. Dead bodies behave like other loose objects.
+            if (TryComp<MobStateComponent>(uid, out var mobState) && mobState.CurrentState != MobState.Dead)
+                continue;
+
+            if (xform.MapID != component.Map ||
+                xform.Anchored ||
+                _containers.IsEntityInContainer(uid) ||
+                !_random.Prob(component.ObjectPushChance) ||
+                !CanPushSafely(xform, push, out var destination))
+                continue;
+
+            _throwing.TryThrow(
+                uid,
+                destination,
+                component.ObjectPushSpeed,
+                pushbackRatio: 0f,
+                compensateFriction: true,
+                recoil: false,
+                playSound: false,
+                doSpin: true);
+        }
+    }
+
+    private bool HasActiveMagboots(EntityUid uid)
+    {
+        return _inventory.TryGetSlotEntity(uid, "shoes", out var shoes) &&
+               HasComp<MagbootsComponent>(shoes.Value) &&
+               _itemToggle.IsActivated(shoes.Value);
     }
 
     private bool CanPushSafely(TransformComponent xform, Vector2 push, out EntityCoordinates destination)

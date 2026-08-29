@@ -22,6 +22,12 @@ public sealed partial class WindstormRuleComponent : Component
     [DataField]
     public float PushSpeed = 2.5f;
 
+    [DataField]
+    public float ObjectPushChance = 0.4f;
+
+    [DataField]
+    public float ObjectPushSpeed = 3.5f;
+
     public Direction WindFrom;
     public MapId Map;
     public TimeSpan NextGust;

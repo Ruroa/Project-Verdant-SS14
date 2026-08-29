@@ -39,3 +39,5 @@
     maxGustInterval: 7
     pushChance: 0.4
     pushSpeed: 2.5
+    objectPushChance: 0.4
+    objectPushSpeed: 3.5
