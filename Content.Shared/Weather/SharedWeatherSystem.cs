@@ -50,7 +50,7 @@ public abstract partial class SharedWeatherSystem : EntitySystem
         var hasExplicitRoofs = Resolve(ent, ref ent.Comp2, false);
         if (hasExplicitRoofs)
         {
-            if (_roof.IsRooved((ent, ent.Comp1, ent.Comp2), tileRef.GridIndices))
+            if (_roof.IsRooved((ent, ent.Comp1, ent.Comp2!), tileRef.GridIndices))
                 return false;
         }
         else
