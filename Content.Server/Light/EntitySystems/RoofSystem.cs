@@ -2,6 +2,7 @@ using Content.Server.Light.Components;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Light.EntitySystems;
 
