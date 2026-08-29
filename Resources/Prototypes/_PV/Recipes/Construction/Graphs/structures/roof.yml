@@ -1,0 +1,26 @@
+- type: constructionGraph
+  id: PVRoof
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: roof
+      completed:
+      - !type:SnapToGrid {}
+      steps:
+      - material: MetalRod
+        amount: 1
+
+  - node: roof
+    entity: PVRoof
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: PartRodMetal1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Cutting
+        doAfter: 1
+
