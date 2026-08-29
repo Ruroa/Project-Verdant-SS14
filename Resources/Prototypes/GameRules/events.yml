@@ -11,7 +11,7 @@
     - id: CockroachMigration
     - id: GasLeak
     - id: DoorLaggingVirus
-    - id: IonStorm # its calm like 90% of the time smh
+    - id: ElectromagneticStorm # its calm like 90% of the time smh
     - id: KudzuGrowth
     - id: MassHallucinations
     - id: MimicVendorRule
@@ -19,7 +19,7 @@
     - id: PowerGridCheck
     - id: RandomSentience
     - id: SlimesSpawn
-    - id: SolarFlare
+    - id: Thunderstorm
     - id: SnakeSpawn
     - id: SpiderClownSpawn
     - id: SpiderSpawn
@@ -28,7 +28,7 @@
     - id: PsychicScreach
     - id: SecurityDrill
     #- id: DoorRuntime
-    - id: RadStorm
+    - id: RadioactiveRain
     - id: AuroraCaelus
     - id: SpaceWhale
     - id: CommunicationBlackout
@@ -400,12 +400,12 @@
 # SL - Moved to WIP
 # - type: entity
 #   parent: BaseGameRule
-#   id: SolarFlare
+#   id: Thunderstorm
 #   components:
 #   - type: StationEvent
 #     weight: 8
-#     startAnnouncement: station-event-solar-flare-start-announcement
-#     endAnnouncement: station-event-solar-flare-end-announcement
+#     startAnnouncement: station-event-thunderstorm-start-announcement
+#     endAnnouncement: station-event-thunderstorm-end-announcement
 #     startAudio:
 #       path: /Audio/_Starlight/Announcements/attention.ogg
 #     duration: 120
@@ -622,7 +622,7 @@
 
 - type: entity
   parent: BaseGameRule
-  id: IonStorm
+  id: ElectromagneticStorm
   components:
   - type: StationEvent
     globalAnnouncement: false # Starlight

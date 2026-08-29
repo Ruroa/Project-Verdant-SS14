@@ -1,4 +1,4 @@
-station-event-ion-storm-start-announcement = Ion storm detected near the station. Please check all AI-controlled equipment for errors.
+station-event-electromagnetic-storm-start-announcement = An electromagnetic storm has been detected near the facility. Please check all AI-controlled equipment for errors.
 
 ion-storm-law-scrambled-number = [font="Monospace"][scramble rate=250 length={$length} chars="@@###$$&%!01"/][/font]
 

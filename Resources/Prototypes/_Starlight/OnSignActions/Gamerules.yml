@@ -1,9 +1,9 @@
 - type: onSignActions
-  id: IonStormInfinite
+  id: ElectromagneticStormInfinite
   actions:
     - !type:ActionAddGamerules
       rules:
-        - IonStorm
+        - ElectromagneticStorm
     - !type:ActionSetCharges
       charges: 1
     - !type:ActionClearSigners

@@ -44,9 +44,9 @@
           protoIdIcon: APCBasic
           gameRule: BreakerFlip
           useDelay: 15m
-        - name: syndicate-disruptor-ion-storm
+        - name: syndicate-disruptor-electromagnetic-storm
           protoIdIcon: BorgChassisGeneric
-          gameRule: IonStorm
+          gameRule: ElectromagneticStorm
           useDelay: 45m
         - name: syndicate-disruptor-comms-blackout
           protoIdIcon: TelecomServer
@@ -90,9 +90,9 @@
           protoIdIcon: APCBasic
           gameRule: BreakerFlip
           useDelay: 15m
-        - name: syndicate-disruptor-ion-storm
+        - name: syndicate-disruptor-electromagnetic-storm
           protoIdIcon: BorgChassisGeneric
-          gameRule: IonStorm
+          gameRule: ElectromagneticStorm
           useDelay: 30m
         - name: syndicate-disruptor-comms-blackout
           protoIdIcon: TelecomServer

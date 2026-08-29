@@ -166,7 +166,7 @@
     - type: Paper
       content: paper-ionstorm-borgs
     - type: ActionsOnSign
-      actions: IonStormInfinite
+      actions: ElectromagneticStormInfinite
 
 - type: entity
   parent: BaseStarlightAdmemePaper

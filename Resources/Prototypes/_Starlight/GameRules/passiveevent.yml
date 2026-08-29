@@ -55,34 +55,34 @@
 
 - type: entity
   parent: BaseGameRule
-  id: RadStorm
+  id: RadioactiveRain
   components:
     - type: StationEvent
       weight: 2
       startAnnouncementColor: Red
-      startAnnouncement: station-event-radstorm-start-announcement
+      startAnnouncement: station-event-radioactive-rain-start-announcement
       startAudio:
         path: /Audio/Misc/notice1.ogg
-      endAnnouncement: station-event-radstorm-end-announcement
+      endAnnouncement: station-event-radioactive-rain-end-announcement
       endAudio:
         path: /Audio/Announcements/announce.ogg
       duration: 150
       maxOccurrences: 1
     - type: WeatherRule
-      weather: WeatherRadStorm
+      weather: WeatherRadioactiveRain
       delay: 30
 
 - type: entity
   parent: BaseGameRule
-  id: SolarFlare
+  id: Thunderstorm
   components:
     - type: StationEvent
       weight: 8
       startAnnouncementColor: Red
-      startAnnouncement: station-event-solarflare-start-announcement
+      startAnnouncement: station-event-thunderstorm-start-announcement
       startAudio:
         path: /Audio/Misc/notice1.ogg
-      endAnnouncement: station-event-solarflare-end-announcement
+      endAnnouncement: station-event-thunderstorm-end-announcement
       endAudio:
         path: /Audio/Announcements/announce.ogg
       duration: 90
@@ -90,7 +90,7 @@
       reoccurrenceDelay: 30
       maxOccurrences: 2
     - type: WeatherRule
-      weather: WeatherSolarFlare
+      weather: WeatherThunderstorm
       delay: 30
 
 - type: entity

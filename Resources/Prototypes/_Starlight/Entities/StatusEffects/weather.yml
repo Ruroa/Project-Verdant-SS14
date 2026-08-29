@@ -1,7 +1,7 @@
 - type: entity
   parent: WeatherBase
-  id: WeatherRadStorm
-  name: radstorm
+  id: WeatherRadioactiveRain
+  name: radioactive rain
   components:
     - type: WeatherStatusEffect
       sprite:
@@ -24,8 +24,8 @@
 
 - type: entity
   parent: WeatherBase
-  id: WeatherSolarFlare
-  name: solar flare
+  id: WeatherThunderstorm
+  name: thunderstorm
   components:
     - type: WeatherStatusEffect
       sprite:
