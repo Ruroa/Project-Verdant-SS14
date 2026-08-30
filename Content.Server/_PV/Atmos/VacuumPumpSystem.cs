@@ -1,9 +1,12 @@
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Components;
+using Content.Server.Atmos.Piping.Unary.Components;
 using Content.Server.Audio;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Power.Components;
 using Content.Shared._PV.Atmos;
+using Content.Shared.Atmos.Piping.Unary.Components;
 using Content.Shared.Power;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
@@ -13,6 +16,7 @@ namespace Content.Server._PV.Atmos;
 public sealed partial class VacuumPumpSystem : EntitySystem
 {
     [Dependency] private NodeContainerSystem _nodes = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private AmbientSoundSystem _ambient = default!;
@@ -56,9 +60,40 @@ public sealed partial class VacuumPumpSystem : EntitySystem
         // siphoning vent. Removed gas is discarded as if the outlet led directly
         // to space. The rate is limited so pressure falls visibly rather than the
         // complete network disappearing in a single atmos tick.
-        var amount = MathF.Min(inlet.Air.TotalMoles, ent.Comp.MolesPerSecond * args.dt);
-        if (amount > 0f)
-            inlet.Air.Remove(amount);
+        var remaining = ent.Comp.MolesPerSecond * args.dt;
+        var pipeAmount = MathF.Min(inlet.Air.TotalMoles, remaining);
+        if (pipeAmount > 0f)
+        {
+            inlet.Air.Remove(pipeAmount);
+            remaining -= pipeAmount;
+        }
+
+        if (remaining <= 0f || inlet.NodeGroup == null)
+            return;
+
+        // Ordinary siphoning vents are intentionally slow. Any siphoning vent
+        // connected to this pump's inlet network instead shares the high-speed
+        // vacuum budget, making the chamber depressurize like a hull breach.
+        var vents = EntityQueryEnumerator<GasVentPumpComponent>();
+        while (remaining > 0f && vents.MoveNext(out var ventUid, out var vent))
+        {
+            if (!vent.Enabled ||
+                vent.PumpDirection != VentPumpDirection.Siphoning ||
+                !_nodes.TryGetNode(ventUid, vent.Outlet, out PipeNode? ventNode) ||
+                ventNode.NodeGroup != inlet.NodeGroup)
+                continue;
+
+            var environment = _atmosphere.GetTileMixture(ventUid, excite: true);
+            if (environment == null)
+                continue;
+
+            var ventAmount = MathF.Min(environment.TotalMoles, remaining);
+            if (ventAmount <= 0f)
+                continue;
+
+            environment.Remove(ventAmount);
+            remaining -= ventAmount;
+        }
     }
 
     private void UpdateState(Entity<VacuumPumpComponent> ent, bool? poweredOverride = null)
