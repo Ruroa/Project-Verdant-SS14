@@ -1,0 +1,17 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="Artifact Vacuum Pump"
+                      MinSize="260 100"
+                      SetSize="260 100"
+                      Resizable="False">
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  VerticalExpand="True"
+                  Margin="12"
+                  SeparationOverride="12">
+        <Button Name="ToggleButton"
+                Text="ON"
+                HorizontalExpand="True"
+                VerticalExpand="True" />
+    </BoxContainer>
+</controls:FancyWindow>
