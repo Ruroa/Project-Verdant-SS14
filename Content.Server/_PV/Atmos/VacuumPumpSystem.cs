@@ -1,6 +1,7 @@
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Audio;
+using Content.Server.NodeContainer.EntitySystems;
+using Content.Server.NodeContainer.Nodes;
 using Content.Server.Power.Components;
 using Content.Shared._PV.Atmos;
 using Content.Shared.Power;
@@ -11,11 +12,10 @@ namespace Content.Server._PV.Atmos;
 
 public sealed partial class VacuumPumpSystem : EntitySystem
 {
-    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private NodeContainerSystem _nodes = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private AmbientSoundSystem _ambient = default!;
-    [Dependency] private TransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -49,17 +49,13 @@ public sealed partial class VacuumPumpSystem : EntitySystem
         if (!ent.Comp.Enabled ||
             !TryComp<ApcPowerReceiverComponent>(ent, out var receiver) ||
             !receiver.Powered ||
-            args.Grid is not { } grid)
+            !_nodes.TryGetNode(ent.Owner, "inlet", out PipeNode? inlet))
             return;
 
-        var position = _transform.GetGridTilePositionOrDefault(ent.Owner);
-        _atmosphere.GetTileMixture(grid, args.Map, position, true)?.Clear();
-
-        // Clearing the pump tile and its four neighbours creates a very strong
-        // atmospheric sink. A sealed room equalizes into it until it reaches 0 kPa.
-        var adjacent = _atmosphere.GetAdjacentTileMixtures(grid, position, false, true);
-        while (adjacent.MoveNext(out var mixture))
-            mixture.Clear();
+        // The inlet is connected to a pipe network containing the chamber's
+        // siphoning vent. Erasing the mixture makes this behave like an outlet
+        // leading directly to space and permits a genuine 0 kPa vacuum.
+        inlet.Air.Clear();
     }
 
     private void UpdateState(Entity<VacuumPumpComponent> ent, bool? poweredOverride = null)
