@@ -53,9 +53,12 @@ public sealed partial class VacuumPumpSystem : EntitySystem
             return;
 
         // The inlet is connected to a pipe network containing the chamber's
-        // siphoning vent. Erasing the mixture makes this behave like an outlet
-        // leading directly to space and permits a genuine 0 kPa vacuum.
-        inlet.Air.Clear();
+        // siphoning vent. Removed gas is discarded as if the outlet led directly
+        // to space. The rate is limited so pressure falls visibly rather than the
+        // complete network disappearing in a single atmos tick.
+        var amount = MathF.Min(inlet.Air.TotalMoles, ent.Comp.MolesPerSecond * args.dt);
+        if (amount > 0f)
+            inlet.Air.Remove(amount);
     }
 
     private void UpdateState(Entity<VacuumPumpComponent> ent, bool? poweredOverride = null)
