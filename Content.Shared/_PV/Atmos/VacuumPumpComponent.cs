@@ -14,6 +14,19 @@ public sealed partial class VacuumPumpComponent : Component
     /// </summary>
     [DataField]
     public float MolesPerSecond = 2000f;
+
+    /// <summary>
+    /// Below this pressure, finish evacuating the connected airtight area to
+    /// avoid the final traces of gas taking disproportionately long to diffuse.
+    /// </summary>
+    [DataField]
+    public float FinishPressure = 5f;
+
+    /// <summary>
+    /// Safety limit for the low-pressure airtight-area finishing pass.
+    /// </summary>
+    [DataField]
+    public int MaxFinishTiles = 256;
 }
 
 [Serializable, NetSerializable]
