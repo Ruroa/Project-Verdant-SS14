@@ -13,7 +13,7 @@ public sealed partial class VacuumPumpComponent : Component
     /// Maximum amount of gas removed from the inlet pipe network each second.
     /// </summary>
     [DataField]
-    public float MolesPerSecond = 100f;
+    public float MolesPerSecond = 2000f;
 }
 
 [Serializable, NetSerializable]
