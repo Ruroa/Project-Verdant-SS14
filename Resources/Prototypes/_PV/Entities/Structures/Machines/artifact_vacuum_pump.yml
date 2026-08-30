@@ -1,46 +1,22 @@
 - type: entity
   id: PVArtifactVacuumPump
-  parent: GasBinaryBase
-  name: artifact vacuum pump
-  description: A high-powered Science pump that rapidly removes every gas from a sealed chamber.
+  parent: BaseWallmountMachine
+  name: wall-mounted vacuum pump
+  description: A directional pump that rapidly removes every gas from the airtight room it faces.
   suffix: PV
-  placement:
-    mode: AlignAtmosPipeLayers
   components:
-  - type: ExtensionCableReceiver
-  - type: LightningTarget
-    priority: 1
-  - type: Rotatable
-  - type: Transform
-    noRot: false
+  - type: StationAiWhitelist
+  - type: WallMount
+    arc: 180
   - type: VacuumPump
+  - type: AtmosDevice
+    joinSystem: true
   - type: ApcPowerReceiver
     powerLoad: 1000
-  - type: SubFloorHide
-    visibleLayers:
-    - enum.SubfloorLayers.FirstLayer
   - type: Sprite
-    sprite: _Carpmosia/Structures/Piping/Atmospherics/pump.rsi
-    layers:
-    - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi
-      state: pipeStraight
-      map: ["enum.PipeVisualLayers.Pipe"]
-    - state: pumpVolume
-      map: ["enum.SubfloorLayers.FirstLayer", "enabled"]
-  - type: AtmosPipeLayers
-    alternativePrototypes:
-      Primary: PVArtifactVacuumPump
-      Secondary: PVArtifactVacuumPumpAlt1
-      Tertiary: PVArtifactVacuumPumpAlt2
-      Quaternary: PVArtifactVacuumPumpAlt3
-      Quinary: PVArtifactVacuumPumpAlt4
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.VacuumPumpVisuals.Enabled:
-        enabled:
-          True: { state: pumpVolumeOn }
-          False: { state: pumpVolume }
+    drawdepth: WallMountedItems
+    sprite: _PV/Structures/Wallmounts/Vacpump.rsi
+    state: vacpump
   - type: ActivatableUI
     key: enum.VacuumPumpUiKey.Key
   - type: ActivatableUIRequiresAnchor
@@ -48,79 +24,18 @@
     interfaces:
       enum.VacuumPumpUiKey.Key:
         type: VacuumPumpBoundUserInterface
-  - type: Construction
-    graph: GasBinary
-    node: volumepump
-  - type: PipeColorVisuals
   - type: AmbientSound
     enabled: false
     volume: -7
     range: 6
     sound:
       path: /Audio/Ambience/Objects/gas_pump.ogg
-  - type: VentCrawlTube
-  - type: VentCrawlTransit
-
-- type: entity
-  parent: [GasPipeLayerAlt1, PVArtifactVacuumPump]
-  id: PVArtifactVacuumPumpAlt1
-  categories: [HideSpawnMenu]
-  components:
-  - type: Sprite
-    sprite: _Carpmosia/Structures/Piping/Atmospherics/pump_alt1.rsi
-    layers:
-    - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe_alt1.rsi
-      state: pipeStraight
-      map: ["enum.PipeVisualLayers.Pipe"]
-    - state: pumpVolume
-      map: ["enum.SubfloorLayers.FirstLayer", "enabled"]
-  - type: Construction
-    node: volumepumpAlt1
-
-- type: entity
-  parent: [GasPipeLayerAlt2, PVArtifactVacuumPump]
-  id: PVArtifactVacuumPumpAlt2
-  categories: [HideSpawnMenu]
-  components:
-  - type: Sprite
-    sprite: _Carpmosia/Structures/Piping/Atmospherics/pump_alt2.rsi
-    layers:
-    - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe_alt2.rsi
-      state: pipeStraight
-      map: ["enum.PipeVisualLayers.Pipe"]
-    - state: pumpVolume
-      map: ["enum.SubfloorLayers.FirstLayer", "enabled"]
-  - type: Construction
-    node: volumepumpAlt2
-
-- type: entity
-  parent: [GasPipeLayerAlt3, PVArtifactVacuumPump]
-  id: PVArtifactVacuumPumpAlt3
-  categories: [HideSpawnMenu]
-  components:
-  - type: Sprite
-    sprite: _Carpmosia/Structures/Piping/Atmospherics/pump_alt3.rsi
-    layers:
-    - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe_alt3.rsi
-      state: pipeStraight
-      map: ["enum.PipeVisualLayers.Pipe"]
-    - state: pumpVolume
-      map: ["enum.SubfloorLayers.FirstLayer", "enabled"]
-  - type: Construction
-    node: volumepumpAlt3
-
-- type: entity
-  parent: [GasPipeLayerAlt4, PVArtifactVacuumPump]
-  id: PVArtifactVacuumPumpAlt4
-  categories: [HideSpawnMenu]
-  components:
-  - type: Sprite
-    sprite: _Carpmosia/Structures/Piping/Atmospherics/pump_alt4.rsi
-    layers:
-    - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe_alt4.rsi
-      state: pipeStraight
-      map: ["enum.PipeVisualLayers.Pipe"]
-    - state: pumpVolume
-      map: ["enum.SubfloorLayers.FirstLayer", "enabled"]
-  - type: Construction
-    node: volumepumpAlt4
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
