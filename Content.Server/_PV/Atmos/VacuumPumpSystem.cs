@@ -1,4 +1,5 @@
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.Atmos.Components;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Atmos.Piping.Unary.Components;
 using Content.Server.Audio;
@@ -6,10 +7,14 @@ using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Power.Components;
 using Content.Shared._PV.Atmos;
+using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.Piping.Unary.Components;
 using Content.Shared.Power;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 
 namespace Content.Server._PV.Atmos;
 
@@ -17,6 +22,8 @@ public sealed partial class VacuumPumpSystem : EntitySystem
 {
     [Dependency] private NodeContainerSystem _nodes = default!;
     [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private TransformSystem _transform = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private AmbientSoundSystem _ambient = default!;
@@ -87,12 +94,66 @@ public sealed partial class VacuumPumpSystem : EntitySystem
             if (environment == null)
                 continue;
 
+            if (environment.Pressure <= ent.Comp.FinishPressure && args.Grid is { } grid)
+            {
+                FinishVacuum(grid, args.Map, ventUid, ent.Comp.MaxFinishTiles);
+                continue;
+            }
+
             var ventAmount = MathF.Min(environment.TotalMoles, remaining);
             if (ventAmount <= 0f)
                 continue;
 
             environment.Remove(ventAmount);
             remaining -= ventAmount;
+        }
+    }
+
+    private void FinishVacuum(
+        Entity<GridAtmosphereComponent?, GasTileOverlayComponent?> grid,
+        Entity<MapAtmosphereComponent?>? map,
+        EntityUid ventUid,
+        int maxTiles)
+    {
+        if (!TryComp<MapGridComponent>(grid.Owner, out var mapGrid) || maxTiles <= 0)
+            return;
+
+        var atmosGrid = new Entity<GridAtmosphereComponent?>(grid.Owner, grid.Comp1);
+        var start = _transform.GetGridTilePositionOrDefault(ventUid);
+        var visited = new HashSet<Vector2i> { start };
+        var queue = new Queue<Vector2i>();
+        queue.Enqueue(start);
+
+        AtmosDirection[] directions =
+        {
+            AtmosDirection.North,
+            AtmosDirection.South,
+            AtmosDirection.East,
+            AtmosDirection.West,
+        };
+
+        while (queue.TryDequeue(out var tile))
+        {
+            _atmosphere.GetTileMixture(grid, map, tile, true)?.Clear();
+
+            if (visited.Count >= maxTiles)
+                continue;
+
+            foreach (var direction in directions)
+            {
+                if (_atmosphere.IsTileAirBlockedCached(atmosGrid, tile, direction))
+                    continue;
+
+                var neighbor = tile.Offset(direction);
+                if (visited.Contains(neighbor) ||
+                    !_map.TryGetTileRef(grid.Owner, mapGrid, neighbor, out var tileRef) ||
+                    tileRef.Tile.IsEmpty ||
+                    _atmosphere.IsTileAirBlockedCached(atmosGrid, neighbor, direction.GetOpposite()))
+                    continue;
+
+                visited.Add(neighbor);
+                queue.Enqueue(neighbor);
+            }
         }
     }
 
