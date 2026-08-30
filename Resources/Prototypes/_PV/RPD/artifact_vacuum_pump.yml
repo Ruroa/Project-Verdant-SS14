@@ -1,0 +1,12 @@
+- type: rcd
+  id: PVArtifactVacuumPumpRCD
+  category: PumpsValves
+  sprite: /Textures/_Starlight/Interface/Radial/RPD/pump_volume.png
+  mode: ConstructObject
+  prototype: PVArtifactVacuumPump
+  cost: 4
+  delay: 0
+  collisionMask: Impassable
+  rotation: User
+  hasLayers: true
+  fx: EffectRCDConstruct0
