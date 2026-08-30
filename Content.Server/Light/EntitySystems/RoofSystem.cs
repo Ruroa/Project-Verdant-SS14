@@ -1,4 +1,5 @@
 using Content.Server.Light.Components;
+using Content.Server._PV.Weather.Components;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Robust.Shared.Map.Components;
@@ -49,6 +50,19 @@ public sealed partial class RoofSystem : SharedRoofSystem
 
             var roof = EnsureComp<RoofComponent>(gridUid);
             var index = _maps.LocalToTile(gridUid, grid, xform.Coordinates);
+            var roofOverrides = EnsureComp<RoofOverrideComponent>(gridUid);
+
+            if (ent.Comp.Value)
+            {
+                roofOverrides.ForceNoRoof.Remove(index);
+                roofOverrides.ForceRoof.Add(index);
+            }
+            else
+            {
+                roofOverrides.ForceRoof.Remove(index);
+                roofOverrides.ForceNoRoof.Add(index);
+            }
+
             SetRoof((gridUid, grid, roof), index, ent.Comp.Value);
         }
 
