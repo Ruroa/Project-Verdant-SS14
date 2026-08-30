@@ -1,15 +1,14 @@
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Components;
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Components;
-using Content.Server.Atmos.Piping.Unary.Components;
 using Content.Server.Audio;
-using Content.Server.NodeContainer.EntitySystems;
-using Content.Server.NodeContainer.Nodes;
 using Content.Server.Power.Components;
 using Content.Shared._PV.Atmos;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
-using Content.Shared.Atmos.Piping.Unary.Components;
+using Content.Shared.DeviceLinking.Events;
+using Content.Shared.DeviceNetwork;
+using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Power;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
@@ -20,13 +19,19 @@ namespace Content.Server._PV.Atmos;
 
 public sealed partial class VacuumPumpSystem : EntitySystem
 {
-    [Dependency] private NodeContainerSystem _nodes = default!;
     [Dependency] private AtmosphereSystem _atmosphere = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
-    [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private AmbientSoundSystem _ambient = default!;
+
+    private static readonly AtmosDirection[] Directions =
+    {
+        AtmosDirection.North,
+        AtmosDirection.South,
+        AtmosDirection.East,
+        AtmosDirection.West,
+    };
 
     public override void Initialize()
     {
@@ -36,13 +41,12 @@ public sealed partial class VacuumPumpSystem : EntitySystem
         SubscribeLocalEvent<VacuumPumpComponent, VacuumPumpToggleMessage>(OnToggle);
         SubscribeLocalEvent<VacuumPumpComponent, BoundUIOpenedEvent>(OnUiOpened);
         SubscribeLocalEvent<VacuumPumpComponent, PowerChangedEvent>(OnPowerChanged);
+        SubscribeLocalEvent<VacuumPumpComponent, SignalReceivedEvent>(OnSignalReceived);
     }
 
     private void OnToggle(Entity<VacuumPumpComponent> ent, ref VacuumPumpToggleMessage args)
     {
-        ent.Comp.Enabled = !ent.Comp.Enabled;
-        Dirty(ent);
-        UpdateState(ent);
+        SetEnabled(ent, !ent.Comp.Enabled);
     }
 
     private void OnUiOpened(Entity<VacuumPumpComponent> ent, ref BoundUIOpenedEvent args)
@@ -55,91 +59,87 @@ public sealed partial class VacuumPumpSystem : EntitySystem
         UpdateState(ent, args.Powered);
     }
 
+    private void OnSignalReceived(Entity<VacuumPumpComponent> ent, ref SignalReceivedEvent args)
+    {
+        var state = SignalState.Momentary;
+        args.Data?.TryGetValue(DeviceNetworkConstants.LogicState, out state);
+        if (state is not (SignalState.High or SignalState.Momentary))
+            return;
+
+        switch (args.Port)
+        {
+            case "On":
+                SetEnabled(ent, true);
+                break;
+            case "Off":
+                SetEnabled(ent, false);
+                break;
+            case "Toggle":
+                SetEnabled(ent, !ent.Comp.Enabled);
+                break;
+        }
+    }
+
     private void OnAtmosUpdate(Entity<VacuumPumpComponent> ent, ref AtmosDeviceUpdateEvent args)
     {
         if (!ent.Comp.Enabled ||
             !TryComp<ApcPowerReceiverComponent>(ent, out var receiver) ||
             !receiver.Powered ||
-            !_nodes.TryGetNode(ent.Owner, "inlet", out PipeNode? inlet))
+            args.Grid is not { } grid ||
+            !TryComp<MapGridComponent>(grid.Owner, out var mapGrid))
             return;
 
-        // The inlet is connected to a pipe network containing the chamber's
-        // siphoning vent. Removed gas is discarded as if the outlet led directly
-        // to space. The rate is limited so pressure falls visibly rather than the
-        // complete network disappearing in a single atmos tick.
-        var remaining = ent.Comp.MolesPerSecond * args.dt;
-        var pipeAmount = MathF.Min(inlet.Air.TotalMoles, remaining);
-        if (pipeAmount > 0f)
-        {
-            inlet.Air.Remove(pipeAmount);
-            remaining -= pipeAmount;
-        }
+        var pumpTile = _transform.GetGridTilePositionOrDefault(ent.Owner);
+        var facing = Transform(ent).LocalRotation.GetCardinalDir().ToIntVec();
+        var start = pumpTile + facing;
 
-        if (remaining <= 0f || inlet.NodeGroup == null)
+        if (!_map.TryGetTileRef(grid.Owner, mapGrid, start, out var startTile) || startTile.Tile.IsEmpty)
             return;
 
-        // Ordinary siphoning vents are intentionally slow. Any siphoning vent
-        // connected to this pump's inlet network instead shares the high-speed
-        // vacuum budget, making the chamber depressurize like a hull breach.
-        var vents = EntityQueryEnumerator<GasVentPumpComponent>();
-        while (remaining > 0f && vents.MoveNext(out var ventUid, out var vent))
+        var mixtures = FindFacingRoom(grid, args.Map, mapGrid, start, ent.Comp.MaxFinishTiles);
+        var totalMoles = 0f;
+        foreach (var mixture in mixtures)
+            totalMoles += mixture.TotalMoles;
+
+        if (totalMoles <= 0f)
+            return;
+
+        var ratio = MathF.Min(1f, ent.Comp.MolesPerSecond * args.dt / totalMoles);
+        foreach (var mixture in mixtures)
         {
-            if (!vent.Enabled ||
-                vent.PumpDirection != VentPumpDirection.Siphoning ||
-                !_nodes.TryGetNode(ventUid, vent.Outlet, out PipeNode? ventNode) ||
-                ventNode.NodeGroup != inlet.NodeGroup)
-                continue;
-
-            var environment = _atmosphere.GetTileMixture(ventUid, excite: true);
-            if (environment == null)
-                continue;
-
-            if (environment.Pressure <= ent.Comp.FinishPressure && args.Grid is { } grid)
-            {
-                FinishVacuum(grid, args.Map, ventUid, ent.Comp.MaxFinishTiles);
-                continue;
-            }
-
-            var ventAmount = MathF.Min(environment.TotalMoles, remaining);
-            if (ventAmount <= 0f)
-                continue;
-
-            environment.Remove(ventAmount);
-            remaining -= ventAmount;
+            if (ratio >= 1f)
+                mixture.Clear();
+            else
+                mixture.RemoveRatio(ratio);
         }
     }
 
-    private void FinishVacuum(
+    private HashSet<GasMixture> FindFacingRoom(
         Entity<GridAtmosphereComponent?, GasTileOverlayComponent?> grid,
         Entity<MapAtmosphereComponent?>? map,
-        EntityUid ventUid,
+        MapGridComponent mapGrid,
+        Vector2i start,
         int maxTiles)
     {
-        if (!TryComp<MapGridComponent>(grid.Owner, out var mapGrid) || maxTiles <= 0)
-            return;
+        var mixtures = new HashSet<GasMixture>();
+        if (maxTiles <= 0)
+            return mixtures;
 
         var atmosGrid = new Entity<GridAtmosphereComponent?>(grid.Owner, grid.Comp1);
-        var start = _transform.GetGridTilePositionOrDefault(ventUid);
         var visited = new HashSet<Vector2i> { start };
         var queue = new Queue<Vector2i>();
         queue.Enqueue(start);
 
-        AtmosDirection[] directions =
-        {
-            AtmosDirection.North,
-            AtmosDirection.South,
-            AtmosDirection.East,
-            AtmosDirection.West,
-        };
-
         while (queue.TryDequeue(out var tile))
         {
-            _atmosphere.GetTileMixture(grid, map, tile, true)?.Clear();
+            var mixture = _atmosphere.GetTileMixture(grid, map, tile, true);
+            if (mixture != null)
+                mixtures.Add(mixture);
 
             if (visited.Count >= maxTiles)
                 continue;
 
-            foreach (var direction in directions)
+            foreach (var direction in Directions)
             {
                 if (_atmosphere.IsTileAirBlockedCached(atmosGrid, tile, direction))
                     continue;
@@ -155,16 +155,25 @@ public sealed partial class VacuumPumpSystem : EntitySystem
                 queue.Enqueue(neighbor);
             }
         }
+
+        return mixtures;
+    }
+
+    private void SetEnabled(Entity<VacuumPumpComponent> ent, bool enabled)
+    {
+        if (ent.Comp.Enabled == enabled)
+            return;
+
+        ent.Comp.Enabled = enabled;
+        Dirty(ent);
+        UpdateState(ent);
     }
 
     private void UpdateState(Entity<VacuumPumpComponent> ent, bool? poweredOverride = null)
     {
         var powered = poweredOverride ??
             (TryComp<ApcPowerReceiverComponent>(ent, out var receiver) && receiver.Powered);
-        var running = ent.Comp.Enabled && powered;
-
-        _appearance.SetData(ent, VacuumPumpVisuals.Enabled, running);
-        _ambient.SetAmbience(ent, running);
+        _ambient.SetAmbience(ent, ent.Comp.Enabled && powered);
         _ui.SetUiState(ent.Owner, VacuumPumpUiKey.Key, new VacuumPumpUiState(ent.Comp.Enabled, powered));
     }
 }
