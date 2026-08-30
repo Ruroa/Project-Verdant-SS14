@@ -1,0 +1,42 @@
+- type: entity
+  id: PVArtifactVacuumPump
+  parent: BaseMachinePowered
+  name: artifact vacuum pump
+  description: A high-powered Science pump that rapidly removes every gas from a sealed chamber.
+  suffix: PV
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: AtmosDevice
+    joinSystem: true
+  - type: VacuumPump
+  - type: ApcPowerReceiver
+    powerLoad: 10000
+  - type: Sprite
+    sprite: _Carpmosia/Structures/Piping/Atmospherics/pump.rsi
+    layers:
+    - state: pumpVolume
+      map: ["enabled"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.VacuumPumpVisuals.Enabled:
+        enabled:
+          True: { state: pumpVolumeOn }
+          False: { state: pumpVolume }
+  - type: ActivatableUI
+    key: enum.VacuumPumpUiKey.Key
+  - type: ActivatableUIRequiresAnchor
+  - type: UserInterface
+    interfaces:
+      enum.VacuumPumpUiKey.Key:
+        type: VacuumPumpBoundUserInterface
+  - type: AmbientSound
+    enabled: false
+    volume: -7
+    range: 6
+    sound:
+      path: /Audio/Ambience/Objects/gas_pump.ogg
