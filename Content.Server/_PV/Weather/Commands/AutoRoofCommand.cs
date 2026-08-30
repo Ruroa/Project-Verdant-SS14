@@ -65,10 +65,12 @@ public sealed partial class AutoRoofCommand : IConsoleCommand
         var roof = _entities.EnsureComponent<RoofComponent>(gridUid);
         var overrides = _entities.EnsureComponent<RoofOverrideComponent>(gridUid);
 
-        var tiles = map.GetAllTiles(gridUid, grid)
-            .Where(tile => !tile.Tile.IsEmpty)
-            .Select(tile => tile.GridIndices)
-            .ToHashSet();
+        var tiles = new HashSet<Vector2i>();
+        foreach (var tile in map.GetAllTiles(gridUid, grid))
+        {
+            if (!tile.Tile.IsEmpty)
+                tiles.Add(tile.GridIndices);
+        }
 
         if (tiles.Count == 0)
         {
@@ -103,7 +105,7 @@ public sealed partial class AutoRoofCommand : IConsoleCommand
                 continue;
 
             // Any traversable tile touching empty space is connected to the map edge.
-            if (CardinalDirections.Any(direction => !tiles.Contains(tile + direction)))
+            if (TouchesEmptySpace(tile, tiles))
                 AddOutside(tile, outside, queue);
         }
 
@@ -127,7 +129,12 @@ public sealed partial class AutoRoofCommand : IConsoleCommand
             }
         }
 
-        var inside = tiles.Where(tile => !blockers.Contains(tile) && !outside.Contains(tile)).ToHashSet();
+        var inside = new HashSet<Vector2i>();
+        foreach (var tile in tiles)
+        {
+            if (!blockers.Contains(tile) && !outside.Contains(tile))
+                inside.Add(tile);
+        }
         var roofed = 0;
         var exposed = 0;
 
@@ -140,7 +147,7 @@ public sealed partial class AutoRoofCommand : IConsoleCommand
             else if (overrides.ForceNoRoof.Contains(tile))
                 value = false;
             else if (blockers.Contains(tile))
-                value = CardinalDirections.Any(direction => inside.Contains(tile + direction));
+                value = TouchesInside(tile, inside);
             else
                 value = inside.Contains(tile);
 
@@ -160,5 +167,27 @@ public sealed partial class AutoRoofCommand : IConsoleCommand
     {
         if (outside.Add(tile))
             queue.Enqueue(tile);
+    }
+
+    private static bool TouchesEmptySpace(Vector2i tile, HashSet<Vector2i> tiles)
+    {
+        foreach (var direction in CardinalDirections)
+        {
+            if (!tiles.Contains(tile + direction))
+                return true;
+        }
+
+        return false;
+    }
+
+    private static bool TouchesInside(Vector2i tile, HashSet<Vector2i> inside)
+    {
+        foreach (var direction in CardinalDirections)
+        {
+            if (inside.Contains(tile + direction))
+                return true;
+        }
+
+        return false;
     }
 }
