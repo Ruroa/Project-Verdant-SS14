@@ -8,6 +8,12 @@ public sealed partial class VacuumPumpComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Enabled;
+
+    /// <summary>
+    /// Maximum amount of gas removed from the inlet pipe network each second.
+    /// </summary>
+    [DataField]
+    public float MolesPerSecond = 100f;
 }
 
 [Serializable, NetSerializable]
