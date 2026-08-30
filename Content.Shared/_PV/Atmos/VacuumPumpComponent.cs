@@ -26,6 +26,7 @@ public sealed class VacuumPumpUiState(bool enabled, bool powered) : BoundUserInt
     public readonly bool Powered = powered;
 }
 
+[Serializable, NetSerializable]
 public enum VacuumPumpVisuals : byte
 {
     Enabled,
