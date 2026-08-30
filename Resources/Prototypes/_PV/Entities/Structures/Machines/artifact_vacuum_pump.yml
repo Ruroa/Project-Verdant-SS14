@@ -15,7 +15,7 @@
     noRot: false
   - type: VacuumPump
   - type: ApcPowerReceiver
-    powerLoad: 10000
+    powerLoad: 1000
   - type: SubFloorHide
     visibleLayers:
     - enum.SubfloorLayers.FirstLayer
