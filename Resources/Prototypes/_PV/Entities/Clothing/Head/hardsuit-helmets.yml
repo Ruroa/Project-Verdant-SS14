@@ -7,20 +7,9 @@
   components:
   - type: Sprite
     sprite: _PV/Clothing/Head/Hardsuits/aegis_helmet.rsi
-    layers:
-    - state: icon
-    - state: icon-flash
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
+    state: icon
   - type: HandheldLight
     addPrefix: false
-  - type: ToggleableVisuals
-    spriteLayer: light
-    clothingVisuals:
-      head:
-      - state: equipped-HELMET-unshaded
-        shader: unshaded
   - type: Clothing
     sprite: _PV/Clothing/Head/Hardsuits/aegis_helmet.rsi
     clothingVisuals:
