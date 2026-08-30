@@ -10,20 +10,13 @@ public sealed partial class VacuumPumpComponent : Component
     public bool Enabled;
 
     /// <summary>
-    /// Maximum amount of gas removed from the inlet pipe network each second.
+    /// Maximum amount of gas removed from the room each second.
     /// </summary>
     [DataField]
     public float MolesPerSecond = 2000f;
 
     /// <summary>
-    /// Below this pressure, finish evacuating the connected airtight area to
-    /// avoid the final traces of gas taking disproportionately long to diffuse.
-    /// </summary>
-    [DataField]
-    public float FinishPressure = 5f;
-
-    /// <summary>
-    /// Safety limit for the low-pressure airtight-area finishing pass.
+    /// Safety limit for the connected-room search.
     /// </summary>
     [DataField]
     public int MaxFinishTiles = 256;
