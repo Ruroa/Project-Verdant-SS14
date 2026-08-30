@@ -13,7 +13,7 @@ public sealed partial class VacuumPumpComponent : Component
     /// Maximum amount of gas removed from the room each second.
     /// </summary>
     [DataField]
-    public float MolesPerSecond = 2000f;
+    public float MolesPerSecond = 1500f;
 
     /// <summary>
     /// Safety limit for the connected-room search.
