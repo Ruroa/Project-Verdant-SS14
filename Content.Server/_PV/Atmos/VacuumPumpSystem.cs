@@ -11,11 +11,11 @@ namespace Content.Server._PV.Atmos;
 
 public sealed partial class VacuumPumpSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AmbientSoundSystem _ambient = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AmbientSoundSystem _ambient = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -27,14 +27,14 @@ public sealed partial class VacuumPumpSystem : EntitySystem
         SubscribeLocalEvent<VacuumPumpComponent, PowerChangedEvent>(OnPowerChanged);
     }
 
-    private void OnToggle(Entity<VacuumPumpComponent> ent, VacuumPumpToggleMessage args)
+    private void OnToggle(Entity<VacuumPumpComponent> ent, ref VacuumPumpToggleMessage args)
     {
         ent.Comp.Enabled = !ent.Comp.Enabled;
         Dirty(ent);
         UpdateState(ent);
     }
 
-    private void OnUiOpened(Entity<VacuumPumpComponent> ent, BoundUIOpenedEvent args)
+    private void OnUiOpened(Entity<VacuumPumpComponent> ent, ref BoundUIOpenedEvent args)
     {
         UpdateState(ent);
     }
@@ -52,7 +52,7 @@ public sealed partial class VacuumPumpSystem : EntitySystem
             args.Grid is not { } grid)
             return;
 
-        var position = _transform.GetGridTilePositionOrDefault(ent);
+        var position = _transform.GetGridTilePositionOrDefault(ent.Owner);
         _atmosphere.GetTileMixture(grid, args.Map, position, true)?.Clear();
 
         // Clearing the pump tile and its four neighbours creates a very strong
