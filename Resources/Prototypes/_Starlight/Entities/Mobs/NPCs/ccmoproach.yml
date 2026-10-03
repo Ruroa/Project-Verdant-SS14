@@ -2,7 +2,7 @@
   id: CCMoproachGlasses
   parent: ClothingEyesGlassesCentComm
   categories: [HideSpawnMenu]
-  description: Centcomm officer glasses that are compatible with mothroaches. Unfortunately as a result, these are stuck to their face.
+  description: VSC officer glasses that are compatible with mothroaches. Unfortunately, as a result, these are stuck to their face.
   components:
     - type: Unremoveable
 

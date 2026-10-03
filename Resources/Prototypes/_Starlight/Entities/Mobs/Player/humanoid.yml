@@ -986,7 +986,7 @@
 
 - type: entity
   id: RandomHumanoidCCServiceWorker
-  name: CentComm service worker ghost role
+  name: VSC service worker ghost role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -1009,7 +1009,7 @@
 
 - type: entity
   id: RandomHumanoidCCChef
-  name: CentComm chef ghost role
+  name: VSC chef ghost role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -1032,7 +1032,7 @@
 
 - type: entity
   id: RandomHumanoidCCBartender
-  name: CentComm bartender ghost role
+  name: VSC bartender ghost role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -1055,7 +1055,7 @@
 
 - type: entity
   id: RandomHumanoidCCJanitor
-  name: CentComm janitor ghost role
+  name: VSC janitor ghost role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -1075,4 +1075,3 @@
       roleLoadout: [ RoleSurvivalStandard ]
     - type: AntagImmune
     - type: NoObjectiveTarget
-

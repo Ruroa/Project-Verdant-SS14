@@ -81,14 +81,14 @@
   parent: FaxMachineCentralCommandBase # Starlight
   id: FaxMachineCentcom
   #name: long range fax machine # Starlight: Inherit name
-  suffix: "CC: Central Command" # Starlight
+  suffix: "VSC: Verdant Sector Control" # Starlight
   components:
   # Starlight: No Sprite override
   - type: FaxMachine
     group: FaxGroupCentralCommand # Starlight
     intrinsicGroup: FaxGroupCentralCommand # Starlight
     order: 100 # Starlight
-    name: "Central Command"
+    name: "Verdant Sector Control"
     notifyAdmins: true
 
 - type: entity

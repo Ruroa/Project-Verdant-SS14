@@ -968,7 +968,7 @@
 - type: entity
   parent: BaseSecurityPDA
   id: CentcomPDA
-  name: CentComm PDA
+  name: VSC PDA
   description: Light green sign of walking bureaucracy.
   components:
   - type: Pda

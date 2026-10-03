@@ -323,7 +323,7 @@
 
 - type: entity
   id: RadioImplanterCentcomm
-  name: centcomm radio implanter
+  name: VSC radio implanter
   parent: BaseImplantOnlyImplanter
   components:
   - type: Implanter
@@ -331,7 +331,7 @@
 
 - type: entity
   id: DeathRattleImplanterCentcomm
-  name: centcomm death rattle implanter
+  name: VSC death rattle implanter
   parent: BaseImplantOnlyImplanter
   components:
   - type: Implanter

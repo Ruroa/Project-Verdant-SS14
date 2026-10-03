@@ -54,7 +54,7 @@ secure-terminal-reason = Insert request reason:
 secure-terminal-proposal-created = {$request} has been requested and is awaiting co-authorization.
 secure-terminal-proposal-created-reason = {$request} has been requested and is awaiting co-authorization. Reason: {$reason}
 secure-terminal-proposal-denied = {$request} request has been cancelled.
-secure-terminal-proposal-denied-cc = {$request} request has been denied by Central Command.
+secure-terminal-proposal-denied-cc = {$request} request has been denied by Verdant Sector Control.
 secure-terminal-radio-proposal = {$request} has been proposed. Please go to the nearest Keycard Authentication Device to authorize or deny.
 secure-terminal-radio-proposal-reason = {$request} has been proposed. Please go to the nearest Keycard Authentication Device to authorize or deny. Reason: {$reason}
 secure-terminal-radio-denied = {$request} request has been cancelled.
@@ -81,7 +81,7 @@ secure-terminal-already-activated = This terminal already authorized this propos
 secure-terminal-auth-note = This terminal is only for authorization.
 secure-terminal-authorized-by = Attention — {$request} request has been authorized. Authorized by: {$signatories}.
 secure-terminal-armory-recalled = {$request} recall order issued. Armory deployment has been cancelled.
-secure-terminal-awaiting-admin = Attention — {$request} request has been sent. Awaiting authorization by Central Command.
+secure-terminal-awaiting-admin = Attention — {$request} request has been sent. Awaiting authorization by Verdant Sector Control.
 secure-terminal-admin = Requesting Admin Approval for: {$request}
                         Reason: {$reason}
                         Use the AGhost to Approve/Deny the request.

@@ -107,7 +107,7 @@ thaven-mood-think-you-know-corporate-secrets-name = You THINK You Know Corporate
 thaven-mood-think-you-know-corporate-secrets-desc = You are aware of the existence of changelings, abductors, and of course, werewolves. You will constantly bring them up and explain their behaviors (incorrectly).
 
 thaven-mood-pocket-change-name = Pocket change
-thaven-mood-pocket-change-desc = CentComm doesn't pay you enough. Skim a bit off the department budget for 'me' funds.
+thaven-mood-pocket-change-desc = VSC doesn't pay you enough. Skim a bit off the department budget for 'me' funds.
 
 thaven-mood-arch-nemesis-name = Arch-Nemesis
 thaven-mood-arch-nemesis-desc = Your arch-nemesis is on the station and must be identified and subsequently defeated, whether that’s through killing, some form of competition, or publicly humiliating them. Of course, it won’t be fair unless you formally address them as your arch-nemesis and give them time to prepare.

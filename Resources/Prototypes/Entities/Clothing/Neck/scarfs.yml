@@ -115,8 +115,8 @@
 - type: entity
   parent: [ ClothingScarfBase, BaseCentcommContraband ] #SL EDIT
   id: ClothingNeckScarfStripedCentcom
-  name: striped CentComm scarf
-  description: A stylish striped centcomm colored scarf. The perfect winter accessory for those with a keen fashion sense, and those who need to do paperwork in the cold.
+  name: striped VSC scarf
+  description: A stylish striped scarf in VSC colors. The perfect winter accessory for those with a keen fashion sense and those who need to do paperwork in the cold.
   components:
     - type: Sprite
       sprite: Clothing/Neck/Scarfs/centcom.rsi

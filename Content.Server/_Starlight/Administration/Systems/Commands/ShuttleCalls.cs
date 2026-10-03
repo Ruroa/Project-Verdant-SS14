@@ -28,7 +28,7 @@ public sealed partial class AllowShuttleCallsCommand : LocalizedEntityCommands
         "  status         Shows whether shuttle calls are currently enabled or disabled.\n" +
         "  [announce]     (Optional) true/false) Whether to announce the change. Defaults to true.\n" +
         "  [message]      (Optional) Custom announcement message. If omitted, a default message is used.\n" +
-        "  [sender]       (Optional) Announcement sender. Defaults to \"Central Command\".\n" +
+        "  [sender]       (Optional) Announcement sender. Defaults to \"Verdant Sector Control\".\n" +
         "  [color]        (Optional) Announcement color hex (e.g. #FFD700). Defaults to gold.\n" +
         "  [sound]        (Optional) Announcement sound file path.";
 
@@ -118,10 +118,10 @@ public sealed partial class AllowShuttleCallsCommand : LocalizedEntityCommands
                 ? "Emergency shuttle calls have been enabled."
                 : "Emergency shuttle calls have been disabled.";
 
-        // Sender text (default to Central Command)
+        // Sender text (default to Verdant Sector Control)
         string senderText = args.Length >= 4 && !string.IsNullOrWhiteSpace(args[3])
             ? args[3]
-            : "Central Command";
+            : "Verdant Sector Control";
 
         // Color
         Color color = Color.Gold;
@@ -159,7 +159,7 @@ public sealed partial class AllowShuttleCallsCommand : LocalizedEntityCommands
             : args.Length == 3
             ? CompletionResult.FromHint("Optional: custom announcement message. Uses default if blank.")
             : args.Length == 4
-            ? CompletionResult.FromHint("Optional: sender for the announcement. Defaults to \"Central Command\".")
+            ? CompletionResult.FromHint("Optional: sender for the announcement. Defaults to \"Verdant Sector Control\".")
             : args.Length == 5
             ? CompletionResult.FromHint("Optional: color hex (e.g. #FFD700) for the announcement. Defaults to gold.")
             : args.Length == 6

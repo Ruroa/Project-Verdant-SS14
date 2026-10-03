@@ -60,7 +60,7 @@ centcomm-revs-gammarift = Based on long-range sensor scans, we have detected hos
 
 centcomm-revs-alldead = Long-range sensor scans report all USSP SKB agents on-board are now permanently deceased.
 
-central-command-sender = Central Command
+central-command-sender = Verdant Sector Control
 
 soviet-commissariat-sender = Soviet People's Commissariat
 

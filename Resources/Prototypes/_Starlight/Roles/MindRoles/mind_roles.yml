@@ -9,7 +9,7 @@
 - type: entity
   parent: MindRoleGhostRoleNeutral
   id: MindRoleGhostCentCommAligned
-  name: Ghost Role (CentComm Aligned)
+  name: Ghost Role (VSC Aligned)
   components:
     - type: MindRole
       roleType: CentCommAligned

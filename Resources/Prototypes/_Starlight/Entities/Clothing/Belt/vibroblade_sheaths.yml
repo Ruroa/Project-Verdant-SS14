@@ -1,7 +1,7 @@
 - type: entity
   parent: [ClothingBeltBase, ClothingSlotBase, BaseCentcommContraband, BaseSheatheWeapon]
   id: CentcommVibrobladeSheath
-  name: CentComm vibroblade sheath
+  name: VSC vibroblade sheath
   description: Vulcan Industries believed that maintenance of the Vibroweapons should be delayed as much as possible and the quality of the blades to be at top notch at all times; for the Corporate Consortium, specially designed sheaths were made where the subsonic piercing qualities would have it degradation slowed when not at use.
   components:
   - type: Sprite
@@ -33,7 +33,7 @@
 - type: entity
   parent: CentcommVibrobladeSheath
   id: CentcommVibrobladeSheathFilled
-  name: CentComm vibroblade sheath
+  name: VSC vibroblade sheath
   description: Vulcan Industries believed that maintenance of the Vibroweapons should be delayed as much as possible and the quality of the blades to be at top notch at all times; for the Corporate Consortium, specially designed sheaths were made where the subsonic piercing qualities would have it degradation slowed when not at use.
   suffix: Filled
   components:

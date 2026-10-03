@@ -141,7 +141,7 @@
 - type: entity
   parent: [ JetpackBlack, BaseCentcommContraband ]
   id: JetpackCyborgCentcomm
-  name: CentComm jetpack
+  name: VSC jetpack
   suffix: Cyborg, Infinite
   description: Specialised jetpack for cyborgs which harvests moles on the go.
   components:

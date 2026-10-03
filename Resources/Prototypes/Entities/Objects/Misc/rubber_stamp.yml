@@ -56,7 +56,7 @@
     state: stamp-cap
 
 - type: entity
-  name: CentComm rubber stamp
+  name: VSC rubber stamp
   parent: RubberStampBase
   id: RubberStampCentcom
   description: A rubber stamp for stamping important documents. Tell them who's boss! # Starlight

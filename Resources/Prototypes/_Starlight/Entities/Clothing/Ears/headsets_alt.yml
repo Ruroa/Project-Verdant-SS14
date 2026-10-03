@@ -1,7 +1,7 @@
 - type: entity
   parent: [ClothingHeadsetAlt, BaseCentcommContraband]
   id: ClothingHeadsetAltCentCom
-  name: CentComm over-ear headset
+  name: VSC over-ear headset
   components:
   - type: ContainerFill
     containers:
@@ -21,7 +21,7 @@
   parent: [ClothingHeadsetAlt, BaseCentcommContraband]
   id: ClothingHeadsetAltAdminCentCom
   suffix: Admin only
-  name: Administrative CentComm over-ear headset
+  name: administrative VSC over-ear headset
   components:
   - type: ContainerFill
     containers:
@@ -197,7 +197,7 @@
 - type: entity
   parent: [ ClothingHeadsetAltCentCom, BaseCentcommContraband ]
   id: ClothingHeadsetAltCentComDS
-  name: CentComm agent over-ear headset
+  name: VSC agent over-ear headset
   components:
   - type: ContainerFill
     containers:

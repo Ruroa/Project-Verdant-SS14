@@ -564,7 +564,7 @@
 ## Central Command
 
 - type: entity
-  name: CentComm official
+  name: VSC official
   id: RandomHumanoidSpawnerCentcomOfficial
   components:
     - type: Sprite

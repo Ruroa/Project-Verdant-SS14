@@ -162,8 +162,8 @@
 - type: entity
   parent: [ClothingOuterArmorBaseCarapace, BaseCentcommContraband]
   id: ClothingOuterArmorCentcommCarapace
-  name: centcomm carapace
-  description: An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to centcomm officials and agents.
+  name: VSC carapace
+  description: An armored chestpiece that provides protection while still offering maximum mobility and flexibility. Issued only to VSC officials and agents.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Armor/centcomm_carapace.rsi
@@ -575,4 +575,3 @@
   - type: Construction
     graph: cardArmour
     node: cardarmour
-

@@ -1,5 +1,5 @@
 - type: entity
-  name: CentComm service worker spawner
+  name: VSC service worker spawner
   suffix: End of Round
   id: CCServiceWorkerSpawnerPostRound
   parent: MarkerBase
@@ -22,7 +22,7 @@
           prototype: MobHumanCCServiceWorkerEOR
 
 - type: entity
-  name: CentComm chef spawner
+  name: VSC chef spawner
   suffix: End of Round
   id: CCChefSpawnerPostRound
   parent: MarkerBase
@@ -45,7 +45,7 @@
           prototype: MobHumanCCChefEOR
 
 - type: entity
-  name: CentComm bartender spawner
+  name: VSC bartender spawner
   suffix: End of Round
   id: CCBartenderSpawnerPostRound
   parent: MarkerBase
@@ -68,7 +68,7 @@
           prototype: MobHumanCCBartenderEOR
 
 - type: entity
-  name: CentComm janitor spawner
+  name: VSC janitor spawner
   suffix: End of Round
   id: CCJanitorSpawnerPostRound
   parent: MarkerBase
@@ -92,7 +92,7 @@
 
 - type: entity
   id: MobHumanCCServiceWorkerEOR
-  name: CentComm service worker
+  name: VSC service worker
   parent: MobHuman
   components:
     - type: RandomHumanoidAppearance
@@ -107,7 +107,7 @@
 
 - type: entity
   id: MobHumanCCChefEOR
-  name: CentComm chef
+  name: VSC chef
   parent: MobHuman
   components:
     - type: RandomHumanoidAppearance
@@ -122,7 +122,7 @@
 
 - type: entity
   id: MobHumanCCBartenderEOR
-  name: CentComm bartender
+  name: VSC bartender
   parent: MobHuman
   components:
     - type: RandomHumanoidAppearance
@@ -137,7 +137,7 @@
 
 - type: entity
   id: MobHumanCCJanitorEOR
-  name: CentComm janitor
+  name: VSC janitor
   parent: MobHuman
   components:
     - type: RandomHumanoidAppearance

@@ -208,7 +208,7 @@
 - type: entity
   parent: PrintedDocument
   id: PrintedDocumentRequestCallCentCommMembers
-  name: Request to Call CentComm Members
+  name: Request to Call VSC Members
   categories: [ HideSpawnMenu ]
   components:
     - type: Paper
@@ -479,7 +479,7 @@
 - type: entity
   parent: PrintedDocument
   id: PrintedDocumentCentCommCommunication
-  name: CentComm Communication
+  name: VSC Communication
   categories: [ HideSpawnMenu ]
   components:
     - type: Paper

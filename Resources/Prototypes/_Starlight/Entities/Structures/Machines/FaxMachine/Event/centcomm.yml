@@ -15,5 +15,5 @@
       group: FaxGroupCentralCommand
       intrinsicGroup: FaxGroupCentralCommand
       intrinsicLocked: true
-      name: "CentComm" # Intentionally different from the "normal" version's "Central Command".
+      name: "VSC" # Intentionally different from the normal version's full name.
       order: 500

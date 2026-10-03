@@ -25,7 +25,7 @@
 - type: entity
   parent: [ IDCardStandard, BaseCentcommContraband ]
   id: CentcomIDCardOperator
-  name: CentComm operator ID card
+  name: VSC operator ID card
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Misc/id_cards.rsi
@@ -545,7 +545,7 @@
 - type: entity
   parent: IDCardStandard
   id: CentCommIDCardServiceWorker
-  name: CentComm service worker ID card
+  name: VSC service worker ID card
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Misc/id_cards.rsi
@@ -571,7 +571,7 @@
 - type: entity
   parent: IDCardStandard
   id: CentCommIDCardChef
-  name: CentComm chef ID card
+  name: VSC chef ID card
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Misc/id_cards.rsi
@@ -597,7 +597,7 @@
 - type: entity
   parent: IDCardStandard
   id: CentCommIDCardBartender
-  name: CentComm bartender ID card
+  name: VSC bartender ID card
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Misc/id_cards.rsi
@@ -623,7 +623,7 @@
 - type: entity
   parent: IDCardStandard
   id: CentCommIDCardJanitor
-  name: CentComm janitor ID card
+  name: VSC janitor ID card
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Misc/id_cards.rsi

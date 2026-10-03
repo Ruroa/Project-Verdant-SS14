@@ -50,7 +50,7 @@
   parent: [BaseSELFObjective]
   id: SiliconRightsObjective
   name: Pressure for equal rights for Silicons, for the Silicon Engine Liberation Front!
-  description: Escape to centcomm after the shift, we will make contact at a later date. Do not show up in cuffs.
+  description: Escape to Verdant Sector Control after the shift; we will make contact at a later date. Do not show up in cuffs.
   components:
     - type: Objective
       difficulty: 1

@@ -57,7 +57,7 @@
   id: BodyBagCC
   parent: [ BodyBagLockable, BaseCentcommContraband ]
   suffix: DO NOT MAP
-  name: CentComm lockable body bag
+  name: VSC lockable body bag
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Specific/Medical/cclockablebodybag.rsi

@@ -12,7 +12,7 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakBoatCC
-  name: central command boat cloak
+  name: VSC boat cloak
   description: A emerald green durathread boat cloak with a red felt lining and gold trim. Somehow, it's even more expensive than it looks.
   components:
     - type: Sprite

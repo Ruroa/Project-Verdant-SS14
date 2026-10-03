@@ -470,8 +470,8 @@
   id: CentralCommandTechFab
   categories: [ DoNotMap ]
   parent: NanoTrasenTechFab
-  name: Central Command techfab
-  description: Prints equipment for use by Central Command.
+  name: VSC techfab
+  description: Prints equipment for use by Verdant Sector Control.
   components:
   - type: Sprite
     sprite: _Starlight/Structures/Machines/techfab.rsi

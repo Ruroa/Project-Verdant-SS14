@@ -563,7 +563,7 @@
   name: Lawbringer
   parent: [BaseWeaponRifle, BaseSecurityContraband]
   id: WeaponRifleLawbringer
-  description: "A bullpup carbine of modern design, commissioned by CentComm for their security forces.\nFeeds from 7.62x39mm magazines."
+  description: "A bullpup carbine of modern design, commissioned by VSC for its security forces.\nFeeds from 7.62x39mm magazines."
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/lawbringer.rsi

@@ -37,7 +37,7 @@
 - type: entity
   id: TurnstileCentComm
   parent: Turnstile
-  name: central command turnstile
+  name: VSC turnstile
   components:
     - type: Sprite
       sprite: _Starlight/Structures/Doors/cc-turnstile.rsi
@@ -48,7 +48,7 @@
 - type: entity
   id: TurnstileCentCommCommand
   parent: TurnstileCentComm
-  name: central command turnstile
+  name: VSC turnstile
   suffix: Command
   components:
     - type: AccessReader
@@ -57,8 +57,8 @@
 - type: entity
   id: TurnstileCentCommCentralCommand
   parent: TurnstileCentComm
-  name: central command turnstile
-  suffix: Central Command
+  name: VSC turnstile
+  suffix: VSC
   components:
     - type: AccessReader
       access: [["CentralCommand"]]
@@ -66,7 +66,7 @@
 - type: entity
   id: TurnstileCentCommDebrief
   parent: TurnstileCentComm
-  name: central command turnstile
+  name: VSC turnstile
   suffix: Debrief
   components:
     - type: AccessReader

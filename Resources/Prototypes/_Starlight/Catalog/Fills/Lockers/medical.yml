@@ -29,9 +29,9 @@
 - type: entity
   parent: CrateCentralCommandSecure
   id: CrateCentralCommandSecureChemicalFilled
-  name: central command medical crate
+  name: VSC medical crate
   suffix: Chemical, Filled
-  description: A secure crate from Central Command stocked to the brim with medical chemicals.
+  description: A secure crate from Verdant Sector Control stocked to the brim with medical chemicals.
   categories: [ Spawner ]
   components:
   - type: EntityTableContainerFill

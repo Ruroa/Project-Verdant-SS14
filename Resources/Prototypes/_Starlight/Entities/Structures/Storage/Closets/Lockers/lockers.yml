@@ -226,7 +226,7 @@
 - type: entity
   id: LockerJanitorCC
   parent: LockerJanitor
-  suffix: Central Command
+  suffix: VSC
   components:
     - type: AccessReader
       access: [["CentralCommand"]]

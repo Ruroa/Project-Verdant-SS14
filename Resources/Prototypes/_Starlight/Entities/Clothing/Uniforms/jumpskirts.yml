@@ -443,7 +443,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtPencilCentcomOfficial
-  name: CentComm "pencil" style skirt
+  name: VSC "pencil" style skirt
   description: A strict green "pencil" skirt exudes authority and poise. The fitted blazer and straight skirt form an elegant silhouette, suitable for various occasions, from business meetings to a captain's dismissal.
   components:
   - type: Sprite
@@ -564,8 +564,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtCentcomOfficial
-  name: CentComm officer's suitskirt
-  description: It's a suitskirt worn by CentComm's highest-tier Commanders.
+  name: VSC officer's suitskirt
+  description: It's a suitskirt worn by VSC's highest-ranking commanders.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Uniforms/Jumpskirt/centcom_official.rsi
@@ -575,8 +575,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtCentcomOfficer
-  name: CentComm turtleneck skirt
-  description: A skirt version of the CentComm turtleneck, rarer and more sought after than the original.
+  name: VSC turtleneck skirt
+  description: A skirt version of the VSC turtleneck, rarer and more sought after than the original.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpskirt/centcom_officer.rsi
@@ -731,7 +731,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseCentcommContraband ]
   id: ClothingUniformJumpskirtCentcommDomesticFormalWear
-  name: central command domestic division formal wear
+  name: VSC domestic division formal wear
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -742,7 +742,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseCentcommContraband ]
   id: ClothingUniformJumpskirtCentcommAdminFormalWear
-  name: central command administrative division formal wear
+  name: VSC administrative division formal wear
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -753,7 +753,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseCentcommContraband ]
   id: ClothingUniformJumpskirtCentcommCargoFormalWear
-  name: central command cargo division formal wear
+  name: VSC cargo division formal wear
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -764,7 +764,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseCentcommContraband ]
   id: ClothingUniformJumpskirtEngiCentcommFormalWear
-  name: central command engineering division formal wear
+  name: VSC engineering division formal wear
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -775,7 +775,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseCentcommContraband ]
   id: ClothingUniformJumpskirtCentcommIntelFormalWear
-  name: central command intelligence division formal wear
+  name: VSC intelligence division formal wear
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -786,7 +786,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseCentcommContraband ]
   id: ClothingUniformJumpskirtCentcommMedFormalWear
-  name: central command medical division formal wear
+  name: VSC medical division formal wear
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -797,7 +797,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseCentcommContraband ]
   id: ClothingUniformJumpskirtCentcommResearchFormalWear
-  name: central command research division formal wear
+  name: VSC research division formal wear
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -808,7 +808,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseCentcommContraband ]
   id: ClothingUniformJumpskirtCentcommSecurityFormalWear
-  name: central command security division formal wear
+  name: VSC security division formal wear
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -819,7 +819,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseCentcommContraband ]
   id: ClothingUniformJumpskirtCentcommSpecialOpsFormalWear
-  name: central command special operations division formal wear
+  name: VSC special operations division formal wear
   description: A dress for special occasions.
   components:
   - type: Sprite

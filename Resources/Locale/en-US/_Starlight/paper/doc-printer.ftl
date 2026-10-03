@@ -3,7 +3,7 @@
 doc-text-printer-report-morgue =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
     ⠀                              [bold]MORGUE DNR REPORT[/bold]
     ────────────────────────────────────────
@@ -25,7 +25,7 @@ doc-text-printer-report-morgue =
 doc-text-printer-report-station =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                            [bold]SITUATION REPORT[/bold]
     ────────────────────────────────────────
@@ -51,7 +51,7 @@ doc-text-printer-report-station =
 doc-text-printer-report-on-elimination-of-violations =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀            [bold]ISSUE RESOLUTION REPORT[/bold]
     ────────────────────────────────────────
@@ -72,7 +72,7 @@ doc-text-printer-report-on-elimination-of-violations =
 doc-text-printer-report-department =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]DEPARTMENTAL REVIEW[/bold]
     ────────────────────────────────────────
@@ -99,7 +99,7 @@ doc-text-printer-report-department =
 doc-text-printer-report-employee-performance =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ─────────────────────────────────────────
    ⠀⠀                 [bold]WORK REPORT[/bold]
     ─────────────────────────────────────────
@@ -117,7 +117,7 @@ doc-text-printer-report-employee-performance =
 doc-text-printer-report-on-the-chapters-meeting =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ─────────────────────────────────────────
    ⠀⠀                     [bold]VOTE RECORD[/bold]
     ─────────────────────────────────────────
@@ -161,7 +161,7 @@ doc-text-printer-report-on-the-chapters-meeting =
 doc-text-printer-internal-affairs-agents-report =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ─────────────────────────────────────────
    ⠀⠀               [bold]AUDIT REPORT[/bold]
     ─────────────────────────────────────────
@@ -179,7 +179,7 @@ doc-text-printer-internal-affairs-agents-report =
 doc-text-printer-condition-report =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]MAINTENANCE REPORT[/bold]
     ─────────────────────────────────────────
@@ -201,7 +201,7 @@ doc-text-printer-condition-report =
 doc-text-printer-object-investigation-report =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀          [bold]UNKNOWN OBJECT INVESTIGATION REPORT[/bold]
     ────────────────────────────────────────
@@ -225,7 +225,7 @@ doc-text-printer-object-investigation-report =
 doc-text-printer-experiment-report =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                              [bold]EXPERIMENT REPORT[/bold]
     ────────────────────────────────────────
@@ -252,7 +252,7 @@ doc-text-printer-experiment-report =
 doc-text-printer-disposal-report =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ─────────────────────────────────────────
    ⠀⠀                                [bold]DISPOSAL REPORT[/bold]
     ─────────────────────────────────────────
@@ -275,7 +275,7 @@ doc-text-printer-disposal-report =
 doc-text-printer-arrest-report =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                            [bold]SECURITY ARREST REPORT[/bold]
     ────────────────────────────────────────
@@ -307,16 +307,16 @@ doc-text-printer-arrest-report =
 doc-text-printer-statement-appointment-interim-chapter =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀          [bold]INTERIM COMMAND APPOINTMENT[/bold]
     ────────────────────────────────────────
      Date and Time: [datetime]
     Document Compiler: [signature]
 
-    I, [signature], request approval of my appointment to the position of Acting [form]. Upon assuming the position, I agree to follow Standard Operating Procedures and, until the arrival of a replacement from Central Command, shall ensure the order and management of my Department, and the safety of the equipment and tools of my office, including those tools and pieces of equipment that are irreplaceable or essential to the Department's work, or whose misuse might have serious consequences for station safety or security.
+    I, [signature], request approval of my appointment to the position of Acting [form]. Upon assuming the position, I agree to follow Standard Operating Procedures and, until the arrival of a replacement from Verdant Sector Control, shall ensure the order and management of my Department, and the safety of the equipment and tools of my office, including those tools and pieces of equipment that are irreplaceable or essential to the Department's work, or whose misuse might have serious consequences for station safety or security.
 
-    Upon arrival of the [form] from Central Command, I shall surrender the privileges and equipment afforded to me in the course of these duties, including access rights.
+    Upon arrival of the [form] from Verdant Sector Control, I shall surrender the privileges and equipment afforded to me in the course of these duties, including access rights.
 
     ────────────────────────────────────────
    ⠀                      [italic]Place for Stamps and/or Signatures[/italic]
@@ -325,7 +325,7 @@ doc-text-printer-statement-appointment-interim-chapter =
 doc-text-printer-employment-statement =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]EMPLOYMENT CONTRACT[/bold]
     ────────────────────────────────────────
@@ -350,7 +350,7 @@ doc-text-printer-employment-statement =
 doc-text-printer-resignation-statement =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                          [bold]NOTICE OF RESIGNATION[/bold]
     ────────────────────────────────────────
@@ -370,7 +370,7 @@ doc-text-printer-resignation-statement =
 doc-text-printer-access-request-statement =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                       [bold]ACCESS REQUEST[/bold]
     ────────────────────────────────────────
@@ -394,7 +394,7 @@ doc-text-printer-access-request-statement =
 doc-text-printer-equipment-request-statement =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                    [bold]EQUIPMENT REQUEST[/bold]
     ────────────────────────────────────────
@@ -419,7 +419,7 @@ doc-text-printer-equipment-request-statement =
 doc-text-printer-invocation =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]NOTICE OF SUMMONS[/bold]
     ────────────────────────────────────────
@@ -440,14 +440,14 @@ doc-text-printer-invocation =
 doc-text-printer-evacuation-shuttle-request =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                    [bold]EVACUATION SHUTTLE REQUEST[/bold]
     ────────────────────────────────────────
      Date and Time: [datetime]
     Document Compiler: [signature]
 
-    To Central Command,
+    To Verdant Sector Control,
 
     I, [signature], write to request that you dispatch an evacuation shuttle to the station, without delay, and authorize evacuation of the station via said shuttle.
 
@@ -461,7 +461,7 @@ doc-text-printer-evacuation-shuttle-request =
 doc-text-printer-shuttle-registration-request =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                  [bold]SHUTTLE REGISTRATION FORM[/bold]
     ────────────────────────────────────────
@@ -486,14 +486,14 @@ doc-text-printer-shuttle-registration-request =
 doc-text-printer-request-call-centcomm-members =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
-   ⠀⠀              [bold]REQUEST TO CALL CENTCOMM MEMBERS[/bold]
+   ⠀⠀                 [bold]REQUEST TO CALL VSC MEMBERS[/bold]
     ────────────────────────────────────────
      Date and Time: [datetime]
     Document Compiler: [signature]
 
-    I, [signature], request to be considered for a call with CentComm administrative officers.
+    I, [signature], request to be considered for a call with VSC administrative officers.
 
     Reason for the call: [form]
 
@@ -505,7 +505,7 @@ doc-text-printer-request-call-centcomm-members =
 doc-text-printer-request-establish-threat-level =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀             [bold]REQUEST TO ESTABLISH THREAT LEVEL[/bold]
     ────────────────────────────────────────
@@ -524,7 +524,7 @@ doc-text-printer-request-establish-threat-level =
 doc-text-printer-request-change-salary =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]SALARY CHANGE REQUEST[/bold]
     ────────────────────────────────────────
@@ -547,7 +547,7 @@ doc-text-printer-request-change-salary =
 doc-text-printer-request-for-non-listed-employment =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀             [bold]NON-LISTED EMPLOYMENT CONTRACT[/bold]
     ────────────────────────────────────────
@@ -574,7 +574,7 @@ doc-text-printer-request-for-non-listed-employment =
 doc-text-printer-request-for-promotion =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]REQUEST FOR PROMOTION[/bold]
     ────────────────────────────────────────
@@ -599,7 +599,7 @@ doc-text-printer-request-for-promotion =
 doc-text-printer-request-documents =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ──────────────────────────────────────────
    ⠀⠀                  [bold]REQUEST FOR RELEASE OF DOCUMENTS[/bold]
     ──────────────────────────────────────────
@@ -622,7 +622,7 @@ doc-text-printer-request-documents =
 doc-text-printer-request-euthanasia =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                        [bold]PETITION FOR EUTHANASIA[/bold]
     ────────────────────────────────────────
@@ -652,7 +652,7 @@ doc-text-printer-request-euthanasia =
 doc-text-printer-request-construction-work =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                     [bold]CONSTRUCTION REQUEST[/bold]
     ────────────────────────────────────────
@@ -673,7 +673,7 @@ doc-text-printer-request-construction-work =
 doc-text-printer-request-modernization =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]MODERNIZATION REQUEST[/bold]
     ────────────────────────────────────────
@@ -695,7 +695,7 @@ doc-text-printer-request-modernization =
 doc-text-printer-request-ert =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀           [bold]EMERGENCY RESPONSE TEAM REQUEST[/bold]
     ────────────────────────────────────────
@@ -723,7 +723,7 @@ doc-text-printer-request-ert =
 doc-text-printer-product-order =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                                 [bold]PRODUCT ORDER[/bold]
     ────────────────────────────────────────
@@ -749,7 +749,7 @@ doc-text-printer-product-order =
 doc-text-printer-complaint-violation-labor-rules =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
     ⠀⠀[bold]DEPARTMENTAL COMPLAINT[/bold]
     ────────────────────────────────────────
@@ -776,7 +776,7 @@ doc-text-printer-complaint-violation-labor-rules =
 doc-text-printer-offense-complaint =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                             [bold]CRIMINAL COMPLAINT[/bold]
     ────────────────────────────────────────
@@ -807,7 +807,7 @@ doc-text-printer-offense-complaint =
 doc-text-printer-permission-equipment =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]EQUIPMENT PERMIT[/bold]
     ────────────────────────────────────────
@@ -834,7 +834,7 @@ doc-text-printer-permission-equipment =
 doc-text-printer-search-permission =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                             [bold]SEARCH WARRANT[/bold]
     ────────────────────────────────────────
@@ -868,7 +868,7 @@ doc-text-printer-search-permission =
 doc-text-printer-permission-to-carry-weapons =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                             [bold]WEAPON PERMIT[/bold]
     ────────────────────────────────────────
@@ -895,7 +895,7 @@ doc-text-printer-permission-to-carry-weapons =
 doc-text-printer-permission-dispose-body =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                 [bold]BODY DISPOSAL AUTHORIZATION[/bold]
     ────────────────────────────────────────
@@ -918,7 +918,7 @@ doc-text-printer-permission-dispose-body =
 doc-text-printer-construction-permit =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]CONSTRUCTION PERMIT[/bold]
     ────────────────────────────────────────
@@ -940,7 +940,7 @@ doc-text-printer-construction-permit =
 doc-text-printer-surgery-consent-permit =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]SURGERY CONSENT FORM[/bold]
     ────────────────────────────────────────
@@ -974,7 +974,7 @@ doc-text-printer-surgery-consent-permit =
 doc-text-printer-art-permit =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]ART PERMIT[/bold]
     ────────────────────────────────────────
@@ -999,7 +999,7 @@ doc-text-printer-art-permit =
 doc-text-printer-dismissal-order =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                               [bold]DISMISSAL ORDER[/bold]
     ────────────────────────────────────────
@@ -1022,7 +1022,7 @@ doc-text-printer-dismissal-order =
 doc-text-printer-access-revocation-order =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                       [bold]ACCESS REVOCATION ORDER[/bold]
     ────────────────────────────────────────
@@ -1047,7 +1047,7 @@ doc-text-printer-access-revocation-order =
 doc-text-printer-incentive-order =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                       [bold]RECOGNITION OF MERIT[/bold]
     ────────────────────────────────────────
@@ -1076,7 +1076,7 @@ doc-text-printer-incentive-order =
 doc-text-printer-prisoner-parole-order =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]ORDER OF MANDATORY PAROLE[/bold]
     ────────────────────────────────────────
@@ -1103,7 +1103,7 @@ doc-text-printer-prisoner-parole-order =
 doc-text-printer-order-recognizing-reasonableness-creature =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
                                 ⠀[bold]DECLARATION OF SENTIENCE[/bold]
     ────────────────────────────────────────
@@ -1128,7 +1128,7 @@ doc-text-printer-order-recognizing-reasonableness-creature =
 doc-text-printer-medical-intervention-order =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                [bold]MEDICAL INTERVENTION ORDER[/bold]
     ────────────────────────────────────────
@@ -1155,7 +1155,7 @@ doc-text-printer-medical-intervention-order =
 doc-text-printer-execution-dnr-order =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀             [bold]EXECUTION AND DO-NOT-REVIVE ORDER[/bold]
     ────────────────────────────────────────
@@ -1187,14 +1187,14 @@ doc-text-printer-execution-dnr-order =
 doc-text-printer-centcomm-communication =
                              [head=3]NT-CC Consortium Services[/head]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
-   ⠀⠀                    [bold]CENTCOMM COMMUNICATION[/bold]
+   ⠀⠀                       [bold]VSC COMMUNICATION[/bold]
     ────────────────────────────────────────
      Date and Time: [datetime]
     Document Compiler: [signature]
 
-    Greetings CentComm,
+    Greetings VSC,
 
    ⠀[form]
 
@@ -1207,7 +1207,7 @@ doc-text-printer-centcomm-communication =
 doc-text-printer-salvagelead-report =
                               [head=3]NT-CC Consortium Services[/head]
 
-                   [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                   [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
     ⠀⠀                   [bold]SALVAGE LEAD REPORT[/bold]
     ────────────────────────────────────────
@@ -1238,7 +1238,7 @@ doc-text-printer-salvagelead-report =
 doc-text-printer-enemy-of-corporation-designation =
                              [head=3]NT-CC Consortium Services[/head]
 
-                   [center][color=#1f75bb][italic][bold]   OFFICIAL CENTCOMM DOCUMENTATION[/bold][/italic][/color][/center]
+                   [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
     ⠀⠀             [bold]ENEMY OF CORPORATION DESIGNATION FORM[/bold]
     ────────────────────────────────────────
@@ -1267,8 +1267,8 @@ doc-text-printer-enemy-of-corporation-designation =
    ⠀ [italic]Captain, or Magistrate. It must be approved by at least 2[/italic]
    ⠀ [italic]of these individuals, and they must provide their stamps.[/italic]
    ⠀ [italic]The prisoner is to remain under watch in captivity until evacuation.[/italic]
-   ⠀ [italic]When completed, form must be faxed to CentComm with all haste.[/italic]
-   ⠀ [italic]If CentComm, or any of the above mentioned officials,[/italic]
+   ⠀ [italic]When completed, form must be faxed to VSC with all haste.[/italic]
+   ⠀ [italic]If VSC, or any of the above mentioned officials,[/italic]
    ⠀ [italic]deny this motion, the prisoner must be reinstated as crew[/italic]
    ⠀ [italic]and tried normally as per Corporate Law.[/italic]
     ────────────────────────────────────────

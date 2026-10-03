@@ -4,7 +4,7 @@ syndicate-disruptor-cooldown = It can't be used right now!
 
 # Menu ftl
 syndicate-disruptor-gas-leak = Causes a sensor error in the gas sensors, triggering a gas leak.
-syndicate-disruptor-bureaucratic-error = Creates errors in CentComm's hiring algorithms, causing some jobs to be over or under staffed.
+syndicate-disruptor-bureaucratic-error = Creates errors in VSC's hiring algorithms, causing some jobs to be over or understaffed.
 syndicate-disruptor-clerical-error = Creates errors in the station's employment records, removing random crew's records.
 syndicate-disruptor-breaker-flip = Causes power sensor errors, causing random APC breakers to flip.
 syndicate-disruptor-electromagnetic-storm = Creates electromagnetic interference throughout the facility, disrupting Silicon laws.

@@ -93,7 +93,7 @@
   parent: CrateGenericSteel
   id: CrateFunInstrumentsSpecial
   name: special instrument collector's crate
-  description: Create some noise with this special collection of arguably-instruments! Centcomm is not responsible for any trauma caused by the contents.
+  description: Create some noise with this special collection of arguable instruments! VSC is not responsible for any trauma caused by the contents.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -115,7 +115,7 @@
   parent: CrateGenericSteel
   id: CrateFunInstrumentsRandom
   name: random instrument collection
-  description: A box containing several randomly curated instruments, hand picked by Centcomm's top musicians!
+  description: A box containing several randomly curated instruments, hand-picked by VSC's top musicians!
   components:
   - type: EntityTableContainerFill
     containers:

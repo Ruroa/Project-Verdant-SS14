@@ -68,7 +68,7 @@ thaven-mood-sportsball-day-name = Sportsball Day
 thaven-mood-sportsball-day-desc = Today’s the big Sportsball tournament! All Thaven will compete in 1v1s until only one remains. You think you remember how to play...
 
 thaven-mood-conferences-name = Conferences
-thaven-mood-conferences-desc = All Thaven must hold conference meetings to discuss their current status. Anyone who fails to make it to these meetings without a good excuse (I.E. being dead) should be ostracized and belittled with the ruthlessness of a CentComm official.
+thaven-mood-conferences-desc = All Thaven must hold conference meetings to discuss their current status. Anyone who fails to make it to these meetings without a good excuse (I.E. being dead) should be ostracized and belittled with the ruthlessness of a VSC official.
 
 thaven-mood-one-of-you-is-a-traitor-name = One of You is a Traitor to Thavenkind
 thaven-mood-one-of-you-is-a-traitor-desc = You must host meetings to discuss who it is and have them punished.

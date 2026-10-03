@@ -95,8 +95,8 @@
 - type: entity
   parent: [ ClothingHeadset, BaseCentcommContraband ]
   id: ClothingHeadsetCentCom
-  name: CentComm headset
-  description: A headset used by the upper echelons of Central Command. # SL
+  name: VSC headset
+  description: A headset used by the upper echelons of Verdant Sector Control. # PV
   components:
   - type: ContainerFill
     containers:

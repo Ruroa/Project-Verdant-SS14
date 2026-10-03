@@ -29,7 +29,7 @@
 - type: entity
   id: BaseDoorElectronicsCentComm
   parent: [DoorElectronics, BaseCentcommContraband]
-  name: Central Command door electronics
+  name: VSC door electronics
   description: An electronics board used in doors and airlocks.
   components:
     - type: Sprite

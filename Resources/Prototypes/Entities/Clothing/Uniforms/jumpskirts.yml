@@ -497,7 +497,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtCentcomFormalDress
-  name: central command formal dress
+  name: VSC formal dress
   description: A dress for special occasions.
   components:
   - type: Sprite

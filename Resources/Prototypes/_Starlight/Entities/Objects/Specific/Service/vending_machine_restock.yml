@@ -34,7 +34,7 @@
 - type: entity
   parent: [ BaseCentcommContraband, BaseVendingMachineRestock ]
   id: VendingMachineRestockCentComm
-  name: CentComm vending restock box
+  name: VSC vending restock box
   description: Fine wares for fine tastes.
   components:
   - type: VendingMachineRestock

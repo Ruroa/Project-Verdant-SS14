@@ -290,7 +290,7 @@
   parent:
     [BaseCentcommContraband, ClothingOuterVestWeb]
   id: ClothingOuterVestWebEliteCentcomm
-  name: central command web vest
+  name: VSC web vest
   description: A synthetic armor vest redesignated for use by the Corporate Consortium, webbing and heat resistant fibers included.
   components:
     - type: Sprite

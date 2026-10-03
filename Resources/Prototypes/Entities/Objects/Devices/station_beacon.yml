@@ -869,15 +869,15 @@
 - type: entity
   parent: DefaultStationBeaconGhost
   id: DefaultStationBeaconCentComm
-  suffix: CentComm
+  suffix: VSC
   components:
   - type: NavMapBeacon
-    text: CentComm
+    text: VSC
 
 - type: entity
   parent: DefaultStationBeaconGhost
   id: DefaultStationBeaconCentCommAfterhours
-  suffix: CentComm Afterhours
+  suffix: VSC Afterhours
   components:
   - type: NavMapBeacon
     text: Afterhours
@@ -885,7 +885,7 @@
 - type: entity
   parent: DefaultStationBeaconGhost
   id: DefaultStationBeaconCentCommThunderdome
-  suffix: CentComm Thunder Dome
+  suffix: VSC Thunder Dome
   components:
   - type: NavMapBeacon
     text: Thunderdome
@@ -893,7 +893,7 @@
 - type: entity
   parent: DefaultStationBeaconGhost
   id: DefaultStationBeaconCentCommERT
-  suffix: CentComm ERT
+  suffix: VSC ERT
   components:
   - type: NavMapBeacon
     text: ERT

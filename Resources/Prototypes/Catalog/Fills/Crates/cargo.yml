@@ -2,7 +2,7 @@
   parent: CratePirate
   id: CrateCargoLuxuryHardsuit
   name: luxury mining hardsuit crate
-  description: Finally, a hardsuit Quartermasters could call their own. Centcomm has heard you, now stop asking.
+  description: Finally, a hardsuit quartermasters can call their own. VSC has heard you; now stop asking.
   components:
   - type: EntityTableContainerFill
     containers:

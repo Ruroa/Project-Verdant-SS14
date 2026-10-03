@@ -7,16 +7,16 @@ job-name-greenshield = Greenshield Officer
 job-name-miningspec = Mining Specialist
 job-name-surgeon = Surgeon
 job-name-mailtech = Mail Technician
-job-name-centcomm = CentComm Official
-job-name-centcommoperator = CentComm Operator
+job-name-centcomm = VSC Official
+job-name-centcommoperator = VSC Operator
 job-name-nanotrasen-special-forces = NTSF Operative
 job-name-decimus = Decimus Operative
 job-name-nct = NanoTrasen Career Trainer
 job-name-ert = Emergency Response Team
-job-name-cc-serviceworker = CentComm Service Worker
-job-name-cc-chef = CentComm Chef
-job-name-cc-bartender = CentComm Bartender
-job-name-cc-janitor = CentComm Janitor
+job-name-cc-serviceworker = VSC Service Worker
+job-name-cc-chef = VSC Chef
+job-name-cc-bartender = VSC Bartender
+job-name-cc-janitor = VSC Janitor
 
 job-name-performer = Performer
 job-name-salvagelead = Salvage Lead
@@ -44,14 +44,14 @@ role-type-corporate-aligned-name = Corporate Aligned
 role-type-corporate-aligned-color = #00b600
 role-type-corporate-aligned-alternate-color = #1b67a5
 job-rules-corporate-aligned = You are {role-type-corporate-aligned-name}.
-                              You are to serve the interests of NanoTrasen and Central Command, even if they differ from the stations'.
+                              You are to serve the interests of NanoTrasen and Verdant Sector Control, even if they differ from the stations'.
                               Remember, you do NOT serve the crew.
 
-role-type-cc-aligned-name = Central Command Aligned
+role-type-cc-aligned-name = VSC Aligned
 role-type-cc-aligned-color = #00b600
 role-type-cc-aligned-alternate-color = #439909
 job-rules-cc-aligned = You are {role-type-cc-aligned-name}.
-                              You are to serve the interests of Central Command, even if they differ from NanoTrasen or the stations'.
+                              You are to serve the interests of Verdant Sector Control, even if they differ from NanoTrasen or the stations'.
                               Remember, you do NOT serve the crew.
 
 role-type-tsf-aligned-name = Trans-Solar Federation Aligned

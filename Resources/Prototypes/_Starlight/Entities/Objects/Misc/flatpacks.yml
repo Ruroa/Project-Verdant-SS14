@@ -157,8 +157,8 @@
 - type: entity
   parent: [BaseFlatpack, BaseCentcommContraband]
   id: CentralCommandTechFabFlatpack
-  name: Central Command techfab flatpack
-  description: A flatpack used for constructing a Central Command techfab.
+  name: VSC techfab flatpack
+  description: A flatpack used for constructing a VSC techfab.
   components:
   - type: Flatpack
     entity: CentralCommandTechFab

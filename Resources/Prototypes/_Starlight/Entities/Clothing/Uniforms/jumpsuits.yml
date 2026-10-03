@@ -747,8 +747,8 @@
 - type: entity
   parent: [ ClothingUniformBase, BaseCentcommContraband ]
   id: ClothingAltUniformJumpsuitCentcomOfficial
-  name: CentComm officer's jumpsuit
-  description: It's a jumpsuit worn by CentComm officers.
+  name: VSC officer's jumpsuit
+  description: It's a jumpsuit worn by VSC officers.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/centcom_official.rsi
@@ -920,7 +920,7 @@
   categories: [ DoNotMap ]
   id: ClothingUniformJumpsuitGreenshield
   name: greenshield uniform
-  description: A special suit made for the best of the elites under CentComm.
+  description: A special suit made for the best of VSC's elite personnel.
   components:
     - type: Sprite
       sprite: Clothing/Uniforms/Jumpsuit/ert_leader.rsi
@@ -992,8 +992,8 @@
 - type: entity
   parent: [ ClothingUniformBase, BaseCentcommContraband ]
   id: ClothingUniformJumpsuitCentCommServiceWorker
-  name: CentComm service worker's jumpsuit
-  description: It's a jumpsuit worn by CentComm service workers. Those boots need licking.
+  name: VSC service worker's jumpsuit
+  description: It's a jumpsuit worn by VSC service workers. Those boots need polishing.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/centcommserviceworker.rsi
@@ -1003,8 +1003,8 @@
 - type: entity
   parent: [ ClothingUniformBase, BaseCentcommContraband ]
   id: ClothingUniformJumpsuitCentCommBartender
-  name: CentComm bartender's jumpsuit
-  description: It's a jumpsuit worn by CentComm bartenders. Those drinks won't serve themselves.
+  name: VSC bartender's jumpsuit
+  description: It's a jumpsuit worn by VSC bartenders. Those drinks won't serve themselves.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/centcommbartender.rsi

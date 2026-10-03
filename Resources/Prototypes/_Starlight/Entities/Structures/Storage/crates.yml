@@ -60,7 +60,7 @@
 - type: entity
   parent: CrateBaseSecure
   id: CrateCentralCommandSecure
-  name: central command crate
+  name: VSC crate
   components:
     - type: Icon
       sprite: _Starlight/Structures/Storage/Crates/centralcommand.rsi
@@ -72,7 +72,7 @@
 - type: entity
   parent: CrateCentralCommandSecure
   id: CrateCentralCommandSecureStrong
-  name: central command crate
+  name: VSC crate
   suffix: Secure, Strong
   description: A large container for items. Made with plastitanium to drastically improve durability.
   components:

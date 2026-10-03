@@ -152,7 +152,7 @@
 - type: entity
   parent: Airlock # if you get centcom door somehow it counts as command, also inherit panel # Starlight edit: Again. Stupid. Now its Normal Airlock
   id: AirlockCentralCommand
-  suffix: Central Command
+  suffix: VSC
   components:
   - type: Sprite
     sprite: Structures/Doors/Airlocks/Standard/centcomm.rsi
@@ -351,7 +351,7 @@
 - type: entity
   parent: AirlockGlass # see standard # Starlight edit: Nuh uh
   id: AirlockCentralCommandGlass
-  suffix: Central Command
+  suffix: VSC
   components:
   - type: Sprite
     sprite: Structures/Doors/Airlocks/Glass/centcomm.rsi

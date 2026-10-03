@@ -47,7 +47,7 @@ id-card-access-level-external = External
 id-card-access-level-nuclear-operative = Nuclear Operative
 id-card-access-level-syndicate-agent = Syndicate Agent
 
-id-card-access-level-central-command = Central Command
+id-card-access-level-central-command = VSC
 
 id-card-access-level-wizard = Wizard
 

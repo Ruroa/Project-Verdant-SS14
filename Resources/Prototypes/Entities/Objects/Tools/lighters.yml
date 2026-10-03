@@ -368,8 +368,8 @@
 - type: entity
   parent: [BaseBrandedLighter, BaseCentcommContraband]
   id: CentCommFlippo
-  name: gilded CentComm flippo  # Starlight-edit
-  description: "An Ornate, jade embossed and gilded flippo frame containing a bluespace powered jet. The latch is secured by a miniature access reader that only responds to CentComm officials. The nicest lighter known to man."
+  name: gilded VSC flippo  # PV
+  description: "An ornate, jade-embossed and gilded flippo frame containing a bluespace-powered jet. The latch is secured by a miniature access reader that only responds to VSC officials. The nicest lighter known to man."
   suffix: DO NOT MAP
   components:
   - type: Sprite

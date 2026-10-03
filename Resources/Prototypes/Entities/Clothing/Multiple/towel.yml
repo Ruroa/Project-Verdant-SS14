@@ -292,7 +292,7 @@
 
 - type: entity
   id: TowelColorCentcom
-  name: centcom towel
+  name: VSC towel
   parent: BaseTowel
   components:
   - type: Sprite

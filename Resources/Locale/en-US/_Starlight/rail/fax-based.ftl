@@ -14,7 +14,7 @@ rr-criminal-1-letter-content =
 
     {CAPITALIZE(SUBJECT($subject))} {CONJUGATE-BE($subject)} charged with multiple counts of █████████████, as well as ██████████████. There is also clear evidence pointing to crimes of a ██████████████ nature against █████████████. {CAPITALIZE(SUBJECT($subject))} may be armed.
 
-    In accordance with Directive 25, Section B of the Code of Information Crimes, you are ordered to deliver {OBJECT($subject)} to Central Command, dead or alive.
+    In accordance with Directive 25, Section B of the Code of Information Crimes, you are ordered to deliver {OBJECT($subject)} to Verdant Sector Control, dead or alive.
 
     {$subject} [italic]must[/italic] be:
     - [bold]Handcuffed[/bold] (even if {SUBJECT($subject)} {CONJUGATE-BE($subject)} compliant)
@@ -40,4 +40,4 @@ rr-criminal-failed-content =
    ⠀                                    [italic]Place for stamps[/italic]
 
 rr-nt-isd = NT ISD
-rr-cc = CentComm
+rr-cc = VSC

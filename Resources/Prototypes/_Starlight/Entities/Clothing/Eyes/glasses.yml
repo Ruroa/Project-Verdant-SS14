@@ -194,7 +194,7 @@
 - type: entity
   parent: ClothingEyesGlassesCentCommBase
   id: ClothingEyesGlassesCentComm
-  name: CentComm officer's glasses
+  name: VSC officer's glasses
   description: The innovative green lenses hide your eyes from light flashes and have a built-in visor.
   components:
   - type: Sprite
@@ -279,8 +279,8 @@
 - type: entity
   parent: ClothingEyesGlassesCentCommBase
   id: ClothingEyesGlassesCentCommPrescription
-  name: prescription CentComm glasses
-  description: A set of prescription glasses for CentComm personnel. Protects against flashes and has a built-in visor.
+  name: prescription VSC glasses
+  description: A set of prescription glasses for VSC personnel. Protects against flashes and has a built-in visor.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Eyes/Glasses/prescriptioncentcomm.rsi
@@ -382,7 +382,7 @@
 - type: entity
   parent: ClothingEyesGlassesCentCommBase
   id: ClothingEyesGlassesJamjarCentComm
-  name: CentComm jamjar glasses
+  name: VSC jamjar glasses
   description: For looking at their profits with even wider eyes.
   components:
     - type: Sprite

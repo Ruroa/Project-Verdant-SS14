@@ -2,7 +2,7 @@
   parent: [BaseTSFContraband, ClothingBackpackSatchel]
   id: ClothingBackpackRadioTSF
   name: TSF radio telephone pack
-  description: A heavy-duty pack, used for telecommunications between central command.
+  description: A heavy-duty pack used for telecommunications with Verdant Sector Control.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Back/rtp.rsi

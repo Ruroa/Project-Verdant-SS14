@@ -1,7 +1,7 @@
 department-Cargo = Cargo
 department-Civilian = Civilian
 department-Command = Command
-department-CentralCommand = Central Command
+department-CentralCommand = Verdant Sector Control
 department-Engineering = Engineering
 department-Medical = Medical
 department-Security = Security

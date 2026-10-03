@@ -358,7 +358,7 @@
 
 - type: entity
   id: RandomHumanoidVisitorLawyerCentcom
-  name: visiting centcom lawyer ghost role
+  name: visiting VSC lawyer ghost role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi

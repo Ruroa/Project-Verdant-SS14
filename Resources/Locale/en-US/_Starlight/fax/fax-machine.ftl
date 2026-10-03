@@ -14,7 +14,7 @@ fax-machine-configure-ui-submit = Apply
 fax-machine-configure-ui-saved = Successfully reconfigured fax machine!
 
 # Normally-present-but-otherwise-event fax groups
-fax-group-centcomm = Central Command
+fax-group-centcomm = Verdant Sector Control
 fax-group-syndicate = Syndicate
 fax-group-itg = Interstellar Trade Guild
 

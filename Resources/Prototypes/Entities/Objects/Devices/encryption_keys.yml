@@ -54,7 +54,7 @@
 - type: entity
   parent: [ EncryptionKey, BaseCentcommContraband ]
   id: EncryptionKeyCentCom
-  name: central command encryption key
+  name: VSC encryption key
   description: An encryption key used by captain's bosses.
   components:
   - type: EncryptionKey

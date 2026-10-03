@@ -13,25 +13,25 @@ ghost-role-terror-spider-description = The task of the Terror Spider is to destr
 ghost-role-terror-spider-rules = You are a [color=red][bold]Team Antagonist[/bold][/color] with all other terror spiders.
 
 ghost-role-information-ntnc-consortium-officer-name = NanoTrasen Navy Corps Marine
-ghost-role-information-ntnc-consortium-officer-description = You are charged directly from the NanoTrasen Navy Corps to protect and serve the Central Command officials at all costs, nothing else subverts that.
+ghost-role-information-ntnc-consortium-officer-description = You are charged directly from the NanoTrasen Navy Corps to protect and serve Verdant Sector Control officials at all costs; nothing else subverts that.
 
 ghost-role-information-green-shield-officer-name = Greenshield Officer
-ghost-role-information-green-shield-officer-description = You are charged directly from the highest levels of CentComm to protect CentComm VIPs and maintain the peace at Central Command outposts.
+ghost-role-information-green-shield-officer-description = You are charged directly from the highest levels of VSC to protect VSC VIPs and maintain the peace at Verdant Sector Control outposts.
 
 ghost-role-information-cburn-corpsman-name = CBURN Corpsman
-ghost-role-information-cburn-corpsman-description = A highly trained CentComm medical agent, capable of fixing injuries from various threats.
+ghost-role-information-cburn-corpsman-description = A highly trained VSC medical agent, capable of treating injuries from various threats.
 
-ghost-role-information-cc-serviceworker-name = CentComm Service Worker
-ghost-role-information-cc-serviceworker-description = Perform menial labor on CentComm outposts.
+ghost-role-information-cc-serviceworker-name = VSC Service Worker
+ghost-role-information-cc-serviceworker-description = Perform essential support work at VSC outposts.
 
-ghost-role-information-cc-chef-name = CentComm Chef
-ghost-role-information-cc-chef-description = Dish out food to weary station crews on CentComm outposts.
+ghost-role-information-cc-chef-name = VSC Chef
+ghost-role-information-cc-chef-description = Dish out food to weary station crews at VSC outposts.
 
-ghost-role-information-cc-bartender-name = CentComm Bartender
-ghost-role-information-cc-bartender-description = Serve up drinks to weary station crews on CentComm outposts.
+ghost-role-information-cc-bartender-name = VSC Bartender
+ghost-role-information-cc-bartender-description = Serve up drinks to weary station crews at VSC outposts.
 
-ghost-role-information-cc-janitor-name = CentComm Janitor
-ghost-role-information-cc-janitor-description = Keep the floors on CentComm outposts squeaky clean.
+ghost-role-information-cc-janitor-name = VSC Janitor
+ghost-role-information-cc-janitor-description = Keep the floors at VSC outposts squeaky clean.
 
 ghost-important-role = [bold]Now looking for candidates to play as {$rolename}[/bold]
 ghost-gui-aghost-toggle-ghost-visibility-popup-on = Invisible to non-admins.

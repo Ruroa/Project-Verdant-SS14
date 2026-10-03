@@ -1286,7 +1286,7 @@
 - type: entity
   parent: [BaseBorgModuleCentcomm,BaseProviderBorgModule,BaseCentcommContraband]
   id: CentcommLaserModule
-  name: CentComm cyborg laser module.
+  name: VSC cyborg laser module
   description: Module with a standard issue HAW laser.
   components:
   - type: Sprite
@@ -1302,7 +1302,7 @@
 - type: entity
   parent: [ BaseBorgModuleCentcomm, BaseProviderBorgModule, BaseCentcommContraband ]
   id: CentcommAccessBreakerModule
-  name: CentComm Breacher Module
+  name: VSC breacher module
   description: Module with an ERT-modified Access Configurator designed to quickly allow access into an area.
   components:
   - type: Sprite
@@ -1318,7 +1318,7 @@
 - type: entity
   id: CentcommBulwarkModule
   parent: [ BaseBorgModuleCentcomm, BaseProviderBorgModule, BaseCentcommContraband ]
-  name: CentComm bulwark module
+  name: VSC bulwark module
   description: A module that comes with an energy chainsword and shield.
   components:
     - type: Sprite
@@ -1335,8 +1335,8 @@
 - type: entity
   parent: [ BaseBorgModuleCentcomm, BaseProviderBorgModule, BaseCentcommContraband ]
   id: CentcommModuleSpaceMovement
-  name: CentComm space movement module
-  description: After seeing the success of the thruster module, CentComm decided to develop a proper jetpack for their most valued cyborgs.
+  name: VSC space movement module
+  description: After seeing the success of the thruster module, VSC developed a proper jetpack for its most valued cyborgs.
   components:
   - type: Sprite
     layers:
@@ -1408,4 +1408,3 @@
     - item: MuteToxinHypo
   - type: BorgModuleIcon
     icon: { sprite: _Starlight/Interface/Actions/actions_borg.rsi, state: xenoborg-hypo2-module }
-
