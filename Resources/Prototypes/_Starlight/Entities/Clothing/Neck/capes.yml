@@ -388,12 +388,12 @@
   - type: UseDelay
     delay: 10.0
 
-# Greenshield Officer
+# Aegis Security Officer
 - type: entity
   parent: [ ClothingNeckBase ]
   categories: [ DoNotMap ]
   id: ClothingNeckGreenshield
-  name: greenshield mantle
+  name: ASO mantle
   description: Extraordinary decorative drape over the shoulders.
   components:
     - type: Sprite

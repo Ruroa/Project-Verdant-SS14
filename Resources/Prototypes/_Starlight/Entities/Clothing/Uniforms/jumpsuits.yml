@@ -914,12 +914,12 @@
   - type: Clothing
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/RetroSec.rsi
 
-# Greenshield Officer
+# Aegis Security Officer
 - type: entity
   parent: [ BaseCentcommContraband, ClothingUniformBase ]
   categories: [ DoNotMap ]
   id: ClothingUniformJumpsuitGreenshield
-  name: greenshield uniform
+  name: ASO uniform
   description: A special suit made for the best of VSC's elite personnel.
   components:
     - type: Sprite

@@ -1267,13 +1267,13 @@
         - CorgiWearable
         - Hardsuit
 
-# Greenshield Officer
+# Aegis Security Officer
 - type: entity
   parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieCommander, AllowSuitStorageClothing, ClothingOuterStorageBase ]
   categories: [ DoNotMap ]
   id: ClothingOuterHardsuitGreenshield
-  name: greenshield hardsuit
-  description: A protective hardsuit worn by Greenshields. It even has pockets!
+  name: ASO hardsuit
+  description: A protective hardsuit worn by Aegis Security Officers. It even has pockets!
   components:
     - type: Sprite
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi

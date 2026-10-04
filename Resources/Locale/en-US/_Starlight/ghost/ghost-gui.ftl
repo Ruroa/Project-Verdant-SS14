@@ -15,8 +15,8 @@ ghost-role-terror-spider-rules = You are a [color=red][bold]Team Antagonist[/bol
 ghost-role-information-ntnc-consortium-officer-name = NanoTrasen Navy Corps Marine
 ghost-role-information-ntnc-consortium-officer-description = You are charged directly from the NanoTrasen Navy Corps to protect and serve Verdant Sector Control officials at all costs; nothing else subverts that.
 
-ghost-role-information-green-shield-officer-name = Greenshield Officer
-ghost-role-information-green-shield-officer-description = You are charged directly from the highest levels of VSC to protect VSC VIPs and maintain the peace at Verdant Sector Control outposts.
+ghost-role-information-green-shield-officer-name = Aegis Security Officer
+ghost-role-information-green-shield-officer-description = You are charged directly by the highest levels of VSC to protect VSC VIPs and maintain the peace at Verdant Sector Control outposts.
 
 ghost-role-information-cburn-corpsman-name = CBURN Corpsman
 ghost-role-information-cburn-corpsman-description = A highly trained VSC medical agent, capable of treating injuries from various threats.

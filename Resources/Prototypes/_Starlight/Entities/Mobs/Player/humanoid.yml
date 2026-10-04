@@ -890,10 +890,10 @@
         - FreedomImplant
 
 # CentComm
-## Greenshield Officer
+## Aegis Security Officer
 
 - type: entity
-  name: Greenshield Officer
+  name: Aegis Security Officer
   suffix: Basic
   id: RandomHumanoidCCGreenshieldSpawnerBasic
   components:
@@ -904,7 +904,7 @@
       settings: CCGreenshieldBasic
 
 - type: entity
-  name: Greenshield Officer
+  name: Aegis Security Officer
   suffix: EVA
   id: RandomHumanoidCCGreenshieldSpawnerEVA
   components:

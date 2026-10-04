@@ -20,12 +20,12 @@
   - type: StealTarget
     stealGroup: BSOMagboots
 
-# Greenshield Officer
+# Aegis Security Officer
 - type: entity
   parent: [BaseCentcommContraband, ClothingShoesBootsMagSyndie]
   categories: [ DoNotMap ]
   id: ClothingShoesBootsMagGreenshield
-  name: greenshield magboots
+  name: ASO magboots
   description: Upgraded magnetic boots that you swiped from the ERT lockers.
   components:
     - type: Sprite

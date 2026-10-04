@@ -637,7 +637,7 @@
   parent: BasePDA
   categories: [ DoNotMap ]
   id: CentCommGreenShieldPDA
-  name: greenshield PDA
+  name: ASO PDA
   description: Comes with all the bells and whistles for all those times you do more than walk slowly next to someone who thinks they are way too important.
   components:
     - type: Sprite

@@ -177,7 +177,7 @@
   parent: [ IDCardStandard, BaseCommandContraband ]
   categories: [ DoNotMap ]
   id: CCGreenShieldIDCard
-  name: greenshield ID card
+  name: ASO ID card
   description: Why are you looking at this instead of the person you're supposed to protect?
   components:
     - type: Sprite

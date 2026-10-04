@@ -35,13 +35,13 @@
       guides:
         - Brighteye
 
-# Greenshield Officer
+# Aegis Security Officer
 - type: entity
   parent: [ ClothingBackpack, BaseCentcommContraband ]
   categories: [ DoNotMap ]
   id: ClothingBackpackGreenshield
-  name: greenshield cloak
-  description: A spacious cloak with lots of pockets, worn by Greenshield officers.
+  name: ASO cloak
+  description: A spacious cloak with lots of pockets, worn by Aegis Security Officers.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Back/thermalcloak.rsi

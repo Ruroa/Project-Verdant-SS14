@@ -437,13 +437,13 @@
   - type: Clothing
     sprite: _Starlight/Clothing/OuterClothing/Vests/retro_officer_hivis_vest.rsi
 
-# Greenshield Officer
+# Aegis Security Officer
 - type: entity
   parent: [ BaseCentcommContraband, ClothingOuterArmorRaid, ClothingOuterStorageBase ]
   categories: [ DoNotMap ]
   id: ClothingOuterVestGreenshield
-  name: greenshield vest
-  description: A protective vest worn by Greenshields. It even has pockets and a flashlight!
+  name: ASO vest
+  description: A protective vest worn by Aegis Security Officers. It even has pockets and a flashlight!
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/OuterClothing/Vests/greenshield_vest.rsi
