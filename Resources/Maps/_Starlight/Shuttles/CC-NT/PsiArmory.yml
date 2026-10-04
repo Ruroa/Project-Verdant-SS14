@@ -905,15 +905,15 @@ entities:
       - font: /Fonts/NotoSans/NotoSans-Regular.ttf
         type: RubberStamp
         stampedColor: '#CC0000FF'
-        stampedName: Central Security Division
+        stampedName: Verdant Sector Control - Security Division
       - font: /Fonts/NotoSans/NotoSans-Regular.ttf
         type: RubberStamp
         stampedColor: '#0AAFC3FF'
-        stampedName: Central Medical Division
+        stampedName: Verdant Sector Control - Medical Division
       - font: /Fonts/NotoSans/NotoSans-Regular.ttf
         type: RubberStamp
         stampedColor: '#9900FFFF'
-        stampedName: Central Research Division
+        stampedName: Verdant Sector Control - Research Division
       content: >-
         [head=1][color=#009100]────────────────────[/color][/head]
 

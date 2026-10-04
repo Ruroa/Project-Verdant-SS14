@@ -1,0 +1,13 @@
+- type: entity
+  name: Verdant Sector Control CEO rubber stamp
+  parent: RubberStampBase
+  id: RubberStampVSCChiefExecutiveOfficer
+  description: The official rubber stamp of the Chief Executive Officer of Verdant Sector Control.
+  categories: [ DoNotMap ]
+  components:
+  - type: Stamp
+    stampedName: "Verdant Sector Control - Office of the Chief Executive Officer"
+    stampedColor: "#087F78"
+    stampState: "paper_stamp-centcom"
+  - type: Sprite
+    state: stamp-centcom

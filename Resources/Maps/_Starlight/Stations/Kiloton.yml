@@ -158753,7 +158753,7 @@ entities:
       stampState: paper_stamp-qm
       stampedBy:
       - type: RubberStamp
-        stampedName: Central Cargo Division
+        stampedName: Verdant Sector Control - Cargo Division
         stampedColor: '#A23E3EFF'
         font: /Fonts/NotoSans/NotoSans-Regular.ttf
       content: >

@@ -75,114 +75,114 @@
       sprite: _Starlight/Objects/Misc/stamps.rsi
       state: stamp-brigmedic
 
-# CC Division Stamps
+# VSC Division Stamps
 - type: entity
-  name: central administration division rubber stamp
+  name: Verdant Sector Control administration division rubber stamp
   parent: RubberStampBase
   id: RubberStampCAD
   description: A rubber stamp for stamping important documents. Somebody is getting fired.
   categories: [ DoNotMap ]
   components:
   - type: Stamp
-    stampedName: "Central Administration Division"
+    stampedName: "Verdant Sector Control - Administration Division"
     stampedColor: "#1155CC"
     stampState: "paper_stamp-cap"
   - type: Sprite
     state: stamp-cap
 
 - type: entity
-  name: central cargo division rubber stamp
+  name: Verdant Sector Control cargo division rubber stamp
   parent: RubberStampBase
   id: RubberStampCCD
   description: A rubber stamp for stamping important documents. Used to deny the urgent medical supplies request and send over a pizza party instead.
   categories: [ DoNotMap ]
   components:
   - type: Stamp
-    stampedName: "Central Cargo Division"
+    stampedName: "Verdant Sector Control - Cargo Division"
     stampedColor: "#9e794a"
     stampState: "paper_stamp-qm"
   - type: Sprite
     state: stamp-detective
 
 - type: entity
-  name: central engineering division rubber stamp
+  name: Verdant Sector Control engineering division rubber stamp
   parent: RubberStampBase
   id: RubberStampCED
   description: A rubber stamp for stamping important documents. Use when another multi-trillion dollar station was lost.
   categories: [ DoNotMap ]
   components:
   - type: Stamp
-    stampedName: "Central Engineering Division"
+    stampedName: "Verdant Sector Control - Engineering Division"
     stampedColor: "#e39919"
     stampState: "paper_stamp-ntrep"
   - type: Sprite
     state: stamp-ce
 
 - type: entity
-  name: central intelligence division rubber stamp
+  name: Verdant Sector Control intelligence division rubber stamp
   parent: RubberStampBase
   id: RubberStampCID
-  description: A rubber stamp for stamping important documents. NT-ISD will always be scarier.
+  description: A rubber stamp for stamping important documents. The VID sees more than it says.
   categories: [ DoNotMap ]
   components:
   - type: Stamp
-    stampedName: "Central Intelligence Division"
+    stampedName: "Verdant Sector Control - Intelligence Division"
     stampedColor: "#660089"
     stampState: "paper_stamp-rd"
   - type: Sprite
     state: stamp-rd
 
 - type: entity
-  name: central medical division rubber stamp
+  name: Verdant Sector Control medical division rubber stamp
   parent: RubberStampBase
   id: RubberStampCMD
   description: A rubber stamp for stamping important documents. For when the REAL doctor is in.
   categories: [ DoNotMap ]
   components:
   - type: Stamp
-    stampedName: "Central Medical Division"
+    stampedName: "Verdant Sector Control - Medical Division"
     stampedColor: "#0AAFC3"
     stampState: "paper_stamp-cmo"
   - type: Sprite
     state: stamp-cmo
 
 - type: entity
-  name: central research division rubber stamp
+  name: Verdant Sector Control research division rubber stamp
   parent: RubberStampBase
   id: RubberStampCRD
-  description: A rubber stamp for stamping important documents. Every bit as exploded as it's non-CC counterpart.
+  description: A rubber stamp for stamping important documents. Every bit as exploded as its station-side counterpart.
   categories: [ DoNotMap ]
   components:
   - type: Stamp
-    stampedName: "Central Research Division"
+    stampedName: "Verdant Sector Control - Research Division"
     stampedColor: "#9900FF"
     stampState: "paper_stamp-rd"
   - type: Sprite
     state: stamp-wizard
 
 - type: entity
-  name: central domestic division rubber stamp
+  name: Verdant Sector Control domestic division rubber stamp
   parent: RubberStampBase
   id: RubberStampCDD
   description: A rubber stamp for stamping important documents. What do you even do again?
   categories: [ DoNotMap ]
   components:
   - type: Stamp
-    stampedName: "Central Domestic Division"
+    stampedName: "Verdant Sector Control - Domestic Division"
     stampedColor: "#6AA84F"
     stampState: "paper_stamp-centcom"
   - type: Sprite
     state: stamp-centcom
 
 - type: entity
-  name: central special operations division rubber stamp
+  name: Verdant Sector Control special operations division rubber stamp
   parent: RubberStampBase
   id: RubberStampCSOD
-  description: A rubber stamp for stamping important documents. For when something is too hot for CSD.
+  description: A rubber stamp for stamping important documents. For when something is too hot for VSD.
   suffix: DO NOT MAP
   components:
   - type: Stamp
-    stampedName: "Central Special Operations Division"
+    stampedName: "Verdant Sector Control - Special Operations Division"
     stampedColor: "#741B47"
     stampState: "paper_stamp-magistrate"
   - type: Sprite
@@ -190,21 +190,21 @@
     state: stamp-magistrate
 
 - type: entity
-  name: central security division rubber stamp
+  name: Verdant Sector Control security division rubber stamp
   parent: RubberStampBase
   id: RubberStampCSD
   description: A rubber stamp for stamping important documents. They fought the law, and the law won.
   categories: [ DoNotMap ]
   components:
   - type: Stamp
-    stampedName: "Central Security Division"
+    stampedName: "Verdant Sector Control - Security Division"
     stampedColor: "#cc0000"
     stampState: "paper_stamp-hos"
   - type: Sprite
     state: stamp-hos
 
 - type: entity
-  name: cc department stamps box
+  name: Verdant Sector Control division stamps box
   parent: BoxCardboard
   id: BoxStampsCCDepartments
   description: A small box containing stamps. You would think by the 26th century there would be something more sophisticated than a rubber stamp.
@@ -490,4 +490,3 @@
       stampState: "paper_stamp-psychologist"
     - type: Sprite
       state: stamp-hop
-
