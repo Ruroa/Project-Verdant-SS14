@@ -4136,7 +4136,7 @@ entities:
       - font: /Fonts/NotoSans/NotoSans-Regular.ttf
         type: RubberStamp
         stampedColor: '#741B47FF'
-        stampedName: Central Special Operations Division
+        stampedName: Verdant Sector Control - Special Operations Division
       content: >-
         [head=1][color=#ad0101]────────────────────[/color][/head]
                 [color=#cb0000]█▀▀ █▀▀ █▀▀ █▀▀█ █▀▀ ▀█▀[/color]
@@ -4450,7 +4450,7 @@ entities:
       - font: /Fonts/NotoSans/NotoSans-Regular.ttf
         type: RubberStamp
         stampedColor: '#741B47FF'
-        stampedName: Central Special Operations Division
+        stampedName: Verdant Sector Control - Special Operations Division
       content: >-
         [color=#134975]█▄░░█ ▀▀█▀▀[/color]  [head=3][color=#1b67a5]REDACTED[/color][/head]
 
