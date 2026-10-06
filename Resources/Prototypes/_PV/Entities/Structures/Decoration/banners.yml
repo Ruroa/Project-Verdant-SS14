@@ -1,0 +1,10 @@
+# Project Verdant
+- type: entity
+  id: BannerVerdant
+  parent: BannerBase
+  name: Verdant flag
+  description: A freestanding banner bearing the colors and emblem of Verdant.
+  components:
+  - type: Sprite
+    sprite: Structures/Decoration/banner.rsi
+    state: banner_verdant

@@ -1,0 +1,9 @@
+# Project Verdant
+- type: stack
+  parent: BaseTileStack
+  id: FloorCarpetTeal
+  name: stack-teal-carpet-tile
+  icon:
+    sprite: /Textures/Structures/Furniture/Carpets/teal_carpet.rsi
+    state: full
+  spawn: FloorCarpetItemTeal

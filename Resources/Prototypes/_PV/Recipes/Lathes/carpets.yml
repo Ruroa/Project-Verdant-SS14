@@ -1,0 +1,5 @@
+# Project Verdant
+- type: latheRecipe
+  parent: BaseCarpetRecipe
+  id: CarpetTeal
+  result: FloorCarpetItemTeal

@@ -1,0 +1,18 @@
+# Project Verdant
+- type: entity
+  parent: FloorCarpetItemRed
+  id: FloorCarpetItemTeal
+  suffix: Teal
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/Carpets/teal_carpet.rsi
+    state: full
+  - type: Item
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: carpet-cyan
+  - type: Stack
+    stackType: FloorCarpetTeal
+  - type: SpawnAfterInteract
+    prototype: CarpetTeal
+    doAfter: 0.5
+    removeOnInteract: true
