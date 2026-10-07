@@ -5,7 +5,7 @@
     "y": 32
   },
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/structures.dmi",
+  "copyright": "Taken from https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/structures.dmi | teal recolor by Ruroa (github)",
   "states": [
     {
       "name": "full",
@@ -20,16 +20,16 @@
       "directions": 4,
       "delays": [
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ]
       ]
     },
@@ -38,16 +38,16 @@
       "directions": 4,
       "delays": [
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ]
       ]
     },
@@ -56,16 +56,16 @@
       "directions": 4,
       "delays": [
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ]
       ]
     },
@@ -74,16 +74,16 @@
       "directions": 4,
       "delays": [
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ]
       ]
     },
@@ -92,16 +92,16 @@
       "directions": 4,
       "delays": [
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ]
       ]
     },
@@ -110,16 +110,16 @@
       "directions": 4,
       "delays": [
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ]
       ]
     },
@@ -128,16 +128,16 @@
       "directions": 4,
       "delays": [
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ]
       ]
     },
@@ -146,16 +146,16 @@
       "directions": 4,
       "delays": [
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ],
         [
-          1.0
+          1
         ]
       ]
     }

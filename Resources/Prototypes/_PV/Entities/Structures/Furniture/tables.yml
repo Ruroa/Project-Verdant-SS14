@@ -1,0 +1,15 @@
+# Project Verdant
+- type: entity
+  id: TableFancyTeal
+  parent: TableFancyBase
+  suffix: Teal
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/Tables/Fancy/teal.rsi
+  - type: Icon
+    sprite: Structures/Furniture/Tables/Fancy/teal.rsi
+  - type: Construction
+    graph: Table
+    node: TableFancyTeal
+  - type: IconSmooth
+    key: fancytableteal
