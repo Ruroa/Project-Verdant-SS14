@@ -254,6 +254,11 @@
             - material: FloorCarpetCyan
               amount: 1
 
+        - to: TableFancyTeal
+          steps:
+            - material: FloorCarpetTeal
+              amount: 1
+
         - to: TableFancyGreen
           steps:
             - material: FloorCarpetGreen
@@ -339,6 +344,18 @@
           completed:
             - !type:SpawnPrototype
               prototype: FloorCarpetItemCyan
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyTeal
+      entity: TableFancyTeal
+      edges:
+        - to: TableWood
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemTeal
               amount: 1
           steps:
             - tool: Prying

@@ -1,0 +1,13 @@
+# Project Verdant
+- type: construction
+  id: TableFancyTeal
+  name: construction-recipe-table-fancy-teal
+  graph: Table
+  startNode: start
+  targetNode: TableFancyTeal
+  category: construction-category-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked

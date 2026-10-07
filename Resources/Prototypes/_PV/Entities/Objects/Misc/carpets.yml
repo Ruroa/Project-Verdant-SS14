@@ -2,6 +2,7 @@
 - type: entity
   parent: FloorCarpetItemRed
   id: FloorCarpetItemTeal
+  categories: [ HideSpawnMenu ]
   suffix: Teal
   components:
   - type: Sprite
