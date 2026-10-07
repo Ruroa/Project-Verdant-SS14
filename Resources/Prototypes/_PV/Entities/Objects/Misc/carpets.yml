@@ -6,11 +6,11 @@
   suffix: Teal
   components:
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/teal_carpet.rsi
-    state: full
+    sprite: Objects/Tiles/tile.rsi
+    state: carpet-teal
   - type: Item
     sprite: Objects/Tiles/tile.rsi
-    heldPrefix: carpet-cyan
+    heldPrefix: carpet-teal
   - type: Stack
     stackType: FloorCarpetTeal
   - type: SpawnAfterInteract

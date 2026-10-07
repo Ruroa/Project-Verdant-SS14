@@ -4,6 +4,6 @@
   id: FloorCarpetTeal
   name: stack-teal-carpet-tile
   icon:
-    sprite: /Textures/Structures/Furniture/Carpets/teal_carpet.rsi
-    state: full
+    sprite: /Textures/Objects/Tiles/tile.rsi
+    state: carpet-teal
   spawn: FloorCarpetItemTeal
