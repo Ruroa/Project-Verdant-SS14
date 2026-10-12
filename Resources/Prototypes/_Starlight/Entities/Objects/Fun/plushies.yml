@@ -89,7 +89,7 @@
   parent: BaseAvaliPlushie
   id: PlushieEinalia # CaptainComedy
   name: einalia plushie
-  description: A marketable plushie of one of the shortest Captains in NT-CC employ, and Nebula's husband. The two amber eyes on its face feel as if they're boring into your soul.
+  description: A marketable plushie of one of the shortest Captains in VTS-VSC employ, and Nebula's husband. The two amber eyes on its face feel as if they're boring into your soul.
   components:
   - type: Item
     size: Small
@@ -251,7 +251,7 @@
   parent: BaseAvaliPlushie
   id: PlushieNebula # rtasva - staff centcomm character
   name: nebula plushie
-  description: A marketable plushie of Nebula Silverfeather- lovable pop star turned CC official. Husband not included.
+  description: A marketable plushie of Nebula Silverfeather, lovable pop star turned VSC official. Husband not included.
   components:
   - type: Item
     size: Small

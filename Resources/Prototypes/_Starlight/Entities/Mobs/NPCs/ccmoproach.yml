@@ -21,7 +21,7 @@
   parent: MobMoproach
   id: MobCCMoproach
   suffix: Jani ERT
-  name: cc moproach
+  name: VSC moproach
   description: A moproach specially trained in the ways of janitorial duties by the best NT has to offer.
   components:
     - type: CanEscapeInventory
@@ -85,7 +85,7 @@
 - type: entity
   parent: MoproachCubeWrapped
   id: CCMoproachCubeWrapped
-  name: cc moproach cube
+  name: VSC moproach cube
   description: Just add water! *chitters*
   components:
     - type: SpawnItemsOnUse

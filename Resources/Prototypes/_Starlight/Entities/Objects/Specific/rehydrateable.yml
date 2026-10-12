@@ -24,7 +24,7 @@
 - type: entity
   parent: RehydratableAnimalCube
   id: CCMoproachCube
-  name: cc moproach cube
+  name: VSC moproach cube
   description: Just add water! *chitters*
   components:
     - type: Rehydratable

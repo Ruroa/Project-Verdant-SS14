@@ -478,7 +478,7 @@
   parent: [ClothingHeadBase, BaseCentcommContraband]
   id: ClothingHeadHatCCSheriffhat
   name: VSC sheriff's hat
-  description: A sheriff's hat in the signature CC colors, one look at this might make a tider think twice from sneaking into debrief.
+  description: A sheriff's hat in the signature VSC colors. One look at this might make a tider think twice about sneaking into debrief.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Head/Hats/CC_Bounty_Hunter_hat.rsi

@@ -179,7 +179,7 @@
   parent: PosterBase
   id: PosterContrabandTools
   name: "Tools"
-  description: "This poster looks like an advertisement for tools, but is in fact a subliminal jab at the tools at CentComm."
+  description: "This poster looks like an advertisement for tools, but is in fact a subliminal jab at the tools at VSC."
   components:
   - type: Sprite
     state: poster15_contraband
@@ -242,7 +242,7 @@
   parent: PosterBase
   id: PosterContrabandKosmicheskayaStantsiya
   name: "Kosmicheskaya Stantsiya 13 Does Not Exist"
-  description: "A poster mocking CentComm's denial of the existence of the derelict station near Space Station 13."
+  description: "A poster mocking VSC's denial of the existence of the derelict station near Space Station 13."
   components:
   - type: Sprite
     state: poster22_contraband
@@ -322,7 +322,7 @@
 - type: entity
   parent: PosterBase
   id: PosterContrabandCC64KAd
-  name: "CC 64K Ad"
+  name: "VSC 64K Ad"
   description: "The latest portable computer from Comrade Computing, with a whole 64kB of ram!"
   components:
   - type: Sprite
@@ -350,7 +350,7 @@
   parent: PosterBase
   id: PosterContrabandFreeDrone
   name: "Free Drone"
-  description: "This poster commemorates the bravery of the rogue drone; once exiled, and then ultimately destroyed by CentComm."
+  description: "This poster commemorates the bravery of the rogue drone; once exiled, and then ultimately destroyed by VSC."
   components:
   - type: Sprite
     state: poster35_contraband
@@ -467,7 +467,7 @@
   parent: PosterBase
   id: PosterContrabandTheBigGasTruth
   name: "The Big Gas Giant Truth"
-  description: "Don't believe everything you see on a poster, patriots. All the lizards at central command don't want to answer this SIMPLE QUESTION: WHERE IS THE GAS MINER MINING FROM, CENTCOMM?"
+  description: "Don't believe everything you see on a poster, patriots. All the lizards at Verdant Sector Control don't want to answer this SIMPLE QUESTION: WHERE IS THE GAS MINER MINING FROM, VSC?"
   components:
   - type: Sprite
     state: poster48_contraband

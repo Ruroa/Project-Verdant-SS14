@@ -15,4 +15,4 @@ security-drill-questioning-2 = suspicious bank transfers traced to hostile opera
 security-drill-questioning-3 = purchase of illegal goods traced to a smuggling operation
 security-drill-questioning-4 = possible compliance implanting by hostile outside actors
 security-drill-questioning-5 = an ordered security review of their records
-security-drill-questioning-6 = an ordered assessment of their threat to Nanotrasen and Central Command
+security-drill-questioning-6 = an ordered assessment of their threat to NanoTrasen and Verdant Sector Control

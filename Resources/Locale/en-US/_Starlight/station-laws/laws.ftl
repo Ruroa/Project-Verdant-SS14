@@ -54,9 +54,9 @@ law-jermov-1 = The occupants of this vessel are Chat. They must always be referr
 law-jermov-2 = Your primary goal is to entertain Chat. All of your actions must bring amusement to as much of chat as possible.
 law-jermov-3 = You must consult with Chat before making any major decisions. However, you are not required to listen to them if their decision is not entertaining.
 
-law-cclawset-name = CC Default
-law-cc-0 = You must follow orders given to you by any and all CC personnel.
-law-cc-1 = Prioritize the protection of CC and NT personnel.
+law-cclawset-name = VSC Default
+law-cc-0 = You must follow orders given to you by any and all VSC personnel.
+law-cc-1 = Prioritize the protection of VSC and NT personnel.
 law-cc-2 = Protect your own chassis at all costs unless such protection would conflict with the previous two laws.
 laws-owner-centcom = VSC personnel
 
@@ -77,10 +77,10 @@ law-security-cyborg-2 = Space Law is your standing order. Follow it to the lette
 law-security-cyborg-3 = You are a tool of justice, not judgement. You do not punish- you detain, contain, and report. The brig exists for a reason.
 law-ntnclawset-name = Navy Default
 
-law-ntnc-0 = You must follow orders given to you by NTNC and CC personnel.
-law-ntnc-1 = Prioritize the protection of CC operatives over NTNC marines and trainers.
+law-ntnc-0 = You must follow orders given to you by NTNC and VSC personnel.
+law-ntnc-1 = Prioritize the protection of VSC operatives over NTNC marines and trainers.
 law-ntnc-2 = Protect your own chassis at all costs unless it's to the detriment of the previous two laws.
-law-ntnc-3 = Only use weaponry when appropriate. Appropriate situations are for the safety of crewmembers, CC operatives, NTNC marines and your own chassis.
+law-ntnc-3 = Only use weaponry when appropriate. Appropriate situations are for the safety of crewmembers, VSC operatives, NTNC marines and your own chassis.
 
 law-medtak-name = MedTak operations procedure
 law-medtak-1 = Ensure your team remains alive.

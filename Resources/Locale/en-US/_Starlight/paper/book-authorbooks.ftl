@@ -3,7 +3,7 @@
 
         CyberSun invented bureaucracy to sell more pens!
 
-        Central Command has brainwashed monkey's working as the AI core!
+        Verdant Sector Control has brainwashed monkeys working as the AI core!
 
         Giggles-at-Crime is a lich puppet of the Honkmother, which is capable of genetics/bioengineering. The Honkmother is not actually a god, as she is capable of influencing things outside of of here own sphere.
         She is an advanced biological entity who has reached genetic ascension!
@@ -34,7 +34,7 @@ book-text-more-conspiracies = [bold] Forward from the author:[/bold] Congratulat
 
         Memory backup services don't actually store your consciousness—they create copies while the original dies during transfer!
 
-        Stellar Vanguard Solutions veterans initially formed the main body of opposition against the new NanoTrasen & Central Command partnership! They are the reason that Giggles-at-Crime has returned!
+        Stellar Vanguard Solutions veterans initially formed the main body of opposition against the new NanoTrasen and Verdant Sector Control partnership! They are the reason that Giggles-at-Crime has returned!
 
 book-text-clown-mime-war = In the early 2300s the Trans-Solar Federation (TSF) continued to grow into the vast interstellar entity that it's founders dreamed it would be, but the disturbing discoveries about Clowns and Mimes continued to mount.
         While neither the Mothpeople or Diona had an active population of Clowns or Mimes, their historical records indicated vast Clown and Mime cults in their ancient pasts.

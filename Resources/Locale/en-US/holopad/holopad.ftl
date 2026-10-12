@@ -158,5 +158,5 @@ holopad-ai-chute = AI - Chute
 holopad-station-bridge = Station - Bridge
 holopad-station-cargo-bay = Station - Cargo Bay
 
-# CentComm
-holopad-centcomm-evac = CentComm - Evacuation Shuttle
+# Verdant Sector Control
+holopad-centcomm-evac = VSC - Evacuation Shuttle

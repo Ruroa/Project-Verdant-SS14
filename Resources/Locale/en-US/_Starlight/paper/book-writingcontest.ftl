@@ -657,7 +657,7 @@ book-apocolypse = It is said there will come a time when shields are riven, spea
 # Written by naterthegreater
 book-wizard-dice = "Snide, smug, swindling sharks." Ricky kicks back the chair and drowns the string of curses in a glass of rum. The free booze is the only good thing about his job. "Tch, 'become an assistant, see the galaxy.'" And where does he end up?
 
-        Barratry, freaking Barratry. He slams his glass down and leers at the dirty little bar where staff drink their days away. CentComm loves touting their "first-rate working environments" and "commitment to employee well-being" when they're parading cameras around Manor and Oasis.
+        Barratry, freaking Barratry. He slams his glass down and leers at the dirty little bar where staff drink their days away. VSC loves touting their "first-rate working environments" and "commitment to employee well-being" when they're parading cameras around Manor and Oasis.
 
         What they don't tell you is what happens to the employees they don't want; they ship them to stations that NanoTrasen wants even less. Where there's nothing to do but gamble your pittance of a salary away to see which employee will scrounge enough credits together to escape the sector for good.
 
@@ -745,7 +745,7 @@ book-wizard-dice = "Snide, smug, swindling sharks." Ricky kicks back the chair a
 
         He twists his hand around to show the image of the wizard on the other side. "You come with me and let me teach you what it means to possess true power. Not merely over men, but over the universe itself."
 
-        Ryan glances back at his reflection. He could stay, he should stay, yes. This is as far as he could've dreamed of making it in CentComm… the swindlers who left him to rot on Barratry. He looks back at the wizard and smirks.
+        Ryan glances back at his reflection. He could stay, he should stay, yes. This is as far as he could've dreamed of making it in VSC… the swindlers who left him to rot on Barratry. He looks back at the wizard and smirks.
 
         "Roll the dice."
 

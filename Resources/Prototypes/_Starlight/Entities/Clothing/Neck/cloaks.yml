@@ -237,7 +237,7 @@
   parent: [ClothingNeckBase, BaseCentcommContraband]
   id: ClothingNeckCloakCCponcho
   name: VSC poncho
-  description: a stylish poncho for a CC offical that prefers field-work to pushing papers.
+  description: A stylish poncho for a VSC official who prefers fieldwork to pushing papers.
   components:
   - type: Sprite
     sprite:  _Starlight/Clothing/Neck/Cloaks/CC_poncho.rsi
