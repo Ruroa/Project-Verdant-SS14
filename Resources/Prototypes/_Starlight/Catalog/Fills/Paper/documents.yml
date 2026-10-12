@@ -4,9 +4,12 @@
   parent: PaperNTCC
   id: PrintedDocument
   abstract: true
-  description: Bureaucratic unit. A document printed on a printer.
+  description: An official VTS-VSC document printed by a document printer.
   components:
     - type: Paper
+    - type: PaperVisuals
+      # Printed forms provide their organization logos through paper markup.
+      headerImagePath: null
 
 # Reports
 

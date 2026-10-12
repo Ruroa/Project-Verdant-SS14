@@ -26,6 +26,7 @@
   - PrintedDocumentShuttleRegistrationRequestRecipe
   - PrintedDocumentRequestCallCentCommMembersRecipe
   - PrintedDocumentRequestRequestEstablishThreatLevelRecipe
+  - PrintedDocumentRequestChangeSalaryRecipe
   - PrintedDocumentRequestForNonlistedEmploymentRecipe
   - PrintedDocumentRequestForPromotionRecipe
   - PrintedDocumentRequestDocumentsRecipe

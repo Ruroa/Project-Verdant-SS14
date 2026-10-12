@@ -5,7 +5,7 @@
   # TODO: could have a unique sprite in the future
 
 - type: entity
-  name: nt-cc paper
+  name: VTS-VSC paper
   parent: Paper
   id: PaperNTCC
   description: A single unit of bureaucracy, branded with the logos of VTS and Verdant Sector Control.
@@ -23,7 +23,7 @@
   - type: PaperVisuals
     backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
     contentMargin: 0.0, 0.0, 0.0, 0.0
-    headerImagePath: "/Textures/_Starlight/Interface/Paper/paper_heading_nt_cc_logos.svg.96dpi.png"
+    headerImagePath: "/Textures/_Starlight/Interface/Paper/paper_heading_verdant_logo.png"
     headerMargin: 0.0, 0.0, 0.0, 0.0
 
 - type: entity

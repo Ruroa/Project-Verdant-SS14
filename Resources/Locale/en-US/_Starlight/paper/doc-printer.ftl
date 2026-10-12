@@ -1,9 +1,9 @@
 # Reports
 
 doc-text-printer-report-morgue =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
     ⠀                              [bold]MORGUE DNR REPORT[/bold]
     ────────────────────────────────────────
@@ -23,9 +23,9 @@ doc-text-printer-report-morgue =
 
 
 doc-text-printer-report-station =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                            [bold]SITUATION REPORT[/bold]
     ────────────────────────────────────────
@@ -49,9 +49,9 @@ doc-text-printer-report-station =
 
 
 doc-text-printer-report-on-elimination-of-violations =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀            [bold]ISSUE RESOLUTION REPORT[/bold]
     ────────────────────────────────────────
@@ -70,9 +70,9 @@ doc-text-printer-report-on-elimination-of-violations =
 
 
 doc-text-printer-report-department =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]DEPARTMENTAL REVIEW[/bold]
     ────────────────────────────────────────
@@ -97,9 +97,9 @@ doc-text-printer-report-department =
 
 
 doc-text-printer-report-employee-performance =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ─────────────────────────────────────────
    ⠀⠀                 [bold]WORK REPORT[/bold]
     ─────────────────────────────────────────
@@ -115,9 +115,9 @@ doc-text-printer-report-employee-performance =
 
 
 doc-text-printer-report-on-the-chapters-meeting =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ─────────────────────────────────────────
    ⠀⠀                     [bold]VOTE RECORD[/bold]
     ─────────────────────────────────────────
@@ -145,7 +145,7 @@ doc-text-printer-report-on-the-chapters-meeting =
     • [signature]
     • [signature]
     Number of [italic]abstentions[/italic] from voting: [form]
-    Those voting to [italic]abstain[italic]:
+    Those voting to [italic]abstain[/italic]:
     • [signature]
     • [signature]
     • [signature]
@@ -159,9 +159,9 @@ doc-text-printer-report-on-the-chapters-meeting =
 
 
 doc-text-printer-internal-affairs-agents-report =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ─────────────────────────────────────────
    ⠀⠀               [bold]AUDIT REPORT[/bold]
     ─────────────────────────────────────────
@@ -177,9 +177,9 @@ doc-text-printer-internal-affairs-agents-report =
 
 
 doc-text-printer-condition-report =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]MAINTENANCE REPORT[/bold]
     ─────────────────────────────────────────
@@ -199,9 +199,9 @@ doc-text-printer-condition-report =
 
 
 doc-text-printer-object-investigation-report =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀          [bold]UNKNOWN OBJECT INVESTIGATION REPORT[/bold]
     ────────────────────────────────────────
@@ -223,9 +223,9 @@ doc-text-printer-object-investigation-report =
 
 
 doc-text-printer-experiment-report =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                              [bold]EXPERIMENT REPORT[/bold]
     ────────────────────────────────────────
@@ -250,9 +250,9 @@ doc-text-printer-experiment-report =
 
 
 doc-text-printer-disposal-report =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ─────────────────────────────────────────
    ⠀⠀                                [bold]DISPOSAL REPORT[/bold]
     ─────────────────────────────────────────
@@ -273,9 +273,9 @@ doc-text-printer-disposal-report =
 
 
 doc-text-printer-arrest-report =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                            [bold]SECURITY ARREST REPORT[/bold]
     ────────────────────────────────────────
@@ -305,9 +305,9 @@ doc-text-printer-arrest-report =
 # Statements
 
 doc-text-printer-statement-appointment-interim-chapter =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀          [bold]INTERIM COMMAND APPOINTMENT[/bold]
     ────────────────────────────────────────
@@ -323,9 +323,9 @@ doc-text-printer-statement-appointment-interim-chapter =
 
 
 doc-text-printer-employment-statement =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]EMPLOYMENT CONTRACT[/bold]
     ────────────────────────────────────────
@@ -348,9 +348,9 @@ doc-text-printer-employment-statement =
 
 
 doc-text-printer-resignation-statement =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                          [bold]NOTICE OF RESIGNATION[/bold]
     ────────────────────────────────────────
@@ -368,9 +368,9 @@ doc-text-printer-resignation-statement =
 
 
 doc-text-printer-access-request-statement =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                       [bold]ACCESS REQUEST[/bold]
     ────────────────────────────────────────
@@ -392,9 +392,9 @@ doc-text-printer-access-request-statement =
 
 
 doc-text-printer-equipment-request-statement =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                    [bold]EQUIPMENT REQUEST[/bold]
     ────────────────────────────────────────
@@ -417,9 +417,9 @@ doc-text-printer-equipment-request-statement =
 # InquiriesAndAppeals
 
 doc-text-printer-invocation =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]NOTICE OF SUMMONS[/bold]
     ────────────────────────────────────────
@@ -438,9 +438,9 @@ doc-text-printer-invocation =
 
 
 doc-text-printer-evacuation-shuttle-request =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                    [bold]EVACUATION SHUTTLE REQUEST[/bold]
     ────────────────────────────────────────
@@ -459,22 +459,22 @@ doc-text-printer-evacuation-shuttle-request =
 
 
 doc-text-printer-shuttle-registration-request =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                  [bold]SHUTTLE REGISTRATION FORM[/bold]
     ────────────────────────────────────────
      Date and Time: [datetime]
     Document Compiler: [signature]
 
-    I hereby request that the following shuttle be registered in the NanoTrasen system for identification.
+    I hereby request that the following shuttle be registered in the Verdant Sector Control system for identification.
 
     Shuttle size: [form]
 
     Shuttle class: [form]
 
-    Construction responsible: [form]
+    Responsible engineer or builder: [form]
 
     Requested name: [form]
 
@@ -484,9 +484,9 @@ doc-text-printer-shuttle-registration-request =
 
 
 doc-text-printer-request-call-centcomm-members =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                 [bold]REQUEST TO CALL VSC MEMBERS[/bold]
     ────────────────────────────────────────
@@ -503,16 +503,16 @@ doc-text-printer-request-call-centcomm-members =
 
 
 doc-text-printer-request-establish-threat-level =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀             [bold]REQUEST TO ESTABLISH THREAT LEVEL[/bold]
     ────────────────────────────────────────
      Date and Time: [datetime]
     Document Compiler: [signature]
 
-    I, [signature], request that follow threat level be established: [form]
+    I, [signature], request that the following threat level be established: [form]
 
     Reason for request: [form]
 
@@ -522,16 +522,16 @@ doc-text-printer-request-establish-threat-level =
 
 
 doc-text-printer-request-change-salary =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]SALARY CHANGE REQUEST[/bold]
     ────────────────────────────────────────
      Date and Time: [datetime]
     Document Compiler: [signature]
 
-    I, [signature], hereby a salary increase/decrease of [form] (amount or percentage).
+    I, [signature], hereby request a salary increase/decrease of [form] (amount or percentage).
 
     Employee receiving salary change: [form]
 
@@ -545,9 +545,9 @@ doc-text-printer-request-change-salary =
 
 
 doc-text-printer-request-for-non-listed-employment =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀             [bold]NON-LISTED EMPLOYMENT CONTRACT[/bold]
     ────────────────────────────────────────
@@ -572,9 +572,9 @@ doc-text-printer-request-for-non-listed-employment =
 
 
 doc-text-printer-request-for-promotion =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]REQUEST FOR PROMOTION[/bold]
     ────────────────────────────────────────
@@ -597,9 +597,9 @@ doc-text-printer-request-for-promotion =
 
 
 doc-text-printer-request-documents =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ──────────────────────────────────────────
    ⠀⠀                  [bold]REQUEST FOR RELEASE OF DOCUMENTS[/bold]
     ──────────────────────────────────────────
@@ -620,9 +620,9 @@ doc-text-printer-request-documents =
 
 
 doc-text-printer-request-euthanasia =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                        [bold]PETITION FOR EUTHANASIA[/bold]
     ────────────────────────────────────────
@@ -650,9 +650,9 @@ doc-text-printer-request-euthanasia =
 
 
 doc-text-printer-request-construction-work =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                     [bold]CONSTRUCTION REQUEST[/bold]
     ────────────────────────────────────────
@@ -671,9 +671,9 @@ doc-text-printer-request-construction-work =
 
 
 doc-text-printer-request-modernization =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]MODERNIZATION REQUEST[/bold]
     ────────────────────────────────────────
@@ -693,9 +693,9 @@ doc-text-printer-request-modernization =
 
 
 doc-text-printer-request-ert =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀           [bold]EMERGENCY RESPONSE TEAM REQUEST[/bold]
     ────────────────────────────────────────
@@ -721,9 +721,9 @@ doc-text-printer-request-ert =
 
 
 doc-text-printer-product-order =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                                 [bold]PRODUCT ORDER[/bold]
     ────────────────────────────────────────
@@ -747,9 +747,9 @@ doc-text-printer-product-order =
 # Complaints
 
 doc-text-printer-complaint-violation-labor-rules =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
     ⠀⠀[bold]DEPARTMENTAL COMPLAINT[/bold]
     ────────────────────────────────────────
@@ -774,9 +774,9 @@ doc-text-printer-complaint-violation-labor-rules =
 
 
 doc-text-printer-offense-complaint =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                             [bold]CRIMINAL COMPLAINT[/bold]
     ────────────────────────────────────────
@@ -805,9 +805,9 @@ doc-text-printer-offense-complaint =
 # Permissions
 
 doc-text-printer-permission-equipment =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]EQUIPMENT PERMIT[/bold]
     ────────────────────────────────────────
@@ -832,9 +832,9 @@ doc-text-printer-permission-equipment =
 
 
 doc-text-printer-search-permission =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                             [bold]SEARCH WARRANT[/bold]
     ────────────────────────────────────────
@@ -866,9 +866,9 @@ doc-text-printer-search-permission =
 
 
 doc-text-printer-permission-to-carry-weapons =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                             [bold]WEAPON PERMIT[/bold]
     ────────────────────────────────────────
@@ -877,7 +877,7 @@ doc-text-printer-permission-to-carry-weapons =
 
     I, [signature], authorize the carrying of the following weapon by the named person, as long as it is used for its intended purpose. In the event of a violation, the authorization will be revoked and the weapon will be confiscated by Security.
 
-    Named of authorized person: [form]
+    Name of authorized person: [form]
 
     Position of authorized person: [form]
 
@@ -893,9 +893,9 @@ doc-text-printer-permission-to-carry-weapons =
 
 
 doc-text-printer-permission-dispose-body =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                 [bold]BODY DISPOSAL AUTHORIZATION[/bold]
     ────────────────────────────────────────
@@ -916,9 +916,9 @@ doc-text-printer-permission-dispose-body =
 
 
 doc-text-printer-construction-permit =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]CONSTRUCTION PERMIT[/bold]
     ────────────────────────────────────────
@@ -938,9 +938,9 @@ doc-text-printer-construction-permit =
 
 
 doc-text-printer-surgery-consent-permit =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]SURGERY CONSENT FORM[/bold]
     ────────────────────────────────────────
@@ -972,19 +972,19 @@ doc-text-printer-surgery-consent-permit =
 
 
 doc-text-printer-art-permit =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                           [bold]ART PERMIT[/bold]
     ────────────────────────────────────────
-    Date And Time:[color=#0000ff] [form] [/color]
-    Document Compiler:[color=#0000ff] [form] [/color]
+    Date and Time: [datetime]
+    Document Compiler: [signature]
 
     I, [bolditalic][color=#0000ff] [signature] [/color][/bolditalic], hereby approve the creation of the following work of art in the location given below.
 
-    Subject of the artpiece:[color=#0000ff] [form] [/color]
-    Location of the artpiece:[color=#0000ff] [form] [/color] [italic][color=#a9a9a9]
+    Subject of the artwork:[color=#0000ff] [form] [/color]
+    Location of the artwork:[color=#0000ff] [form] [/color] [italic][color=#a9a9a9]
 
     Art permits require a stamp from the Head of Personnel, the NanoTrasen Representative, or the Captain. If an artwork is located inside of a department or at its lobby the stamp of the relevant head of staff is required as well.
 
@@ -997,9 +997,9 @@ doc-text-printer-art-permit =
 # OrdersAndInstructions
 
 doc-text-printer-dismissal-order =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                               [bold]DISMISSAL ORDER[/bold]
     ────────────────────────────────────────
@@ -1020,9 +1020,9 @@ doc-text-printer-dismissal-order =
 
 
 doc-text-printer-access-revocation-order =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                       [bold]ACCESS REVOCATION ORDER[/bold]
     ────────────────────────────────────────
@@ -1045,9 +1045,9 @@ doc-text-printer-access-revocation-order =
 
 
 doc-text-printer-incentive-order =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                       [bold]RECOGNITION OF MERIT[/bold]
     ────────────────────────────────────────
@@ -1074,9 +1074,9 @@ doc-text-printer-incentive-order =
 
 
 doc-text-printer-prisoner-parole-order =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                         [bold]ORDER OF MANDATORY PAROLE[/bold]
     ────────────────────────────────────────
@@ -1101,9 +1101,9 @@ doc-text-printer-prisoner-parole-order =
 
 
 doc-text-printer-order-recognizing-reasonableness-creature =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
                                 ⠀[bold]DECLARATION OF SENTIENCE[/bold]
     ────────────────────────────────────────
@@ -1126,9 +1126,9 @@ doc-text-printer-order-recognizing-reasonableness-creature =
 
 
 doc-text-printer-medical-intervention-order =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                [bold]MEDICAL INTERVENTION ORDER[/bold]
     ────────────────────────────────────────
@@ -1143,7 +1143,7 @@ doc-text-printer-medical-intervention-order =
 
     Circumstances: [form]
 
-   ⠀I hereby affirm that, in my professional opinion as a licensed medical practioner, the ordered intervention is medically or legally necessary.
+   ⠀I hereby affirm that, in my professional opinion as a licensed medical practitioner, the ordered intervention is medically or legally necessary.
 
     Qualified Medical Officer: [signature]
 
@@ -1153,9 +1153,9 @@ doc-text-printer-medical-intervention-order =
 
 
 doc-text-printer-execution-dnr-order =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀             [bold]EXECUTION AND DO-NOT-REVIVE ORDER[/bold]
     ────────────────────────────────────────
@@ -1185,9 +1185,9 @@ doc-text-printer-execution-dnr-order =
 # Communications
 
 doc-text-printer-centcomm-communication =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                  [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                  [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
    ⠀⠀                       [bold]VSC COMMUNICATION[/bold]
     ────────────────────────────────────────
@@ -1205,9 +1205,9 @@ doc-text-printer-centcomm-communication =
 
 
 doc-text-printer-salvagelead-report =
-                              [head=3]NT-CC Consortium Services[/head]
+                              [logo=vts]    [logo=vsc]
 
-                   [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                   [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
     ⠀⠀                   [bold]SALVAGE LEAD REPORT[/bold]
     ────────────────────────────────────────
@@ -1236,9 +1236,9 @@ doc-text-printer-salvagelead-report =
    ⠀                      [italic]Place for Stamps and/or Signatures[/italic]
 
 doc-text-printer-enemy-of-corporation-designation =
-                             [head=3]NT-CC Consortium Services[/head]
+                             [logo=vts]    [logo=vsc]
 
-                   [center][color=#1f75bb][italic][bold]   OFFICIAL VSC DOCUMENTATION[/bold][/italic][/color][/center]
+                   [center][color=#087f78][italic][bold]   OFFICIAL VTS-VSC DOCUMENTATION[/bold][/italic][/color][/center]
     ────────────────────────────────────────
     ⠀⠀             [bold]ENEMY OF CORPORATION DESIGNATION FORM[/bold]
     ────────────────────────────────────────
@@ -1263,7 +1263,7 @@ doc-text-printer-enemy-of-corporation-designation =
 
     Authority ordering the Designation (Name + Position): [signature]
 
-   ⠀ [italic]This order can only be issued either the (Acting) Head of Security,[/italic]
+   ⠀ [italic]This order can only be issued by the (Acting) Head of Security,[/italic]
    ⠀ [italic]Captain, or Magistrate. It must be approved by at least 2[/italic]
    ⠀ [italic]of these individuals, and they must provide their stamps.[/italic]
    ⠀ [italic]The prisoner is to remain under watch in captivity until evacuation.[/italic]
