@@ -13,6 +13,10 @@ using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 
+#region Project Verdant
+using Content.Client._PV.UserInterface.RichText;
+#endregion Project Verdant
+
 #region Starlight
 using Robust.Client.UserInterface;
 using Content.Client._Starlight.UserInterface.RichText;
@@ -304,7 +308,8 @@ namespace Content.Client.Paper.UI
             // Display text with markup processing (forms, signatures, colors, etc.)
             // The markup system converts [form] and [signature] tags into interactive buttons
             var fm = new FormattedMessage();
-            fm.AddMarkupPermissive(state.Text);
+            var normalizedText = PaperLogoTagHandler.NormalizeMarkup(state.Text);
+            fm.AddMarkupPermissive(normalizedText);
             WrittenTextLabel.SetMessage(fm, UserFormattableTags.BaseAllowedTags, _writtenTextColor);
 
             // Add extra bottom margin based on tag count to prevent cutoff (only in read mode)

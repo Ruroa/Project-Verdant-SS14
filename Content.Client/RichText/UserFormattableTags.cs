@@ -1,5 +1,8 @@
 ﻿using Content.Client.UserInterface.RichText;
 using Robust.Client.UserInterface.RichText;
+#region Project Verdant
+using Content.Client._PV.UserInterface.RichText;
+#endregion
 #region Starlight
 using Content.Client._Starlight.UserInterface.RichText;
 #endregion
@@ -33,5 +36,8 @@ public static class UserFormattableTags
         typeof(DotHeadTagHandler),
         typeof(MetaTagHandler),
         // Starlight end
+        // Project Verdant start
+        typeof(PaperLogoTagHandler),
+        // Project Verdant end
     ];
 }
