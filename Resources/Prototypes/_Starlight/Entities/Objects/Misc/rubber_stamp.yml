@@ -45,7 +45,7 @@
       state: stamp-iaa
 
 - type: entity
-  name: TSFO fubber stamp
+  name: TSFO rubber stamp
   parent: [ RubberStampBase, BaseBlueShieldContraband ]
   id: RubberStampBSO
   description: A rubber stamp for stamping important documents. While you are stamping a document, the captain is getting his shoes stolen AGAIN.

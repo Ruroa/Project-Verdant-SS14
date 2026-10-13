@@ -23,6 +23,7 @@ fax-group-neo-eclipse = Neo-Eclipse
 fax-group-medtak = MedTak
 fax-group-ntsf = NTSF
 fax-group-tsf = TSF
+fax-group-tsf-office = TSF Office
 fax-group-ussp = USSP
 fax-group-wizard = Wizard Federation
 

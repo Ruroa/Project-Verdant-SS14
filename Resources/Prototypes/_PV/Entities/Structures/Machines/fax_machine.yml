@@ -1,0 +1,24 @@
+# TSF Office fax endpoint
+- type: faxGroup
+  id: FaxGroupTSFOffice
+  name: fax-group-tsf-office
+  order: 1200
+  color: "#22a7ff"
+  selectable: false
+
+- type: entity
+  parent: FaxMachineBase
+  id: FaxMachineTSFOffice
+  suffix: "TSF Office"
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "base" ]
+      color: "#22a7ff"
+  - type: FaxMachine
+    group: FaxGroupTSFOffice
+    intrinsicGroup: FaxGroupTSFOffice
+    intrinsicLocked: true
+    name: "TSF Office"
+    order: 500
