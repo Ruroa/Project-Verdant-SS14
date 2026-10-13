@@ -62,7 +62,7 @@ public sealed partial class SpecialRolesTab : BoxContainer
 
             foreach (var antagId in category.Antags)
             {
-                if (!_prototype.TryIndex(antagId, out var antag))
+                if (!_prototype.TryIndex(antagId, out var antag) || !antag.SetPreference)
                     continue;
 
                 remainingAntags.Remove(antag);
