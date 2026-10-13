@@ -114,8 +114,9 @@
       prob: 0.25
     - id: SubWizard
       prob: 0.05 # We can go back down to 0.05, since they scale now.
-    - id: Devil
-      prob: 0.05 # rare
+    # Legacy-disabled: Devil removed from automatic round-start rolls.
+    #- id: Devil
+    #  prob: 0.05 # rare
     #- id: SubXenoborgs # Subgamemode replaced with SubXenoborgs
     #  prob: 0.05
     #- id: SubBrighteye # Brighteye is disabled until more work is put in.
@@ -156,8 +157,9 @@
       prob: 0.20 # Can be a little higher now, since lings don't have their standalone anymore.
     - id: SubWizard
       prob: 0.05 # We can go back down to 0.05, since they scale now.
-    - id: Devil
-      prob: 0.05 # rare
+    # Legacy-disabled: Devil removed from automatic round-start rolls.
+    #- id: Devil
+    #  prob: 0.05 # rare
     #- id: SubXenoborgs # Subgamemode replaced with SubXenoborgs
     #  prob: 0.05
     #- id: SubBrighteye
@@ -175,8 +177,9 @@
       prob: 0.28 # Starlight, to account for Wizard and Xenoborgs
     - id: SubWizard
       prob: 0.05
-    - id: Devil
-      prob: 0.05
+    # Legacy-disabled: Devil removed from automatic round-start rolls.
+    #- id: Devil
+    #  prob: 0.05
     #- id: SubXenoborgs # Subgamemode replaced with SubXenoborgs
     #      prob: 0.05
     #- id: SubBrighteye
