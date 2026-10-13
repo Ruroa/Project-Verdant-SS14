@@ -58,7 +58,8 @@
     - ThiefGamerule # Starlight, Event Light
     - CosmicCult #Starlight
     #- TerrorSpidersSpawn # Starlight
-    - Devil # Starlight
+    # Legacy-disabled: Devil remains defined but is excluded from automatic presets.
+    #- Devil # Starlight
 
 - type: gamePreset
   id: AllerAtOnce
@@ -104,7 +105,8 @@
     - RailroadingMinor # Starlight
     - CosmicCult # Starlight
     #- TerrorSpidersSpawn # Starlight
-    - Devil # Starlight
+    # Legacy-disabled: Devil remains defined but is excluded from automatic presets.
+    #- Devil # Starlight
 
 - type: gamePreset
   id: Extended
