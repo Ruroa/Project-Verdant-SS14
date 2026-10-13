@@ -444,7 +444,8 @@
   - HeadRev
   - Changeling # Starlight start
   - CosmicAntagCultist
-  - Devil
+  # Legacy-disabled: Devil removed from automatic round-start selection.
+  # - Devil
   - SELFAgent
   - Vampire # Starlight end
 
