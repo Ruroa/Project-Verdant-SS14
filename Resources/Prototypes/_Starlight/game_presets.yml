@@ -152,9 +152,11 @@
     - ShitStationEventScheduler
     - Vampire
     - SiliconLiberation
-    - SubBrighteye
+    # Legacy-disabled: Brighteye remains defined but is excluded from automatic presets.
+    #- SubBrighteye
     - ThiefGamerule
-    - Devil
+    # Legacy-disabled: Devil remains defined but is excluded from automatic presets.
+    #- Devil
     - CosmicCult
 
 - type: gamePreset
@@ -190,12 +192,14 @@
     - SLChangeling
     - Vampire
     - SiliconLiberation
-    - SubBrighteye
+    # Legacy-disabled: Brighteye remains defined but is excluded from automatic presets.
+    #- SubBrighteye
     - ThiefGamerule
     - LoneOpsSpawn
     - RailroadingTerminator
     - RailroadingMinor
-    - Devil
+    # Legacy-disabled: Devil remains defined but is excluded from automatic presets.
+    #- Devil
     - CosmicCult
 
 - type: gamePreset
