@@ -224,7 +224,6 @@
       conditions:
         - !type:HolidayActiveCondition
           holiday: FestiveSeason
-    - id: PrintedDocumentEndymionMemorial
     - id: Multitool
     # Starlight End
 
