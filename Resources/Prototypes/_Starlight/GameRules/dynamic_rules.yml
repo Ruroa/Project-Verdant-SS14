@@ -148,11 +148,12 @@
             - Zombie # Wizards don't lose their abilities in Zombie games, so they can't be allowed together
           - !type:PlayerCountCondition
             min: 40
-        - id: Devil
-          prob: 0.05
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
+        # Legacy-disabled: Devil removed from automatic dynamic rolls.
+        # - id: Devil
+        #   prob: 0.05
+        #   conditions:
+        #   - !type:HasBudgetCondition
+        #   - !type:MaxRuleOccurenceCondition
         # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic rolls.
         #- id: SubBrighteye
         #  prob: 0.05
@@ -263,12 +264,13 @@
             - Zombie # Wizards don't lose their abilities in Zombie games, so they can't be allowed together
           - !type:PlayerCountCondition
             min: 40
-        - id: Devil
-          weight: 5
-          prob: 0.50
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
+        # Legacy-disabled: Devil removed from automatic dynamic rolls.
+        # - id: Devil
+        #   weight: 5
+        #   prob: 0.50
+        #   conditions:
+        #   - !type:HasBudgetCondition
+        #   - !type:MaxRuleOccurenceCondition
         # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic rolls.
         #- id: SubBrighteye
         #  weight: 5
@@ -534,11 +536,12 @@
             - Zombie # Wizards don't lose their abilities in Zombie games, so they can't be allowed together
           - !type:PlayerCountCondition
             min: 40
-        - id: Devil
-          prob: 0.05
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
+        # Legacy-disabled: Devil removed from automatic dynamic rolls.
+        # - id: Devil
+        #   prob: 0.05
+        #   conditions:
+        #   - !type:HasBudgetCondition
+        #   - !type:MaxRuleOccurenceCondition
         # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic rolls.
         #- id: SubBrighteye
         #  prob: 0.05
@@ -647,12 +650,13 @@
             - Zombie # Wizards don't lose their abilities in Zombie games, so they can't be allowed together
           - !type:PlayerCountCondition
             min: 40
-        - id: Devil
-          weight: 5
-          prob: 0.50
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
+        # Legacy-disabled: Devil removed from automatic dynamic rolls.
+        # - id: Devil
+        #   weight: 5
+        #   prob: 0.50
+        #   conditions:
+        #   - !type:HasBudgetCondition
+        #   - !type:MaxRuleOccurenceCondition
         # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic rolls.
         #- id: SubBrighteye
         #  weight: 5
