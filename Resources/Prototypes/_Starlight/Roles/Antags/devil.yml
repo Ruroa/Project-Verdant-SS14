@@ -2,7 +2,8 @@
   id: Devil
   name: roles-antag-devil-name
   antagonist: true
-  setPreference: true
+  # Legacy-disabled: hidden from player preferences while Devil is inactive.
+  setPreference: false
   objective: roles-antag-devil-objective
   guides: [ Devil ]
   requirements:
