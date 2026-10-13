@@ -2,7 +2,7 @@
   id: Brighteye
   name: roles-antag-brighteye-name
   antagonist: true
-  setPreference: true
+  setPreference: false
   objective: roles-antag-brighteye-description
   guides: [ Shadekin, Brighteye ]
   roleLoadout: [ AntagBrighteye ]

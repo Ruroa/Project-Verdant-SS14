@@ -53,7 +53,8 @@
     - ShitStationEventScheduler # Starlight, ShitStation
     - Vampire #Starlight
     - SiliconLiberation #Starlight
-    - SubBrighteye #Starlight
+    # Legacy: keep Brighteye defined, but exclude it from automatic round-start presets.
+    #- SubBrighteye # Starlight; legacy-disabled
     - ThiefGamerule # Starlight, Event Light
     - CosmicCult #Starlight
     #- TerrorSpidersSpawn # Starlight
@@ -95,7 +96,8 @@
     - SLChangeling # Starlight
     - Vampire #Starlight
     - SiliconLiberation #Starlight
-    - SubBrighteye #Starlight
+    # Legacy: keep Brighteye defined, but exclude it from automatic round-start presets.
+    #- SubBrighteye # Starlight; legacy-disabled
     - ThiefGamerule # Starlight, Event Light
     - LoneOpsSpawn # Starlight
     - RailroadingTerminator # Starlight

@@ -153,6 +153,7 @@
           conditions:
           - !type:HasBudgetCondition
           - !type:MaxRuleOccurenceCondition
+        # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic rolls.
         #- id: SubBrighteye
         #  prob: 0.05
         #  conditions:
@@ -268,6 +269,7 @@
           conditions:
           - !type:HasBudgetCondition
           - !type:MaxRuleOccurenceCondition
+        # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic rolls.
         #- id: SubBrighteye
         #  weight: 5
         #  prob: 0.50
@@ -352,6 +354,7 @@
             min: 10
           - !type:RoundDurationCondition
             min: 1200 # 20 minutes
+        # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic mid-round rolls.
         #- id: BrighteyeSpawn
         #  weight: 1
         #  conditions:
@@ -536,6 +539,7 @@
           conditions:
           - !type:HasBudgetCondition
           - !type:MaxRuleOccurenceCondition
+        # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic rolls.
         #- id: SubBrighteye
         #  prob: 0.05
         #  conditions:
@@ -649,6 +653,7 @@
           conditions:
           - !type:HasBudgetCondition
           - !type:MaxRuleOccurenceCondition
+        # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic rolls.
         #- id: SubBrighteye
         #  weight: 5
         #  prob: 0.50
@@ -733,6 +738,7 @@
             min: 10
           - !type:RoundDurationCondition
             min: 1200 # 20 minutes
+        # Legacy-disabled: Brighteye remains available for manual/admin use, not automatic mid-round rolls.
         #- id: BrighteyeSpawn
         #  weight: 1
         #  conditions:

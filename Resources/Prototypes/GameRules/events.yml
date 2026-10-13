@@ -67,6 +67,7 @@
     - id: WizardSpawn
     - id: AbductorsSpawn # Starlight start
     #- id: SubXenoborgs
+    # Legacy-disabled: Brighteye is excluded from automatic mid-round event selection.
     #- id: BrighteyeSpawn
     #- id: TerrorSpidersSpawn
     - id: RailroadingTerminator
