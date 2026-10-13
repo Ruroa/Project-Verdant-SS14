@@ -367,16 +367,7 @@
         #    min: 20
         #  - !type:RoundDurationCondition
         #    min: 1200 # 20 minutes
-        - id: EeepEvent
-          weight: 1
-          prob: 0.85
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:PlayerCountCondition
-            min: 30
-          - !type:RoundDurationCondition
-            min: 1200 # 20 minutes
-        - id: ColossusSpawn
+                - id: ColossusSpawn
           weight: 4.5
           prob: 0.85
           conditions:
@@ -753,16 +744,7 @@
         #    min: 20
         #  - !type:RoundDurationCondition
         #    min: 1200 # 20 minutes
-        - id: EeepEvent
-          weight: 1
-          prob: 0.85
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:PlayerCountCondition
-            min: 30
-          - !type:RoundDurationCondition
-            min: 1200 # 20 minutes
-        - id: ColossusSpawn
+                - id: ColossusSpawn
           weight: 4.5
           prob: 0.85
           conditions:
