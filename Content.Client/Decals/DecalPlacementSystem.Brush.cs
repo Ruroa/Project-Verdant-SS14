@@ -3,7 +3,6 @@ using Content.Shared.Decals;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Map;
-using Robust.Shared.Timing;
 
 namespace Content.Client.Decals;
 
@@ -57,9 +56,9 @@ public sealed partial class DecalPlacementSystem
         _distanceSinceLastBrushStamp = 0f;
     }
 
-    public override void FrameUpdate(FrameEventArgs args)
+    public override void FrameUpdate(float frameTime)
     {
-        base.FrameUpdate(args);
+        base.FrameUpdate(frameTime);
 
         if (!_active || !_brushEnabled || !_brushPainting || _decalId == null)
             return;
