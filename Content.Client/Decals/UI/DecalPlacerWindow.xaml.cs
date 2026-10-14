@@ -36,6 +36,10 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
     private int _zIndex;
 
     private bool _auto;
+    private bool _brush;
+    private bool _randomRotation;
+    private float _brushSpacing = 1f;
+    private FloatSpinBox _brushSpacingSpinBox = default!;
 
     public DecalPlacerWindow()
     {
@@ -52,6 +56,18 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
             HorizontalExpand = true
         };
         SpinBoxContainer.AddChild(RotationSpinBox);
+
+        _brushSpacingSpinBox = new FloatSpinBox(0.25f, 2)
+        {
+            HorizontalExpand = true,
+            Value = _brushSpacing,
+            IsValid = value => value >= (_snap ? 1f : 0.25f),
+        };
+        BrushSpacingContainer.AddChild(new Label
+        {
+            Text = Loc.GetString("mapping-decal-brush-spacing"),
+        });
+        BrushSpacingContainer.AddChild(_brushSpacingSpinBox);
 
         Search.OnTextChanged += _ => RefreshList();
         ColorPicker.OnColorChanged += OnColorPicked;
@@ -93,6 +109,23 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
             if (_selected != null)
                 SelectDecal(_selected);
         };
+        EnableBrush.OnToggled += args =>
+        {
+            _brush = args.Pressed;
+            BrushSettings.Visible = args.Pressed;
+            UpdateDecalPlacementInfo();
+        };
+        RandomRotation.OnToggled += args =>
+        {
+            _randomRotation = args.Pressed;
+            UpdateDecalPlacementInfo();
+        };
+        _brushSpacingSpinBox.OnValueChanged += args =>
+        {
+            _brushSpacing = MathF.Max(_snap ? 1f : 0.25f, args.Value);
+            _brushSpacingSpinBox.Value = _brushSpacing;
+            UpdateDecalPlacementInfo();
+        };
         EnableColor.OnToggled += args =>
         {
             _useColor = args.Pressed;
@@ -102,6 +135,13 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
         EnableSnap.OnToggled += args =>
         {
             _snap = args.Pressed;
+            _brushSpacingSpinBox.IsValid = value => value >= (_snap ? 1f : 0.25f);
+            if (_snap && _brushSpacing < 1f)
+            {
+                _brushSpacing = 1f;
+                _brushSpacingSpinBox.Value = _brushSpacing;
+            }
+
             UpdateDecalPlacementInfo();
         };
         EnableCleanable.OnToggled += args =>
@@ -125,6 +165,7 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
 
     private void UpdateDecalPlacementInfo()
     {
+        _decalPlacementSystem.UpdateBrushInfo(_brush, _randomRotation, _brushSpacing);
         if (_selected is null)
             return;
 
