@@ -54,28 +54,17 @@ public sealed partial class DecalPlacementSystem : EntitySystem
         CommandBinds.Builder.Bind(EngineKeyFunctions.EditorPlaceObject, new PointerStateInputCmdHandler(
             (session, coords, uid) =>
             {
-                if (!_active || _placing || _decalId == null)
+                if (!_active || _decalId == null)
+                    return false;
+
+                if (_brushEnabled)
+                    return BeginBrush(coords);
+
+                if (_placing)
                     return false;
 
                 _placing = true;
-
-                if (_snap)
-                {
-                    var newPos = new Vector2(
-                        (float) (MathF.Round(coords.X - 0.5f, MidpointRounding.AwayFromZero) + 0.5),
-                        (float) (MathF.Round(coords.Y - 0.5f, MidpointRounding.AwayFromZero) + 0.5)
-                    );
-                    coords = coords.WithPosition(newPos);
-                }
-
-                coords = coords.Offset(new Vector2(-0.5f, -0.5f));
-
-                if (!coords.IsValid(EntityManager))
-                    return false;
-
-                var decal = new Decal(coords.Position, _decalId, _decalColor, _decalAngle, _zIndex, _cleanable);
-                RaiseNetworkEvent(new RequestDecalPlacementEvent(decal, GetNetCoordinates(coords)));
-
+                PlaceDecal(coords, false);
                 return true;
             },
             (session, coords, uid) =>
@@ -83,7 +72,11 @@ public sealed partial class DecalPlacementSystem : EntitySystem
                 if (!_active)
                     return false;
 
-                _placing = false;
+                if (_brushEnabled)
+                    EndBrush();
+                else
+                    _placing = false;
+
                 return true;
             }, true))
             .Bind(EngineKeyFunctions.EditorCancelPlace, new PointerStateInputCmdHandler(
@@ -120,19 +113,20 @@ public sealed partial class DecalPlacementSystem : EntitySystem
 
         args.Handled = true;
 
+        var target = args.Target;
         if (args.Snap)
         {
             var newPos = new Vector2(
-                (float) (MathF.Round(args.Target.X - 0.5f, MidpointRounding.AwayFromZero) + 0.5),
-                (float) (MathF.Round(args.Target.Y - 0.5f, MidpointRounding.AwayFromZero) + 0.5)
+                (float) (MathF.Round(target.X - 0.5f, MidpointRounding.AwayFromZero) + 0.5),
+                (float) (MathF.Round(target.Y - 0.5f, MidpointRounding.AwayFromZero) + 0.5)
             );
-            args.Target = args.Target.WithPosition(newPos);
+            target = target.WithPosition(newPos);
         }
 
-        args.Target = args.Target.Offset(new Vector2(-0.5f, -0.5f));
+        target = target.Offset(new Vector2(-0.5f, -0.5f));
 
-        var decal = new Decal(args.Target.Position, args.DecalId, args.Color, Angle.FromDegrees(args.Rotation), args.ZIndex, args.Cleanable);
-        RaiseNetworkEvent(new RequestDecalPlacementEvent(decal, GetNetCoordinates(args.Target)));
+        var decal = new Decal(target.Position, args.DecalId, args.Color, Angle.FromDegrees(args.Rotation), args.ZIndex, args.Cleanable);
+        RaiseNetworkEvent(new RequestDecalPlacementEvent(decal, GetNetCoordinates(target)));
     }
 
     private void OnFillSlot(FillActionSlotEvent ev)
@@ -192,6 +186,9 @@ public sealed partial class DecalPlacementSystem : EntitySystem
         if (_active)
             _inputManager.Contexts.SetActiveContext("editor");
         else
+        {
+            EndBrush();
             _inputSystem.SetEntityContextActive();
+        }
     }
 }

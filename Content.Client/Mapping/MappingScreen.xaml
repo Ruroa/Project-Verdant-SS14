@@ -23,6 +23,15 @@
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                     <CheckBox Name="DecalEnableAuto" Margin="0 0 0 10"
                               Text="{Loc decal-placer-window-enable-auto}" />
+                    <CheckBox Name="DecalEnableBrush"
+                              Text="{Loc mapping-decal-brush}" />
+                    <BoxContainer Name="DecalBrushSettings" Orientation="Vertical"
+                                  Visible="False">
+                        <CheckBox Name="DecalRandomRotation"
+                                  Text="{Loc mapping-decal-brush-random-rotation}" />
+                        <BoxContainer Name="DecalBrushSpacingContainer"
+                                      Orientation="Horizontal" />
+                    </BoxContainer>
                     <CheckBox Name="DecalEnableSnap"
                               Text="{Loc decal-placer-window-enable-snap}" />
                     <CheckBox Name="DecalEnableCleanable"

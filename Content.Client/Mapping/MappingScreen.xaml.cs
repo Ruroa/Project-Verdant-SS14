@@ -32,6 +32,9 @@ public sealed partial class MappingScreen : InGameScreen
     private bool _decalCleanable;
 
     private bool _decalAuto;
+    private bool _decalBrush;
+    private bool _decalRandomRotation;
+    private float _decalBrushSpacing = 1f;
 
     public override ChatBox ChatBox => GetWidget<ChatBox>()!;
 
@@ -60,6 +63,16 @@ public sealed partial class MappingScreen : InGameScreen
         };
         DecalSpinBoxContainer.AddChild(rotationSpinBox);
 
+        var brushSpacingSpinBox = new FloatSpinBox(0.25f, _decalBrushSpacing)
+        {
+            HorizontalExpand = true
+        };
+        DecalBrushSpacingContainer.AddChild(new Label
+        {
+            Text = Loc.GetString("mapping-decal-brush-spacing"),
+        });
+        DecalBrushSpacingContainer.AddChild(brushSpacingSpinBox);
+
         DecalColorPicker.OnColorChanged += OnDecalColorPicked;
         DecalPickerOpen.OnPressed += OnDecalPickerOpenPressed;
         rotationSpinBox.OnValueChanged += args =>
@@ -72,6 +85,22 @@ public sealed partial class MappingScreen : InGameScreen
             _decalAuto = args.Pressed;
             if (_id is { } id)
                 SelectDecal(id);
+        };
+        DecalEnableBrush.OnToggled += args =>
+        {
+            _decalBrush = args.Pressed;
+            DecalBrushSettings.Visible = args.Pressed;
+            UpdateDecal();
+        };
+        DecalRandomRotation.OnToggled += args =>
+        {
+            _decalRandomRotation = args.Pressed;
+            UpdateDecal();
+        };
+        brushSpacingSpinBox.OnValueChanged += args =>
+        {
+            _decalBrushSpacing = MathF.Max(0.25f, args.Value);
+            UpdateDecal();
         };
         DecalEnableSnap.OnToggled += args =>
         {
@@ -148,6 +177,7 @@ public sealed partial class MappingScreen : InGameScreen
             return;
 
         DecalSystem.UpdateDecalInfo(id, _decalColor, _decalRotation, _decalSnap, _decalZIndex, _decalCleanable);
+        DecalSystem.UpdateBrushInfo(_decalBrush, _decalRandomRotation, _decalBrushSpacing);
     }
 
     public void SelectDecal(string decalId)
