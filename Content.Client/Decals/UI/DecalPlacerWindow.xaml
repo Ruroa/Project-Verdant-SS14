@@ -15,6 +15,11 @@
             <Button Name="PickerOpen" Text="{Loc 'decal-placer-window-palette'}" />
         </BoxContainer>
         <CheckBox Name="EnableAuto" Text="{Loc 'decal-placer-window-enable-auto'}" Margin="0 0 0 10"/>
+        <CheckBox Name="EnableBrush" Text="{Loc 'mapping-decal-brush'}" />
+        <BoxContainer Name="BrushSettings" Orientation="Vertical" Visible="False">
+            <CheckBox Name="RandomRotation" Text="{Loc 'mapping-decal-brush-random-rotation'}" />
+            <BoxContainer Name="BrushSpacingContainer" Orientation="Horizontal" />
+        </BoxContainer>
         <CheckBox Name="EnableColor" Text="{Loc 'decal-placer-window-use-color'}" />
         <CheckBox Name="EnableSnap" Text="{Loc 'decal-placer-window-enable-snap'}" />
         <CheckBox Name="EnableCleanable" Text="{Loc 'decal-placer-window-enable-cleanable'}" />
