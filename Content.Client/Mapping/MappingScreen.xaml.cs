@@ -35,6 +35,7 @@ public sealed partial class MappingScreen : InGameScreen
     private bool _decalBrush;
     private bool _decalRandomRotation;
     private float _decalBrushSpacing = 1f;
+    private FloatSpinBox _decalBrushSpacingSpinBox = default!;
 
     public override ChatBox ChatBox => GetWidget<ChatBox>()!;
 
@@ -63,15 +64,17 @@ public sealed partial class MappingScreen : InGameScreen
         };
         DecalSpinBoxContainer.AddChild(rotationSpinBox);
 
-        var brushSpacingSpinBox = new FloatSpinBox(0.25f, _decalBrushSpacing)
+        _decalBrushSpacingSpinBox = new FloatSpinBox(0.25f, 2)
         {
-            HorizontalExpand = true
+            HorizontalExpand = true,
+            Value = _decalBrushSpacing,
+            IsValid = value => value >= (_decalSnap ? 1f : 0.25f),
         };
         DecalBrushSpacingContainer.AddChild(new Label
         {
             Text = Loc.GetString("mapping-decal-brush-spacing"),
         });
-        DecalBrushSpacingContainer.AddChild(brushSpacingSpinBox);
+        DecalBrushSpacingContainer.AddChild(_decalBrushSpacingSpinBox);
 
         DecalColorPicker.OnColorChanged += OnDecalColorPicked;
         DecalPickerOpen.OnPressed += OnDecalPickerOpenPressed;
@@ -97,14 +100,21 @@ public sealed partial class MappingScreen : InGameScreen
             _decalRandomRotation = args.Pressed;
             UpdateDecal();
         };
-        brushSpacingSpinBox.OnValueChanged += args =>
+        _decalBrushSpacingSpinBox.OnValueChanged += args =>
         {
-            _decalBrushSpacing = MathF.Max(0.25f, args.Value);
+            _decalBrushSpacing = MathF.Max(_decalSnap ? 1f : 0.25f, args.Value);
+            _decalBrushSpacingSpinBox.Value = _decalBrushSpacing;
             UpdateDecal();
         };
         DecalEnableSnap.OnToggled += args =>
         {
             _decalSnap = args.Pressed;
+            if (_decalSnap && _decalBrushSpacing < 1f)
+            {
+                _decalBrushSpacing = 1f;
+                _decalBrushSpacingSpinBox.Value = _decalBrushSpacing;
+            }
+
             UpdateDecal();
         };
         DecalEnableCleanable.OnToggled += args =>
@@ -192,6 +202,11 @@ public sealed partial class MappingScreen : InGameScreen
             _decalColor = Color.White;
             _decalCleanable = decal.DefaultCleanable;
             _decalSnap = decal.DefaultSnap;
+            if (_decalSnap && _decalBrushSpacing < 1f)
+            {
+                _decalBrushSpacing = 1f;
+                _decalBrushSpacingSpinBox.Value = _decalBrushSpacing;
+            }
 
             DecalColorPicker.Color = _decalColor;
             DecalEnableCleanable.Pressed = _decalCleanable;

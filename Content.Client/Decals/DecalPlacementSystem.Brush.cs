@@ -24,7 +24,10 @@ public sealed partial class DecalPlacementSystem
     {
         _brushEnabled = enabled;
         _brushRandomRotation = randomRotation;
-        _brushSpacing = MathF.Max(0.25f, spacing);
+        var newSpacing = MathF.Max(0.25f, spacing);
+        if (MathF.Abs(newSpacing - _brushSpacing) > 0.001f)
+            _distanceSinceLastBrushStamp = 0f;
+        _brushSpacing = newSpacing;
 
         if (!enabled)
             EndBrush();
