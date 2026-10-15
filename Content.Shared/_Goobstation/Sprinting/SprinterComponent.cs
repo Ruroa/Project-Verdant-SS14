@@ -22,7 +22,7 @@ public sealed partial class SprinterComponent : Component
     public bool CanSprint = true;
 
     [DataField, AutoNetworkedField]
-    public float StaminaDrainRate = 9f;
+    public float StaminaDrainRate = 3f;
 
     [DataField, AutoNetworkedField]
     public float StaminaDrainMultiplier = 1.4f;
