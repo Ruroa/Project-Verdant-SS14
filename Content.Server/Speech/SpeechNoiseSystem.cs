@@ -1,4 +1,5 @@
 using Content.Shared.Chat;
+using Content.Shared._Omu.Traits;
 using Content.Shared.Speech;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -29,7 +30,18 @@ namespace Content.Server.Speech
 
             // Play speech sound
             SoundSpecifier? contextSound;
-            var prototype = _protoManager.Index<SpeechSoundsPrototype>(ent.Comp.SpeechSounds);
+            var speechSounds = ent.Comp.SpeechSounds;
+            if (HasComp<CyberneticBeastComponent>(ent))
+            {
+                var cyberneticBeastSound = new GetCyberneticBeastSpeechSoundEvent(speechSounds);
+                RaiseLocalEvent(ent.Owner, cyberneticBeastSound);
+                speechSounds = cyberneticBeastSound.SpeechSound;
+            }
+
+            if (speechSounds == null)
+                return null;
+
+            var prototype = _protoManager.Index<SpeechSoundsPrototype>(speechSounds.Value);
 
             // Different sounds for ask/exclaim based on last character
             contextSound = message[^1] switch

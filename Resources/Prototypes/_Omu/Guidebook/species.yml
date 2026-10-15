@@ -1,0 +1,4 @@
+- type: guideEntry
+  id: CyberneticBeast
+  name: trait-cybernetic-beast-name
+  text: "/ServerInfo/_Omu/Guidebook/Mobs/CyberneticBeast.xml"

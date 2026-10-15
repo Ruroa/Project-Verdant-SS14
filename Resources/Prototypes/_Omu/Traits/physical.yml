@@ -1,0 +1,28 @@
+- type: traitCategory
+  id: PhysicalTraits
+  name: trait-category-physical
+  priority: 15
+  accentColor: "#22d3ee"
+
+- type: trait
+  id: CyberneticBeast
+  name: trait-cybernetic-beast-name
+  description: trait-cybernetic-beast-desc
+  category: PhysicalTraits
+  cost: 5
+  requirements:
+  - !type:SpeciesRequirement
+    species:
+    - Vulpkanin
+  - !type:TraitsRequirement
+    traits:
+    - PoorVision
+    - Blindness
+    inverted: true
+  effects:
+  - !type:AddCompsEffect
+    components:
+    - type: CyberneticBeast
+    - type: PermanentBlindness
+      blindness: 3
+      glassesFixable: true

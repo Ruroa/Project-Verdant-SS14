@@ -1,0 +1,51 @@
+- type: constructionGraph
+  id: ClothingCyberneticBeastSpaceMantleSecurity
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: helmet
+      steps:
+      - tag: WorkMantle
+        name: construction-graph-tag-work-mantle
+        icon:
+          sprite: _Omu/Clothing/Head/mantle.rsi
+          state: icon-work
+        doAfter: 1
+      - tag: HudSecurity
+        name: construction-graph-tag-security-hud
+        icon:
+          sprite: Clothing/Eyes/Hud/sec.rsi
+          state: icon
+        doAfter: 1
+  - node: helmet
+    entity: ClothingCyberneticBeastSpaceMantleSecurity
+
+- type: constructionGraph
+  id: ClothingCyberneticBeastSpaceMantleCorpsman
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: helmet
+      steps:
+      - tag: WorkMantle
+        name: construction-graph-tag-work-mantle
+        icon:
+          sprite: _Omu/Clothing/Head/mantle.rsi
+          state: icon-work
+        doAfter: 1
+      - tag: HudMedical
+        name: construction-graph-tag-medical-hud
+        icon:
+          sprite: Clothing/Eyes/Hud/med.rsi
+          state: icon
+        doAfter: 1
+      - tag: HudSecurity
+        name: construction-graph-tag-security-hud
+        icon:
+          sprite: Clothing/Eyes/Hud/sec.rsi
+          state: icon
+        doAfter: 1
+  - node: helmet
+    entity: ClothingCyberneticBeastSpaceMantleCorpsman

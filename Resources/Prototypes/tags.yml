@@ -1560,6 +1560,9 @@
 - type: Tag
   id: WriteIgnoreStamps # Used by PaperSystem to allow tagged entity to bypass stamps.
 
+- type: Tag
+  id: WorkMantle
+
 ## X ##
 
 - type: Tag

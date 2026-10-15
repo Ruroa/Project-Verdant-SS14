@@ -1,0 +1,36 @@
+<Document>
+  # Cybernetic Beasts
+
+  <Box>
+	  <GuideEntityEmbed Entity="ClothingCyberneticBeastMantle" Caption=""/>
+    <GuideEntityEmbed Entity="ClothingCyberneticBeastMantleWorkEngineering" Caption=""/>
+    <GuideEntityEmbed Entity="ClothingCyberneticBeastMantleWorkSalvage" Caption=""/>
+    <GuideEntityEmbed Entity="ClothingCyberneticBeastMantleSecurity" Caption=""/>
+    <GuideEntityEmbed Entity="ClothingCyberneticBeastMantleMedical" Caption=""/>
+    <GuideEntityEmbed Entity="ClothingCyberneticBeastMantleBlueshieldOfficer" Caption=""/>
+    <GuideEntityEmbed Entity="ClothingCyberneticBeastMantleCommand" Caption=""/>
+  </Box>
+
+  Cybernetic beasts are a subset of vulpkanin. They have been augmented with a removable visor, or "mantle".
+  This mantle connects to the beast's head with a set of pogo-pins. In practice, this means that beasts can
+  wear each-other's mantles, but a mantle will provide no benefit to somebody who isn't a cybernetic beast.
+
+  Cybernetic beasts are naturally short-sighted, but this is corrected by their mantle. In turn, their mantle enhances
+  their vision; it also provides night vision.
+
+  Cybernetic mantles are large. They cover the head and face of the wearer. Practically, this means that a beast
+  must remove their mantle in order to use a gas mask, or a set of glasses.
+
+  As well, due to the scarce nature of a beast's mantle, a mantle may sometimes become a target for thieves.
+
+  ## Background
+
+  During the early 2400s, Razzi Research and Technology, in their endless pursuit to allow colonists to live on
+  all sorts of worlds, created a set of cybernetic augments are are meant to "grow" with the user. Families
+  that had worked under them for generations were given the chance for their children to be "gifted" these augments
+  for testing.
+
+  Due to their simliarty with drawings and photos of old Atlam predators, augmented children would often be labeled
+  as "cybernetic beasts" by the wider population.
+
+</Document>

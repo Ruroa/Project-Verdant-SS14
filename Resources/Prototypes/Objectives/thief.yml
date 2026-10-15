@@ -184,6 +184,16 @@
 #    difficulty: 0.3
 # Starlight end
 
+- type: entity
+  parent: BaseThiefStealObjective
+  id: CyberneticMantleStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: CyberneticMantles
+    verifyMapExistence: true
+  - type: Objective
+    difficulty: 1.2
+
 # steal item
 
 - type: entity                                      #Security subgroup
