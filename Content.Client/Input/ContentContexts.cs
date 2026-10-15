@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Input;
+using Content.Shared._Goobstation.Input;
 using Robust.Shared.Input;
 
 namespace Content.Client.Input
@@ -58,6 +59,7 @@ namespace Content.Client.Input
             human.AddFunction(EngineKeyFunctions.MoveRight);
             human.AddFunction(EngineKeyFunctions.Walk);
             human.AddFunction(ContentKeyFunctions.Jump); // 🌟Starlight🌟
+            human.AddFunction(GoobstationKeyFunctions.Sprint);
             human.AddFunction(ContentKeyFunctions.ToggleKnockdown);
             human.AddFunction(ContentKeyFunctions.SwapHands);
             human.AddFunction(ContentKeyFunctions.SwapHandsReverse);
