@@ -22,8 +22,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
-using System.Numerics;
 
 namespace Content.Shared._Goobstation.Sprinting;
 
@@ -35,10 +33,7 @@ public abstract class SharedSprintingSystem : EntitySystem
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedMoverController _moverController = default!;
-
     public override void Initialize()
     {
         SubscribeLocalEvent<SprinterComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
@@ -82,19 +77,29 @@ public abstract class SharedSprintingSystem : EntitySystem
     {
         if (session?.AttachedEntity == null
             || !TryComp<SprinterComponent>(session.AttachedEntity, out var sprinter)
-            || !TryComp<InputMoverComponent>(session.AttachedEntity, out var inputMover)
-            || (!sprinter.IsSprinting && _moverController.GetVelocityInput(inputMover).Sprinting == Vector2.Zero))
+            || !TryComp<InputMoverComponent>(session.AttachedEntity, out _))
+            return;
+
+        // A key-up must always stop sprinting. Do not gate this on current
+        // movement input: it may be zero if the player stops moving before
+        // releasing Sprint, which would otherwise leave sprint stuck on.
+        if (message.State == BoundKeyState.Up)
+        {
+            if (sprinter.IsSprinting)
+                RaiseLocalEvent(session.AttachedEntity.Value, new SprintToggleEvent(false));
+            return;
+        }
+
+        if (sprinter.IsSprinting)
             return;
 
         if (!sprinter.CanSprint)
         {
-            if (message.State == BoundKeyState.Down)
-                _popupSystem.PopupClient(Loc.GetString("sprint-disabled"), session.AttachedEntity.Value, session.AttachedEntity.Value, PopupType.Medium);
+            _popupSystem.PopupClient(Loc.GetString("sprint-disabled"), session.AttachedEntity.Value, session.AttachedEntity.Value, PopupType.Medium);
             return;
         }
 
-        RaiseLocalEvent(session.AttachedEntity.Value,
-            new SprintToggleEvent(!sprinter.IsSprinting && message.State == BoundKeyState.Down));
+        RaiseLocalEvent(session.AttachedEntity.Value, new SprintToggleEvent(true));
     }
 
     private void OnSprintToggle(EntityUid uid, SprinterComponent component, ref SprintToggleEvent args) =>
@@ -105,11 +110,9 @@ public abstract class SharedSprintingSystem : EntitySystem
         if (newSprintState == component.IsSprinting)
             return;
 
-        if (newSprintState
-            && (!CanSprint(uid) || _timing.CurTime - component.LastSprint < component.TimeBetweenSprints))
+        if (newSprintState && !CanSprint(uid))
             return;
 
-        component.LastSprint = _timing.CurTime;
         component.IsSprinting = newSprintState;
 
         if (newSprintState)

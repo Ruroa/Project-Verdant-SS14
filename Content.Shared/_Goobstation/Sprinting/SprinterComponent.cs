@@ -30,12 +30,6 @@ public sealed partial class SprinterComponent : Component
     [DataField, AutoNetworkedField]
     public float SprintSpeedMultiplier = 1.45f;
 
-    [DataField, AutoNetworkedField]
-    public TimeSpan TimeBetweenSprints = TimeSpan.FromSeconds(3);
-
-    [ViewVariables, AutoNetworkedField]
-    public TimeSpan LastSprint = TimeSpan.Zero;
-
     [DataField]
     public EntProtoId SprintAnimation = "GoobstationSprintAnimation";
 
