@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseAction
+  id: ActionToggleCyberneticBeastNightVision
+  name: Toggle Night Vision
+  description: Enable or disable the mantle's night vision.
+  components:
+  - type: Action
+    useDelay: 1
+  - type: InstantAction
+    event: !type:ToggleActionEvent

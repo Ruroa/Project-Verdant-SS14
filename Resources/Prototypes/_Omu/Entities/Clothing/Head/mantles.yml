@@ -50,6 +50,9 @@
     onUse: true
     onActivate: true
     predictable: true
+  - type: ToggleClothing
+    action: ActionToggleCyberneticBeastNightVision
+    disableOnUnequip: true
   - type: GuideHelp # I would add this to the player, but unfortunately that doesn't work. The guidebook system is client sided only, so if the server adds this to the player via a trait, nothing will happen.
     guides:
     - CyberneticBeast
