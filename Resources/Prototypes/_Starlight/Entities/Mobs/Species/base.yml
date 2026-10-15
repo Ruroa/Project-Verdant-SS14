@@ -9,6 +9,8 @@
   id: BaseMobSpecies
   abstract: true
   components:
+  # Goobstation sprinting is added to player species here.
+  - type: Sprinter
   # Starlight-start
   - type: StationTracker
   - type: Railroadable

@@ -5,6 +5,9 @@
   id: BaseMobDiona
   abstract: true
   components:
+  # Diona are too slow to sprint.
+  - type: Sprinter
+    canSprint: false
   # Starlight-start: Languages
   - type: LanguageKnowledge
     speaks:
