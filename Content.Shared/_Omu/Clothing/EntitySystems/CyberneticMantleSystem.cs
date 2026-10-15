@@ -8,6 +8,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Inventory;
+using Content.Shared._Starlight.Overlay.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -28,6 +29,7 @@ public sealed class CyberneticMantleSystem : EntitySystem
         SubscribeLocalEvent<CyberneticMantleComponent, BeingEquippedAttemptEvent>(OnEquipAttempt);
         SubscribeLocalEvent<CyberneticMantleComponent, GotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<CyberneticMantleComponent, GotUnequippedEvent>(OnUnequipped);
+        SubscribeLocalEvent<CyberneticMantleComponent, ItemToggledEvent>(OnToggled);
     }
 
     private void OnEquipAttempt(Entity<CyberneticMantleComponent> ent, ref BeingEquippedAttemptEvent args)
@@ -53,8 +55,8 @@ public sealed class CyberneticMantleSystem : EntitySystem
 
         if (HasComp<CyberneticBeastComponent>(args.EquipTarget))
         {
-            if (TryComp<ItemToggleComponent>(ent, out var toggle))
-                _toggle.TrySetActive(new Entity<ItemToggleComponent?>(ent.Owner, toggle), true, args.EquipTarget, true);
+            if (TryComp<ItemToggleComponent>(ent, out var toggle) && toggle.Activated)
+                EnableNightVision(args.EquipTarget);
 
             if (TryComp<HumanoidAppearanceComponent>(args.EquipTarget, out var appearance))
             {
@@ -74,5 +76,56 @@ public sealed class CyberneticMantleSystem : EntitySystem
             return;
         if (TryComp<ItemToggleComponent>(ent, out var toggle))
             _toggle.TrySetActive(new Entity<ItemToggleComponent?>(ent.Owner, toggle), false, args.EquipTarget, true);
+
+        DisableNightVision(args.EquipTarget);
+    }
+
+    private void OnToggled(Entity<CyberneticMantleComponent> ent, ref ItemToggledEvent args)
+    {
+        if (_timing.ApplyingState && _net.IsClient)
+            return;
+
+        if (!args.Activated)
+        {
+            var parent = Transform(ent).ParentUid;
+            if (parent.IsValid())
+                DisableNightVision(parent);
+            return;
+        }
+
+        if (TryGetWornBeast(ent.Owner, out var wearer))
+            EnableNightVision(wearer);
+    }
+
+    private bool TryGetWornBeast(EntityUid mantle, out EntityUid wearer)
+    {
+        wearer = default;
+        var parent = Transform(mantle).ParentUid;
+        if (!parent.IsValid() || !HasComp<CyberneticBeastComponent>(parent))
+            return false;
+
+        if (!_inventory.TryGetSlotContainer(parent, "head", out var container, out _) || container.ContainedEntity != mantle)
+            return false;
+
+        wearer = parent;
+        return true;
+    }
+
+    private void EnableNightVision(EntityUid wearer)
+    {
+        if (HasComp<NightVisionComponent>(wearer))
+            return;
+
+        AddComp<NightVisionComponent>(wearer);
+        AddComp<CyberneticMantleNightVisionSourceComponent>(wearer);
+    }
+
+    private void DisableNightVision(EntityUid wearer)
+    {
+        if (!HasComp<CyberneticMantleNightVisionSourceComponent>(wearer))
+            return;
+
+        RemComp<NightVisionComponent>(wearer);
+        RemComp<CyberneticMantleNightVisionSourceComponent>(wearer);
     }
 }

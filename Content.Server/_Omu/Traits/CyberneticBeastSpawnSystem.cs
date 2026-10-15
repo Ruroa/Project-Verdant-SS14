@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Omu.Traits;
 
-/// <summary>Gives cybernetic beasts the mantle variant appropriate to their job.</summary>
+/// <summary>Gives cybernetic beasts one internals-capable mantle variant appropriate to their job.</summary>
 public sealed class CyberneticBeastSpawnSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -19,29 +19,29 @@ public sealed class CyberneticBeastSpawnSystem : EntitySystem
         ["SalvageSpecialist"] = "ClothingCyberneticBeastMantleWorkSalvage",
         ["SalvageLead"] = "ClothingCyberneticBeastMantleWorkSalvage",
         ["MiningSpecialist"] = "ClothingCyberneticBeastMantleWorkSalvage",
-        ["Detective"] = "ClothingCyberneticBeastMantleSecurity",
-        ["SecurityCadet"] = "ClothingCyberneticBeastMantleSecurity",
-        ["SecurityOfficer"] = "ClothingCyberneticBeastMantleSecurity",
-        ["Warden"] = "ClothingCyberneticBeastMantleSecurity",
-        ["Chemist"] = "ClothingCyberneticBeastMantleMedicalChemist",
-        ["MedicalDoctor"] = "ClothingCyberneticBeastMantleMedical",
-        ["Surgeon"] = "ClothingCyberneticBeastMantleMedical",
-        ["MedicalIntern"] = "ClothingCyberneticBeastMantleMedical",
-        ["Paramedic"] = "ClothingCyberneticBeastMantleMedicalParamedic",
-        ["Brigmedic"] = "ClothingCyberneticBeastMantleCorpsman",
-        ["Captain"] = "ClothingCyberneticBeastMantleCommand",
+        ["Detective"] = "ClothingCyberneticBeastSpaceMantleSecurity",
+        ["SecurityCadet"] = "ClothingCyberneticBeastSpaceMantleSecurity",
+        ["SecurityOfficer"] = "ClothingCyberneticBeastSpaceMantleSecurity",
+        ["Warden"] = "ClothingCyberneticBeastSpaceMantleSecurity",
+        ["Chemist"] = "ClothingCyberneticBeastMantleWorkResearch",
+        ["MedicalDoctor"] = "ClothingCyberneticBeastSpaceMantleCorpsman",
+        ["Surgeon"] = "ClothingCyberneticBeastSpaceMantleCorpsman",
+        ["MedicalIntern"] = "ClothingCyberneticBeastSpaceMantleCorpsman",
+        ["Paramedic"] = "ClothingCyberneticBeastSpaceMantleCorpsman",
+        ["Brigmedic"] = "ClothingCyberneticBeastSpaceMantleCorpsman",
+        ["Captain"] = "ClothingCyberneticBeastMantleWorkResearch",
         ["ChiefEngineer"] = "ClothingCyberneticBeastMantleWorkChiefEngineering",
-        ["ChiefMedicalOfficer"] = "ClothingCyberneticBeastMantleMedicalCMO",
-        ["HeadOfPersonnel"] = "ClothingCyberneticBeastMantleCommand",
-        ["HeadOfSecurity"] = "ClothingCyberneticBeastMantleHeadofSecurity",
-        ["Quartermaster"] = "ClothingCyberneticBeastMantleSupply",
-        ["ResearchDirector"] = "ClothingCyberneticBeastMantleScienceCommand",
-        ["AssistantManager"] = "ClothingCyberneticBeastMantleCommand",
+        ["ChiefMedicalOfficer"] = "ClothingCyberneticBeastSpaceMantleCorpsman",
+        ["HeadOfPersonnel"] = "ClothingCyberneticBeastMantleWorkResearch",
+        ["HeadOfSecurity"] = "ClothingCyberneticBeastSpaceMantleSecurity",
+        ["Quartermaster"] = "ClothingCyberneticBeastMantleWorkSalvage",
+        ["ResearchDirector"] = "ClothingCyberneticBeastMantleWorkResearch",
+        ["AssistantManager"] = "ClothingCyberneticBeastMantleWorkResearch",
         ["BlueShield"] = "ClothingCyberneticBeastMantleBlueshieldOfficer",
         ["NTNCBlueShield"] = "ClothingCyberneticBeastMantleBlueshieldOfficer",
-        ["NanoTrasenRepresentative"] = "ClothingCyberneticBeastMantleCentralCommandNoThermal",
-        ["Bartender"] = "ClothingCyberneticBeastMantleBar",
-        ["Roboticist"] = "ClothingCyberneticBeastMantleRoboticist",
+        ["NanoTrasenRepresentative"] = "ClothingCyberneticBeastMantleWorkResearch",
+        ["Bartender"] = "ClothingCyberneticBeastMantleWork",
+        ["Roboticist"] = "ClothingCyberneticBeastMantleWorkResearch",
     };
 
     public override void Initialize()
@@ -56,7 +56,7 @@ public sealed class CyberneticBeastSpawnSystem : EntitySystem
 
         var prototype = args.JobId != null && JobMantles.TryGetValue(args.JobId, out var jobMantle)
             ? jobMantle
-            : new EntProtoId("ClothingCyberneticBeastMantle");
+            : new EntProtoId("ClothingCyberneticBeastMantleWork");
         var coords = Transform(args.Mob).Coordinates;
         var mantle = Spawn(prototype, coords);
         _hands.PickupOrDrop(args.Mob, mantle);

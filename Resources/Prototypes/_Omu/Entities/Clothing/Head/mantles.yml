@@ -1,6 +1,6 @@
 # (READ THIS!) About ComponentToggler for mantles:
-#     Specialized features in a mantle's ComponentToggler are turned ON when the mantle is worn by a beast, and turned OFF when anybody unequips the mantle.
-# Vision correction and night vision live directly on the mantle because they need to respond to inventory and clothing equip events.
+#     Specialized features in a mantle's ComponentToggler are turned ON when its toggle is activated, and turned OFF when deactivated.
+# Vision correction lives directly on the mantle because it responds to inventory events. Night vision is added to the wearer only while the toggle is on.
 # When you create a new mantle that inherits from a mantle with specialized toggle features, copy the parent's ComponentToggler and adjust its features.
 #
 # (Extra reading) On Balance:
@@ -46,10 +46,9 @@
   - type: CyberneticMantle
   - type: VisionCorrection
     correctionPower: 16 # these ain't your granny's reading glasses
-  - type: ClothesNightVision
   - type: ItemToggle
-    onUse: false
-    onActivate: false
+    onUse: true
+    onActivate: true
     predictable: true
   - type: GuideHelp # I would add this to the player, but unfortunately that doesn't work. The guidebook system is client sided only, so if the server adds this to the player via a trait, nothing will happen.
     guides:

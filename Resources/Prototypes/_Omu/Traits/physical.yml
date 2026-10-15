@@ -26,5 +26,3 @@
     - type: PermanentBlindness
       blindness: 3
       glassesFixable: true
-  - !type:SpawnItemInHandEffect
-    item: ClothingCyberneticBeastMantleWork
