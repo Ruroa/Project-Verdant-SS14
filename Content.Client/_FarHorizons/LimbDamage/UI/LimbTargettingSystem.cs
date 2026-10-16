@@ -16,10 +16,13 @@ public sealed class LimbTargettingSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<LimbTargettingComponent, AfterAutoHandleStateEvent>(OnTargetState);
-        SubscribeLocalEvent<BodyComponent, ComponentInit>(OnBodyInit);
+        // SharedBodySystem owns the BodyComponent + ComponentInit subscription.
+        // Use startup to refresh after the body has been initialized without
+        // registering the same component/event pair twice.
+        SubscribeLocalEvent<BodyComponent, ComponentStartup>(OnBodyStartup);
     }
 
-    private void OnBodyInit(Entity<BodyComponent> ent, ref ComponentInit args)
+    private void OnBodyStartup(Entity<BodyComponent> ent, ref ComponentStartup args)
     {
         if (ent.Owner == _player.LocalEntity)
             LocalBodyInitialized?.Invoke(ent.Owner);
