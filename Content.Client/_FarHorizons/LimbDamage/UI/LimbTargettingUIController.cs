@@ -1,15 +1,23 @@
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared._FarHorizons.LimbDamage.Components;
 using Content.Shared.Body.Components;
+using JetBrains.Annotations;
+using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controllers;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._FarHorizons.LimbDamage.UI;
 
+[UsedImplicitly]
 public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<LimbTargettingSystem>
 {
+    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
+
     private LimbTargettingSystem? _targettingSystem;
+    private SpriteSystem? _sprites;
 
     public override void Initialize()
     {
@@ -26,47 +34,58 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
     {
         _targettingSystem = system;
         system.TargetChanged += OnTargetChanged;
+        _sprites = _entities.System<SpriteSystem>();
+        Refresh();
     }
 
     private void OnPlayerAttached(EntityUid _) => Refresh();
+
     private void OnPlayerDetached(EntityUid _) => Hide();
 
     private void OnTargetChanged(LimbTarget target)
     {
-        var widget = UIManager.GetActiveUIWidgetOrNull<LimbTargettingUI>();
+        var widget = GetWidget();
         if (widget == null)
             return;
 
-        widget.Visible = true;
         widget.SetTarget(target);
+        widget.Visible = true;
     }
 
     private void Refresh()
     {
-        var widget = UIManager.GetActiveUIWidgetOrNull<LimbTargettingUI>();
+        var widget = GetWidget();
         if (widget == null)
             return;
 
         if (_player.LocalEntity is not { } player ||
-            !EntityManager.HasComponent<BodyComponent>(player) &&
-            !EntityManager.HasComponent<LimbTargettingComponent>(player))
+            !_entities.HasComponent<BodyComponent>(player) ||
+            _sprites == null || _targettingSystem == null)
         {
+            widget.ShutdownTarget();
             widget.Visible = false;
             return;
         }
 
-        widget.Visible = true;
+        widget.InitTarget(_prototypes, _sprites, "LimbTargetHuman");
         widget.TargetSelected -= OnTargetSelected;
         widget.TargetSelected += OnTargetSelected;
-        widget.SetTarget(_targettingSystem?.CurrentTarget ?? LimbTarget.Random);
+        widget.SetTarget(_targettingSystem.CurrentTarget);
+        widget.Visible = true;
     }
 
     private void OnTargetSelected(LimbTarget target) => _targettingSystem?.SetTarget(target);
 
+    private LimbTargettingUI? GetWidget() => UIManager.GetActiveUIWidgetOrNull<LimbTargettingUI>();
+
     private void Hide()
     {
-        var widget = UIManager.GetActiveUIWidgetOrNull<LimbTargettingUI>();
-        if (widget != null)
-            widget.Visible = false;
+        var widget = GetWidget();
+        if (widget == null)
+            return;
+
+        widget.TargetSelected -= OnTargetSelected;
+        widget.ShutdownTarget();
+        widget.Visible = false;
     }
 }
