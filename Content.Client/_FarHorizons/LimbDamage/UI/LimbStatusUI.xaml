@@ -1,0 +1,13 @@
+<limb:LimbStatusUI
+    xmlns="https://spacestation14.io"
+    xmlns:limb="clr-namespace:Content.Client._FarHorizons.LimbDamage.UI"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    MinSize="64 64"
+    Visible="False">
+    <PanelContainer Name="BackgroundPanel" MinSize="100 100" MaxSize="100 100">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxTexture PatchMarginBottom="6" PatchMarginTop="6" PatchMarginLeft="6" PatchMarginRight="6" TextureScale="2 2" Mode="Tile" />
+        </PanelContainer.PanelOverride>
+        <limb:LimbTargettingDisplay Name="LimbTargettingDisplay" MouseFilter="Ignore" />
+    </PanelContainer>
+</limb:LimbStatusUI>

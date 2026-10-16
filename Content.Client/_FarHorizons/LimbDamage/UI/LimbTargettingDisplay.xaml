@@ -3,4 +3,5 @@
     xmlns:limb="clr-namespace:Content.Client._FarHorizons.LimbDamage.UI"
     MinSize="100 100"
     MaxSize="100 100"
+    SetSize="100 100"
     MouseFilter="Stop" />

@@ -22,10 +22,11 @@ public sealed partial class DefaultGameScreen : InGameScreen
         SetAnchorAndMarginPreset(Hotbar, LayoutPreset.BottomWide, margin: 5);
         SetAnchorAndMarginPreset(Chat, LayoutPreset.TopRight, margin: 10);
         SetAnchorAndMarginPreset(Alerts, LayoutPreset.TopRight, margin: 10);
-        // Measure the widget while visible so the anchor preset captures its size.
-        // It starts hidden in XAML and hidden controls measure as zero-sized.
+        // Measure both initially hidden widgets before anchoring their container.
+        LimbStatus.Visible = true;
         LimbTargetting.Visible = true;
-        SetAnchorAndMarginPreset(LimbTargetting, LayoutPreset.BottomRight, margin: 10);
+        SetAnchorAndMarginPreset(LimbHealthContainer, LayoutPreset.BottomRight, margin: 10);
+        LimbStatus.Visible = false;
         LimbTargetting.Visible = false;
 
         Chat.OnResized += ChatOnResized;

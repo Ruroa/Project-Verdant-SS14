@@ -21,24 +21,18 @@ public sealed partial class LimbTargettingUI : UIWidget
     public LimbTargettingUI()
     {
         RobustXamlLoader.Load(this);
+        UpdateTheme();
         LimbTargettingDisplay.OnSelectedLimb += target => TargetSelected?.Invoke(target);
-        RandomButton.OnPressed += _ => TargetSelected?.Invoke(LimbTarget.Random);
     }
 
     public void InitTarget(IPrototypeManager prototypes, SpriteSystem sprites, ProtoId<LimbTargettingPrototype> proto, bool withHealth = false)
     {
+        UpdateTheme();
         LimbTargettingDisplay.InitializeDisplay(prototypes, sprites, proto, withHealth);
-    }
-
-    public void SetHealth(Dictionary<LimbTarget, float> damage)
-    {
-        LimbTargettingDisplay.LimbDamage = damage;
     }
 
     public void SetTarget(LimbTarget target)
     {
-        CurrentTargetLabel.Text = Loc.GetString("limb-damage-target-current",
-            ("target", Loc.GetString(GetTargetLocaleKey(target))));
         LimbTargettingDisplay.UpdateSelection(target == LimbTarget.Random ? null : target);
     }
 
@@ -51,21 +45,21 @@ public sealed partial class LimbTargettingUI : UIWidget
         LimbTargettingDisplay.ClearShaders();
     }
 
-    private static string GetTargetLocaleKey(LimbTarget target) => target switch
+    private void UpdateTheme()
     {
-        LimbTarget.Random => "limb-damage-target-random",
-        LimbTarget.Head => "limb-damage-target-head",
-        LimbTarget.Torso => "limb-damage-target-torso",
-        LimbTarget.LeftArm => "limb-damage-target-left-arm",
-        LimbTarget.RightArm => "limb-damage-target-right-arm",
-        LimbTarget.LeftHand => "limb-damage-target-left-hand",
-        LimbTarget.RightHand => "limb-damage-target-right-hand",
-        LimbTarget.LeftLeg => "limb-damage-target-left-leg",
-        LimbTarget.RightLeg => "limb-damage-target-right-leg",
-        LimbTarget.LeftFoot => "limb-damage-target-left-foot",
-        LimbTarget.RightFoot => "limb-damage-target-right-foot",
-        _ => "limb-damage-target-random",
-    };
+        if (BackgroundPanel.PanelOverride is StyleBoxTexture styleBox &&
+            Theme.TryResolveTexture("template_small", out var texture))
+            styleBox.Texture = texture;
+
+        if (Theme.ResolveColor("slotText") is { } color)
+            LimbTargettingDisplay.DefaultColor = new(color.R, color.G, color.B);
+    }
+
+    protected override void OnThemeUpdated()
+    {
+        base.OnThemeUpdated();
+        UpdateTheme();
+    }
 }
 
 public sealed class DrawLimb(SpriteSystem sprites, Box2 area, List<SpriteSpecifier> spritesToDraw)
