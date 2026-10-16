@@ -39,9 +39,10 @@ public sealed partial class LimbDamageSystem : EntitySystem
     {
         if (!Enum.IsDefined(typeof(LimbTarget), ev.Target) ||
             args.SenderSession.AttachedEntity is not { } user ||
-            !TryComp<LimbTargettingComponent>(user, out var targetting))
+            !HasComp<BodyComponent>(user))
             return;
 
+        var targetting = EnsureComp<LimbTargettingComponent>(user);
         targetting.Target = ev.Target;
         Dirty(user, targetting);
     }

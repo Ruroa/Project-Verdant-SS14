@@ -1,5 +1,6 @@
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared._FarHorizons.LimbDamage.Components;
+using Content.Shared.Body.Components;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controllers;
 
@@ -33,7 +34,11 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
     private void OnTargetChanged(LimbTarget target)
     {
         var widget = UIManager.GetActiveUIWidgetOrNull<LimbTargettingUI>();
-        widget?.SetTarget(target);
+        if (widget == null)
+            return;
+
+        widget.Visible = true;
+        widget.SetTarget(target);
     }
 
     private void Refresh()
@@ -42,7 +47,9 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
         if (widget == null)
             return;
 
-        if (_player.LocalEntity is not { } player || !EntityManager.HasComponent<LimbTargettingComponent>(player))
+        if (_player.LocalEntity is not { } player ||
+            !EntityManager.HasComponent<BodyComponent>(player) &&
+            !EntityManager.HasComponent<LimbTargettingComponent>(player))
         {
             widget.Visible = false;
             return;

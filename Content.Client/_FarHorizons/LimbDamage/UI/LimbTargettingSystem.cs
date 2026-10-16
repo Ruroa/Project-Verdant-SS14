@@ -27,7 +27,7 @@ public sealed class LimbTargettingSystem : EntitySystem
 
     public void SetTarget(LimbTarget target)
     {
-        if (_player.LocalEntity is not { } player || !HasComp<LimbTargettingComponent>(player))
+        if (_player.LocalEntity is not { } player)
             return;
 
         CurrentTarget = target;
