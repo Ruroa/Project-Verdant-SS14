@@ -1,4 +1,17 @@
 - type: shader
+  id: LimbTargetting
+  kind: source
+  path: "/Textures/_FarHorizons/Shaders/limb_targetting.swsl"
+  params:
+    width: 0.75
+    outerColor: 0, 1, 0
+    innerFill: false
+    innerColor: 0, 1, 0
+    lineSpeed: 5
+    lineFreq: 40000
+    colorFactor: 0.5
+
+- type: shader
   id: GlitchingEffect
   kind: source
   path: "/Textures/_FarHorizons/Shaders/glitching_effect.swsl"
