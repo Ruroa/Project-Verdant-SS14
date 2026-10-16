@@ -16,6 +16,7 @@ namespace Content.Client._FarHorizons.LimbDamage.UI;
 public sealed partial class LimbTargettingUI : UIWidget
 {
     public event Action<LimbTarget>? TargetSelected;
+    public bool HasTargetDisplay => LimbTargettingDisplay.DrawLimbs.Count > 0;
 
     public LimbTargettingUI()
     {
