@@ -1,0 +1,13 @@
+limb-damage-target-title = Target location
+limb-damage-target-current = Selected: {$target}
+limb-damage-target-random = Random
+limb-damage-target-head = Head
+limb-damage-target-torso = Torso
+limb-damage-target-left-arm = Left arm
+limb-damage-target-right-arm = Right arm
+limb-damage-target-left-hand = Left hand
+limb-damage-target-right-hand = Right hand
+limb-damage-target-left-leg = Left leg
+limb-damage-target-right-leg = Right leg
+limb-damage-target-left-foot = Left foot
+limb-damage-target-right-foot = Right foot

@@ -38,10 +38,11 @@ public struct HealthAnalyzerUiState
     public bool? Bleeding;
     public bool? Unrevivable;
     public List<(string ReagentId, FixedPoint2 Quantity)>? MetabolizingReagents; // Starlight - list of metabolizing reagents inside scanned user
+    public List<(string PartName, FixedPoint2 Damage)>? LimbDamage;
 
     public HealthAnalyzerUiState() {}
 
-    public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? canPrint, bool? scanMode, bool? bleeding, bool? unrevivable, List<(string ReagentId, FixedPoint2 Quantity)>? metabolizingReagents = null) // Starlight - added metabolizingReagents parameter
+    public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? canPrint, bool? scanMode, bool? bleeding, bool? unrevivable, List<(string ReagentId, FixedPoint2 Quantity)>? metabolizingReagents = null, List<(string PartName, FixedPoint2 Damage)>? limbDamage = null) // Starlight - added metabolizingReagents parameter
     {
         TargetEntity = targetEntity;
         Temperature = temperature;
@@ -51,5 +52,6 @@ public struct HealthAnalyzerUiState
         Bleeding = bleeding;
         Unrevivable = unrevivable;
         MetabolizingReagents = metabolizingReagents; // Starlight
+        LimbDamage = limbDamage;
     }
 }

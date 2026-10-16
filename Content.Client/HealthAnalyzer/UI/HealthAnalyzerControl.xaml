@@ -57,6 +57,8 @@
             <Label Text="{Loc 'health-analyzer-window-entity-damage-total-text'}" />
             <Label Name="DamageLabel" />
         </GridContainer>
+        <Label Name="LimbDamageTitle" Text="{Loc 'health-analyzer-window-limb-damage-title'}" Visible="False" Margin="0 5 0 0" />
+        <BoxContainer Name="LimbDamageContainer" Orientation="Vertical" Visible="False" Margin="0 2 0 0" />
     </BoxContainer>
 
     <PanelContainer Name="AlertsDivider" Visible="False" StyleClasses="LowDivider" />

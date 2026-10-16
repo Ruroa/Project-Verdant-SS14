@@ -2,6 +2,9 @@ using System.Linq; // Starlight-edit
 using Content.Server.Chat.Systems; // Starlight-edit
 using Content.Server.Medical.Components;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Part;
+using Content.Shared.Body.Systems;
+using Content.Shared._Starlight.Medical.Body.Part;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chat; // Starlight
 using Content.Shared.Damage.Components;
@@ -56,6 +59,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     // Starlight-end
 
     [Dependency] private ChatSystem _chat = default!; // Starlight-edit
+    [Dependency] private BodySystem _bodySystem = default!;
 
     public override void Initialize()
     {
@@ -338,6 +342,26 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
         }
         // Starlight end
 
+        var limbDamage = new List<(string PartName, FixedPoint2 Damage)>();
+        if (_bodySystem.GetRootPartOrNull(entity) is { } rootPart)
+        {
+            var parts = new List<Entity<BodyPartComponent>> { (rootPart.Entity, rootPart.BodyPart) };
+            parts.AddRange(_bodySystem.GetAllBodyPart(rootPart.Entity, rootPart.BodyPart));
+            foreach (var part in parts)
+            {
+                if (!TryComp<DamageableComponent>(part, out var partDamageable) || partDamageable.TotalDamage <= 0)
+                    continue;
+
+                var partName = part.Comp.Symmetry switch
+                {
+                    BodyPartSymmetry.Left => "Left ",
+                    BodyPartSymmetry.Right => "Right ",
+                    _ => string.Empty,
+                } + part.Comp.PartType;
+                limbDamage.Add((partName, partDamageable.TotalDamage));
+            }
+        }
+
         return new HealthAnalyzerUiState(
             GetNetEntity(entity),
             bodyTemperature,
@@ -346,7 +370,8 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             null,
             bleeding,
             unrevivable,
-            metabolizingReagents // Starlight - add metabolizing chemicals to ui message
+            metabolizingReagents, // Starlight - add metabolizing chemicals to ui message
+            limbDamage
         );
     }
 

@@ -113,6 +113,22 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         DamageLabel.Text = damageable.TotalDamage.ToString();
 
+        LimbDamageContainer.RemoveAllChildren();
+        var limbDamage = state.LimbDamage;
+        LimbDamageTitle.Visible = limbDamage is { Count: > 0 };
+        LimbDamageContainer.Visible = limbDamage is { Count: > 0 };
+        if (limbDamage != null)
+        {
+            foreach (var (partName, damage) in limbDamage.OrderBy(part => part.PartName))
+            {
+                LimbDamageContainer.AddChild(new Label
+                {
+                    Text = $"{partName}: {damage}",
+                    Margin = new Thickness(2, 0),
+                });
+            }
+        }
+
         // Alerts
 
         var showAlerts = state.Unrevivable == true || state.Bleeding == true;
