@@ -1,5 +1,6 @@
 <BoxContainer
     xmlns="https://spacestation14.io"
+    xmlns:limbDamage="clr-namespace:Content.Client._FarHorizons.LimbDamage.UI"
     Margin="5 5 5 5"
     VerticalExpand="True"
     Orientation="Vertical">
@@ -58,6 +59,7 @@
             <Label Name="DamageLabel" />
         </GridContainer>
         <Label Name="LimbDamageTitle" Text="{Loc 'health-analyzer-window-limb-damage-title'}" Visible="False" Margin="0 5 0 0" />
+        <limbDamage:LimbTargettingDisplay Name="LimbDamageDisplay" SetSize="110 110" Visible="False" Margin="0 2 0 2" />
         <BoxContainer Name="LimbDamageContainer" Orientation="Vertical" Visible="False" Margin="0 2 0 0" />
     </BoxContainer>
 
