@@ -1,26 +1,15 @@
 <limb:LimbTargettingUI
     xmlns="https://spacestation14.io"
     xmlns:limb="clr-namespace:Content.Client._FarHorizons.LimbDamage.UI"
-    MinSize="190 210"
-    MaxSize="220 240"
+    MinSize="120 170"
+    MaxSize="140 190"
     Visible="False">
     <PanelContainer StyleClasses="BorderedWindowPanel">
-        <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="4">
+        <BoxContainer Orientation="Vertical" Margin="4" SeparationOverride="2">
             <Label Text="{Loc 'limb-damage-target-title'}" />
             <Label Name="CurrentTargetLabel" StyleClasses="LabelSubText" />
-            <GridContainer Columns="2" HSeparationOverride="4" VSeparationOverride="4">
-                <Button Name="RandomButton" Text="{Loc 'limb-damage-target-random'}" />
-                <Button Name="HeadButton" Text="{Loc 'limb-damage-target-head'}" />
-                <Button Name="TorsoButton" Text="{Loc 'limb-damage-target-torso'}" />
-                <Button Name="LeftArmButton" Text="{Loc 'limb-damage-target-left-arm'}" />
-                <Button Name="RightArmButton" Text="{Loc 'limb-damage-target-right-arm'}" />
-                <Button Name="LeftHandButton" Text="{Loc 'limb-damage-target-left-hand'}" />
-                <Button Name="RightHandButton" Text="{Loc 'limb-damage-target-right-hand'}" />
-                <Button Name="LeftLegButton" Text="{Loc 'limb-damage-target-left-leg'}" />
-                <Button Name="RightLegButton" Text="{Loc 'limb-damage-target-right-leg'}" />
-                <Button Name="LeftFootButton" Text="{Loc 'limb-damage-target-left-foot'}" />
-                <Button Name="RightFootButton" Text="{Loc 'limb-damage-target-right-foot'}" />
-            </GridContainer>
+            <limb:LimbTargettingDisplay Name="LimbTargettingDisplay" SetSize="100 100" />
+            <Button Name="RandomButton" Text="{Loc 'limb-damage-target-random'}" />
         </BoxContainer>
     </PanelContainer>
 </limb:LimbTargettingUI>
