@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controllers;
+using Robust.Shared.Timing;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._FarHorizons.LimbDamage.UI;
@@ -39,13 +40,30 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
         Refresh();
     }
 
+    public override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+
+        if (_player.LocalEntity is not { } player ||
+            !_entities.HasComponent<BodyComponent>(player) &&
+            !_entities.HasComponent<LimbTargettingComponent>(player))
+            return;
+
+        var widget = GetWidget();
+        if (widget == null || widget.Visible && widget.HasTargetDisplay)
+            return;
+
+        Refresh(player);
+    }
+
     private void OnPlayerAttached(EntityUid player) => Refresh(player);
 
     // The player attach event can arrive before the replicated body component.
     // Refresh again when it is initialized so the HUD does not stay hidden.
     private void OnBodyInitialized(EntityUid player)
     {
-        Refresh(player);
+        if (player == _player.LocalEntity)
+            Refresh(player);
     }
 
     private void OnPlayerDetached(EntityUid _) => Hide();
@@ -56,8 +74,11 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
         if (widget == null)
             return;
 
+        if (!widget.HasTargetDisplay)
+            Refresh(_player.LocalEntity);
+
         widget.SetTarget(target);
-        widget.Visible = true;
+        widget.Visible = widget.HasTargetDisplay;
     }
 
     private void Refresh() => Refresh(_player.LocalEntity);
