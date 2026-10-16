@@ -25,19 +25,19 @@
                     </BoxContainer>
                 </BoxContainer>
             </BoxContainer>
-            <!-- Keep controls on a second row so they cannot overlap patient details in narrow windows. -->
+            <!-- Keep controls below patient details so they cannot overlap or be clipped in narrow windows. -->
             <BoxContainer
                 Margin="0 4 5 0"
                 HorizontalExpand="True"
-                Orientation="Horizontal">
+                Orientation="Vertical">
                 <Button
                     Name="PrintReportButton"
                     Text="{Loc 'health-analyzer-window-print-report'}"
                     Disabled="True"
                     Visible="False"
-                    Margin="0 0 4 0" />
-                <Label HorizontalAlignment="Right"
-                       HorizontalExpand="True"
+                    HorizontalAlignment="Left"
+                    Margin="0 0 0 2" />
+                <Label HorizontalAlignment="Left"
                        Name="ScanModeLabel"
                        Text="{Loc 'health-analyzer-window-entity-unknown-text'}" />
             </BoxContainer>
@@ -55,8 +55,8 @@
             <Label Text="{Loc 'health-analyzer-window-entity-damage-total-text'}" />
             <Label Name="DamageLabel" />
         </GridContainer>
-        <Label Name="LimbDamageTitle" Text="{Loc 'health-analyzer-window-limb-damage-title'}" Visible="False" Margin="0 5 0 0" />
-        <limbDamage:LimbTargettingDisplay Name="LimbDamageDisplay" SetSize="110 110" Visible="False" Margin="0 2 0 2" />
+        <Label Name="LimbDamageTitle" Text="{Loc 'health-analyzer-window-limb-damage-title'}" Visible="False" Margin="0 10 0 4" />
+        <limbDamage:LimbTargettingDisplay Name="LimbDamageDisplay" MinSize="110 110" MaxSize="110 110" SetSize="110 110" VerticalAlignment="Top" Visible="False" Margin="0 0 0 4" />
         <BoxContainer Name="LimbDamageContainer" Orientation="Vertical" Visible="False" Margin="0 2 0 0" />
     </BoxContainer>
 
