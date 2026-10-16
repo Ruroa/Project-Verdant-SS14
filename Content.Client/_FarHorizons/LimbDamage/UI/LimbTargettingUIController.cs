@@ -19,10 +19,12 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
 
     private LimbTargettingSystem? _targettingSystem;
     private SpriteSystem? _sprites;
+    private string? _lastHudDiagnostic;
 
     public override void Initialize()
     {
         base.Initialize();
+        ReportHudState("controller initialized");
 
         var screenLoad = UIManager.GetUIController<GameplayStateLoadController>();
         screenLoad.OnScreenLoad += Refresh;
@@ -37,6 +39,7 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
         system.TargetChanged += OnTargetChanged;
         system.LocalBodyInitialized += OnBodyInitialized;
         _sprites = _entities.System<SpriteSystem>();
+        ReportHudState("limb targeting system loaded");
         Refresh();
     }
 
@@ -87,15 +90,21 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
     {
         var widget = GetWidget();
         if (widget == null)
+        {
+            ReportHudState($"waiting for HUD widget; active screen={UIManager.ActiveScreen?.GetType().Name ?? "none"}");
             return;
+        }
+
+        var hasBody = attachedEntity is { } bodyEntity && _entities.HasComponent<BodyComponent>(bodyEntity);
+        var hasTargetting = attachedEntity is { } targetEntity && _entities.HasComponent<LimbTargettingComponent>(targetEntity);
 
         if (attachedEntity is not { } player ||
-            !_entities.HasComponent<BodyComponent>(player) &&
-            !_entities.HasComponent<LimbTargettingComponent>(player) ||
+            !hasBody && !hasTargetting ||
             _sprites == null || _targettingSystem == null)
         {
             widget.ShutdownTarget();
             widget.Visible = false;
+            ReportHudState($"hidden; player={attachedEntity?.ToString() ?? "none"}, body={hasBody}, targetComponent={hasTargetting}, sprites={_sprites != null}, system={_targettingSystem != null}");
             return;
         }
 
@@ -104,6 +113,16 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
         widget.TargetSelected += OnTargetSelected;
         widget.SetTarget(_targettingSystem.CurrentTarget);
         widget.Visible = true;
+        ReportHudState($"ready; player={player}, visible={widget.Visible}, displayReady={widget.HasTargetDisplay}, screen={UIManager.ActiveScreen?.GetType().Name ?? "none"}");
+    }
+
+    private void ReportHudState(string state)
+    {
+        if (state == _lastHudDiagnostic)
+            return;
+
+        _lastHudDiagnostic = state;
+        Log.Info($"Limb HUD: {state}");
     }
 
     private void OnTargetSelected(LimbTarget target) => _targettingSystem?.SetTarget(target);
