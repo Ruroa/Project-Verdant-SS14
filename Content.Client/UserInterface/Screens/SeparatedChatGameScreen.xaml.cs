@@ -31,7 +31,11 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
         SetAnchorAndMarginPreset(Ghost, LayoutPreset.BottomWide, margin: 80);
         SetAnchorAndMarginPreset(Hotbar, LayoutPreset.BottomWide, margin: 5);
         SetAnchorAndMarginPreset(Alerts, LayoutPreset.CenterRight, margin: 10);
+        // Measure the widget while visible so the anchor preset captures its size.
+        // It starts hidden in XAML and hidden controls measure as zero-sized.
+        LimbTargetting.Visible = true;
         SetAnchorAndMarginPreset(LimbTargetting, LayoutPreset.BottomRight, margin: 10);
+        LimbTargetting.Visible = false;
 
         ScreenContainer.OnSplitResizeFinished += () =>
             OnChatResized?.Invoke(new Vector2(ScreenContainer.SplitFraction, 0));
