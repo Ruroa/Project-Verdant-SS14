@@ -118,14 +118,12 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         // Total Damage
 
-        LimbDamageContainer.RemoveAllChildren();
         var limbDamage = state.LimbDamage;
         // The scanner may deliver its limb-damage state before the replicated
         // BodyComponent is visible on the client. Either signal is sufficient
         // to display the patient hit-location diagram.
         var showHitLocation = _entityManager.HasComponent<BodyComponent>(target.Value) || limbDamage != null;
         LimbDamageTitle.Visible = showHitLocation || limbDamage is { Count: > 0 };
-        LimbDamageContainer.Visible = limbDamage is { Count: > 0 };
         LimbDamageDisplay.Visible = showHitLocation;
         if (showHitLocation)
         {
@@ -161,18 +159,6 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
                 totalDamage += partDamage;
         }
         DamageLabel.Text = totalDamage.ToString();
-
-        if (limbDamage != null)
-        {
-            foreach (var (partName, damage) in limbDamage.OrderBy(part => part.PartName))
-            {
-                LimbDamageContainer.AddChild(new Label
-                {
-                    Text = $"{partName}: {damage}",
-                    Margin = new Thickness(2, 0),
-                });
-            }
-        }
 
         // Alerts
 
