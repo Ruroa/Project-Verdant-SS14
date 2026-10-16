@@ -24,8 +24,7 @@ public sealed class LimbTargettingSystem : EntitySystem
 
     private void OnBodyStartup(Entity<BodyComponent> ent, ref ComponentStartup args)
     {
-        if (ent.Owner == _player.LocalEntity)
-            LocalBodyInitialized?.Invoke(ent.Owner);
+        LocalBodyInitialized?.Invoke(ent.Owner);
     }
 
     private void OnTargetState(Entity<LimbTargettingComponent> ent, ref AfterAutoHandleStateEvent args)
