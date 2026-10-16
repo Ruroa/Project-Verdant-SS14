@@ -20,13 +20,16 @@ public sealed partial class LimbDamageSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<BodyComponent, ComponentInit>(OnBodyInit);
+        // Starlight's SharedBodySystem already subscribes to BodyComponent +
+        // ComponentInit. Use ComponentStartup here to avoid a duplicate event
+        // subscription while still adding the body targeting components.
+        SubscribeLocalEvent<BodyComponent, ComponentStartup>(OnBodyStartup);
         SubscribeLocalEvent<BodyComponent, DamageBeforeApplyEvent>(OnDamage);
         SubscribeLocalEvent<BodyComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeNetworkEvent<ChangeLimbTargetMessage>(OnChangeTarget);
     }
 
-    private void OnBodyInit(Entity<BodyComponent> ent, ref ComponentInit args)
+    private void OnBodyStartup(Entity<BodyComponent> ent, ref ComponentStartup args)
     {
         EnsureComp<LimbDamageComponent>(ent);
         EnsureComp<LimbTargettingComponent>(ent);
