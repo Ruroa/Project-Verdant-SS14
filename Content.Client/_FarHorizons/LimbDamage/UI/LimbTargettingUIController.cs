@@ -23,6 +23,8 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
     {
         base.Initialize();
 
+        SubscribeLocalEvent<BodyComponent, ComponentInit>(OnBodyInit);
+
         var screenLoad = UIManager.GetUIController<GameplayStateLoadController>();
         screenLoad.OnScreenLoad += Refresh;
         screenLoad.OnScreenUnload += Hide;
@@ -38,7 +40,15 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
         Refresh();
     }
 
-    private void OnPlayerAttached(EntityUid _) => Refresh();
+    private void OnPlayerAttached(EntityUid player) => Refresh(player);
+
+    // The player attach event can arrive before the replicated body component.
+    // Refresh again when it is initialized so the HUD does not stay hidden.
+    private void OnBodyInit(Entity<BodyComponent> ent, ref ComponentInit args)
+    {
+        if (ent.Owner == _player.LocalEntity)
+            Refresh(ent.Owner);
+    }
 
     private void OnPlayerDetached(EntityUid _) => Hide();
 
@@ -52,14 +62,17 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
         widget.Visible = true;
     }
 
-    private void Refresh()
+    private void Refresh() => Refresh(_player.LocalEntity);
+
+    private void Refresh(EntityUid? attachedEntity)
     {
         var widget = GetWidget();
         if (widget == null)
             return;
 
-        if (_player.LocalEntity is not { } player ||
-            !_entities.HasComponent<BodyComponent>(player) ||
+        if (attachedEntity is not { } player ||
+            !_entities.HasComponent<BodyComponent>(player) &&
+            !_entities.HasComponent<LimbTargettingComponent>(player) ||
             _sprites == null || _targettingSystem == null)
         {
             widget.ShutdownTarget();
