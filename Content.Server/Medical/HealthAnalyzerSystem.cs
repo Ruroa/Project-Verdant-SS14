@@ -343,6 +343,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
         // Starlight end
 
         var limbDamage = new List<(string PartName, FixedPoint2 Damage)>();
+        var limbDamageByType = new List<(string PartName, string DamageType, FixedPoint2 Damage)>();
         if (_bodySystem.GetRootPartOrNull(entity) is { } rootPart)
         {
             var parts = new List<Entity<BodyPartComponent>> { (rootPart.Entity, rootPart.BodyPart) };
@@ -359,6 +360,11 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
                     _ => string.Empty,
                 } + part.Comp.PartType;
                 limbDamage.Add((partName, partDamageable.TotalDamage));
+                foreach (var (damageType, amount) in partDamageable.Damage.DamageDict)
+                {
+                    if (amount > 0)
+                        limbDamageByType.Add((partName, damageType, amount));
+                }
             }
         }
 
@@ -371,7 +377,8 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             bleeding,
             unrevivable,
             metabolizingReagents, // Starlight - add metabolizing chemicals to ui message
-            limbDamage
+            limbDamage,
+            limbDamageByType
         );
     }
 

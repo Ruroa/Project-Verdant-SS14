@@ -32,6 +32,10 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
     private readonly SpriteSystem _spriteSystem;
     private readonly IPrototypeManager _prototypes;
     private readonly IResourceCache _cache;
+    private readonly Dictionary<string, FixedPoint2> _wholeBodyDamagePerType = new();
+    private readonly List<(string PartName, string DamageType, FixedPoint2 Damage)> _limbDamagePerType = new();
+    private readonly List<string> _damageGroupIds = new();
+    private LimbTarget _selectedLimb = LimbTarget.Torso;
 
     // Starlight-start: Printable health reports.
     public event Action? PrintReportPressed;
@@ -114,8 +118,6 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         // Total Damage
 
-        DamageLabel.Text = damageable.TotalDamage.ToString();
-
         LimbDamageContainer.RemoveAllChildren();
         var limbDamage = state.LimbDamage;
         // The scanner may deliver its limb-damage state before the replicated
@@ -151,6 +153,14 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             LimbDamageDisplay.DrawLabels.Clear();
             LimbDamageDisplay.ClearShaders();
         }
+
+        var totalDamage = damageable.TotalDamage;
+        if (limbDamage != null)
+        {
+            foreach (var (_, partDamage) in limbDamage)
+                totalDamage += partDamage;
+        }
+        DamageLabel.Text = totalDamage.ToString();
 
         if (limbDamage != null)
         {
@@ -196,16 +206,34 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             damageable.DamagePerGroup.OrderByDescending(damage => damage.Value)
                 .ToDictionary(x => x.Key, x => x.Value);
          Starlight end */
-        IReadOnlyDictionary<string, FixedPoint2> damagePerType = damageable.Damage.DamageDict;
+        _wholeBodyDamagePerType.Clear();
+        foreach (var (type, amount) in damageable.Damage.DamageDict)
+            _wholeBodyDamagePerType[type] = amount;
+
+        _limbDamagePerType.Clear();
+        if (state.LimbDamageByType != null)
+        {
+            foreach (var limbDamageType in state.LimbDamageByType)
+            {
+                _limbDamagePerType.Add(limbDamageType);
+                if (_wholeBodyDamagePerType.TryGetValue(limbDamageType.DamageType, out var existing))
+                    _wholeBodyDamagePerType[limbDamageType.DamageType] = existing + limbDamageType.Damage;
+                else
+                    _wholeBodyDamagePerType[limbDamageType.DamageType] = limbDamageType.Damage;
+            }
+        }
+
         //Starlight begin - Sort damage groups in a fixed order and add metabolizing section
         var sortedGroups = damageable.DamagePerGroup
             .OrderBy(g => HealthAnalyzerFormatting.GetDamageGroupSortKey(g.Key))
             .ThenBy(g => g.Key)
             .ToDictionary(g => g.Key, g => g.Value);
+        _damageGroupIds.Clear();
+        _damageGroupIds.AddRange(sortedGroups.Keys);
 
         DrawMetabolizingChemicals(state.MetabolizingReagents); // Metabolizing Chemicals Section
         // Starlight end
-        DrawDiagnosticGroups(sortedGroups, damagePerType);
+        DrawDiagnosticGroups();
     }
 
     private void OnHitLocationSelected(LimbTarget location)
@@ -214,8 +242,10 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             return;
 
         LimbDamageDisplay.UpdateSelection(location);
+        _selectedLimb = location;
         LimbDamageTitle.Text = Loc.GetString("limb-damage-target-current",
             ("target", Loc.GetString(GetLimbLocaleKey(location)))) + $" — {damage:0.##}";
+        DrawDiagnosticGroups();
     }
 
     private static bool TryGetLimbTarget(string partName, out LimbTarget target)
@@ -254,9 +284,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         _ => "limb-damage-target-random",
     };
     // Starlight-start: Draw Damage Groups in a two column grid in their own boxes.
-    private void DrawDiagnosticGroups(
-        Dictionary<string, FixedPoint2> groups,
-        IReadOnlyDictionary<string, FixedPoint2> damageDict)
+    private void DrawDiagnosticGroups()
     {
         GroupsContainer.RemoveAllChildren();
 
@@ -264,30 +292,40 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         {
             Columns = 2,
         };
-
         GroupsContainer.AddChild(gridContainer);
 
-        var columnIndex = 0;
-        foreach (var (damageGroupId, damageAmount) in groups)
-        {
-            var groupTitleText = $"{Loc.GetString(
-                "health-analyzer-window-damage-group-text",
-                ("damageGroup", _prototypes.Index<DamageGroupPrototype>(damageGroupId).LocalizedName),
-                ("amount", damageAmount)
-            )}";
+        var selectedPartName = GetLimbPartName(_selectedLimb);
+        var selectedPartDamage = selectedPartName == null
+            ? new Dictionary<string, FixedPoint2>()
+            : _limbDamagePerType
+                .Where(part => string.Equals(part.PartName, selectedPartName, StringComparison.OrdinalIgnoreCase))
+                .GroupBy(part => part.DamageType)
+                .ToDictionary(group => group.Key, group => group.Aggregate(FixedPoint2.Zero, (total, part) => total + part.Damage));
 
-            // Create a bordered box for each damage group
+        var columnIndex = 0;
+        foreach (var damageGroupId in _damageGroupIds)
+        {
+            var group = _prototypes.Index<DamageGroupPrototype>(damageGroupId);
+            var usesSelectedPart = damageGroupId is "Brute" or "Burn";
+            IReadOnlyDictionary<string, FixedPoint2> damageDict = usesSelectedPart ? selectedPartDamage : _wholeBodyDamagePerType;
+
+            var damageAmount = group.DamageTypes.Aggregate(
+                FixedPoint2.Zero,
+                (total, type) => damageDict.TryGetValue(type, out var amount) ? total + amount : total);
+
+            var groupTitleText = Loc.GetString(
+                "health-analyzer-window-damage-group-text",
+                ("damageGroup", group.LocalizedName),
+                ("amount", damageAmount));
+
             var groupBox = new PanelContainer
             {
                 Margin = new Thickness(2),
                 MinWidth = 155,
             };
 
-            // Boxes in the second column get right aligned
             if (columnIndex % 2 == 1)
-            {
                 groupBox.HorizontalAlignment = HAlignment.Right;
-            }
 
             groupBox.PanelOverride = new StyleBoxFlat
             {
@@ -305,10 +343,8 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
             };
 
-            var titleRow = CreateDiagnosticGroupTitleRow(groupTitleText, (float)damageAmount, damageGroupId);
-            groupContainer.AddChild(titleRow);
+            groupContainer.AddChild(CreateDiagnosticGroupTitleRow(groupTitleText, (float) damageAmount, damageGroupId));
 
-            // Add divider line under the title row
             var divider = new PanelContainer
             {
                 MinHeight = 1,
@@ -317,8 +353,6 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             divider.PanelOverride = new StyleBoxFlat(Color.Gray);
             groupContainer.AddChild(divider);
 
-            var group = _prototypes.Index<DamageGroupPrototype>(damageGroupId);
-
             foreach (var type in group.DamageTypes)
             {
                 if (!damageDict.TryGetValue(type, out var typeAmount) || typeAmount <= 0)
@@ -326,14 +360,12 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
                 var damageTypeName = _prototypes.Index<DamageTypePrototype>(type).LocalizedName;
                 var typeId = type.ToString().ToLowerInvariant();
-
                 var damageRow = new BoxContainer
                 {
                     Orientation = BoxContainer.LayoutOrientation.Horizontal,
                     Margin = new Thickness(0, 2),
                 };
 
-                // Add damage type icon
                 damageRow.AddChild(new TextureRect
                 {
                     SetSize = new Vector2(15, 15),
@@ -341,21 +373,17 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
                     Margin = new Thickness(0, 0, 4, 0),
                 });
 
-                var typeLabel = new Label
+                damageRow.AddChild(new Label
                 {
                     Text = damageTypeName,
                     HorizontalExpand = true,
                     HorizontalAlignment = HAlignment.Left,
-                };
-
-                var amountLabel = new Label
+                });
+                damageRow.AddChild(new Label
                 {
                     Text = typeAmount.ToString(),
                     HorizontalAlignment = HAlignment.Right,
-                };
-
-                damageRow.AddChild(typeLabel);
-                damageRow.AddChild(amountLabel);
+                });
                 groupContainer.AddChild(damageRow);
             }
 
@@ -364,6 +392,21 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             columnIndex++;
         }
     }
+
+    private static string? GetLimbPartName(LimbTarget target) => target switch
+    {
+        LimbTarget.Head => "Head",
+        LimbTarget.Torso => "Torso",
+        LimbTarget.LeftArm => "Left Arm",
+        LimbTarget.RightArm => "Right Arm",
+        LimbTarget.LeftHand => "Left Hand",
+        LimbTarget.RightHand => "Right Hand",
+        LimbTarget.LeftLeg => "Left Leg",
+        LimbTarget.RightLeg => "Right Leg",
+        LimbTarget.LeftFoot => "Left Foot",
+        LimbTarget.RightFoot => "Right Foot",
+        _ => null,
+    };
 
     // Metabolizing chemicals display
     private void DrawMetabolizingChemicals(List<(string ReagentId, FixedPoint2 Quantity)>? reagents)
