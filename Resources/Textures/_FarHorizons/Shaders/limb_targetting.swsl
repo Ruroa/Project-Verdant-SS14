@@ -1,0 +1,38 @@
+uniform highp vec3 outerColor;
+uniform highp float width;
+uniform highp vec3 innerColor;
+uniform bool innerFill;
+
+uniform highp float lineSpeed;
+uniform highp float lineFreq;
+uniform highp float colorFactor;
+
+void fragment() {
+	highp vec2 size = TEXTURE_PIXEL_SIZE * width;
+	highp float alpha = texture(TEXTURE, UV).a;
+
+	if (alpha == 0.0) {
+		discard;
+	}
+
+	highp float a_up = texture(TEXTURE, UV + vec2(0.0, -size.y)).a;
+	highp float a_down = texture(TEXTURE, UV + vec2(0.0, size.y)).a;
+	highp float a_left = texture(TEXTURE, UV + vec2(-size.x, 0.0)).a;
+	highp float a_right = texture(TEXTURE, UV + vec2(size.x, 0.0)).a;
+	highp float min_neighbor_alpha = min(min(a_up, a_down), min(a_left, a_right));
+
+	if (min_neighbor_alpha < 1.0) {
+		COLOR = vec4(outerColor, 1.0);
+	} else {
+		if (innerFill) {
+			highp float scanline = sin((UV.y * lineFreq) - (TIME * lineSpeed));
+			highp vec3 final_color = innerColor;
+			if (scanline < 0.0) {
+				final_color *= colorFactor;
+			}
+			COLOR = vec4(final_color, 1.0);
+		} else {
+			discard;
+		}
+	}
+}
