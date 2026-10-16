@@ -24,17 +24,14 @@ public sealed partial class LimbTargettingUI : UIWidget
         RandomButton.OnPressed += _ => TargetSelected?.Invoke(LimbTarget.Random);
     }
 
-    public void InitTarget(IPrototypeManager prototypes, SpriteSystem sprites, ProtoId<LimbTargettingPrototype> proto)
+    public void InitTarget(IPrototypeManager prototypes, SpriteSystem sprites, ProtoId<LimbTargettingPrototype> proto, bool withHealth = false)
     {
-        var targetter = prototypes.Index(proto);
-        LimbTargettingDisplay.DrawDebugBoxes = targetter.DrawDebugBoxes;
-        LimbTargettingDisplay.DrawLimbs = targetter.Limbs.ToDictionary(
-            layer => layer.Limb,
-            layer => new DrawLimb(sprites, layer.Area, layer.Sprites));
-        LimbTargettingDisplay.DrawLabels = targetter.Labels
-            .Select(label => new DrawLabel(label.Text, label.Position, label.FontPath, label.FontSize))
-            .ToList();
-        LimbTargettingDisplay.InitShaders(prototypes);
+        LimbTargettingDisplay.InitializeDisplay(prototypes, sprites, proto, withHealth);
+    }
+
+    public void SetHealth(Dictionary<LimbTarget, float> damage)
+    {
+        LimbTargettingDisplay.LimbDamage = damage;
     }
 
     public void SetTarget(LimbTarget target)
@@ -48,6 +45,8 @@ public sealed partial class LimbTargettingUI : UIWidget
     {
         LimbTargettingDisplay.DrawLimbs.Clear();
         LimbTargettingDisplay.DrawLabels.Clear();
+        LimbTargettingDisplay.LimbDamage.Clear();
+        LimbTargettingDisplay.WithHealth = false;
         LimbTargettingDisplay.ClearShaders();
     }
 
