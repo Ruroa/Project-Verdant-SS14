@@ -2,6 +2,8 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared._FarHorizons.LimbDamage.Components;
+using Content.Shared.Body.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
@@ -51,6 +53,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         _cache = dependencies.Resolve<IResourceCache>();
 
         PrintReportButton.OnPressed += _ => PrintReportPressed?.Invoke(); // Starlight-edit: Printable health reports.
+        LimbDamageDisplay.OnSelectedLimb += OnHitLocationSelected;
     }
 
     public void Populate(HealthAnalyzerUiState state)
@@ -115,8 +118,40 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         LimbDamageContainer.RemoveAllChildren();
         var limbDamage = state.LimbDamage;
-        LimbDamageTitle.Visible = limbDamage is { Count: > 0 };
+        // The scanner may deliver its limb-damage state before the replicated
+        // BodyComponent is visible on the client. Either signal is sufficient
+        // to display the patient hit-location diagram.
+        var showHitLocation = _entityManager.HasComponent<BodyComponent>(target.Value) || limbDamage != null;
+        LimbDamageTitle.Visible = showHitLocation || limbDamage is { Count: > 0 };
         LimbDamageContainer.Visible = limbDamage is { Count: > 0 };
+        LimbDamageDisplay.Visible = showHitLocation;
+        if (showHitLocation)
+        {
+            LimbDamageDisplay.ReadOnly = false;
+            LimbDamageDisplay.InitializeDisplay(_prototypes, _spriteSystem, "LimbTargetHuman", withHealth: true);
+
+            var damageByLocation = Enum.GetValues<LimbTarget>()
+                .Where(location => location != LimbTarget.Random)
+                .ToDictionary(location => location, _ => 0f);
+
+            if (limbDamage != null)
+            {
+                foreach (var (partName, damageAmount) in limbDamage)
+                {
+                    if (TryGetLimbTarget(partName, out var location))
+                        damageByLocation[location] = (float) damageAmount;
+                }
+            }
+
+            LimbDamageDisplay.LimbDamage = damageByLocation;
+        }
+        else
+        {
+            LimbDamageDisplay.DrawLimbs.Clear();
+            LimbDamageDisplay.DrawLabels.Clear();
+            LimbDamageDisplay.ClearShaders();
+        }
+
         if (limbDamage != null)
         {
             foreach (var (partName, damage) in limbDamage.OrderBy(part => part.PartName))
@@ -172,6 +207,52 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         // Starlight end
         DrawDiagnosticGroups(sortedGroups, damagePerType);
     }
+
+    private void OnHitLocationSelected(LimbTarget location)
+    {
+        if (!LimbDamageDisplay.LimbDamage.TryGetValue(location, out var damage))
+            return;
+
+        LimbDamageDisplay.UpdateSelection(location);
+        LimbDamageTitle.Text = Loc.GetString("limb-damage-target-current",
+            ("target", Loc.GetString(GetLimbLocaleKey(location)))) + $" — {damage:0.##}";
+    }
+
+    private static bool TryGetLimbTarget(string partName, out LimbTarget target)
+    {
+        var normalized = new string(partName.Where(char.IsLetter).Select(char.ToLowerInvariant).ToArray());
+        target = normalized switch
+        {
+            "head" => LimbTarget.Head,
+            "torso" => LimbTarget.Torso,
+            "leftarm" => LimbTarget.LeftArm,
+            "rightarm" => LimbTarget.RightArm,
+            "lefthand" => LimbTarget.LeftHand,
+            "righthand" => LimbTarget.RightHand,
+            "leftleg" => LimbTarget.LeftLeg,
+            "rightleg" => LimbTarget.RightLeg,
+            "leftfoot" => LimbTarget.LeftFoot,
+            "rightfoot" => LimbTarget.RightFoot,
+            _ => LimbTarget.Random,
+        };
+
+        return target != LimbTarget.Random;
+    }
+
+    private static string GetLimbLocaleKey(LimbTarget target) => target switch
+    {
+        LimbTarget.Head => "limb-damage-target-head",
+        LimbTarget.Torso => "limb-damage-target-torso",
+        LimbTarget.LeftArm => "limb-damage-target-left-arm",
+        LimbTarget.RightArm => "limb-damage-target-right-arm",
+        LimbTarget.LeftHand => "limb-damage-target-left-hand",
+        LimbTarget.RightHand => "limb-damage-target-right-hand",
+        LimbTarget.LeftLeg => "limb-damage-target-left-leg",
+        LimbTarget.RightLeg => "limb-damage-target-right-leg",
+        LimbTarget.LeftFoot => "limb-damage-target-left-foot",
+        LimbTarget.RightFoot => "limb-damage-target-right-foot",
+        _ => "limb-damage-target-random",
+    };
     // Starlight-start: Draw Damage Groups in a two column grid in their own boxes.
     private void DrawDiagnosticGroups(
         Dictionary<string, FixedPoint2> groups,
