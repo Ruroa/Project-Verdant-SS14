@@ -12,38 +12,35 @@
         Name="PatientDataContainer"
         Margin="0 0 0 5"
         Orientation="Vertical">
-        <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
-            <SpriteView OverrideDirection="South" Scale="2 2" Name="SpriteView" Access="Public" SetSize="64 64" />
-            <TextureRect Name="NoDataTex" Access="Public" SetSize="64 64" Visible="false" Stretch="KeepAspectCentered" TexturePath="/Textures/Interface/Misc/health_analyzer_out_of_range.png"/>
-            <!-- Starlight begin - changed to fix species and name labels overlapping -->
-            <BoxContainer Margin="5 0 0 0" Orientation="Vertical" VerticalAlignment="Top" SetWidth="155">
-                <BoxContainer Orientation="Vertical" Margin="0 0 0 4">
-                    <RichTextLabel Name="NameLabel" SetWidth="150" />
-                </BoxContainer>
-                <BoxContainer Orientation="Vertical">
-                    <Label Name="SpeciesLabel" StyleClasses="LabelSubText" />
+        <BoxContainer Orientation="Vertical" Margin="0 0 0 5">
+            <BoxContainer Orientation="Horizontal">
+                <SpriteView OverrideDirection="South" Scale="2 2" Name="SpriteView" Access="Public" SetSize="64 64" />
+                <TextureRect Name="NoDataTex" Access="Public" SetSize="64 64" Visible="false" Stretch="KeepAspectCentered" TexturePath="/Textures/Interface/Misc/health_analyzer_out_of_range.png"/>
+                <BoxContainer Margin="5 0 0 0" Orientation="Vertical" VerticalAlignment="Top" HorizontalExpand="True">
+                    <BoxContainer Orientation="Vertical" Margin="0 0 0 4">
+                        <RichTextLabel Name="NameLabel" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Vertical">
+                        <Label Name="SpeciesLabel" StyleClasses="LabelSubText" />
+                    </BoxContainer>
                 </BoxContainer>
             </BoxContainer>
-            <!-- Starlight end -->
-            <!-- Starlight begin - printable health reports -->
+            <!-- Keep controls on a second row so they cannot overlap patient details in narrow windows. -->
             <BoxContainer
-                Margin="0 0 5 0"
+                Margin="0 4 5 0"
                 HorizontalExpand="True"
-                Orientation="Vertical"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top">
+                Orientation="Horizontal">
                 <Button
                     Name="PrintReportButton"
                     Text="{Loc 'health-analyzer-window-print-report'}"
                     Disabled="True"
                     Visible="False"
-                    HorizontalAlignment="Right"
-                    Margin="0 0 0 4" />
+                    Margin="0 0 4 0" />
                 <Label HorizontalAlignment="Right"
+                       HorizontalExpand="True"
                        Name="ScanModeLabel"
                        Text="{Loc 'health-analyzer-window-entity-unknown-text'}" />
             </BoxContainer>
-            <!-- Starlight end -->
         </BoxContainer>
 
         <PanelContainer StyleClasses="LowDivider" />

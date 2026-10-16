@@ -3,14 +3,11 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:ui="clr-namespace:Content.Client.HealthAnalyzer.UI"
     MinWidth="300">
-    <!-- Starlight
     <ScrollContainer
         Margin="5 5 5 5"
         ReturnMeasure="True"
         VerticalExpand="True">
-    -->
-
         <ui:HealthAnalyzerControl
             Name="HealthAnalyzer"/>
-    <!-- </ScrollContainer> Starlight -->
+    </ScrollContainer>
 </controls:FancyWindow>

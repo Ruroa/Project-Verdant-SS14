@@ -39,6 +39,8 @@ public sealed partial class LimbTargettingDisplay : Control
     public bool DrawDebugBoxes;
     public bool WithHealth;
     public bool ReadOnly;
+    /// <summary>Whether the current mouse hover and selected limb should receive the selection outline.</summary>
+    public bool HighlightSelection = true;
     public Dictionary<LimbTarget, float> LimbDamage = new();
 
     public LimbTargettingDisplay()
@@ -136,11 +138,11 @@ public sealed partial class LimbTargettingDisplay : Control
 
     private void UpdateShaders()
     {
-        _highlight = GetHighlight();
+        _highlight = HighlightSelection ? GetHighlight() : null;
         foreach (var (limb, shader) in _shaders)
         {
             var color = WithHealth ? HealthColor(limb) : DefaultColor;
-            var selected = limb == _highlight || limb == _selection;
+            var selected = HighlightSelection && (limb == _highlight || limb == _selection);
             shader.SetParameter("outerColor", selected ? HighlightColor : color);
             shader.SetParameter("innerFill", WithHealth || selected);
             shader.SetParameter("innerColor", WithHealth ? color : HighlightColor);
