@@ -19,8 +19,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineLightRifleSP
-  result: MagazineLightRifleSP
+  id: MagazineLightRifleSPPV
+  result: MagazineLightRifleSPPV
   materials:
     Steel: 565
 
@@ -33,8 +33,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineLightRifleFMJ
-  result: MagazineLightRifleFMJ
+  id: MagazineLightRifleFMJPV
+  result: MagazineLightRifleFMJPV
   materials:
     Steel: 565
 
@@ -72,8 +72,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineLightRifleMaxim
-  result: MagazineLightRifleMaxim
+  id: MagazineLightRifleMaximPV
+  result: MagazineLightRifleMaximPV
   materials:
     Steel: 350
 

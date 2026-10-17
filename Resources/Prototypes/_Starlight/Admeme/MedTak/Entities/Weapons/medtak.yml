@@ -3,7 +3,7 @@
   name: CODE-6 "Arbitration"
   id: WeaponMedTakLightMachineGun
   parent: [ BaseWeaponLightMachineGun, BaseMedTakContraband ]
-  description: "An ultralight assault LMG developed for MedTak security.\nAccepts 7.62x39mm box magazines."
+  description: "An ultralight assault LMG developed for MedTak security.\nAccepts 5.56x45mm box magazines."
   components:
   - type: Sprite
     sprite: _Starlight/Admeme/MedTak/Weapons/LMG.rsi
@@ -33,7 +33,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: LightRifleHeavyMagazineSP
+        startingItem: MagazineLightRifleHeavy556PV
         insertSound: /Audio/Weapons/Guns/MagIn/sfrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
         whitelist:
@@ -41,11 +41,11 @@
             - LightRifleHeavy
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
+        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
-            - CartridgeLightRifle
+            - CartridgeRifle
   - type: HeldSpeedModifier
   - type: Gun
     soundGunshot:
@@ -90,7 +90,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleM52SP
+        startingItem: MagazineRifleM52SPPV
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
@@ -172,7 +172,7 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistol40SP
+          startingItem: MagazinePistol40SPPV
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
@@ -258,7 +258,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineShotgun
+        startingItem: MagazineShotgunPV
         priority: 2
         whitelist:
           tags:

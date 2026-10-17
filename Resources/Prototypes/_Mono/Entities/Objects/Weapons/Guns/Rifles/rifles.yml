@@ -17,7 +17,7 @@
   name: VFD MR-8C Watchman
   parent: [BaseWeaponRifle, BaseGunWieldable, BaseMajorContraband]
   id: WeaponMR8CDMR
-  description: A TSF-designed MR-8C designated marksman rifle chambered in .45 ACP. Originally intended for frontier patrol and overwatch teams, the platform has found steady use among corporate security forces assigned to long-term terraforming contracts.
+  description: A TSF-designed MR-8C designated marksman rifle chambered in 7.62x51mm NATO. Originally intended for frontier patrol and overwatch teams, the platform has found steady use among corporate security forces assigned to long-term terraforming contracts.
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Rifles/mr8c.rsi
@@ -47,21 +47,21 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineDMRSP
+        startingItem: MagazineHeavyRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineL10DMR
+          - MagazineHeavyRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnumSP
+        startingItem: CartridgeHeavyRifleBall
         priority: 1
         whitelist:
           tags:
-          - CartridgeMagnum
+          - CartridgeHeavyRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -117,7 +117,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineLightRifleSPPV
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
@@ -181,7 +181,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleSP
+        startingItem: MagazineRifleSPPV
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
@@ -237,21 +237,21 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineDMRSP
+        startingItem: MagazineRifleSPPV
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineL10DMR
+          - MagazineRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnumSP
+        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
-          - CartridgeMagnum
+          - CartridgeRifle
   - type: StaticPrice
     price: 1200
 

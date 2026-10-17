@@ -9,6 +9,8 @@
 - type: Tag
   id: MagazineMP27 # Standard MP27 magazine.
 - type: Tag
+  id: MagazineMP27Extended # Extended 60-round MP27 magazine.
+- type: Tag
   id: MagazineMP27E # Energized-ammunition MP27 magazine.
 - type: Tag
   id: MagazinePD90 # Standard PD90 magazine.
@@ -16,3 +18,17 @@
   id: MagazinePD90E # Energized-ammunition PD90 magazine.
 - type: Tag
   id: MagazineVector45ACP # Vector SMG magazine for .45 ACP.
+- type: Tag
+  id: MagazineMP5 # MP5 9x19mm magazine.
+- type: Tag
+  id: MagazineMAC15 # Standard 9x19mm MAC15 magazine.
+- type: Tag
+  id: MagazineMAC15Extended # Extended 9x19mm MAC15 magazine.
+- type: Tag
+  id: MagazinePK7 # PK7 9x19mm magazine.
+- type: Tag
+  id: MagazineL90 # Standard 5.56x45mm L90 magazine.
+- type: Tag
+  id: MagazineL90Drum # 60-round 5.56x45mm L90 drum.
+- type: Tag
+  id: MagazineI122 # I122 7.62x51mm DMR magazine.

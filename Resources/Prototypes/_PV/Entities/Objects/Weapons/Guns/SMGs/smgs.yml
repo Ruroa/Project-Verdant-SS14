@@ -102,6 +102,7 @@
         whitelist:
           tags:
           - MagazineMP27
+          - MagazineMP27Extended
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -144,4 +145,83 @@
         whitelist:
           tags:
           - Cartridge57x26E
+  - type: Appearance
+
+- type: entity
+  name: MP5 submachine gun
+  parent: [ BaseWeaponSubMachineGun, BaseSecurityContraband ]
+  id: WeaponSubMachineGunMP5
+  description: A compact 9x19mm submachine gun using a 30-round magazine.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/SMGs/mp5.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/SMGs/mp5.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineMP5
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineMP5
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgePistol
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  name: MAC15 submachine gun
+  parent: [ BaseWeaponSubMachineGun, BaseSecurityContraband ]
+  id: WeaponSubMachineGunMAC15
+  description: A 9x19mm submachine gun that accepts standard and extended MAC15 magazines.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/SMGs/mac15.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/SMGs/mac15.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineMAC15
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineMAC15
+          - MagazineMAC15Extended
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgePistol
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
   - type: Appearance

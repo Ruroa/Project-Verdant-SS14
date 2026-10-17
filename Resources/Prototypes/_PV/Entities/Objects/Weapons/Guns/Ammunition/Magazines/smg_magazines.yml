@@ -120,6 +120,239 @@
 
 - type: entity
   parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazineMP27Extended
+  name: MP27 extended magazine (5.7x26mm)
+  description: A 60-round extended magazine for the MP27.
+  components:
+  - type: Tag
+    tags:
+    - MagazineMP27Extended
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge57x26
+    proto: Cartridge57x26
+    capacity: 60
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/mp27extend.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazineMP5
+  name: MP5 magazine (9x19mm)
+  description: A 30-round 9x19mm magazine for the MP5.
+  components:
+  - type: Tag
+    tags:
+    - MagazineMP5
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgePistol
+    proto: CartridgePistolSP
+    capacity: 30
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/mp5.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazineMAC15
+  name: MAC15 magazine (9x19mm)
+  description: A 30-round 9x19mm magazine for the MAC15.
+  components:
+  - type: Tag
+    tags:
+    - MagazineMAC15
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgePistol
+    proto: CartridgePistolSP
+    capacity: 30
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/mac15.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazineMAC15Extended
+  name: MAC15 extended magazine (9x19mm)
+  description: A 50-round extended 9x19mm magazine for the MAC15.
+  components:
+  - type: Tag
+    tags:
+    - MagazineMAC15Extended
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgePistol
+    proto: CartridgePistolSP
+    capacity: 50
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/mac15e.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazinePK7
+  name: PK7 magazine (9x19mm)
+  description: A 30-round magazine for the PK7.
+  components:
+  - type: Tag
+    tags:
+    - MagazinePK7
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgePistol
+    proto: CartridgePistolSP
+    capacity: 30
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pk7_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: MagazineL90
+  name: L90 magazine (5.56x45mm)
+  description: A 30-round magazine for the L90.
+  components:
+  - type: Tag
+    tags:
+    - MagazineL90
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeRifle
+    proto: CartridgeRifleSP
+    capacity: 30
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/l90_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: MagazineL90Drum
+  name: L90 drum magazine (5.56x45mm)
+  description: A 60-round drum magazine for the L90.
+  components:
+  - type: Tag
+    tags:
+    - MagazineL90Drum
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeRifle
+    proto: CartridgeRifleSP
+    capacity: 60
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/l90_drum_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
   id: MagazineVector45ACP
   name: Vector SMG magazine (.45 ACP)
   description: A 30-round magazine for the Vector, loaded with .45 ACP ball ammunition.
@@ -152,7 +385,7 @@
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/45acp_vector_mag.rsi
     layers:
-    - state: red
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]

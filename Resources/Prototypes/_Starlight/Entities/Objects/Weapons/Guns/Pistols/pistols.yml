@@ -22,7 +22,7 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistolSP
+          startingItem: MagazinePistolSPPV
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
@@ -55,7 +55,7 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistolRubber
+          startingItem: MagazinePistolRubberPV
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
@@ -80,7 +80,7 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazineMagnumRubber
+          startingItem: MagazineMagnumRubberPV
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
@@ -106,7 +106,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolHighCapacitySP
+        startingItem: MagazinePistolHighCapacitySPPV
         insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
         priority: 2
@@ -131,7 +131,7 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistolSPGolden
+          startingItem: MagazinePistolSPGoldenPV
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
@@ -151,7 +151,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolHighCapacitySPGolden
+        startingItem: MagazinePistolHighCapacitySPGoldenPV
         insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
         priority: 2
@@ -232,7 +232,7 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistol40SP
+          startingItem: MagazinePistol40SPPV
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
@@ -298,7 +298,7 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistol40FMJ
+          startingItem: MagazinePistol40FMJPV
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
@@ -338,7 +338,7 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistol40SP
+          startingItem: MagazinePistol40SPPV
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2

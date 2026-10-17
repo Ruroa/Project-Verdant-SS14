@@ -8,8 +8,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineShotgun
-  result: MagazineShotgun
+  id: MagazineShotgunPV
+  result: MagazineShotgunPV
   materials:
     Steel: 240
 

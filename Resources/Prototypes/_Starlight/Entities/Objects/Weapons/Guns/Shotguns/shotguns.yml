@@ -30,7 +30,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineShotgun
+        startingItem: MagazineShotgunPV
         priority: 2
         whitelist:
           tags:
@@ -242,7 +242,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineShotgun
+        startingItem: MagazineShotgunPV
         priority: 2
         whitelist:
           tags:

@@ -51,7 +51,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineLightRifleSPPV
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -106,7 +106,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineLightRifleSPPV
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
@@ -197,7 +197,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleSP
+        startingItem: MagazineRifleSPPV
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
@@ -253,7 +253,7 @@
   name: Estoc DMR
   parent: [BaseWeaponRifle, BaseSyndicateContraband]
   id: WeaponRifleEstoc
-  description: "A designated marksman rifle firing in 3-round bursts. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from 5.56x45mm magazines."
+  description: "A designated marksman rifle firing in 3-round bursts. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from 7.62x51mm NATO magazines."
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
@@ -285,20 +285,21 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleSP
+        startingItem: MagazineHeavyRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - MagazineHeavyRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
+        startingItem: CartridgeHeavyRifleBall
         priority: 1
         whitelist:
           tags:
-          - CartridgeRifle
+          - CartridgeHeavyRifle
   - type: SpeedModifiedOnWield
     walkModifier: 0.80 #SL 75% -> 80% speed
     sprintModifier: 0.80 #SL 75% -> 80% speed

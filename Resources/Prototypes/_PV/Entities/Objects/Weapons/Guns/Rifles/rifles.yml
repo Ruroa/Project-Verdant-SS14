@@ -1,0 +1,55 @@
+- type: entity
+  name: L90A1 infantry carbine
+  parent: [ BaseWeaponRifle, BaseSecurityContraband ]
+  id: WeaponRifleL90A1
+  description: A 5.56x45mm infantry carbine using standard or drum magazines.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Rifles/l90a1.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Rifles/l90a1.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineL90
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineL90
+          - MagazineL90Drum
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeRifle
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  name: L90A2 infantry carbine
+  parent: WeaponRifleL90A1
+  id: WeaponRifleL90A2
+  description: An improved 5.56x45mm L90 carbine using standard or drum magazines.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Rifles/l90a2.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Rifles/l90a2.rsi

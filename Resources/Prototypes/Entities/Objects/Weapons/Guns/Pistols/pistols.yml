@@ -48,7 +48,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolSP
+        startingItem: MagazinePistolSPPV
         insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
         priority: 2
@@ -118,7 +118,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolHighCapacitySP # Starlight, starts with the high capacity now
+        startingItem: MagazinePistolHighCapacitySPPV # Starlight, starts with the high capacity now
         insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
         priority: 2
@@ -283,7 +283,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineMagnum
+        startingItem: MagazineMagnumSPPV
         insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
         priority: 2

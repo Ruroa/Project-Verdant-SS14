@@ -45,7 +45,7 @@
     - FullAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
   - type: BallisticAmmoProvider
-    proto: CartridgePistolFMJ
+    proto: CartridgeRifleSP
     capacity: 50
   - type: TriggerOnEmptyGunshot
   - type: ExplodeOnTrigger

@@ -1,0 +1,23 @@
+- type: entity
+  name: M890 combat shotgun
+  parent: [ BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband ]
+  id: WeaponShotgunM890
+  description: A pump-action combat shotgun that holds eight 12 gauge shells.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Shotguns/m890.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Shotguns/m890.rsi
+  - type: Item
+    sprite: _PV/Objects/Weapons/Guns/Shotguns/m890.rsi
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - ShellShotgun
+    capacity: 8
+    proto: ShellShotgun
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg

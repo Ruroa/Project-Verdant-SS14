@@ -80,14 +80,14 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineMagnum
-  result: MagazineMagnum
+  result: MagazineMagnumSPPV
   materials:
     Steel: 200
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineMagnumRifleSP
-  result: MagazineMagnumRifleSP
+  result: MagazineMagnumRifleSPPV
   materials:
     Steel: 250
 

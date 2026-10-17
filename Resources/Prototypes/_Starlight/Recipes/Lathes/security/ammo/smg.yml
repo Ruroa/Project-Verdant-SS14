@@ -7,8 +7,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolSubMachineGunSP
-  result: MagazinePistolSubMachineGunSP
+  id: MagazinePistolSubMachineGunSPPV
+  result: MagazinePistolSubMachineGunSPPV
   materials:
     Steel: 300
 
@@ -59,8 +59,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolSubMachineGunTopMounted
-  result: MagazinePistolSubMachineGunTopMounted
+  id: MagazinePistolSubMachineGunTopMountedPV
+  result: MagazinePistolSubMachineGunTopMountedPV
   materials:
     Steel: 300
 

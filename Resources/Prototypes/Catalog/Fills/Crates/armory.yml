@@ -10,7 +10,7 @@
         children:
         - id: WeaponSubMachineGunWt550
           amount: 2
-        - id: MagazinePistolSubMachineGunTopMounted
+        - id: MagazinePistolSubMachineGunTopMountedPV
           amount: 4
 
 - type: entity
@@ -80,7 +80,7 @@
         children:
         - id: WeaponPistolMk58 #Starlight
           amount: 2
-        - id: MagazinePistolSP #Starlight
+        - id: MagazinePistolSPPV #Starlight
           amount: 2
         - id: MagazinePistolHP #Starlight
           amount: 1
@@ -120,5 +120,5 @@
         children:
         - id: WeaponRifleLecter
           amount: 2
-        - id: MagazineRifleSP
+        - id: MagazineRifleSPPV
           amount: 4
