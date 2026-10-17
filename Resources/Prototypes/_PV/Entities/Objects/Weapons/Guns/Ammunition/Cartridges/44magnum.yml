@@ -8,7 +8,7 @@
     tags:
     - Cartridge44Magnum
   - type: CartridgeAmmo
-    proto: BulletMagnumTraceSP
+    proto: Bullet44MagnumTraceSP
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/44magnum.rsi
     layers:
@@ -38,7 +38,7 @@
   name: cartridge (.44 Magnum AP)
   components:
   - type: CartridgeAmmo
-    proto: BulletMagnumTraceAP
+    proto: Bullet44MagnumTraceAP
   - type: Sprite
     layers:
     - state: base
