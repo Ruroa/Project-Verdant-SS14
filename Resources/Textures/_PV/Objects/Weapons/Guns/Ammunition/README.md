@@ -9,6 +9,7 @@ Ammunition/
 │   ├── 45acp.rsi/
 │   ├── 44magnum.rsi/
 │   ├── 57x28mm.rsi/
+│   ├── 57x28mm-e.rsi/ (5.7x28 mm Energized)
 │   ├── 57x28mm_caseless.rsi/
 │   ├── 127x55mm_rsh12.rsi/
 │   ├── 556x45mm.rsi/
@@ -21,6 +22,7 @@ Ammunition/
     ├── 45acp.rsi/
     ├── 44magnum.rsi/
     ├── 57x28mm.rsi/
+    ├── 57x28mm-e.rsi/ (5.7x28 mm Energized)
     ├── 57x28mm_caseless.rsi/
     ├── 127x55mm_rsh12.rsi/
     ├── 556x45mm.rsi/
@@ -30,8 +32,8 @@ Ammunition/
     └── 127x99mm.rsi/
 ```
 
-- Use one RSI folder per caliber and category. Keep conventional 5.7×28 mm and 5.7×28 mm caseless separate.
-- Each planned `.rsi` folder now has a `meta.json` with empty `states`. Add the state entries and matching PNG frames when the artwork is ready.
-- Keep ammo variants (such as ball, AP, or incendiary) as states or tintable layers within the caliber's RSI when the same casing or box design can be shared.
+- Keep conventional 5.7x28 mm, 5.7x28 mm Energized, and 5.7x28 mm caseless assets separate.
+- Use one RSI folder per caliber and category. Add state entries to `meta.json` for every PNG frame in that folder.
+- Keep ammo variants (such as ball, AP, or incendiary) as states or tintable layers within a caliber's RSI when the same casing or box design can be shared.
 - Shotgun shells stay on the existing base-game texture path; do not duplicate them here.
 - These are texture-only paths. Prototypes that use them should reference the matching RSI under `_PV/Objects/Weapons/Guns/Ammunition/`.
