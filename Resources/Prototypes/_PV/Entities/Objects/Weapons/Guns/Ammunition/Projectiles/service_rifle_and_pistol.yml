@@ -41,3 +41,16 @@
     damage:
       types:
         Piercing: 30
+
+- type: entity
+  parent: BulletPistolTraceSP
+  id: Bullet57x26ETrace
+  categories: [ HideSpawnMenu ]
+  name: energized bullet (5.7x26mm)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 15
+        Blunt: 5
+        Heat: 5
