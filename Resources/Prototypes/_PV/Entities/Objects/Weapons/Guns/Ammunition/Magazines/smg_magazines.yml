@@ -1,0 +1,163 @@
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazinePD90
+  name: PD90 magazine (5.7x26mm)
+  components:
+  - type: Tag
+    tags:
+    - MagazinePD90
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge57x26
+    proto: Cartridge57x26
+    capacity: 20
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pd90_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazinePD90E
+  name: PD90 magazine (5.7x26mm energized)
+  components:
+  - type: Tag
+    tags:
+    - MagazinePD90E
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge57x26E
+    proto: Cartridge57x26E
+    capacity: 20
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pd90_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazineMP27
+  name: MP27 magazine (5.7x26mm)
+  components:
+  - type: Tag
+    tags:
+    - MagazineMP27
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge57x26
+    proto: Cartridge57x26
+    capacity: 20
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/mp27.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazineMP27E
+  name: MP27 magazine (5.7x26mm energized)
+  components:
+  - type: Tag
+    tags:
+    - MagazineMP27E
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge57x26E
+    proto: Cartridge57x26E
+    capacity: 20
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/mp27.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazineVector45ACP
+  name: Vector SMG magazine (.45 ACP)
+  description: A 25-round magazine for the Vector, loaded with .45 ACP ball ammunition.
+  components:
+  - type: Tag
+    tags:
+    - MagazineVector45ACP
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeMagnum
+    proto: CartridgeMagnumSP
+    capacity: 25
+  - type: Item
+    size: Small
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#9b0000"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#9b0000"
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/45acp_smg_mag.rsi
+    layers:
+    - state: red
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
