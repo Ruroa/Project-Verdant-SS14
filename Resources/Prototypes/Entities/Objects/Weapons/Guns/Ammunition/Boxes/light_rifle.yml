@@ -17,7 +17,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Boxes/light_rifle.rsi
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/762x39mm.rsi
   - type: MagazineVisuals
     magState: mag
     steps: 4
@@ -35,12 +35,12 @@
     proto: CartridgeLightRifleSP
   - type: Sprite
     layers:
-    - state: base-b
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: magb-1
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
-    magState: magb
+    magState: mag
     steps: 4
     zeroVisible: false
   - type: Appearance
@@ -58,7 +58,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: sp
+    - state: ball
 # Starlight-start
   - type: Tag
     tags:
@@ -123,8 +123,6 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: practice
-
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleIncendiary

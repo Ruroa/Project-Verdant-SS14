@@ -10,10 +10,12 @@
   - type: CartridgeAmmo
     proto: BulletHeavyRifleTrace
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/762x51mm_nato.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
   - type: Appearance
   - type: SpentAmmoVisuals
   - type: StaticPrice

@@ -16,7 +16,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Boxes/magnum.rsi
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/45acp.rsi
   - type: MagazineVisuals
     magState: mag
     steps: 4
@@ -37,7 +37,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: sp
+    - state: ball
 
 - type: entity
   parent: BaseMagazineBoxMagnum
@@ -67,8 +67,6 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: practice
-
 - type: entity
   id: MagazineBoxMagnumIncendiary
   parent: BaseMagazineBoxMagnum
