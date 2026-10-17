@@ -1,12 +1,12 @@
 - type: entity
   parent: [ BaseCartridge, BaseSecurityContraband ]
-  id: Cartridge57x28
-  name: cartridge (5.7x28mm Ball)
+  id: Cartridge57x26
+  name: cartridge (5.7x26mm Ball)
   description: A compact, high-velocity pistol cartridge.
   components:
   - type: Tag
     tags:
-    - Cartridge57x28
+    - Cartridge57x26
   - type: CartridgeAmmo
     proto: BulletPistolTraceSP
   - type: Sprite

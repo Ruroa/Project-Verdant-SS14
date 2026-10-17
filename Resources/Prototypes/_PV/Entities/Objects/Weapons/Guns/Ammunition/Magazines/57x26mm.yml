@@ -1,17 +1,17 @@
 - type: entity
   parent: [ BaseItem, BaseSecurityContraband ]
-  id: Magazine57x28
-  name: pistol magazine (5.7x28mm)
+  id: Magazine57x26
+  name: pistol magazine (5.7x26mm)
   components:
   - type: Tag
     tags:
-    - Magazine57x28
+    - Magazine57x26
   - type: BallisticAmmoProvider
     mayTransfer: true
     whitelist:
       tags:
-      - Cartridge57x28
-    proto: Cartridge57x28
+      - Cartridge57x26
+    proto: Cartridge57x26
     capacity: 20
   - type: Item
     size: Small

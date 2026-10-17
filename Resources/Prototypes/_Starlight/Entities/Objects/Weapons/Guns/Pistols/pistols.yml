@@ -165,7 +165,7 @@
   name: FL57
   parent: [BaseWeaponPistol, BaseSecurityContraband]
   id: WeaponPistolEnforcer
-  description: A lightweight, high-velocity service pistol chambered in 5.7x28mm.
+  description: A lightweight, high-velocity service pistol chambered in 5.7x26mm.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/enforcer.rsi
@@ -196,19 +196,19 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: Magazine57x28
+          startingItem: Magazine57x26
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
           whitelist:
             tags:
-            - Magazine57x28
+            - Magazine57x26
         gun_chamber:
           name: Chamber
           priority: 1
           whitelist:
             tags:
-            - Cartridge57x28
+            - Cartridge57x26
     - type: StealTarget
       stealGroup: OfficerHandgun
 
