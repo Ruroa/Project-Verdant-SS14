@@ -53,4 +53,6 @@
       types:
         Piercing: 15
         Blunt: 5
-        Heat: 5
+        Shock: 5
+  - type: StaminaDamageOnCollide
+    damage: 10
