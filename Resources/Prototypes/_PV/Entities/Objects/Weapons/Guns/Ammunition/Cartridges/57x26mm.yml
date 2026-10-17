@@ -8,7 +8,7 @@
     tags:
     - Cartridge57x26
   - type: CartridgeAmmo
-    proto: BulletPistolTraceSP
+    proto: Bullet57x26TraceSP
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/57x28mm.rsi
     layers:
