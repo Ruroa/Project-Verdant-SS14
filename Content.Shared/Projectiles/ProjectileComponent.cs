@@ -75,6 +75,12 @@ public sealed partial class ProjectileComponent : Component
     public bool IgnoreResistances = false;
 
     /// <summary>
+    ///     Fraction of target damage resistance bypassed by this projectile (0 to 1).
+    /// </summary>
+    [DataField]
+    public float ArmorPenetration = 0f;
+
+    /// <summary>
     ///     Get that juicy FPS hit sound.
     /// </summary>
     [DataField]
