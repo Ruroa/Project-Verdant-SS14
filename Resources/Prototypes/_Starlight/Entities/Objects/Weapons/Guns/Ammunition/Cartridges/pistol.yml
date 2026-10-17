@@ -122,7 +122,7 @@
   parent: BaseCartridgePistol
   components:
   - type: CartridgeAmmo
-    proto: BulletPistolTraceFMJ
+    proto: BulletPistolTraceFMJPartial
   - type: Sprite
     layers:
       - state: base
