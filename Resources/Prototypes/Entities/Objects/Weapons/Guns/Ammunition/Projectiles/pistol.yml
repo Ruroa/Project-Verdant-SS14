@@ -9,6 +9,9 @@
       types:
         Piercing: 16
 
+      types:
+        Piercing: 16
+
 - type: entity
   parent: BaseBulletPractice
   id: BulletPistolPractice
@@ -17,6 +20,9 @@
   components:
   - type: Projectile
     damage:
+      types:
+        Blunt: 1
+
       types:
         Blunt: 2
 
@@ -29,6 +35,10 @@
   - type: Projectile
     damage:
       types:
+        Piercing: 11
+        Heat: 5
+
+      types:
         Piercing: 12
         Heat: 4
 
@@ -40,6 +50,10 @@
   components:
   - type: Projectile
     damage:
+      types:
+        Piercing: 14
+        Toxin: 2
+
       types:
         Radiation: 6
         Piercing: 10
