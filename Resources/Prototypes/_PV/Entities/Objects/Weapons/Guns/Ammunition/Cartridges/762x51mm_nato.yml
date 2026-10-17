@@ -5,7 +5,7 @@
   description: A full-power rifle cartridge intended for general use.
   components:
   - type: CartridgeAmmo
-    proto: BulletHeavyRifleTrace
+    proto: Bullet762x51NATOTrace
   - type: Sprite
     layers:
     - state: base
