@@ -7,6 +7,9 @@
   - type: Projectile
     damage:
       types:
+        Piercing: 17
+
+      types:
         Piercing: 18
 
 - type: entity
@@ -17,6 +20,9 @@
   components:
   - type: Projectile
     damage:
+      types:
+        Piercing: 28
+
       types:
         Piercing: 40
 
@@ -29,6 +35,9 @@
   - type: Projectile
     damage:
       types:
+        Piercing: 26
+
+      types:
         Piercing: 32
 
 - type: entity
@@ -40,6 +49,9 @@
   - type: Projectile
     damage:
       types:
+        Piercing: 32
+
+      types:
         Piercing: 30
 
 - type: entity
@@ -50,6 +62,11 @@
   components:
   - type: Projectile
     damage:
+      types:
+        Piercing: 15
+        Blunt: 5
+        Shock: 5
+
       types:
         Piercing: 15
         Blunt: 5
