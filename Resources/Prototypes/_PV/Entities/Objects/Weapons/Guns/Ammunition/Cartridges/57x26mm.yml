@@ -21,3 +21,27 @@
   - type: SpentAmmoVisuals
   - type: StaticPrice
     price: 10
+
+- type: entity
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: Cartridge57x26E
+  name: cartridge (5.7x26mm energized)
+  description: An energized 5.7x26mm cartridge for the PD90E and MP27E only.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge57x26E
+  - type: CartridgeAmmo
+    proto: Bullet57x26ETrace
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/57x28mm-e.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#4FEAFF"
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 15

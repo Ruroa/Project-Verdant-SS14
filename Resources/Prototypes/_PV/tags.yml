@@ -1,0 +1,18 @@
+# Project Verdant ammo and magazine tags.
+
+- type: Tag
+  id: Cartridge57x26 # Standard 5.7x26mm cartridge for the PD90 and MP27.
+- type: Tag
+  id: Cartridge57x26E # Energized 5.7x26mm cartridge for PD90E and MP27E only.
+- type: Tag
+  id: Magazine57x26 # General-purpose 5.7x26mm magazine.
+- type: Tag
+  id: MagazineMP27 # Standard MP27 magazine.
+- type: Tag
+  id: MagazineMP27E # Energized-ammunition MP27 magazine.
+- type: Tag
+  id: MagazinePD90 # Standard PD90 magazine.
+- type: Tag
+  id: MagazinePD90E # Energized-ammunition PD90 magazine.
+- type: Tag
+  id: MagazineVector45ACP # Vector SMG magazine for .45 ACP.
