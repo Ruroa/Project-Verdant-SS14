@@ -1,0 +1,33 @@
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: Magazine57x28
+  name: pistol magazine (5.7x28mm)
+  components:
+  - type: Tag
+    tags:
+    - Magazine57x28
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge57x28
+    proto: Cartridge57x28
+    capacity: 20
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: false
+  - type: Appearance

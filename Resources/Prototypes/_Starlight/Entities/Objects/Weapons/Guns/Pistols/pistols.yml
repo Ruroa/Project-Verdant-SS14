@@ -162,10 +162,10 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
 
 - type: entity
-  name: enforcer
+  name: FL57
   parent: [BaseWeaponPistol, BaseSecurityContraband]
   id: WeaponPistolEnforcer
-  description: A versatile pistol of modern design.
+  description: A lightweight, high-velocity service pistol chambered in 5.7x28mm.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/enforcer.rsi
@@ -192,6 +192,23 @@
         - tan
         - grey
         - greengrip
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: Magazine57x28
+          insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+            - Magazine57x28
+        gun_chamber:
+          name: Chamber
+          priority: 1
+          whitelist:
+            tags:
+            - Cartridge57x28
     - type: StealTarget
       stealGroup: OfficerHandgun
 

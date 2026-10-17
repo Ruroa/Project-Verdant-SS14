@@ -286,7 +286,7 @@
   name: L10 DMR
   parent: [ BaseWeaponRifle, BaseSecurityContraband ]
   id: WeaponRifleL10
-  description: "A scoped marksman rifle for medium range engagements, built on the Lecter platform.\nChambered in .45 ACP."
+  description: "A scoped marksman rifle for medium range engagements, built on the Lecter platform.\nChambered in 7.62x51mm NATO."
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/L10.rsi
@@ -312,21 +312,21 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineDMRSP
+        startingItem: MagazineHeavyRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineL10DMR
+          - MagazineHeavyRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnumSP
+        startingItem: CartridgeHeavyRifleBall
         priority: 1
         whitelist:
           tags:
-          - CartridgeMagnum
+          - CartridgeHeavyRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot ""
@@ -347,7 +347,7 @@
   name: Pitbull
   parent: [ BaseWeaponRifle, BaseSyndicateContraband ]
   id: WeaponRiflePitbull
-  description: A large bullpup rifle with a low fire-rate but excellent accuracy. Chambered in .45 ACP.
+  description: A large bullpup rifle with a low fire-rate but excellent accuracy. Chambered in 7.62x51mm NATO.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/pitbull.rsi
@@ -369,21 +369,21 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineMagnumRifleSP
+        startingItem: MagazineHeavyRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineMagnumSubMachineGun
+          - MagazineHeavyRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnumSP
+        startingItem: CartridgeHeavyRifleBall
         priority: 1
         whitelist:
           tags:
-            - CartridgeMagnum
+            - CartridgeHeavyRifle
 
 
 - type: entity
@@ -500,7 +500,7 @@
   name: SPC-Lionhunter
   parent: [ BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband ]
   id: WeaponRifleLionhunter
-  description: A one-of-a-kind bolt-action precision rifle fitted with an integrated scope and chambered in .338 Lapua Magnum. Built to drop targets at extreme range with authority. Each shot demands a deliberate recycle of the action.
+  description: A one-of-a-kind bolt-action precision rifle fitted with an integrated scope and chambered in 12.7x99mm. Built to drop targets at extreme range with authority. Each shot demands a deliberate recycle of the action.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/lionhunter_icons.rsi
@@ -529,9 +529,9 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - Cartridge48Rifle
+      - CartridgeAntiMateriel
     capacity: 10
-    proto: Cartridge48Rifle
+    proto: CartridgeAntiMateriel
     soundRack:
       path: /Audio/_Starlight/Weapons/Guns/Cock/cycle_bolt.ogg
       params:
@@ -563,7 +563,7 @@
   name: Lawbringer
   parent: [BaseWeaponRifle, BaseSecurityContraband]
   id: WeaponRifleLawbringer
-  description: "A bullpup carbine of modern design, commissioned by VSC for its security forces.\nFeeds from 7.62x39mm magazines."
+  description: "A bullpup carbine of modern design, commissioned by VSC for its security forces.\nFeeds from 7.62x51mm NATO magazines."
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/lawbringer.rsi
@@ -580,20 +580,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineHeavyRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineLightRifle
+          - MagazineHeavyRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         priority: 1
         whitelist:
           tags:
-          - CartridgeLightRifle
+          - CartridgeHeavyRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot ""

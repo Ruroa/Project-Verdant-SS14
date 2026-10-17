@@ -93,7 +93,7 @@
   name: dispatcher
   parent: [BaseWeaponRevolver, BaseSecurityContraband]
   id: WeaponRevolverDispatcher
-  description: The NT Model 7 Service Revolver, known unofficially as the 'Dispatcher.' chambered in .45 ACP with robust stopping power for putting an end to any non-compliance. A true timeless classic carried amongst NanoTrasen's elite security staff.
+  description: The NT Model 7 Service Revolver, known unofficially as the 'Dispatcher.' chambered in .44 Magnum with robust stopping power for putting an end to any non-compliance. A true timeless classic carried amongst NanoTrasen's elite security staff.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Revolvers/Dispatcher.rsi
@@ -113,6 +113,11 @@
     soundGunshot:
       path: /Audio/_Starlight/Weapons/Guns/Gunshots/revolver_stronger.ogg
   - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - Cartridge44Magnum
+      - SpeedLoader44Magnum
+    proto: Cartridge44Magnum
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]

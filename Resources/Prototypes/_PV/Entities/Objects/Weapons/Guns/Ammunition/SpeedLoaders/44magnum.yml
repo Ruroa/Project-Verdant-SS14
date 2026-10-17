@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseSpeedLoaderMagnum
+  id: SpeedLoader44Magnum
+  name: speed loader (.44 Magnum)
+  components:
+  - type: Tag
+    tags:
+    - SpeedLoader44Magnum
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge44Magnum
+    proto: Cartridge44Magnum
+    capacity: 6

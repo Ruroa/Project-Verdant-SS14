@@ -1,0 +1,23 @@
+- type: entity
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: Cartridge57x28
+  name: cartridge (5.7x28mm Ball)
+  description: A compact, high-velocity pistol cartridge.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge57x28
+  - type: CartridgeAmmo
+    proto: BulletPistolTraceSP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/57x28mm.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#3F47DB"
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10
