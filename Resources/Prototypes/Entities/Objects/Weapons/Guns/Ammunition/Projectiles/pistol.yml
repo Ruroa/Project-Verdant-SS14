@@ -9,9 +9,6 @@
       types:
         Piercing: 16
 
-      types:
-        Piercing: 16
-
 - type: entity
   parent: BaseBulletPractice
   id: BulletPistolPractice
@@ -22,9 +19,6 @@
     damage:
       types:
         Blunt: 1
-
-      types:
-        Blunt: 2
 
 - type: entity
   parent: BaseBulletIncendiary
@@ -38,10 +32,6 @@
         Piercing: 11
         Heat: 5
 
-      types:
-        Piercing: 12
-        Heat: 4
-
 - type: entity
   parent: BaseBulletUranium
   id: BulletPistolUranium
@@ -53,8 +43,4 @@
       types:
         Piercing: 14
         Toxin: 2
-
-      types:
-        Radiation: 6
-        Piercing: 10
 
