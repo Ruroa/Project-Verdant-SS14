@@ -45,8 +45,7 @@
     damage:
       types:
         Piercing: 55
-  - type: HitscanStaminaDamage
-    staminaDamage: 35
+
   - type: HitscanPierce
     chance: 0.95
     pierceLevel: Rock
@@ -75,9 +74,12 @@
   - type: HitscanBasicDamage
     damage:
       types:
+        Blunt: 3
+
+      types:
         Blunt: 1
   - type: HitscanStaminaDamage
-    staminaDamage: 12
+    staminaDamage: 20
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
