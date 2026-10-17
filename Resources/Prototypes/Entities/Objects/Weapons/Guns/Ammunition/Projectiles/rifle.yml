@@ -7,6 +7,9 @@
   - type: Projectile
     damage:
       types:
+        Piercing: 24
+
+      types:
         Piercing: 17
 
 - type: entity
@@ -17,6 +20,9 @@
   components:
   - type: Projectile
     damage:
+      types:
+        Blunt: 1
+
       types:
         Blunt: 2
 
@@ -29,6 +35,10 @@
   - type: Projectile
     damage:
       types:
+        Piercing: 17
+        Heat: 7
+
+      types:
         Piercing: 12
         Heat: 5
 
@@ -40,6 +50,10 @@
   components:
   - type: Projectile
     damage:
+      types:
+        Piercing: 20
+        Toxin: 4
+
       types:
         Radiation: 7
         Piercing: 8
