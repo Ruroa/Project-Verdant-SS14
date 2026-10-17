@@ -75,9 +75,6 @@
     damage:
       types:
         Blunt: 3
-
-      types:
-        Blunt: 1
   - type: HitscanStaminaDamage
     staminaDamage: 20
   - type: HitscanBasicVisuals
