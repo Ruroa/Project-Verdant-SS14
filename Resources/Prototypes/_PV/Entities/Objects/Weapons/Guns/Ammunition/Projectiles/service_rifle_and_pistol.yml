@@ -56,3 +56,15 @@
         Shock: 5
   - type: StaminaDamageOnCollide
     damage: 10
+
+- type: entity
+  parent: BulletPistolTraceFMJ
+  id: BulletPistolTraceFMJPartial
+  categories: [ HideSpawnMenu ]
+  name: bullet (9x19mm FMJ)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+    armorPenetration: 0.25
