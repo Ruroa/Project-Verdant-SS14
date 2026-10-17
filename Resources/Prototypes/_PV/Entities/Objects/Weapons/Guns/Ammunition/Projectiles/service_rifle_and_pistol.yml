@@ -8,9 +8,10 @@
     damage:
       types:
         Piercing: 17
-
+  - type: HitscanBasicDamage
+    damage:
       types:
-        Piercing: 18
+        Piercing: 17
 
 - type: entity
   parent: BulletMagnumTraceSP
@@ -22,9 +23,10 @@
     damage:
       types:
         Piercing: 28
-
+  - type: HitscanBasicDamage
+    damage:
       types:
-        Piercing: 40
+        Piercing: 28
 
 - type: entity
   parent: BulletMagnumTraceAP
@@ -36,9 +38,11 @@
     damage:
       types:
         Piercing: 26
-
+  - type: HitscanBasicDamage
+    armorPenetration: 1
+    damage:
       types:
-        Piercing: 32
+        Piercing: 26
 
 - type: entity
   parent: BulletHeavyRifleTrace
@@ -50,9 +54,10 @@
     damage:
       types:
         Piercing: 32
-
+  - type: HitscanBasicDamage
+    damage:
       types:
-        Piercing: 30
+        Piercing: 32
 
 - type: entity
   parent: BulletPistolTraceSP
@@ -66,7 +71,8 @@
         Piercing: 15
         Blunt: 5
         Shock: 5
-
+  - type: HitscanBasicDamage
+    damage:
       types:
         Piercing: 15
         Blunt: 5
