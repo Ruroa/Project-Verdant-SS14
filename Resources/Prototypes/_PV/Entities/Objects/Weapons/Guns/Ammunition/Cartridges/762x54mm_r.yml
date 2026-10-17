@@ -1,0 +1,27 @@
+- type: entity
+  abstract: true
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: BaseCartridge762x54R
+  name: cartridge (7.62x54mm R)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge762x54R
+  - type: CartridgeAmmo
+    proto: Bullet762x54R
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/762x54mm_r.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: BaseCartridge762x54R
+  id: Cartridge762x54R
+  name: cartridge (7.62x54mm R Ball)

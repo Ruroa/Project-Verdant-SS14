@@ -84,7 +84,7 @@
   name: Kardashev-Mosin
   parent: [BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband]
   id: WeaponSniperMosin
-  description: A weapon of the masses, a true relic. The Kardashev-Mosin has served in nearly every armed conflict since its creation 670 years ago. The bolt-action design of the rifle remains virtually identical to its original design, whether used for hunting, sniping, or endless trench warfare. Uses .45 ACP ammo.
+  description: A weapon of the masses, a true relic. The Kardashev-Mosin has served in nearly every armed conflict since its creation 670 years ago. The bolt-action design of the rifle remains virtually identical to its original design, whether used for hunting, sniping, or endless trench warfare. Uses 7.62x54mm R ammunition.
   components:
   - type: KnockbackByUserTag # Starlight
     doestContain:
@@ -99,10 +99,10 @@
         staminaMultiplier: 20
   - type: BallisticAmmoProvider # Starlight
     capacity: 10
-    proto: CartridgeMagnumSP
+    proto: Cartridge762x54R
     whitelist:
       tags:
-        - CartridgeMagnum
+        - Cartridge762x54R
     soundRack:
       path: /Audio/_Starlight/Weapons/Guns/Cock/cycle_bolt.ogg
       params:
