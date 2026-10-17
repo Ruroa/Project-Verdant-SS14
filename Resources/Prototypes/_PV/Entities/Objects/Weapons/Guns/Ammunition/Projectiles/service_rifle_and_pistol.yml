@@ -1,0 +1,43 @@
+- type: entity
+  parent: BulletPistolTraceSP
+  id: Bullet57x26TraceSP
+  categories: [ HideSpawnMenu ]
+  name: bullet (5.7x26mm)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 18
+
+- type: entity
+  parent: BulletMagnumTraceSP
+  id: Bullet44MagnumTraceSP
+  categories: [ HideSpawnMenu ]
+  name: bullet (.44 Magnum)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+
+- type: entity
+  parent: BulletMagnumTraceAP
+  id: Bullet44MagnumTraceAP
+  categories: [ HideSpawnMenu ]
+  name: bullet (.44 Magnum AP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 32
+
+- type: entity
+  parent: BulletHeavyRifleTrace
+  id: Bullet762x51NATOTrace
+  categories: [ HideSpawnMenu ]
+  name: bullet (7.62x51mm NATO)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
