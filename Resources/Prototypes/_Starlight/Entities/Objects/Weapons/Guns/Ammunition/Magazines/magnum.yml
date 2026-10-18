@@ -35,7 +35,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/45acp_smg_mag.rsi
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/45apc_ext_mag.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -185,10 +185,8 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      right:
-      - state: inhand-right-mag
+      left: []
+      right: []
 
 - type: entity
   id: MagazineMagnumSubMachineGun
@@ -199,20 +197,14 @@
     proto: CartridgeMagnumSP
   - type: Sprite
     layers:
-    - state: red
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#575EF5"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#575EF5"
+      left: []
+      right: []
 
 - type: entity
   id: MagazineMagnumSubMachineGunPractice
@@ -223,20 +215,14 @@
     proto: CartridgeMagnumPractice
   - type: Sprite
     layers:
-    - state: practice
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#F08B4B"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#F08B4B"
+      left: []
+      right: []
 
 - type: entity
   id: MagazineMagnumSubMachineGunUranium
@@ -247,20 +233,14 @@
     proto: CartridgeMagnumUranium
   - type: Sprite
     layers:
-    - state: uranium
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#40F57A"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#40F57A"
+      left: []
+      right: []
 
 - type: entity
   id: MagazineMagnumSubMachineGunPiercing
@@ -271,20 +251,14 @@
     proto: CartridgeMagnumAP
   - type: Sprite
     layers:
-    - state: piercing
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#72E374"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#72E374"
+      left: []
+      right: []
 
 - type: entity
   id: MagazineMagnumRubber
@@ -319,20 +293,14 @@
     proto: CartridgeMagnumRubber
   - type: Sprite
     layers:
-    - state: rubber
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#40F57A"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#40F57A"
+      left: []
+      right: []
 
 - type: entity
   id: MagazineMagnumRifleSP
