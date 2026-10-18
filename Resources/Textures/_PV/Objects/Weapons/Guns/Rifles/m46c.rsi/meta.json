@@ -43,6 +43,9 @@
     {
       "name": "sling",
       "directions": 4
-    }
-  ]
+    },
+        {
+            "name": "bolt-open"
+        }
+]
 }

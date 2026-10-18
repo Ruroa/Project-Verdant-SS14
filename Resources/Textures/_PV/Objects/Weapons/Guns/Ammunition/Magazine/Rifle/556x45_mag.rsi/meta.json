@@ -28,6 +28,9 @@
     {
       "name": "inhand-right-stripe",
       "directions": 4
-    }
-  ]
+    },
+        {
+            "name": "mag-0"
+        }
+]
 }

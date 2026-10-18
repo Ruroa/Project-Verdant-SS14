@@ -79,7 +79,7 @@
     proto: CartridgeMagnumSP
   - type: Sprite
     layers:
-    - state: red
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -104,7 +104,7 @@
     proto: CartridgeMagnumPractice
   - type: Sprite
     layers:
-    - state: practice
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -129,7 +129,7 @@
     proto: CartridgeMagnumUranium
   - type: Sprite
     layers:
-    - state: uranium
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -154,7 +154,7 @@
     proto: CartridgeMagnumAP
   - type: Sprite
     layers:
-    - state: piercing
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -269,7 +269,7 @@
     proto: CartridgeMagnumRubber
   - type: Sprite
     layers:
-    - state: rubber
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -350,7 +350,7 @@
     proto: CartridgeMagnumSP
   - type: Sprite
     layers:
-    - state: sp
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -374,7 +374,7 @@
     proto: CartridgeMagnumHP
   - type: Sprite
     layers:
-    - state: red
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -398,7 +398,7 @@
     proto: CartridgeMagnumFMJ
   - type: Sprite
     layers:
-    - state: fmj
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -422,7 +422,7 @@
     proto: CartridgeMagnumAP
   - type: Sprite
     layers:
-    - state: ap
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -467,7 +467,7 @@
     proto: CartridgeMagnumIncendiary
   - type: Sprite
     layers:
-    - state: incendiary
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -491,7 +491,7 @@
     proto: CartridgeMagnumPractice
   - type: Sprite
     layers:
-    - state: practice
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -515,7 +515,7 @@
     proto: CartridgeMagnumUranium
   - type: Sprite
     layers:
-    - state: uranium
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -539,7 +539,7 @@
     proto: CartridgeMagnumRubber
   - type: Sprite
     layers:
-    - state: rubber
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
