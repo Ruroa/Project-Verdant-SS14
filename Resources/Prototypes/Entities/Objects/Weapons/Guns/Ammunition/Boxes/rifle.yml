@@ -19,7 +19,7 @@
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/556x45mm.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 4
+    steps: 3
     zeroVisible: false
   - type: Appearance
 
@@ -40,7 +40,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 4
+    steps: 3
     zeroVisible: false
   - type: Appearance
 

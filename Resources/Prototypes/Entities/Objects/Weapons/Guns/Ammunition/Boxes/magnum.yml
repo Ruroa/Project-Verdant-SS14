@@ -19,7 +19,7 @@
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/45acp.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 4
+    steps: 3
     zeroVisible: false
   - type: Appearance
 

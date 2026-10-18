@@ -20,7 +20,7 @@
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/57x28mm.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 4
+    steps: 3
     zeroVisible: false
   - type: Appearance
 

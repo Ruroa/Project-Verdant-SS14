@@ -8,7 +8,7 @@
     tags:
     - Cartridge762x54R
   - type: CartridgeAmmo
-    proto: Bullet762x54R
+    proto: Bullet762x54RTraceBall
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/762x54mm_r.rsi
     layers:

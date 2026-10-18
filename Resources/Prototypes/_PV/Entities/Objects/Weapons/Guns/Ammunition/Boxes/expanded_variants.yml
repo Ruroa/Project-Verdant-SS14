@@ -1,0 +1,610 @@
+### Variant boxes for ammunition added in Project Verdant.
+
+- type: entity
+  parent: BaseMagazineBox44Magnum
+  id: MagazineBox44MagnumFMJ
+  name: ammunition box (.44 Magnum FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge44MagnumFMJ
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: fmj
+
+- type: entity
+  parent: BaseMagazineBox44Magnum
+  id: MagazineBox44MagnumHP
+  name: ammunition box (.44 Magnum HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge44MagnumHP
+
+- type: entity
+  parent: BaseMagazineBox44Magnum
+  id: MagazineBox44MagnumIncendiary
+  name: ammunition box (.44 Magnum incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge44MagnumIncendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: incendiary
+
+- type: entity
+  parent: BaseMagazineBox44Magnum
+  id: MagazineBox44MagnumUranium
+  name: ammunition box (.44 Magnum uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge44MagnumUranium
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: uranium
+
+- type: entity
+  parent: BaseMagazineBox44Magnum
+  id: MagazineBox44MagnumRubber
+  name: ammunition box (.44 Magnum rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge44MagnumRubber
+
+- type: entity
+  parent: BaseMagazineBox44Magnum
+  id: MagazineBox44MagnumPractice
+  name: ammunition box (.44 Magnum practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge44MagnumPractice
+
+- type: entity
+  parent: BaseMagazineBox57x26
+  id: MagazineBox57x26FMJ
+  name: ammunition box (5.7x26mm FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge57x26FMJ
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: fmj
+
+- type: entity
+  parent: BaseMagazineBox57x26
+  id: MagazineBox57x26AP
+  name: ammunition box (5.7x26mm AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge57x26AP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ap
+
+- type: entity
+  parent: BaseMagazineBox57x26
+  id: MagazineBox57x26HP
+  name: ammunition box (5.7x26mm HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge57x26HP
+
+- type: entity
+  parent: BaseMagazineBox57x26
+  id: MagazineBox57x26Incendiary
+  name: ammunition box (5.7x26mm incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge57x26Incendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: incendiary
+
+- type: entity
+  parent: BaseMagazineBox57x26
+  id: MagazineBox57x26Uranium
+  name: ammunition box (5.7x26mm uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge57x26Uranium
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: uranium
+
+- type: entity
+  parent: BaseMagazineBox57x26
+  id: MagazineBox57x26Rubber
+  name: ammunition box (5.7x26mm rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge57x26Rubber
+
+- type: entity
+  parent: BaseMagazineBox57x26
+  id: MagazineBox57x26Practice
+  name: ammunition box (5.7x26mm practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge57x26Practice
+
+- type: entity
+  parent: [BaseItem, BaseSecurityContraband]
+  id: MagazineBox57x26E
+  name: ammunition box (5.7x26mm energized)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge57x26E
+    proto: Cartridge57x26E
+    capacity: 50
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/57x28mm.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: energized
+      sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/57x28mm-e.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRifleFMJ
+  name: ammunition box (7.62x51mm NATO FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRifleFMJ
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: fmj
+
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRifleAP
+  name: ammunition box (7.62x51mm NATO AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRifleAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ap
+
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRifleHP
+  name: ammunition box (7.62x51mm NATO HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRifleHP
+
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRifleIncendiary
+  name: ammunition box (7.62x51mm NATO incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRifleIncendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: incendiary
+
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRifleUranium
+  name: ammunition box (7.62x51mm NATO uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRifleUranium
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: uranium
+
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRifleRubber
+  name: ammunition box (7.62x51mm NATO rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRifleRubber
+
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRiflePractice
+  name: ammunition box (7.62x51mm NATO practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRiflePractice
+
+- type: entity
+  parent: BaseMagazineBox762x54R
+  id: MagazineBox762x54RFMJ
+  name: ammunition box (7.62x54mm R FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x54RFMJ
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: fmj
+
+- type: entity
+  parent: BaseMagazineBox762x54R
+  id: MagazineBox762x54RAP
+  name: ammunition box (7.62x54mm R AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x54RAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ap
+
+- type: entity
+  parent: BaseMagazineBox762x54R
+  id: MagazineBox762x54RHP
+  name: ammunition box (7.62x54mm R HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x54RHP
+
+- type: entity
+  parent: BaseMagazineBox762x54R
+  id: MagazineBox762x54RIncendiary
+  name: ammunition box (7.62x54mm R incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x54RIncendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: incendiary
+
+- type: entity
+  parent: BaseMagazineBox762x54R
+  id: MagazineBox762x54RUranium
+  name: ammunition box (7.62x54mm R uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x54RUranium
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: uranium
+
+- type: entity
+  parent: BaseMagazineBox762x54R
+  id: MagazineBox762x54RRubber
+  name: ammunition box (7.62x54mm R rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x54RRubber
+
+- type: entity
+  parent: BaseMagazineBox762x54R
+  id: MagazineBox762x54RPractice
+  name: ammunition box (7.62x54mm R practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x54RPractice
+
+
+- type: entity
+  parent: BaseMagazineBoxPistol40
+  id: MagazineBoxPistol40Incendiary
+  name: ammunition box (.40 S&W incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistol40Incendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: incendiary
+
+- type: entity
+  parent: BaseMagazineBoxPistol40
+  id: MagazineBoxPistol40Uranium
+  name: ammunition box (.40 S&W uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistol40Uranium
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: uranium
+
+- type: entity
+  parent: BaseMagazineBoxPistol40
+  id: MagazineBoxPistol40Rubber
+  name: ammunition box (.40 S&W rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistol40Rubber
+
+- type: entity
+  parent: BaseMagazineBoxPistol40
+  id: MagazineBoxPistol40Practice
+  name: ammunition box (.40 S&W practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistol40Practice
+
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielFMJ
+  name: ammunition box (12.7x99mm fmj)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielFMJ
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: fmj
+
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielAP
+  name: ammunition box (12.7x99mm ap)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ap
+
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielHP
+  name: ammunition box (12.7x99mm hp)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielHP
+
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielIncendiary
+  name: ammunition box (12.7x99mm incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielIncendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: incendiary
+
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielUranium
+  name: ammunition box (12.7x99mm uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielUranium
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: uranium
+
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielRubber
+  name: ammunition box (12.7x99mm rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielRubber
+
+- type: entity
+  parent: BaseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielPractice
+  name: ammunition box (12.7x99mm practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielPractice
+
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: BaseMagazineBox127x55
+  name: ammunition box (12.7x55mm)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge127x55
+    proto: Cartridge127x55Ball
+    capacity: 20
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/127x55mm_rsh12.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineBox127x55
+  id: MagazineBox127x55Ball
+  name: ammunition box (12.7x55mm ball)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge127x55Ball
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ball
+
+- type: entity
+  parent: BaseMagazineBox127x55
+  id: MagazineBox127x55FMJ
+  name: ammunition box (12.7x55mm fmj)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge127x55FMJ
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: fmj
+
+- type: entity
+  parent: BaseMagazineBox127x55
+  id: MagazineBox127x55AP
+  name: ammunition box (12.7x55mm ap)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge127x55AP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ap
+
+- type: entity
+  parent: BaseMagazineBox127x55
+  id: MagazineBox127x55HP
+  name: ammunition box (12.7x55mm hp)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge127x55HP
+
+- type: entity
+  parent: BaseMagazineBox127x55
+  id: MagazineBox127x55Incendiary
+  name: ammunition box (12.7x55mm incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge127x55Incendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: incendiary
+
+- type: entity
+  parent: BaseMagazineBox127x55
+  id: MagazineBox127x55Uranium
+  name: ammunition box (12.7x55mm uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge127x55Uranium
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: uranium
+
+- type: entity
+  parent: BaseMagazineBox127x55
+  id: MagazineBox127x55Rubber
+  name: ammunition box (12.7x55mm rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge127x55Rubber
+
+- type: entity
+  parent: BaseMagazineBox127x55
+  id: MagazineBox127x55Practice
+  name: ammunition box (12.7x55mm practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge127x55Practice

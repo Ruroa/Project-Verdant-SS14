@@ -1,0 +1,29 @@
+- type: entity
+  parent: BaseSpeedLoaderMagnum
+  id: SpeedLoader127x55
+  name: speed loader (12.7x55mm RSh-12)
+  components:
+  - type: Tag
+    tags:
+    - SpeedLoader127x55
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge127x55
+    proto: Cartridge127x55Ball
+    capacity: 5
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Revolver/127x55_loader.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: base-5
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: base-tip-5
+      map: ["enum.GunVisualLayers.Tip"]
+      color: "#3F47DB"
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false

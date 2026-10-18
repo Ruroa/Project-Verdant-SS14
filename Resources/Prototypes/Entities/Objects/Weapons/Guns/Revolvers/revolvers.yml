@@ -106,10 +106,6 @@
   - type: Item
     storedOffset: 0,-2
   - type: RevolverAmmoProvider
-    capacity: 6
-    chambers: [ True, True, True, True, True, True ]
-    ammoSlots: [ null, null, null, null, null, null ]
-  - type: RevolverAmmoProvider
     whitelist:
       tags:
       - Cartridge44Magnum

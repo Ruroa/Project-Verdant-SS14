@@ -86,7 +86,7 @@
   - type: CartridgeAmmo
     proto: BulletPistolTraceImprovised
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Casings/improvised_casing.rsi
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/9x19mm.rsi
     layers:
       - state: base
         map: [ "enum.AmmoVisualLayers.Base" ]

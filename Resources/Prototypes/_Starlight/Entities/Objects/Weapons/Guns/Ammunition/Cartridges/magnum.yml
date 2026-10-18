@@ -4,7 +4,7 @@
   parent: BaseCartridgeMagnum
   components:
   - type: CartridgeAmmo
-    proto: RubberBulletTrace
+    proto: BulletMagnumTracePVRubber
   - type: Sprite
     layers:
       - state: base
@@ -22,7 +22,7 @@
   - type: CartridgeAmmo
     proto: BulletMagnumTraceImprovised
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Casings/improvised_casing.rsi
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/45acp.rsi
     layers:
       - state: base
         map: [ "enum.AmmoVisualLayers.Base" ]

@@ -1,6 +1,8 @@
 # Project Verdant ammo and magazine tags.
 
 - type: Tag
+  id: Cartridge127x55 # 12.7x55mm RSh-12 cartridge.
+- type: Tag
   id: Cartridge57x26 # Standard 5.7x26mm cartridge for the PD90 and MP27.
 - type: Tag
   id: Cartridge57x26E # Energized 5.7x26mm cartridge for PD90E and MP27E only.
@@ -32,3 +34,5 @@
   id: MagazineL90Drum # 60-round 5.56x45mm L90 drum.
 - type: Tag
   id: MagazineI122 # I122 7.62x51mm DMR magazine.
+- type: Tag
+  id: SpeedLoader127x55 # Speedloader for 12.7x55mm RSh-12 cartridges.

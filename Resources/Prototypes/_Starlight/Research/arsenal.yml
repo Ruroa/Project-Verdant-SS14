@@ -77,6 +77,22 @@
   - MagazineBoxLightRifleAP
   - MagazineDMRAP
   - MagazinePistolSubMachineGunAP
+  # Project Verdant improved ammunition
+  - MagazineBox44MagnumFMJ
+  - MagazineBox44MagnumAP
+  - MagazineBox44MagnumHP
+  - MagazineBox57x26FMJ
+  - MagazineBox57x26AP
+  - MagazineBox57x26HP
+  - MagazineBox762x54RFMJ
+  - MagazineBox762x54RAP
+  - MagazineBox762x54RHP
+  - MagazineBoxHeavyRifleFMJ
+  - MagazineBoxHeavyRifleAP
+  - MagazineBoxHeavyRifleHP
+  - MagazineBoxPistol40FMJ
+  - MagazineBoxPistol40AP
+  - MagazineBoxPistol40HP
   radioChannels:
   - Security
 

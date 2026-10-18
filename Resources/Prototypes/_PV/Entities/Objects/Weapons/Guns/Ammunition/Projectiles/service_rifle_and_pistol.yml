@@ -79,6 +79,8 @@
         Shock: 5
   - type: StaminaDamageOnCollide
     damage: 10
+  - type: HitscanStaminaDamage
+    staminaDamage: 10
 
 - type: entity
   parent: BulletPistolTraceFMJ
