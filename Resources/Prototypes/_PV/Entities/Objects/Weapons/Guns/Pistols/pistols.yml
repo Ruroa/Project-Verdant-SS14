@@ -107,3 +107,71 @@
         whitelist:
           tags:
           - CartridgePistol
+
+- type: entity
+  name: T73 service pistol
+  parent: [ BaseWeaponPistol, BaseSecurityContraband ]
+  id: WeaponPistolT73PV
+  description: A semiautomatic 9x19mm service pistol.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Pistols/t73.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Pistols/t73.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolSPPV
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistol
+          - MagazinePistolHighCapacitySP
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgePistol
+
+- type: entity
+  name: ZHNK-72 pistol
+  parent: [ BaseWeaponPistol, BaseSecurityContraband ]
+  id: WeaponPistolZHNK72PV
+  description: A semiautomatic 9x19mm pistol.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Pistols/zhnk72.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Pistols/zhnk72.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolSPPV
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistol
+          - MagazinePistolHighCapacitySP
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgePistol

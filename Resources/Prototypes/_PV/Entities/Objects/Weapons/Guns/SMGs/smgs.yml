@@ -225,3 +225,42 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
+
+- type: entity
+  name: FP9000 submachine gun
+  parent: [ BaseWeaponSubMachineGun, BaseSecurityContraband ]
+  id: WeaponSubMachineGunFP9000PV
+  description: A compact 9x19mm submachine gun.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/SMGs/fp9000.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/SMGs/fp9000.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolSubMachineGunSPPV
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistolSubMachineGunSP
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgePistol
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance

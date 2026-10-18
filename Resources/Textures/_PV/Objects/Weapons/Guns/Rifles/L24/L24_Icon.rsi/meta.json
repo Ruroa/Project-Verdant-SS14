@@ -8,16 +8,34 @@
   },
   "states": [
     {
-        "name": "icon"
+      "name": "icon"
     },
     {
-        "name": "base"
+      "name": "base"
     },
     {
-        "name": "mag-0"
+      "name": "mag-0"
     },
     {
-        "name": "bolt-open"
+      "name": "bolt-open"
+    },
+    {
+      "name": "inhand-left"
+    },
+    {
+      "name": "inhand-right"
+    },
+    {
+      "name": "wielded-inhand-left"
+    },
+    {
+      "name": "wielded-inhand-right"
+    },
+    {
+      "name": "equipped-BACKPACK"
+    },
+    {
+      "name": "equipped-SUITSTORAGE"
     }
   ]
 }

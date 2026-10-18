@@ -21,6 +21,8 @@
 - type: Tag
   id: MagazineVector45ACP # Vector SMG magazine for .45 ACP.
 - type: Tag
+  id: MagazineVector9x19 # Vector SMG magazine for 9x19mm.
+- type: Tag
   id: MagazineMP5 # MP5 9x19mm magazine.
 - type: Tag
   id: MagazineMAC15 # Standard 9x19mm MAC15 magazine.

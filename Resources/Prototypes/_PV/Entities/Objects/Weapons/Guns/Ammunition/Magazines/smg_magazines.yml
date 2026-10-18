@@ -353,6 +353,41 @@
 
 - type: entity
   parent: [ BaseItem, BaseSecurityContraband ]
+  id: MagazineVector9x19
+  name: Vector SMG magazine (9x19mm)
+  description: A 30-round magazine made for the 9x19mm Vector.
+  components:
+  - type: Tag
+    tags:
+    - MagazineVector9x19
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgePistol
+    proto: CartridgePistol
+    capacity: 30
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/9x19_vector_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
   id: MagazineVector45ACP
   name: Vector SMG magazine (.45 ACP)
   description: A 30-round magazine for the Vector, loaded with .45 ACP ball ammunition.
