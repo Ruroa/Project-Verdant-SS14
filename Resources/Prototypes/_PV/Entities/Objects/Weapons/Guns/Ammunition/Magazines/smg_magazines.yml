@@ -404,15 +404,6 @@
     capacity: 30
   - type: Item
     size: Small
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#9b0000"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#9b0000"
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
