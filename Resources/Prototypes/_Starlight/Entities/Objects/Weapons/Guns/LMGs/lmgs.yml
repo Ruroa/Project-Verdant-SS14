@@ -43,7 +43,7 @@
         startingItem: MagazineLightRifleHeavy556PV
         whitelist:
           tags:
-            - LightRifleHeavy
+            - MagazineLightRifleHeavy556PV
   - type: ContainerContainer
     containers:
       firing_pin: !type:Container
