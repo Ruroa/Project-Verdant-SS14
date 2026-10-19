@@ -20,7 +20,7 @@
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/44magnum.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
