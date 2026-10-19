@@ -42,5 +42,5 @@
     damage:
       types:
         Piercing: 20
-        Toxin: 4
+        Radiation: 4
 
