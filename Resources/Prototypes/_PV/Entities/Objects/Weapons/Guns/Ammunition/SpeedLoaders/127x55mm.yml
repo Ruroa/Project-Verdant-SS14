@@ -25,5 +25,5 @@
       color: "#3F47DB"
   - type: MagazineVisuals
     magState: base
-    steps: 6
+    steps: 7
     zeroVisible: false
