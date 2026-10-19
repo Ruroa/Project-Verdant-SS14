@@ -12,8 +12,15 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazinePistol
+    - MagazinePistolSPPV
   - type: Item
     size: Small
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -31,7 +38,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazinePistolHighCapacitySP
+    - MagazinePistolHighCapacitySPPV
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: MagazineVisuals
     magState: mag
@@ -49,6 +63,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazinePistolHighCapacitySP
+    - MagazinePistolHighCapacitySPPV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -65,6 +87,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazinePistol
+    - MagazinePistolSPPV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -82,9 +112,18 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazinePistolSubMachineGunSP
+    - MagazineFP9000PV
+  - type: Item
+    size: Small
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 5
     zeroVisible: false
 
 - type: entity
@@ -99,6 +138,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineRifle
+    - MagazineRifleSPPV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -116,6 +163,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineLightRifle
+    - MagazineLightRifleSPPV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -140,6 +195,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineLightRifleHeavy
+    - MagazineLightRifleHeavy556PV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 7
@@ -164,6 +227,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineLightRifleHeavy
+    - MagazineLightRifleHeavy556PV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 7
@@ -181,6 +252,13 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineLightRifleMaxim
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -197,6 +275,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineRifle
+    - MagazineRifleSPPV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -213,6 +299,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineRifle
+    - MagazineRifleSPPV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -229,6 +323,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineLightRifle
+    - MagazineLightRifleSPPV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -245,6 +347,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineRifle
+    - MagazineRifleSPPV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -261,6 +371,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - MagazineRifle
+    - MagazineRifleSPPV
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -278,6 +396,9 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: MagazineVisuals
     magState: mag
@@ -296,6 +417,9 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: MagazineVisuals
     magState: mag
@@ -314,6 +438,9 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: MagazineVisuals
     magState: mag
@@ -331,9 +458,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Small
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 5
     zeroVisible: false
 
 - type: entity
@@ -347,6 +479,11 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-unshaded-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Small
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag-unshaded
     steps: 5
@@ -363,9 +500,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Small
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 5
     zeroVisible: false
 
 - type: entity
@@ -380,7 +522,14 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
+  - type: Tag
+    tags:
+    - MagazineMagnumRifle
+    - MagazineMagnumRifleSPPV
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -398,7 +547,14 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
+  - type: Tag
+    tags:
+    - MagazineMagnum
+    - MagazineMagnumSPPV
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -416,7 +572,14 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
+  - type: Tag
+    tags:
+    - MagazineMagnum
+    - MagazineMagnumSPPV
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -433,6 +596,10 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1

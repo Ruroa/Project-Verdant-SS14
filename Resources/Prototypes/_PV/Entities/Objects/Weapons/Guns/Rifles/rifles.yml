@@ -81,7 +81,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - MagazineRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -120,7 +120,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - MagazineRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -159,7 +159,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - MagazineRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -198,7 +198,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - MagazineRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -259,7 +259,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineLightRifle
+          - MagazineLightRifleHeavy556PV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -298,7 +298,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - MagazineRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -337,7 +337,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineHeavyRifle
+          - MagazineHeavyRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -376,7 +376,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - MagazineRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -447,7 +447,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - MagazineRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -486,7 +486,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineLightRifle
+          - MagazineLightRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -552,7 +552,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineHeavyRifle
+          - MagazineHeavyRifleSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber

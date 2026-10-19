@@ -2,7 +2,7 @@
   name: M1984 service pistol
   parent: [ BaseWeaponPistol, BaseSecurityContraband ]
   id: WeaponPistolM1984PV
-  description: A 9x19mm service pistol.
+  description: A .45 ACP service pistol.
   components:
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Pistols/m1984.rsi
@@ -17,21 +17,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolSPPV
+        startingItem: MagazineMagnumSPPV
         insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazinePistol
-          - MagazinePistolHighCapacitySP
+          - MagazineMagnumSPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         priority: 1
         whitelist:
           tags:
-          - CartridgePistol
+          - CartridgeMagnum
 
 - type: entity
   name: L14 combat pistol
@@ -58,8 +57,8 @@
         priority: 2
         whitelist:
           tags:
-          - MagazinePistol
-          - MagazinePistolHighCapacitySP
+          - MagazinePistolSPPV
+          - MagazinePistolHighCapacitySPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -133,8 +132,8 @@
         priority: 2
         whitelist:
           tags:
-          - MagazinePistol
-          - MagazinePistolHighCapacitySP
+          - MagazinePistolSPPV
+          - MagazinePistolHighCapacitySPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -166,8 +165,8 @@
         priority: 2
         whitelist:
           tags:
-          - MagazinePistol
-          - MagazinePistolHighCapacitySP
+          - MagazinePistolSPPV
+          - MagazinePistolHighCapacitySPPV
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber

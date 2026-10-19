@@ -28,7 +28,10 @@ public sealed partial class HitscanBasicDamageSystem : EntitySystem
                 args.Data.HitEntity.Value,
                 dmg,
                 ignoreResistances: ent.Comp.IgnoreResistances,
-                origin: args.Data.Gun,
+                // Damage origin must be the firing mob so limb targeting can
+                // read the shooter's selected body part. Keep the gun as a
+                // fallback for autonomous hitscan sources.
+                origin: args.Data.Shooter ?? args.Data.Gun,
                 armorPenetration: ent.Comp.ArmorPenetration,
                 canHeal: false
             );

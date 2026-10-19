@@ -14,6 +14,9 @@
     proto: Cartridge57x26
     capacity: 50
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -44,6 +47,9 @@
     proto: Cartridge57x26E
     capacity: 50
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -74,6 +80,9 @@
     proto: Cartridge57x26
     capacity: 40
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -104,6 +113,9 @@
     proto: Cartridge57x26E
     capacity: 40
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -135,6 +147,9 @@
     proto: Cartridge57x26
     capacity: 60
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -170,6 +185,9 @@
     proto: CartridgePistolSP
     capacity: 30
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -205,6 +223,9 @@
     proto: CartridgePistolSP
     capacity: 30
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -240,6 +261,9 @@
     proto: CartridgePistolSP
     capacity: 50
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -275,6 +299,9 @@
     proto: CartridgePistolSP
     capacity: 30
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -316,6 +343,10 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -345,6 +376,10 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -368,6 +403,9 @@
     proto: CartridgePistol
     capacity: 30
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:
@@ -403,6 +441,9 @@
     proto: CartridgeMagnumSP
     capacity: 30
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:

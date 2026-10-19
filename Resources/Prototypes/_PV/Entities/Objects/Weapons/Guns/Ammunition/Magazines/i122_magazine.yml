@@ -16,6 +16,9 @@
     proto: CartridgeHeavyRifleBall
     capacity: 12
   - type: Item
+    inhandVisuals:
+      left: []
+      right: []
     size: Small
   - type: ContainerContainer
     containers:

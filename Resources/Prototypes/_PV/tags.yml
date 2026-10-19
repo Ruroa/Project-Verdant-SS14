@@ -9,6 +9,24 @@
 - type: Tag
   id: Magazine57x26 # General-purpose 5.7x26mm magazine.
 - type: Tag
+  id: MagazinePistolSPPV # PV 9x19mm pistol magazine.
+- type: Tag
+  id: MagazinePistolHighCapacitySPPV # PV extended 9x19mm pistol magazine.
+- type: Tag
+  id: MagazineFP9000PV # PV FP9000 9x19mm magazine.
+- type: Tag
+  id: MagazineRifleSPPV # PV 5.56x45mm rifle magazine.
+- type: Tag
+  id: MagazineLightRifleSPPV # PV 7.62x39mm rifle magazine.
+- type: Tag
+  id: MagazineLightRifleHeavy556PV # PV 5.56x45mm LMG box magazine.
+- type: Tag
+  id: MagazineHeavyRifleSPPV # PV 7.62x51mm rifle magazine.
+- type: Tag
+  id: MagazineMagnumSPPV # PV .45 ACP pistol magazine.
+- type: Tag
+  id: MagazineMagnumRifleSPPV # PV .45 ACP rifle magazine.
+- type: Tag
   id: MagazineMP27 # Standard MP27 magazine.
 - type: Tag
   id: MagazineMP27Extended # Extended 60-round MP27 magazine.
