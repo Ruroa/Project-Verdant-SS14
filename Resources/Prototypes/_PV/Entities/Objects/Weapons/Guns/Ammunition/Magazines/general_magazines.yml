@@ -209,7 +209,7 @@
     zeroVisible: false
 
 - type: entity
-  parent: LightRifleHeavyMagazineSP
+  parent: BaseMagazineBoxLightRifle
   id: MagazineLightRifleHeavy556PV
   name: 5.56x45mm heavy magazine
   description: An 80-round heavy magazine for 5.56x45mm light machine guns.
@@ -239,6 +239,7 @@
     magState: mag
     steps: 8
     zeroVisible: false
+  - type: Appearance
 
 - type: entity
   parent: MagazineLightRifleMaxim
