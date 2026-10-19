@@ -21,6 +21,8 @@
 - type: Tag
   id: MagazineLightRifleHeavy556PV # PV 5.56x45mm LMG box magazine.
 - type: Tag
+  id: MagazineLightRifleHeavy556M492 # Starlight-textured 5.56x45mm M492 magazine.
+- type: Tag
   id: MagazineHeavyRifleSPPV # PV 7.62x51mm rifle magazine.
 - type: Tag
   id: MagazineMagnumSPPV # PV .45 ACP pistol magazine.
