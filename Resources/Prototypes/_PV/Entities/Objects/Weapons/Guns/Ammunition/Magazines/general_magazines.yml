@@ -242,6 +242,32 @@
   - type: Appearance
 
 - type: entity
+  parent: LightRifleHeavyMagazineSP
+  id: MagazineLightRifleHeavy556M492
+  name: 5.56x45mm M492 magazine box
+  description: An 80-round 5.56x45mm magazine box for the M492 Smart LMG.
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgeRifle
+    proto: CartridgeRifleSP
+    capacity: 80
+  - type: Tag
+    tags:
+    - MagazineLightRifleHeavy556M492
+  - type: Item
+    size: Small
+    inhandVisuals:
+      left: []
+      right: []
+  - type: MagazineVisuals
+    magState: mag
+    steps: 8
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
   parent: MagazineLightRifleMaxim
   id: MagazineLightRifleMaximPV
   name: 7.62x39mm pan magazine
