@@ -20,7 +20,7 @@
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/762x51mm_nato.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
