@@ -36,19 +36,16 @@ public sealed partial class GunSystem
 
         if (_sprite.LayerMapTryGet((ent, sprite), GunVisualLayers.Mag, out _, false))
         {
-            _sprite.LayerSetRsiState((ent, sprite), GunVisualLayers.Mag, $"{ent.Comp.MagState}-{ent.Comp.MagSteps - 1}");
             _sprite.LayerSetVisible((ent, sprite), GunVisualLayers.Mag, false);
         }
 
         if (_sprite.LayerMapTryGet((ent, sprite), GunVisualLayers.Tip, out _, false)) //🌟Starlight🌟
         {
-            _sprite.LayerSetRsiState((ent, sprite), GunVisualLayers.Tip, $"{ent.Comp.MagState}-tip-{ent.Comp.MagSteps - 1}");
             _sprite.LayerSetVisible((ent, sprite), GunVisualLayers.Tip, false);
         }
 
         if (_sprite.LayerMapTryGet((ent, sprite), GunVisualLayers.MagUnshaded, out _, false))
         {
-            _sprite.LayerSetRsiState((ent, sprite), GunVisualLayers.MagUnshaded, $"{ent.Comp.MagState}-unshaded-{ent.Comp.MagSteps - 1}");
             _sprite.LayerSetVisible((ent, sprite), GunVisualLayers.MagUnshaded, false);
         }
     }
