@@ -26,12 +26,12 @@
     damage:
       types:
         Piercing: 15
-        Toxin: 3
+        Radiation: 3
   - type: HitscanBasicDamage
     damage:
       types:
         Piercing: 15
-        Toxin: 3
+        Radiation: 3
 
 - type: entity
   parent: BulletTrace
@@ -127,12 +127,12 @@
     damage:
       types:
         Piercing: 24
-        Toxin: 4
+        Radiation: 4
   - type: HitscanBasicDamage
     damage:
       types:
         Piercing: 24
-        Toxin: 4
+        Radiation: 4
 
 - type: entity
   parent: BulletTrace
@@ -246,12 +246,12 @@
     damage:
       types:
         Piercing: 14
-        Toxin: 3
+        Radiation: 3
   - type: HitscanBasicDamage
     damage:
       types:
         Piercing: 14
-        Toxin: 3
+        Radiation: 3
 
 - type: entity
   parent: BulletTrace
@@ -365,12 +365,12 @@
     damage:
       types:
         Piercing: 27
-        Toxin: 5
+        Radiation: 5
   - type: HitscanBasicDamage
     damage:
       types:
         Piercing: 27
-        Toxin: 5
+        Radiation: 5
 
 - type: entity
   parent: BulletTrace
@@ -499,12 +499,12 @@
     damage:
       types:
         Piercing: 34
-        Toxin: 6
+        Radiation: 6
   - type: HitscanBasicDamage
     damage:
       types:
         Piercing: 34
-        Toxin: 6
+        Radiation: 6
 
 - type: entity
   parent: BulletTrace
@@ -618,12 +618,12 @@
     damage:
       types:
         Piercing: 47
-        Toxin: 8
+        Radiation: 8
   - type: HitscanBasicDamage
     damage:
       types:
         Piercing: 47
-        Toxin: 8
+        Radiation: 8
 
 - type: entity
   parent: BulletTrace
@@ -752,12 +752,12 @@
     damage:
       types:
         Piercing: 31
-        Toxin: 5
+        Radiation: 5
   - type: HitscanBasicDamage
     damage:
       types:
         Piercing: 31
-        Toxin: 5
+        Radiation: 5
 
 - type: entity
   parent: BulletTrace
