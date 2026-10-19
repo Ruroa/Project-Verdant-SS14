@@ -40,10 +40,10 @@
             - CartridgeRifle
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleHeavy556PV
+        startingItem: MagazineLightRifleHeavy556M492
         whitelist:
           tags:
-            - MagazineLightRifleHeavy556PV
+            - MagazineLightRifleHeavy556M492
   - type: ContainerContainer
     containers:
       firing_pin: !type:Container
