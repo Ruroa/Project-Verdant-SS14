@@ -181,7 +181,7 @@
       sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/57x28mm-e.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
@@ -506,7 +506,7 @@
     sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/127x55mm_rsh12.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
