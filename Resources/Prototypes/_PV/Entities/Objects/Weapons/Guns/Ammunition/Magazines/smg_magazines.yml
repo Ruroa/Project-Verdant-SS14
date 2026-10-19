@@ -164,7 +164,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
@@ -202,7 +202,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
@@ -240,7 +240,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
@@ -278,7 +278,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
@@ -316,7 +316,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
@@ -349,7 +349,7 @@
       right: []
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
@@ -382,7 +382,7 @@
       right: []
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
@@ -400,7 +400,7 @@
     whitelist:
       tags:
       - CartridgePistol
-    proto: CartridgePistol
+    proto: CartridgePistolSP
     capacity: 30
   - type: Item
     inhandVisuals:
@@ -420,7 +420,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
@@ -458,6 +458,6 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: false
   - type: Appearance
