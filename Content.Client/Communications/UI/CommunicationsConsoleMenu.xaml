@@ -70,13 +70,6 @@
                 <!-- Starlight End -->
             </BoxContainer>
 
-            <!-- Starlight Start: Secure Command Terminal -->
-            <Button Name="SecureTerminalButton"
-                Access="Public"
-                Text="{Loc 'comms-console-menu-secure-terminal-button'}"
-                ToolTip="{Loc 'comms-console-menu-secure-terminal-button-tooltip'}"
-                Margin="0 4 0 0"/>
-            <!-- Starlight End -->
         </BoxContainer>
     </BoxContainer>
 </controls:FancyWindow>
