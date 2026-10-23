@@ -16,9 +16,8 @@
       shuttleTime: 600
     violet:
       announcement: alert-level-violet-announcement
-      selectable: false
+      selectable: true
       sound: /Audio/_Starlight/Announcements/siren_spooky.ogg
-      disableSelection: true
       color: Violet
       emergencyLightColor: Violet
       forceEnableEmergencyLights: true
