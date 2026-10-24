@@ -1,43 +1,43 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleBigRubber
-  name: ammunition box (5.56x45mm rubber)
+  name: ammunition box (.20 rifle rubber)
   components:
   - type: BallisticAmmoProvider
     capacity: 200
-    proto: CartridgeRifleRubber
+    proto: CartridgeRiflePractice
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/556x45mm.rsi
     layers:
-    - state: base
+    - state: base-b
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: magb-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: practice-b
   - type: MagazineVisuals
-    magState: mag
-    steps: 3
+    magState: magb
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleRubber
-  name: ammunition box (5.56x45mm rubber)
+  name: ammunition box (.20 rifle rubber)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleRubber
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/556x45mm.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: rubber
 
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleFMJ
-  name: ammunition box (5.56x45mm FMJ)
+  name: ammunition box (.20 rifle FMJ)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleFMJ
@@ -52,7 +52,7 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleAP
-  name: ammunition box (5.56x45mm AP)
+  name: ammunition box (.20 rifle AP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleAP

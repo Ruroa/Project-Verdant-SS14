@@ -67,9 +67,9 @@
 
 - type: entity
   name: deckard # Starlight, capitalization
-  parent: [BaseWeaponRevolver, BaseSecurityCommandContraband]
+  parent: [ BaseContrabandTier3, BaseWeaponRevolver, BaseSecurityContraband, BaseCommandContraband ] # Blimpuf
   id: WeaponRevolverDeckard
-  description: A beautifully machined, custom-built revolver. Used when there is no time for the Voight-Kampff test. Loads 6 rounds of .45 ACP. # Starlight, 5 -> 6
+  description: A beautifully machined, custom-built revolver. Used when there is no time for the Voight-Kampff test. Loads 6 rounds of .45 magnum. # Starlight, 5 -> 6
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Revolvers/deckard.rsi
@@ -95,9 +95,9 @@
 
 - type: entity
   name: inspector # Starlight, capitalization
-  parent: [BaseWeaponRevolver, BaseSecurityContraband]
+  parent: [ BaseContrabandTier3, BaseWeaponRevolver, BaseSecurityContraband ] # Blimpuf
   id: WeaponRevolverInspector
-  description: A double-action revolver manufactured by various companies. It is readily available on the civilian market, making it a popular choice among private investigators. You feel lucky just holding it. Loads 6 rounds of .44 Magnum.
+  description: A double-action revolver manufactured by various companies. It is readily available on the civilian market, making it a popular choice among private investigators. You feel lucky just holding it. Loads 6 rounds of .45 magnum.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
@@ -106,11 +106,6 @@
   - type: Item
     storedOffset: 0,-2
   - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-      - Cartridge44Magnum
-      - SpeedLoader44Magnum
-    proto: Cartridge44Magnum
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -130,7 +125,7 @@
   name: mateba # Starlight, capitalization
   parent: [BaseWeaponRevolver, BaseMajorContraband]
   id: WeaponRevolverMateba
-  description: A modern revolver used by NanoTrasen’s elite, near mythical ‘Death Squad’ task force. Its unique trigger action and barrel placement enable a high fire rate with minimal muzzle flip. Many have looked down this barrel, but few have lived to tell of it. Loads 6 rounds of .44 Magnum. # SL
+  description: A modern revolver used by NanoTrasen’s elite, near mythical ‘Death Squad’ task force. Its unique trigger action and barrel placement enable a high fire rate with minimal muzzle flip. Many have looked down this barrel, but few have lived to tell of it. Loads 6 rounds of .45 magnum. # SL
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Revolvers/mateba.rsi
@@ -138,33 +133,24 @@
     sprite: Objects/Weapons/Guns/Revolvers/mateba.rsi
   - type: Item
     storedOffset: 0,-3
-  - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-      - Cartridge44Magnum
-      - SpeedLoader44Magnum
-    proto: Cartridge44Magnum
-    capacity: 6
-    chambers: [ True, True, True, True, True, True ]
-    ammoSlots: [ null, null, null, null, null, null ]
   - type: Gun
     fireRate: 3
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
 
 - type: entity
-  parent: WeaponRevolverMateba
+  parent: [ BaseCentcommContraband, WeaponRevolverMateba ] # Blimpuf
   id: WeaponRevolverMatebaAP # For deathsquad
   suffix: armor-piercing
   components:
   - type: RevolverAmmoProvider
-    proto: Cartridge44MagnumAP
+    proto: CartridgeMagnumAP
 
 - type: entity
   name: python # Starlight, capitalization
   parent: [BaseWeaponRevolver, BaseSyndicateContraband]
   id: WeaponRevolverPython
-  description: A powerful double-action revolver manufactured by the Syndicate. Loud and flashy, perfect for any agent looking to make a statement. Loads 6 rounds of .45 ACP. Can be double-shot burst fired to really bring the pain. # Starlight
+  description: A powerful double-action revolver manufactured by the Syndicate. Loud and flashy, perfect for any agent looking to make a statement. Loads 6 rounds of .45 magnum. Can be double-shot burst fired to really bring the pain. # Starlight
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Revolvers/python.rsi
@@ -201,7 +187,7 @@
   name: pirate revolver
   parent: [BaseWeaponRevolver, BaseMajorContraband]
   id: WeaponRevolverPirate
-  description: A crude single-action revolver handmade by a space pirate. Old and covered in rust, it somehow still works. Loads 5 rounds of .45 ACP.
+  description: A crude single-action revolver handmade by a space pirate. Old and covered in rust, it somehow still works. Loads 5 rounds of .45 magnum.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Revolvers/pirate_revolver.rsi

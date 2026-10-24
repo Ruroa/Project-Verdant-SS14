@@ -2,7 +2,7 @@
   parent: BaseItem
   id: BaseMagazineBoxImprovised
   name: improvised ammunition box (.any)
-  description: This looks suspiciously like a 5.56x45mm magazine box with a crude bullet drawing ontop. Mixing ammo is not advised.
+  description: This looks suspiciously like a .20 magazine box with a crude bullet drawing ontop. Mixing ammo is not advised.
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -45,7 +45,7 @@
 - type: entity
   parent: BaseMagazineBoxImprovised
   id: MagazineBoxImprovisedPistol
-  name: improvised ammunition box (9x19mm improvised)
+  name: improvised ammunition box (.35 auto improvised)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolImprovised
@@ -62,7 +62,7 @@
 - type: entity
   parent: BaseMagazineBoxImprovised
   id: MagazineBoxImprovisedRifle
-  name: improvised ammunition box (7.62x39mm improvised)
+  name: improvised ammunition box (.30 rifle improvised)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRifleImprovised
@@ -79,7 +79,7 @@
 - type: entity
   parent: BaseMagazineBoxImprovised
   id: MagazineBoxImprovisedMagnum
-  name: improvised ammunition box (.45 ACP improvised)
+  name: improvised ammunition box (.45 magnum improvised)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumImprovised

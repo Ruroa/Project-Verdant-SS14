@@ -1,7 +1,7 @@
 - type: entity
   id: SpeedLoaderMagnumRubber
-  name: "speed loader (.45 ACP rubber)"
-  parent: [ BaseSpeedLoaderMagnum, BaseSecurityContraband ]
+  name: "speed loader (.45 magnum rubber)"
+  parent: [ BaseContrabandTier2, BaseSpeedLoaderMagnum, BaseSecurityContraband ] # Blimpuf
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumRubber
@@ -18,7 +18,7 @@
 
 - type: entity
   id: SpeedLoaderMagnumImprovised
-  name: "speed loader (.45 ACP)"
+  name: "speed loader (.45 magnum)"
   parent: [BaseItem, BaseMinorContraband]
   components:
   - type: Tag
@@ -57,7 +57,7 @@
 
 - type: entity
   id: SpeedLoaderMagnumLeverImprovised
-  name: "speed loader (7.62x39mm / .45 ACP)"
+  name: "speed loader (.30 /.45 magnum)"
   parent: [BaseSpeedLoaderShotgun, BaseMinorContraband]
   components:
   - type: BallisticAmmoProvider
@@ -94,7 +94,7 @@
 - type: entity
   parent: BaseSpeedLoaderMagnum
   id: SpeedLoaderMagnumSP
-  name: "speed loader (.45 ACP Ball)"
+  name: "speed loader (.45 magnum SP)"
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumSP
@@ -111,7 +111,7 @@
 
 - type: entity
   id: SpeedLoaderMagnumHP
-  name: "speed loader (.45 ACP HP)"
+  name: "speed loader (.45 magnum HP)"
   parent: BaseSpeedLoaderMagnum
   components:
   - type: BallisticAmmoProvider
@@ -129,7 +129,7 @@
 
 - type: entity
   id: SpeedLoaderMagnumFMJ
-  name: "speed loader (.45 ACP FMJ)"
+  name: "speed loader (.45 magnum FMJ)"
   parent: BaseSpeedLoaderMagnum
   components:
   - type: BallisticAmmoProvider

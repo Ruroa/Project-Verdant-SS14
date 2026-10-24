@@ -2,45 +2,45 @@
   parent: BaseBullet
   id: BulletRifle
   categories: [ HideSpawnMenu ]
-  name: bullet (5.56x45mm)
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 24
-
-- type: entity
-  parent: BaseBulletPractice
-  id: BulletRiflePractice
-  categories: [ HideSpawnMenu ]
-  name: bullet (5.56x45mm practice)
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 1
-
-- type: entity
-  parent: BaseBulletIncendiary
-  id: BulletRifleIncendiary
-  categories: [ HideSpawnMenu ]
-  name: bullet (5.56x45mm incendiary)
+  name: bullet (.20 rifle)
   components:
   - type: Projectile
     damage:
       types:
         Piercing: 17
-        Heat: 7
+
+- type: entity
+  parent: BaseBulletPractice
+  id: BulletRiflePractice
+  categories: [ HideSpawnMenu ]
+  name: bullet (.20 rifle practice)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 2
+
+- type: entity
+  parent: BaseBulletIncendiary
+  id: BulletRifleIncendiary
+  categories: [ HideSpawnMenu ]
+  name: bullet (.20 rifle incendiary)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 12
+        Heat: 5
 
 - type: entity
   parent: BaseBulletUranium
   id: BulletRifleUranium
   categories: [ HideSpawnMenu ]
-  name: bullet (5.56x45mm uranium)
+  name: bullet (.20 rifle uranium)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 20
-        Radiation: 4
+        Radiation: 7
+        Piercing: 8
 

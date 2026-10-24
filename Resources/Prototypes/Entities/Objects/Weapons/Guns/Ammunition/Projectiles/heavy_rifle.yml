@@ -2,18 +2,18 @@
   parent: BaseBullet
   id: BulletHeavyRifle
   categories: [ HideSpawnMenu ]
-  name: bullet (7.62x51mm NATO)
+  name: bullet (.10 rifle)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 32
+        Piercing: 19
 
 - type: entity
   parent: BulletHeavyRifle
   id: BulletMinigun
   categories: [ HideSpawnMenu ]
-  name: minigun bullet (7.62x51mm NATO)
+  name: minigun bullet (.10 rifle)
   components:
   - type: Projectile
     damage:

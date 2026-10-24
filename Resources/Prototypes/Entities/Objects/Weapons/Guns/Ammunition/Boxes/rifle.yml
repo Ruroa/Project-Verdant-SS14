@@ -16,10 +16,10 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/556x45mm.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Boxes/rifle.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
@@ -27,28 +27,28 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleBig
-  name: ammunition box (5.56x45mm Ball)
+  name: ammunition box (.20 rifle SP)
   components:
   - type: BallisticAmmoProvider
     capacity: 200
     proto: CartridgeRifleSP
   - type: Sprite
     layers:
-    - state: base
+    - state: base-b
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: magb-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
-    magState: mag
-    steps: 3
+    magState: magb
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleSP
-  name: ammunition box (5.56x45mm Ball)
-  description: A cardboard box of 5.56x45mm rounds. Intended to hold general-purpose kinetic ammunition.
+  name: ammunition box (.20 rifle SP)
+  description: A cardboard box of .20 rifle rounds. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleSP
@@ -58,12 +58,12 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: ball
+    - state: sp
 
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleHP
-  name: ammunition box (5.56x45mm HP)
+  name: ammunition box (.20 rifle HP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleHP
@@ -77,8 +77,8 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRiflePractice
-  name: ammunition box (5.56x45mm practice)
-  description: A cardboard box of 5.56x45mm rounds. Intended to hold harmless practice ammunition.
+  name: ammunition box (.20 rifle practice)
+  description: A cardboard box of .20 rifle rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRiflePractice
@@ -88,11 +88,13 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: practice
+
 - type: entity
   id: MagazineBoxRifleIncendiary
   parent: BaseMagazineBoxRifle
-  name: ammunition box (5.56x45mm incendiary)
-  description: A cardboard box of 5.56x45mm rounds. Intended to hold self-igniting incendiary ammunition.
+  name: ammunition box (.20 rifle incendiary)
+  description: A cardboard box of .20 rifle rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleIncendiary
@@ -107,8 +109,8 @@
 - type: entity
   id: MagazineBoxRifleUranium
   parent: BaseMagazineBoxRifle
-  name: ammunition box (5.56x45mm uranium)
-  description: A cardboard box of 5.56x45mm rounds. Intended to hold exotic uranium-core ammunition.
+  name: ammunition box (.20 rifle uranium)
+  description: A cardboard box of .20 rifle rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleUranium

@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseItem
   id: BaseMagazineBoxPistol
-  name: ammunition box (9x19mm)
+  name: ammunition box (.35 auto)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -17,7 +17,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
   - type: MagazineVisuals
     magState: mag
     steps: 3
@@ -28,7 +28,7 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolSP
-  name: ammunition box (9x19mm Ball)
+  name: ammunition box (.35 auto SP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolSP
@@ -38,12 +38,12 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: ball
+    - state: sp
 
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolHP
-  name: ammunition box (9x19mm HP)
+  name: ammunition box (.35 auto HP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolHP
@@ -57,8 +57,8 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolPractice
-  name: ammunition box (9x19mm practice)
-  description: A cardboard box of 9x19mm rounds. Intended to hold harmless practice ammunition.
+  name: ammunition box (.35 auto practice)
+  description: A cardboard box of .35 auto rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolPractice
@@ -68,11 +68,13 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: practice
+
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolIncendiary
-  name: ammunition box (9x19mm incendiary)
-  description: A cardboard box of 9x19mm rounds. Intended to hold self-igniting incendiary ammunition.
+  name: ammunition box (.35 auto incendiary)
+  description: A cardboard box of .35 auto rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolIncendiary
@@ -87,8 +89,8 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolUranium
-  name: ammunition box (9x19mm uranium)
-  description: A cardboard box of 9x19mm rounds. Intended to hold exotic uranium-core ammunition.
+  name: ammunition box (.35 auto uranium)
+  description: A cardboard box of .35 auto rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolUranium

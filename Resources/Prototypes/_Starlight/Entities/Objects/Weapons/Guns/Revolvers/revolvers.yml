@@ -91,9 +91,9 @@
 
 - type: entity
   name: dispatcher
-  parent: [BaseWeaponRevolver, BaseSecurityContraband]
+  parent: [ BaseContrabandTier3, BaseWeaponRevolver, BaseSecurityContraband ] # Blimpuf
   id: WeaponRevolverDispatcher
-  description: The NT Model 7 Service Revolver, known unofficially as the 'Dispatcher.' chambered in .44 Magnum with robust stopping power for putting an end to any non-compliance. A true timeless classic carried amongst NanoTrasen's elite security staff.
+  description: The NT Model 7 Service Revolver, known unofficially as the 'Dispatcher.' chambered in .45 Magnum with robust stopping power for putting an end to any non-compliance. A true timeless classic carried amongst NanoTrasen's elite security staff.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Revolvers/Dispatcher.rsi
@@ -113,11 +113,6 @@
     soundGunshot:
       path: /Audio/_Starlight/Weapons/Guns/Gunshots/revolver_stronger.ogg
   - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-      - Cartridge44Magnum
-      - SpeedLoader44Magnum
-    proto: Cartridge44Magnum
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -129,9 +124,9 @@
 
 - type: entity
   name: TOZ-82 'Jupiter'
-  parent: [BaseWeaponRevolver, BaseSecuritySalvageContraband]
+  parent: [ BaseContrabandTier3, BaseWeaponRevolver, BaseSecurityContraband, BaseSalvageContraband ] # Blimpuf
   id: WeaponRevolverZOZ
-  description: An oversized bullpup revolver whose design was smuggled out of the USSP. You might need both hands for this one. It's got a flip-out bayonet, but the damned thing is stuck shut. Loads 6 rounds of .45 ACP.
+  description: An oversized bullpup revolver whose design was smuggled out of the USSP. You might need both hands for this one. It's got a flip-out bayonet, but the damned thing is stuck shut. Loads 6 rounds of .45 magnum.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Revolvers/ZOZ82.rsi
@@ -142,10 +137,8 @@
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    minAngle: -3
-    maxAngle: -16
   - type: Gun
-    minAngle: 4
+    minAngle: 3
     maxAngle: 18
     fireRate: 2.3
     selectedMode: SemiAuto
@@ -155,3 +148,5 @@
       path: /Audio/Weapons/Guns/Gunshots/revolver.ogg
       params:
         volume: 2.25
+    angleIncrease: 8
+    angleDecay: 16

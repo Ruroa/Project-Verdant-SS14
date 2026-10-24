@@ -1,8 +1,8 @@
 - type: entity
   abstract: true
-  parent: [ BaseCartridge, BaseSecurityContraband ]
+  parent: [ BaseContrabandTier3, BaseCartridge, BaseSecurityContraband ] # Blimpuf
   id: BaseCartridgePistol
-  name: cartridge (9x19mm)
+  name: cartridge (.35 auto)
   components:
   - type: Tag
     tags:
@@ -10,7 +10,7 @@
   - type: CartridgeAmmo
     proto: BulletPistolTraceSP
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/9x19mm.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
     layers:
       - state: base
         map: [ "enum.AmmoVisualLayers.Base" ]
@@ -20,7 +20,7 @@
 - type: entity
   parent: BaseCartridgePistol
   id: CartridgePistolSP
-  name: cartridge (9x19mm Ball)
+  name: cartridge (.35 auto SP)
   description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: CartridgeAmmo
@@ -36,7 +36,7 @@
 - type: entity
   parent: BaseCartridgePistol
   id: CartridgePistolPractice
-  name: cartridge (9x19mm practice)
+  name: cartridge (.35 auto practice)
   description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo
@@ -52,7 +52,7 @@
 - type: entity
   parent: BaseCartridgePistol
   id: CartridgePistolIncendiary
-  name: cartridge (9x19mm incendiary)
+  name: cartridge (.35 auto incendiary)
   description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
   components:
   - type: CartridgeAmmo
@@ -67,7 +67,7 @@
 
 - type: entity
   id: CartridgePistolUranium
-  name: cartridge (9x19mm uranium)
+  name: cartridge (.35 auto uranium)
   description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
   parent: BaseCartridgePistol
   components:
@@ -84,11 +84,11 @@
 - type: entity
   parent: BaseCartridgePistol
   id: CartridgePistolSpent
-  name: cartridge (9x19mm)
+  name: cartridge (.35 auto)
   suffix: spent
   components:
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/9x19mm.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
     layers:
     - state: base-spent
       map: [ "enum.AmmoVisualLayers.Base" ]

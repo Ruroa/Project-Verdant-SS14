@@ -1,8 +1,8 @@
 - type: entity
   abstract: true
-  parent: [ BaseCartridge, BaseSecurityContraband ]
+  parent: [ BaseContrabandTier3, BaseCartridge, BaseSecurityContraband ] # Blimpuf
   id: BaseCartridgeLightRifleSP
-  name: cartridge (7.62x39mm Ball)
+  name: cartridge (.30 rifle SP)
   components:
   - type: Tag
     tags:
@@ -10,7 +10,7 @@
   - type: CartridgeAmmo
     proto: BulletLightRifleTraceSP
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/762x39mm.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
@@ -20,7 +20,7 @@
 - type: entity
   parent: BaseCartridgeLightRifleSP
   id: CartridgeLightRifleSP
-  name: cartridge (7.62x39mm Ball)
+  name: cartridge (.30 rifle SP)
   components:
   - type: CartridgeAmmo
     proto: BulletLightRifleTraceSP
@@ -35,7 +35,7 @@
 - type: entity
   parent: BaseCartridgeLightRifleSP
   id: CartridgeLightRiflePractice
-  name: cartridge (7.62x39mm practice)
+  name: cartridge (.30 rifle practice)
   description: A classic intermediate cartridge used by many combat rifles and LMGs. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo
@@ -51,7 +51,7 @@
 - type: entity
   parent: BaseCartridgeLightRifleSP
   id: CartridgeLightRifleIncendiary
-  name: cartridge (7.62x39mm incendiary)
+  name: cartridge (.30 rifle incendiary)
   description: A classic intermediate cartridge used by many combat rifles and LMGs. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
   components:
   - type: CartridgeAmmo
@@ -67,7 +67,7 @@
 - type: entity
   parent: BaseCartridgeLightRifleSP
   id: CartridgeLightRifleUranium
-  name: cartridge (7.62x39mm uranium)
+  name: cartridge (.30 rifle uranium)
   description: A classic intermediate cartridge used by many combat rifles and LMGs. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
   components:
   - type: CartridgeAmmo

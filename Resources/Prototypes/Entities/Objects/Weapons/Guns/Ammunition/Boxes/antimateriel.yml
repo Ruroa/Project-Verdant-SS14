@@ -1,8 +1,8 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseContrabandTier3, BaseItem, BaseSecurityContraband ] # Blimpuf
   id: BaseMagazineBoxAntiMateriel
-  name: ammunition box (12.7x99mm)
+  name: ammunition box (.60 anti-materiel)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -17,10 +17,10 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/127x99mm.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Boxes/anti_materiel.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
@@ -28,8 +28,8 @@
 - type: entity
   parent: BaseMagazineBoxAntiMateriel
   id: MagazineBoxAntiMateriel
-  name: ammunition box (12.7x99mm)
-  description: A cardboard box of 12.7x99mm rounds.
+  name: ammunition box (.60 anti-materiel)
+  description: A cardboard box of .60 anti-materiel rounds.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeAntiMateriel

@@ -15,18 +15,6 @@
   - MechEquipmentKineticAccelerator
   - FiringPinExpedition # Starlight
   - BorgModuleMiningDefense # Starlight
-  # Project Verdant baseline ammunition boxes
-  - MagazineBox44Magnum
-  - MagazineBox44MagnumPractice
-  - MagazineBox57x26
-  - MagazineBox57x26Practice
-  - MagazineBox57x26E
-  - MagazineBox762x54R
-  - MagazineBox762x54RPractice
-  - MagazineBoxHeavyRifle
-  - MagazineBoxHeavyRiflePractice
-  - MagazineBoxPistol40SP
-  - MagazineBoxPistol40Practice
   technologyPrerequisites:
   - SalvageEquipment # starlight
   radioChannels:
@@ -37,8 +25,8 @@
   id: DraconicMunitions
   name: research-technology-draconic-munitions
   icon:
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
-    state: incendiary
+    sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
+    state: incendiarydisplay
   discipline: Arsenal
   tier: 1
   cost: 10000
@@ -57,11 +45,6 @@
   - MagazineDMRIncendiary # Starlight
   - MagazinePistolSubMachineGunIncendiary
   - SpeedLoaderShotgunIncendiary
-  - MagazineBox44MagnumIncendiary
-  - MagazineBox57x26Incendiary
-  - MagazineBox762x54RIncendiary
-  - MagazineBoxHeavyRifleIncendiary
-  - MagazineBoxPistol40Incendiary
   radioChannels:
   - Security
 
@@ -106,11 +89,6 @@
   - MagazineBoxMagnumRubber
   - MagazineBoxLightRifleRubber
   - MagazineBoxRifleRubber
-  - MagazineBox44MagnumRubber
-  - MagazineBox57x26Rubber
-  - MagazineBox762x54RRubber
-  - MagazineBoxHeavyRifleRubber
-  - MagazineBoxPistol40Rubber
   radioChannels:
   - Security
 
@@ -137,11 +115,6 @@
   - MagazineDMRUranium # Starlight
   - MagazinePistolSubMachineGunUranium
   - SpeedLoaderShotgunUranium
-  - MagazineBox44MagnumUranium
-  - MagazineBox57x26Uranium
-  - MagazineBox762x54RUranium
-  - MagazineBoxHeavyRifleUranium
-  - MagazineBoxPistol40Uranium
   radioChannels:
   - Security
 

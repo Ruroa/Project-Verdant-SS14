@@ -2,7 +2,7 @@
   name: M492 Smart LMG
   id: WeaponLightMachineGunM492
   parent: [BaseWeaponLightMachineGun, BaseSecurityContraband]
-  description: A high tech non-traditional LMG built specifically for combating the big threats among us. Uses 5.56x45mm ammunition.
+  description: A high tech non-traditional LMG built specifically for combating the big threats among us. Uses 7.62x39mm ammunition.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/LMGs/M492.rsi
@@ -33,17 +33,17 @@
     slots:
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
+        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
-            - CartridgeRifle
+            - CartridgeLightRifle
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleHeavy556M492
+        startingItem: LightRifleHeavyMagazineSP
         whitelist:
           tags:
-            - MagazineLightRifleHeavy556M492
+            - LightRifleHeavy
   - type: ContainerContainer
     containers:
       firing_pin: !type:Container
@@ -84,7 +84,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleMaximPV
+        startingItem: MagazineLightRifleMaxim
         insertSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         ejectSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
         whitelist:

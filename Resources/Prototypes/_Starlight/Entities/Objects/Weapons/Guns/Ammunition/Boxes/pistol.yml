@@ -1,22 +1,22 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolRubber
-  name: ammunition box (9x19mm rubber)
+  name: ammunition box (.35 auto rubber)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolRubber
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: rubber
 
 - type: entity
   parent: BaseItem
   id: BaseMagazineBoxPistol40
-  name: ammunition box (.40 S&W)
+  name: ammunition box (.40)
   abstract: true
   components:
   - type: BallisticAmmoProvider
@@ -32,40 +32,38 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
+    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
 - type: entity
   parent: BaseMagazineBoxPistol40
   id: MagazineBoxPistol40SP
-  name: ammunition box (.40 S&W Ball)
+  name: ammunition box (.40 SP)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
     proto: CartridgePistol40SP
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: ball
+    - state: sp
 
 - type: entity
   parent: BaseMagazineBoxPistol40
   id: MagazineBoxPistol40HP
-  name: ammunition box (.40 S&W HP)
+  name: ammunition box (.40 HP)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
     proto: CartridgePistol40HP
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -75,13 +73,12 @@
 - type: entity
   parent: BaseMagazineBoxPistol40
   id: MagazineBoxPistol40FMJ
-  name: ammunition box (.40 S&W FMJ)
+  name: ammunition box (.40 FMJ)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
     proto: CartridgePistol40FMJ
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -92,13 +89,12 @@
 - type: entity
   parent: BaseMagazineBoxPistol40
   id: MagazineBoxPistol40AP
-  name: ammunition box (.40 S&W AP)
+  name: ammunition box (.40 AP)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
     proto: CartridgePistol40AP
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -109,12 +105,11 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolFMJ
-  name: ammunition box (9x19mm FMJ)
+  name: ammunition box (.35 auto FMJ)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolFMJ
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -125,12 +120,11 @@
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolAP
-  name: ammunition box (9x19mm AP)
+  name: ammunition box (.35 auto AP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolAP
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/9x19mm.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

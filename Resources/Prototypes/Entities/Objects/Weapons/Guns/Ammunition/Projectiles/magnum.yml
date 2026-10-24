@@ -2,18 +2,18 @@
   parent: BaseBullet
   id: BulletMagnum
   categories: [ HideSpawnMenu ]
-  name: bullet (.45 ACP)
+  name: bullet (.45 magnum)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 20
+        Piercing: 35
 
 - type: entity
   parent: BaseBulletPractice
   id: BulletMagnumPractice
   categories: [ HideSpawnMenu ]
-  name: bullet (.45 ACP practice)
+  name: bullet (.45 magnum practice)
   components:
   - type: Projectile
     damage:
@@ -24,34 +24,34 @@
   parent: BaseBulletIncendiary
   id: BulletMagnumIncendiary
   categories: [ HideSpawnMenu ]
-  name: bullet (.45 ACP incendiary)
+  name: bullet (.45 magnum incendiary)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 14
-        Heat: 6
+        Piercing: 26
+        Heat: 9
 
 - type: entity
   parent: BaseBulletAP
   id: BulletMagnumAP
   categories: [ HideSpawnMenu ]
-  name: bullet (.45 ACP armor-piercing)
+  name: bullet (.45 magnum armor-piercing)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 19
+        Piercing: 26 # 20% decrease
     ignoreResistances: true
 
 - type: entity
   parent: BaseBulletUranium
   id: BulletMagnumUranium
   categories: [ HideSpawnMenu ]
-  name: bullet (.45 ACP uranium)
+  name: bullet (.45 magnum uranium)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 17
-        Radiation: 3
+        Radiation: 15
+        Piercing: 20

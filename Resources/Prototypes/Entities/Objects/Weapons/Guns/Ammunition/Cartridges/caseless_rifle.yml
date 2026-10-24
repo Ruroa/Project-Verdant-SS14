@@ -1,8 +1,8 @@
 - type: entity
   abstract: true
-  parent: [ BaseCartridge, BaseSecurityContraband ]
+  parent: [ BaseContrabandTier3, BaseCartridge, BaseSecurityContraband ] # Blimpuf
   id: BaseCartridgeCaselessRifle
-  name: cartridge (5.7x28mm caseless)
+  name: cartridge (.25 caseless)
   components:
   - type: Tag
     tags:
@@ -23,7 +23,7 @@
 - type: entity
   parent: BaseCartridgeCaselessRifle
   id: CartridgeCaselessRifle
-  name: cartridge (5.7x28mm caseless)
+  name: cartridge (.25 caseless)
   description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: CartridgeAmmo
@@ -32,7 +32,7 @@
 - type: entity
   parent: BaseCartridgeCaselessRifle
   id: CartridgeCaselessRiflePractice
-  name: cartridge (5.7x28mm caseless practice)
+  name: cartridge (.25 caseless practice)
   description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo

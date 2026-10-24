@@ -1,10 +1,10 @@
 - type: entity
   id: CartridgeMagnumRubber
-  name: cartridge (.45 ACP rubber)
+  name: cartridge (.45 magnum rubber)
   parent: BaseCartridgeMagnum
   components:
   - type: CartridgeAmmo
-    proto: BulletMagnumTracePVRubber
+    proto: RubberBulletTrace
   - type: Sprite
     layers:
       - state: base
@@ -15,14 +15,14 @@
 
 - type: entity
   id: CartridgeMagnumImprovised
-  name: improvised cartridge (.45 ACP)
+  name: improvised cartridge (.45 magnum)
   description: A handmade revolver bullet, stuffed to the brim with phosphorus for extra 'oomph'. Still not as good as a normal magnum bullet.
   parent: [BaseCartridgePistol, BaseMinorContraband]
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceImprovised
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/45acp.rsi
+    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Casings/improvised_casing.rsi
     layers:
       - state: base
         map: [ "enum.AmmoVisualLayers.Base" ]
@@ -39,9 +39,9 @@
 
 - type: entity
   id: CartridgeMagnumHP
-  name: cartridge (.45 ACP HP)
+  name: cartridge (.45 magnum HP)
   parent: BaseCartridgeMagnum
-  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Chalk ammunition is generally non-harmful and used for practice.
+  description: Heavy magnum cartridge mostly used by revolvers. Chalk ammunition is generally non-harmful, used for practice.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceHP
@@ -55,9 +55,9 @@
 
 - type: entity
   id: CartridgeMagnumFMJ
-  name: cartridge (.45 ACP FMJ)
+  name: cartridge (.45 magnum FMJ)
   parent: BaseCartridgeMagnum
-  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Incendiary ammunition contains a self-igniting compound that sets the target ablaze.
+  description: Heavy magnum cartridge mostly used by revolvers. Incendiary ammunition contains a self-igniting compound that sets the target ablaze.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceFMJ

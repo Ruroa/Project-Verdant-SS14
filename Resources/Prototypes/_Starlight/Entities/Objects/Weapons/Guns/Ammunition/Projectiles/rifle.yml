@@ -1,10 +1,10 @@
 - type: entity
   id: BulletRifleRubber
-  name: bullet (5.56x45mm rubber)
+  name: bullet (0.20 rifle rubber)
   parent: BaseBulletRubber
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
-        Blunt: 5
+        Blunt: 1

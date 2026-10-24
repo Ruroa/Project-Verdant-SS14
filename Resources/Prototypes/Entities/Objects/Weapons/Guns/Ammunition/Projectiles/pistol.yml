@@ -2,7 +2,7 @@
   parent: BaseBullet
   id: BulletPistol
   categories: [ HideSpawnMenu ]
-  name: bullet (9x19mm)
+  name: bullet (.35 auto)
   components:
   - type: Projectile
     damage:
@@ -13,34 +13,34 @@
   parent: BaseBulletPractice
   id: BulletPistolPractice
   categories: [ HideSpawnMenu ]
-  name: bullet (9x19mm practice)
+  name: bullet (.35 auto practice)
   components:
   - type: Projectile
     damage:
       types:
-        Blunt: 1
+        Blunt: 2
 
 - type: entity
   parent: BaseBulletIncendiary
   id: BulletPistolIncendiary
   categories: [ HideSpawnMenu ]
-  name: bullet (9x19mm incendiary)
+  name: bullet (.35 auto incendiary)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 11
-        Heat: 5
+        Piercing: 12
+        Heat: 4
 
 - type: entity
   parent: BaseBulletUranium
   id: BulletPistolUranium
   categories: [ HideSpawnMenu ]
-  name: bullet (9x19mm uranium)
+  name: bullet (.35 auto uranium)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 14
-        Radiation: 2
+        Radiation: 6
+        Piercing: 10
 

@@ -1,8 +1,8 @@
 - type: entity
   abstract: true
-  parent: [ BaseCartridge, BaseSecuritySalvageContraband ] # Starlight-edit - Security -> SecuritySalvage
+  parent: [ BaseContrabandTier3, BaseCartridge, BaseSecurityContraband, BaseSalvageContraband ] # TODO Starlight partial once space-wizards/RobustToolbox/pull/7084 gets fixed
   id: BaseCartridgeMagnum
-  name: cartridge (.45 ACP)
+  name: cartridge (.45 magnum)
   components:
   - type: Tag
     tags:
@@ -10,7 +10,7 @@
   - type: CartridgeAmmo
     proto: BulletMagnumTraceSP
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/45acp.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
@@ -20,8 +20,8 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumSP
-  name: cartridge (.45 ACP Ball)
-  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Ball ammunition is useful in most situations.
+  name: cartridge (.45 magnum SP)
+  description: Heavy magnum cartridge mostly used by revolvers. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceSP
@@ -36,8 +36,8 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumPractice
-  name: cartridge (.45 ACP practice)
-  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
+  name: cartridge (.45 magnum practice)
+  description: Heavy magnum cartridge mostly used by revolvers. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTracePractice
@@ -52,8 +52,8 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumIncendiary
-  name: cartridge (.45 ACP incendiary)
-  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
+  name: cartridge (.45 magnum incendiary)
+  description: Heavy magnum cartridge mostly used by revolvers. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceIncendiary
@@ -68,8 +68,8 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumAP
-  name: cartridge (.45 ACP armor-piercing)
-  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Armor-piercing ammunition is renowned for its ability to cut straight through body armor.
+  name: cartridge (.45 magnum armor-piercing)
+  description: Heavy magnum cartridge mostly used by revolvers. Armor-piercing ammunition is renowned for its ability to cut straight through body armor.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceAP
@@ -84,8 +84,8 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumUranium
-  name: cartridge (.45 ACP uranium)
-  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
+  name: cartridge (.45 magnum uranium)
+  description: Heavy magnum cartridge mostly used by revolvers. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceUranium

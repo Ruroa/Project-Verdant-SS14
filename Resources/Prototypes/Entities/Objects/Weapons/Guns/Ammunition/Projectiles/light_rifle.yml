@@ -2,44 +2,44 @@
   parent: BaseBullet
   id: BulletLightRifle
   categories: [ HideSpawnMenu ]
-  name: bullet (7.62x39mm)
+  name: bullet (.30 rifle)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 28
+        Piercing: 19
 
 - type: entity
   parent: BaseBulletPractice
   id: BulletLightRiflePractice
   categories: [ HideSpawnMenu ]
-  name: bullet (7.62x39mm practice)
+  name: bullet (.30 rifle practice)
   components:
   - type: Projectile
     damage:
       types:
-        Blunt: 1
+        Blunt: 2
 
 - type: entity
   parent: BaseBulletIncendiary
   id: BulletLightRifleIncendiary
   categories: [ HideSpawnMenu ]
-  name: bullet (7.62x39mm incendiary)
+  name: bullet (.30 rifle incendiary)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 20
-        Heat: 8
+        Piercing: 14
+        Heat: 5
 
 - type: entity
   parent: BaseBulletUranium
   id: BulletLightRifleUranium
   categories: [ HideSpawnMenu ]
-  name: bullet (7.62x39mm uranium)
+  name: bullet (.30 rifle uranium)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 24
-        Radiation: 4
+        Radiation: 9
+        Piercing: 10

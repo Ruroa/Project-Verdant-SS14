@@ -1,10 +1,10 @@
 - type: entity
   id: CartridgeLightRifleRubber
-  name: cartridge (7.62x39mm rubber)
+  name: cartridge (.30 rifle rubber)
   parent: BaseCartridgeLightRifleSP
   components:
   - type: CartridgeAmmo
-    proto: BulletLightRifleTraceRubber
+    proto: RubberBulletTrace
   - type: Sprite
     layers:
       - state: base
@@ -15,14 +15,14 @@
 
 - type: entity
   id: CartridgeLightRifleImprovised
-  name: improvised cartridge (7.62x39mm)
+  name: improvised cartridge (.30 rifle)
   description: A handmade rifle bullet, uses phosphorus as a propellent instead of gunpowder which makes it much less effective.
   parent: [BaseCartridgeLightRifleSP, BaseMinorContraband]
   components:
   - type: CartridgeAmmo
     proto: BulletLightRifleTraceImprovised
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Casings/762x39mm.rsi
+    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Casings/improvised_casing.rsi
     layers:
       - state: base
         map: [ "enum.AmmoVisualLayers.Base" ]
@@ -39,7 +39,7 @@
 
 - type: entity
   id: CartridgeLightRifleHP
-  name: cartridge (7.62x39mm HP)
+  name: cartridge (.30 rifle HP)
   parent: BaseCartridgeLightRifleSP
   components:
   - type: CartridgeAmmo
@@ -54,7 +54,7 @@
 
 - type: entity
   id: CartridgeLightRifleFMJ
-  name: cartridge (7.62x39mm FMJ)
+  name: cartridge (.30 rifle FMJ)
   parent: BaseCartridgeLightRifleSP
   components:
   - type: CartridgeAmmo
@@ -69,7 +69,7 @@
 
 - type: entity
   id: CartridgeLightRifleAP
-  name: cartridge (7.62x39mm AP)
+  name: cartridge (.30 rifle AP)
   parent: BaseCartridgeLightRifleSP
   components:
   - type: CartridgeAmmo

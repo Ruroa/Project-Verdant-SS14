@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 10630)
+Total output lines: 1839
+
 - type: entity
   id: BulletTrace
   parent: BasicHitscan
@@ -103,6 +106,8 @@
     damage:
       types:
         Piercing: 20
+  - type: HitscanStaminaDamage
+    staminaDamage: 4
   - type: HitscanPierce
     chance: 0.40
     deviation: 0.05
@@ -165,6 +170,8 @@
     damage:
       types:
         Piercing: 25
+  - type: HitscanStaminaDamage
+    staminaDamage: 10
   - type: HitscanPierce
     chance: 0.03
     deviation: 0.05
@@ -335,6 +342,8 @@
     damage:
       types:
         Piercing: 16
+  - type: HitscanStaminaDamage
+    staminaDamage: 2
   - type: HitscanPierce
     chance: 0.40
     deviation: 0.2
@@ -379,6 +388,8 @@
     damage:
       types:
         Piercing: 20
+  - type: HitscanStaminaDamage
+    staminaDamage: 5
   - type: HitscanPierce
     chance: 0.03
     deviation: 0.2
@@ -502,6 +513,8 @@
     damage:
       types:
         Piercing: 18
+  - type: HitscanStaminaDamage
+    staminaDamage: 15
   - type: HitscanPierce
     chance: 0.30
     deviation: 0.15
@@ -522,6 +535,8 @@
     damage:
       types:
         Piercing: 23
+  - type: HitscanStaminaDamage
+    staminaDamage: 20
   - type: HitscanPierce
     chance: 0.02
     deviation: 0.15
@@ -543,6 +558,8 @@
     damage:
       types:
         Piercing: 23
+  - type: HitscanStaminaDamage
+    staminaDamage: 13
   - type: HitscanPierce
     chance: 0.55
     deviation: 0.15
@@ -565,6 +582,8 @@
     damage:
       types:
         Piercing: 17
+  - type: HitscanStaminaDamage
+    staminaDamage: 10
   - type: HitscanPierce
     chance: 0.63
     deviation: 0.15
@@ -632,6 +651,8 @@
     damage:
       types:
         Piercing: 28
+  - type: HitscanStaminaDamage
+    staminaDamage: 2
   - type: HitscanPierce
     chance: 0.40
     deviation: 0.05
@@ -693,6 +714,8 @@
     damage:
       types:
         Piercing: 35
+  - type: HitscanStaminaDamage
+    staminaDamage: 6
   - type: HitscanPierce
     chance: 0.03
     deviation: 0.05
@@ -819,6 +842,8 @@
     damage:
       types:
         Piercing: 24
+  - type: HitscanStaminaDamage
+    staminaDamage: 2
   - type: HitscanPierce
     chance: 0.40
     pierceLevel: Wood
@@ -839,6 +864,8 @@
     damage:
       types:
         Piercing: 30
+  - type: HitscanStaminaDamage
+    staminaDamage: 5
   - type: HitscanPierce
     chance: 0.03
   - type: HitscanRicochet
@@ -847,121 +874,7 @@
 - type: entity
   id: BulletRifleTraceFMJ
   parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: HitscanBasicDamage
-    armorPenetration: 0.25
-    damage:
-      types:
-        Piercing: 30
-  - type: HitscanPierce
-    chance: 0.69
-    pierceLevel: Metal
-  - type: HitscanRicochet
-    chance: 0.80
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: fmj
-
-- type: entity
-  id: BulletRifleTraceAP
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: HitscanBasicDamage
-    armorPenetration: 1
-    damage:
-      types:
-        Piercing: 23
-  - type: HitscanPierce
-    chance: 0.81
-    pierceLevel: HardenedMetal
-  - type: HitscanRicochet
-    chance: 0.48
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: ap
-
-- type: entity
-  id: BulletRifleTracePractice
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: HitscanBasicDamage
-    damage:
-      types:
-        Blunt: 1
-  - type: HitscanPierce
-    chance: 0.69
-  - type: HitscanRicochet
-    chance: 0.48
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: practice
-
-- type: entity
-  id: BulletRifleTraceIncendiary
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: HitscanBasicDamage
-    damage:
-      types:
-        Piercing: 17
-        Heat: 7
-  - type: HitscanIgniteEffect
-  - type: HitscanPierce
-    chance: 0.69
-  - type: HitscanRicochet
-    chance: 0.48
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: incendiary
-
-- type: entity
-  id: BulletRifleTraceUranium
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: HitscanBasicDamage
-    damage:
-      types:
-        Piercing: 20
-        Toxin: 4
-  - type: HitscanPierce
-    chance: 0.69
-    pierceLevel: HardenedMetal
-  - type: HitscanRicochet
-    chance: 0.80
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: uranium
-### shotgun
-
-- type: entity
-  id: PelletShotgunBeanbagTrace
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: HitscanBasicDamage
-    damage:
-      types:
-        Blunt: 10
-  - type: HitscanStaminaDamage
-    staminaDamage: 40
-  - type: HitscanPierce
-    chance: 0
-  - type: HitscanBasicVisuals
+…630 tokens truncated…nBasicVisuals
     bullet:
       sprite:
         sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi

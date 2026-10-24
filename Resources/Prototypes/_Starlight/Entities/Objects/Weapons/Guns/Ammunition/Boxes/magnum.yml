@@ -1,27 +1,26 @@
 - type: entity
   parent: BaseMagazineBoxMagnum
   id: MagazineBoxMagnumRubber
-  name: ammunition box (.45 ACP rubber)
+  name: ammunition box (.45 magnum rubber)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumRubber
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/45acp.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: rubber
 
 - type: entity
   parent: BaseMagazineBoxMagnum
   id: MagazineBoxMagnumFMJ
-  name: ammunition box (.45 ACP FMJ)
+  name: ammunition box (.45 magnum FMJ)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumFMJ
   - type: Sprite
-    sprite: _PV/Objects/Weapons/Guns/Ammunition/Boxes/45acp.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
