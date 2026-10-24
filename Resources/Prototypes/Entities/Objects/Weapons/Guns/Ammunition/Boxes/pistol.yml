@@ -38,7 +38,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: sp
+    - state: ball
 
 - type: entity
   parent: BaseMagazineBoxPistol
@@ -68,8 +68,6 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: practice
-
 - type: entity
   parent: BaseMagazineBoxPistol
   id: MagazineBoxPistolIncendiary

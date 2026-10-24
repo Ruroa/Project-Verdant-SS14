@@ -19,8 +19,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineRifleSPPV
-  result: MagazineRifleSPPV
+  id: MagazineRifleSP
+  result: MagazineRifleSP
   materials:
     Steel: 455
 
@@ -33,8 +33,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineRifleFMJPV
-  result: MagazineRifleFMJPV
+  id: MagazineRifleFMJ
+  result: MagazineRifleFMJ
   materials:
     Steel: 555
 

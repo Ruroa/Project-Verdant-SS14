@@ -59,8 +59,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolSPPV
-  result: MagazinePistolSPPV
+  id: MagazinePistolSP
+  result: MagazinePistolSP
   materials:
     Steel: 145
 
@@ -112,8 +112,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolHighCapacitySPPV
-  result: MagazinePistolHighCapacitySPPV
+  id: MagazinePistolHighCapacitySP
+  result: MagazinePistolHighCapacitySP
   materials:
     Steel: 145
 
@@ -149,8 +149,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistol40SPPV
-  result: MagazinePistol40SPPV
+  id: MagazinePistol40SP
+  result: MagazinePistol40SP
   materials:
     Steel: 167
 
@@ -163,8 +163,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistol40FMJPV
-  result: MagazinePistol40FMJPV
+  id: MagazinePistol40FMJ
+  result: MagazinePistol40FMJ
   materials:
     Steel: 167
 

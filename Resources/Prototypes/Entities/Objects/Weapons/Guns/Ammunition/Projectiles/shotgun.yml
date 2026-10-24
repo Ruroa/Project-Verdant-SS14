@@ -2,7 +2,7 @@
   parent: BaseBullet
   id: PelletShotgunSlug
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 slug)
+  name: 12 gauge slug # Starlight change: .50 -> 12 gauge
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -13,12 +13,11 @@
         Piercing: 40
         Structural: 15
 
-
 - type: entity
   parent: BaseBullet
   id: PelletShotgunBeanbag
   categories: [ HideSpawnMenu ]
-  name: beanbag (.50)
+  name: 12 gauge beanbag slug # Starlight change: .50 -> 12 gauge
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -35,7 +34,7 @@
   parent: BaseBullet
   id: PelletShotgun
   categories: [ HideSpawnMenu ]
-  name: pellet (.50)
+  name: 12 gage buckshot # Starlight change: .50 -> 12 gauge
   components:
   - type: Projectile
     damage:
@@ -57,7 +56,7 @@
   parent: BaseBulletIncendiary
   id: PelletShotgunIncendiary
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 incendiary)
+  name: 12 gauge incendiary buckshot # Starlight change: .50 -> 12 gauge
   components:
   - type: Projectile
     damage:
@@ -81,7 +80,7 @@
   parent: BaseBulletPractice
   id: PelletShotgunPractice
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 practice)
+  name: 12 gauge blank # Starlight change: .50 -> 12 gauge
   components:
   - type: Projectile
     damage:
@@ -126,23 +125,27 @@
     spread: 45
 
 - type: entity
-  parent: [SolutionAmmo, SolutionToolVeryTiny, BaseBulletPractice]
+  parent: BaseBulletPractice
   id: PelletShotgunTranquilizer
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 tranquilizer)
+  name: 12 gauge traunquilizer slug # Starlight change: .50 -> 12 gauge
   components:
   - type: Projectile
     damage:
       types:
         Blunt: 1
+  - type: SolutionContainerManager
+    solutions:
+      ammo:
+        maxVol: 15
   - type: SolutionInjectOnProjectileHit
-    transferAmount: 7.5
+    transferAmount: 15
     solution: ammo
 
 - type: entity
   id: PelletShotgunFlare
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 flare)
+  name: 12 gauge flare # Starlight change: .50 -> 12 gauge
   components:
   - type: Physics
     bodyType: Dynamic
@@ -190,7 +193,7 @@
   parent: BaseBulletUranium
   id: PelletShotgunUranium
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 uranium)
+  name: 12 gauge uranium buckshot # Starlight change: .50 -> 12 gauge
   components:
   - type: Projectile
     damage:

@@ -4,7 +4,7 @@
   parent: BaseCartridgeMagnum
   components:
   - type: CartridgeAmmo
-    proto: RubberBulletTrace
+    proto: BulletMagnumTracePVRubber
   - type: Sprite
     layers:
       - state: base
@@ -22,7 +22,7 @@
   - type: CartridgeAmmo
     proto: BulletMagnumTraceImprovised
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Casings/improvised_casing.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
     layers:
       - state: base
         map: [ "enum.AmmoVisualLayers.Base" ]
@@ -41,7 +41,7 @@
   id: CartridgeMagnumHP
   name: cartridge (.45 magnum HP)
   parent: BaseCartridgeMagnum
-  description: Heavy magnum cartridge mostly used by revolvers. Chalk ammunition is generally non-harmful, used for practice.
+  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Chalk ammunition is generally non-harmful and used for practice.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceHP
@@ -57,7 +57,7 @@
   id: CartridgeMagnumFMJ
   name: cartridge (.45 magnum FMJ)
   parent: BaseCartridgeMagnum
-  description: Heavy magnum cartridge mostly used by revolvers. Incendiary ammunition contains a self-igniting compound that sets the target ablaze.
+  description: A large-caliber pistol cartridge used by heavy sidearms and revolvers. Incendiary ammunition contains a self-igniting compound that sets the target ablaze.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumTraceFMJ

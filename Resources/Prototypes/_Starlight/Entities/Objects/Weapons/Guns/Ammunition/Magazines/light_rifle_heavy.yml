@@ -1,6 +1,6 @@
 - type: entity
   id: LightRifleHeavyBase
-  name: ".30 Magazine Box"
+  name: ".30 rifle Magazine Box"
   parent: BaseMagazineBoxLightRifle
   components:
   - type: Tag

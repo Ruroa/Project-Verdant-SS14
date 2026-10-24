@@ -1,7 +1,7 @@
 - type: entity
   id: BaseMagazinePistol
   name: pistol magazine (.35 auto)
-  parent: [ BaseContrabandTier3, BaseItem, BaseSecurityContraband ] # Blimpuf
+  parent: [ BaseItem, BaseSecurityContraband ]
   abstract: true
   components:
   - type: Tag
@@ -53,7 +53,7 @@
 - type: entity
   id: BaseMagazinePistolHighCapacity
   name: extended pistol magazine (.35 auto)
-  parent: [ BaseContrabandTier3, BaseItem, BaseSecurityContraband ] # Blimpuf
+  parent: [ BaseItem, BaseSecurityContraband ]
   abstract: true
   components:
   - type: Tag
@@ -105,7 +105,7 @@
 - type: entity
   id: BaseMagazinePistolSubMachineGun  # Yeah it's weird but it's pistol caliber
   name: SMG magazine (.35 auto)
-  parent: [ BaseContrabandTier3, BaseItem, BaseSecurityContraband ] # Blimpuf
+  parent: [ BaseItem, BaseSecurityContraband ]
   abstract: true
   components:
   - type: Tag
@@ -143,7 +143,7 @@
 - type: entity
   id: MagazinePistolSubMachineGunTopMounted
   name: WT550 magazine (.35 auto top-mounted)
-  parent: [ BaseContrabandTier3, BaseItem, BaseSecurityContraband ] # Blimpuf
+  parent: [ BaseItem, BaseSecurityContraband ]
   description: Unconventional 30-round top feeding magazine for the WT550 SMG. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: Tag
@@ -174,7 +174,7 @@
 
 - type: entity
   id: MagazinePistolSubMachineGunTopMountedFMJ
-  name: WT550 magazine (.35 FMJ auto top-mounted)
+  name: WT550 magazine (.35 auto FMJ top-mounted)
   parent: [ MagazinePistolSubMachineGunTopMounted ]
   description: Unconventional 30-round top feeding magazine for the WT550 SMG. Intended to hold general-purpose kinetic ammunition. This one is loaded with FMJ.
   components:
@@ -183,7 +183,7 @@
 
 - type: entity
   id: MagazinePistolSubMachineGunTopMountedHP
-  name: WT550 magazine (.35 HP auto top-mounted)
+  name: WT550 magazine (.35 auto HP top-mounted)
   parent: [ MagazinePistolSubMachineGunTopMounted ]
   description: Unconventional 30-round top feeding magazine for the WT550 SMG. Intended to hold general-purpose kinetic ammunition. This one is loaded with HP.
   components:
@@ -465,7 +465,7 @@
 
 - type: entity
   id: MagazinePistolImprovised
-  name: "improvised pistol magazine (.35)"
+  name: "improvised pistol magazine (.35 auto)"
   parent: [ BaseItem, BaseMinorContraband ]
   components:
   - type: Tag

@@ -33,12 +33,12 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleHeavy556PV
+        startingItem: MagazineRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/sfrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
         whitelist:
           tags:
-            - LightRifleHeavy
+            - MagazineRifle
       gun_chamber:
         name: Chamber
         startingItem: CartridgeRifleSP
@@ -90,7 +90,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleM52SPPV
+        startingItem: MagazineRifleM52SP
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
@@ -172,7 +172,7 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistol40SPPV
+          startingItem: MagazinePistol40SP
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
@@ -258,7 +258,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineShotgunPV
+        startingItem: MagazineShotgun
         priority: 2
         whitelist:
           tags:

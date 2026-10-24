@@ -68,7 +68,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponShotgunBulldog
-        - id: MagazineShotgunPV
+        - id: MagazineShotgun
           amount: 4 #SL 3 > 4
         - id: MagazineShotgunSlug
 #       - id: ThermalImagingGoggles
@@ -84,7 +84,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponSubMachineGunC20r
-        - id: MagazinePistolSubMachineGunSPPV
+        - id: MagazinePistolSubMachineGunSP
           amount: 3 #SL 2 > 3
 #       - id: SMGSuppressor
 
@@ -99,7 +99,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponRifleEstoc
-        - id: MagazineRifleSPPV
+        - id: MagazineRifleSP
           amount: 3 #SL 2 > 3
 
 - type: entity
@@ -129,7 +129,7 @@
         - id: WeaponLightMachineGunL6
         - id: MagazineBoxLightRifleSP
           amount: 2 #SL 1 > 2
-        - id: MagazineLightRifleBoxSPPV
+        - id: MagazineLightRifleBoxSP
           amount: 2 #SL cleanup
 
 - type: entity
@@ -176,15 +176,15 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazinePistolSubMachineGunSPPV
+        - id: MagazinePistolSubMachineGunSP
           amount: 4
-        - id: MagazineShotgunPV
+        - id: MagazineShotgun
           amount: 4
-        - id: MagazineRifleSPPV
+        - id: MagazineRifleSP
           amount: 3
-        - id: MagazineRifleSPPV #Starlight, for the estoc
+        - id: MagazineRifleSP #Starlight, for the estoc
           amount: 2
-        - id: MagazineLightRifleBoxSPPV
+        - id: MagazineLightRifleBoxSP
           amount: 3
         - id: MagazineShotgunSlug
           amount: 1
@@ -469,9 +469,9 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponSubMachineGunC20r
-        - id: MagazinePistolSubMachineGunSPPV
+        - id: MagazinePistolSubMachineGunSP
           amount: 4 #SL 3 > 4
-        - id: MagazinePistolSPPV
+        - id: MagazinePistolSP
         - id: SyndicateJawsOfLife
         - id: C4
           amount: 2

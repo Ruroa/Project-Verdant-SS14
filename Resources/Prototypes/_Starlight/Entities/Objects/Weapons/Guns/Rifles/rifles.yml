@@ -1,13 +1,13 @@
 - type: entity
   name: Lecter
-  parent: [ BaseContrabandTier3, WeaponRifleLecter, BaseSecurityContraband ] # Blimpuf
+  parent: [WeaponRifleLecter, BaseSecurityContraband]
   id: WeaponRifleLecterRubber
   suffix: Non-lethal
   components:
   - type: ItemSlots
     slots:
       gun_magazine:
-        name: item-slot-component-slot-name-magazine
+        name: Magazine
         startingItem: MagazineRifleRubber
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
@@ -16,7 +16,7 @@
           tags:
             - MagazineRifle
       gun_chamber:
-        name: item-slot-component-slot-name-chamber
+        name: Chamber
         startingItem: CartridgeRifleRubber
         priority: 1
         whitelist:
@@ -25,8 +25,8 @@
 
 - type: entity
   name: lr-30
-  parent: [ BaseContrabandTier3, BaseItem, BaseGunWieldable, BaseSecurityContraband, BaseSalvageContraband ] # Blimpuf
-  id: WeaponRifleLr30
+  parent: [BaseItem, BaseGunWieldable, BaseSecuritySalvageContraband]
+  id: WeaponLr30
   description: Energy carbine with lethal mode.
   components:
   - type: Sprite
@@ -48,7 +48,7 @@
   - type: ItemSlots
     slots:
       gun_magazine:
-        name: item-slot-component-slot-name-magazine
+        name: Magazine
         startingItem: MagazineBatteryLr30
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
@@ -62,16 +62,11 @@
     containers:
       gun_magazine: !type:ContainerSlot
   - type: Gun
-    fireRate: 3.5
-    shotsPerBurst: 3
-    burstFireRate: 6
-    burstCooldown: 0.7
-    selectedMode: Burst
+    fireRate: 5
+    selectedMode: FullAuto
     availableModes:
       - SemiAuto
-      - Burst
-    angleIncrease: 3
-    angleDecay: 8
+      - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: MagazineVisuals
@@ -79,13 +74,11 @@
     steps: 6
     zeroVisible: true
   - type: Appearance
-  - type: GunHeat
-    heatPerShot: 1600
 
 - type: entity
   name: IK-60 laser carbine
-  parent: [ BaseContrabandTier3, BaseItem, BaseGunWieldable, BaseSecurityContraband ] # Blimpuf
-  id: WeaponRifleIK60
+  parent: [BaseItem, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponIK60
   description: A short, compact rifle-like carbine that relies more on battery-powered ammunition rather than a built-in battery. Used by the NanoTrasen Space Force in combat operations.
   components:
   - type: Sprite
@@ -107,7 +100,7 @@
   - type: ItemSlots
     slots:
       gun_magazine:
-        name: item-slot-component-slot-name-magazine
+        name: Magazine
         startingItem: MagazineBatteryLr30
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
@@ -122,13 +115,12 @@
       gun_magazine: !type:ContainerSlot
   - type: Gun
     fireRate: 5
-    shotsPerBurst: 3
+    shotsPerBurst: 2
     burstCooldown: 0.6
     selectedMode: Burst
     availableModes:
       - SemiAuto
       - Burst
-      - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: MagazineVisuals
@@ -136,8 +128,60 @@
     steps: 5
     zeroVisible: true
   - type: Appearance
-  - type: GunHeat
-    heatPerShot: 1000
+
+- type: entity
+  name: ARG
+  parent: [BaseTSFContraband, BaseWeaponRifle]
+  id: WeaponRifleARG
+  description: An old galactic standard assault rifle, used by various paramilitary groups and former SVS militias ever since. Uses 7.62x39mm ammo.
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Weapons/Guns/Rifles/arg.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Item
+    sprite: _Starlight/Objects/Weapons/Guns/Rifles/arg.rsi
+  - type: Clothing
+    sprite: _Starlight/Objects/Weapons/Guns/Rifles/arg.rsi
+  - type: Gun
+    fireRate: 6
+    soundGunshot:
+      path: /Audio/_Starlight/Weapons/Guns/Gunshots/m90.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineLightRifleFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineLightRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeLightRifleFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeLightRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot ""
+      gun_chamber: !type:ContainerSlot ""
+      firing_pin: !type:Container
+  - type: Appearance
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
 
 - type: entity
   name: Aussec Armory M-52
@@ -162,7 +206,7 @@
   - type: ItemSlots
     slots:
       gun_magazine:
-        name: item-slot-component-slot-name-magazine
+        name: Magazine
         startingItem: MagazineRifleM52FMJ
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
@@ -172,7 +216,7 @@
             - MagazineRifleM52
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
-        name: item-slot-component-slot-name-chamber
+        name: Chamber
         startingItem: CartridgeRifleFMJ
         priority: 1
         whitelist:
@@ -180,10 +224,69 @@
             - CartridgeRifle
 
 - type: entity
+  name: Leikha
+  parent: [ BaseWeaponRifle, BaseSecurityContraband ]
+  id: WeaponRifleLeikha
+  description: A high end military grade assault rifle. This one has been retrofitted with a scope and a burst reciever. Uses 5.56x45mm ammo.
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16a4.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16a4.rsi
+  - type: Gun
+    burstFireRate: 12
+    shotsPerBurst: 3
+    burstCooldown: 0.55
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifleSP
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeRifleSP
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot ""
+      gun_chamber: !type:ContainerSlot ""
+      firing_pin: !type:Container
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 1.5
+    pvsIncrease: 0.15
+
+- type: entity
   name: L10 DMR
-  parent: [ BaseContrabandTier3, BaseWeaponRifle, BaseSecurityContraband ] # Blimpuf
+  parent: [ BaseWeaponRifle, BaseSecurityContraband ]
   id: WeaponRifleL10
-  description: "A scoped marksman rifle for medium range engagements, built on the Lecter platform.\nChambered in .45 magnum."
+  description: "A scoped marksman rifle for medium range engagements, built on the Lecter platform.\nChambered in 7.62x51mm NATO."
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/L10.rsi
@@ -196,43 +299,34 @@
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/L10.rsi
   - type: Gun
     fireRate: 2
-    angleIncrease: 3
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    minAngle: 12
-    maxAngle: 30
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
-    angleDecay: 10
-  - type: GunWieldBonus
-    angleIncreaseDivider: 2
-    minAngleDivider: 8
-    maxAngleDivider: 3.75
-    minAngle: 0
-    maxAngle: 0
+  - type: GunRequiresWield
   - type: SpeedModifiedOnWield
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: ItemSlots
     slots:
       gun_magazine:
-        name: item-slot-component-slot-name-magazine
-        startingItem: MagazineDMRSP
+        name: Magazine
+        startingItem: MagazineRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineL10DMR
+          - MagazineHeavyRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
-        name: item-slot-component-slot-name-chamber
-        startingItem: CartridgeMagnumSP
+        name: Chamber
+        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
-          - CartridgeMagnum
+          - CartridgeHeavyRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot ""
@@ -253,7 +347,7 @@
   name: Pitbull
   parent: [ BaseWeaponRifle, BaseSyndicateContraband ]
   id: WeaponRiflePitbull
-  description: A large bullpup rifle with a low fire-rate but excellent accuracy. Chambered in .45 magnum.
+  description: A large bullpup rifle with a low fire-rate but excellent accuracy. Chambered in 7.62x51mm NATO.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/pitbull.rsi
@@ -269,44 +363,34 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    minAngle: 12
-    maxAngle: 30
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
-    angleIncrease: 3
-    angleDecay: 10
-  - type: GunWieldBonus
-    angleIncreaseDivider: 2
-    minAngleDivider: 8
-    maxAngleDivider: 3.75
-    minAngle: 0
-    maxAngle: 0
   - type: ItemSlots
     slots:
       gun_magazine:
-        name: item-slot-component-slot-name-magazine
-        startingItem: MagazineMagnumRifleSP
+        name: Magazine
+        startingItem: MagazineRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineMagnumSubMachineGun
+          - MagazineHeavyRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
-        name: item-slot-component-slot-name-chamber
-        startingItem: CartridgeMagnumSP
+        name: Chamber
+        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
-            - CartridgeMagnum
+            - CartridgeHeavyRifle
 
 
 - type: entity
   name: Peacemaker
-  parent: [ BaseContrabandTier3, BaseWeaponRifle, BaseSecurityContraband ] # Blimpuf
+  parent: [ BaseWeaponRifle, BaseSecurityContraband ]
   id: WeaponRiflePeacemaker
-  description: The best or worst thing you'll ever see, depending if it's pointed at you or not. Uses .20 rifle ammo.
+  description: The best or worst thing you'll ever see, depending if it's pointed at you or not. Uses 5.56x45mm ammo.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/ert.rsi
@@ -322,22 +406,19 @@
   - type: Gun
     fireRate: 7
     burstFireRate: 14
-    selectedMode: Burst
+    selectedMode: FullAuto
     availableModes:
+    - FullAuto
+    - SemiAuto
     - Burst
-    minAngle: 12
-    maxAngle: 30
     soundGunshot:
       path: /Audio/_Starlight/Weapons/Guns/Gunshots/m90.ogg
       params:
         volume: 1
-    angleIncrease: 3
-    angleDecay: 10
-    shotsPerBurst: 3
   - type: ItemSlots
     slots:
       gun_magazine:
-        name: item-slot-component-slot-name-magazine
+        name: Magazine
         startingItem: MagazineRifleFMJ
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
@@ -347,25 +428,132 @@
           - MagazineRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
-        name: item-slot-component-slot-name-chamber
+        name: Chamber
         startingItem: CartridgeRifleFMJ
         priority: 1
         whitelist:
           tags:
-          - CartridgeRifle
-  - type: GunWieldBonus
-    minAngle: 0
-    maxAngle: 0
-    minAngleDivider: 8
-    maxAngleDivider: 3.75
-    angleIncreaseDivider: 2
+
+- type: entity
+  name: M18-Militant
+  parent: [BaseWeaponRifle, BaseSalvageContraband]
+  id: WeaponRifleM18
+  description: Aged yet dependable, this old-world assault rifle is chambered in 5.56x45mm ammunition. Renowned for its reliability and ease of maintenance even in the harshest environments, it remains a staple among your station's merce- salvage forces.
+  components:
+    - type: Sprite
+      sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-0
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: Clothing
+      sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16.rsi
+    - type: Wieldable
+      unwieldOnUse: false
+    - type: GunWieldBonus
+      minAngle: -13
+      maxAngle: -10
+    - type: Gun
+      minAngle: 21
+      maxAngle: 32
+      fireRate: 2.7
+      burstFireRate: 18
+      soundGunshot:
+        path: /Audio/_Starlight/Weapons/Guns/Gunshots/m16.ogg
+      selectedMode: Burst
+      availableModes:
+      - Burst
+      - SemiAuto
+      shotsPerBurst: 2
+      burstCooldown: 0.45
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazineRifleSP
+          insertSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - MagazineRifle
+          whitelistFailPopup: gun-magazine-whitelist-fail
+        gun_chamber:
+          name: Chamber
+          startingItem: CartridgeRifleSP
+          priority: 1
+          whitelist:
+            tags:
+              - CartridgeRifle
+    - type: MagazineVisuals
+      magState: mag
+      steps: 1
+      zeroVisible: true
+    - type: Appearance
+    - type: CursorOffsetRequiresWield
+    - type: EyeCursorOffset
+      maxOffset: 0.5
+      pvsIncrease: 1.4
+
+- type: entity
+  name: SPC-Lionhunter
+  parent: [ BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband ]
+  id: WeaponRifleLionhunter
+  description: A one-of-a-kind bolt-action precision rifle fitted with an integrated scope and chambered in 12.7x99mm. Built to drop targets at extreme range with authority. Each shot demands a deliberate recycle of the action.
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Weapons/Guns/Rifles/lionhunter_icons.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,2
+    sprite: _Starlight/Objects/Weapons/Guns/Rifles/lionhunter_inhands.rsi
+  - type: Clothing
+    sprite: _Starlight/Objects/Weapons/Guns/Rifles/lionhunter_inhands.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    fireRate: 1
+    pump: true
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgeAntiMateriel
+    capacity: 10
+    proto: CartridgeAntiMateriel
+    soundRack:
+      path: /Audio/_Starlight/Weapons/Guns/Cock/cycle_bolt.ogg
+      params:
+        variation: 0.1
+  - type: GunRequiresWield
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 5.4
+    pvsIncrease: 0.54
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+      firing_pin: !type:Container
+  - type: Appearance
 
 - type: entity
   name: ForceableFollow AKMS
   parent: [ WeaponRifleAk, BaseSovietContraband ]
   id: WeaponRifleAkAdmeme
   suffix: Admeme
-  description: An iconic weapon of war. Uses .30 rifle ammo.
+  description: An iconic weapon of war. Uses 7.62x39mm ammo.
   components:
   - type: Tag
     tags:
@@ -373,9 +561,9 @@
 
 - type: entity
   name: Lawbringer
-  parent: [ BaseContrabandTier3, BaseWeaponRifle, BaseSecurityContraband ] # Blimpuf
+  parent: [BaseWeaponRifle, BaseSecurityContraband]
   id: WeaponRifleLawbringer
-  description: "A bullpup carbine of modern design, commissioned by CentComm for their security forces.\nFeeds from .30 rifle magazines."
+  description: "A bullpup carbine of modern design, commissioned by VSC for its security forces.\nFeeds from 7.62x51mm NATO magazines."
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/lawbringer.rsi
@@ -391,102 +579,26 @@
   - type: ItemSlots
     slots:
       gun_magazine:
-        name: item-slot-component-slot-name-magazine
-        startingItem: MagazineLightRifleSP
+        name: Magazine
+        startingItem: MagazineRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineLightRifle
-        whitelistFailPopup: gun-magazine-whitelist-fail
-      gun_chamber:
-        name: item-slot-component-slot-name-chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeLightRifle
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot ""
-      gun_chamber: !type:ContainerSlot ""
-      firing_pin: !type:Container
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-
-- type: entity
-  name: Bolt Rifle
-  parent: [ BaseWeaponRifle, BaseSalvageContraband ]
-  id: WeaponRifleBolt
-  description: A terrifyingly powerful and rugged rifle commonly used by the ITG for their frontier logistic escorts and salvage teams. Fires high-caliber explosive impact bolts. Watch out for the recoil.
-  components:
-  - type: KnockbackByUserTag
-    doestContain:
-      Skating:
-        knockback: 2
-        staminaMultiplier: 6
-      Rodentia:
-        knockback: 2
-        staminaMultiplier: 6
-      Resomi:
-        knockback: 2
-        staminaMultiplier: 6
-      Felionoid:
-        knockback: 2
-        staminaMultiplier: 6
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Rifles/impact_bolt_rifle.rsi
-    layers:
-    - state: base
-      map:
-      - "enum.GunVisualLayers.Base"
-    - state: mag-0
-      map:
-      - "enum.GunVisualLayers.Mag"
-  - type: Clothing
-    sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16.rsi
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,4,3
-  - type: Wieldable
-    unwieldOnUse: false
-  - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -20
-  - type: Gun
-    minAngle: 20
-    maxAngle: 35
-    fireRate: 3.5
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-    - FullAuto
-    soundGunshot:
-      path: /Audio/_Starlight/Weapons/Guns/Gunshots/dp.ogg
-      params:
-        pitch: 0.7
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineBoltRifle
-        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineBoltRifle
+          - MagazineHeavyRifle
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         priority: 1
         whitelist:
           tags:
-          - CartridgeImpactBolt
+          - CartridgeHeavyRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot ""
+      gun_chamber: !type:ContainerSlot ""
+      firing_pin: !type:Container
   - type: MagazineVisuals
     magState: mag
     steps: 1

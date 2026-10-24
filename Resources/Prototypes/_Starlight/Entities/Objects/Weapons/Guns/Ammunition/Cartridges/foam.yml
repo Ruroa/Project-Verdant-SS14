@@ -40,7 +40,7 @@
   parent: BaseCartridgeLightRifleSP # Starlight
   id: CartridgeLightRifleFoam
   categories: [ HideSpawnMenu ]
-  name: cartridge (.30 light rifle foam)
+  name: cartridge (.30 rifle foam)
   description: A light rifle cartridge with a foam dart tip. At these velocities it's still going to leave a bruise.
   components:
   - type: CartridgeAmmo

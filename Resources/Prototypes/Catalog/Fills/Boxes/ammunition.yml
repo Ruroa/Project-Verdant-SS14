@@ -46,11 +46,11 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazineLightRifleSPPV
+        - id: MagazineLightRifleSP
           amount: 1
         - id: MagazineLightRifleHP
           amount: 1
-        - id: MagazineLightRifleFMJPV
+        - id: MagazineLightRifleFMJ
           amount: 1
         - id: MagazineLightRifleAP
           amount: 1
@@ -79,7 +79,7 @@
   - type: EntityTableContainerFill
     containers:
       storagebase:
-        id: MagazinePistolSubMachineGunTopMountedPV
+        id: MagazinePistolSubMachineGunTopMounted
         amount: 3
 
 - type: entity
@@ -92,7 +92,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazinePistolSPPV
+        - id: MagazinePistolSP
           amount: 2
         - id: MagazinePistolHP
           amount: 1
@@ -120,7 +120,7 @@
   - type: EntityTableContainerFill
     containers:
       storagebase:
-        id: MagazinePistolHighCapacitySPPV
+        id: MagazinePistolHighCapacitySP
         amount: 4
 
 - type: entity
@@ -144,7 +144,7 @@
   - type: EntityTableContainerFill
     containers:
       storagebase:
-        id: MagazinePistolSubMachineGunSPPV
+        id: MagazinePistolSubMachineGunSP
         amount: 3
 
 - type: entity
@@ -169,7 +169,7 @@
   - type: EntityTableContainerFill
     containers:
       storagebase:
-        id: MagazineShotgunPV
+        id: MagazineShotgun
         amount: 4
 
 - type: entity
@@ -227,9 +227,9 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazineRifleFMJPV
+        - id: MagazineRifleFMJ
           amount: 2
-        - id: MagazineRifleSPPV
+        - id: MagazineRifleSP
           amount: 1
         - id: MagazineRifleHP
           amount: 1

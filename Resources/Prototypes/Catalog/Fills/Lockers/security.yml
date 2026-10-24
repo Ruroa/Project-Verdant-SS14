@@ -265,7 +265,7 @@
       amount: 2
     - id: WeaponPistolEnforcer
       amount: 1
-    - id: MagazinePistolSPPV
+    - id: MagazinePistolSP
       amount: 4
     - id: MagazinePistolHP
       amount: 2
@@ -300,9 +300,9 @@
       amount: 1
     - id: MagazineRifleHP
       amount: 4
-    - id: MagazineRifleSPPV
+    - id: MagazineRifleSP
       amount: 4
-    - id: MagazineLightRifleSPPV
+    - id: MagazineLightRifleSP
       amount: 1
     - id: MagazineLightRifleHP
       amount: 1
@@ -331,7 +331,7 @@
       amount: 2 # Starlight
     - id: WeaponSubMachineGunSP91RC
       amount: 2
-    - id: MagazinePistolSubMachineGunSPPV
+    - id: MagazinePistolSubMachineGunSP
       amount: 5 # Starlight
 
 - type: entity
@@ -412,7 +412,7 @@
     - id: BoxFiringPinPistol # Starlight, firing pins
     - id: WeaponSubMachineGunWt550
       amount: 2
-    - id: MagazinePistolSubMachineGunTopMountedPV
+    - id: MagazinePistolSubMachineGunTopMounted
       amount: 4
 
 - type: entity

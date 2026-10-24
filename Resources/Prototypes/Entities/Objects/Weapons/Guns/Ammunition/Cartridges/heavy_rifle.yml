@@ -1,8 +1,8 @@
 - type: entity
   abstract: true
-  parent: [ BaseContrabandTier3, BaseCartridge, BaseSecurityContraband ] # Blimpuf
+  parent: [ BaseCartridge, BaseSecurityContraband ]
   id: BaseCartridgeHeavyRifle
-  name: cartridge (.10 rifle)
+  name: cartridge (7.62x51mm NATO)
   components:
   - type: Tag
     tags:
@@ -10,10 +10,12 @@
   - type: CartridgeAmmo
     proto: BulletHeavyRifleTrace
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
   - type: Appearance
   - type: SpentAmmoVisuals
   - type: StaticPrice
@@ -22,7 +24,7 @@
 - type: entity
   parent: BaseCartridgeHeavyRifle
   id: CartridgeMinigun
-  name: cartridge (.10 rifle)
+  name: cartridge (7.62x51mm NATO)
   components:
   - type: CartridgeAmmo
     proto: BulletMinigunTrace

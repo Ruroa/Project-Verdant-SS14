@@ -9,8 +9,7 @@
   - type: CartridgeAmmo
     proto: BulletGrenadeCleanadeSyndicate
   - type: Contraband
-    tier: Tier3 # Blimpuf
-    contrabandType: Syndicate # Blimpuf
+    severity: Syndicate
 
 # 120mm Ammunition
 
@@ -195,13 +194,11 @@
         - Cartridge60mmRocket
     capacity: 30
 
-# PEACEKEEPER AMMO
-
-- type: entity
+- type: entity # Starlight Grenades for the Peacekeeper
   id: GrenadeGaslauncher
   name: gas grenade
   description: Able to choke a room or several of your friends.
-  parent: [ BaseContrabandTier2, BaseGrenade, BaseSecurityContraband ] # Blimpuf
+  parent: [ BaseGrenade, BaseSecurityContraband]
   components:
   - type: CartridgeAmmo
     proto: BulletGrenadeGas
@@ -218,11 +215,11 @@
     tags:
     - GrenadeLessLethal
 
-- type: entity
+- type: entity # Starlight Grenades for the sec Peacekeeper
   id: GrenadeStingerlauncher
   name: stinger grenade
   description: An unruly crowd's favourite.
-  parent: [ BaseContrabandTier2, BaseGrenade, BaseSecurityContraband ] # Blimpuf
+  parent: [ BaseGrenade, BaseSecurityContraband]
   components:
   - type: CartridgeAmmo
     proto: BulletGrenadeStinger
@@ -234,27 +231,6 @@
   - type: Appearance
   - type: SpentAmmoVisuals
     state: blast
-    suffix: false
-  - type: Tag
-    tags:
-    - GrenadeLessLethal
-
-- type: entity
-  id: GrenadeBola
-  name: bola grenade
-  description:
-  parent: [BaseGrenade, BaseSecurityContraband]
-  components:
-  - type: CartridgeAmmo
-    proto: BulletGrenadeBola
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
-    layers:
-    - state: bola
-      map: ["enum.AmmoVisualLayers.Base"]
-  - type: Appearance
-  - type: SpentAmmoVisuals
-    state: bola
     suffix: false
   - type: Tag
     tags:

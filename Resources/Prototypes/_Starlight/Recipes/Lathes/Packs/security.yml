@@ -64,10 +64,10 @@
   - MagazineBoxBattery
 #####################MAGAZINE#######################
 # Light Rifle
-  - MagazineLightRifleSPPV
+  - MagazineLightRifleSP
   - MagazineLightRifleHP
-  - MagazineLightRifleFMJPV
-  - MagazineLightRifleMaximPV
+  - MagazineLightRifleFMJ
+  - MagazineLightRifleMaxim
   - SpeedLoaderLightRifle
   - MagazineLightRifleEmpty
   - MagazineDMRSP
@@ -85,30 +85,30 @@
 # Pistol
   - MagazinePistolCaselessRifle
   - MagazineCaselessRifleRubber
-  - MagazinePistolSPPV
+  - MagazinePistolSP
   - MagazinePistolHP
   - MagazinePistolFMJ
   - MagazinePistolEmpty
-  - MagazinePistol40SPPV
+  - MagazinePistol40SP
   - MagazinePistol40HP
-  - MagazinePistol40FMJPV
+  - MagazinePistol40FMJ
   - MagazinePistol40Empty
 # SMG
-  - MagazinePistolSubMachineGunSPPV
+  - MagazinePistolSubMachineGunSP
   - MagazinePistolSubMachineGunHP
   - MagazinePistolSubMachineGunFMJ
   - MagazinePistolSubMachineGunEmpty
-  - MagazinePistolSubMachineGunTopMountedPV
+  - MagazinePistolSubMachineGunTopMounted
   - MagazinePistolSubMachineGunTopMountedEmpty
   - MagazinePistolSubMachineGunUzi
   - MagazinePistolSubMachineGunPPSH
 # Rifle
-  - MagazineRifleSPPV
+  - MagazineRifleSP
   - MagazineRifleHP
-  - MagazineRifleFMJPV
+  - MagazineRifleFMJ
   - MagazineRifleEmpty
 # Shotgun
-  - MagazineShotgunPV
+  - MagazineShotgun
   - MagazineShotgunEmpty
   - MagazineShotgunSlug
   - SpeedLoaderMagnumBasic

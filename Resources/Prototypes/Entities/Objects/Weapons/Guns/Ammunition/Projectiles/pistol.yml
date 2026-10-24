@@ -18,7 +18,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 2
+        Blunt: 1
 
 - type: entity
   parent: BaseBulletIncendiary
@@ -29,8 +29,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 12
-        Heat: 4
+        Piercing: 11
+        Heat: 5
 
 - type: entity
   parent: BaseBulletUranium
@@ -41,6 +41,6 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 6
-        Piercing: 10
+        Piercing: 14
+        Radiation: 2
 
