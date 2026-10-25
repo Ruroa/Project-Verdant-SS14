@@ -61,8 +61,7 @@ public sealed class LimbTargettingUIController : UIController, IOnSystemLoaded<L
 
     private void OnPlayerAttached(EntityUid player) => Refresh(player);
 
-    // The player attach event can arrive before the replicated body component.
-    // Refresh again when it is initialized so the HUD does not stay hidden.
+    // Body replication refresh
     private void OnBodyInitialized(EntityUid player)
     {
         if (player == _player.LocalEntity)

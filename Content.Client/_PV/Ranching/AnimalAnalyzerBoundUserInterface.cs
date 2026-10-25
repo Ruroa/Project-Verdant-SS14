@@ -16,7 +16,7 @@ public sealed class AnimalAnalyzerBoundUserInterface(EntityUid owner, Enum uiKey
         _window = this.CreateWindow<AnimalAnalyzerWindow>();
         _window.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
 
-        // The scan message can arrive before the window has finished opening.
+        // Scan response timing
         if (_lastScan is { } scan)
             _window.Populate(scan);
     }

@@ -29,11 +29,11 @@ public sealed class FeedMakerSystem : EntitySystem
         if (_solutions.TryGetSolution(args.Used, produce.SolutionName, out _, out var solution))
             color = solution.GetColor(_prototypes);
 
-        // Banana's reagent mixture is green, which does not represent the produce itself very well.
+        // Produce color
         if (produce.SeedId == "banana")
             color = Color.FromHex("#E8D34F");
 
-        // Seed names describe the crop itself and avoid harvested-item suffixes such as "bushel".
+        // Crop name
         var produceName = Name(args.Used);
         if (_botany.TryGetSeed(produce, out var seed) && !string.IsNullOrWhiteSpace(seed.Name))
             produceName = Loc.GetString(seed.Name);

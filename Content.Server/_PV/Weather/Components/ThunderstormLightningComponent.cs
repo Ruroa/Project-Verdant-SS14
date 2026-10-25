@@ -3,7 +3,7 @@ using Content.Server._PV.Weather.Systems;
 namespace Content.Server._PV.Weather.Components;
 
 /// <summary>
-/// Periodically creates controlled lightning strikes while a thunderstorm weather effect is active.
+/// Storm lightning strikes
 /// </summary>
 [RegisterComponent, Access(typeof(ThunderstormLightningSystem))]
 public sealed partial class ThunderstormLightningComponent : Component

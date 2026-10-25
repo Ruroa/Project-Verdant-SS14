@@ -88,12 +88,11 @@ public sealed class ThunderstormLightningSystem : EntitySystem
             target = Spawn(MarkerPrototype, strikeCoordinates);
         }
 
-        // Base lightning only reaches five tiles. Keep the temporary sky source inside that range.
+        // Sky source range
         var sourceCoordinates = strikeCoordinates.Offset(new Vector2(0f, 4f));
         var source = Spawn(MarkerPrototype, sourceCoordinates);
 
-        // The weather bolt uses Tesla's beam visual, but deliberately disables Tesla target events,
-        // chaining and explosions so the event remains predictable.
+        // Safe Tesla effect
         _lightning.ShootLightning(source, target, LightningPrototype, triggerLightningEvents: false);
 
         if (mobTarget is { } struckMob)

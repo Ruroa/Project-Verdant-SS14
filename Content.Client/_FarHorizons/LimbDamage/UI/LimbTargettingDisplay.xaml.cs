@@ -13,8 +13,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._FarHorizons.LimbDamage.UI;
 
 /// <summary>
-/// Far Horizons-style body diagram: each configured body-part sprite is drawn
-/// with an outline shader, and clicking its configured area selects that part.
+/// Limb selector
 /// </summary>
 [GenerateTypedNameReferences]
 public sealed partial class LimbTargettingDisplay : Control
@@ -39,7 +38,7 @@ public sealed partial class LimbTargettingDisplay : Control
     public bool DrawDebugBoxes;
     public bool WithHealth;
     public bool ReadOnly;
-    /// <summary>Whether the current mouse hover and selected limb should receive the selection outline.</summary>
+    /// <summary>Selection highlight</summary>
     public bool HighlightSelection = true;
     public Dictionary<LimbTarget, float> LimbDamage = new();
 

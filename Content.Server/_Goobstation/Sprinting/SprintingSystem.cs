@@ -5,6 +5,6 @@ using Content.Shared._Goobstation.Sprinting;
 namespace Content.Server._Goobstation.Sprinting;
 
 /// <summary>
-/// Runs the shared sprint input and movement-speed logic on the authoritative server.
+/// Server sprint handling
 /// </summary>
 public sealed class SprintingSystem : SharedSprintingSystem;

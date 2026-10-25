@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._PV.UserInterface.RichText;
 
 /// <summary>
-/// Displays one of the approved organization logos in player-written paper markup.
+/// Paper logo tags
 /// </summary>
 public sealed class PaperLogoTagHandler : IMarkupTagHandler
 {
@@ -35,8 +35,7 @@ public sealed class PaperLogoTagHandler : IMarkupTagHandler
     }
 
     /// <summary>
-    /// Converts the convenient unquoted player syntax into a quoted markup parameter.
-    /// Robust's markup parser otherwise interprets unquoted words as color values.
+    /// Normalize logo markup
     /// </summary>
     public static string NormalizeMarkup(string text)
     {

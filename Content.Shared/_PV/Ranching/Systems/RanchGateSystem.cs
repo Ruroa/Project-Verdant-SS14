@@ -10,7 +10,7 @@ using Robust.Shared.Physics.Systems;
 namespace Content.Shared._PV.Ranching.Systems;
 
 /// <summary>
-/// Allows ranch gates to remain open for people while containing unpulled livestock.
+/// Livestock gate behavior
 /// </summary>
 public sealed class RanchGateSystem : EntitySystem
 {
@@ -48,8 +48,7 @@ public sealed class RanchGateSystem : EntitySystem
         if (args.CanCollide || !TryComp(entity, out DoorComponent? door))
             return;
 
-        // The regular door system has reached the passable portion of opening and disabled collision.
-        // Keep the body enabled so PreventCollideEvent can selectively block livestock.
+        // Preserve selective collision
         if (door.State != DoorState.Opening && door.State != DoorState.Open)
             return;
 
@@ -67,16 +66,14 @@ public sealed class RanchGateSystem : EntitySystem
         var isAnimal = _whitelist.IsValid(entity.Comp.AnimalWhitelist, args.OtherEntity);
         var isBeingPulled = IsActivelyPulled(args.OtherEntity);
 
-        // Cancelling means there is no collision. Everyone can cross an open gate except
-        // configured livestock that is not actively being dragged.
+        // Open gate filtering
         if (!isAnimal || isBeingPulled)
             args.Cancelled = true;
     }
 
     private bool IsActivelyPulled(EntityUid animal)
     {
-        // Pull state is networked on both participants. Accept either side so prediction does not
-        // temporarily treat a dragged animal as free-roaming while one component catches up.
+        // Networked pull state
         if (TryComp(animal, out PullableComponent? pullable) && pullable.Puller != null)
             return true;
 

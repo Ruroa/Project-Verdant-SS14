@@ -27,7 +27,7 @@ public sealed partial class TerraformerComponent : Component
     public float TileConvertCooldown = 2f;
 
     /// <summary>
-    /// Research points awarded to the linked research server for every successfully converted tile.
+    /// Tile research points
     /// </summary>
     [DataField]
     public int SciencePointsPerTile = 5;
@@ -48,7 +48,7 @@ public sealed partial class TerraformerComponent : Component
     public List<string> SourceTiles = new();
 
     /// <summary>
-    /// Tile used as the visible transition between barren terrain and the final terraformed tile.
+    /// Transition tile
     /// </summary>
     [DataField]
     public string IntermediateTile = "FloorDirt";
@@ -99,15 +99,14 @@ public sealed partial class TerraformerComponent : Component
     public string BarrierPrototype = "TerraformerAtmosBarrier";
 
     /// <summary>
-    /// Distance from the Terraformer where the barrier outline should spawn.
-    /// If set to 0 or below, Radius is used instead.
+    /// Barrier distance
+    /// Nonpositive uses radius
     /// </summary>
     [DataField]
     public float BarrierRadius = 0f;
 
     /// <summary>
-    /// How often the Terraformer network checks and repairs the shared barrier outline.
-    /// This does not delete and respawn the entire outline anymore; it only removes invalid barriers and spawns missing ones.
+    /// Barrier repair interval
     /// </summary>
     [DataField]
     public float BarrierRefreshCooldown = 6f;
@@ -116,26 +115,24 @@ public sealed partial class TerraformerComponent : Component
     public float BarrierRefreshAccumulator = 0f;
 
     /// <summary>
-    /// Forces this Terraformer's grid to repair its shared barrier outline on the next update.
-    /// Used when another Terraformer turns off or is deleted.
+    /// Network repair trigger
     /// </summary>
     [DataField]
     public bool ForceBarrierRefresh = false;
 
     /// <summary>
-    /// Runtime list of barrier entities spawned for this Terraformer's current barrier network.
-    /// The repaired barrier system stores the shared grid outline on one Terraformer in the network.
+    /// Shared barrier list
     /// </summary>
     public List<EntityUid> SpawnedBarriers = new();
 
     /// <summary>
-    /// Legacy automatic tree spawning. Disabled by default; saplings inserted into the terraformer are the intended tree source.
+    /// Legacy tree spawning
     /// </summary>
     [DataField]
     public bool SpawnTrees = false;
 
     /// <summary>
-    /// Maximum amount of trees this Terraformer may spawn over its lifetime if legacy automatic spawning is explicitly enabled.
+    /// Legacy tree limit
     /// </summary>
     [DataField]
     public int MaxSpawnedTrees = 4;
@@ -153,14 +150,13 @@ public sealed partial class TerraformerComponent : Component
     public float TreeSpawnChance = 0.25f;
 
     /// <summary>
-    /// Legacy automatic tree prototype. Sapling tree spawning uses TerraformerSaplingComponent instead.
+    /// Legacy tree prototype
     /// </summary>
     [DataField]
     public string TreePrototype = "FloraTree";
 
     /// <summary>
-    /// Tile prototype IDs that may receive spawned trees.
-    /// Keep this to grass tiles so trees do not appear on paths or other converted floor types.
+    /// Valid tree tiles
     /// </summary>
     [DataField]
     public List<string> TreeSpawnTiles = new()

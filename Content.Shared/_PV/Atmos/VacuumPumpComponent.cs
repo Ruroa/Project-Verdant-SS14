@@ -10,13 +10,13 @@ public sealed partial class VacuumPumpComponent : Component
     public bool Enabled;
 
     /// <summary>
-    /// Maximum amount of gas removed from the room each second.
+    /// Maximum gas removal
     /// </summary>
     [DataField]
     public float MolesPerSecond = 1500f;
 
     /// <summary>
-    /// Safety limit for the connected-room search.
+    /// Room search limit
     /// </summary>
     [DataField]
     public int MaxFinishTiles = 256;

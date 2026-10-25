@@ -26,7 +26,7 @@ public sealed partial class LimbStatusUI : UIWidget
         LimbTargettingDisplay.InitializeDisplay(prototypes, sprites, proto, withHealth: true);
         LimbTargettingDisplay.DefaultColor = Vector3.One;
         LimbTargettingDisplay.HighlightColor = Vector3.One;
-        // This HUD diagram only reports health; it is not a target selector.
+        // Health display only
         LimbTargettingDisplay.HighlightSelection = false;
     }
 

@@ -1,7 +1,7 @@
 namespace Content.Shared._PV.Ranching;
 
 /// <summary>
-/// Gives a six-slot feeding trough its special empty/half/full visual thresholds.
+/// Feed trough visuals
 /// </summary>
 [RegisterComponent]
 public sealed partial class FeedingTroughComponent : Component
@@ -10,7 +10,7 @@ public sealed partial class FeedingTroughComponent : Component
 }
 
 /// <summary>
-/// Allows thirsty nearby animals to drink water from a solution trough.
+/// Water trough
 /// </summary>
 [RegisterComponent]
 public sealed partial class WaterTroughComponent : Component

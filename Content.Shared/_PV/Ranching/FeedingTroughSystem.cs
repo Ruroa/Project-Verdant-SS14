@@ -34,8 +34,8 @@ public sealed class FeedingTroughSystem : EntitySystem
 
     private void OnFeedingTroughIngested(Entity<FeedingTroughComponent> ent, ref IngestedEvent args)
     {
-        // Large troughs must not use Edible's normal "repeat until empty" behavior.
-        // Replanning lets the animal stop once its hunger or thirst is satisfied.
+        // Single feed interaction
+        // Feeding replanning
         args.Repeat = false;
     }
 

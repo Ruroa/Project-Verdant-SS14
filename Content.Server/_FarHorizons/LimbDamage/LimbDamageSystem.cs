@@ -20,9 +20,7 @@ public sealed partial class LimbDamageSystem : EntitySystem
 
     public override void Initialize()
     {
-        // Starlight's SharedBodySystem already subscribes to BodyComponent +
-        // ComponentInit. Use ComponentStartup here to avoid a duplicate event
-        // subscription while still adding the body targeting components.
+        // Avoid duplicate subscriptions
         SubscribeLocalEvent<BodyComponent, ComponentStartup>(OnBodyStartup);
         SubscribeLocalEvent<BodyComponent, DamageBeforeApplyEvent>(OnDamage);
         SubscribeLocalEvent<BodyComponent, RejuvenateEvent>(OnRejuvenate);
@@ -59,9 +57,7 @@ public sealed partial class LimbDamageSystem : EntitySystem
     }
 
     /// <summary>
-    /// Records a random locational portion of each hit on an attached body part.
-    /// The remainder stays on the main body entity, preserving existing mob-state
-    /// thresholds while giving each part its own damage pool.
+    /// Apply limb damage
     /// </summary>
     private void OnDamage(Entity<BodyComponent> ent, ref DamageBeforeApplyEvent args)
     {

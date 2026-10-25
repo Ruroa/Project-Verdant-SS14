@@ -6,7 +6,7 @@ using Content.Shared.Chemistry.EntitySystems;
 namespace Content.Server._PV.Ranching;
 
 /// <summary>
-/// Keeps a reagent cow's visual reagent synchronized with the dominant reagent in its udder.
+/// Udder reagent visuals
 /// </summary>
 public sealed class ReagentCowSystem : EntitySystem
 {

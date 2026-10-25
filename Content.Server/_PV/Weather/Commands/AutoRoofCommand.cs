@@ -11,9 +11,7 @@ using Robust.Shared.Map.Components;
 namespace Content.Server._PV.Weather.Commands;
 
 /// <summary>
-/// Calculates roof coverage for the grid the invoking mapper is standing on.
-/// Boundary-connected floor is outdoors; floor enclosed by BlockWeather
-/// structures is indoors. Explicit roof markers are preserved as overrides.
+/// Calculate grid roofs
 /// </summary>
 [AdminCommand(AdminFlags.Mapping)]
 public sealed partial class AutoRoofCommand : IConsoleCommand
@@ -78,7 +76,7 @@ public sealed partial class AutoRoofCommand : IConsoleCommand
             return;
         }
 
-        // Remove overrides that no longer point to a real tile.
+        // Remove stale overrides
         overrides.ForceRoof.IntersectWith(tiles);
         overrides.ForceNoRoof.IntersectWith(tiles);
 
@@ -104,13 +102,12 @@ public sealed partial class AutoRoofCommand : IConsoleCommand
             if (blockers.Contains(tile))
                 continue;
 
-            // Any traversable tile touching empty space is connected to the map edge.
+            // Boundary seed
             if (TouchesEmptySpace(tile, tiles))
                 AddOutside(tile, outside, queue);
         }
 
-        // Roof Disabled is also an outside seed. This lets one marker expose a
-        // connected courtyard while surrounding rooms remain roofed.
+        // Courtyard seed
         foreach (var tile in overrides.ForceNoRoof)
         {
             if (!blockers.Contains(tile))

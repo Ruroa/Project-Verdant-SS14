@@ -80,9 +80,7 @@ public abstract class SharedSprintingSystem : EntitySystem
             || !TryComp<InputMoverComponent>(session.AttachedEntity, out _))
             return;
 
-        // A key-up must always stop sprinting. Do not gate this on current
-        // movement input: it may be zero if the player stops moving before
-        // releasing Sprint, which would otherwise leave sprint stuck on.
+        // Stop on key release
         if (message.State == BoundKeyState.Up)
         {
             if (sprinter.IsSprinting)

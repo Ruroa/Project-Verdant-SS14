@@ -16,9 +16,7 @@ public sealed class LimbTargettingSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<LimbTargettingComponent, AfterAutoHandleStateEvent>(OnTargetState);
-        // SharedBodySystem owns the BodyComponent + ComponentInit subscription.
-        // Use startup to refresh after the body has been initialized without
-        // registering the same component/event pair twice.
+        // Avoid duplicate subscriptions
         SubscribeLocalEvent<BodyComponent, ComponentStartup>(OnBodyStartup);
     }
 

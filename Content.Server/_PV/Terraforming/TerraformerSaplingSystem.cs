@@ -40,8 +40,7 @@ public sealed class TerraformerSaplingSystem : EntitySystem
     {
         base.Initialize();
 
-        // The main TerraformerSystem already subscribes to TerraformerComponent events.
-        // Subscribe through TransformComponent and filter for terraformers to avoid duplicate subscriptions.
+        // Filter terraformers
         SubscribeLocalEvent<TransformComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<TransformComponent, ComponentShutdown>(OnTransformShutdown);
     }
@@ -79,12 +78,11 @@ public sealed class TerraformerSaplingSystem : EntitySystem
             _saplingQueues[uid] = queue;
         }
 
-        // Each sapling gets its own 5-10 second processing delay. Only the front item is processed,
-        // so loading several saplings never causes them to grow all at once.
+        // Growth delay
         var processDelay = _random.NextFloat(MinimumProcessDelay, MaximumProcessDelay);
         queue.Enqueue(new QueuedSapling(treePrototype, processDelay));
 
-        // The physical sapling is now stored logically in the Terraformer's queue.
+        // Queued sapling
         QueueDel(args.Used);
         args.Handled = true;
 
@@ -102,8 +100,7 @@ public sealed class TerraformerSaplingSystem : EntitySystem
             if (!_saplingQueues.TryGetValue(uid, out var queue) || queue.Count == 0)
                 continue;
 
-            // Saplings only process while the Terraformer is active and powered.
-            // Pausing power also pauses the current sapling's processing delay.
+            // Active power check
             if (!terraformer.Active || !IsPowered(uid))
                 continue;
 
@@ -127,8 +124,7 @@ public sealed class TerraformerSaplingSystem : EntitySystem
 
             current.RetryAccumulator = 0f;
 
-            // Do not dequeue the sapling when there is no valid grass tile.
-            // It remains at the front of the queue and retries until a spot opens up.
+            // Retry without grass
             if (!TrySpawnSaplingTree(terraformer, xform, current.TreePrototype))
                 continue;
 
@@ -184,10 +180,7 @@ public sealed class TerraformerSaplingSystem : EntitySystem
             if (Deleted(anchored))
                 continue;
 
-            // Sub-floor cables, pipes, atmosphere-fix markers and similar anchored utility entities
-            // should not make an otherwise valid grass tile unusable. Only real colliding occupants
-            // block tree placement. Existing trees and normal structures are collidable, so this also
-            // prevents trees from spawning on top of each other or inside walls/machines.
+            // Check tile occupants
             if (!TryComp<PhysicsComponent>(anchored, out var physics))
                 continue;
 

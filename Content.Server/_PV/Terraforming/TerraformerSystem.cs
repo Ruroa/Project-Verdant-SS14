@@ -297,21 +297,21 @@ public sealed class TerraformerSystem : EntitySystem
 
             var tile = _map.GetTileRef(gridUid, grid, xform.Coordinates).GridIndices;
 
-            // Remove barriers that ended up inside the terraform area but are no longer part of the outside outline.
+            // Remove inner barriers
             if (combinedArea.Contains(tile) && !desiredBoundaryTiles.Contains(tile))
             {
                 barriersToDelete.Add(uid);
                 continue;
             }
 
-            // Remove barriers that are no longer on the desired outline.
+            // Remove invalid barriers
             if (!desiredBoundaryTiles.Contains(tile))
             {
                 barriersToDelete.Add(uid);
                 continue;
             }
 
-            // Keep only one barrier per outline tile.
+            // Unique barrier tiles
             if (existingBoundaryBarriers.ContainsKey(tile))
             {
                 barriersToDelete.Add(uid);

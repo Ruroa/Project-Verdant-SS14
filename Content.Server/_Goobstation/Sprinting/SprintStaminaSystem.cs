@@ -10,8 +10,7 @@ using System.Numerics;
 namespace Content.Server._Goobstation.Sprinting;
 
 /// <summary>
-/// Applies sprint stamina costs on the authoritative server. PV has no keyed
-/// continuous-drain API, so the OMU drain is translated into stamina damage per tick.
+/// Sprint stamina drain
 /// </summary>
 public sealed class SprintStaminaSystem : EntitySystem
 {

@@ -6,8 +6,7 @@ using Content.Shared.Popups;
 namespace Content.Server._PV.Ranching;
 
 /// <summary>
-/// Consumes animal feed into the feeding trough's internal food reservoir.
-/// Animals consume both trough types through the normal Edible/HTN systems.
+/// Animal feed storage
 /// </summary>
 public sealed class AnimalTroughSystem : EntitySystem
 {
