@@ -78,7 +78,7 @@
   description: 7-round single stack pistol magazine. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumSP
+    proto: CartridgePV45ACPBall
   - type: Sprite
     layers:
     - state: base
@@ -103,7 +103,7 @@
   description: 7-round single stack pistol magazine. Intended to hold non-harmful chalk ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumPractice
+    proto: CartridgePV45ACPPractice
   - type: Sprite
     layers:
     - state: base
@@ -128,7 +128,7 @@
   description: 7-round single stack pistol magazine. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumUranium
+    proto: CartridgePV45ACPUranium
   - type: Sprite
     layers:
     - state: base
@@ -153,7 +153,7 @@
   description: 7-round single stack pistol magazine. Intended to hold rare armor-piercing ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumAP
+    proto: CartridgePV45ACPAP
   - type: Sprite
     layers:
     - state: base
@@ -196,7 +196,7 @@
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumSP
+    proto: CartridgePV45ACPBall
   - type: Sprite
     layers:
     - state: base
@@ -214,7 +214,7 @@
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumPractice
+    proto: CartridgePV45ACPPractice
   - type: Sprite
     layers:
     - state: base
@@ -232,7 +232,7 @@
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumUranium
+    proto: CartridgePV45ACPUranium
   - type: Sprite
     layers:
     - state: base
@@ -250,7 +250,7 @@
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumAP
+    proto: CartridgePV45ACPAP
   - type: Sprite
     layers:
     - state: base
@@ -268,7 +268,7 @@
   parent: BaseMagazineMagnum
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumRubber
+    proto: CartridgePV45ACPRubber
   - type: Sprite
     layers:
     - state: base
@@ -292,7 +292,7 @@
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumRubber
+    proto: CartridgePV45ACPRubber
   - type: Sprite
     layers:
     - state: base

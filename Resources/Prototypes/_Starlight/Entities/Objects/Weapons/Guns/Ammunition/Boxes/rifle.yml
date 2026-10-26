@@ -5,7 +5,7 @@
   components:
   - type: BallisticAmmoProvider
     capacity: 200
-    proto: CartridgeRifleRubber
+    proto: CartridgePV556Rubber
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/rifle.rsi
     layers:
@@ -25,7 +25,7 @@
   name: ammunition box (.20 rifle rubber)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleRubber
+    proto: CartridgePV556Rubber
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/rifle.rsi
     layers:
@@ -40,7 +40,7 @@
   name: ammunition box (.20 rifle FMJ)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleFMJ
+    proto: CartridgePV556FMJ
   - type: Sprite
     layers:
     - state: base
@@ -55,7 +55,7 @@
   name: ammunition box (.20 rifle AP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleAP
+    proto: CartridgePV556AP
   - type: Sprite
     layers:
     - state: base

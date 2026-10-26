@@ -40,7 +40,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleSP
+    proto: CartridgePV556Ball
   - type: Sprite
     layers:
     - state: sp
@@ -64,7 +64,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHP
+    proto: CartridgePV556HP
   - type: Sprite
     layers:
     - state: red
@@ -88,7 +88,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleFMJ
+    proto: CartridgePV556FMJ
   - type: Sprite
     layers:
     - state: fmj
@@ -112,7 +112,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleAP
+    proto: CartridgePV556AP
   - type: Sprite
     layers:
     - state: ap
@@ -157,7 +157,7 @@
   parent: MagazineRifleSP
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleIncendiary
+    proto: CartridgePV556Incendiary
   - type: Sprite
     layers:
     - state: incendiary
@@ -181,7 +181,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRiflePractice
+    proto: CartridgePV556Practice
   - type: Sprite
     layers:
     - state: practice
@@ -205,7 +205,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleUranium
+    proto: CartridgePV556Uranium
   - type: Sprite
     layers:
     - state: uranium
@@ -229,7 +229,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleRubber
+    proto: CartridgePV556Rubber
   - type: Sprite
     layers:
     - state: rubber
@@ -272,7 +272,7 @@
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleSP
+    proto: CartridgePV556Ball
   - type: Sprite
     layers:
     - state: sp
@@ -296,7 +296,7 @@
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHP
+    proto: CartridgePV556HP
   - type: Sprite
     layers:
     - state: red
@@ -320,7 +320,7 @@
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleFMJ
+    proto: CartridgePV556FMJ
   - type: Sprite
     layers:
     - state: fmj
@@ -344,7 +344,7 @@
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleAP
+    proto: CartridgePV556AP
   - type: Sprite
     layers:
     - state: ap
@@ -387,7 +387,7 @@
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleIncendiary
+    proto: CartridgePV556Incendiary
   - type: Sprite
     layers:
     - state: incendiary
@@ -409,7 +409,7 @@
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRiflePractice
+    proto: CartridgePV556Practice
   - type: Sprite
     layers:
     - state: practice
@@ -433,7 +433,7 @@
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleUranium
+    proto: CartridgePV556Uranium
   - type: Sprite
     layers:
     - state: uranium

@@ -9,7 +9,7 @@
     whitelist:
       tags:
         - CartridgePistol
-    proto: CartridgePistolSP
+    proto: CartridgePV9x19Ball
     capacity: 60
   - type: Item
     size: Small
@@ -31,7 +31,7 @@
   name: ammunition box (.35 auto SP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolSP
+    proto: CartridgePV9x19Ball
   - type: Sprite
     layers:
     - state: base
@@ -46,7 +46,7 @@
   name: ammunition box (.35 auto HP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolHP
+    proto: CartridgePV9x19HP
   - type: Sprite
     layers:
     - state: base
@@ -61,7 +61,7 @@
   description: A cardboard box of .35 auto rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolPractice
+    proto: CartridgePV9x19Practice
   - type: Sprite
     layers:
     - state: base
@@ -75,7 +75,7 @@
   description: A cardboard box of .35 auto rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolIncendiary
+    proto: CartridgePV9x19Incendiary
   - type: Sprite
     layers:
     - state: base
@@ -91,7 +91,7 @@
   description: A cardboard box of .35 auto rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolUranium
+    proto: CartridgePV9x19Uranium
   - type: Sprite
     layers:
     - state: base

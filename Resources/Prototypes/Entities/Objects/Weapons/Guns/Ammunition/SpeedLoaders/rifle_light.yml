@@ -11,7 +11,7 @@
       tags:
         - CartridgeMagnum # Starlight
     capacity: 5
-    proto: CartridgeMagnumSP # Starlight
+    proto: CartridgePV45ACPBall # Starlight
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/LightRifle/light_rifle_speed_loader.rsi
     layers:

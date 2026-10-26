@@ -9,7 +9,7 @@
     whitelist:
       tags:
         - CartridgeLightRifle
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV762x39Ball
     capacity: 60
   - type: Item
     size: Small
@@ -32,7 +32,7 @@
   components:
   - type: BallisticAmmoProvider
     capacity: 200
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV762x39Ball
   - type: Sprite
     layers:
     - state: base
@@ -51,7 +51,7 @@
   name: ammunition box (.30 rifle SP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV762x39Ball
   - type: Sprite
     layers:
     - state: base
@@ -71,7 +71,7 @@
   name: ammunition box (.30 rifle HP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleHP
+    proto: CartridgePV762x39HP
   - type: Sprite
     layers:
     - state: base
@@ -85,7 +85,7 @@
   name: ammunition box (.30 rifle FMJ)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleFMJ
+    proto: CartridgePV762x39FMJ
   - type: Sprite
     layers:
     - state: base
@@ -100,7 +100,7 @@
   name: ammunition box (.30 rifle AP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleAP
+    proto: CartridgePV762x39AP
   - type: Sprite
     layers:
     - state: base
@@ -116,7 +116,7 @@
   description: A cardboard box of .30 rifle rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRiflePractice
+    proto: CartridgePV762x39Practice
   - type: Sprite
     layers:
     - state: base
@@ -130,7 +130,7 @@
   description: A cardboard box of .30 rifle rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleIncendiary
+    proto: CartridgePV762x39Incendiary
   - type: Sprite
     layers:
     - state: base
@@ -146,7 +146,7 @@
   description: A cardboard box of .30 rifle rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleUranium
+    proto: CartridgePV762x39Uranium
   - type: Sprite
     layers:
     - state: base

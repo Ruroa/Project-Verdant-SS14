@@ -11,13 +11,13 @@
     minFillFraction: 0.7
     maxFillFraction: 1.0
     entries:
-      - proto: CartridgePistolSP # Starlight
+      - proto: CartridgePV9x19Ball # Starlight
         weight: 5
-      - proto: CartridgePistolIncendiary
+      - proto: CartridgePV9x19Incendiary
         weight: 2
-      - proto: CartridgePistolUranium
+      - proto: CartridgePV9x19Uranium
         weight: 1
-      - proto: CartridgePistolPractice
+      - proto: CartridgePV9x19Practice
         weight: 3
       - proto: CartridgePistolFoam
         weight: 2
@@ -31,13 +31,13 @@
     minFillFraction: 0.65
     maxFillFraction: 1.0
     entries:
-      - proto: CartridgePistolSP # Starlight
+      - proto: CartridgePV9x19Ball # Starlight
         weight: 5
-      - proto: CartridgePistolIncendiary
+      - proto: CartridgePV9x19Incendiary
         weight: 2
-      - proto: CartridgePistolUranium
+      - proto: CartridgePV9x19Uranium
         weight: 1
-      - proto: CartridgePistolPractice
+      - proto: CartridgePV9x19Practice
         weight: 3
       - proto: CartridgePistolFoam
         weight: 2
@@ -109,13 +109,13 @@
     minFillFraction: 0.6
     maxFillFraction: 1.0
     entries:
-      - proto: CartridgeRifleSP # Starlight
+      - proto: CartridgePV556Ball # Starlight
         weight: 5
-      - proto: CartridgeRifleIncendiary
+      - proto: CartridgePV556Incendiary
         weight: 2
-      - proto: CartridgeRifleUranium
+      - proto: CartridgePV556Uranium
         weight: 1
-      - proto: CartridgeRiflePractice
+      - proto: CartridgePV556Practice
         weight: 2
       - proto: CartridgeRifleFoam
         weight: 2
@@ -129,13 +129,13 @@
     minFillFraction: 0.5
     maxFillFraction: 1.0
     entries:
-      - proto: CartridgeLightRifleSP # Starlight
+      - proto: CartridgePV762x39Ball # Starlight
         weight: 5
-      - proto: CartridgeLightRifleIncendiary
+      - proto: CartridgePV762x39Incendiary
         weight: 2
-      - proto: CartridgeLightRifleUranium
+      - proto: CartridgePV762x39Uranium
         weight: 1
-      - proto: CartridgeLightRiflePractice
+      - proto: CartridgePV762x39Practice
         weight: 2
       - proto: CartridgeLightRifleFoam
         weight: 2

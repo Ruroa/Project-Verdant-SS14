@@ -4,7 +4,7 @@
   name: ammunition box (.35 auto rubber)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolRubber
+    proto: CartridgePV9x19Rubber
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
     layers:
@@ -112,7 +112,7 @@
   name: ammunition box (.35 auto FMJ)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolFMJ
+    proto: CartridgePV9x19FMJ
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
     layers:
@@ -128,7 +128,7 @@
   name: ammunition box (.35 auto AP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolAP
+    proto: CartridgePV9x19AP
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
     layers:

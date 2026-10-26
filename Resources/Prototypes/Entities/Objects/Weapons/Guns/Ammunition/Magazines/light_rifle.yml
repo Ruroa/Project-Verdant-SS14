@@ -14,7 +14,7 @@
     whitelist:
       tags:
         - CartridgeLightRifle
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV762x39Ball
     capacity: 30
   - type: Item
     size: Small
@@ -65,7 +65,7 @@
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV762x39Ball
   - type: Sprite
     layers:
     - state: sp
@@ -102,7 +102,7 @@
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRiflePractice
+    proto: CartridgePV762x39Practice
   - type: Sprite
     layers:
     - state: base
@@ -129,7 +129,7 @@
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleUranium
+    proto: CartridgePV762x39Uranium
   - type: Sprite
     layers:
     - state: base
@@ -156,7 +156,7 @@
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleIncendiary
+    proto: CartridgePV762x39Incendiary
   - type: Sprite
     layers:
     - state: incendiary

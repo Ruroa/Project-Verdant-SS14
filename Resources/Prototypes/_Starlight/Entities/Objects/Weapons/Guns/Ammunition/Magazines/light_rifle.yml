@@ -4,7 +4,7 @@
   parent: BaseMagazineLightRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleRubber
+    proto: CartridgePV762x39Rubber
   - type: Sprite
     layers:
     - state: rubber
@@ -19,7 +19,7 @@
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleHP
+    proto: CartridgePV762x39HP
   - type: Sprite
     layers:
     - state: base
@@ -39,7 +39,7 @@
   parent: BaseMagazineLightRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleFMJ
+    proto: CartridgePV762x39FMJ
   - type: Sprite
     layers:
     - state: fmj
@@ -53,7 +53,7 @@
   parent: BaseMagazineLightRifle
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleAP
+    proto: CartridgePV762x39AP
   - type: Sprite
     layers:
     - state: ap
@@ -76,7 +76,7 @@
     tags:
       - MagazineLightRiflePan
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV762x39Ball
     capacity: 47
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/maxim.rsi
@@ -90,7 +90,7 @@
     tags:
       - MagazineLightRifleBox
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV762x39Ball
     capacity: 80
   - type: Sprite
     layers:

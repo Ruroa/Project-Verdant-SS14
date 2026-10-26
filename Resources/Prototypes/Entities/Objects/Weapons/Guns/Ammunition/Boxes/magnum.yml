@@ -8,7 +8,7 @@
     whitelist:
       tags:
         - CartridgeMagnum
-    proto: CartridgeMagnumSP
+    proto: CartridgePV45ACPBall
     capacity: 12
   - type: Item
     size: Small
@@ -30,7 +30,7 @@
   name: ammunition box (.45 magnum SP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumSP
+    proto: CartridgePV45ACPBall
   - type: Sprite
     layers:
     - state: base
@@ -45,7 +45,7 @@
   name: ammunition box (.45 magnum HP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumHP
+    proto: CartridgePV45ACPHP
   - type: Sprite
     layers:
     - state: base
@@ -60,7 +60,7 @@
   description: A cardboard box of .45 magnum rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumPractice
+    proto: CartridgePV45ACPPractice
   - type: Sprite
     layers:
     - state: base
@@ -74,7 +74,7 @@
   description: A cardboard box of .45 magnum rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumIncendiary
+    proto: CartridgePV45ACPIncendiary
   - type: Sprite
     layers:
     - state: base
@@ -90,7 +90,7 @@
   description: A cardboard box of .45 magnum rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumUranium
+    proto: CartridgePV45ACPUranium
   - type: Sprite
     layers:
     - state: base
@@ -106,7 +106,7 @@
   description: A cardboard box of .45 magnum rounds. Intended to hold specialized armor-piercing ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumAP
+    proto: CartridgePV45ACPAP
   - type: Sprite
     layers:
     - state: base

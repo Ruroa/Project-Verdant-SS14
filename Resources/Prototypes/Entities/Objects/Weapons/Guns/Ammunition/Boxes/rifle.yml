@@ -8,7 +8,7 @@
     whitelist:
       tags:
         - CartridgeRifle
-    proto: CartridgeRifleSP
+    proto: CartridgePV556Ball
     capacity: 50
   - type: Item
     size: Small
@@ -31,7 +31,7 @@
   components:
   - type: BallisticAmmoProvider
     capacity: 200
-    proto: CartridgeRifleSP
+    proto: CartridgePV556Ball
   - type: Sprite
     layers:
     - state: base
@@ -51,7 +51,7 @@
   description: A cardboard box of .20 rifle rounds. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleSP
+    proto: CartridgePV556Ball
   - type: Sprite
     layers:
     - state: base
@@ -66,7 +66,7 @@
   name: ammunition box (.20 rifle HP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHP
+    proto: CartridgePV556HP
   - type: Sprite
     layers:
     - state: base
@@ -81,7 +81,7 @@
   description: A cardboard box of .20 rifle rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRiflePractice
+    proto: CartridgePV556Practice
   - type: Sprite
     layers:
     - state: base
@@ -95,7 +95,7 @@
   description: A cardboard box of .20 rifle rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleIncendiary
+    proto: CartridgePV556Incendiary
   - type: Sprite
     layers:
     - state: base
@@ -111,7 +111,7 @@
   description: A cardboard box of .20 rifle rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleUranium
+    proto: CartridgePV556Uranium
   - type: Sprite
     layers:
     - state: base

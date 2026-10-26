@@ -4,7 +4,7 @@
   name: ammunition box (.45 magnum rubber)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumRubber
+    proto: CartridgePV45ACPRubber
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/magnum.rsi
     layers:
@@ -19,7 +19,7 @@
   name: ammunition box (.45 magnum FMJ)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumFMJ
+    proto: CartridgePV45ACPFMJ
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/magnum.rsi
     layers:
