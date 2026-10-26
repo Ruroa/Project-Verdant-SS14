@@ -5,7 +5,7 @@
   components:
   - type: RevolverAmmoProvider
     whitelist:
-      tags: [ CartridgeMagnum ]
+      tags: [ CartridgeMagnum, SpeedLoaderMagnum ]
     proto: CartridgePV45ACPBall
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
