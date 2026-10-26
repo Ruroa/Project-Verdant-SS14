@@ -21,7 +21,7 @@
 
 - type: entity
   name: MP27
-  parent: [BasePVSMG, BaseSecurityContraband]
+  parent: [BasePVSMG, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponSMGMP27
   description: A compact 5.7x26mm submachine gun.
   components:
@@ -34,6 +34,17 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Smgs/mp27.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+    wieldingVisuals:
+      left:
+      - state: wielded-inhand-left
+      right:
+      - state: wielded-inhand-right
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -74,7 +85,7 @@
 
 - type: entity
   name: PD90
-  parent: [BasePVSMG, BaseSecurityContraband]
+  parent: [BasePVSMG, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponSMGPD90
   description: A compact 5.7x26mm personal defense weapon.
   components:
@@ -87,6 +98,17 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Smgs/pd90.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+    wieldingVisuals:
+      left:
+      - state: wielded-inhand-left
+      right:
+      - state: wielded-inhand-right
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -156,7 +178,7 @@
 
 - type: entity
   name: MP5
-  parent: WeaponSMGMac15
+  parent: [WeaponSMGMac15, BaseGunWieldable]
   id: WeaponSMGMP5
   description: A 9x19mm submachine gun.
   components:
@@ -164,6 +186,17 @@
     sprite: _PV/Objects/Weapons/Guns/Smgs/mp5.rsi
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Smgs/mp5.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+    wieldingVisuals:
+      left:
+      - state: wielded-inhand-left
+      right:
+      - state: wielded-inhand-right
   - type: ItemSlots
     slots:
       gun_magazine:

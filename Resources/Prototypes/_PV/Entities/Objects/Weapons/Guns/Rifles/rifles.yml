@@ -38,6 +38,17 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Rifles/DTMDR556.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+    wieldingVisuals:
+      left:
+      - state: wielded-inhand-left
+      right:
+      - state: wielded-inhand-right
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -107,6 +118,7 @@
   components:
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Rifles/DTMDR762.rsi
+    scale: 0.75, 0.75
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -114,6 +126,17 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Rifles/DTMDR762.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+    wieldingVisuals:
+      left:
+      - state: wielded-inhand-left
+      right:
+      - state: wielded-inhand-right
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -136,9 +159,14 @@
   components:
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Dmr/SR32.rsi
+    scale: 0.75, 0.75
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Dmr/SR32.rsi
   - type: Gun
     selectedMode: SemiAuto
     availableModes: [ SemiAuto ]
     fireRate: 2.5
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 4
+    pvsIncrease: 0.4

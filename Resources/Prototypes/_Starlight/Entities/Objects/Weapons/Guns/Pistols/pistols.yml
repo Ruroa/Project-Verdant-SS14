@@ -400,7 +400,7 @@
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
           whitelist:
-            tags: [ MagazinePV45ACP ]
+            tags: [ PVMagazine45ACPTag ]
         gun_chamber:
           name: Chamber
           priority: 1
