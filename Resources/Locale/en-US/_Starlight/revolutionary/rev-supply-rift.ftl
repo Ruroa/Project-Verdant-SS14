@@ -29,11 +29,11 @@ finka-desc = The knife's secret technique was...
 mosin-name = Kardashev-Mosin
 mosin-desc = Enemies at the airlock. Uses 7.62x54mmR ammo.
 dp-name = DP-28 LMG
-dp-desc = From RA-TA-TA-TA with love. Uses .30 ammo.
+dp-desc = From RA-TA-TA-TA with love. Uses 7.62x39mm ammo.
 ppsh-name = PPSH 59 SMG
-ppsh-desc = The legendary discontinued PPSH 59. Inaccurate as hell, but delivers it. Uses .35 ammo.
+ppsh-desc = The legendary discontinued PPSH 59. Inaccurate as hell, but delivers it. Uses 9x19mm ammo.
 toz-name = ZOZ-106
-toz-desc = Aim at head and eyes. Uses .42 ammo, comes with extended magazine.
+toz-desc = Aim at head and eyes. Uses 20-gauge shotgun shells. Comes with an extended magazine.
 
 # Wearables
 soviet-eva-name = Soviet EVA Suit
