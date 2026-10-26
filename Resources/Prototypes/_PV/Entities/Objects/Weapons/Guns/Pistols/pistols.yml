@@ -1,0 +1,100 @@
+- type: entity
+  abstract: true
+  parent: BaseWeaponPistol
+  id: BasePVPistol
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        priority: 2
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+      gun_chamber:
+        name: Chamber
+        priority: 1
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      firing_pin: !type:Container
+      ballistic-ammo: !type:Container
+
+- type: entity
+  name: FL57
+  parent: [BasePVPistol, BaseSecurityContraband]
+  id: WeaponPistolFL57
+  description: A compact 5.7x26mm service pistol.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Pistols/FL57.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Pistols/FL57.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePV57
+        priority: 2
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        whitelist:
+          tags: [ PVMagazine57Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ PVCartridge57Tag ]
+  - type: Gun
+    fireRate: 5
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
+
+- type: entity
+  name: LA2
+  parent: [BasePVPistol, BaseSecurityContraband]
+  id: WeaponPistolLA2
+  description: A semiautomatic 9x19mm service pistol.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Pistols/la2.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Pistols/la2.rsi
+  - type: Gun
+    fireRate: 6
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePV9x19
+        priority: 2
+        whitelist:
+          tags: [ PVMagazine9x19Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ CartridgePistol ]
+
+- type: entity
+  name: SR14
+  parent: WeaponPistolLA2
+  id: WeaponPistolSR14
+  description: A 9x19mm semiautomatic pistol.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Pistols/sr14.rsi
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Pistols/sr14.rsi

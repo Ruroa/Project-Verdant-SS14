@@ -1,9 +1,9 @@
-﻿{
+{
   "version": 1,
   "license": "CC0-1.0",
   "copyright": "Created for RMC-14/RMC-14 by @TadJohnson00 (GitHub).",
   "size": {
-    "x": 64,
+    "x": 32,
     "y": 32
   },
   "states": [
@@ -11,37 +11,25 @@
       "name": "base"
     },
     {
+      "name": "bolt-open"
+    },
+    {
       "name": "icon"
     },
     {
-      "name": "bolt-open"
+      "name": "inhand-left"
+    },
+    {
+      "name": "inhand-right"
     },
     {
       "name": "mag-0"
     },
     {
-      "name": "wielded-inhand-right",
-      "directions": 4
+      "name": "wielded-inhand-left"
     },
     {
-      "name": "inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "wielded-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "equipped-BACKPACK",
-      "directions": 4
-    },
-    {
-      "name": "equipped-SUITSTORAGE",
-      "directions": 4
+      "name": "wielded-inhand-right"
     }
   ]
 }

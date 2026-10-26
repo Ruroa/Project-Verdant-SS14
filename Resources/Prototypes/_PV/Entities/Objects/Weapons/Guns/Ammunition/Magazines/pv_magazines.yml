@@ -1,0 +1,285 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BasePVMagazine
+  components:
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePV9x19
+  name: pistol magazine (9x19mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazine9x19Tag, MagazinePistol ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 15
+    proto: CartridgePV9x19Ball
+    whitelist:
+      tags: [ CartridgePistol ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/Pistol/9x19_mag.rsi
+
+- type: entity
+  parent: MagazinePV9x19
+  id: MagazinePV9x19Extended
+  name: extended pistol magazine (9x19mm)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 30
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/Pistol/9x19_Extend_mag.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePV45ACP
+  name: pistol magazine (.45 ACP)
+  components:
+  - type: Tag
+    tags: [ PVMagazine45ACPTag, MagazineMagnum ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 7
+    proto: CartridgePV45ACPBall
+    whitelist:
+      tags: [ CartridgeMagnum ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/Pistol/45acp_mag.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePV57
+  name: pistol magazine (5.7x26mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazine57Tag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 20
+    proto: CartridgePV57
+    whitelist:
+      tags: [ PVCartridge57Tag ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/Pistol/57_mag.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePV556
+  name: rifle magazine (5.56x45mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazine556Tag, MagazineRifle ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 30
+    proto: CartridgePV556Ball
+    whitelist:
+      tags: [ CartridgeRifle ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/Rifle/556_mag.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePV762x39
+  name: rifle magazine (7.62x39mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazine762x39Tag, MagazineLightRifle ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 30
+    proto: CartridgePV762x39Ball
+    whitelist:
+      tags: [ CartridgeLightRifle ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/Rifle/762x39_mag.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePV762x51
+  name: rifle magazine (7.62x51mm NATO)
+  components:
+  - type: Tag
+    tags: [ PVMagazine762x51Tag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 20
+    proto: CartridgePV762x51SP
+    whitelist:
+      tags: [ Cartridge48Rifle ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/Rifle/762x51_mag.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePVMP27
+  name: MP27 magazine (5.7x26mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazineMP27Tag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 40
+    proto: CartridgePV57
+    whitelist:
+      tags: [ PVCartridge57Tag ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/mp27.rsi
+
+- type: entity
+  parent: MagazinePVMP27
+  id: MagazinePVMP27Extended
+  name: extended MP27 magazine (5.7x26mm)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 60
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/mp27extend.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePVMP27E
+  name: MP27E energized magazine (5.7x26mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazineMP27ETag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 40
+    proto: CartridgePV57E
+    whitelist:
+      tags: [ PVCartridge57ETag ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/mp27e.rsi
+
+- type: entity
+  parent: MagazinePVMP27E
+  id: MagazinePVMP27EExtended
+  name: extended MP27E energized magazine (5.7x26mm)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 60
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/mp27eextend.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePVPD90
+  name: PD90 magazine (5.7x26mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazinePD90Tag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 50
+    proto: CartridgePV57
+    whitelist:
+      tags: [ PVCartridge57Tag ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/pd90.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePVPD90E
+  name: PD90E energized magazine (5.7x26mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazinePD90ETag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 50
+    proto: CartridgePV57E
+    whitelist:
+      tags: [ PVCartridge57ETag ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/pd90e.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePVMac15
+  name: MAC-15 magazine (9x19mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazineMac15Tag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 30
+    proto: CartridgePV9x19Ball
+    whitelist:
+      tags: [ CartridgePistol ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/mac15.rsi
+
+- type: entity
+  parent: MagazinePVMac15
+  id: MagazinePVMac15Extended
+  name: extended MAC-15 magazine (9x19mm)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 50
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/mac15e.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePVMP5
+  name: MP5 magazine (9x19mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazineMP5Tag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 30
+    proto: CartridgePV9x19Ball
+    whitelist:
+      tags: [ CartridgePistol ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/mp5.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePVVector9x19
+  name: Vector magazine (9x19mm)
+  components:
+  - type: Tag
+    tags: [ PVMagazineVector9x19Tag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 30
+    proto: CartridgePV9x19Ball
+    whitelist:
+      tags: [ CartridgePistol ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/Vector9x19.rsi
+
+- type: entity
+  parent: BasePVMagazine
+  id: MagazinePVVector45ACP
+  name: Vector magazine (.45 ACP)
+  components:
+  - type: Tag
+    tags: [ PVMagazineVector45ACPTag ]
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 30
+    proto: CartridgePV45ACPBall
+    whitelist:
+      tags: [ CartridgeMagnum ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/Vector45acp.rsi

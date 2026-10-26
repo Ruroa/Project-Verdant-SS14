@@ -1,0 +1,124 @@
+- type: entity
+  parent: Cartridge48Rifle
+  id: CartridgePV762x51SP
+  name: cartridge (7.62x51mm NATO ball)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x51SP
+
+- type: entity
+  parent: Cartridge48Rifle
+  id: CartridgePV762x51FMJ
+  name: cartridge (7.62x51mm NATO FMJ)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x51FMJ
+
+- type: entity
+  parent: Cartridge48Rifle
+  id: CartridgePV762x51AP
+  name: cartridge (7.62x51mm NATO AP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x51AP
+
+- type: entity
+  parent: Cartridge48Rifle
+  id: CartridgePV762x51HP
+  name: cartridge (7.62x51mm NATO HP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x51HP
+
+- type: entity
+  parent: Cartridge48Rifle
+  id: CartridgePV762x51Incendiary
+  name: cartridge (7.62x51mm NATO incendiary)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x51Incendiary
+
+- type: entity
+  parent: Cartridge48Rifle
+  id: CartridgePV762x51Uranium
+  name: cartridge (7.62x51mm NATO uranium)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x51Uranium
+
+- type: entity
+  parent: Cartridge48Rifle
+  id: CartridgePV762x51Rubber
+  name: cartridge (7.62x51mm NATO rubber)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x51Rubber
+
+- type: entity
+  parent: Cartridge48Rifle
+  id: CartridgePV762x51Practice
+  name: cartridge (7.62x51mm NATO practice)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x51Practice
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgePV50calFMJ
+  name: cartridge (.50 anti-materiel FMJ)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV50calFMJ
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgePV50calBall
+  name: cartridge (.50 anti-materiel ball)
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgePV50calAP
+  name: cartridge (.50 anti-materiel AP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV50calAP
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgePV50calHP
+  name: cartridge (.50 anti-materiel HP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV50calHP
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgePV50calIncendiary
+  name: cartridge (.50 anti-materiel incendiary)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV50calIncendiary
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgePV50calUranium
+  name: cartridge (.50 anti-materiel uranium)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV50calUranium
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgePV50calRubber
+  name: cartridge (.50 anti-materiel rubber)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV50calRubber
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgePV50calPractice
+  name: cartridge (.50 anti-materiel practice)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV50calPractice

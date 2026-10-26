@@ -1,0 +1,64 @@
+- type: entity
+  parent: BulletTrace
+  id: BulletPV762x54RAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    armorPenetration: 1
+    damage:
+      types:
+        Piercing: 38
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV762x54RHP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Piercing: 50
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV762x54RIncendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Piercing: 28
+        Heat: 12
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV762x54RUranium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Piercing: 34
+        Radiation: 6
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV762x54RRubber
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Blunt: 8
+  - type: HitscanStaminaDamage
+    staminaDamage: 20
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV762x54RPractice
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Blunt: 1

@@ -70,7 +70,7 @@
     - DefibrillatorCompact
     belt:
     - WeaponPistolM1911
-    - MagazineMagnum
+    - MagazinePV45ACP
     - Truncheon
     - Handcuffs
     - ToolDebug

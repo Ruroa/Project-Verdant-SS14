@@ -19,7 +19,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponSniperHristov
-        - id: MagazineBoxAntiMateriel
+        - id: PVAmmoBox50cal
         - id: ClothingNeckTieRed
         - id: ClothingHandsGlovesLatex
         - id: ClothingUniformJumpsuitLawyerBlack

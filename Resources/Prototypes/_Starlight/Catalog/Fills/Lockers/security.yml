@@ -141,9 +141,9 @@
         children:
         - id: WeaponRifleL10
           amount: 3
-        - id: MagazineDMRSP
+        - id: MagazinePV762x51
           amount: 4
-        - id: MagazineDMRFMJ
+        - id: MagazinePV762x51
           amount: 4
         - id: HammerBreachingNT
           amount: 1

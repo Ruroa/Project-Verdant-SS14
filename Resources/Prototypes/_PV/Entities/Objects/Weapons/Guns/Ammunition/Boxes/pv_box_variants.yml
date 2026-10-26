@@ -1,0 +1,817 @@
+- type: entity
+  parent: PVAmmoBox9x19
+  id: PVAmmoBox9x19FMJ
+  name: ammunition box (9x19mm FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV9x19FMJ
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/9x19_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: fmj
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox9x19
+  id: PVAmmoBox9x19AP
+  name: ammunition box (9x19mm AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV9x19AP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/9x19_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ap
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox9x19
+  id: PVAmmoBox9x19HP
+  name: ammunition box (9x19mm HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV9x19HP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/9x19_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox9x19
+  id: PVAmmoBox9x19Incendiary
+  name: ammunition box (9x19mm incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV9x19Incendiary
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/9x19_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: incendiary
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox9x19
+  id: PVAmmoBox9x19Uranium
+  name: ammunition box (9x19mm uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV9x19Uranium
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/9x19_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: uranium
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox9x19
+  id: PVAmmoBox9x19Rubber
+  name: ammunition box (9x19mm rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV9x19Rubber
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/9x19_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: rubber
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox9x19
+  id: PVAmmoBox9x19Practice
+  name: ammunition box (9x19mm practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV9x19Practice
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/9x19_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: practice
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox45ACP
+  id: PVAmmoBox45ACPFMJ
+  name: ammunition box (.45 ACP FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV45ACPFMJ
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/45acp_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: fmj
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox45ACP
+  id: PVAmmoBox45ACPAP
+  name: ammunition box (.45 ACP AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV45ACPAP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/45acp_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ap
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox45ACP
+  id: PVAmmoBox45ACPHP
+  name: ammunition box (.45 ACP HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV45ACPHP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/45acp_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox45ACP
+  id: PVAmmoBox45ACPIncendiary
+  name: ammunition box (.45 ACP incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV45ACPIncendiary
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/45acp_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: incendiary
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox45ACP
+  id: PVAmmoBox45ACPUranium
+  name: ammunition box (.45 ACP uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV45ACPUranium
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/45acp_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: uranium
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox45ACP
+  id: PVAmmoBox45ACPRubber
+  name: ammunition box (.45 ACP rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV45ACPRubber
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/45acp_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: rubber
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox45ACP
+  id: PVAmmoBox45ACPPractice
+  name: ammunition box (.45 ACP practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV45ACPPractice
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/45acp_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: practice
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox556
+  id: PVAmmoBox556FMJ
+  name: ammunition box (5.56x45mm FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV556FMJ
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/556_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: fmj
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox556
+  id: PVAmmoBox556AP
+  name: ammunition box (5.56x45mm AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV556AP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/556_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ap
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox556
+  id: PVAmmoBox556HP
+  name: ammunition box (5.56x45mm HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV556HP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/556_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox556
+  id: PVAmmoBox556Incendiary
+  name: ammunition box (5.56x45mm incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV556Incendiary
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/556_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: incendiary
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox556
+  id: PVAmmoBox556Uranium
+  name: ammunition box (5.56x45mm uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV556Uranium
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/556_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: uranium
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox556
+  id: PVAmmoBox556Rubber
+  name: ammunition box (5.56x45mm rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV556Rubber
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/556_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: rubber
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox556
+  id: PVAmmoBox556Practice
+  name: ammunition box (5.56x45mm practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV556Practice
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/556_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: practice
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x39
+  id: PVAmmoBox762x39FMJ
+  name: ammunition box (7.62x39mm FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x39FMJ
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x39_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: fmj
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x39
+  id: PVAmmoBox762x39AP
+  name: ammunition box (7.62x39mm AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x39AP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x39_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ap
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x39
+  id: PVAmmoBox762x39HP
+  name: ammunition box (7.62x39mm HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x39HP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x39_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x39
+  id: PVAmmoBox762x39Incendiary
+  name: ammunition box (7.62x39mm incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x39Incendiary
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x39_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: incendiary
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x39
+  id: PVAmmoBox762x39Uranium
+  name: ammunition box (7.62x39mm uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x39Uranium
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x39_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: uranium
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x39
+  id: PVAmmoBox762x39Practice
+  name: ammunition box (7.62x39mm practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x39Practice
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x39_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: practice
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x51
+  id: PVAmmoBox762x51FMJ
+  name: ammunition box (7.62x51mm NATO FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x51FMJ
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x51_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: fmj
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x51
+  id: PVAmmoBox762x51AP
+  name: ammunition box (7.62x51mm NATO AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x51AP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x51_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ap
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x51
+  id: PVAmmoBox762x51HP
+  name: ammunition box (7.62x51mm NATO HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x51HP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x51_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x51
+  id: PVAmmoBox762x51Incendiary
+  name: ammunition box (7.62x51mm NATO incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x51Incendiary
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x51_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: incendiary
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x51
+  id: PVAmmoBox762x51Uranium
+  name: ammunition box (7.62x51mm NATO uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x51Uranium
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x51_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: uranium
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x51
+  id: PVAmmoBox762x51Rubber
+  name: ammunition box (7.62x51mm NATO rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x51Rubber
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x51_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x51
+  id: PVAmmoBox762x51Practice
+  name: ammunition box (7.62x51mm NATO practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x51Practice
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x51_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: practice
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x54R
+  id: PVAmmoBox762x54RFMJ
+  name: ammunition box (7.62x54mmR FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x54RFMJ
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x54r_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: fmj
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x54R
+  id: PVAmmoBox762x54RAP
+  name: ammunition box (7.62x54mmR AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x54RAP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x54r_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ap
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x54R
+  id: PVAmmoBox762x54RHP
+  name: ammunition box (7.62x54mmR HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x54RHP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x54r_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x54R
+  id: PVAmmoBox762x54RIncendiary
+  name: ammunition box (7.62x54mmR incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x54RIncendiary
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x54r_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: incendiary
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x54R
+  id: PVAmmoBox762x54RUranium
+  name: ammunition box (7.62x54mmR uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x54RUranium
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x54r_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: uranium
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x54R
+  id: PVAmmoBox762x54RPractice
+  name: ammunition box (7.62x54mmR practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x54RPractice
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x54r_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: practice
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox57
+  id: PVAmmoBox57FMJ
+  name: ammunition box (5.7x26mm FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV57FMJ
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/57_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: fmj
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox57
+  id: PVAmmoBox57AP
+  name: ammunition box (5.7x26mm AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV57AP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/57_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ap
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox57
+  id: PVAmmoBox57HP
+  name: ammunition box (5.7x26mm HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV57HP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/57_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox57
+  id: PVAmmoBox57Incendiary
+  name: ammunition box (5.7x26mm incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV57Incendiary
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/57_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: incendiary
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox57
+  id: PVAmmoBox57Uranium
+  name: ammunition box (5.7x26mm uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV57Uranium
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/57_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: uranium
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox57
+  id: PVAmmoBox57Rubber
+  name: ammunition box (5.7x26mm rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV57Rubber
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/57_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: rubber
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox57
+  id: PVAmmoBox57Practice
+  name: ammunition box (5.7x26mm practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV57Practice
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/57_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: practice
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox57
+  id: PVAmmoBox57Energized
+  name: ammunition box (5.7x26mm energized)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV57E
+    whitelist:
+      tags: [ PVCartridge57ETag ]
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/57_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: energized
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox50cal
+  id: PVAmmoBox50calFMJ
+  name: ammunition box (.50 anti-materiel FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV50calFMJ
+
+- type: entity
+  parent: PVAmmoBox50cal
+  id: PVAmmoBox50calAP
+  name: ammunition box (.50 anti-materiel AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV50calAP
+
+- type: entity
+  parent: PVAmmoBox50cal
+  id: PVAmmoBox50calHP
+  name: ammunition box (.50 anti-materiel HP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV50calHP
+
+- type: entity
+  parent: PVAmmoBox50cal
+  id: PVAmmoBox50calIncendiary
+  name: ammunition box (.50 anti-materiel incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV50calIncendiary
+
+- type: entity
+  parent: PVAmmoBox50cal
+  id: PVAmmoBox50calUranium
+  name: ammunition box (.50 anti-materiel uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV50calUranium
+
+- type: entity
+  parent: PVAmmoBox50cal
+  id: PVAmmoBox50calRubber
+  name: ammunition box (.50 anti-materiel rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV50calRubber
+
+- type: entity
+  parent: PVAmmoBox50cal
+  id: PVAmmoBox50calPractice
+  name: ammunition box (.50 anti-materiel practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV50calPractice

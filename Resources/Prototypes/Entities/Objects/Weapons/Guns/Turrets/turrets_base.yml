@@ -96,7 +96,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
   - type: BallisticAmmoProvider
-    proto: CartridgeCaselessRifle
+    proto: CartridgePV556Ball
     capacity: 500
 
 - type: entity

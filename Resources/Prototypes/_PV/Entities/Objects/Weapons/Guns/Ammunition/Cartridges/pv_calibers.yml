@@ -1,0 +1,111 @@
+- type: entity
+  parent: BaseCartridgePistol
+  id: CartridgePV57
+  name: cartridge (5.7x26mm ball)
+  components:
+  - type: Tag
+    tags: [ PVCartridge57Tag ]
+  - type: CartridgeAmmo
+    proto: BulletPV57
+
+- type: entity
+  parent: CartridgePV57
+  id: CartridgePV57FMJ
+  name: cartridge (5.7x26mm FMJ)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV57FMJ
+
+- type: entity
+  parent: CartridgePV57
+  id: CartridgePV57AP
+  name: cartridge (5.7x26mm AP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV57AP
+
+- type: entity
+  parent: CartridgePV57
+  id: CartridgePV57E
+  name: cartridge (5.7x26mm energized)
+  components:
+  - type: Tag
+    tags: [ PVCartridge57ETag ]
+  - type: CartridgeAmmo
+    proto: BulletPV57E
+
+- type: entity
+  parent: BaseCartridgeMagnum
+  id: CartridgePV50AEFMJ
+  name: cartridge (.50 AE FMJ)
+  components:
+  - type: Tag
+    tags: [ PVCartridge50AETag ]
+  - type: CartridgeAmmo
+    proto: BulletPV50AEFMJ
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#B68F0E"
+
+- type: entity
+  parent: BaseCartridgeLightRifleSP
+  id: CartridgePV762x54R
+  name: cartridge (7.62x54mmR ball)
+  components:
+  - type: Tag
+    tags: [ PVCartridge762x54RTag ]
+  - type: CartridgeAmmo
+    proto: BulletPV762x54R
+
+- type: entity
+  parent: CartridgePV762x54R
+  id: CartridgePV762x54RFMJ
+  name: cartridge (7.62x54mmR FMJ)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x54RFMJ
+
+- type: entity
+  parent: CartridgePV57
+  id: CartridgePV57HP
+  name: cartridge (5.7x26mm HP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV57HP
+
+- type: entity
+  parent: CartridgePV57
+  id: CartridgePV57Incendiary
+  name: cartridge (5.7x26mm incendiary)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV57Incendiary
+
+- type: entity
+  parent: CartridgePV57
+  id: CartridgePV57Uranium
+  name: cartridge (5.7x26mm uranium)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV57Uranium
+
+- type: entity
+  parent: CartridgePV57
+  id: CartridgePV57Rubber
+  name: cartridge (5.7x26mm rubber)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV57Rubber
+
+- type: entity
+  parent: CartridgePV57
+  id: CartridgePV57Practice
+  name: cartridge (5.7x26mm practice)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV57Practice

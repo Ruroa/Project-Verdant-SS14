@@ -1,0 +1,28 @@
+- type: entity
+  name: M890
+  parent: [BaseWeaponShotgunAny, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponShotgunM890
+  description: A pump-action shotgun with an eight-shell tube. Takes 12 gauge shells.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Shotgun/m890.rsi
+    state: base
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Shotgun/m890.rsi
+  - type: Gun
+    fireRate: 1.5
+    selectedMode: SemiAuto
+    availableModes: [ SemiAuto ]
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags: [ ShellShotgun ]
+    capacity: 8
+    proto: ShellShotgun
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+      firing_pin: !type:Container

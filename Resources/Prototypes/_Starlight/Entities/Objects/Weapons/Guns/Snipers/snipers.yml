@@ -141,8 +141,8 @@
     capacity: 8
     whitelist:
       tags:
-      - CartridgeLightRifle
-      - CartridgeLightRifleImprovised
+      - CartridgePistol
+      - CartridgePistolImprovised
       - CartridgeMagnum
       - CartridgeMagnumImprovised
   - type: WeaponDismantleOnShoot

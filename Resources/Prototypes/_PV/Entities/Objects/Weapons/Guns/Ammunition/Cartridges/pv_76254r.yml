@@ -1,0 +1,47 @@
+- type: entity
+  parent: CartridgePV762x54R
+  id: CartridgePV762x54RAP
+  name: cartridge (7.62x54mmR AP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x54RAP
+
+- type: entity
+  parent: CartridgePV762x54R
+  id: CartridgePV762x54RHP
+  name: cartridge (7.62x54mmR HP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x54RHP
+
+- type: entity
+  parent: CartridgePV762x54R
+  id: CartridgePV762x54RIncendiary
+  name: cartridge (7.62x54mmR incendiary)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x54RIncendiary
+
+- type: entity
+  parent: CartridgePV762x54R
+  id: CartridgePV762x54RUranium
+  name: cartridge (7.62x54mmR uranium)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x54RUranium
+
+- type: entity
+  parent: CartridgePV762x54R
+  id: CartridgePV762x54RRubber
+  name: cartridge (7.62x54mmR rubber)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x54RRubber
+
+- type: entity
+  parent: CartridgePV762x54R
+  id: CartridgePV762x54RPractice
+  name: cartridge (7.62x54mmR practice)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPV762x54RPractice

@@ -1,0 +1,144 @@
+- type: entity
+  abstract: true
+  parent: BaseWeaponRifle
+  id: BasePVRifle556
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        priority: 2
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags: [ PVMagazine556Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ CartridgeRifle ]
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      firing_pin: !type:Container
+
+- type: entity
+  name: DT DMR L
+  parent: [BasePVRifle556, BaseSecurityContraband]
+  id: WeaponRifleDTMDR556
+  description: A designated marksman rifle chambered in 5.56x45mm.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Rifles/DTMDR556.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Rifles/DTMDR556.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePV556
+        priority: 2
+        whitelist:
+          tags: [ PVMagazine556Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ CartridgeRifle ]
+
+- type: entity
+  name: M4
+  parent: WeaponRifleDTMDR556
+  id: WeaponRifleM4
+  description: A 5.56x45mm service rifle.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Rifles/m4.rsi
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Rifles/m4.rsi
+
+- type: entity
+  name: M16
+  parent: WeaponRifleDTMDR556
+  id: WeaponRifleM16
+  description: A 5.56x45mm service rifle.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Rifles/m16.rsi
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Rifles/m16.rsi
+
+- type: entity
+  abstract: true
+  parent: BaseWeaponRifle
+  id: BasePVRifle762x51
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        priority: 2
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags: [ PVMagazine762x51Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ Cartridge48Rifle ]
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      firing_pin: !type:Container
+
+- type: entity
+  name: DT DMR H
+  parent: [BasePVRifle762x51, BaseSecurityContraband]
+  id: WeaponRifleDTMDR762
+  description: A designated marksman rifle chambered in 7.62x51mm NATO.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Rifles/DTMDR762.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Rifles/DTMDR762.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePV762x51
+        priority: 2
+        whitelist:
+          tags: [ PVMagazine762x51Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ Cartridge48Rifle ]
+
+- type: entity
+  name: SR32
+  parent: WeaponRifleDTMDR762
+  id: WeaponRifleSR32
+  description: A semiautomatic 7.62x51mm designated marksman rifle.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Dmr/SR32.rsi
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Dmr/SR32.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes: [ SemiAuto ]
+    fireRate: 2.5

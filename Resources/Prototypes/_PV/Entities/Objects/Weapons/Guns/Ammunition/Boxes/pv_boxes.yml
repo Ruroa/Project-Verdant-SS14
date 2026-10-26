@@ -1,0 +1,206 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BasePVAmmoBox
+  components:
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+  - type: Appearance
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+
+- type: entity
+  parent: BasePVAmmoBox
+  id: PVAmmoBox9x19
+  name: ammunition box (9x19mm)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags: [ CartridgePistol ]
+    capacity: 50
+    proto: CartridgePV9x19Ball
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/9x19_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ball
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: BasePVAmmoBox
+  id: PVAmmoBox45ACP
+  name: ammunition box (.45 ACP)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags: [ CartridgeMagnum ]
+    capacity: 50
+    proto: CartridgePV45ACPBall
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/45acp_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ball
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: BasePVAmmoBox
+  id: PVAmmoBox556
+  name: ammunition box (5.56x45mm)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags: [ CartridgeRifle ]
+    capacity: 50
+    proto: CartridgePV556Ball
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/556_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ball
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: BasePVAmmoBox
+  id: PVAmmoBox762x39
+  name: ammunition box (7.62x39mm)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags: [ CartridgeLightRifle ]
+    capacity: 50
+    proto: CartridgePV762x39Ball
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x39_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ball
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: magb
+    steps: 3
+    zeroVisible: false
+
+- type: entity
+  parent: BasePVAmmoBox
+  id: PVAmmoBox762x51
+  name: ammunition box (7.62x51mm NATO)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags: [ Cartridge48Rifle ]
+    capacity: 50
+    proto: CartridgePV762x51SP
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x51_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ball
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: magb
+    steps: 3
+    zeroVisible: false
+
+- type: entity
+  parent: BasePVAmmoBox
+  id: PVAmmoBox762x54R
+  name: ammunition box (7.62x54mmR)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags: [ PVCartridge762x54RTag ]
+    capacity: 50
+    proto: CartridgePV762x54R
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x54r_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ball
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: magb
+    steps: 3
+    zeroVisible: false
+
+- type: entity
+  parent: BasePVAmmoBox
+  id: PVAmmoBox50AE
+  name: ammunition box (.50 AE FMJ)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags: [ PVCartridge50AETag ]
+    capacity: 50
+    proto: CartridgePV50AEFMJ
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/50AE_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: BasePVAmmoBox
+  id: PVAmmoBox57
+  name: ammunition box (5.7x26mm)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags: [ PVCartridge57Tag ]
+    capacity: 50
+    proto: CartridgePV57
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/57_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: ball
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: BasePVAmmoBox
+  id: PVAmmoBox50cal
+  name: ammunition box (.50 anti-materiel)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags: [ CartridgeAntiMateriel ]
+    capacity: 10
+    proto: CartridgePV50calBall
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/50cal_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]

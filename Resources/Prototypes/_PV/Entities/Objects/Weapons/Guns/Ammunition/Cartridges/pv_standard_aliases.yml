@@ -1,0 +1,159 @@
+- type: entity
+  parent: CartridgePistolSP
+  id: CartridgePV9x19Ball
+  name: cartridge (9x19mm ball)
+
+- type: entity
+  parent: CartridgePistolFMJ
+  id: CartridgePV9x19FMJ
+  name: cartridge (9x19mm FMJ)
+
+- type: entity
+  parent: CartridgePistolAP
+  id: CartridgePV9x19AP
+  name: cartridge (9x19mm AP)
+
+- type: entity
+  parent: CartridgePistolHP
+  id: CartridgePV9x19HP
+  name: cartridge (9x19mm HP)
+
+- type: entity
+  parent: CartridgePistolIncendiary
+  id: CartridgePV9x19Incendiary
+  name: cartridge (9x19mm incendiary)
+
+- type: entity
+  parent: CartridgePistolUranium
+  id: CartridgePV9x19Uranium
+  name: cartridge (9x19mm uranium)
+
+- type: entity
+  parent: CartridgePistolRubber
+  id: CartridgePV9x19Rubber
+  name: cartridge (9x19mm rubber)
+
+- type: entity
+  parent: CartridgePistolPractice
+  id: CartridgePV9x19Practice
+  name: cartridge (9x19mm practice)
+
+- type: entity
+  parent: CartridgeMagnumSP
+  id: CartridgePV45ACPBall
+  name: cartridge (.45 ACP ball)
+
+- type: entity
+  parent: CartridgeMagnumFMJ
+  id: CartridgePV45ACPFMJ
+  name: cartridge (.45 ACP FMJ)
+
+- type: entity
+  parent: CartridgeMagnumAP
+  id: CartridgePV45ACPAP
+  name: cartridge (.45 ACP AP)
+
+- type: entity
+  parent: CartridgeMagnumHP
+  id: CartridgePV45ACPHP
+  name: cartridge (.45 ACP HP)
+
+- type: entity
+  parent: CartridgeMagnumIncendiary
+  id: CartridgePV45ACPIncendiary
+  name: cartridge (.45 ACP incendiary)
+
+- type: entity
+  parent: CartridgeMagnumUranium
+  id: CartridgePV45ACPUranium
+  name: cartridge (.45 ACP uranium)
+
+- type: entity
+  parent: CartridgeMagnumRubber
+  id: CartridgePV45ACPRubber
+  name: cartridge (.45 ACP rubber)
+
+- type: entity
+  parent: CartridgeMagnumPractice
+  id: CartridgePV45ACPPractice
+  name: cartridge (.45 ACP practice)
+
+- type: entity
+  parent: CartridgeRifleSP
+  id: CartridgePV556Ball
+  name: cartridge (5.56x45mm ball)
+
+- type: entity
+  parent: CartridgeRifleFMJ
+  id: CartridgePV556FMJ
+  name: cartridge (5.56x45mm FMJ)
+
+- type: entity
+  parent: CartridgeRifleAP
+  id: CartridgePV556AP
+  name: cartridge (5.56x45mm AP)
+
+- type: entity
+  parent: CartridgeRifleHP
+  id: CartridgePV556HP
+  name: cartridge (5.56x45mm HP)
+
+- type: entity
+  parent: CartridgeRifleIncendiary
+  id: CartridgePV556Incendiary
+  name: cartridge (5.56x45mm incendiary)
+
+- type: entity
+  parent: CartridgeRifleUranium
+  id: CartridgePV556Uranium
+  name: cartridge (5.56x45mm uranium)
+
+- type: entity
+  parent: CartridgeRifleRubber
+  id: CartridgePV556Rubber
+  name: cartridge (5.56x45mm rubber)
+
+- type: entity
+  parent: CartridgeRiflePractice
+  id: CartridgePV556Practice
+  name: cartridge (5.56x45mm practice)
+
+- type: entity
+  parent: CartridgeLightRifleSP
+  id: CartridgePV762x39Ball
+  name: cartridge (7.62x39mm ball)
+
+- type: entity
+  parent: CartridgeLightRifleFMJ
+  id: CartridgePV762x39FMJ
+  name: cartridge (7.62x39mm FMJ)
+
+- type: entity
+  parent: CartridgeLightRifleAP
+  id: CartridgePV762x39AP
+  name: cartridge (7.62x39mm AP)
+
+- type: entity
+  parent: CartridgeLightRifleHP
+  id: CartridgePV762x39HP
+  name: cartridge (7.62x39mm HP)
+
+- type: entity
+  parent: CartridgeLightRifleIncendiary
+  id: CartridgePV762x39Incendiary
+  name: cartridge (7.62x39mm incendiary)
+
+- type: entity
+  parent: CartridgeLightRifleUranium
+  id: CartridgePV762x39Uranium
+  name: cartridge (7.62x39mm uranium)
+
+- type: entity
+  parent: CartridgeLightRifleRubber
+  id: CartridgePV762x39Rubber
+  name: cartridge (7.62x39mm rubber)
+
+- type: entity
+  parent: CartridgeLightRiflePractice
+  id: CartridgePV762x39Practice
+  name: cartridge (7.62x39mm practice)

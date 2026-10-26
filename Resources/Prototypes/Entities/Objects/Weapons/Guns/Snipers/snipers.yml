@@ -99,10 +99,10 @@
         staminaMultiplier: 20
   - type: BallisticAmmoProvider # Starlight
     capacity: 10
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV762x54R
     whitelist:
       tags:
-        - CartridgeLightRifleSP
+        - CartridgePV762x54R
     soundRack:
       path: /Audio/_Starlight/Weapons/Guns/Cock/cycle_bolt.ogg
       params:
@@ -187,7 +187,7 @@
       tags:
       - CartridgeAntiMateriel
     capacity: 5
-    proto: CartridgeAntiMateriel
+    proto: CartridgePV50calBall
   - type: SpeedModifiedOnWield
     walkModifier: 0.30 #SL 25% -> 30% speed
     sprintModifier: 0.30 #SL 25% -> 30% speed

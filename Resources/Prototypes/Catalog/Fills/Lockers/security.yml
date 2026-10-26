@@ -298,6 +298,8 @@
       amount: 1
     - id: WeaponRifleLawbringer
       amount: 1
+    - id: MagazinePV762x51
+      amount: 2
     - id: MagazineRifleHP
       amount: 4
     - id: MagazineRifleSP

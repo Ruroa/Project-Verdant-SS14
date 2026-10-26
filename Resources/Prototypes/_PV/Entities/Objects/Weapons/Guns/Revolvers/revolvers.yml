@@ -1,0 +1,82 @@
+- type: entity
+  abstract: true
+  parent: BaseWeaponRevolver
+  id: BasePVRevolver45
+  components:
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags: [ CartridgeMagnum ]
+    proto: CartridgeMagnumSP
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+
+- type: entity
+  name: M44
+  parent: [BasePVRevolver45, BaseSecurityContraband]
+  id: WeaponRevolverM44
+  description: A six-shot .45 ACP revolver.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Revolver/m44.rsi
+    state: base
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Revolver/m44.rsi
+  - type: Gun
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/revolver.ogg
+
+- type: entity
+  name: S&W 629
+  parent: [BasePVRevolver45, BaseSecurityContraband]
+  id: WeaponRevolverSW629
+  description: A six-shot .45 ACP revolver.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Revolver/s&w629.rsi
+    state: base
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Revolver/s&w629.rsi
+  - type: Gun
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/revolver.ogg
+
+- type: entity
+  name: S&W 629 snub
+  parent: WeaponRevolverSW629
+  id: WeaponRevolverSW629Snub
+  description: A compact six-shot .45 ACP revolver.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Revolver/s&w629_snub.rsi
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Revolver/s&w629_snub.rsi
+  - type: Gun
+    fireRate: 2.5
+
+- type: entity
+  name: RSh-12
+  parent: [BaseWeaponRevolver, BaseMajorContraband]
+  id: WeaponRevolverRSh12
+  description: A heavy five-shot revolver chambered in .50 AE FMJ.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Revolver/rsh12.rsi
+    state: base
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Revolver/rsh12.rsi
+  - type: Gun
+    fireRate: 1.5
+    soundGunshot:
+      path: /Audio/_Starlight/Weapons/Guns/Gunshots/deagle.ogg
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags: [ PVCartridge50AETag ]
+    proto: CartridgePV50AEFMJ
+    capacity: 5
+    chambers: [ True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null ]
+  - type: StaminaDamageOnShoot
+    damage: 15

@@ -2,8 +2,8 @@
 - type: entity
   parent: [ BaseCartridge, BaseMajorContraband ]
   id: Cartridge48Rifle
-  name: cartridge (.338 Lapua Magnum)
-  description: A powerful long-range precision-rifle cartridge that sits between full-power rifle ammunition and anti-materiel rounds.
+  name: cartridge (7.62x51mm NATO FMJ)
+  description: A full-power rifle cartridge used in designated marksman rifles.
   components:
   - type: Tag
     tags:
@@ -24,8 +24,8 @@
 - type: entity
   parent: [ BaseItem, BaseMajorContraband ]
   id: SpeedLoader48Rifle
-  name: "speed loader (.338 Lapua Magnum)"
-  description: A stripper clip pre-loaded with .338 Lapua Magnum rounds. Feeds directly into the Lionhunter's internal magazine and is hard to come by.
+  name: "speed loader (7.62x51mm NATO)"
+  description: A stripper clip pre-loaded with 7.62x51mm NATO rounds. Feeds directly into the Lionhunter's internal magazine.
   components:
   - type: Tag
     tags:

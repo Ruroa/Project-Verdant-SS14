@@ -1,0 +1,132 @@
+- type: entity
+  parent: BulletTrace
+  id: BulletPV57
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Piercing: 17
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV57FMJ
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    armorPenetration: 0.25
+    damage:
+      types:
+        Piercing: 21
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV57AP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    armorPenetration: 1
+    damage:
+      types:
+        Piercing: 16
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV57E
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    armorPenetration: 0.5
+    damage:
+      types:
+        Piercing: 15
+        Blunt: 5
+        Shock: 5
+  - type: HitscanStaminaDamage
+    staminaDamage: 10
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV50AEFMJ
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    armorPenetration: 0.25
+    damage:
+      types:
+        Piercing: 45
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV762x54R
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Piercing: 40
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV762x54RFMJ
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    armorPenetration: 0.25
+    damage:
+      types:
+        Piercing: 50
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV57HP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Piercing: 21
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV57Incendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Piercing: 12
+        Heat: 5
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV57Uranium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Piercing: 14
+        Radiation: 3
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV57Rubber
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Blunt: 3
+  - type: HitscanStaminaDamage
+    staminaDamage: 20
+
+- type: entity
+  parent: BulletTrace
+  id: BulletPV57Practice
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Blunt: 1

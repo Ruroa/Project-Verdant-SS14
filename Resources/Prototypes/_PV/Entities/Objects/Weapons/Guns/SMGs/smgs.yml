@@ -1,0 +1,179 @@
+- type: entity
+  abstract: true
+  parent: BaseWeaponSubMachineGun
+  id: BasePVSMG
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        priority: 2
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+      gun_chamber:
+        name: Chamber
+        priority: 1
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      firing_pin: !type:Container
+
+- type: entity
+  name: MP27
+  parent: [BasePVSMG, BaseSecurityContraband]
+  id: WeaponSMGMP27
+  description: A compact 5.7x26mm submachine gun.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Smgs/mp27.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Smgs/mp27.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePVMP27
+        priority: 2
+        whitelist:
+          tags: [ PVMagazineMP27Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ PVCartridge57Tag ]
+
+- type: entity
+  name: MP27E
+  parent: WeaponSMGMP27
+  id: WeaponSMGMP27E
+  description: An energized MP27 chambered for specialized 5.7x26mm rounds.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Smgs/mp27e.rsi
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Smgs/mp27e.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePVMP27E
+        priority: 2
+        whitelist:
+          tags: [ PVMagazineMP27ETag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ PVCartridge57ETag ]
+
+- type: entity
+  name: PD90
+  parent: [BasePVSMG, BaseSecurityContraband]
+  id: WeaponSMGPD90
+  description: A compact 5.7x26mm personal defense weapon.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Smgs/pd90.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Smgs/pd90.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePVPD90
+        priority: 2
+        whitelist:
+          tags: [ PVMagazinePD90Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ PVCartridge57Tag ]
+
+- type: entity
+  name: PD90E
+  parent: WeaponSMGPD90
+  id: WeaponSMGPD90E
+  description: An energized PD90 using specialized 5.7x26mm rounds.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Smgs/pd90e.rsi
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Smgs/pd90e.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePVPD90E
+        priority: 2
+        whitelist:
+          tags: [ PVMagazinePD90ETag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ PVCartridge57ETag ]
+
+- type: entity
+  name: MAC-15
+  parent: [BasePVSMG, BaseSecurityContraband]
+  id: WeaponSMGMac15
+  description: A 9x19mm submachine gun.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Smgs/mac15.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Smgs/mac15.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePVMac15
+        priority: 2
+        whitelist:
+          tags: [ PVMagazineMac15Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ CartridgePistol ]
+
+- type: entity
+  name: MP5
+  parent: WeaponSMGMac15
+  id: WeaponSMGMP5
+  description: A 9x19mm submachine gun.
+  components:
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Smgs/mp5.rsi
+  - type: Clothing
+    sprite: _PV/Objects/Weapons/Guns/Smgs/mp5.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePVMP5
+        priority: 2
+        whitelist:
+          tags: [ PVMagazineMP5Tag ]
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags: [ CartridgePistol ]

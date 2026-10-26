@@ -70,7 +70,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponRiflePitbull
-        - id: MagazineMagnumRifleSP
+        - id: MagazinePV762x51
           amount: 3
 
 - type: entity
@@ -136,5 +136,5 @@
         - id: GrenadeBlast
           amount: 3
         - id: WeaponRifleEstoc
-        - id: MagazineRifleFMJ
+        - id: MagazinePV762x51
           amount: 3

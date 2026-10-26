@@ -1,13 +1,15 @@
 - type: entity
   id: LightRifleHeavyBase
-  name: ".30 rifle Magazine Box"
+  name: "5.56x45mm Magazine Box"
   parent: BaseMagazineBoxLightRifle
   components:
   - type: Tag
     tags:
       - LightRifleHeavy
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
+    whitelist:
+      tags: [ CartridgeRifle ]
+    proto: CartridgePV556Ball
     capacity: 80
   - type: Item
     size: Small
@@ -26,7 +28,7 @@
 
 - type: entity
   id: LightRifleHeavyMagazineEmpty
-  name: "Magazine Box (.30 rifle any)"
+  name: "Magazine Box (5.56x45mm any)"
   suffix: empty
   parent: LightRifleHeavyBase
   components:
@@ -44,11 +46,11 @@
 
 - type: entity
   id: LightRifleHeavyMagazineSP
-  name: "Magazine Box (.30 rifle SP)"
+  name: "Magazine Box (5.56x45mm SP)"
   parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV556Ball
   - type: Sprite
     layers:
     - state: base
@@ -64,11 +66,11 @@
 
 - type: entity
   id: LightRifleHeavyMagazineHP
-  name: "Magazine Box (.30 rifle HP)"
+  name: "Magazine Box (5.56x45mm HP)"
   parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleHP
+    proto: CartridgePV556HP
   - type: Sprite
     layers:
     - state: base
@@ -84,11 +86,11 @@
 
 - type: entity
   id: LightRifleHeavyMagazineFMJ
-  name: "Magazine Box (.30 rifle FMJ)"
+  name: "Magazine Box (5.56x45mm FMJ)"
   parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleFMJ
+    proto: CartridgePV556FMJ
   - type: Sprite
     layers:
     - state: base
@@ -104,11 +106,11 @@
 
 - type: entity
   id: LightRifleHeavyMagazineIncendiary
-  name: "Magazine Box (.30 rifle incendiary)"
+  name: "Magazine Box (5.56x45mm incendiary)"
   parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleIncendiary
+    proto: CartridgePV556Incendiary
   - type: Sprite
     layers:
     - state: base
@@ -124,11 +126,11 @@
 
 - type: entity
   id: LightRifleHeavyMagazineUranium
-  name: "Magazine Box (.30 rifle uranium)"
+  name: "Magazine Box (5.56x45mm uranium)"
   parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleUranium
+    proto: CartridgePV556Uranium
   - type: Sprite
     layers:
     - state: base
@@ -144,11 +146,11 @@
 
 - type: entity
   id: LightRifleHeavyMagazineAP
-  name: "Magazine Box (.30 rifle AP)"
+  name: "Magazine Box (5.56x45mm AP)"
   parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleAP
+    proto: CartridgePV556AP
   - type: Sprite
     layers:
     - state: base
