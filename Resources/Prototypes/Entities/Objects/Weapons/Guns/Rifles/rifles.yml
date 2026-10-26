@@ -250,10 +250,10 @@
     - FullAuto
 
 - type: entity
-  name: Estoc DMR
+  name: DT MDR
   parent: [BaseWeaponRifle, BaseSyndicateContraband]
   id: WeaponRifleEstoc
-  description: "A designated marksman rifle firing in 3-round bursts. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from .20 rifle magazines."
+  description: "The Desert Tech Micro Dynamic Rifle (DT MDR), a compact bullpup rifle capable of semi-automatic and 3-round burst fire.\nFeeds from .20 rifle magazines."
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
