@@ -65,7 +65,7 @@
   result: PVAmmoBox57Energized
   materials:
     Steel: 350
-    Plasma: 100
+    Plasma: 5
 
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
