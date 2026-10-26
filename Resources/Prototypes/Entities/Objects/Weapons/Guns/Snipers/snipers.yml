@@ -102,7 +102,7 @@
     proto: CartridgePV762x54R
     whitelist:
       tags:
-        - CartridgePV762x54R
+        - PVCartridge762x54RTag
     soundRack:
       path: /Audio/_Starlight/Weapons/Guns/Cock/cycle_bolt.ogg
       params:
