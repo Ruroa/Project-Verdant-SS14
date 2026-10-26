@@ -1,6 +1,6 @@
 - type: entity
   id: BaseMagazineMagnum
-  name: pistol magazine (.45 magnum)
+  name: pistol magazine (.45 ACP)
   parent: [ BaseSecuritySalvageContraband, BaseMagazinePistol ]
   abstract: true
   components:
@@ -17,7 +17,7 @@
 
 - type: entity
   id: BaseMagazineMagnumSubMachineGun
-  name: SMG magazine (.45 magnum)
+  name: SMG magazine (.45 ACP)
   parent: [BaseItem, BaseSecuritySalvageContraband]
   abstract: true
   components:
@@ -51,7 +51,7 @@
 
 - type: entity
   id: MagazineMagnumEmpty
-  name: pistol magazine (.45 magnum any)
+  name: pistol magazine (.45 ACP any)
   suffix: empty
   parent: BaseMagazineMagnum
   description: 7-round single stack pistol magazine.
@@ -73,7 +73,7 @@
 
 - type: entity
   id: MagazineMagnum
-  name: pistol magazine (.45 magnum)
+  name: pistol magazine (.45 ACP)
   parent: BaseMagazineMagnum
   description: 7-round single stack pistol magazine. Intended to hold general-purpose kinetic ammunition.
   components:
@@ -98,7 +98,7 @@
 
 - type: entity
   id: MagazineMagnumPractice
-  name: pistol magazine (.45 magnum practice)
+  name: pistol magazine (.45 ACP practice)
   parent: BaseMagazineMagnum
   description: 7-round single stack pistol magazine. Intended to hold non-harmful chalk ammunition.
   components:
@@ -123,7 +123,7 @@
 
 - type: entity
   id: MagazineMagnumUranium
-  name: pistol magazine (.45 magnum uranium)
+  name: pistol magazine (.45 ACP uranium)
   parent: BaseMagazineMagnum
   description: 7-round single stack pistol magazine. Intended to hold exotic uranium-core ammunition.
   components:
@@ -148,7 +148,7 @@
 
 - type: entity
   id: MagazineMagnumAP
-  name: pistol magazine (.45 magnum armor-piercing)
+  name: pistol magazine (.45 ACP armor-piercing)
   parent: BaseMagazineMagnum
   description: 7-round single stack pistol magazine. Intended to hold rare armor-piercing ammunition.
   components:
@@ -173,7 +173,7 @@
 
 - type: entity
   id: MagazineMagnumSubMachineGunEmpty
-  name: SMG magazine (.45 magnum any)
+  name: SMG magazine (.45 ACP any)
   suffix: empty
   parent: BaseMagazineMagnumSubMachineGun
   components:
@@ -192,7 +192,7 @@
 
 - type: entity
   id: MagazineMagnumSubMachineGun
-  name: SMG magazine (.45 magnum)
+  name: SMG magazine (.45 ACP)
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
@@ -210,7 +210,7 @@
 
 - type: entity
   id: MagazineMagnumSubMachineGunPractice
-  name: SMG magazine (.45 magnum practice)
+  name: SMG magazine (.45 ACP practice)
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
@@ -228,7 +228,7 @@
 
 - type: entity
   id: MagazineMagnumSubMachineGunUranium
-  name: SMG magazine (.45 magnum uranium)
+  name: SMG magazine (.45 ACP uranium)
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
@@ -246,7 +246,7 @@
 
 - type: entity
   id: MagazineMagnumSubMachineGunPiercing
-  name: SMG magazine (.45 magnum armour-piercing)
+  name: SMG magazine (.45 ACP armour-piercing)
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
@@ -264,7 +264,7 @@
 
 - type: entity
   id: MagazineMagnumRubber
-  name: pistol magazine (.45 magnum rubber)
+  name: pistol magazine (.45 ACP rubber)
   parent: BaseMagazineMagnum
   components:
   - type: BallisticAmmoProvider
@@ -288,7 +288,7 @@
 
 - type: entity
   id: MagazineMagnumSubMachineGunRubber
-  name: "Vector magazine (.45 magnum rubber)"
+  name: "Vector magazine (.45 ACP rubber)"
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider

@@ -1,7 +1,7 @@
 # Empty mags
 - type: entity
   id: BaseMagazineRifle
-  name: "magazine (.20 rifle)"
+  name: "magazine (5.56x45mm)"
   parent: [ BaseItem, BaseSecurityContraband ]
   abstract: true
   components:
@@ -36,7 +36,7 @@
 # Magazines
 - type: entity
   id: MagazineRifleSP
-  name: "magazine (.20 rifle SP)"
+  name: "magazine (5.56x45mm SP)"
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
@@ -60,7 +60,7 @@
 
 - type: entity
   id: MagazineRifleHP
-  name: "magazine (.20 rifle HP)"
+  name: "magazine (5.56x45mm HP)"
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
@@ -84,7 +84,7 @@
 
 - type: entity
   id: MagazineRifleFMJ
-  name: "magazine (.20 rifle FMJ)"
+  name: "magazine (5.56x45mm FMJ)"
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
@@ -108,7 +108,7 @@
 
 - type: entity
   id: MagazineRifleAP
-  name: "magazine (.20 rifle AP)"
+  name: "magazine (5.56x45mm AP)"
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
@@ -132,7 +132,7 @@
 
 - type: entity
   id: MagazineRifleEmpty
-  name: "magazine (.20 rifle any)"
+  name: "magazine (5.56x45mm any)"
   suffix: empty
   parent: MagazineRifleSP
   components:
@@ -153,7 +153,7 @@
 
 - type: entity
   id: MagazineRifleIncendiary
-  name: "magazine (.20 rifle incendiary)"
+  name: "magazine (5.56x45mm incendiary)"
   parent: MagazineRifleSP
   components:
   - type: BallisticAmmoProvider
@@ -177,7 +177,7 @@
 
 - type: entity
   id: MagazineRiflePractice
-  name: "magazine (.20 rifle practice)"
+  name: "magazine (5.56x45mm practice)"
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
@@ -201,7 +201,7 @@
 
 - type: entity
   id: MagazineRifleUranium
-  name: "magazine (.20 rifle uranium)"
+  name: "magazine (5.56x45mm uranium)"
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
@@ -225,7 +225,7 @@
 
 - type: entity
   id: MagazineRifleRubber
-  name: "magazine (.20 rifle rubber)"
+  name: "magazine (5.56x45mm rubber)"
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
@@ -268,7 +268,7 @@
 
 - type: entity
   id: MagazineRifleM52SP
-  name: "magazine (.20 rifle SP)"
+  name: "magazine (5.56x45mm SP)"
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
@@ -292,7 +292,7 @@
 
 - type: entity
   id: MagazineRifleM52HP
-  name: "magazine (.20 rifle HP)"
+  name: "magazine (5.56x45mm HP)"
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
@@ -316,7 +316,7 @@
 
 - type: entity
   id: MagazineRifleM52FMJ
-  name: "magazine (.20 rifle FMJ)"
+  name: "magazine (5.56x45mm FMJ)"
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
@@ -340,7 +340,7 @@
 
 - type: entity
   id: MagazineRifleM52AP
-  name: "magazine (.20 rifle AP)"
+  name: "magazine (5.56x45mm AP)"
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
@@ -364,7 +364,7 @@
 
 - type: entity
   id: MagazineRifleM52Empty
-  name: "magazine (.20 rifle any)"
+  name: "magazine (5.56x45mm any)"
   suffix: empty
   parent: BaseMagazineRifleM52
   components:
@@ -383,7 +383,7 @@
 
 - type: entity
   id: MagazineRifleM52Incendiary
-  name: "magazine (.20 rifle incendiary)"
+  name: "magazine (5.56x45mm incendiary)"
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
@@ -405,7 +405,7 @@
 
 - type: entity
   id: MagazineRifleM52Practice
-  name: "magazine (.20 rifle practice)"
+  name: "magazine (5.56x45mm practice)"
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider
@@ -429,7 +429,7 @@
 
 - type: entity
   id: MagazineRifleM52Uranium
-  name: "magazine (.20 rifle uranium)"
+  name: "magazine (5.56x45mm uranium)"
   parent: BaseMagazineRifleM52
   components:
   - type: BallisticAmmoProvider

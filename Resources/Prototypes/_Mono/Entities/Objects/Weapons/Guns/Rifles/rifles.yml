@@ -247,7 +247,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
+        startingItem: CartridgePV556Ball
         priority: 1
         whitelist:
           tags:

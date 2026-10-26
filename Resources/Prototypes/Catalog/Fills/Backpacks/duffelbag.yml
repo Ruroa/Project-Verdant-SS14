@@ -182,7 +182,7 @@
           amount: 4
         - id: MagazineRifleSP
           amount: 3
-        - id: MagazineRifleSP #Starlight, for the estoc
+        - id: MagazinePV762x51 #Starlight, for the estoc
           amount: 2
         - id: MagazineLightRifleBoxSP
           amount: 3

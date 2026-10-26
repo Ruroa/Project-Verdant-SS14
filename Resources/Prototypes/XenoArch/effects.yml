@@ -350,7 +350,7 @@
         tags:
         - CartridgeMagnum
         - SpeedLoaderMagnum
-      proto: CartridgeMagnumSP
+      proto: CartridgePV45ACPBall
       capacity: 7
       chambers: [ True, True, True, True, True, True, True ]
       ammoSlots: [ null, null, null, null, null, null, null ]

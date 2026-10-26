@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseItem
   id: BaseMagazineBoxLightRifle
-  name: ammunition box (.30 rifle)
+  name: ammunition box (7.62x39mm)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -28,7 +28,7 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleBig
-  name: ammunition box (.30 rifle SP)
+  name: ammunition box (7.62x39mm SP)
   components:
   - type: BallisticAmmoProvider
     capacity: 200
@@ -48,7 +48,7 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleSP
-  name: ammunition box (.30 rifle SP)
+  name: ammunition box (7.62x39mm SP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePV762x39Ball
@@ -68,7 +68,7 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleHP
-  name: ammunition box (.30 rifle HP)
+  name: ammunition box (7.62x39mm HP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePV762x39HP
@@ -82,7 +82,7 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleFMJ
-  name: ammunition box (.30 rifle FMJ)
+  name: ammunition box (7.62x39mm FMJ)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePV762x39FMJ
@@ -97,7 +97,7 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleAP
-  name: ammunition box (.30 rifle AP)
+  name: ammunition box (7.62x39mm AP)
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePV762x39AP
@@ -112,8 +112,8 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRiflePractice
-  name: ammunition box (.30 rifle practice)
-  description: A cardboard box of .30 rifle rounds. Intended to hold harmless practice ammunition.
+  name: ammunition box (7.62x39mm practice)
+  description: A cardboard box of 7.62x39mm rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePV762x39Practice
@@ -126,8 +126,8 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleIncendiary
-  name: ammunition box (.30 rifle incendiary)
-  description: A cardboard box of .30 rifle rounds. Intended to hold self-igniting incendiary ammunition.
+  name: ammunition box (7.62x39mm incendiary)
+  description: A cardboard box of 7.62x39mm rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePV762x39Incendiary
@@ -142,8 +142,8 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleUranium
-  name: ammunition box (.30 rifle uranium)
-  description: A cardboard box of .30 rifle rounds. Intended to hold exotic uranium-core ammunition.
+  name: ammunition box (7.62x39mm uranium)
+  description: A cardboard box of 7.62x39mm rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePV762x39Uranium

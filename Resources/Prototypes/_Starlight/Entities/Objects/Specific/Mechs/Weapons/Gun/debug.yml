@@ -26,7 +26,7 @@
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: AmmoCounter
   - type: MechAmmoProvider #Starlight - MechAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgePV762x39Ball
     fireCost: 9
   - type: MagazineVisuals
     magState: mag

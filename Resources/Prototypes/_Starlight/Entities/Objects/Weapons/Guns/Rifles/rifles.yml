@@ -17,7 +17,7 @@
             - MagazineRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleRubber
+        startingItem: CartridgePV556Rubber
         priority: 1
         whitelist:
           tags:
@@ -167,7 +167,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleFMJ
+        startingItem: CartridgePV762x39FMJ
         priority: 1
         whitelist:
           tags:
@@ -217,7 +217,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleFMJ
+        startingItem: CartridgePV556FMJ
         priority: 1
         whitelist:
           tags:
@@ -262,7 +262,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
+        startingItem: CartridgePV556Ball
         priority: 1
         whitelist:
           tags:
@@ -431,7 +431,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleFMJ
+        startingItem: CartridgePV556FMJ
         priority: 1
         whitelist:
           tags:
@@ -483,7 +483,7 @@
           whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
-          startingItem: CartridgeRifleSP
+          startingItem: CartridgePV556Ball
           priority: 1
           whitelist:
             tags:

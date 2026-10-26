@@ -77,6 +77,10 @@
   - MagazineBoxLightRifleAP
   - MagazineDMRAP
   - MagazinePistolSubMachineGunAP
+  - PVAmmoBox57AP
+  - PVAmmoBox57Energized
+  - PVAmmoBox762x51AP
+  - PVAmmoBox762x54RAP
   radioChannels:
   - Security
 

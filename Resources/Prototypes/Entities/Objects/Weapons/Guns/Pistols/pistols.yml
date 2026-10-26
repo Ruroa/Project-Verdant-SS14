@@ -170,7 +170,7 @@
       tags:
       - CartridgePistol
     capacity: 10
-    proto: CartridgePistolSP
+    proto: CartridgePV9x19Ball
     cycleable: false # No synthesizing ammo for your syndicate masters.
   - type: BallisticAmmoSelfRefiller
     autoRefillRate: 4s

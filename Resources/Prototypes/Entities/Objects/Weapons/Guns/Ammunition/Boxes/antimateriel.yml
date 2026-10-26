@@ -9,7 +9,7 @@
     whitelist:
       tags:
         - CartridgeAntiMateriel
-    proto: CartridgeAntiMateriel
+    proto: CartridgePV50calBall
     capacity: 10
   - type: Item
     size: Small
@@ -32,7 +32,7 @@
   description: A cardboard box of .50 anti-materiel rounds.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeAntiMateriel
+    proto: CartridgePV50calBall
   - type: Sprite
     layers:
     - state: base

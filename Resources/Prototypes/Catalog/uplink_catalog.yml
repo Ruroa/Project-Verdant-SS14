@@ -616,7 +616,7 @@
   id: UplinkMosinAmmo
   name: uplink-mosin-ammo-name
   description: uplink-mosin-ammo-desc
-  productEntity: MagazineBoxLightRifleFMJ
+  productEntity: PVAmmoBox762x54R
   cost:
     Telecrystal: 1
   categories:
@@ -627,7 +627,7 @@
   id: UplinkEstocAmmo
   name: uplink-estoc-ammo-name
   description: uplink-estoc-ammo-desc
-  productEntity: MagazineRifleSP #Starlight
+  productEntity: MagazinePV762x51 #Starlight
   cost:
     Telecrystal: 2
   categories:

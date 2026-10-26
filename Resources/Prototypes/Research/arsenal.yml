@@ -45,6 +45,9 @@
   - MagazineDMRIncendiary # Starlight
   - MagazinePistolSubMachineGunIncendiary
   - SpeedLoaderShotgunIncendiary
+  - PVAmmoBox57Incendiary
+  - PVAmmoBox762x51Incendiary
+  - PVAmmoBox762x54RIncendiary
   radioChannels:
   - Security
 
@@ -89,6 +92,9 @@
   - MagazineBoxMagnumRubber
   - MagazineBoxLightRifleRubber
   - MagazineBoxRifleRubber
+  - PVAmmoBox57Rubber
+  - PVAmmoBox762x51Rubber
+  - PVAmmoBox762x54RRubber
   radioChannels:
   - Security
 
@@ -115,6 +121,9 @@
   - MagazineDMRUranium # Starlight
   - MagazinePistolSubMachineGunUranium
   - SpeedLoaderShotgunUranium
+  - PVAmmoBox57Uranium
+  - PVAmmoBox762x51Uranium
+  - PVAmmoBox762x54RUranium
   radioChannels:
   - Security
 

@@ -18,7 +18,7 @@
               - MagazinePistolSubMachineGunSP
         gun_chamber:
           name: Chamber
-          startingItem: CartridgePistolRubber
+          startingItem: CartridgePV9x19Rubber
           priority: 1
           whitelist:
             tags:
@@ -110,7 +110,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
+        startingItem: CartridgePV9x19Ball
         priority: 1
         whitelist:
           tags:
@@ -172,7 +172,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
+        startingItem: CartridgePV9x19Ball
         priority: 1
         whitelist:
           tags:

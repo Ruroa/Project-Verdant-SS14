@@ -195,7 +195,7 @@
       tags:
       - CartridgePistol
     capacity: 30
-    proto: CartridgePistolSP #Starlight Ammo
+    proto: CartridgePV9x19Ball #Starlight Ammo
     cycleable: false # No synthesizing ammo for your syndicate masters.
   - type: BallisticAmmoSelfRefiller
     autoRefillRate: 4s

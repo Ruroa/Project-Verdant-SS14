@@ -1,0 +1,190 @@
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox57
+  result: PVAmmoBox57
+  materials:
+    Steel: 350
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox57FMJ
+  result: PVAmmoBox57FMJ
+  materials:
+    Steel: 350
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox57HP
+  result: PVAmmoBox57HP
+  materials:
+    Steel: 350
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox57Practice
+  result: PVAmmoBox57Practice
+  materials:
+    Steel: 150
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox57Rubber
+  result: PVAmmoBox57Rubber
+  materials:
+    Steel: 150
+    Plastic: 150
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox57AP
+  result: PVAmmoBox57AP
+  materials:
+    Steel: 350
+    Uranium: 150
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox57Incendiary
+  result: PVAmmoBox57Incendiary
+  materials:
+    Steel: 200
+    Plastic: 150
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox57Uranium
+  result: PVAmmoBox57Uranium
+  materials:
+    Steel: 100
+    Plastic: 100
+    Uranium: 250
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox57Energized
+  result: PVAmmoBox57Energized
+  materials:
+    Steel: 350
+    Plasma: 250
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x51
+  result: PVAmmoBox762x51
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x51FMJ
+  result: PVAmmoBox762x51FMJ
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x51HP
+  result: PVAmmoBox762x51HP
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x51Practice
+  result: PVAmmoBox762x51Practice
+  materials:
+    Steel: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x51Rubber
+  result: PVAmmoBox762x51Rubber
+  materials:
+    Steel: 200
+    Plastic: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x51AP
+  result: PVAmmoBox762x51AP
+  materials:
+    Steel: 500
+    Uranium: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x51Incendiary
+  result: PVAmmoBox762x51Incendiary
+  materials:
+    Steel: 250
+    Plastic: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x51Uranium
+  result: PVAmmoBox762x51Uranium
+  materials:
+    Steel: 150
+    Plastic: 150
+    Uranium: 300
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x54R
+  result: PVAmmoBox762x54R
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x54RFMJ
+  result: PVAmmoBox762x54RFMJ
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x54RHP
+  result: PVAmmoBox762x54RHP
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x54RPractice
+  result: PVAmmoBox762x54RPractice
+  materials:
+    Steel: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x54RRubber
+  result: PVAmmoBox762x54RRubber
+  materials:
+    Steel: 200
+    Plastic: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x54RAP
+  result: PVAmmoBox762x54RAP
+  materials:
+    Steel: 500
+    Uranium: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x54RIncendiary
+  result: PVAmmoBox762x54RIncendiary
+  materials:
+    Steel: 250
+    Plastic: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: PVAmmoBox762x54RUranium
+  result: PVAmmoBox762x54RUranium
+  materials:
+    Steel: 150
+    Plastic: 150
+    Uranium: 300

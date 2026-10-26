@@ -1,6 +1,6 @@
 - type: latheRecipe
   id: CartridgeMagnumRubber
-  result: CartridgeMagnumRubber
+  result: CartridgePV45ACPRubber
   categories:
   - Ammo
   completetime: 2
@@ -95,7 +95,7 @@
 
 - type: latheRecipe
   id: MagazineBoxMagnumRubber
-  result: MagazineBoxMagnumRubber
+  result: PVAmmoBox45ACPRubber
   categories:
   - Ammo
   completetime: 5
@@ -106,42 +106,42 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxMagnumSP
-  result: MagazineBoxMagnumSP
+  result: PVAmmoBox45ACP
   materials:
     Steel: 240
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxMagnumHP
-  result: MagazineBoxMagnumHP
+  result: PVAmmoBox45ACPHP
   materials:
     Steel: 240
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxMagnumFMJ
-  result: MagazineBoxMagnumFMJ
+  result: PVAmmoBox45ACPFMJ
   materials:
     Steel: 240
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxMagnumPractice
-  result: MagazineBoxMagnumPractice
+  result: PVAmmoBox45ACPPractice
   materials:
     Steel: 60
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxMagnumIncendiary
-  result: MagazineBoxMagnumIncendiary
+  result: PVAmmoBox45ACPIncendiary
   materials:
     Plastic: 240
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxMagnumUranium
-  result: MagazineBoxMagnumUranium
+  result: PVAmmoBox45ACPUranium
   materials:
     Plastic: 240
     Uranium: 180
@@ -149,7 +149,7 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxMagnumAP
-  result: MagazineBoxMagnumAP
+  result: PVAmmoBox45ACPAP
   materials:
     Plastic: 240
     Steel: 180

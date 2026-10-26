@@ -41,7 +41,7 @@
             - MagazineRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
+        startingItem: CartridgePV556Ball
         priority: 1
         whitelist:
           tags:
@@ -148,7 +148,7 @@
       tags:
       - CartridgeRifle
     capacity: 24
-    proto: CartridgeRifleSP
+    proto: CartridgePV556Ball
     cycleable: false
   - type: BallisticAmmoSelfRefiller
     autoRefillRate: 4s

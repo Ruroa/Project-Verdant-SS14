@@ -89,7 +89,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: rubber
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -105,7 +104,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: practice
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -200,7 +198,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: rubber
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -216,7 +213,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: practice
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -311,7 +307,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: rubber
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -327,7 +322,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: practice
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -422,7 +416,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: practice
     - state: magb-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -532,7 +525,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: practice
     - state: magb-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -627,7 +619,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: practice
     - state: magb-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -722,7 +713,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: rubber
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -738,7 +728,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: practice
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
@@ -815,3 +804,33 @@
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePV50calPractice
+
+- type: entity
+  parent: PVAmmoBox762x39
+  id: PVAmmoBox762x39Rubber
+  name: ammunition box (7.62x39mm rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x39Rubber
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x39_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: PVAmmoBox762x54R
+  id: PVAmmoBox762x54RRubber
+  name: ammunition box (7.62x54mmR rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x54RRubber
+  - type: Sprite
+    sprite: _PV/Objects/Weapons/Guns/Ammo/Boxes/762x54r_box.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: magb-1
+      map: [ "enum.GunVisualLayers.Mag" ]

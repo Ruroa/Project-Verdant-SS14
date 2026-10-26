@@ -1,6 +1,6 @@
 - type: latheRecipe
   id: CartridgePistolRubber
-  result: CartridgePistolRubber
+  result: CartridgePV9x19Rubber
   categories:
   - Ammo
   completetime: 2
@@ -181,7 +181,7 @@
 
 - type: latheRecipe
   id: MagazineBoxPistolRubber
-  result: MagazineBoxPistolRubber
+  result: PVAmmoBox9x19Rubber
   categories:
   - Ammo
   completetime: 5
@@ -192,42 +192,42 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxPistolSP
-  result: MagazineBoxPistolSP
+  result: PVAmmoBox9x19
   materials:
     Steel: 600
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxPistolHP
-  result: MagazineBoxPistolHP
+  result: PVAmmoBox9x19HP
   materials:
     Steel: 600
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxPistolFMJ
-  result: MagazineBoxPistolFMJ
+  result: PVAmmoBox9x19FMJ
   materials:
     Steel: 600
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxPistolPractice
-  result: MagazineBoxPistolPractice
+  result: PVAmmoBox9x19Practice
   materials:
     Steel: 300
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxPistolIncendiary
-  result: MagazineBoxPistolIncendiary
+  result: PVAmmoBox9x19Incendiary
   materials:
     Plastic: 600
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxPistolUranium
-  result: MagazineBoxPistolUranium
+  result: PVAmmoBox9x19Uranium
   materials:
     Plastic: 300
     Uranium: 600
@@ -235,7 +235,7 @@
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineBoxPistolAP
-  result: MagazineBoxPistolAP
+  result: PVAmmoBox9x19AP
   materials:
     Plastic: 300
     Steel: 300

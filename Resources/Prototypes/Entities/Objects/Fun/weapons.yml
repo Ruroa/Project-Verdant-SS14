@@ -182,7 +182,7 @@
       - SpeedLoaderCap
       - CartridgeMagnum
       - SpeedLoaderMagnum
-    proto: CartridgeMagnumAP
+    proto: CartridgePV45ACPAP
 
 - type: entity
   parent: [ BaseItem, BaseToyGun ]

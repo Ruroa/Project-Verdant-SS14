@@ -40,7 +40,7 @@
       tags:
         - CartridgeMagnum
         - SpeedLoaderMagnum
-    proto: CartridgeMagnumSP
+    proto: CartridgePV45ACPBall
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -110,7 +110,7 @@
       tags:
       - CartridgeMagnumSP
       - SpeedLoaderMagnumSP
-    proto: CartridgeMagnumSP
+    proto: CartridgePV45ACPBall
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -143,7 +143,7 @@
       tags:
       - CartridgeMagnumSP
       - SpeedLoaderMagnumSP
-    proto: CartridgeMagnumSP
+    proto: CartridgePV45ACPBall
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -158,7 +158,7 @@
   suffix: armor-piercing
   components:
   - type: RevolverAmmoProvider
-    proto: CartridgeMagnumAP
+    proto: CartridgePV45ACPAP
 
 - type: entity
   name: python # Starlight, capitalization
@@ -194,7 +194,7 @@
   suffix: armor-piercing
   components:
   - type: RevolverAmmoProvider
-    proto: CartridgeMagnumAP
+    proto: CartridgePV45ACPAP
 
 
 - type: entity

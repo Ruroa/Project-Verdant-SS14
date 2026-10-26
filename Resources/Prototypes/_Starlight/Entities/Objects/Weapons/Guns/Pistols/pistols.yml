@@ -33,7 +33,7 @@
           whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
-          startingItem: CartridgePistolSP
+          startingItem: CartridgePV9x19Ball
           priority: 1
           whitelist:
             tags:
@@ -64,7 +64,7 @@
               - MagazinePistol
         gun_chamber:
           name: Chamber
-          startingItem: CartridgePistolRubber
+          startingItem: CartridgePV9x19Rubber
           priority: 1
           whitelist:
             tags:
@@ -89,7 +89,7 @@
               - MagazineMagnum
         gun_chamber:
           name: Chamber
-          startingItem: CartridgeMagnumRubber
+          startingItem: CartridgePV45ACPRubber
           priority: 1
           whitelist:
             tags:
@@ -196,19 +196,19 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistolSP
+          startingItem: MagazinePV57
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
           whitelist:
             tags:
-            - MagazinePistolSP
+            - PVMagazine57Tag
         gun_chamber:
           name: Chamber
           priority: 1
           whitelist:
             tags:
-            - CartridgePistolSP
+            - PVCartridge57Tag
     - type: StealTarget
       stealGroup: OfficerHandgun
 
@@ -626,7 +626,7 @@
       tags:
       - CartridgePistol
     capacity: 10
-    proto: CartridgePistolSP
+    proto: CartridgePV9x19Ball
     cycleable: false # No synthesizing ammo.
   - type: BallisticAmmoSelfRefiller
     autoRefillRate: 4s

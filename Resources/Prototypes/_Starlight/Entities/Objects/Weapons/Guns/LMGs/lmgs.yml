@@ -92,7 +92,7 @@
             - MagazineLightRiflePan
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
+        startingItem: CartridgePV762x39Ball
         priority: 1
         whitelist:
           tags:
