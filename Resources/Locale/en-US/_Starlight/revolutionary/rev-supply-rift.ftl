@@ -21,13 +21,13 @@ lawboard-desc = The USSP is open to everyone, even the AI! Do keep in mind that 
 # Telebonds
 # Weapons
 akms-weapon-name = AKMS Rifle
-akms-weapon-desc = Discontinued but a reliable assault rifle still in broad use today. Uses .30 ammo.
+akms-weapon-desc = Discontinued but a reliable assault rifle still in broad use today. Uses 7.62x39mm ammo.
 makarov-name = Makarov
-makarov-desc = Cho? Gun is gun comrade. Uses .35 auto ammo.
+makarov-desc = Cho? Gun is gun comrade. Uses 9x19mm ammo.
 finka-name = Finka (SNKVD)
 finka-desc = The knife's secret technique was...
 mosin-name = Kardashev-Mosin
-mosin-desc = Enemies at the airlock. Uses .45 magnum ammo.
+mosin-desc = Enemies at the airlock. Uses 7.62x54mmR ammo.
 dp-name = DP-28 LMG
 dp-desc = From RA-TA-TA-TA with love. Uses .30 ammo.
 ppsh-name = PPSH 59 SMG

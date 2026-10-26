@@ -14,17 +14,17 @@ uplink-stechkin-desc = A small, easily concealable 10mm handgun. Has a threaded 
 uplink-stechkin-bundle-name = Solid Operative Bundle
 uplink-stechkin-bundle-desc = A mysterious cardboard box containing a slew of equipment for only the most solid of operatives.
 
-uplink-pistol-high-capacity-magazine-name = Extended Pistol Magazine (.35 auto)
+uplink-pistol-high-capacity-magazine-name = Extended Pistol Magazine (9x19mm)
 uplink-pistol-high-capacity-magazine-desc = Pistol magazine with 16 cartridges. Compatible with the Viper.
 
-uplink-pistol-hp-magazine-name = Pistol Magazine (.35 auto HP)
-uplink-pistol-hp-magazine-desc = Pistol magazine with 10 cartridges. Compatible with the Viper.
+uplink-pistol-hp-magazine-name = Pistol Magazine (9x19mm HP)
+uplink-pistol-hp-magazine-desc = 10-round 9x19mm HP magazine. Compatible with the Viper.
 
-uplink-pistol-fmj-magazine-name = Pistol Magazine (.35 auto FMJ)
-uplink-pistol-fmj-magazine-desc = Pistol magazine with 10 cartridges. Compatible with the Viper.
+uplink-pistol-fmj-magazine-name = Pistol Magazine (9x19mm FMJ)
+uplink-pistol-fmj-magazine-desc = 10-round 9x19mm FMJ magazine. Compatible with the Viper.
 
-uplink-pistol-magnum-magazine-name = Pistol Magazine (.45 magnum)
-uplink-pistol-magnum-magazine-desc = Pistol magazine with 10 cartridges. Compatible with the Desert Eagle.
+uplink-pistol-magnum-magazine-name = Pistol Magazine (.45 ACP)
+uplink-pistol-magnum-magazine-desc = 7-round .45 ACP magazine. Compatible with the Desert Eagle.
 
 uplink-magillitis-serum-implanter-name = Magillitis Serum Implanter
 uplink-magillitis-serum-implanter-desc = An experimental biochip which causes irreversable rapid muscular growth in Hominidae. Side-affects may include hypertrichosis, violent outbursts, and an unending affinity for bananas.
@@ -32,11 +32,11 @@ uplink-gear-acidifier-implant-name = Gear Acidifier Implant
 uplink-gear-acidifier-implant-desc = Melts your equipment on use or death, leaving your body intact. Does not destroy restraints.
 
 uplink-pitbull-bundle-name = Pitbull Bundle
-uplink-pitbull-bundle-desc = A large bullpup rifle with a low fire-rate but excellent accuracy. Chambered in .45 magnum.
+uplink-pitbull-bundle-desc = A large bullpup rifle with a low fire-rate but excellent accuracy. Chambered in 7.62x51mm NATO.
 
 
-uplink-rifle-magazine-pitbull-name = Bullpup magazine (.45 magnum)
-uplink-rifle-magazine-pitbull-desc = Bullpup magazines with 20 cartrides. Compatible with the Pitbull.
+uplink-rifle-magazine-pitbull-name = Bullpup magazine (7.62x51mm NATO)
+uplink-rifle-magazine-pitbull-desc = 20-round 7.62x51mm NATO magazines. Compatible with the Pitbull.
 
 uplink-nightvision-eyes = Night Vision Cyber Eyes
 uplink-nightvision-eyes-desc = Allows you to see in the dark but makes you more vulnerable to flashes. (Warning: You will need a surgical assistant for the procedure.)
@@ -56,8 +56,8 @@ uplink-syndie-implant-desc = A cybernetic eye implant. Enables an agent to see i
 uplink-uzi-bundle-name = Type U3 Uzi Bundle
 uplink-uzi-bundle-desc = Contains the Type U3 Uzi, with two additional magazines.
 
-uplink-uzi-magazine-name = Uzi Magazine (.35 auto)
-uplink-uzi-magazine-desc = Submachine gun magazine with 32 cartridges. Compatible with the Type U3 Uzi
+uplink-uzi-magazine-name = Uzi Magazine (9x19mm)
+uplink-uzi-magazine-desc = 32-round 9x19mm magazine. Compatible with the Type U3 Uzi.
 
 uplink-breaching-magazine-name = Shotgun Magazine (12 gauge breaching)
 uplink-breaching-magazine-desc = A magazine loaded with breaching shells, for breaking down airlocks, windows and walls. Less effective on people.

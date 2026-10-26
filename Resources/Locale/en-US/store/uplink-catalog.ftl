@@ -1,10 +1,10 @@
 # Weapons
 
 uplink-pistol-viper-name = Viper
-uplink-pistol-viper-desc = A small, easily concealable, but somewhat underpowered gun. Retrofitted with a fully automatic receiver. Uses pistol magazines (.35 auto).
+uplink-pistol-viper-desc = A small, easily concealable, but somewhat underpowered gun. Retrofitted with a fully automatic receiver. Uses 9x19mm pistol magazines.
 
 uplink-revolver-python-name = Python
-uplink-revolver-python-desc = A brutally simple, effective, and loud Syndicate revolver. Comes loaded with armor-piercing rounds. Uses .45 magnum.
+uplink-revolver-python-desc = A brutally simple, effective, and loud Syndicate revolver. Comes loaded with armor-piercing rounds. Uses .45 ACP.
 
 uplink-pistol-cobra-name = Cobra
 uplink-pistol-cobra-desc = A rugged, robust operator handgun with inbuilt silencer. Uses pistol magazines (.25 caseless).
@@ -102,10 +102,10 @@ uplink-shrapnel-grenade-name = Shrapnel Grenade
 uplink-shrapnel-grenade-desc = Launches a spray of sharp fragments dealing great damage against unarmored targets.
 
 # Ammo
-uplink-pistol-magazine-name = Pistol Magazine (.35 auto)
-uplink-pistol-magazine-desc = Pistol magazine with 15 cartridges. Compatible with the Viper.
+uplink-pistol-magazine-name = Pistol Magazine (9x19mm)
+uplink-pistol-magazine-desc = 16-round 9x19mm magazine. Compatible with the Viper.
 
-uplink-pistol-magazine-c20r-name = SMG magazine (.35 auto)
+uplink-pistol-magazine-c20r-name = SMG magazine (9x19mm)
 uplink-pistol-magazine-c20r-desc = SMG magazine with 30 cartridges. Compatible with C-20r.
 
 uplink-magazine-bulldog-pellet-name = Drum magazine (12 gauge pellet)
@@ -114,20 +114,20 @@ uplink-magazine-bulldog-pellet-desc = Shotgun magazine with 8 shells filled with
 uplink-magazine-bulldog-slug-name = Drum magazine (12 gauge slug)
 uplink-magazine-bulldog-slug-desc = Shotgun magazine with 8 shells filled with slugs. Compatible with the Bulldog.
 
-uplink-estoc-ammo-name = Rifle magazine (.20 rifle)
-uplink-estoc-ammo-desc = A rifle magazine with 25 cartridges. Compatible with the Estoc DMR.
+uplink-estoc-ammo-name = Rifle magazine (7.62x51mm NATO)
+uplink-estoc-ammo-desc = A 20-round 7.62x51mm NATO magazine for the Estoc DMR.
 
 uplink-pistol-magazine-caseless-name = Pistol Magazine (.25 caseless)
 uplink-pistol-magazine-caseless-desc = Pistol magazine with 10 cartridges. Compatible with the Cobra.
 
-uplink-speedloader-magnum-name = Speedloader (.45 magnum AP)
+uplink-speedloader-magnum-name = Speedloader (.45 ACP AP)
 uplink-speedloader-magnu-desc = Revolver speedloader with 6 armor-piercing cartridges, capable of ignoring armor entirely. Compatible with the Python.
 
-uplink-mosin-ammo-name = Ammunition box (.30 rifle)
-uplink-mosin-ammo-desc = A box of 60 cartridges for the surplus rifle.
+uplink-mosin-ammo-name = Ammunition box (7.62x54mmR)
+uplink-mosin-ammo-desc = A box of 50 7.62x54mmR cartridges for the Kardashev-Mosin.
 
-uplink-sniper-ammo-name = Ammunition box (.60 antimateriel)
-uplink-sniper-ammo-desc = A box of 10 cartridges for the Hristov sniper rifle.
+uplink-sniper-ammo-name = Ammunition box (.50 anti-materiel)
+uplink-sniper-ammo-desc = A box of 10 .50 anti-materiel cartridges for the Hristov sniper rifle.
 
 uplink-grenade-launcher-frag-ammo-name = Frag grenade cartidge (China-Lake)
 uplink-grenade-launcher-frag-ammo-desc = A pack of 6 frag grenade cartridges. Compatible with the China Lake grenade launcher.
@@ -285,7 +285,7 @@ uplink-bulldog-bundle-name = Bulldog Bundle
 uplink-bulldog-bundle-desc = Lean and mean: Contains the popular Bulldog Shotgun, a 12g slug drum, and four 12g buckshot drums.
 
 uplink-estoc-bundle-name = Estoc DMR bundle
-uplink-estoc-bundle-desc = A designated marksman rifle, fitted with a mid-range optic for longer-range combat. Bundled with two rifle magazines (.20 rifle).
+uplink-estoc-bundle-desc = A designated marksman rifle, fitted with a mid-range optic for longer-range combat. Bundled with two 7.62x51mm NATO magazines.
 
 uplink-grenade-launcher-bundle-name = China-Lake Bundle
 uplink-grenade-launcher-bundle-desc = An old China-Lake grenade launcher bundled with 11 rounds of varying destructive capability.

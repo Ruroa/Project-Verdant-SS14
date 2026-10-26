@@ -18,16 +18,16 @@ uplink-second-hand-bulldog-worn-name = Worn Bulldog
 uplink-second-hand-bulldog-worn-desc = A Bulldog auto-shotgun hobbled into semi-auto by a broken cycling mechanism. Someone bypassed the selector — you get one shot at a time from a full-auto platform. Still takes 12-gauge drum magazines.
 
 uplink-second-hand-hristov-worn-name = Worn Hristov
-uplink-second-hand-hristov-worn-desc = A Hristov with stress fractures in the receiver and a bipod that collapsed on one side. Fires even slower than usual and the sights have drifted. The round is still the round — it just takes longer to get there. Uses .60 anti-materiel ammo.
+uplink-second-hand-hristov-worn-desc = A Hristov with stress fractures in the receiver and a bipod that collapsed on one side. Fires even slower than usual and the sights have drifted. The round is still the round — it just takes longer to get there. Uses .50 anti-materiel ammunition.
 
 uplink-second-hand-mosin-worn-name = Worn Mosin
-uplink-second-hand-mosin-worn-desc = A Kardashev-Mosin that's somehow in worse shape than usual, which is saying something. The bolt is sticky, the stock is cracked, and it takes its time between shots. Still has the bayonet. Some things are eternal. Loads .30 rifle rounds.
+uplink-second-hand-mosin-worn-desc = A Kardashev-Mosin that's somehow in worse shape than usual, which is saying something. The bolt is sticky, the stock is cracked, and it takes its time between shots. Still has the bayonet. Some things are eternal. Loads 7.62x54mmR rounds.
 
 uplink-second-hand-estoc-worn-name = Worn Estoc DMR
-uplink-second-hand-estoc-worn-desc = An Estoc whose burst mechanism has seized up — semi-auto only now. The barrel has heat discoloration and the weld feel has gone soft. Pace your shots and it'll still reach out and touch someone. Feeds from .20 rifle magazines.
+uplink-second-hand-estoc-worn-desc = An Estoc whose burst mechanism has seized up — semi-auto only now. The barrel has heat discoloration and the weld feel has gone soft. Pace your shots and it'll still reach out and touch someone. Feeds from 7.62x51mm NATO magazines.
 
 uplink-second-hand-l6-saw-worn-name = Worn L6 SAW
-uplink-second-hand-l6-saw-worn-desc = An L6 SAW with a worn bolt carrier and a barrel that's seen too many sustained bursts. Rate of fire is down and the spread opens up faster under fire. Still an L6 SAW. Feeds from .30 ammo belts.
+uplink-second-hand-l6-saw-worn-desc = An L6 SAW with a worn bolt carrier and a barrel that's seen too many sustained bursts. Rate of fire is down and the spread opens up faster under fire. Still an L6 SAW. Feeds from 5.56x45mm belts.
 
 uplink-second-hand-energy-crossbow-worn-name = Worn Energy Crossbow
 uplink-second-hand-energy-crossbow-worn-desc = A mini energy crossbow with a failing power cell. Still drops targets on contact — it just takes 15 seconds to recharge instead of 5. The floor is still coming. It'll just take a moment.
@@ -42,11 +42,11 @@ uplink-second-hand-edagger-worn-name = Worn Energy Dagger (Pen)
 uplink-second-hand-edagger-worn-desc = A dark ink pen with a loose power connector. The disguise is intact. The damage is intact. The reliability is not. Same odds of cutting out per swing as its bigger cousin.
 
 # Ammo
-uplink-second-hand-magazine-viper-worn-name = Worn Viper Magazine (.35 auto)
-uplink-second-hand-magazine-viper-worn-desc = A .35 auto Viper magazine with a damaged spring and bent feed lips. Someone clearly had questionable taste in ammunition — expect a mix of standard, incendiary, uranium, practice, and maybe a foam dart or two. Free.
+uplink-second-hand-magazine-viper-worn-name = Worn Viper Magazine (9x19mm)
+uplink-second-hand-magazine-viper-worn-desc = A 9x19mm Viper magazine with a damaged spring and bent feed lips. Someone clearly had questionable taste in ammunition — expect a mix of standard, incendiary, uranium, practice, and maybe a foam dart or two. Free.
 
-uplink-second-hand-magazine-smg-worn-name = Worn SMG Magazine (.35 auto)
-uplink-second-hand-magazine-smg-worn-desc = A .35 auto SMG magazine with a cracked housing and sticky follower. The previous owner raided a comedy store — mix of standard, incendiary, uranium, practice, and foam darts inside. Check before you commit. Free.
+uplink-second-hand-magazine-smg-worn-name = Worn SMG Magazine (9x19mm)
+uplink-second-hand-magazine-smg-worn-desc = A 9x19mm SMG magazine with a cracked housing and sticky follower. The previous owner raided a comedy store — mix of standard, incendiary, uranium, practice, and foam darts inside. Check before you commit. Free.
 
 uplink-second-hand-magazine-caseless-worn-name = Worn Caseless Rifle Magazine (.25 caseless)
 uplink-second-hand-magazine-caseless-worn-desc = A .25 caseless magazine with corroded internals. Loaded with a questionable mix of standard, practice, and the occasional foam dart-tipped caseless round. Free.
@@ -57,11 +57,11 @@ uplink-second-hand-magazine-shotgun-worn-desc = A 12-gauge pellet drum with a sp
 uplink-second-hand-magazine-shotgun-slug-worn-name = Worn Shotgun Drum (12ga slug)
 uplink-second-hand-magazine-shotgun-slug-worn-desc = A 12-gauge slug drum with a partially seized feed mechanism. Someone topped it off with whatever fit — slugs, pellets, incendiary, and beanbag rounds mixed in. Free.
 
-uplink-second-hand-magazine-rifle-worn-name = Worn Rifle Magazine (.20 rifle)
-uplink-second-hand-magazine-rifle-worn-desc = A .20 rifle magazine with a cracked polymer shell. Loaded with a scavenged mix of standard, incendiary, uranium, practice rounds, and the occasional foam dart. Free.
+uplink-second-hand-magazine-rifle-worn-name = Worn Rifle Magazine (5.56x45mm)
+uplink-second-hand-magazine-rifle-worn-desc = A 5.56x45mm rifle magazine with a cracked polymer shell. Loaded with a scavenged mix of standard, incendiary, uranium, practice rounds, and the occasional foam dart. Free.
 
-uplink-second-hand-magazine-box-light-rifle-worn-name = Worn Light Rifle Box (.30 LR)
-uplink-second-hand-magazine-box-light-rifle-worn-desc = A 100-round .30 light rifle belt box that's been through it. Previous owner had eclectic taste — standard, incendiary, uranium, practice rounds, and foam darts, mixed throughout. Free.
+uplink-second-hand-magazine-box-light-rifle-worn-name = Worn Light Rifle Box (7.62x39mm)
+uplink-second-hand-magazine-box-light-rifle-worn-desc = A 100-round 7.62x39mm light rifle belt box that's been through it. Previous owner had eclectic taste — standard, incendiary, uranium, practice rounds, and foam darts, mixed throughout. Free.
 
 # Explosives
 uplink-second-hand-exgrenade-worn-name = Dud Explosive Grenade
