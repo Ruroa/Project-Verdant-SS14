@@ -58,6 +58,7 @@ namespace Content.Client.Chat.UI
 
         public float VerticalOffset { get; set; }
         private float _verticalOffsetAchieved;
+        protected bool TextOutline { get; }
 
         public Vector2 ContentSize { get; private set; }
 
@@ -69,7 +70,7 @@ namespace Content.Client.Chat.UI
             switch (type)
             {
                 case SpeechType.Emote:
-                    return new TextSpeechBubble(message, senderEntity, "emoteBox");
+                    return new TextSpeechBubble(message, senderEntity, "emoteBox", outline: true);
 
                 case SpeechType.Say:
                     return new FancyTextSpeechBubble(message, senderEntity, "sayBox");
@@ -85,10 +86,11 @@ namespace Content.Client.Chat.UI
             }
         }
 
-        public SpeechBubble(ChatMessage message, EntityUid senderEntity, string speechStyleClass, Color? fontColor = null)
+        public SpeechBubble(ChatMessage message, EntityUid senderEntity, string speechStyleClass, Color? fontColor = null, bool outline = false)
         {
             IoCManager.InjectDependencies(this);
             _senderEntity = senderEntity;
+            TextOutline = outline;
             _transformSystem = _entityManager.System<SharedTransformSystem>();
 
             // Use text clipping so new messages don't overlap old ones being pushed up.
@@ -204,8 +206,8 @@ namespace Content.Client.Chat.UI
 
     public sealed class TextSpeechBubble : SpeechBubble
     {
-        public TextSpeechBubble(ChatMessage message, EntityUid senderEntity, string speechStyleClass, Color? fontColor = null)
-            : base(message, senderEntity, speechStyleClass, fontColor)
+        public TextSpeechBubble(ChatMessage message, EntityUid senderEntity, string speechStyleClass, Color? fontColor = null, bool outline = false)
+            : base(message, senderEntity, speechStyleClass, fontColor, outline)
         {
         }
 
@@ -214,6 +216,8 @@ namespace Content.Client.Chat.UI
             var label = new RichTextLabel
             {
                 MaxWidth = SpeechMaxWidth,
+                OutlineThicknessOverride = TextOutline ? 1f : null,
+                OutlineColorOverride = TextOutline ? Color.Black : null,
             };
 
             label.SetMessage(FormatSpeech(message.WrappedMessage, fontColor));
