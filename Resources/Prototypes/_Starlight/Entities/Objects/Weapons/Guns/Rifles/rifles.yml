@@ -319,6 +319,7 @@
         whitelist:
           tags:
           - PVMagazine762x51Tag
+          - MagazineL10DMR
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -376,6 +377,7 @@
         whitelist:
           tags:
           - PVMagazine762x51Tag
+          - MagazineL10DMR
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -587,6 +589,7 @@
         whitelist:
           tags:
           - PVMagazine762x51Tag
+          - MagazineL10DMR
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber

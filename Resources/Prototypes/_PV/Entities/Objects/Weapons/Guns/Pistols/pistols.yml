@@ -81,7 +81,7 @@
         startingItem: MagazinePV9x19
         priority: 2
         whitelist:
-          tags: [ PVMagazine9x19Tag ]
+          tags: [ PVMagazine9x19Tag, MagazinePistol, MagazinePistolHighCapacitySP ]
       gun_chamber:
         name: Chamber
         priority: 1

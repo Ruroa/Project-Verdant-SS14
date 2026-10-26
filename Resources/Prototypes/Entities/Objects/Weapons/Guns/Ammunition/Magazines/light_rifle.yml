@@ -8,6 +8,7 @@
   - type: Tag
     tags:
       - MagazineLightRifle
+      - PVMagazine762x39Tag
   - type: BallisticAmmoProvider
     mayTransfer: true
     whitelist:

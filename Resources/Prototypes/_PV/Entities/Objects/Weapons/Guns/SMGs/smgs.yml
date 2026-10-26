@@ -169,7 +169,7 @@
         startingItem: MagazinePVMac15
         priority: 2
         whitelist:
-          tags: [ PVMagazineMac15Tag ]
+          tags: [ PVMagazineMac15Tag, MagazinePistolSubMachineGunSP ]
       gun_chamber:
         name: Chamber
         priority: 1
@@ -204,7 +204,7 @@
         startingItem: MagazinePVMP5
         priority: 2
         whitelist:
-          tags: [ PVMagazineMP5Tag ]
+          tags: [ PVMagazineMP5Tag, MagazinePistolSubMachineGunSP ]
       gun_chamber:
         name: Chamber
         priority: 1

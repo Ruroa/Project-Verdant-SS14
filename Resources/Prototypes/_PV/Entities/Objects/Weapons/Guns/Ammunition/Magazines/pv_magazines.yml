@@ -26,7 +26,7 @@
   name: pistol magazine (9x19mm)
   components:
   - type: Tag
-    tags: [ PVMagazine9x19Tag, MagazinePistol ]
+    tags: [ PVMagazine9x19Tag, MagazinePistol, MagazinePistolHighCapacitySP, MagazinePistolSubMachineGunSP ]
   - type: BallisticAmmoProvider
     mayTransfer: true
     capacity: 15
@@ -52,7 +52,7 @@
   name: pistol magazine (.45 ACP)
   components:
   - type: Tag
-    tags: [ PVMagazine45ACPTag, MagazineMagnum ]
+    tags: [ PVMagazine45ACPTag, MagazineMagnum, MagazineMagnumSubMachineGun ]
   - type: BallisticAmmoProvider
     mayTransfer: true
     capacity: 7
@@ -116,7 +116,7 @@
   name: rifle magazine (7.62x51mm NATO)
   components:
   - type: Tag
-    tags: [ PVMagazine762x51Tag ]
+    tags: [ PVMagazine762x51Tag, MagazineL10DMR ]
   - type: BallisticAmmoProvider
     mayTransfer: true
     capacity: 20
@@ -216,7 +216,7 @@
   name: MAC-15 magazine (9x19mm)
   components:
   - type: Tag
-    tags: [ PVMagazineMac15Tag ]
+    tags: [ PVMagazineMac15Tag, MagazinePistolSubMachineGunSP, PVMagazine9x19Tag ]
   - type: BallisticAmmoProvider
     mayTransfer: true
     capacity: 30
@@ -242,7 +242,7 @@
   name: MP5 magazine (9x19mm)
   components:
   - type: Tag
-    tags: [ PVMagazineMP5Tag ]
+    tags: [ PVMagazineMP5Tag, MagazinePistolSubMachineGunSP, PVMagazine9x19Tag ]
   - type: BallisticAmmoProvider
     mayTransfer: true
     capacity: 30

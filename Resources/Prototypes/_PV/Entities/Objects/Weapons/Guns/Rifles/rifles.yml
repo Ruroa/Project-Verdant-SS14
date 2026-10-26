@@ -11,7 +11,7 @@
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
-          tags: [ PVMagazine556Tag ]
+          tags: [ PVMagazine556Tag, MagazineRifle ]
       gun_chamber:
         name: Chamber
         priority: 1
@@ -56,7 +56,7 @@
         startingItem: MagazinePV556
         priority: 2
         whitelist:
-          tags: [ PVMagazine556Tag ]
+          tags: [ PVMagazine556Tag, MagazineRifle ]
       gun_chamber:
         name: Chamber
         priority: 1
@@ -98,7 +98,7 @@
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
-          tags: [ PVMagazine762x51Tag ]
+          tags: [ PVMagazine762x51Tag, MagazineL10DMR ]
       gun_chamber:
         name: Chamber
         priority: 1
@@ -144,7 +144,7 @@
         startingItem: MagazinePV762x51
         priority: 2
         whitelist:
-          tags: [ PVMagazine762x51Tag ]
+          tags: [ PVMagazine762x51Tag, MagazineL10DMR ]
       gun_chamber:
         name: Chamber
         priority: 1

@@ -7,6 +7,7 @@
   - type: Tag
     tags:
       - MagazineMagnum
+      - PVMagazine45ACPTag
   - type: BallisticAmmoProvider
     mayTransfer: true
     whitelist:
@@ -23,6 +24,7 @@
   - type: Tag
     tags:
       - MagazineMagnumSubMachineGun
+      - PVMagazine45ACPTag
   - type: BallisticAmmoProvider
     mayTransfer: true
     whitelist:
@@ -304,12 +306,16 @@
 
 - type: entity
   id: MagazineMagnumRifleSP
-  name: rifle magazine (.45 magnum)
+  name: rifle magazine (7.62x51mm NATO)
   parent: BaseMagazineMagnumSubMachineGun
   components:
+  - type: Tag
+    tags: [ MagazineL10DMR, PVMagazine762x51Tag ]
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumSP
+    proto: CartridgePV762x51SP
     capacity: 20
+    whitelist:
+      tags: [ Cartridge48Rifle ]
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Magazine/Magnum/magnum_rifle_mag.rsi
     layers:
@@ -328,11 +334,12 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeMagnum
+        - Cartridge48Rifle
     capacity: 10
   - type: Tag
     tags:
       - MagazineL10DMR
+      - PVMagazine762x51Tag
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Magazine/Magnum/magnum_rifle_mag.rsi
     layers:
@@ -343,11 +350,11 @@
 
 - type: entity
   id: MagazineDMRSP
-  name: "DMR magazine (.45 magnum SP)"
+  name: "DMR magazine (7.62x51mm NATO SP)"
   parent: BaseMagazineRifleDMR
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumSP
+    proto: CartridgePV762x51SP
   - type: Sprite
     layers:
     - state: base
@@ -367,11 +374,11 @@
 
 - type: entity
   id: MagazineDMRHP
-  name: "DMR magazine (.45 magnum HP)"
+  name: "DMR magazine (7.62x51mm NATO HP)"
   parent: BaseMagazineRifleDMR
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumHP
+    proto: CartridgePV762x51HP
   - type: Sprite
     layers:
     - state: base
@@ -391,11 +398,11 @@
 
 - type: entity
   id: MagazineDMRFMJ
-  name: "DMR magazine (.45 magnum FMJ)"
+  name: "DMR magazine (7.62x51mm NATO FMJ)"
   parent: BaseMagazineRifleDMR
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumFMJ
+    proto: CartridgePV762x51FMJ
   - type: Sprite
     layers:
     - state: base
@@ -415,11 +422,11 @@
 
 - type: entity
   id: MagazineDMRAP
-  name: "DMR magazine (.45 magnum AP)"
+  name: "DMR magazine (7.62x51mm NATO AP)"
   parent: BaseMagazineRifleDMR
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumAP
+    proto: CartridgePV762x51AP
   - type: Sprite
     layers:
     - state: base
@@ -439,7 +446,7 @@
 
 - type: entity
   id: MagazineDMREmpty
-  name: "DMR magazine (.45 magnum any)"
+  name: "DMR magazine (7.62x51mm NATO any)"
   suffix: empty
   parent: MagazineDMRSP
   components:
@@ -460,11 +467,11 @@
 
 - type: entity
   id: MagazineDMRIncendiary
-  name: "DMR magazine (.45 magnum incendiary)"
+  name: "DMR magazine (7.62x51mm NATO incendiary)"
   parent: MagazineDMRSP
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumIncendiary
+    proto: CartridgePV762x51Incendiary
   - type: Sprite
     layers:
     - state: base
@@ -484,11 +491,11 @@
 
 - type: entity
   id: MagazineDMRPractice
-  name: "DMR magazine (.45 magnum practice)"
+  name: "DMR magazine (7.62x51mm NATO practice)"
   parent: BaseMagazineRifleDMR
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumPractice
+    proto: CartridgePV762x51Practice
   - type: Sprite
     layers:
     - state: base
@@ -508,11 +515,11 @@
 
 - type: entity
   id: MagazineDMRUranium
-  name: "DMR magazine (.45 magnum uranium)"
+  name: "DMR magazine (7.62x51mm NATO uranium)"
   parent: BaseMagazineRifleDMR
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumUranium
+    proto: CartridgePV762x51Uranium
   - type: Sprite
     layers:
     - state: base
@@ -532,11 +539,11 @@
 
 - type: entity
   id: MagazineDMRRubber
-  name: "DMR magazine (.45 magnum rubber)"
+  name: "DMR magazine (7.62x51mm NATO rubber)"
   parent: BaseMagazineRifleDMR
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumRubber
+    proto: CartridgePV762x51Rubber
   - type: Sprite
     layers:
     - state: base

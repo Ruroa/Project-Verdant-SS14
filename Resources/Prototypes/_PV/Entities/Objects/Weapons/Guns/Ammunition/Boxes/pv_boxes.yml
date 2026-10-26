@@ -55,6 +55,11 @@
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: false
+
 - type: entity
   parent: BasePVAmmoBox
   id: PVAmmoBox556
@@ -74,6 +79,11 @@
     - state: ball
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
+
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: false
 
 - type: entity
   parent: BasePVAmmoBox
@@ -96,7 +106,7 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: MagazineVisuals
     magState: magb
-    steps: 3
+    steps: 4
     zeroVisible: false
 
 - type: entity
@@ -120,7 +130,7 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: MagazineVisuals
     magState: magb
-    steps: 3
+    steps: 4
     zeroVisible: false
 
 - type: entity
@@ -144,7 +154,7 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: MagazineVisuals
     magState: magb
-    steps: 3
+    steps: 4
     zeroVisible: false
 
 - type: entity
@@ -166,6 +176,11 @@
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: false
+
 - type: entity
   parent: BasePVAmmoBox
   id: PVAmmoBox57
@@ -186,6 +201,11 @@
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
 
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: false
+
 - type: entity
   parent: BasePVAmmoBox
   id: PVAmmoBox50cal
@@ -204,3 +224,8 @@
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
+
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: false
