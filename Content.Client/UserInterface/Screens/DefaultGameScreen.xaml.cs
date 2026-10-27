@@ -22,11 +22,9 @@ public sealed partial class DefaultGameScreen : InGameScreen
         SetAnchorAndMarginPreset(Hotbar, LayoutPreset.BottomWide, margin: 5);
         SetAnchorAndMarginPreset(Chat, LayoutPreset.TopRight, margin: 10);
         SetAnchorAndMarginPreset(Alerts, LayoutPreset.TopRight, margin: 10);
-        // Measure both initially hidden widgets before anchoring their container.
-        LimbStatus.Visible = true;
+        // Target selector stays in the bottom-right; injury status is part of AlertsUI.
         LimbTargetting.Visible = true;
-        SetAnchorAndMarginPreset(LimbHealthContainer, LayoutPreset.BottomRight, margin: 10);
-        LimbStatus.Visible = false;
+        SetAnchorAndMarginPreset(LimbTargetting, LayoutPreset.BottomRight, margin: 10);
         LimbTargetting.Visible = false;
 
         Chat.OnResized += ChatOnResized;
