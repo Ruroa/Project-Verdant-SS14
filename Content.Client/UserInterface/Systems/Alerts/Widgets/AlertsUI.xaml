@@ -1,7 +1,12 @@
 ﻿<widgets:AlertsUI xmlns="https://spacestation14.io"
                   xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Alerts.Widgets"
-                  MinSize="64 64">
+                  MinSize="64 64"
+                  xmlns:limb="clr-namespace:Content.Client._FarHorizons.LimbDamage.UI">
     <PanelContainer HorizontalAlignment="Right" VerticalAlignment="Top">
-        <BoxContainer Name="AlertContainer" Access="Public" Orientation="Vertical" />
+        <BoxContainer Orientation="Vertical" HorizontalAlignment="Right">
+            <BoxContainer Name="AlertContainer" Access="Public" Orientation="Vertical" />
+            <!-- Persistent locational health mannequin below normal status alerts. -->
+            <limb:LimbStatusUI Name="LimbStatus" Access="Public" />
+        </BoxContainer>
     </PanelContainer>
 </widgets:AlertsUI>
