@@ -150,10 +150,12 @@ public sealed partial class LimbTargettingDisplay : Control
 
     private Vector3 HealthColor(LimbTarget limb)
     {
-        if (!LimbDamage.TryGetValue(limb, out var damage) || damage <= 25f)
+        if (!LimbDamage.TryGetValue(limb, out var damage) || damage <= 0f)
             return new Vector3(0f, 1f, 0f);
+        if (damage <= 25f)
+            return new Vector3(1f, 0.8f, 0f);
         if (damage <= 50f)
-            return new Vector3(1f, 0.65f, 0f);
+            return new Vector3(1f, 0.45f, 0f);
         return new Vector3(1f, 0f, 0f);
     }
 
