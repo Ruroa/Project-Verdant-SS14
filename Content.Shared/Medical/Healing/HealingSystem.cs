@@ -42,6 +42,7 @@ public sealed partial class HealingSystem : EntitySystem
     [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private ConditionalHealingSystem _conditionalHealing = default!; // Far Horizons
     [Dependency] private BlindableSystem _blindable = default!; // Far Horizons
+    [Dependency] private SharedBodySystem _body = default!;
 
     public override void Initialize()
     {
@@ -99,10 +100,20 @@ public sealed partial class HealingSystem : EntitySystem
         if (healing.AdjustEyeDamage != 0 && TryComp(target, out BlindableComponent? blindable))
             _blindable.AdjustEyeDamage((target, blindable), healing.AdjustEyeDamage);
 
-        if (!_damageable.TryChangeDamage(target.Owner, healing.Damage * _damageable.UniversalTopicalsHealModifier, out var healed, true, origin: args.Args.User) && healing.BloodlossModifier != 0)
+        var bodyDamageBefore = GetBodyHealingDamage(target.Owner, healing.Damage);
+        var damageChanged = _damageable.TryChangeDamage(
+            target.Owner,
+            healing.Damage * _damageable.UniversalTopicalsHealModifier,
+            out var healed,
+            true,
+            origin: args.Args.User);
+        var bodyDamageAfter = GetBodyHealingDamage(target.Owner, healing.Damage);
+        var bodyDamageHealed = bodyDamageAfter < bodyDamageBefore;
+
+        if (!damageChanged && !bodyDamageHealed && healing.BloodlossModifier != 0)
             return;
 
-        if (healed == null && healing.BloodlossModifier != 0 && healing.AdjustEyeDamage != 0) // Far Horizons - added eye healing
+        if (healed == null && !bodyDamageHealed && healing.BloodlossModifier != 0 && healing.AdjustEyeDamage != 0) // Far Horizons - added eye healing
             return;
 
         var total = healed?.GetTotal();
@@ -180,7 +191,8 @@ public sealed partial class HealingSystem : EntitySystem
         var healingDict = healing.Comp.Damage.DamageDict;
         foreach (var type in healingDict)
         {
-            if (damageableDict[type.Key].Value > 0)
+            if ((damageableDict.TryGetValue(type.Key, out var damage) && damage > 0) ||
+                (type.Value < 0 && HasBodyPartDamage(target.Owner, type.Key)))
             {
                 return true;
             }
@@ -211,6 +223,52 @@ public sealed partial class HealingSystem : EntitySystem
         // Far Horizons end
 
         return false;
+    }
+
+    private bool HasBodyPartDamage(EntityUid body, string damageType)
+    {
+        if (!TryComp<BodyComponent>(body, out _) || _body.GetRootPartOrNull(body) is not { } root)
+            return false;
+
+        if (HasDamage(root.Entity))
+            return true;
+
+        return _body.GetAllBodyPart(root.Entity, root.BodyPart).Any(part => HasDamage(part.Owner));
+
+        bool HasDamage(EntityUid entity)
+        {
+            return TryComp<DamageableComponent>(entity, out var damageable) &&
+                   damageable.Damage.DamageDict.TryGetValue(damageType, out var damage) &&
+                   damage > 0;
+        }
+    }
+
+    private FixedPoint2 GetBodyHealingDamage(EntityUid body, DamageSpecifier healing)
+    {
+        if (!TryComp<BodyComponent>(body, out _) || _body.GetRootPartOrNull(body) is not { } root)
+            return FixedPoint2.Zero;
+
+        var total = FixedPoint2.Zero;
+        AddDamage(body);
+        AddDamage(root.Entity);
+        foreach (var part in _body.GetAllBodyPart(root.Entity, root.BodyPart))
+            AddDamage(part.Owner);
+
+        return total;
+
+        void AddDamage(EntityUid entity)
+        {
+            if (!TryComp<DamageableComponent>(entity, out var damageable))
+                return;
+
+            foreach (var (type, amount) in healing.DamageDict)
+            {
+                if (amount >= FixedPoint2.Zero || !damageable.Damage.DamageDict.TryGetValue(type, out var damage))
+                    continue;
+
+                total += damage;
+            }
+        }
     }
 
     private void OnHealingUse(Entity<HealingComponent> healing, ref UseInHandEvent args)
