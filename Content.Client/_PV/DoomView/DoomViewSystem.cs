@@ -1,4 +1,8 @@
 using System.Numerics;
+using Content.Shared._PV.DoomView;
+using Robust.Client.Input;
+using Robust.Client.UserInterface;
+using Robust.Shared.Input;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Robust.Client.Graphics;
@@ -17,6 +21,11 @@ public sealed partial class DoomViewSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transforms = default!;
     [Dependency] private SharedMoverController _mover = default!;
 
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    private float _pendingTurn;
+    public bool MouseLooking { get; private set; }
     private DoomViewOverlay? _overlay;
     public bool Enabled => _overlay != null;
 
@@ -30,6 +39,7 @@ public sealed partial class DoomViewSystem : EntitySystem
     {
         if (_overlay != null)
         {
+            StopMouseLook();
             _overlays.RemoveOverlay(_overlay);
             _overlay.Dispose();
             _overlay = null;
@@ -44,8 +54,45 @@ public sealed partial class DoomViewSystem : EntitySystem
         return true;
     }
 
+    public bool HandleLookKey(GUIBoundKeyEventArgs args, bool down)
+    {
+        if (!Enabled || args.Function != EngineKeyFunctions.UIRightClick)
+            return false;
+        if (down)
+        {
+            MouseLooking = true;
+            _clyde.MainWindow.SetRelativeMouseMode(true);
+        }
+        else
+            StopMouseLook();
+        args.Handle();
+        return true;
+    }
+
+    public void MouseLook(float horizontalDelta)
+    {
+        if (MouseLooking && float.IsFinite(horizontalDelta))
+            _pendingTurn = Math.Clamp(_pendingTurn - horizontalDelta * 0.003f, -0.5f, 0.5f);
+    }
+
+    private void StopMouseLook()
+    {
+        if (MouseLooking)
+            _clyde.MainWindow.SetRelativeMouseMode(false);
+        MouseLooking = false;
+        _pendingTurn = 0;
+    }
+
     public override void FrameUpdate(float frameTime)
     {
+        if (MouseLooking && (!_clyde.MainWindow.IsFocused || _ui.KeyboardFocused != null ||
+            !_input.IsKeyDown(Keyboard.Key.MouseRight)))
+            StopMouseLook();
+        if (MouseLooking && MathF.Abs(_pendingTurn) > 0.0001f)
+        {
+            RaisePredictiveEvent(new DoomLookEvent(_pendingTurn));
+            _pendingTurn = 0;
+        }
         if (Enabled && (_lights.LockConsoleAccess || _players.LocalEntity == null))
             Toggle();
     }
@@ -76,7 +123,8 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     private void OnPixelToMap(ref PixelToMapEvent args)
     {
-        if (_overlay == null || !_overlay.TryPick(args.Viewport, args.LocalPosition, out var position))
+        var pixel = MouseLooking ? (Vector2) args.Viewport.Size / 2f : args.LocalPosition;
+        if (_overlay == null || !_overlay.TryPick(args.Viewport, pixel, out var position))
             return;
 
         args.VisiblePosition = args.Viewport.WorldToLocal(position);

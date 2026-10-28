@@ -1,63 +1,62 @@
 # Doom view prototype
 
-Branch: `experimental/doom-view`
+Branch: `experimental/doom-view`. Enable with `doomview` in the client console (F3).
+Use the same branch for both client and server. The feature starts disabled.
 
-A client-side raycasting experiment using the existing station and server simulation.
-The feature starts disabled. No engine submodule changes or server gameplay changes.
+## Controls
 
-## Try it
+- WASD: move relative to the camera.
+- Hold right mouse over the game view and move the mouse: turn horizontally.
+- Release right mouse: release the cursor for inventory and menus.
+- While looking, interaction aims at the center crosshair.
+- NumPad 7/9: existing camera rotation bindings, still available.
+- Run `doomview` again: return to the normal view.
 
-1. Build and run this branch's server and client using the usual scripts.
-2. Join a small station map as an administrator and control a character.
-3. Open the client console with F3, run `doomview`, then close the console.
-4. Move with WASD. Turn with **Camera rotate left/right** in Controls
-   (defaults: NumPad 7 and NumPad 9). Camera rotation must be enabled by the server.
-5. Click a visible door to use the normal server-validated interaction. Automatic
-   airlocks also retain their normal proximity behavior.
-6. Run `doomview` again to return to the normal view.
+Mouse turning requires Debug admin permission and server camera rotation enabled.
+The cursor is also released on lost window focus, text-field focus, disconnect,
+or disabling Doom view. Mouse turning is predicted on the client and applied on
+both client and server through the normal movement camera rotation system.
 
-The command uses the engine's debug-rendering access lock. It won't enable when
-that lock is active, and disables on losing the controlled entity or debug access.
+## Rendering
 
-## Implemented
+- 70-degree horizontal perspective, 240 wall rays, 12-tile draw distance.
+- Walls retain raycast geometry and existing wall icons.
+- Doors use thin panels and their current visible sprite layers/animation frames.
+- Windows use thin glass panels, with opacity for enabled occluders.
+- Furniture and machinery use shallow boxes with existing artwork stretched over
+  sides and tops. Climbable furniture and seats use lower profiles.
+- Characters remain layered directional sprites.
+- Loose items use smaller flat floor quads. Pipes, cables, vents, and floor objects
+  use flat quads and retain existing per-layer visibility, including covered cables.
+- Floor textures come from the actual placed tiles: variants, rotation/mirroring,
+  grid transforms, and tile-edge transitions are preserved.
+- Floor decals use their existing textures, coordinates, rotation, tint, and order.
+- Clicks are projected back to visible objects or floor positions. The server still
+  validates interaction range, access, movement, and collisions.
 
-- 70-degree horizontal perspective with 240 wall rays and a 12-tile draw distance.
-- Existing collision geometry for opaque anchored structures and closed doors.
-- Existing entity icons as wall textures, with the standard solid-wall texture fallback.
-- Distance shading and a placeholder perspective checker floor.
-- Upright entity sprites, including clothing layers, with directional frames.
-- Wall-depth clipping and back-to-front entity drawing.
-- Camera direction tied to the same rotation used by normal movement prediction.
-- Screen clicks translated into world positions for the existing interaction pipeline.
-- Existing HUD and inventory retained.
+## Limits
 
-## Prototype limits
+This remains a local/admin rendering experiment. Full lighting, blindness, FOV,
+ceilings, terrain elevation, particles, and held-weapon presentation are unfinished.
+Empty tiles draw no floor; they are not filled by a checkerboard.
 
-This is a rendering experiment for local/admin testing, not a public gameplay mode.
-It does not reproduce SS14 lighting, blindness, fog of war, or visibility rules yet.
-The server still controls movement, collisions, access checks, and interaction range.
+Models are approximations, not authored 3D assets. Thin panels and projected meshes
+use painter ordering and subdivided textures; intersections, transparent overlaps,
+and close-up texture distortion still need in-game review. Picking uses projected
+geometry rather than texture alpha. Special machinery and unusual shapes may need
+individual model rules. Door frames depend on the available open-state artwork.
 
-- Turning uses the existing camera rotation steps, not free mouse-look.
-- Floors are placeholders; actual floor tiles, space, ceilings, and elevation are not rendered.
-- Transparent windows and unusual wall shapes need dedicated rendering.
-- Furniture remains billboard artwork made for the original overhead camera.
-- Open doors currently disappear from the first-person view.
-- Entity picking uses projected bounds, not sprite alpha. Overlapping objects can
-  still need the existing context menu. Combat aiming needs separate in-game testing.
-- Lighting, particles, held-weapon presentation, and world overlays need further work.
-- First-person rendering adds work on top of the normal renderer; profile it on a
-  small map before trying a populated station.
-- No changes to field-of-view or server PVS limits are requested; distant content
-  may be absent when the server has not sent it to the client.
+Server PVS limits remain unchanged. The renderer adds work to the normal view, so
+profile it on a small map before testing on a populated station.
 
-## Verification checklist
+## Checks
 
-- Toggle repeatedly; disconnect/reconnect; ensure the normal view returns.
-- Approach walls at several angles and verify there is no fisheye distortion.
-- Turn and move in all four directions; verify movement agrees with the view.
-- Test a closed/open door, denied access, and an out-of-range door.
-- Check a clothed player partially hidden behind a wall.
-- Resize the window and try both HUD layouts; click positions must still align.
-- Take damage/heal and use inventory while the view is enabled.
+- Toggle, disconnect/reconnect, open chat/console, and alt-tab during mouse-look.
+- Turn and walk in every direction, including on a rotated grid.
+- Use a closed/open door, denied-access door, windoor, and glass/tinted window.
+- Compare tile variants, rotated arrows, colored markings, and grass transitions.
+- Remove and replace a floor tile over cables and pipes; vents remain visible.
+- Place an item on the floor; compare furniture scale with a nearby character.
+- Resize the window and try both HUD layouts; click positions must stay aligned.
 
-Projection unit tests live in `Content.Tests/Client/_PV/DoomProjectionTest.cs`.
+Projection and tile-orientation tests: `Content.Tests/Client/_PV/`.

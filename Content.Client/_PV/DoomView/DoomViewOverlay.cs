@@ -22,6 +22,10 @@ internal sealed class DoomViewOverlay : Overlay
     private readonly EntityLookupSystem _lookup;
     private readonly SpriteSystem _sprites;
     private readonly Texture _wall;
+    private readonly DoomModels _models;
+    private readonly DoomGround _ground;
+    private readonly DoomGeometry _floor = new();
+    private readonly DoomGeometry _objects = new();
     private readonly float[] _depths = new float[Columns];
     private readonly Vector2[] _hits = new Vector2[Columns];
     private readonly List<Billboard> _billboards = new();
@@ -44,6 +48,8 @@ internal sealed class DoomViewOverlay : Overlay
         _transforms = entities.System<SharedTransformSystem>();
         _lookup = entities.System<EntityLookupSystem>();
         _sprites = entities.System<SpriteSystem>();
+        _models = new DoomModels(entities);
+        _ground = new DoomGround(entities);
         _wall = _sprites.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Structures/Walls/solid.rsi"), "full"));
         ZIndex = -100;
     }
@@ -71,12 +77,18 @@ internal sealed class DoomViewOverlay : Overlay
         if (width <= 0 || height <= 0)
             return;
 
+        args.RenderHandle.SetScissor(args.ViewportBounds);
         _drawSize = new Vector2(width, height);
         var horizon = top + height * 0.5f;
         var focal = DoomProjection.FocalLength(width);
         handle.DrawRect(new UIBox2(left, top, left + width, horizon), new Color(0.07f, 0.09f, 0.12f));
         handle.DrawRect(new UIBox2(left, horizon, left + width, top + height), new Color(0.16f, 0.18f, 0.20f));
-        DrawFloor(handle, left, horizon, width, height, focal);
+        _floor.Begin(_origin.Position, _forward, width, horizon - top);
+        _objects.Begin(_origin.Position, _forward, width, horizon - top);
+        _ground.Collect(_origin, _forward, _floor);
+        CollectBillboards(width, horizon - top, focal);
+        foreach (var patch in _floor.Patches.OrderBy(p => p.Layer).ThenByDescending(p => p.Depth))
+            DoomGeometry.Draw(patch, args);
 
         for (var column = 0; column < Columns; column++)
         {
@@ -111,11 +123,14 @@ internal sealed class DoomViewOverlay : Overlay
                 new UIBox2(texX, texTop, texX + 1, texBottom), new Color(shade, shade, shade));
         }
 
-        CollectBillboards(width, horizon - top, focal);
+        var patches = _objects.Patches.OrderByDescending(p => p.Depth).ToArray();
+        var patchIndex = 0;
         try
         {
             foreach (var billboard in _billboards.OrderByDescending(b => b.Depth))
             {
+                while (patchIndex < patches.Length && patches[patchIndex].Depth > billboard.Depth)
+                    DoomGeometry.Draw(patches[patchIndex++], args, _depths);
                 var first = Math.Clamp((int) (billboard.Rect.Left / width * Columns), 0, Columns - 1);
                 var last = Math.Clamp((int) (billboard.Rect.Right / width * Columns), 0, Columns - 1);
                 var runStart = -1;
@@ -136,6 +151,8 @@ internal sealed class DoomViewOverlay : Overlay
                     runStart = -1;
                 }
             }
+            while (patchIndex < patches.Length)
+                DoomGeometry.Draw(patches[patchIndex++], args, _depths);
         }
         finally
         {
@@ -149,9 +166,8 @@ internal sealed class DoomViewOverlay : Overlay
     private bool IgnoreWall(EntityUid uid)
     {
         return uid == _player || !_entities.TryGetComponent<TransformComponent>(uid, out var transform) ||
-               !transform.Anchored ||
-               !(_entities.HasComponent<DoorComponent>(uid) ||
-                 _entities.TryGetComponent<OccluderComponent>(uid, out var occluder) && occluder.Enabled);
+               !transform.Anchored || !_models.IsWall(uid) || _models.IsPanel(uid) ||
+               !(_entities.TryGetComponent<OccluderComponent>(uid, out var occluder) && occluder.Enabled);
     }
 
     private Texture WallTexture(EntityUid uid)
@@ -163,30 +179,6 @@ internal sealed class DoomViewOverlay : Overlay
         return texture;
     }
 
-    private void DrawFloor(DrawingHandleScreen handle, int left, float horizon, int width, int height, float focal)
-    {
-        const int rows = 32;
-        const int columns = 64;
-        var right = DoomProjection.Right(_forward);
-        for (var y = 0; y < rows; y++)
-        {
-            var rowHeight = height * 0.5f / rows;
-            var depth = focal * DoomProjection.EyeHeight / ((y + 0.5f) * rowHeight);
-            if (depth > DoomProjection.Range)
-                continue;
-            for (var x = 0; x < columns; x++)
-            {
-                var offset = ((x + 0.5f) / columns * 2f - 1f) * DoomProjection.Plane;
-                var position = _origin.Position + (_forward + right * offset) * depth;
-                var alternate = (((int) MathF.Floor(position.X) + (int) MathF.Floor(position.Y)) & 1) == 0;
-                var shade = (alternate ? 0.31f : 0.25f) * Math.Clamp(1f - depth / 16f, 0.2f, 1f);
-                handle.DrawRect(new UIBox2(left + x * width / (float) columns, horizon + y * rowHeight,
-                    left + (x + 1) * width / (float) columns, horizon + (y + 1) * rowHeight),
-                    new Color(shade, shade, shade));
-            }
-        }
-    }
-
     private void CollectBillboards(int width, float horizon, float focal)
     {
         _nearby.Clear();
@@ -196,6 +188,8 @@ internal sealed class DoomViewOverlay : Overlay
             if (uid == _player || !_entities.TryGetComponent<SpriteComponent>(uid, out var sprite) ||
                 !sprite.Visible || sprite.ContainerOccluded || !IgnoreWall(uid) ||
                 !_entities.TryGetComponent<TransformComponent>(uid, out var transform))
+                continue;
+            if (_models.Add(uid, sprite, transform, _origin.Position, _floor, _objects))
                 continue;
             var position = _transforms.GetWorldPosition(transform);
             if (!DoomProjection.Project(position - _origin.Position, _forward, width, out var x, out var depth))
@@ -220,16 +214,33 @@ internal sealed class DoomViewOverlay : Overlay
             return false;
         var column = Math.Clamp((int) (pixel.X / _size.X * Columns), 0, Columns - 1);
         pixel = pixel / (Vector2) _size * _drawSize;
+        var pickedDepth = _depths[column];
+        EntityUid picked = default;
+        _floor.Pick(pixel, ref picked, ref pickedDepth);
+        _objects.Pick(pixel, ref picked, ref pickedDepth);
         foreach (var billboard in _billboards.OrderBy(b => b.Depth))
         {
-            if (billboard.Depth < _depths[column] && billboard.Rect.Contains(pixel) &&
+            if (billboard.Depth < pickedDepth && billboard.Rect.Contains(pixel) &&
                 _entities.EntityExists(billboard.Entity))
             {
                 position = _transforms.GetWorldPosition(billboard.Entity);
                 return true;
             }
         }
+        if (picked != default && _entities.EntityExists(picked))
+        {
+            position = _transforms.GetWorldPosition(picked);
+            return true;
+        }
         position = _hits[column];
+        var belowHorizon = pixel.Y - _drawSize.Y / 2;
+        if (belowHorizon > 0)
+        {
+            var depth = DoomProjection.EyeHeight * DoomProjection.FocalLength(_drawSize.X) / belowHorizon;
+            if (depth < _depths[column] && depth < DoomProjection.Range)
+                position = _origin.Position + (_forward + DoomProjection.Right(_forward) *
+                    ((pixel.X / _drawSize.X * 2 - 1) * DoomProjection.Plane)) * depth;
+        }
         return true;
     }
 

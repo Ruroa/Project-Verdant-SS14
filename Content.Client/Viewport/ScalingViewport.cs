@@ -126,6 +126,8 @@ namespace Content.Client.Viewport
 
         protected override void KeyBindDown(GUIBoundKeyEventArgs args)
         {
+            if (_entityManager.EntitySysManager.TryGetEntitySystem<Content.Client._PV.DoomView.DoomViewSystem>(out var doomView) && doomView.HandleLookKey(args, true))
+                return;
             base.KeyBindDown(args);
 
             if (args.Handled)
@@ -136,6 +138,8 @@ namespace Content.Client.Viewport
 
         protected override void KeyBindUp(GUIBoundKeyEventArgs args)
         {
+            if (_entityManager.EntitySysManager.TryGetEntitySystem<Content.Client._PV.DoomView.DoomViewSystem>(out var doomView) && doomView.HandleLookKey(args, false))
+                return;
             base.KeyBindUp(args);
 
             if (args.Handled)
