@@ -21,8 +21,11 @@ both client and server through the normal movement camera rotation system.
 
 - 70-degree horizontal perspective, 240 wall rays, 12-tile draw distance.
 - Walls retain raycast geometry and existing wall icons.
-- Doors use thin panels and their current visible sprite layers/animation frames.
-- Windows use thin glass panels, with opacity for enabled occluders.
+- Ordinary airlocks use a near-full-tile footprint while windoors keep their thin edge-mounted footprint; door textures are chosen in local space so the rotated geometry does not double-rotate directional artwork.
+- Full windows occupy a full tile with textured faces, while directional/diagonal windows remain thin and edge-mounted. Enabled occluders control tint.
+- Grilles occupy nearly a full tile, with girders set slightly smaller and lower than surrounding glass.
+- Wall-mounted fixtures (including lights and cameras) use elevated thin textures instead of cubes.
+- Unsupported decoration objects remain billboards instead of becoming oversized boxes.
 - Furniture and machinery use shallow boxes with existing artwork stretched over
   sides and tops. Climbable furniture and seats use lower profiles.
 - Characters remain layered directional sprites.
@@ -53,7 +56,9 @@ profile it on a small map before testing on a populated station.
 
 - Toggle, disconnect/reconnect, open chat/console, and alt-tab during mouse-look.
 - Turn and walk in every direction, including on a rotated grid.
-- Use a closed/open door, denied-access door, windoor, and glass/tinted window.
+- Use closed/open doors facing north, south, east and west (including a windoor) and inspect both sides. Test a denied-access door and glass/tinted window.
+- Check a full window over a grille, a girder alone, a directional window, and a diagonal window from all four directions.
+- Compare wall-mounted lights, cameras, APCs and signs at eye level and from behind the wall.
 - Compare tile variants, rotated arrows, colored markings, and grass transitions.
 - Remove and replace a floor tile over cables and pipes; vents remain visible.
 - Place an item on the floor; compare furniture scale with a nearby character.
