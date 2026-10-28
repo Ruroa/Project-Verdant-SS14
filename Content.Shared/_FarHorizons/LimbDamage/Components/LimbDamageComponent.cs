@@ -10,5 +10,5 @@ public sealed partial class LimbDamageComponent : Component
     /// Part damage fraction
     /// </summary>
     [DataField]
-    public float PartDamageFraction = 0.5f;
+    public float PartDamageFraction = 1.0f;
 }
