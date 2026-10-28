@@ -19,7 +19,6 @@ public sealed partial class LimbStatusUI : UIWidget
 
     public void InitTarget(IPrototypeManager prototypes, SpriteSystem sprites, ProtoId<LimbTargettingPrototype> proto)
     {
-        UpdateTheme();
         LimbTargettingDisplay.InitializeDisplay(prototypes, sprites, proto, withHealth: true);
         LimbTargettingDisplay.DrawLabels.Clear();
         LimbTargettingDisplay.DefaultColor = Vector3.One;
