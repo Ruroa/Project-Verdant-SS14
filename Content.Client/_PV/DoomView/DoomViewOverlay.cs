@@ -204,10 +204,49 @@ internal sealed class DoomViewOverlay : Overlay
             var center = new Vector2(x, floor + bounds.Bottom * size);
             var rect = new UIBox2(x + bounds.Left * size, floor - bounds.Height * size,
                 x + bounds.Right * size, floor);
-            var direction = (_transforms.GetWorldRotation(transform) - _forward.ToAngle() + Angle.FromDegrees(90)).GetDir();
+            var facing = _transforms.GetWorldRotation(transform) - _forward.ToAngle() + Angle.FromDegrees(90);
+            var direction = facing.GetDir();
+            // Single-layer sprites can use the same depth and lighting as 3D
+            // geometry. Keep multi-layer characters with Robust's sprite renderer,
+            // which preserves their clothing, animations and layer offsets.
+            if (TryLitBillboard(uid, sprite, position, bounds, facing))
+                continue;
+
             _billboards.Add(new Billboard(uid, depth, center, size / EyeManager.PixelsPerMeter,
                 rect, direction));
         }
+    }
+
+    private bool TryLitBillboard(EntityUid uid, SpriteComponent sprite, Vector2 position,
+        Box2 bounds, Angle facing)
+    {
+        ISpriteLayer? only = null;
+        foreach (var layer in sprite.AllLayers)
+        {
+            if (!layer.Visible)
+                continue;
+            if (only != null)
+                return false;
+            only = layer;
+        }
+        if (only == null)
+            return false;
+
+        var texture = only.Texture;
+        if (only.ActualRsi is { } rsi && rsi.TryGetState(only.RsiState, out var state))
+            texture = state.GetFrame(only.EffectiveDirection(facing),
+                Math.Clamp(only.AnimationFrame, 0, state.DelayCount - 1));
+        if (texture == null)
+            return false;
+
+        var right = DoomProjection.Right(_forward);
+        var lower = position + right * bounds.Left;
+        var upper = position + right * bounds.Right;
+        var z = MathF.Max(0.1f, bounds.Height);
+        _objects.Quad(uid, texture, only.Color * sprite.Color,
+            new Vector3(lower, z), new Vector3(upper, z),
+            new Vector3(upper, 0), new Vector3(lower, 0));
+        return true;
     }
 
     public bool TryPick(IClydeViewport viewport, Vector2 pixel, out Vector2 position)
