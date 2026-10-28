@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Components;
@@ -95,7 +96,6 @@ internal sealed class DoomModels
                 !(_entities.TryGetComponent<OccluderComponent>(uid, out var occluder) && occluder.Enabled);
             if (_entities.TryGetComponent<DoorComponent>(uid, out var door))
                 glass = !door.Occludes;
-            var path = sprite.BaseRSI?.Path.ToString() ?? string.Empty;
             if (windoor || !fullWindow && _tags.HasTag(uid, WindowTag))
                 position += rotation.RotateVec(new Vector2(0, -0.43f));
             if (_tags.HasTag(uid, DiagonalTag))
@@ -128,7 +128,9 @@ internal sealed class DoomModels
         {
             if (!layer.Visible)
                 continue;
-            var texture = TextureFor(layer, rotation);
+            // Geometry already rotates to the entity's world orientation. Select the
+            // sprite's local artwork to avoid applying that rotation twice.
+            var texture = TextureFor(layer, panel ? Angle.Zero : rotation);
             if (texture == null)
                 continue;
             var tint = layer.Color * sprite.Color;
