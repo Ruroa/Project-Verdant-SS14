@@ -7,11 +7,13 @@ using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared._Starlight.Medical.Body.Part;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.Random;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._FarHorizons.LimbDamage;
 
@@ -20,11 +22,22 @@ public sealed partial class LimbDamageSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private readonly HashSet<EntityUid> _directDamageTargets = new();
+    private readonly HashSet<string> _localizedDamageTypes = new(StringComparer.OrdinalIgnoreCase);
 
     public override void Initialize()
     {
+        foreach (var groupId in new[] { "Brute", "Burn" })
+        {
+            if (!_prototypeManager.TryIndex<DamageGroupPrototype>(groupId, out var group))
+                continue;
+
+            foreach (var type in group.DamageTypes)
+                _localizedDamageTypes.Add(type.ToString());
+        }
+
         // Avoid duplicate subscriptions
         SubscribeLocalEvent<BodyComponent, ComponentStartup>(OnBodyStartup);
         SubscribeLocalEvent<BodyComponent, DamageBeforeApplyEvent>(OnDamage);
@@ -57,6 +70,7 @@ public sealed partial class LimbDamageSystem : EntitySystem
             return;
 
         _damageable.ClearAllDamage(root.Value.Entity);
+        _damageable.ClearAllDamage(ent.Owner);
         foreach (var part in _body.GetAllBodyPart(root.Value.Entity, root.Value.BodyPart))
             _damageable.ClearAllDamage(part.Owner);
     }
@@ -80,19 +94,19 @@ public sealed partial class LimbDamageSystem : EntitySystem
         if (parts.Count == 0)
             return;
 
-        var healingTargets = GetHealingTargets(ent.Owner, parts);
+        var healingTargets = GetHealingTargets(parts);
         foreach (var type in args.Damage.DamageDict.Keys.ToArray())
         {
             var amount = args.Damage.DamageDict[type];
             if (amount >= FixedPoint2.Zero)
                 continue;
 
-            HealBodyParts(args.Origin, healingTargets, type, -amount);
-            args.Damage.DamageDict[type] = FixedPoint2.Zero;
+            if (_localizedDamageTypes.Contains(type))
+                HealBodyParts(args.Origin, healingTargets, type, -amount);
         }
 
         var positiveTypes = args.Damage.DamageDict
-            .Where(pair => pair.Value > FixedPoint2.Zero)
+            .Where(pair => pair.Value > FixedPoint2.Zero && _localizedDamageTypes.Contains(pair.Key))
             .Select(pair => pair.Key)
             .ToList();
 
@@ -100,7 +114,7 @@ public sealed partial class LimbDamageSystem : EntitySystem
         {
             var fraction = Math.Clamp(TryComp<LimbDamageComponent>(ent, out var limbDamage)
                 ? limbDamage.PartDamageFraction
-                : 0.5f, 0f, 1f);
+                : 1.0f, 0f, 1f);
 
             if (fraction > 0f)
             {
@@ -110,7 +124,6 @@ public sealed partial class LimbDamageSystem : EntitySystem
                 {
                     var localizedAmount = args.Damage.DamageDict[type] * fraction;
                     localizedDamage.DamageDict[type] = localizedAmount;
-                    args.Damage.DamageDict[type] -= localizedAmount;
                 }
 
                 ChangeDamageDirect(part.Owner, localizedDamage, args.Origin);
@@ -121,12 +134,9 @@ public sealed partial class LimbDamageSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private Dictionary<LimbTarget, List<EntityUid>> GetHealingTargets(
-        EntityUid body,
-        List<Entity<BodyPartComponent>> parts)
+    private Dictionary<LimbTarget, List<EntityUid>> GetHealingTargets(List<Entity<BodyPartComponent>> parts)
     {
         var targets = new Dictionary<LimbTarget, List<EntityUid>>();
-        Add(LimbTarget.Torso, body);
 
         foreach (var part in parts)
         {
