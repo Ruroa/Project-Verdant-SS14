@@ -24,6 +24,7 @@ internal sealed class DoomViewOverlay : Overlay
     private readonly Texture _wall;
     private readonly DoomModels _models;
     private readonly DoomGround _ground;
+    private readonly DoomLighting _lighting;
     private readonly DoomGeometry _floor = new();
     private readonly DoomGeometry _objects = new();
     private readonly float[] _depths = new float[Columns];
@@ -50,6 +51,7 @@ internal sealed class DoomViewOverlay : Overlay
         _sprites = entities.System<SpriteSystem>();
         _models = new DoomModels(entities);
         _ground = new DoomGround(entities);
+        _lighting = new DoomLighting(entities);
         _wall = _sprites.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Structures/Walls/solid.rsi"), "full"));
         ZIndex = -100;
     }
@@ -83,8 +85,11 @@ internal sealed class DoomViewOverlay : Overlay
         var focal = DoomProjection.FocalLength(width);
         handle.DrawRect(new UIBox2(left, top, left + width, horizon), new Color(0.07f, 0.09f, 0.12f));
         handle.DrawRect(new UIBox2(left, horizon, left + width, top + height), new Color(0.16f, 0.18f, 0.20f));
-        _floor.Begin(_origin.Position, _forward, width, horizon - top);
-        _objects.Begin(_origin.Position, _forward, width, horizon - top);
+        _nearby.Clear();
+        _lookup.GetEntitiesInRange(_origin.MapId, _origin.Position, DoomProjection.Range, _nearby);
+        _lighting.Begin(_origin.MapId, _nearby);
+        _floor.Begin(_origin.Position, _forward, width, horizon - top, _lighting.Sample);
+        _objects.Begin(_origin.Position, _forward, width, horizon - top, _lighting.Sample);
         _ground.Collect(_origin, _forward, _floor);
         CollectBillboards(width, horizon - top, focal);
         foreach (var patch in _floor.Patches.OrderBy(p => p.Layer).ThenByDescending(p => p.Depth))
@@ -120,7 +125,8 @@ internal sealed class DoomViewOverlay : Overlay
             var texTop = (clippedTop - wallTop) / (wallBottom - wallTop) * texture.Height;
             var texBottom = (clippedBottom - wallTop) / (wallBottom - wallTop) * texture.Height;
             handle.DrawTextureRectRegion(texture, new UIBox2(x1, clippedTop, x2, clippedBottom),
-                new UIBox2(texX, texTop, texX + 1, texBottom), new Color(shade, shade, shade));
+                new UIBox2(texX, texTop, texX + 1, texBottom),
+                _lighting.Sample(hit.HitPos) * new Color(shade, shade, shade));
         }
 
         var patches = _objects.Patches.OrderByDescending(p => p.Depth).ToArray();
@@ -181,8 +187,6 @@ internal sealed class DoomViewOverlay : Overlay
 
     private void CollectBillboards(int width, float horizon, float focal)
     {
-        _nearby.Clear();
-        _lookup.GetEntitiesInRange(_origin.MapId, _origin.Position, DoomProjection.Range, _nearby);
         foreach (var uid in _nearby)
         {
             if (uid == _player || !_entities.TryGetComponent<SpriteComponent>(uid, out var sprite) ||
