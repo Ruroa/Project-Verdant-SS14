@@ -94,7 +94,14 @@ internal sealed class DoomModels
             var railTexture = _sprites.Frame0(new SpriteSpecifier.Rsi(
                 new ResPath("/Textures/Structures/Walls/solid.rsi"), "full"));
             var railTint = new Color(0.68f, 0.73f, 0.76f);
-            var state = sprite.AllLayers.FirstOrDefault(layer => layer.Visible)?.RsiState.ToString() ?? "";
+            var state = "";
+            foreach (var layer in sprite.AllLayers)
+            {
+                if (!layer.Visible)
+                    continue;
+                state = layer.RsiState.ToString();
+                break;
+            }
             Run(-0.46f, -0.38f, 0.46f, -0.38f);
             if (state.Contains("corner", StringComparison.OrdinalIgnoreCase) ||
                 state.Contains("round", StringComparison.OrdinalIgnoreCase))
