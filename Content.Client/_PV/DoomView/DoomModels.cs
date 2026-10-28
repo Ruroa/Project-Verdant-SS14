@@ -44,19 +44,30 @@ internal sealed class DoomModels
         var bounds = _sprites.GetLocalBounds((uid, sprite));
         var panel = IsPanel(uid);
         var item = _entities.HasComponent<ItemComponent>(uid);
+        var spritePath = sprite.BaseRSI?.Path.ToString() ?? string.Empty;
+        var fixture = spritePath.Contains("/Lighting/", StringComparison.OrdinalIgnoreCase) ||
+                      spritePath.Contains("/Lights/", StringComparison.OrdinalIgnoreCase) ||
+                      spritePath.Contains("/Camera", StringComparison.OrdinalIgnoreCase);
         if (item)
             return false; // Keep loose items as grounded directional sprites rather than flat geometry.
-        var flat = !panel && (_entities.HasComponent<SubFloorHideComponent>(uid) ||
+        var flat = !panel && !fixture && (_entities.HasComponent<SubFloorHideComponent>(uid) ||
                     sprite.DrawDepth <= (int) DrawDepth.HighFloorObjects);
         var width = Math.Clamp(bounds.Width, 0.2f, 1.2f);
         var length = Math.Clamp(bounds.Height, 0.2f, 1.2f);
         var height = _entities.HasComponent<ClimbableComponent>(uid) || _entities.HasComponent<StrapComponent>(uid)
             ? 0.45f : sprite.DrawDepth == (int) DrawDepth.LargeObjects ? 1.05f : 0.75f;
+        if (fixture)
+        {
+            width = Math.Clamp(width, 0.3f, 0.75f);
+            length = 0.012f;
+            height = 0.36f;
+            position += rotation.RotateVec(new Vector2(0, -0.46f));
+        }
         var glass = false;
         if (panel)
         {
             width = 1;
-            length = _tags.HasTag(uid, WindowTag) ? 0.88f : 0.10f;
+            length = _tags.HasTag(uid, WindowTag) ? 0.96f : 0.10f;
             height = DoomProjection.WallHeight;
             glass = _tags.HasTag(uid, WindowTag) &&
                 !(_entities.TryGetComponent<OccluderComponent>(uid, out var occluder) && occluder.Enabled);
@@ -96,6 +107,15 @@ internal sealed class DoomModels
                 continue;
             }
             var localViewer = (-rotation).RotateVec(viewer - position);
+            if (fixture)
+            {
+                var faceY = localViewer.Y < 0 ? -length / 2 : length / 2;
+                objects.Quad(uid, texture, tint, Point(-width / 2, faceY, 1.35f + height / 2),
+                    Point(width / 2, faceY, 1.35f + height / 2),
+                    Point(width / 2, faceY, 1.35f - height / 2),
+                    Point(-width / 2, faceY, 1.35f - height / 2));
+                continue;
+            }
             if (localViewer.Y < -length / 2)
                 Face(-width / 2, -length / 2 - offset, width / 2, -length / 2 - offset, tint);
             if (localViewer.Y > length / 2)
@@ -104,7 +124,7 @@ internal sealed class DoomModels
                 Face(width / 2 + offset, -length / 2, width / 2 + offset, length / 2, tint * new Color(0.8f, 0.8f, 0.8f));
             if (localViewer.X < -width / 2)
                 Face(-width / 2 - offset, length / 2, -width / 2 - offset, -length / 2, tint * new Color(0.8f, 0.8f, 0.8f));
-            if (!panel && DoomProjection.EyeHeight > height)
+            if (!panel && !fixture && DoomProjection.EyeHeight > height)
                 objects.Quad(uid, texture, tint, Point(-width / 2, length / 2, height + offset),
                     Point(width / 2, length / 2, height + offset), Point(width / 2, -length / 2, height + offset),
                     Point(-width / 2, -length / 2, height + offset));
