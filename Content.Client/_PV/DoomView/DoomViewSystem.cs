@@ -26,6 +26,7 @@ public sealed partial class DoomViewSystem : EntitySystem
     [Dependency] private IUserInterfaceManager _ui = default!;
     private float _pendingTurn;
     private float _lookPitch;
+    private bool _middleWasDown;
     public float LookPitch => _lookPitch;
     public bool MouseLooking { get; private set; }
     private DoomViewOverlay? _overlay;
@@ -82,15 +83,23 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     public override void FrameUpdate(float frameTime)
     {
+        // Toggle on the press edge; never intercept right-click or other UI keys.
+        var middleDown = _input.IsKeyDown(Keyboard.Key.MouseMiddle);
+        var pressed = middleDown && !_middleWasDown;
+        _middleWasDown = middleDown;
         var canLook = Enabled && _clyde.MainWindow.IsFocused && _ui.KeyboardFocused == null;
-        var held = canLook && _input.IsKeyDown(Keyboard.Key.MouseMiddle);
-        if (held && !MouseLooking)
-        {
-            MouseLooking = true;
-            _clyde.MainWindow.SetRelativeMouseMode(true);
-        }
-        else if (!held && MouseLooking)
+        if (!canLook)
             StopMouseLook();
+        else if (pressed)
+        {
+            if (MouseLooking)
+                StopMouseLook();
+            else
+            {
+                MouseLooking = true;
+                _clyde.MainWindow.SetRelativeMouseMode(true);
+            }
+        }
         if (MouseLooking && MathF.Abs(_pendingTurn) > 0.0001f)
         {
             RaisePredictiveEvent(new DoomLookEvent(_pendingTurn));
