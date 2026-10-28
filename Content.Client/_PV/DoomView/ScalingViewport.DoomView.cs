@@ -9,6 +9,6 @@ public sealed partial class ScalingViewport
     {
         base.MouseMove(args);
         if (_entityManager.EntitySysManager.TryGetEntitySystem<DoomViewSystem>(out var doomView))
-            doomView.MouseLook(args.Relative.X * UIScale);
+            doomView.MouseLook(args.Relative.X * UIScale, args.Relative.Y * UIScale);
     }
 }
