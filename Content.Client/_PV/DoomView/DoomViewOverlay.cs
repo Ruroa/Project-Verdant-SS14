@@ -158,7 +158,7 @@ internal sealed class DoomViewOverlay : Overlay
         {
             args.RenderHandle.SetScissor(args.ViewportBounds);
         }
-        var center = new Vector2(left + width * 0.5f, horizon);
+        var center = new Vector2(left + width * 0.5f, top + height * 0.5f);
         handle.DrawLine(center - new Vector2(4, 0), center + new Vector2(4, 0), Color.White);
         handle.DrawLine(center - new Vector2(0, 4), center + new Vector2(0, 4), Color.White);
     }
@@ -233,7 +233,7 @@ internal sealed class DoomViewOverlay : Overlay
             return true;
         }
         position = _hits[column];
-        var belowHorizon = pixel.Y - _drawSize.Y / 2;
+        var belowHorizon = pixel.Y - _drawSize.Y * (0.5f + _system.LookPitch);
         if (belowHorizon > 0)
         {
             var depth = DoomProjection.EyeHeight * DoomProjection.FocalLength(_drawSize.X) / belowHorizon;
