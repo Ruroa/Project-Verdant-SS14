@@ -152,13 +152,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             LimbDamageDisplay.ClearShaders();
         }
 
-        var totalDamage = damageable.TotalDamage;
-        if (limbDamage != null)
-        {
-            foreach (var (_, partDamage) in limbDamage)
-                totalDamage += partDamage;
-        }
-        DamageLabel.Text = totalDamage.ToString();
+        DamageLabel.Text = damageable.TotalDamage.ToString();
 
         // Alerts
 
@@ -200,13 +194,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         if (state.LimbDamageByType != null)
         {
             foreach (var limbDamageType in state.LimbDamageByType)
-            {
                 _limbDamagePerType.Add(limbDamageType);
-                if (_wholeBodyDamagePerType.TryGetValue(limbDamageType.DamageType, out var existing))
-                    _wholeBodyDamagePerType[limbDamageType.DamageType] = existing + limbDamageType.Damage;
-                else
-                    _wholeBodyDamagePerType[limbDamageType.DamageType] = limbDamageType.Damage;
-            }
         }
 
         //Starlight begin - Sort damage groups in a fixed order and add metabolizing section
