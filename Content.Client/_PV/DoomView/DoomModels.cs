@@ -44,22 +44,19 @@ internal sealed class DoomModels
         var bounds = _sprites.GetLocalBounds((uid, sprite));
         var panel = IsPanel(uid);
         var item = _entities.HasComponent<ItemComponent>(uid);
-        var flat = !panel && (item || _entities.HasComponent<SubFloorHideComponent>(uid) ||
+        if (item)
+            return false; // Keep loose items as grounded directional sprites rather than flat geometry.
+        var flat = !panel && (_entities.HasComponent<SubFloorHideComponent>(uid) ||
                     sprite.DrawDepth <= (int) DrawDepth.HighFloorObjects);
         var width = Math.Clamp(bounds.Width, 0.2f, 1.2f);
         var length = Math.Clamp(bounds.Height, 0.2f, 1.2f);
         var height = _entities.HasComponent<ClimbableComponent>(uid) || _entities.HasComponent<StrapComponent>(uid)
             ? 0.45f : sprite.DrawDepth == (int) DrawDepth.LargeObjects ? 1.05f : 0.75f;
-        if (item)
-        {
-            width *= 0.45f;
-            length *= 0.45f;
-        }
         var glass = false;
         if (panel)
         {
             width = 1;
-            length = 0.08f;
+            length = _tags.HasTag(uid, WindowTag) ? 0.88f : 0.10f;
             height = DoomProjection.WallHeight;
             glass = _tags.HasTag(uid, WindowTag) &&
                 !(_entities.TryGetComponent<OccluderComponent>(uid, out var occluder) && occluder.Enabled);
