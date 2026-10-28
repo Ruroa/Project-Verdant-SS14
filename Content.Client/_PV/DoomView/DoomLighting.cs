@@ -71,9 +71,12 @@ internal sealed class DoomLighting
             return color;
 
         var sample = new Vector2((cell.X + 0.5f) * 0.5f, (cell.Y + 0.5f) * 0.5f);
-        var r = MathF.Max(0.025f, _ambient.R);
-        var g = MathF.Max(0.025f, _ambient.G);
-        var b = MathF.Max(0.03f, _ambient.B);
+        // This is a software approximation of SS14's light buffer. A modest
+        // indirect-light floor keeps normal textures legible without making
+        // unpowered rooms look illuminated.
+        var r = MathF.Max(0.115f, _ambient.R);
+        var g = MathF.Max(0.12f, _ambient.G);
+        var b = MathF.Max(0.135f, _ambient.B);
         foreach (var light in _lights)
         {
             var delta = sample - light.Position;
@@ -84,7 +87,9 @@ internal sealed class DoomLighting
                 continue;
 
             var t = 1f - distance / light.Radius;
-            var strength = MathF.Min(2f, light.Energy) * t * t * 1.8f;
+            // The old squared attenuation extinguished most station light
+            // before it reached the floor; use smoother falloff.
+            var strength = MathF.Min(2.5f, light.Energy) * t * (0.65f + 0.35f * t) * 1.5f;
             r += light.Color.R * strength;
             g += light.Color.G * strength;
             b += light.Color.B * strength;
@@ -98,9 +103,14 @@ internal sealed class DoomLighting
 
     private bool Blocked(Light light, Vector2 delta, float distance)
     {
-        var ray = new CollisionRay(light.Position, delta / distance,
+        // Wall-mounted lights can sit almost exactly on a wall collider.
+        // Starting the ray a little toward the target avoids mistakenly
+        // treating the mounting wall as blocking its own illumination.
+        var direction = delta / distance;
+        var bias = MathF.Min(0.16f, distance * 0.3f);
+        var ray = new CollisionRay(light.Position + direction * bias, direction,
             (int) (CollisionGroup.Opaque | CollisionGroup.Impassable | CollisionGroup.InteractImpassable));
-        var hit = _physics.IntersectRayWithPredicate(_map, ray, MathF.Max(0.01f, distance - 0.12f),
+        var hit = _physics.IntersectRayWithPredicate(_map, ray, MathF.Max(0.01f, distance - bias - 0.12f),
             uid => uid == light.Entity ||
                    !_entities.TryGetComponent<OccluderComponent>(uid, out var occluder) ||
                    !occluder.Enabled, false).FirstOrDefault();
