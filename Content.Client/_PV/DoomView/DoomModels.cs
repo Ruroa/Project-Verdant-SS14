@@ -17,6 +17,7 @@ internal sealed class DoomModels
 {
     private static readonly ProtoId<TagPrototype> WindowTag = "Window";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly ProtoId<TagPrototype> DiagonalTag = "Diagonal";
     private readonly IEntityManager _entities;
     private readonly SharedTransformSystem _transforms;
     private readonly SpriteSystem _sprites;
@@ -45,12 +46,23 @@ internal sealed class DoomModels
         var panel = IsPanel(uid);
         var item = _entities.HasComponent<ItemComponent>(uid);
         var spritePath = sprite.BaseRSI?.Path.ToString() ?? string.Empty;
-        var fixture = spritePath.Contains("/Lighting/", StringComparison.OrdinalIgnoreCase) ||
+        var fixture = sprite.DrawDepth == (int) DrawDepth.WallMountedItems ||
+                      spritePath.Contains("/Lighting/", StringComparison.OrdinalIgnoreCase) ||
                       spritePath.Contains("/Lights/", StringComparison.OrdinalIgnoreCase) ||
                       spritePath.Contains("/Camera", StringComparison.OrdinalIgnoreCase);
+        var fullWindow = _tags.HasTag(uid, WindowTag) &&
+                         !spritePath.Contains("directional", StringComparison.OrdinalIgnoreCase);
+        var windoor = _entities.HasComponent<DoorComponent>(uid) &&
+                      spritePath.Contains("Windoors", StringComparison.OrdinalIgnoreCase);
+        var grille = spritePath.Contains("/Walls/grille", StringComparison.OrdinalIgnoreCase) ||
+                     spritePath.Contains("/Walls/clockwork_grille", StringComparison.OrdinalIgnoreCase);
+        var girder = spritePath.Contains("wall_girder", StringComparison.OrdinalIgnoreCase) ||
+                     spritePath.Contains("/Walls/solid", StringComparison.OrdinalIgnoreCase) &&
+                     sprite.AllLayers.Any(layer => layer.RsiState.ToString().Contains("girder", StringComparison.OrdinalIgnoreCase));
         if (item)
-            return false; // Keep loose items as grounded directional sprites rather than flat geometry.
-        var flat = !panel && !fixture && (_entities.HasComponent<SubFloorHideComponent>(uid) ||
+            return false; // Keep loose items as directional sprites on the ground.
+        var flat = !panel && !fixture && !grille && !girder &&
+                   (_entities.HasComponent<SubFloorHideComponent>(uid) ||
                     sprite.DrawDepth <= (int) DrawDepth.HighFloorObjects);
         var width = Math.Clamp(bounds.Width, 0.2f, 1.2f);
         var length = Math.Clamp(bounds.Height, 0.2f, 1.2f);
@@ -58,24 +70,41 @@ internal sealed class DoomModels
             ? 0.45f : sprite.DrawDepth == (int) DrawDepth.LargeObjects ? 1.05f : 0.75f;
         if (fixture)
         {
-            width = Math.Clamp(width, 0.3f, 0.75f);
+            width = Math.Clamp(width, 0.25f, 0.8f);
             length = 0.012f;
-            height = 0.36f;
+            height = Math.Clamp(bounds.Height, 0.25f, 0.65f);
             position += rotation.RotateVec(new Vector2(0, -0.46f));
+        }
+        // A grille occupies the same tile as a window, and a girder is a smaller
+        // structural block inside it. Neither should look like low furniture.
+        if (grille || girder)
+        {
+            width = girder ? 0.82f : 0.91f;
+            length = girder ? 0.82f : 0.91f;
+            height = girder ? DoomProjection.WallHeight * 0.94f : DoomProjection.WallHeight * 0.98f;
         }
         var glass = false;
         if (panel)
         {
             width = 1;
-            length = _tags.HasTag(uid, WindowTag) ? 0.96f : 0.10f;
+            // Full windows and airlocks are full tile structures; only quarter
+            // windows and windoors sit against one edge of their tile.
+            length = fullWindow || !windoor && _entities.HasComponent<DoorComponent>(uid) ? 0.96f : 0.12f;
             height = DoomProjection.WallHeight;
             glass = _tags.HasTag(uid, WindowTag) &&
                 !(_entities.TryGetComponent<OccluderComponent>(uid, out var occluder) && occluder.Enabled);
             if (_entities.TryGetComponent<DoorComponent>(uid, out var door))
                 glass = !door.Occludes;
             var path = sprite.BaseRSI?.Path.ToString() ?? string.Empty;
-            if (path.Contains("Windoors", StringComparison.OrdinalIgnoreCase) || path.Contains("directional", StringComparison.OrdinalIgnoreCase))
+            if (windoor || !fullWindow && _tags.HasTag(uid, WindowTag))
                 position += rotation.RotateVec(new Vector2(0, -0.43f));
+            if (_tags.HasTag(uid, DiagonalTag))
+            {
+                // Diagonal windows are a face across the tile, not a full glass cube.
+                length = 0.12f;
+                position = _transforms.GetWorldPosition(transform);
+                rotation += Angle.FromDegrees(45);
+            }
         }
         if (_tags.HasTag(uid, WindowTag) && _entities.TryGetComponent<IconComponent>(uid, out var icon))
         {
@@ -116,11 +145,17 @@ internal sealed class DoomModels
             var localViewer = (-rotation).RotateVec(viewer - position);
             if (fixture)
             {
+                // Camera/light/poster textures mount on a wall, near the top.
+                // Reverse the back face so labels aren't mirrored.
                 var faceY = localViewer.Y < 0 ? -length / 2 : length / 2;
-                objects.Quad(uid, texture, tint, Point(-width / 2, faceY, 1.35f + height / 2),
-                    Point(width / 2, faceY, 1.35f + height / 2),
-                    Point(width / 2, faceY, 1.35f - height / 2),
-                    Point(-width / 2, faceY, 1.35f - height / 2));
+                var leftX = localViewer.Y < 0 ? -width / 2 : width / 2;
+                var rightX = -leftX;
+                var centerZ = 1.32f;
+                objects.Quad(uid, texture, tint,
+                    Point(leftX, faceY, centerZ + height / 2),
+                    Point(rightX, faceY, centerZ + height / 2),
+                    Point(rightX, faceY, centerZ - height / 2),
+                    Point(leftX, faceY, centerZ - height / 2));
                 continue;
             }
             if (localViewer.Y < -length / 2)
