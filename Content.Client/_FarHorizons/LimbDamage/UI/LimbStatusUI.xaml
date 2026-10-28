@@ -1,14 +1,14 @@
 <limb:LimbStatusUI
     xmlns="https://spacestation14.io"
     xmlns:limb="clr-namespace:Content.Client._FarHorizons.LimbDamage.UI"
-    MinSize="32 64"
-    MaxSize="32 64"
-    SetSize="32 64"
+    MinSize="64 64"
+    MaxSize="64 64"
+    SetSize="64 64"
     Visible="False">
     <limb:LimbTargettingDisplay
         Name="LimbTargettingDisplay"
-        MinSize="32 64"
-        MaxSize="32 64"
-        SetSize="32 64"
+        MinSize="64 64"
+        MaxSize="64 64"
+        SetSize="64 64"
         MouseFilter="Ignore" />
 </limb:LimbStatusUI>
