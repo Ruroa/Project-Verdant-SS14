@@ -100,7 +100,7 @@ internal sealed class DoomModels
             {
                 if (!layer.Visible)
                     continue;
-                state = layer.RsiState.ToString();
+                state = layer.RsiState.ToString() ?? string.Empty;
                 break;
             }
             Run(-0.46f, -0.38f, 0.46f, -0.38f);
