@@ -84,6 +84,8 @@ public sealed class LimbStatusUIController : UIController
         foreach (var part in body.GetAllBodyPart(rootPart.Entity, rootPart.BodyPart))
             AddPartDamage(part.Owner, part.Comp);
 
+        AddDamage(player, LimbTarget.Torso);
+
         return damage;
 
         void AddPartDamage(EntityUid partUid, BodyPartComponent part)
@@ -92,7 +94,16 @@ public sealed class LimbStatusUIController : UIController
             if (target == null || !_entities.TryGetComponent<DamageableComponent>(partUid, out var damageable))
                 return;
 
-            damage[target.Value] = (float) damageable.Damage.GetTotal();
+            AddDamage(partUid, target.Value);
+        }
+
+        void AddDamage(EntityUid entity, LimbTarget target)
+        {
+            if (!_entities.TryGetComponent<DamageableComponent>(entity, out var damageable))
+                return;
+
+            damage.TryGetValue(target, out var currentDamage);
+            damage[target] = currentDamage + (float) damageable.Damage.GetTotal();
         }
     }
 
