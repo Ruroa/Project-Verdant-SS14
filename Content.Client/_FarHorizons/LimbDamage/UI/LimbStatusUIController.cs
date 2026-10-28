@@ -84,8 +84,6 @@ public sealed class LimbStatusUIController : UIController
         foreach (var part in body.GetAllBodyPart(rootPart.Entity, rootPart.BodyPart))
             AddPartDamage(part.Owner, part.Comp);
 
-        AddDamage(player, LimbTarget.Torso);
-
         return damage;
 
         void AddPartDamage(EntityUid partUid, BodyPartComponent part)
