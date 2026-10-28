@@ -126,7 +126,8 @@ internal sealed class DoomViewOverlay : Overlay
             var texBottom = (clippedBottom - wallTop) / (wallBottom - wallTop) * texture.Height;
             handle.DrawTextureRectRegion(texture, new UIBox2(x1, clippedTop, x2, clippedBottom),
                 new UIBox2(texX, texTop, texX + 1, texBottom),
-                _lighting.Sample(hit.HitPos) * new Color(shade, shade, shade));
+                _lighting.Sample(hit.HitPos + Vector2.Normalize(_origin.Position - hit.HitPos) * 0.10f) *
+                new Color(shade, shade, shade));
         }
 
         var patches = _objects.Patches.OrderByDescending(p => p.Depth).ToArray();
