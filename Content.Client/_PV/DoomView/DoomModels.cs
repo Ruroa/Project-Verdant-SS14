@@ -85,6 +85,13 @@ internal sealed class DoomModels
             var y = localViewer.Y < 0 ? -length / 2 : length / 2;
             objects.Quad(uid, texture, tint, Point(-width / 2, y, height), Point(width / 2, y, height),
                 Point(width / 2, y, 0), Point(-width / 2, y, 0));
+            // A glass wall occupies the tile, not an infinitely thin image plane.
+            // Render its near side plus both edge faces using the same existing artwork.
+            var sideTint = tint * new Color(0.75f, 0.75f, 0.75f);
+            var x = localViewer.X < 0 ? -width / 2 : width / 2;
+            objects.Quad(uid, texture, sideTint, Point(x, -length / 2, height),
+                Point(x, length / 2, height), Point(x, length / 2, 0),
+                Point(x, -length / 2, 0));
             return true;
         }
         var number = 0;
