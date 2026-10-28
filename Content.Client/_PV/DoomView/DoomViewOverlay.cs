@@ -79,7 +79,7 @@ internal sealed class DoomViewOverlay : Overlay
 
         args.RenderHandle.SetScissor(args.ViewportBounds);
         _drawSize = new Vector2(width, height);
-        var horizon = top + height * 0.5f;
+        var horizon = top + height * (0.5f + _system.LookPitch);
         var focal = DoomProjection.FocalLength(width);
         handle.DrawRect(new UIBox2(left, top, left + width, horizon), new Color(0.07f, 0.09f, 0.12f));
         handle.DrawRect(new UIBox2(left, horizon, left + width, top + height), new Color(0.16f, 0.18f, 0.20f));
