@@ -58,17 +58,8 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     public bool HandleLookKey(GUIBoundKeyEventArgs args, bool down)
     {
-        if (!Enabled || args.Function != EngineKeyFunctions.UIMiddleClick)
-            return false;
-        if (down)
-        {
-            MouseLooking = true;
-            _clyde.MainWindow.SetRelativeMouseMode(true);
-        }
-        else
-            StopMouseLook();
-        args.Handle();
-        return true;
+        // Do not intercept UI mouse bindings: normal context menus must keep working.
+        return false;
     }
 
     public void MouseLook(float horizontalDelta, float verticalDelta)
@@ -91,8 +82,14 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     public override void FrameUpdate(float frameTime)
     {
-        if (MouseLooking && (!_clyde.MainWindow.IsFocused || _ui.KeyboardFocused != null ||
-            !_input.IsKeyDown(Keyboard.Key.MouseMiddle)))
+        var canLook = Enabled && _clyde.MainWindow.IsFocused && _ui.KeyboardFocused == null;
+        var held = canLook && _input.IsKeyDown(Keyboard.Key.MouseMiddle);
+        if (held && !MouseLooking)
+        {
+            MouseLooking = true;
+            _clyde.MainWindow.SetRelativeMouseMode(true);
+        }
+        else if (!held && MouseLooking)
             StopMouseLook();
         if (MouseLooking && MathF.Abs(_pendingTurn) > 0.0001f)
         {
