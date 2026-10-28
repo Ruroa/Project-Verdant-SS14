@@ -70,7 +70,8 @@ public sealed partial class DoomViewSystem : EntitySystem
         if (float.IsFinite(horizontalDelta))
             _pendingTurn = Math.Clamp(_pendingTurn - horizontalDelta * 0.003f, -0.5f, 0.5f);
         if (float.IsFinite(verticalDelta))
-            _lookPitch = Math.Clamp(_lookPitch + verticalDelta * 0.002f, -0.30f, 0.30f);
+            // Move mouse up to look up, down to look down (standard FPS pitch).
+            _lookPitch = Math.Clamp(_lookPitch - verticalDelta * 0.002f, -0.30f, 0.30f);
     }
 
     private void StopMouseLook()
