@@ -11,14 +11,17 @@ internal sealed class DoomGeometry
     private Vector2 _forward;
     private float _width;
     private float _horizon;
+    private Func<Vector2, Color>? _lighting;
 
-    public void Begin(Vector2 origin, Vector2 forward, float width, float horizon)
+    public void Begin(Vector2 origin, Vector2 forward, float width, float horizon,
+        Func<Vector2, Color>? lighting = null)
     {
         Patches.Clear();
         _origin = origin;
         _forward = forward;
         _width = width;
         _horizon = horizon;
+        _lighting = lighting;
     }
 
     public void Quad(EntityUid entity, Texture texture, Color color, Vector3 a, Vector3 b, Vector3 c, Vector3 d,
@@ -50,7 +53,12 @@ internal sealed class DoomGeometry
             if (projected.Max(p => p.Position.X) < 0 || projected.Min(p => p.Position.X) > _width)
                 continue;
             var shade = Math.Clamp(1f - depth / 16f, 0.2f, 1f);
-            Patches.Add(new Patch(entity, texture, color * new Color(shade, shade, shade), projected,
+            var sampleU = u + 0.5f / steps;
+            var sampleV = v + 0.5f / steps;
+            var sampleWorld = Vector3.Lerp(Vector3.Lerp(a, b, sampleU),
+                Vector3.Lerp(d, c, sampleU), sampleV);
+            var light = _lighting?.Invoke(new Vector2(sampleWorld.X, sampleWorld.Y)) ?? Color.White;
+            Patches.Add(new Patch(entity, texture, color * light * new Color(shade, shade, shade), projected,
                 depth, vertices.Min(p => p.Position.Y), layer));
 
             Vertex Make(float horizontal, float vertical)
