@@ -84,6 +84,16 @@ internal sealed class DoomModels
             length = girder ? 0.82f : 0.91f;
             height = girder ? DoomProjection.WallHeight * 0.94f : DoomProjection.WallHeight * 0.98f;
         }
+        // A generic 2D decoration is safer as a facing sprite than as a box
+        // with unrelated textures stretched over all six sides.
+        var modeledProp = spritePath.Contains("/Machines/", StringComparison.OrdinalIgnoreCase) ||
+                          spritePath.Contains("/Furniture/", StringComparison.OrdinalIgnoreCase) ||
+                          spritePath.Contains("/Dispensers/", StringComparison.OrdinalIgnoreCase) ||
+                          _entities.HasComponent<ClimbableComponent>(uid) ||
+                          _entities.HasComponent<StrapComponent>(uid);
+        if (!panel && !fixture && !grille && !girder && !flat && !modeledProp)
+            return false;
+
         var glass = false;
         if (panel)
         {
@@ -112,8 +122,11 @@ internal sealed class DoomModels
             var tint = sprite.Color.WithAlpha(glass ? 0.6f * sprite.Color.A : sprite.Color.A);
             var localViewer = (-rotation).RotateVec(viewer - position);
             var y = localViewer.Y < 0 ? -length / 2 : length / 2;
-            objects.Quad(uid, texture, tint, Point(-width / 2, y, height), Point(width / 2, y, height),
-                Point(width / 2, y, 0), Point(-width / 2, y, 0));
+            // Keep the near face readable from either side of the window.
+            var nearLeft = localViewer.Y < 0 ? -width / 2 : width / 2;
+            var nearRight = -nearLeft;
+            objects.Quad(uid, texture, tint, Point(nearLeft, y, height), Point(nearRight, y, height),
+                Point(nearRight, y, 0), Point(nearLeft, y, 0));
             // A glass wall occupies the tile, not an infinitely thin image plane.
             // Render its near side plus both edge faces using the same existing artwork.
             var sideTint = tint * new Color(0.75f, 0.75f, 0.75f);
@@ -130,7 +143,7 @@ internal sealed class DoomModels
                 continue;
             // Geometry already rotates to the entity's world orientation. Select the
             // sprite's local artwork to avoid applying that rotation twice.
-            var texture = TextureFor(layer, panel ? Angle.Zero : rotation);
+            var texture = TextureFor(layer, panel || fixture ? Angle.Zero : rotation);
             if (texture == null)
                 continue;
             var tint = layer.Color * sprite.Color;
