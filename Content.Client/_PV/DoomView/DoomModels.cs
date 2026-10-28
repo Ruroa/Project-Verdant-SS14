@@ -57,11 +57,15 @@ internal sealed class DoomModels
                       spritePath.Contains("Windoors", StringComparison.OrdinalIgnoreCase);
         var grille = spritePath.Contains("/Walls/grille", StringComparison.OrdinalIgnoreCase) ||
                      spritePath.Contains("/Walls/clockwork_grille", StringComparison.OrdinalIgnoreCase);
+        var railing = spritePath.Contains("/Walls/railing.rsi", StringComparison.OrdinalIgnoreCase);
         var girder = spritePath.Contains("wall_girder", StringComparison.OrdinalIgnoreCase) ||
                      spritePath.Contains("/Walls/solid", StringComparison.OrdinalIgnoreCase) &&
                      sprite.AllLayers.Any(layer => layer.RsiState.ToString()?.Contains("girder", StringComparison.OrdinalIgnoreCase) == true);
-        if (item)
-            return false; // Keep loose items as directional sprites on the ground.
+        // Atmos pipes and floor vents inherit ItemComponent. Keep anchored
+        // subfloor objects on the ground, but loose items as billboards.
+        if (item && !_entities.HasComponent<SubFloorHideComponent>(uid) &&
+            sprite.DrawDepth > (int) DrawDepth.HighFloorObjects)
+            return false;
         var flat = !panel && !fixture && !grille && !girder &&
                    (_entities.HasComponent<SubFloorHideComponent>(uid) ||
                     sprite.DrawDepth <= (int) DrawDepth.HighFloorObjects);
@@ -84,6 +88,47 @@ internal sealed class DoomModels
             length = girder ? 0.82f : 0.91f;
             height = girder ? DoomProjection.WallHeight * 0.94f : DoomProjection.WallHeight * 0.98f;
         }
+        if (railing)
+        {
+            // Railing RSI art is an overhead silhouette, not a wall face.
+            var railTexture = _sprites.Frame0(new SpriteSpecifier.Rsi(
+                new ResPath("/Textures/Structures/Walls/solid.rsi"), "full"));
+            var railTint = new Color(0.68f, 0.73f, 0.76f);
+            var state = sprite.AllLayers.FirstOrDefault(layer => layer.Visible)?.RsiState.ToString() ?? "";
+            Run(-0.46f, -0.38f, 0.46f, -0.38f);
+            if (state.Contains("corner", StringComparison.OrdinalIgnoreCase) ||
+                state.Contains("round", StringComparison.OrdinalIgnoreCase))
+                Run(0.38f, -0.38f, 0.38f, 0.45f);
+            if (state.Contains("round", StringComparison.OrdinalIgnoreCase))
+                Run(-0.38f, -0.38f, -0.38f, 0.45f);
+            return true;
+
+            void Run(float ax, float ay, float bx, float by)
+            {
+                Post(ax, ay);
+                Post(bx, by);
+                Bar(ax, ay, bx, by, 0.52f, 0.045f);
+                Bar(ax, ay, bx, by, 0.97f, 0.06f);
+            }
+
+            void Bar(float ax, float ay, float bx, float by, float z, float thickness)
+            {
+                objects.Quad(uid, railTexture, railTint,
+                    Point(ax, ay, z + thickness), Point(bx, by, z + thickness),
+                    Point(bx, by, z - thickness), Point(ax, ay, z - thickness));
+            }
+
+            void Post(float x, float y)
+            {
+                const float t = 0.035f;
+                objects.Quad(uid, railTexture, railTint, Point(x - t, y, 1.02f),
+                    Point(x + t, y, 1.02f), Point(x + t, y, 0), Point(x - t, y, 0));
+                objects.Quad(uid, railTexture, railTint * new Color(0.85f, 0.85f, 0.85f),
+                    Point(x, y - t, 1.02f), Point(x, y + t, 1.02f),
+                    Point(x, y + t, 0), Point(x, y - t, 0));
+            }
+        }
+
         // A generic 2D decoration is safer as a facing sprite than as a box
         // with unrelated textures stretched over all six sides.
         var modeledProp = spritePath.Contains("/Machines/", StringComparison.OrdinalIgnoreCase) ||
