@@ -59,7 +59,7 @@ internal sealed class DoomModels
                      spritePath.Contains("/Walls/clockwork_grille", StringComparison.OrdinalIgnoreCase);
         var girder = spritePath.Contains("wall_girder", StringComparison.OrdinalIgnoreCase) ||
                      spritePath.Contains("/Walls/solid", StringComparison.OrdinalIgnoreCase) &&
-                     sprite.AllLayers.Any(layer => layer.RsiState?.ToString()?.Contains("girder", StringComparison.OrdinalIgnoreCase) == true);
+                     sprite.AllLayers.Any(layer => layer.RsiState.ToString()?.Contains("girder", StringComparison.OrdinalIgnoreCase) == true);
         if (item)
             return false; // Keep loose items as directional sprites on the ground.
         var flat = !panel && !fixture && !grille && !girder &&
