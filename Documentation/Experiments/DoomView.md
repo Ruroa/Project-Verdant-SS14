@@ -6,7 +6,7 @@ Use the same branch for both client and server. The feature starts disabled.
 ## Controls
 
 - WASD: move relative to the camera.
-- Click middle mouse once over the game view to lock free-look. Move the mouse to turn horizontally and look slightly up/down. Click it again to release.
+- Click middle mouse once over the game view to lock free-look. Move the mouse horizontally to turn; move the mouse up to look up and down to look down. Click it again to release.
 - Right-click still opens context menus. Losing window focus or focusing a text field also releases free-look.
 - While looking, interaction aims at the center crosshair.
 - NumPad 7/9: existing camera rotation bindings, still available.
@@ -43,7 +43,7 @@ This remains a local/admin rendering experiment. Exact native lightmaps, blindne
 ceilings, terrain elevation, particles, and held-weapon presentation are unfinished.
 Empty tiles draw no floor; they are not filled by a checkerboard.
 
-Doom View now approximates darkness using the map's ambient color and nearby enabled PointLight components with radial falloff and occluder ray checks. This is separate from the native 2D light buffer; masked lights, sprite billboard tint, animated shadows, and full lightmap fidelity are not yet supported.
+Doom View approximates darkness using the map's ambient color and enabled PointLight components with softened falloff and occluder ray checks. Light rays are biased away from fixtures to prevent wall-mounted lamps blocking themselves. Single-layer billboards now receive sampled lighting too; complex multi-layer characters still render with Robust's sprite pipeline and may appear too bright. Native light masks and full 2D lightmap fidelity remain unsupported.
 
 Models are approximations, not authored 3D assets. Thin panels and projected meshes
 use painter ordering and subdivided textures; intersections, transparent overlaps,
