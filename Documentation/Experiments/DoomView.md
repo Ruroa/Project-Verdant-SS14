@@ -6,8 +6,8 @@ Use the same branch for both client and server. The feature starts disabled.
 ## Controls
 
 - WASD: move relative to the camera.
-- Hold right mouse over the game view and move the mouse: turn horizontally.
-- Release right mouse: release the cursor for inventory and menus.
+- Hold middle mouse over the game view and move the mouse: turn horizontally and look slightly up/down.
+- Release middle mouse: release the cursor for inventory and menus. Right-click still opens context menus.
 - While looking, interaction aims at the center crosshair.
 - NumPad 7/9: existing camera rotation bindings, still available.
 - Run `doomview` again: return to the normal view.
@@ -26,7 +26,7 @@ both client and server through the normal movement camera rotation system.
 - Furniture and machinery use shallow boxes with existing artwork stretched over
   sides and tops. Climbable furniture and seats use lower profiles.
 - Characters remain layered directional sprites.
-- Loose items use smaller flat floor quads. Pipes, cables, vents, and floor objects
+- Loose items remain directional sprites at floor level. Pipes, cables, vents, and floor objects
   use flat quads and retain existing per-layer visibility, including covered cables.
 - Floor textures come from the actual placed tiles: variants, rotation/mirroring,
   grid transforms, and tile-edge transitions are preserved.
