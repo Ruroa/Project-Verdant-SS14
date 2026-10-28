@@ -25,6 +25,8 @@ public sealed partial class DoomViewSystem : EntitySystem
     [Dependency] private IInputManager _input = default!;
     [Dependency] private IUserInterfaceManager _ui = default!;
     private float _pendingTurn;
+    private float _lookPitch;
+    public float LookPitch => _lookPitch;
     public bool MouseLooking { get; private set; }
     private DoomViewOverlay? _overlay;
     public bool Enabled => _overlay != null;
@@ -56,7 +58,7 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     public bool HandleLookKey(GUIBoundKeyEventArgs args, bool down)
     {
-        if (!Enabled || args.Function != EngineKeyFunctions.UIRightClick)
+        if (!Enabled || args.Function != EngineKeyFunctions.UIMiddleClick)
             return false;
         if (down)
         {
@@ -69,10 +71,14 @@ public sealed partial class DoomViewSystem : EntitySystem
         return true;
     }
 
-    public void MouseLook(float horizontalDelta)
+    public void MouseLook(float horizontalDelta, float verticalDelta)
     {
-        if (MouseLooking && float.IsFinite(horizontalDelta))
+        if (!MouseLooking)
+            return;
+        if (float.IsFinite(horizontalDelta))
             _pendingTurn = Math.Clamp(_pendingTurn - horizontalDelta * 0.003f, -0.5f, 0.5f);
+        if (float.IsFinite(verticalDelta))
+            _lookPitch = Math.Clamp(_lookPitch + verticalDelta * 0.002f, -0.30f, 0.30f);
     }
 
     private void StopMouseLook()
@@ -86,7 +92,7 @@ public sealed partial class DoomViewSystem : EntitySystem
     public override void FrameUpdate(float frameTime)
     {
         if (MouseLooking && (!_clyde.MainWindow.IsFocused || _ui.KeyboardFocused != null ||
-            !_input.IsKeyDown(Keyboard.Key.MouseRight)))
+            !_input.IsKeyDown(Keyboard.Key.MouseMiddle)))
             StopMouseLook();
         if (MouseLooking && MathF.Abs(_pendingTurn) > 0.0001f)
         {
