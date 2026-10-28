@@ -4,6 +4,7 @@ using Content.Shared.Physics;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 
@@ -18,6 +19,8 @@ internal sealed class DoomLighting
     private readonly IEntityManager _entities;
     private readonly SharedTransformSystem _transforms;
     private readonly SharedPhysicsSystem _physics;
+    private readonly SharedMapSystem _maps;
+    private Color _ambient;
     private readonly List<Light> _lights = new();
     private readonly Dictionary<Vector2i, Color> _samples = new();
     private readonly ILightManager _manager = IoCManager.Resolve<ILightManager>();
@@ -28,11 +31,17 @@ internal sealed class DoomLighting
         _entities = entities;
         _transforms = entities.System<SharedTransformSystem>();
         _physics = entities.System<SharedPhysicsSystem>();
+        _maps = entities.System<SharedMapSystem>();
     }
 
     public void Begin(MapId map, IEnumerable<EntityUid> nearby)
     {
         _map = map;
+        // Respect the map's own ambient light (sunlit maps stay bright).
+        var mapUid = _maps.GetMap(map);
+        _ambient = _entities.TryGetComponent<MapLightComponent>(mapUid, out var mapLight)
+            ? mapLight.AmbientLightColor
+            : MapLightComponent.DefaultColor;
         _lights.Clear();
         _samples.Clear();
         if (!_manager.Enabled || !_manager.DrawLighting)
@@ -62,16 +71,16 @@ internal sealed class DoomLighting
             return color;
 
         var sample = new Vector2((cell.X + 0.5f) * 0.5f, (cell.Y + 0.5f) * 0.5f);
-        var r = 0.075f;
-        var g = 0.078f;
-        var b = 0.09f;
+        var r = MathF.Max(0.025f, _ambient.R);
+        var g = MathF.Max(0.025f, _ambient.G);
+        var b = MathF.Max(0.03f, _ambient.B);
         foreach (var light in _lights)
         {
             var delta = sample - light.Position;
             var distance = delta.Length();
             if (distance >= light.Radius)
                 continue;
-            if (distance > 0.25f && Blocked(light, sample, delta, distance))
+            if (distance > 0.25f && Blocked(light, delta, distance))
                 continue;
 
             var t = 1f - distance / light.Radius;
@@ -87,7 +96,7 @@ internal sealed class DoomLighting
         return color;
     }
 
-    private bool Blocked(Light light, Vector2 target, Vector2 delta, float distance)
+    private bool Blocked(Light light, Vector2 delta, float distance)
     {
         var ray = new CollisionRay(light.Position, delta / distance,
             (int) (CollisionGroup.Opaque | CollisionGroup.Impassable | CollisionGroup.InteractImpassable));
