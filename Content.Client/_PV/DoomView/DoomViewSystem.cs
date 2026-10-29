@@ -1,15 +1,15 @@
 using System.Numerics;
 using Content.Shared._PV.DoomView;
-using Robust.Client.UserInterface;
-using Content.Shared.Movement.Components;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Input;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
+using Robust.Client.Input;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Console;
+using Robust.Shared.Input;
 using Robust.Shared.Map;
 
 namespace Content.Client._PV.DoomView;
@@ -23,6 +23,7 @@ public sealed partial class DoomViewSystem : EntitySystem
     [Dependency] private SharedMoverController _mover = default!;
 
     [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IInputManager _input = default!;
     private float _pendingTurn;
     private float _lookPitch;
     private const float MaxLookPitch = 0.6f;
@@ -41,6 +42,7 @@ public sealed partial class DoomViewSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<PixelToMapEvent>(OnPixelToMap);
         SubscribeLocalEvent<DamageableComponent, DamageChangedEvent>(OnLocalDamage);
+        _input.FirstChanceOnKeyEvent += OnFirstChanceKeyEvent;
     }
 
     public bool Toggle()
@@ -62,13 +64,15 @@ public sealed partial class DoomViewSystem : EntitySystem
         return true;
     }
 
-    public bool HandleLookKey(GUIBoundKeyEventArgs args, bool down)
+    private void OnFirstChanceKeyEvent(KeyEventArgs args, KeyEventType type)
     {
-        // Use the viewport input event so this does not depend on combat mode.
-        if (!Enabled || args.Function != ContentKeyFunctions.MouseMiddle)
-            return false;
+        if (!Enabled || !_clyde.MainWindow.IsFocused || args.Key != Keyboard.Key.MouseMiddle)
+            return;
 
-        if (down && _clyde.MainWindow.IsFocused)
+        if (type is KeyEventType.Down or KeyEventType.Up)
+            args.Handle();
+
+        if (type == KeyEventType.Down && !args.IsRepeat)
         {
             if (MouseLooking)
                 StopMouseLook();
@@ -78,8 +82,6 @@ public sealed partial class DoomViewSystem : EntitySystem
                 _clyde.MainWindow.SetRelativeMouseMode(true);
             }
         }
-
-        return true;
     }
 
     public void MouseLook(float horizontalDelta, float verticalDelta)
@@ -141,6 +143,7 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     public override void Shutdown()
     {
+        _input.FirstChanceOnKeyEvent -= OnFirstChanceKeyEvent;
         if (Enabled)
             Toggle();
         base.Shutdown();
