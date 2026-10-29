@@ -8,6 +8,7 @@ using Robust.Client.Input;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Console;
 using Robust.Shared.Input;
@@ -83,7 +84,7 @@ public sealed partial class DoomViewSystem : EntitySystem
             MouseLooking = true;
             _ui.ControlFocused = null;
             _ui.ReleaseKeyboardFocus();
-            _mouseCaptureControl = new DoomMouseCaptureControl(_input, MouseLook);
+            _mouseCaptureControl = new DoomMouseCaptureControl(_input, delta => MouseLook(delta.X, delta.Y));
             _ui.RootControl.AddChild(_mouseCaptureControl);
             LayoutContainer.SetAnchorPreset(_mouseCaptureControl, LayoutContainer.LayoutPreset.Wide);
             _mouseCaptureControl.SetPositionLast();
