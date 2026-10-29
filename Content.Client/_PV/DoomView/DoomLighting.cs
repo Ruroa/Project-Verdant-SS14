@@ -30,9 +30,18 @@ internal sealed class DoomLighting
 
         var sample = new Vector2(cell.X + 0.5f, cell.Y + 0.5f);
         color = _lightLevels.CalculateLightColor(new MapCoordinates(sample, _map));
+        color = new Color(ToDisplayLight(color.R), ToDisplayLight(color.G), ToDisplayLight(color.B), color.A);
         _samples[cell] = color;
         return color;
     }
 
     public float Brightness(Color color) => _lightLevels.ColorToLevel(color);
+
+    private static float ToDisplayLight(float value)
+    {
+        value = Math.Clamp(value, 0f, 1f);
+        return value <= 0.0031308f
+            ? value * 12.92f
+            : 1.055f * MathF.Pow(value, 1f / 2.4f) - 0.055f;
+    }
 }

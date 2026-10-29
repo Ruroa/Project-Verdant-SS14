@@ -98,14 +98,14 @@ public sealed partial class DoomViewSystem : EntitySystem
         var middleDown = _input.IsKeyDown(Keyboard.Key.MouseMiddle);
         var pressed = middleDown && !_middleWasDown;
         _middleWasDown = middleDown;
-        var canLook = Enabled && _clyde.MainWindow.IsFocused && _ui.KeyboardFocused == null;
+        var canLook = Enabled && _clyde.MainWindow.IsFocused;
         if (!canLook)
             StopMouseLook();
         else if (pressed)
         {
             if (MouseLooking)
                 StopMouseLook();
-            else
+            else if (_ui.KeyboardFocused == null)
             {
                 MouseLooking = true;
                 _clyde.MainWindow.SetRelativeMouseMode(true);

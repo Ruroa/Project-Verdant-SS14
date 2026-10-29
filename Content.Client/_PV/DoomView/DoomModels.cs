@@ -17,6 +17,7 @@ namespace Content.Client._PV.DoomView;
 
 internal sealed class DoomModels
 {
+    private const float ObjectHeightScale = 0.85f;
     private static readonly ProtoId<TagPrototype> WindowTag = "Window";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly ProtoId<TagPrototype> DiagonalTag = "Diagonal";
@@ -61,7 +62,8 @@ internal sealed class DoomModels
             Vector3 ModelPoint(int index)
             {
                 var local = model.Positions[index];
-                return new Vector3(position + rotation.RotateVec(new Vector2(local.X, local.Y)), local.Z * 0.85f);
+                return new Vector3(position + rotation.RotateVec(new Vector2(local.X, local.Y)),
+                    local.Z * 0.85f * ObjectHeightScale);
             }
         }
         var bounds = _sprites.GetLocalBounds((uid, sprite));
@@ -265,7 +267,7 @@ internal sealed class DoomModels
         Vector3 Point(float x, float y, float z)
         {
             var p = position + rotation.RotateVec(new Vector2(x, y));
-            return new Vector3(p, z);
+            return new Vector3(p, modeledProp ? z * ObjectHeightScale : z);
         }
     }
 
