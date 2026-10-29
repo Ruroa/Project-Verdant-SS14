@@ -103,6 +103,17 @@ public sealed partial class DoomViewSystem : EntitySystem
             _lookPitch = Math.Clamp(_lookPitch - verticalDelta * 0.002f, -MaxLookPitch, MaxLookPitch);
     }
 
+    public bool TryGetCrosshairMapPosition(out MapCoordinates position)
+    {
+        position = default;
+        if (!MouseLooking || _overlay == null || !TryCamera(out _, out var origin, out _) ||
+            !_overlay.TryPickCrosshair(out var picked))
+            return false;
+
+        position = new MapCoordinates(picked, origin.MapId);
+        return true;
+    }
+
     private void StopMouseLook()
     {
         if (MouseLooking)
