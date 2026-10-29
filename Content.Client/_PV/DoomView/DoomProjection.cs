@@ -17,7 +17,7 @@ internal static class DoomProjection
 
     public static float FocalLength(float width) => width / (2f * Plane);
 
-    public static bool InView(Vector2 delta, Vector2 forward, float padding = 0.65f)
+    public static bool InView(Vector2 delta, Vector2 forward, float padding = 2f)
     {
         var distanceSquared = delta.LengthSquared();
         if (distanceSquared <= NearBubble * NearBubble)
