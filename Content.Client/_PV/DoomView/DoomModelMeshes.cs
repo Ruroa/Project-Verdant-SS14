@@ -2,12 +2,15 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Globalization;
-using YamlDotNet.RepresentationModel;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Markdown;
+using Robust.Shared.Serialization.Markdown.Mapping;
+using Robust.Shared.Serialization.Markdown.Sequence;
+using Robust.Shared.Serialization.Markdown.Value;
 
 namespace Content.Client._PV.DoomView;
 
@@ -24,11 +27,11 @@ internal sealed class DoomModelMeshes
         try
         {
             var root = ParseDocument(_resources.ContentFileReadAllText(MeshRoot + "model-rules.json"));
-            _rules = Sequence(root, "rules").Children.Select(rule =>
+            _rules = Sequence(root, "rules").Sequence.Select(rule =>
                 new ModelRule(
                     TryGet(rule, "spritePathContains", out var path) ? Scalar(path) : null,
                     TryGet(rule, "entityPrototypeParents", out var parents)
-                        ? Sequence(parents).Children.Select(Scalar).ToArray()
+                        ? Sequence(parents).Sequence.Select(Scalar).ToArray()
                         : Array.Empty<string>(),
                     Scalar(Get(rule, "mesh")))).ToList();
         }
@@ -102,48 +105,47 @@ internal sealed class DoomModelMeshes
         }
     }
 
-    internal static YamlMappingNode ParseDocument(string text)
+    internal static MappingDataNode ParseDocument(string text)
     {
-        var stream = new YamlStream();
         using var reader = new StringReader(text);
-        stream.Load(reader);
-        if (stream.Documents.Count != 1 || stream.Documents[0].RootNode is not YamlMappingNode root)
+        var documents = DataNodeParser.ParseYamlStream(reader).ToArray();
+        if (documents.Length != 1 || documents[0].Root is not MappingDataNode root)
             throw new InvalidDataException("Invalid Doom View model document.");
         return root;
     }
 
-    internal static YamlNode Get(YamlNode node, string key)
+    internal static DataNode Get(DataNode node, string key)
     {
-        if (node is YamlMappingNode mapping && mapping.Children.TryGetValue(new YamlScalarNode(key), out var value))
+        if (node is MappingDataNode mapping && mapping.TryGet(key, out var value))
             return value;
         throw new InvalidDataException($"Missing Doom View model field '{key}'.");
     }
 
-    internal static bool TryGet(YamlNode node, string key, out YamlNode value)
+    internal static bool TryGet(DataNode node, string key, out DataNode value)
     {
-        if (node is YamlMappingNode mapping && mapping.Children.TryGetValue(new YamlScalarNode(key), out value!))
+        if (node is MappingDataNode mapping && mapping.TryGet(key, out value!))
             return true;
         value = null!;
         return false;
     }
 
-    internal static YamlSequenceNode Sequence(YamlNode node) => node as YamlSequenceNode ??
+    internal static SequenceDataNode Sequence(DataNode node) => node as SequenceDataNode ??
         throw new InvalidDataException("Expected a Doom View model list.");
 
-    internal static YamlSequenceNode Sequence(YamlNode node, string key) => Sequence(Get(node, key));
+    internal static SequenceDataNode Sequence(DataNode node, string key) => Sequence(Get(node, key));
 
-    internal static string Scalar(YamlNode node) => (node as YamlScalarNode)?.Value ??
+    internal static string Scalar(DataNode node) => (node as ValueDataNode)?.Value ??
         throw new InvalidDataException("Expected a Doom View model value.");
 
-    internal static int Integer(YamlNode node) => int.TryParse(Scalar(node), NumberStyles.Integer,
+    internal static int Integer(DataNode node) => int.TryParse(Scalar(node), NumberStyles.Integer,
         CultureInfo.InvariantCulture, out var value) ? value :
         throw new InvalidDataException("Invalid Doom View model integer.");
 
-    internal static float Number(YamlNode node) => float.TryParse(Scalar(node), NumberStyles.Float,
+    internal static float Number(DataNode node) => float.TryParse(Scalar(node), NumberStyles.Float,
         CultureInfo.InvariantCulture, out var value) && float.IsFinite(value) ? value :
         throw new InvalidDataException("Invalid Doom View model number.");
 
-    internal static bool Boolean(YamlNode node) => bool.TryParse(Scalar(node), out var value) ? value :
+    internal static bool Boolean(DataNode node) => bool.TryParse(Scalar(node), out var value) ? value :
         throw new InvalidDataException("Invalid Doom View model boolean.");
 
     private sealed record ModelRule(string? SpritePathContains, string[] Parents, string Mesh);
@@ -166,22 +168,22 @@ internal sealed class DoomModelMesh
             DoomModelMeshes.Scalar(DoomModelMeshes.Get(root, "upAxis")) != "Z")
             throw new InvalidDataException("Unsupported Doom View mesh format.");
 
-        var positions = DoomModelMeshes.Sequence(root, "positions").Children.Select(point =>
+        var positions = DoomModelMeshes.Sequence(root, "positions").Sequence.Select(point =>
         {
-            var values = DoomModelMeshes.Sequence(point).Children.Select(DoomModelMeshes.Number).ToArray();
+            var values = DoomModelMeshes.Sequence(point).Sequence.Select(DoomModelMeshes.Number).ToArray();
             if (values.Length != 3)
                 throw new InvalidDataException("Invalid Doom View mesh position.");
             return new Vector3(values[0], values[1], values[2]);
         }).ToArray();
-        var flatTriangles = DoomModelMeshes.Sequence(root, "triangles").Children
-            .SelectMany(triangle => DoomModelMeshes.Sequence(triangle).Children.Select(DoomModelMeshes.Integer)).ToArray();
-        var triangleMaterials = DoomModelMeshes.Sequence(root, "triangleMaterials").Children
+        var flatTriangles = DoomModelMeshes.Sequence(root, "triangles").Sequence
+            .SelectMany(triangle => DoomModelMeshes.Sequence(triangle).Sequence.Select(DoomModelMeshes.Integer)).ToArray();
+        var triangleMaterials = DoomModelMeshes.Sequence(root, "triangleMaterials").Sequence
             .Select(DoomModelMeshes.Integer).ToArray();
-        var materials = DoomModelMeshes.Sequence(root, "materials").Children.Select(material =>
+        var materials = DoomModelMeshes.Sequence(root, "materials").Sequence.Select(material =>
         {
             if (DoomModelMeshes.Boolean(DoomModelMeshes.Get(material, "doubleSided")))
                 throw new InvalidDataException("Double-sided model faces are not supported.");
-            var rgba = DoomModelMeshes.Sequence(material, "baseColor").Children.Select(DoomModelMeshes.Number).ToArray();
+            var rgba = DoomModelMeshes.Sequence(material, "baseColor").Sequence.Select(DoomModelMeshes.Number).ToArray();
             if (rgba.Length != 4 || rgba.Any(value => !float.IsFinite(value) || value is < 0 or > 1))
                 throw new InvalidDataException("Invalid model material color.");
             return new Color(rgba[0], rgba[1], rgba[2], rgba[3]);
