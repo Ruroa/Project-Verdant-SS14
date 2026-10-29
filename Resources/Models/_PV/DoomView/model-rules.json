@@ -1,0 +1,18 @@
+{
+  "format": "verdant.doom-model-rules",
+  "version": 1,
+  "rules": [
+    { "spritePathContains": "sofa_corner", "mesh": "couch_corner_inner" },
+    { "spritePathContains": "sofa_end_left", "mesh": "couch_left" },
+    { "spritePathContains": "sofa_end_right", "mesh": "couch_right" },
+    { "spritePathContains": "sofa_middle", "mesh": "couch_middle" },
+    { "spritePathContains": "diner_end_left", "mesh": "couch_left" },
+    { "spritePathContains": "diner_end_right", "mesh": "couch_right" },
+    { "spritePathContains": "diner_middle", "mesh": "couch_middle" },
+    { "spritePathContains": "fancy_end_left", "mesh": "couch_left" },
+    { "spritePathContains": "fancy_end_right", "mesh": "couch_right" },
+    { "spritePathContains": "fancy_middle", "mesh": "couch_middle" },
+    { "entityPrototypeParents": ["CounterBase"], "mesh": "counter" },
+    { "entityPrototypeParents": ["TableBase"], "mesh": "table" }
+  ]
+}

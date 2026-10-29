@@ -208,8 +208,8 @@ internal sealed class DoomViewOverlay : Overlay
             var center = new Vector2(x, floor + bounds.Bottom * size);
             var rect = new UIBox2(x + bounds.Left * size, floor - bounds.Height * size,
                 x + bounds.Right * size, floor);
-            var facing = _transforms.GetWorldRotation(transform) - _forward.ToAngle() + Angle.FromDegrees(90);
-            var direction = facing.GetDir();
+            var direction = DoomSpriteDirection.FromCamera(_transforms.GetWorldRotation(transform), _forward);
+            var facing = direction.ToAngle();
             // Single-layer sprites can use the same depth and lighting as 3D
             // geometry. Keep multi-layer characters with Robust's sprite renderer,
             // which preserves their clothing, animations and layer offsets.

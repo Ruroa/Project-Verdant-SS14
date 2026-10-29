@@ -24,6 +24,8 @@ internal sealed class DoomModels
     private readonly SharedTransformSystem _transforms;
     private readonly SpriteSystem _sprites;
     private readonly TagSystem _tags;
+    private readonly DoomModelMeshes _modelMeshes = new();
+    private readonly IPrototypeManager _prototypes = IoCManager.Resolve<IPrototypeManager>();
 
     public DoomModels(IEntityManager entities)
     {
@@ -44,6 +46,24 @@ internal sealed class DoomModels
             return false;
         var position = _transforms.GetWorldPosition(transform);
         var rotation = _transforms.GetWorldRotation(transform);
+        if (_modelMeshes.Resolve(uid, sprite, _entities, _prototypes) is { } model)
+        {
+            for (var i = 0; i < model.Triangles.Length; i += 3)
+            {
+                var material = model.Materials[model.TriangleMaterials[i / 3]];
+                objects.Triangle(uid, material,
+                    ModelPoint(model.Triangles[i]), ModelPoint(model.Triangles[i + 1]),
+                    ModelPoint(model.Triangles[i + 2]), sprite.DrawDepth);
+            }
+
+            return true;
+
+            Vector3 ModelPoint(int index)
+            {
+                var local = model.Positions[index];
+                return new Vector3(position + rotation.RotateVec(new Vector2(local.X, local.Y)), local.Z);
+            }
+        }
         var bounds = _sprites.GetLocalBounds((uid, sprite));
         var panel = IsPanel(uid);
         var item = _entities.HasComponent<ItemComponent>(uid);
@@ -139,9 +159,7 @@ internal sealed class DoomModels
 
         // A generic 2D decoration is safer as a facing sprite than as a box
         // with unrelated textures stretched over all six sides.
-        var modeledProp = spritePath.Contains("/Machines/", StringComparison.OrdinalIgnoreCase) ||
-                          spritePath.Contains("/Furniture/", StringComparison.OrdinalIgnoreCase) ||
-                          spritePath.Contains("/Dispensers/", StringComparison.OrdinalIgnoreCase) ||
+        var modeledProp = spritePath.Contains("/Furniture/", StringComparison.OrdinalIgnoreCase) ||
                           _entities.HasComponent<ClimbableComponent>(uid) ||
                           _entities.HasComponent<StrapComponent>(uid);
         if (!panel && !fixture && !grille && !girder && !flat && !modeledProp)

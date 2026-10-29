@@ -72,6 +72,62 @@ internal sealed class DoomGeometry
         }
     }
 
+    public void Triangle(EntityUid entity, Color color, Vector3 a, Vector3 b, Vector3 c, int layer = 0)
+    {
+        var normal = Vector3.Cross(b - a, c - a);
+        var center = (a + b + c) / 3f;
+        var toCamera = new Vector3(_origin.X - center.X, _origin.Y - center.Y,
+            DoomProjection.EyeHeight - center.Z);
+        if (Vector3.Dot(normal, toCamera) <= 0)
+            return;
+
+        var input = new[] { a, b, c };
+        var clipped = new List<Vector3>(4);
+        var previous = input[^1];
+        foreach (var current in input)
+        {
+            var previousDepth = Vector2.Dot(new Vector2(previous.X, previous.Y) - _origin, _forward);
+            var currentDepth = Vector2.Dot(new Vector2(current.X, current.Y) - _origin, _forward);
+            if ((previousDepth >= 0.08f) != (currentDepth >= 0.08f))
+            {
+                var amount = (0.08f - previousDepth) / (currentDepth - previousDepth);
+                clipped.Add(Vector3.Lerp(previous, current, amount));
+            }
+            if (currentDepth >= 0.08f)
+                clipped.Add(current);
+            previous = current;
+        }
+
+        if (clipped.Count < 3)
+            return;
+        for (var i = 1; i < clipped.Count - 1; i++)
+            Project(clipped[0], clipped[i], clipped[i + 1]);
+
+        void Project(Vector3 first, Vector3 second, Vector3 third)
+        {
+            var focal = DoomProjection.FocalLength(_width);
+            var vertices = new[] { first, second, third }.Select(point =>
+            {
+                var delta = new Vector2(point.X, point.Y) - _origin;
+                var depth = Vector2.Dot(delta, _forward);
+                var x = Vector2.Dot(delta, DoomProjection.Right(_forward));
+                return new DrawVertexUV2D(new Vector2(_width / 2f + x * focal / depth,
+                    _horizon + (DoomProjection.EyeHeight - point.Z) * focal / depth), Vector2.Zero);
+            }).ToArray();
+            if (vertices.Max(vertex => vertex.Position.X) < 0 || vertices.Min(vertex => vertex.Position.X) > _width)
+                return;
+            var deltaCenter = (first + second + third) / 3f;
+            var worldDepth = Vector2.Dot(new Vector2(deltaCenter.X, deltaCenter.Y) - _origin, _forward);
+            if (worldDepth > DoomProjection.Range)
+                return;
+            var sample = _lighting?.Invoke(new Vector2(deltaCenter.X, deltaCenter.Y)) ?? Color.White;
+            var shade = Math.Clamp(1f - worldDepth / 16f, 0.2f, 1f);
+            Patches.Add(new Patch(entity, Texture.White,
+                color * sample * new Color(shade, shade, shade), vertices,
+                worldDepth, worldDepth, layer));
+        }
+    }
+
     private static List<Vertex> Clip(Vertex[] input)
     {
         const float near = 0.08f;

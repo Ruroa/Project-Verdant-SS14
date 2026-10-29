@@ -26,8 +26,12 @@ both client and server through the normal movement camera rotation system.
 - Grilles occupy nearly a full tile, with girders set slightly smaller and lower than surrounding glass.
 - Wall-mounted fixtures (including lights and cameras) use elevated thin textures instead of cubes.
 - Unsupported decoration objects remain billboards instead of becoming oversized boxes.
-- Furniture and machinery use shallow boxes with existing artwork stretched over
-  sides and tops. Climbable furniture and seats use lower profiles.
+- Prototype-mapped tables, counters, and Starlight couch sections use cached
+  tile-scale mesh JSON for Doom View only. Their original entities, collisions,
+  interactions, and construction behavior remain unchanged.
+- Consoles and machines remain animated sprite billboards. Their visible RSI
+  direction is selected relative to the camera and entity rotation.
+- Other furniture keeps the existing sprite/approximation fallback.
 - Characters remain layered directional sprites.
 - Loose items remain directional sprites at floor level. Anchored vents and atmospheric pipes (which also have an ItemComponent) use flat floor geometry. Pipes, cables, vents, and floor objects
   use flat quads and retain existing per-layer visibility, including covered cables.
@@ -66,6 +70,11 @@ profile it on a small map before testing on a populated station.
 - Compare tile variants, rotated arrows, colored markings, and grass transitions.
 - Remove and replace a floor tile over cables and pipes; vents remain visible.
 - Place an item on the floor; compare furniture scale with a nearby character.
+- Compare each couch section and colored sofa variant; check the table and counter
+  models against adjacent tile bounds and verify they remain clickable/climbable.
+- Look around animated consoles and vending machines; verify their face changes
+  direction without freezing animation.
 - Resize the window and try both HUD layouts; click positions must stay aligned.
 
 Projection and tile-orientation tests: `Content.Tests/Client/_PV/`.
+Mesh format v1 and current model rules: `Resources/Models/_PV/DoomView/`.
