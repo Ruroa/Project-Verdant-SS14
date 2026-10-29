@@ -92,6 +92,7 @@ internal sealed class DoomModels
         var flat = !panel && !fixture && !grille && !girder &&
                    (_entities.HasComponent<SubFloorHideComponent>(uid) ||
                     sprite.DrawDepth <= (int) DrawDepth.HighFloorObjects);
+        var modeledProp = false;
         var width = Math.Clamp(bounds.Width, 0.2f, 1.2f);
         var length = Math.Clamp(bounds.Height, 0.2f, 1.2f);
         var height = _entities.HasComponent<ClimbableComponent>(uid) || _entities.HasComponent<StrapComponent>(uid)
@@ -161,9 +162,9 @@ internal sealed class DoomModels
 
         // A generic 2D decoration is safer as a facing sprite than as a box
         // with unrelated textures stretched over all six sides.
-        var modeledProp = spritePath.Contains("/Furniture/", StringComparison.OrdinalIgnoreCase) ||
-                          _entities.HasComponent<ClimbableComponent>(uid) ||
-                          _entities.HasComponent<StrapComponent>(uid);
+        modeledProp = spritePath.Contains("/Furniture/", StringComparison.OrdinalIgnoreCase) ||
+                      _entities.HasComponent<ClimbableComponent>(uid) ||
+                      _entities.HasComponent<StrapComponent>(uid);
         if (!panel && !fixture && !grille && !girder && !flat && !modeledProp)
             return false;
 
