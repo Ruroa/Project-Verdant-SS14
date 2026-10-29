@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Shared._PV.DoomView;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
+using Content.Shared.Effects;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Robust.Client.Input;
@@ -13,6 +12,7 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Console;
 using Robust.Shared.Input;
 using Robust.Shared.Map;
+using Robust.Shared.Maths;
 
 namespace Content.Client._PV.DoomView;
 
@@ -45,7 +45,7 @@ public sealed partial class DoomViewSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<PixelToMapEvent>(OnPixelToMap);
-        SubscribeLocalEvent<DamageableComponent, DamageChangedEvent>(OnLocalDamage);
+        SubscribeAllEvent<ColorFlashEffectEvent>(OnColorFlash);
         _input.FirstChanceOnKeyEvent += OnFirstChanceKeyEvent;
     }
 
@@ -84,7 +84,7 @@ public sealed partial class DoomViewSystem : EntitySystem
             MouseLooking = true;
             _ui.ControlFocused = null;
             _ui.ReleaseKeyboardFocus();
-            _mouseCaptureControl = new DoomMouseCaptureControl(_input, delta => MouseLook(delta.X, delta.Y));
+            _mouseCaptureControl = new DoomMouseCaptureControl(_input, FindViewport(_ui.RootControl), delta => MouseLook(delta.X, delta.Y));
             _ui.RootControl.AddChild(_mouseCaptureControl);
             LayoutContainer.SetAnchorPreset(_mouseCaptureControl, LayoutContainer.LayoutPreset.Wide);
             _mouseCaptureControl.SetPositionLast();
@@ -133,27 +133,34 @@ public sealed partial class DoomViewSystem : EntitySystem
             Toggle();
     }
 
-    private void OnLocalDamage(EntityUid uid, DamageableComponent component, DamageChangedEvent args)
+    private Control? FindViewport(Control control)
     {
-        if (Enabled && uid == _players.LocalEntity && IsHitDamage(args))
-            _hitFlashRemaining = HitFlashDuration;
-    }
+        if (control.VisibleInTree && control is IViewportControl)
+            return control;
 
-    private static bool IsHitDamage(DamageChangedEvent args)
-    {
-        if (!args.DamageIncreased || args.DamageDelta is not { } delta)
-            return false;
-
-        foreach (var (type, amount) in delta.DamageDict)
+        for (var i = 0; i < control.ChildCount; i++)
         {
-            if (amount <= 0)
-                continue;
-
-            if (type is "Blunt" or "Piercing" or "Slash" or "Heat" or "Shock")
-                return true;
+            var viewport = FindViewport(control.GetChild(i));
+            if (viewport != null)
+                return viewport;
         }
 
-        return false;
+        return null;
+    }
+
+    private void OnColorFlash(ColorFlashEffectEvent args)
+    {
+        if (!Enabled || args.Color != Color.Red || _players.LocalEntity is not { } local)
+            return;
+
+        foreach (var target in args.Entities)
+        {
+            if (GetEntity(target) != local)
+                continue;
+
+            _hitFlashRemaining = HitFlashDuration;
+            return;
+        }
     }
 
     public override void Shutdown()
