@@ -1,12 +1,8 @@
-using System.Linq;
 using System.Numerics;
-using Content.Shared.Physics;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
 
 namespace Content.Client._PV.DoomView;
 
@@ -18,25 +14,21 @@ internal sealed class DoomLighting
 {
     private readonly IEntityManager _entities;
     private readonly SharedTransformSystem _transforms;
-    private readonly SharedPhysicsSystem _physics;
     private readonly SharedMapSystem _maps;
     private Color _ambient;
     private readonly List<Light> _lights = new();
     private readonly Dictionary<Vector2i, Color> _samples = new();
     private readonly ILightManager _manager = IoCManager.Resolve<ILightManager>();
-    private MapId _map;
 
     public DoomLighting(IEntityManager entities)
     {
         _entities = entities;
         _transforms = entities.System<SharedTransformSystem>();
-        _physics = entities.System<SharedPhysicsSystem>();
         _maps = entities.System<SharedMapSystem>();
     }
 
     public void Begin(MapId map, IEnumerable<EntityUid> nearby)
     {
-        _map = map;
         // Respect the map's own ambient light (sunlit maps stay bright).
         var mapUid = _maps.GetMap(map);
         _ambient = _entities.TryGetComponent<MapLightComponent>(mapUid, out var mapLight)
@@ -83,9 +75,6 @@ internal sealed class DoomLighting
             var distance = delta.Length();
             if (distance >= light.Radius)
                 continue;
-            if (distance > 0.25f && Blocked(light, delta, distance))
-                continue;
-
             var t = 1f - distance / light.Radius;
             // The old squared attenuation extinguished most station light
             // before it reached the floor; use smoother falloff.
@@ -99,22 +88,6 @@ internal sealed class DoomLighting
             Math.Clamp(g, 0.025f, 1f), Math.Clamp(b, 0.025f, 1f));
         _samples[cell] = color;
         return color;
-    }
-
-    private bool Blocked(Light light, Vector2 delta, float distance)
-    {
-        // Wall-mounted lights can sit almost exactly on a wall collider.
-        // Starting the ray a little toward the target avoids mistakenly
-        // treating the mounting wall as blocking its own illumination.
-        var direction = delta / distance;
-        var bias = MathF.Min(0.16f, distance * 0.3f);
-        var ray = new CollisionRay(light.Position + direction * bias, direction,
-            (int) (CollisionGroup.Opaque | CollisionGroup.Impassable | CollisionGroup.InteractImpassable));
-        var hit = _physics.IntersectRayWithPredicate(_map, ray, MathF.Max(0.01f, distance - bias - 0.12f),
-            uid => uid == light.Entity ||
-                   !_entities.TryGetComponent<OccluderComponent>(uid, out var occluder) ||
-                   !occluder.Enabled, false).FirstOrDefault();
-        return hit.HitEntity != default;
     }
 
     private readonly record struct Light(EntityUid Entity, Vector2 Position, float Radius, float Energy, Color Color);

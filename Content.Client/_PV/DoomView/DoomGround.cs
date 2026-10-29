@@ -33,7 +33,13 @@ internal sealed class DoomGround
 
     public void Collect(MapCoordinates origin, Vector2 forward, DoomGeometry geometry)
     {
-        var area = Box2.CenteredAround(origin.Position, new Vector2(DoomProjection.Range * 2));
+        var right = DoomProjection.Right(forward);
+        var farCenter = origin.Position + forward * DoomProjection.Range;
+        var farLeft = farCenter - right * (DoomProjection.Range * DoomProjection.Plane);
+        var farRight = farCenter + right * (DoomProjection.Range * DoomProjection.Plane);
+        var min = Vector2.Min(origin.Position, Vector2.Min(farLeft, farRight)) - new Vector2(2f);
+        var max = Vector2.Max(origin.Position, Vector2.Max(farLeft, farRight)) + new Vector2(2f);
+        var area = new Box2(min, max);
         _grids.Clear();
         _maps.FindGridsIntersecting(origin.MapId, area, ref _grids, approx: true);
         foreach (var grid in _grids)
@@ -46,6 +52,10 @@ internal sealed class DoomGround
                     continue;
                 var x = tile.X * grid.Comp.TileSize;
                 var y = tile.Y * grid.Comp.TileSize;
+                var center = Vector2.Transform(new Vector2(x + grid.Comp.TileSize / 2,
+                    y + grid.Comp.TileSize / 2), matrix);
+                if (!DoomProjection.InView(center - origin.Position, forward, grid.Comp.TileSize))
+                    continue;
                 if (definition.Sprite is { } path)
                 {
                     var texture = _resources.GetResource<TextureResource>(path).Texture;
@@ -98,6 +108,8 @@ internal sealed class DoomGround
                 var texture = _sprites.Frame0(prototype.Sprite);
                 var size = (Vector2) texture.Size / EyeManager.PixelsPerMeter;
                 var center = decal.Coordinates + size / 2;
+                if (!DoomProjection.InView(Vector2.Transform(center, matrix) - origin.Position, forward, size.Length()))
+                    continue;
                 var angle = decal.Angle;
                 if (prototype.SnapCardinals)
                     angle -= (-forward.ToAngle() + Angle.FromDegrees(90) + rotation).GetCardinalDir().ToAngle();

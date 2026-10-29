@@ -33,7 +33,7 @@ internal sealed class DoomGeometry
         var extent = MathF.Max(Vector3.Distance(a, c), Vector3.Distance(b, d));
         if (centerDepth + extent < 0.08f || centerDepth - extent > DoomProjection.Range)
             return;
-        var steps = centerDepth > 6 ? 1 : centerDepth > 3 ? 2 : 4;
+        var steps = centerDepth > 3 ? 1 : 2;
         for (var y = 0; y < steps; y++)
         for (var x = 0; x < steps; x++)
         {

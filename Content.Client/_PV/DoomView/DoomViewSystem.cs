@@ -5,6 +5,8 @@ using Robust.Client.UserInterface;
 using Robust.Shared.Input;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.CustomControls;
@@ -27,6 +29,11 @@ public sealed partial class DoomViewSystem : EntitySystem
     private float _pendingTurn;
     private float _lookPitch;
     private bool _middleWasDown;
+    private float _hitFlashRemaining;
+    private const float HitFlashDuration = 0.65f;
+    public float HitFlashAlpha => _hitFlashRemaining <= 0
+        ? 0f
+        : 0.13f * MathF.Sin(MathF.PI * (1f - _hitFlashRemaining / HitFlashDuration));
     public float LookPitch => _lookPitch;
     public bool MouseLooking { get; private set; }
     private DoomViewOverlay? _overlay;
@@ -36,6 +43,7 @@ public sealed partial class DoomViewSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<PixelToMapEvent>(OnPixelToMap);
+        SubscribeLocalEvent<DamageableComponent, DamageChangedEvent>(OnLocalDamage);
     }
 
     public bool Toggle()
@@ -84,6 +92,7 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     public override void FrameUpdate(float frameTime)
     {
+        _hitFlashRemaining = MathF.Max(0, _hitFlashRemaining - frameTime);
         // Toggle on the press edge; never intercept right-click or other UI keys.
         var middleDown = _input.IsKeyDown(Keyboard.Key.MouseMiddle);
         var pressed = middleDown && !_middleWasDown;
@@ -108,6 +117,12 @@ public sealed partial class DoomViewSystem : EntitySystem
         }
         if (Enabled && (_lights.LockConsoleAccess || _players.LocalEntity == null))
             Toggle();
+    }
+
+    private void OnLocalDamage(EntityUid uid, DamageableComponent component, DamageChangedEvent args)
+    {
+        if (Enabled && uid == _players.LocalEntity && args.DamageIncreased)
+            _hitFlashRemaining = HitFlashDuration;
     }
 
     public override void Shutdown()

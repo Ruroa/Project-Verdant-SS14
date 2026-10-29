@@ -16,6 +16,24 @@ public sealed class DoomProjectionTest
     }
 
     [Test]
+    public void EdgeRaysUseNinetyDegreeFieldOfView()
+    {
+        var left = DoomProjection.Ray(Vector2.UnitY, 0f);
+        var right = DoomProjection.Ray(Vector2.UnitY, 1f);
+        Assert.That(MathF.Abs(left.X / left.Y), Is.EqualTo(1f).Within(0.0001f));
+        Assert.That(MathF.Abs(right.X / right.Y), Is.EqualTo(1f).Within(0.0001f));
+    }
+
+    [Test]
+    public void VisibilityIncludesTwoTileBubbleAndForwardCone()
+    {
+        Assert.That(DoomProjection.InView(new Vector2(0f, -1f), Vector2.UnitY), Is.True);
+        Assert.That(DoomProjection.InView(new Vector2(0f, -3f), Vector2.UnitY), Is.False);
+        Assert.That(DoomProjection.InView(new Vector2(3f, 3f), Vector2.UnitY), Is.True);
+        Assert.That(DoomProjection.InView(new Vector2(4f, 3f), Vector2.UnitY), Is.False);
+    }
+
+    [Test]
     public void ProjectionRoundTrip()
     {
         foreach (var forward in new[] { Vector2.UnitX, Vector2.UnitY, Vector2.Normalize(new Vector2(1, 1)) })

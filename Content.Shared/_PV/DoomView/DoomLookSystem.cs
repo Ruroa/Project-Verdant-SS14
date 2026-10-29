@@ -1,5 +1,6 @@
 using Content.Shared.Administration;
 using Content.Shared.Administration.Managers;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Serialization;
@@ -23,6 +24,11 @@ public sealed partial class DoomLookSystem : EntitySystem
             !_admins.HasAdminFlag(args.SenderSession, AdminFlags.Debug) || !float.IsFinite(message.Radians))
             return;
         _mover.RotateCamera(player, new Angle(Math.Clamp(message.Radians, -0.5f, 0.5f)));
+        if (TryComp<InputMoverComponent>(player, out var mover))
+        {
+            mover.RelativeRotation = mover.TargetRelativeRotation;
+            Dirty(player, mover);
+        }
     }
 }
 

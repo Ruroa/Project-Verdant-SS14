@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Numerics;
 using Content.Shared.Doors.Components;
 using Content.Shared.Physics;
@@ -14,7 +13,7 @@ namespace Content.Client._PV.DoomView;
 
 internal sealed class DoomViewOverlay : Overlay
 {
-    private const int Columns = 240;
+    private const int Columns = 128;
     private readonly DoomViewSystem _system;
     private readonly IEntityManager _entities;
     private readonly SharedPhysicsSystem _physics;
@@ -87,12 +86,20 @@ internal sealed class DoomViewOverlay : Overlay
         handle.DrawRect(new UIBox2(left, horizon, left + width, top + height), new Color(0.16f, 0.18f, 0.20f));
         _nearby.Clear();
         _lookup.GetEntitiesInRange(_origin.MapId, _origin.Position, DoomProjection.Range, _nearby);
+        _nearby.RemoveWhere(uid => uid != _player &&
+            (!_entities.TryGetComponent<TransformComponent>(uid, out var transform) ||
+             !DoomProjection.InView(_transforms.GetWorldPosition(transform) - _origin.Position, _forward)));
         _lighting.Begin(_origin.MapId, _nearby);
         _floor.Begin(_origin.Position, _forward, width, horizon - top, _lighting.Sample);
         _objects.Begin(_origin.Position, _forward, width, horizon - top, _lighting.Sample);
         _ground.Collect(_origin, _forward, _floor);
         CollectBillboards(width, horizon - top, focal);
-        foreach (var patch in _floor.Patches.OrderBy(p => p.Layer).ThenByDescending(p => p.Depth))
+        _floor.Patches.Sort(static (a, b) =>
+        {
+            var layer = a.Layer.CompareTo(b.Layer);
+            return layer != 0 ? layer : b.Depth.CompareTo(a.Depth);
+        });
+        foreach (var patch in _floor.Patches)
             DoomGeometry.Draw(patch, args);
 
         for (var column = 0; column < Columns; column++)
@@ -100,8 +107,16 @@ internal sealed class DoomViewOverlay : Overlay
             var direction = DoomProjection.Ray(_forward, (column + 0.5f) / Columns);
             var ray = new CollisionRay(_origin.Position, direction,
                 (int) (CollisionGroup.Opaque | CollisionGroup.Impassable | CollisionGroup.InteractImpassable));
-            var hit = _physics.IntersectRayWithPredicate(_origin.MapId, ray, DoomProjection.Range,
-                IgnoreWall, false).OrderBy(result => result.Distance).FirstOrDefault();
+            var hit = default(Robust.Shared.Physics.RayCastResults);
+            var closest = float.PositiveInfinity;
+            foreach (var result in _physics.IntersectRayWithPredicate(_origin.MapId, ray, DoomProjection.Range,
+                         IgnoreWall, false))
+            {
+                if (result.Distance >= closest)
+                    continue;
+                closest = result.Distance;
+                hit = result;
+            }
             _depths[column] = float.PositiveInfinity;
             _hits[column] = _origin.Position + direction * DoomProjection.Range;
             if (hit.HitEntity == default)
@@ -133,13 +148,15 @@ internal sealed class DoomViewOverlay : Overlay
                 _lighting.Sample(surface) * new Color(shade, shade, shade));
         }
 
-        var patches = _objects.Patches.OrderByDescending(p => p.Depth).ToArray();
+        _objects.Patches.Sort(static (a, b) => b.Depth.CompareTo(a.Depth));
+        _billboards.Sort(static (a, b) => b.Depth.CompareTo(a.Depth));
+        var patches = _objects.Patches;
         var patchIndex = 0;
         try
         {
-            foreach (var billboard in _billboards.OrderByDescending(b => b.Depth))
+            foreach (var billboard in _billboards)
             {
-                while (patchIndex < patches.Length && patches[patchIndex].Depth > billboard.Depth)
+                while (patchIndex < patches.Count && patches[patchIndex].Depth > billboard.Depth)
                     DoomGeometry.Draw(patches[patchIndex++], args, _depths);
                 var first = Math.Clamp((int) (billboard.Rect.Left / width * Columns), 0, Columns - 1);
                 var last = Math.Clamp((int) (billboard.Rect.Right / width * Columns), 0, Columns - 1);
@@ -161,7 +178,7 @@ internal sealed class DoomViewOverlay : Overlay
                     runStart = -1;
                 }
             }
-            while (patchIndex < patches.Length)
+            while (patchIndex < patches.Count)
                 DoomGeometry.Draw(patches[patchIndex++], args, _depths);
         }
         finally
@@ -171,6 +188,8 @@ internal sealed class DoomViewOverlay : Overlay
         var center = new Vector2(left + width * 0.5f, top + height * 0.5f);
         handle.DrawLine(center - new Vector2(4, 0), center + new Vector2(4, 0), Color.White);
         handle.DrawLine(center - new Vector2(0, 4), center + new Vector2(0, 4), Color.White);
+        if (_system.HitFlashAlpha > 0)
+            handle.DrawRect(args.ViewportBounds, new Color(0.82f, 0.025f, 0.025f, _system.HitFlashAlpha));
     }
 
     private bool IgnoreWall(EntityUid uid)
@@ -265,7 +284,8 @@ internal sealed class DoomViewOverlay : Overlay
         EntityUid picked = default;
         _floor.Pick(pixel, ref picked, ref pickedDepth);
         _objects.Pick(pixel, ref picked, ref pickedDepth);
-        foreach (var billboard in _billboards.OrderBy(b => b.Depth))
+        _billboards.Sort(static (a, b) => a.Depth.CompareTo(b.Depth));
+        foreach (var billboard in _billboards)
         {
             if (billboard.Depth < pickedDepth && billboard.Rect.Contains(pixel) &&
                 _entities.EntityExists(billboard.Entity))
