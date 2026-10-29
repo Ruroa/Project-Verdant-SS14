@@ -52,10 +52,6 @@ internal sealed class DoomGround
                     continue;
                 var x = tile.X * grid.Comp.TileSize;
                 var y = tile.Y * grid.Comp.TileSize;
-                var center = Vector2.Transform(new Vector2(x + grid.Comp.TileSize / 2,
-                    y + grid.Comp.TileSize / 2), matrix);
-                if (!DoomProjection.InView(center - origin.Position, forward, grid.Comp.TileSize))
-                    continue;
                 if (definition.Sprite is { } path)
                 {
                     var texture = _resources.GetResource<TextureResource>(path).Texture;
@@ -108,8 +104,6 @@ internal sealed class DoomGround
                 var texture = _sprites.Frame0(prototype.Sprite);
                 var size = (Vector2) texture.Size / EyeManager.PixelsPerMeter;
                 var center = decal.Coordinates + size / 2;
-                if (!DoomProjection.InView(Vector2.Transform(center, matrix) - origin.Position, forward, size.Length()))
-                    continue;
                 var angle = decal.Angle;
                 if (prototype.SnapCardinals)
                     angle -= (-forward.ToAngle() + Angle.FromDegrees(90) + rotation).GetCardinalDir().ToAngle();
