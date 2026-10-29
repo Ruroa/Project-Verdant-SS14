@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 
@@ -8,11 +9,13 @@ namespace Content.Client._PV.DoomView;
 internal sealed class DoomMouseCaptureControl : Control
 {
     private readonly IInputManager _input;
+    private readonly Control? _viewport;
     private readonly Action<Vector2> _onMouseMove;
 
-    public DoomMouseCaptureControl(IInputManager input, Action<Vector2> onMouseMove)
+    public DoomMouseCaptureControl(IInputManager input, Control? viewport, Action<Vector2> onMouseMove)
     {
         _input = input;
+        _viewport = viewport;
         _onMouseMove = onMouseMove;
         MouseFilter = MouseFilterMode.Stop;
     }
@@ -27,13 +30,19 @@ internal sealed class DoomMouseCaptureControl : Control
     {
         base.KeyBindDown(args);
         if (!args.Handled)
-            _input.ViewportKeyEvent(null, args);
+        {
+            _input.ViewportKeyEvent(_viewport, args);
+            args.Handle();
+        }
     }
 
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
         base.KeyBindUp(args);
         if (!args.Handled)
-            _input.ViewportKeyEvent(null, args);
+        {
+            _input.ViewportKeyEvent(_viewport, args);
+            args.Handle();
+        }
     }
 }
