@@ -89,7 +89,7 @@ internal sealed class DoomViewOverlay : Overlay
         _nearby.RemoveWhere(uid => uid != _player &&
             (!_entities.TryGetComponent<TransformComponent>(uid, out var transform) ||
              !DoomProjection.InView(_transforms.GetWorldPosition(transform) - _origin.Position, _forward)));
-        _lighting.Begin(_origin.MapId, _nearby);
+        _lighting.Begin(_origin.MapId, _player, _forward, _nearby);
         _floor.Begin(_origin.Position, _forward, width, horizon - top, _lighting.Sample);
         _objects.Begin(_origin.Position, _forward, width, horizon - top, _lighting.Sample);
         _ground.Collect(_origin, _forward, _floor);
@@ -175,6 +175,13 @@ internal sealed class DoomViewOverlay : Overlay
                         new Vector2(left + billboard.Center.X, top + billboard.Center.Y),
                         new Vector2(billboard.Scale), Angle.Zero,
                         overrideDirection: billboard.Direction);
+                    var darkness = 1f - Math.Clamp(_lighting.Brightness(billboard.Light), 0.08f, 1f);
+                    if (darkness > 0.001f)
+                    {
+                        var rect = billboard.Rect;
+                        handle.DrawRect(new UIBox2(left + rect.Left, top + rect.Top,
+                            left + rect.Right, top + rect.Bottom), Color.Black.WithAlpha(darkness));
+                    }
                     runStart = -1;
                 }
             }
@@ -184,6 +191,7 @@ internal sealed class DoomViewOverlay : Overlay
         finally
         {
             args.RenderHandle.SetScissor(args.ViewportBounds);
+            _lighting.End();
         }
         var center = new Vector2(left + width * 0.5f, top + height * 0.5f);
         handle.DrawLine(center - new Vector2(4, 0), center + new Vector2(4, 0), Color.White);
@@ -229,6 +237,7 @@ internal sealed class DoomViewOverlay : Overlay
                 x + bounds.Right * size, floor);
             var direction = DoomSpriteDirection.FromCamera(_transforms.GetWorldRotation(transform), _forward);
             var facing = direction.ToAngle();
+            var lighting = _lighting.Sample(position);
             // Single-layer sprites can use the same depth and lighting as 3D
             // geometry. Keep multi-layer characters with Robust's sprite renderer,
             // which preserves their clothing, animations and layer offsets.
@@ -236,7 +245,7 @@ internal sealed class DoomViewOverlay : Overlay
                 continue;
 
             _billboards.Add(new Billboard(uid, depth, center, size / EyeManager.PixelsPerMeter,
-                rect, direction));
+                rect, direction, lighting));
         }
     }
 
@@ -312,5 +321,5 @@ internal sealed class DoomViewOverlay : Overlay
     }
 
     private readonly record struct Billboard(EntityUid Entity, float Depth, Vector2 Center, float Scale,
-        UIBox2 Rect, Direction Direction);
+        UIBox2 Rect, Direction Direction, Color Light);
 }

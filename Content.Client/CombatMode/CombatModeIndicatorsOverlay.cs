@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client.Hands.Systems;
+using Content.Client._PV.DoomView;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -22,6 +23,7 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
     private readonly IEntityManager _entMan;
     private readonly IEyeManager _eye;
     private readonly CombatModeSystem _combat;
+    private readonly DoomViewSystem _doomView;
     private readonly HandsSystem _hands = default!;
 
     private readonly Texture _gunSight;
@@ -42,6 +44,7 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
         _eye = eye;
         _combat = combatSys;
         _hands = hands;
+        _doomView = _entMan.System<DoomViewSystem>();
 
         var spriteSys = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
         _gunSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/crosshair_pointers.rsi"),
@@ -63,8 +66,13 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
     protected override void Draw(in OverlayDrawArgs args)
     {
         var mouseScreenPosition = _inputManager.MouseScreenPosition;
-        var mousePosMap = _eye.PixelToMap(mouseScreenPosition);
-        if (mousePosMap.MapId != args.MapId)
+        var mousePos = mouseScreenPosition.Position;
+        if (_doomView.MouseLooking)
+        {
+            mousePos = new Vector2(args.ViewportBounds.Left + args.ViewportBounds.Width * 0.5f,
+                args.ViewportBounds.Top + args.ViewportBounds.Height * 0.5f);
+        }
+        else if (_eye.PixelToMap(mouseScreenPosition).MapId != args.MapId)
             return;
 
         var handEntity = _hands.GetActiveHandEntity();
@@ -74,7 +82,6 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
             isGunBolted = chamber.BoltClosed ?? true;
 
 
-        var mousePos = mouseScreenPosition.Position;
         var uiScale = (args.ViewportControl as Control)?.UIScale ?? 1f;
         var limitedScale = uiScale > 1.25f ? 1.25f : uiScale;
 

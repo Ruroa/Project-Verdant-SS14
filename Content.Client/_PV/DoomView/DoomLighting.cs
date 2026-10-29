@@ -1,94 +1,82 @@
 using System.Numerics;
 using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
+using Robust.Shared.Light;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 
 namespace Content.Client._PV.DoomView;
 
-/// <summary>
-/// Approximate local light sampling for the experimental 3D projection.
-/// The native 2D lighting buffer cannot be reused on projected 3D surfaces.
-/// </summary>
 internal sealed class DoomLighting
 {
     private readonly IEntityManager _entities;
+    private readonly LightLevelSystem _lightLevels;
     private readonly SharedTransformSystem _transforms;
-    private readonly SharedMapSystem _maps;
-    private Color _ambient;
-    private readonly List<Light> _lights = new();
     private readonly Dictionary<Vector2i, Color> _samples = new();
-    private readonly ILightManager _manager = IoCManager.Resolve<ILightManager>();
+    private readonly List<(PointLightComponent Light, Angle Rotation)> _rotatedLights = new();
+    private MapId _map;
 
     public DoomLighting(IEntityManager entities)
     {
         _entities = entities;
+        _lightLevels = entities.System<LightLevelSystem>();
         _transforms = entities.System<SharedTransformSystem>();
-        _maps = entities.System<SharedMapSystem>();
     }
 
-    public void Begin(MapId map, IEnumerable<EntityUid> nearby)
+    public void Begin(MapId map, EntityUid player, Vector2 forward, IEnumerable<EntityUid> nearby)
     {
-        // Respect the map's own ambient light (sunlit maps stay bright).
-        var mapUid = _maps.GetMap(map);
-        _ambient = _entities.TryGetComponent<MapLightComponent>(mapUid, out var mapLight)
-            ? mapLight.AmbientLightColor
-            : MapLightComponent.DefaultColor;
-        _lights.Clear();
+        RestoreLightRotations();
+        _map = map;
         _samples.Clear();
-        if (!_manager.Enabled || !_manager.DrawLighting)
+
+        if (forward.LengthSquared() < 0.0001f)
             return;
 
+        var facing = Angle.FromWorldVec(Vector2.Normalize(forward));
         foreach (var uid in nearby)
         {
-            if (!_entities.TryGetComponent<PointLightComponent>(uid, out var light) ||
-                !light.Enabled || light.ContainerOccluded || light.Radius <= 0 || light.Energy <= 0 ||
-                !_entities.TryGetComponent<TransformComponent>(uid, out var transform))
+            if (!_entities.TryGetComponent<PointLightComponent>(uid, out var light) || !light.MaskAutoRotate ||
+                !IsAttachedTo(uid, player) || !_entities.TryGetComponent<TransformComponent>(uid, out var transform))
                 continue;
 
-            var position = _transforms.GetWorldPosition(transform) +
-                           _transforms.GetWorldRotation(transform).RotateVec(light.Offset);
-            _lights.Add(new Light(uid, position, light.Radius, light.Energy, light.Color));
+            _rotatedLights.Add((light, light.Rotation));
+            light.Rotation = facing - _transforms.GetWorldRotation(transform);
         }
     }
 
     public Color Sample(Vector2 world)
     {
-        if (!_manager.Enabled || !_manager.DrawLighting)
-            return Color.White;
-
-        // Half-tile resolution reduces the number of visibility rays needed.
-        var cell = new Vector2i((int) MathF.Floor(world.X * 2), (int) MathF.Floor(world.Y * 2));
+        // One lighting sample per tile keeps projection overhead low.
+        var cell = new Vector2i((int) MathF.Floor(world.X), (int) MathF.Floor(world.Y));
         if (_samples.TryGetValue(cell, out var color))
             return color;
 
-        var sample = new Vector2((cell.X + 0.5f) * 0.5f, (cell.Y + 0.5f) * 0.5f);
-        // This is a software approximation of SS14's light buffer. A modest
-        // indirect-light floor keeps normal textures legible without making
-        // unpowered rooms look illuminated.
-        var r = MathF.Max(0.115f, _ambient.R);
-        var g = MathF.Max(0.12f, _ambient.G);
-        var b = MathF.Max(0.135f, _ambient.B);
-        foreach (var light in _lights)
-        {
-            var delta = sample - light.Position;
-            var distance = delta.Length();
-            if (distance >= light.Radius)
-                continue;
-            var t = 1f - distance / light.Radius;
-            // The old squared attenuation extinguished most station light
-            // before it reached the floor; use smoother falloff.
-            var strength = MathF.Min(2.5f, light.Energy) * t * (0.65f + 0.35f * t) * 1.5f;
-            r += light.Color.R * strength;
-            g += light.Color.G * strength;
-            b += light.Color.B * strength;
-        }
-
-        color = new Color(Math.Clamp(r, 0.025f, 1f),
-            Math.Clamp(g, 0.025f, 1f), Math.Clamp(b, 0.025f, 1f));
+        var sample = new Vector2(cell.X + 0.5f, cell.Y + 0.5f);
+        color = _lightLevels.CalculateLightColor(new MapCoordinates(sample, _map));
         _samples[cell] = color;
         return color;
     }
 
-    private readonly record struct Light(EntityUid Entity, Vector2 Position, float Radius, float Energy, Color Color);
+    public float Brightness(Color color) => _lightLevels.ColorToLevel(color);
+
+    public void End() => RestoreLightRotations();
+
+    private bool IsAttachedTo(EntityUid uid, EntityUid player)
+    {
+        var current = uid;
+        while (current != player && _entities.TryGetComponent<TransformComponent>(current, out var transform))
+        {
+            if (transform.ParentUid == current)
+                return false;
+            current = transform.ParentUid;
+        }
+
+        return current == player;
+    }
+
+    private void RestoreLightRotations()
+    {
+        foreach (var (light, rotation) in _rotatedLights)
+            light.Rotation = rotation;
+        _rotatedLights.Clear();
+    }
 }
