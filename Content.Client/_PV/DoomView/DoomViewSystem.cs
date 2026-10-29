@@ -29,6 +29,7 @@ public sealed partial class DoomViewSystem : EntitySystem
     private float _pendingTurn;
     private float _lookPitch;
     private bool _middleWasDown;
+    private const float MaxLookPitch = 0.6f;
     private float _hitFlashRemaining;
     private const float HitFlashDuration = 0.65f;
     public float HitFlashAlpha => _hitFlashRemaining <= 0
@@ -79,7 +80,7 @@ public sealed partial class DoomViewSystem : EntitySystem
             _pendingTurn = Math.Clamp(_pendingTurn - horizontalDelta * 0.003f, -0.5f, 0.5f);
         if (float.IsFinite(verticalDelta))
             // Move mouse up to look up, down to look down (standard FPS pitch).
-            _lookPitch = Math.Clamp(_lookPitch - verticalDelta * 0.002f, -0.30f, 0.30f);
+            _lookPitch = Math.Clamp(_lookPitch - verticalDelta * 0.002f, -MaxLookPitch, MaxLookPitch);
     }
 
     private void StopMouseLook()

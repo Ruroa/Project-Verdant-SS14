@@ -7,6 +7,7 @@ Use the same branch for both client and server. The feature starts disabled.
 
 - WASD: move relative to the camera.
 - Click middle mouse once over the game view to lock free-look. Move the mouse horizontally to turn; move the mouse up to look up and down to look down. Click it again to release.
+- Vertical look range is about 34 degrees in either direction.
 - Right-click still opens context menus. Losing window focus or focusing a text field also releases free-look.
 - While looking, interaction aims at the center crosshair.
 - NumPad 7/9: existing camera rotation bindings, still available.
