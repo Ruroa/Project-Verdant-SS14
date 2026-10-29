@@ -175,7 +175,7 @@ internal sealed class DoomViewOverlay : Overlay
                         new Vector2(left + billboard.Center.X, top + billboard.Center.Y),
                         new Vector2(billboard.Scale), Angle.Zero,
                         overrideDirection: billboard.Direction);
-                    var darkness = 1f - Math.Clamp(_lighting.Brightness(billboard.Light), 0.08f, 1f);
+                    var darkness = 1f - Math.Clamp(_lighting.Brightness(billboard.Light), 0f, 1f);
                     if (darkness > 0.001f)
                     {
                         var rect = billboard.Rect;

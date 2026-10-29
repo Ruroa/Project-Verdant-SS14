@@ -25,7 +25,6 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IInputManager _input = default!;
-    [Dependency] private IUserInterfaceManager _ui = default!;
     private float _pendingTurn;
     private float _lookPitch;
     private bool _middleWasDown;
@@ -105,7 +104,7 @@ public sealed partial class DoomViewSystem : EntitySystem
         {
             if (MouseLooking)
                 StopMouseLook();
-            else if (_ui.KeyboardFocused == null)
+            else
             {
                 MouseLooking = true;
                 _clyde.MainWindow.SetRelativeMouseMode(true);
