@@ -2,6 +2,7 @@
 using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
+using Content.Client._PV.DoomView;
 using Content.Client.Weapons.Ranged.Components;
 using Content.Shared.Camera;
 using Content.Shared.CombatMode;
@@ -56,6 +57,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private SharedMapSystem _maps = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private DoomViewSystem _doomView = default!;
 
 #region Starlight
     [Dependency] private IConfigurationManager _cfg = default!;
@@ -397,6 +399,8 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
 
         var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition);
+        if (_doomView.TryGetCrosshairMapPosition(out var doomPosition))
+            mousePos = doomPosition;
 
         if (mousePos.MapId == MapId.Nullspace)
         {
