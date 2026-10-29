@@ -1,12 +1,11 @@
 using System.Numerics;
 using Content.Shared._PV.DoomView;
-using Robust.Client.Input;
 using Robust.Client.UserInterface;
-using Robust.Shared.Input;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Input;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.CustomControls;
@@ -24,10 +23,8 @@ public sealed partial class DoomViewSystem : EntitySystem
     [Dependency] private SharedMoverController _mover = default!;
 
     [Dependency] private IClyde _clyde = default!;
-    [Dependency] private IInputManager _input = default!;
     private float _pendingTurn;
     private float _lookPitch;
-    private bool _middleWasDown;
     private const float MaxLookPitch = 0.6f;
     private float _hitFlashRemaining;
     private const float HitFlashDuration = 0.65f;
@@ -67,8 +64,22 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     public bool HandleLookKey(GUIBoundKeyEventArgs args, bool down)
     {
-        // Do not intercept UI mouse bindings: normal context menus must keep working.
-        return false;
+        // Use the viewport input event so this does not depend on combat mode.
+        if (!Enabled || args.Function != ContentKeyFunctions.MouseMiddle)
+            return false;
+
+        if (down && _clyde.MainWindow.IsFocused)
+        {
+            if (MouseLooking)
+                StopMouseLook();
+            else
+            {
+                MouseLooking = true;
+                _clyde.MainWindow.SetRelativeMouseMode(true);
+            }
+        }
+
+        return true;
     }
 
     public void MouseLook(float horizontalDelta, float verticalDelta)
@@ -93,23 +104,9 @@ public sealed partial class DoomViewSystem : EntitySystem
     public override void FrameUpdate(float frameTime)
     {
         _hitFlashRemaining = MathF.Max(0, _hitFlashRemaining - frameTime);
-        // Toggle on the press edge; never intercept right-click or other UI keys.
-        var middleDown = _input.IsKeyDown(Keyboard.Key.MouseMiddle);
-        var pressed = middleDown && !_middleWasDown;
-        _middleWasDown = middleDown;
         var canLook = Enabled && _clyde.MainWindow.IsFocused;
         if (!canLook)
             StopMouseLook();
-        else if (pressed)
-        {
-            if (MouseLooking)
-                StopMouseLook();
-            else
-            {
-                MouseLooking = true;
-                _clyde.MainWindow.SetRelativeMouseMode(true);
-            }
-        }
         if (MouseLooking && MathF.Abs(_pendingTurn) > 0.0001f)
         {
             RaisePredictiveEvent(new DoomLookEvent(_pendingTurn));
