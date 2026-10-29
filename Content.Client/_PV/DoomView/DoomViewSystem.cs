@@ -69,18 +69,16 @@ public sealed partial class DoomViewSystem : EntitySystem
         if (!Enabled || !_clyde.MainWindow.IsFocused || args.Key != Keyboard.Key.MouseMiddle)
             return;
 
-        if (type is KeyEventType.Down or KeyEventType.Up)
-            args.Handle();
+        args.Handle();
+        if (type != KeyEventType.Down || args.IsRepeat)
+            return;
 
-        if (type == KeyEventType.Down && !args.IsRepeat)
+        if (MouseLooking)
+            StopMouseLook();
+        else
         {
-            if (MouseLooking)
-                StopMouseLook();
-            else
-            {
-                MouseLooking = true;
-                _clyde.MainWindow.SetRelativeMouseMode(true);
-            }
+            MouseLooking = true;
+            _clyde.MainWindow.SetRelativeMouseMode(true);
         }
     }
 
