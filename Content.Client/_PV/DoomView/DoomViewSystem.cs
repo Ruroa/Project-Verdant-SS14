@@ -7,6 +7,7 @@ using Content.Shared.Movement.Systems;
 using Robust.Client.Input;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Console;
 using Robust.Shared.Input;
@@ -24,6 +25,7 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IInputManager _input = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
     private float _pendingTurn;
     private float _lookPitch;
     private const float MaxLookPitch = 0.6f;
@@ -35,6 +37,7 @@ public sealed partial class DoomViewSystem : EntitySystem
     public float LookPitch => _lookPitch;
     public bool MouseLooking { get; private set; }
     private DoomViewOverlay? _overlay;
+    private DoomMouseCaptureControl? _mouseCaptureControl;
     public bool Enabled => _overlay != null;
 
     public override void Initialize()
@@ -78,6 +81,12 @@ public sealed partial class DoomViewSystem : EntitySystem
         else
         {
             MouseLooking = true;
+            _ui.ControlFocused = null;
+            _ui.ReleaseKeyboardFocus();
+            _mouseCaptureControl = new DoomMouseCaptureControl(_input, MouseLook);
+            _ui.RootControl.AddChild(_mouseCaptureControl);
+            LayoutContainer.SetAnchorPreset(_mouseCaptureControl, LayoutContainer.LayoutPreset.Wide);
+            _mouseCaptureControl.SetPositionLast();
             _clyde.MainWindow.SetRelativeMouseMode(true);
         }
     }
@@ -98,6 +107,11 @@ public sealed partial class DoomViewSystem : EntitySystem
         if (MouseLooking)
             _clyde.MainWindow.SetRelativeMouseMode(false);
         MouseLooking = false;
+        if (_mouseCaptureControl != null)
+        {
+            _ui.RootControl.RemoveChild(_mouseCaptureControl);
+            _mouseCaptureControl = null;
+        }
         _pendingTurn = 0;
     }
 
@@ -107,6 +121,8 @@ public sealed partial class DoomViewSystem : EntitySystem
         var canLook = Enabled && _clyde.MainWindow.IsFocused;
         if (!canLook)
             StopMouseLook();
+        else
+            _mouseCaptureControl?.SetPositionLast();
         if (MouseLooking && MathF.Abs(_pendingTurn) > 0.0001f)
         {
             RaisePredictiveEvent(new DoomLookEvent(_pendingTurn));

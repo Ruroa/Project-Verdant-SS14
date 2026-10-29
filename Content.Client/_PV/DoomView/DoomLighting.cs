@@ -14,6 +14,8 @@ namespace Content.Client._PV.DoomView;
 internal sealed class DoomLighting
 {
     private const float MaxLightRadius = 16f;
+    private const float DisplayExposure = 1.3f;
+    private static readonly Color AmbientFloor = new(0.12f, 0.13f, 0.15f);
     private readonly LightLevelSystem _lightLevels;
     private readonly IEntityManager _entities;
     private readonly EntityLookupSystem _lookup;
@@ -78,7 +80,11 @@ internal sealed class DoomLighting
             color = new Color(color.RGBA + contribution);
         }
 
-        color = new Color(ToDisplayLight(color.R), ToDisplayLight(color.G), ToDisplayLight(color.B), color.A);
+        color = new Color(
+            ToDisplayLight(Math.Max(color.R, AmbientFloor.R) * DisplayExposure),
+            ToDisplayLight(Math.Max(color.G, AmbientFloor.G) * DisplayExposure),
+            ToDisplayLight(Math.Max(color.B, AmbientFloor.B) * DisplayExposure),
+            color.A);
         _samples[cell] = color;
         return color;
     }
