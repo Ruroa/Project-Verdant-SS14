@@ -121,8 +121,25 @@ public sealed partial class DoomViewSystem : EntitySystem
 
     private void OnLocalDamage(EntityUid uid, DamageableComponent component, DamageChangedEvent args)
     {
-        if (Enabled && uid == _players.LocalEntity && args.DamageIncreased)
+        if (Enabled && uid == _players.LocalEntity && IsHitDamage(args))
             _hitFlashRemaining = HitFlashDuration;
+    }
+
+    private static bool IsHitDamage(DamageChangedEvent args)
+    {
+        if (!args.DamageIncreased || args.DamageDelta is not { } delta)
+            return false;
+
+        foreach (var (type, amount) in delta.DamageDict)
+        {
+            if (amount <= 0)
+                continue;
+
+            if (type is "Blunt" or "Piercing" or "Slash" or "Heat" or "Shock")
+                return true;
+        }
+
+        return false;
     }
 
     public override void Shutdown()

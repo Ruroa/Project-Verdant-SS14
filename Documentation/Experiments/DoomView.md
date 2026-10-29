@@ -21,8 +21,9 @@ both client and server through the normal movement camera rotation system.
 
 - 90-degree horizontal perspective, 128 wall rays, 12-tile draw distance.
 - Nearby objects within two tiles remain visible around the player; farther content is culled to the forward view cone. Floor tile lookup also uses the cone bounds.
-- Mouse turning snaps to each input update so it does not keep easing after the mouse stops. Model meshes are rendered at 85% scale.
-- A low-alpha red hit flash fades in and out over 0.65 seconds while the existing damage overlay remains active.
+- Middle-mouse free-look captures the pointer in SDL relative mode; the centered crosshair stays fixed while the OS cursor is locked and hidden. Clicking middle mouse again releases it.
+- Mouse turning snaps to each input update so it does not keep easing after the mouse stops. Model mesh height is 85% while its floor footprint stays unchanged.
+- A low-alpha red hit flash fades in and out over 0.65 seconds for impact damage (blunt, piercing, slash, heat, or shock). Bloodloss and other periodic damage do not trigger it. The existing damage overlay remains active.
 - Walls retain raycast geometry and existing wall icons.
 - Ordinary airlocks use a near-full-tile footprint while windoors keep their thin edge-mounted footprint; door textures are chosen in local space so the rotated geometry does not double-rotate directional artwork.
 - Full windows occupy a full tile with textured faces, while directional/diagonal windows remain thin and edge-mounted. Enabled occluders control tint.

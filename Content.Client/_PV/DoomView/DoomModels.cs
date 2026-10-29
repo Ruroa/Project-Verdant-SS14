@@ -60,8 +60,8 @@ internal sealed class DoomModels
 
             Vector3 ModelPoint(int index)
             {
-                var local = model.Positions[index] * 0.85f;
-                return new Vector3(position + rotation.RotateVec(new Vector2(local.X, local.Y)), local.Z);
+                var local = model.Positions[index];
+                return new Vector3(position + rotation.RotateVec(new Vector2(local.X, local.Y)), local.Z * 0.85f);
             }
         }
         var bounds = _sprites.GetLocalBounds((uid, sprite));
