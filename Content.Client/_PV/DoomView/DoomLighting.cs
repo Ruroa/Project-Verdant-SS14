@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared.Physics;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Light;
 using Robust.Shared.Map;
@@ -46,7 +47,9 @@ internal sealed class DoomLighting
 
         var sample = new Vector2(cell.X + 0.5f, cell.Y + 0.5f);
         var coordinates = new MapCoordinates(sample, _map);
-        color = _lightLevels.CalculateLightColor(coordinates, new LightLevelQueryOptions(ShadowCastingOnly: true));
+        if (!_lightLevels.TryCalculateLightColor(coordinates, out color,
+                new LightLevelQueryOptions(ShadowCastingOnly: true)))
+            color = Color.Black;
         _nearbyLights.Clear();
         _lookup.GetEntitiesInRange(typeof(SharedPointLightComponent), coordinates, MaxLightRadius, _nearbyLights);
         foreach (var lightEntity in _nearbyLights)
