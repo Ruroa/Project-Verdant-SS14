@@ -319,6 +319,17 @@ internal sealed class DoomViewOverlay : Overlay
         return true;
     }
 
+    public bool TryPickCrosshair(out Vector2 position)
+    {
+        if (_viewport == null)
+        {
+            position = default;
+            return false;
+        }
+
+        return TryPick(_viewport, (Vector2) _size / 2f, out position);
+    }
+
     private readonly record struct Billboard(EntityUid Entity, float Depth, Vector2 Center, float Scale,
         UIBox2 Rect, Direction Direction, Color Light);
 }
