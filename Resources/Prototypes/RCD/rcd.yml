@@ -60,6 +60,48 @@
   fx: EffectRCDConstruct1
 
 - type: rcd
+  id: PlanetaryFloorSteel
+  name: rcd-component-planetary-floor-steel
+  category: PlanetaryConstruction
+  sprite: /Textures/Interface/Radial/RCD/metal_tile.png
+  mode: ConstructTile
+  prototype: FloorSteel
+  cost: 1
+  delay: 1
+  collisionMask: InteractImpassable
+  rules:
+    - CanBuildOnEmptyTile
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: PlanetaryPlating
+  name: rcd-component-planetary-plating
+  category: PlanetaryConstruction
+  sprite: /Textures/Interface/Radial/RCD/plating.png
+  mode: ConstructTile
+  prototype: PlatingRCD
+  cost: 1
+  delay: 1
+  collisionMask: InteractImpassable
+  rules:
+    - CanBuildOnEmptyTile
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: PlanetaryWall
+  category: PlanetaryConstruction
+  sprite: /Textures/_Starlight/Interface/Radial/RCD/solid_wall.png
+  mode: ConstructObject
+  prototype: WallSolid
+  cost: 4
+  delay: 2
+  collisionMask: FullTileMask
+  rules:
+    - CanBuildOnEmptyTile
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
   id: Catwalk
   category: WallsAndFlooring
   sprite: /Textures/Interface/Radial/RCD/catwalk.png
