@@ -76,7 +76,6 @@ public partial class SharedGunSystem
         if (args.Current is not RevolverAmmoProviderComponentState state)
             return;
 
-        var oldIndex = ent.Comp.CurrentIndex;
         ent.Comp.CurrentIndex = state.CurrentIndex;
         ent.Comp.Chambers = new bool?[state.Chambers.Length];
 
@@ -87,11 +86,7 @@ public partial class SharedGunSystem
             ent.Comp.Chambers[i] = state.Chambers[i];
         }
 
-        // Handle spins
-        if (oldIndex != state.CurrentIndex)
-        {
-            UpdateAmmoCount(ent, prediction: false);
-        }
+        UpdateAmmoCount(ent, prediction: false);
     }
 
     public bool TryRevolverInsert(Entity<RevolverAmmoProviderComponent> ent, EntityUid insertEnt, EntityUid? user)
