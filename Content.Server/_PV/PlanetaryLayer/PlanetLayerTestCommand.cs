@@ -35,7 +35,9 @@ public sealed class PlanetLayerTestCommand : IConsoleCommand
         var tileSystem = _entityManager.System<TileSystem>();
         var transformSystem = _entityManager.System<SharedTransformSystem>();
         var mapUid = mapSystem.CreateMap(out _);
-        var grid = _entityManager.GetComponent<MapGridComponent>(mapUid);
+        var gridEntity = mapSystem.CreateGridEntity(mapUid);
+        var gridUid = gridEntity.Owner;
+        var grid = gridEntity.Comp;
 
         var grass = (ContentTileDefinition)_tileDefinitions["FloorPlanetGrass"];
         var desert = (ContentTileDefinition)_tileDefinitions["FloorDesert"];
@@ -53,7 +55,7 @@ public sealed class PlanetLayerTestCommand : IConsoleCommand
             }
         }
 
-        mapSystem.SetTiles(mapUid, grid, terrain);
+        mapSystem.SetTiles(gridUid, grid, terrain);
 
         // Build a small steel pad over the terrain. Tile history keeps each original planet tile.
         for (var x = -3; x <= 3; x++)
@@ -61,14 +63,14 @@ public sealed class PlanetLayerTestCommand : IConsoleCommand
             for (var y = -3; y <= 3; y++)
             {
                 var indices = new Vector2i(x, y);
-                if (!mapSystem.TryGetTileRef(mapUid, grid, indices, out var tileRef))
+                if (!mapSystem.TryGetTileRef(gridUid, grid, indices, out var tileRef))
                     continue;
 
-                tileSystem.ReplaceTile(tileRef, steel, mapUid, grid, tileSystem.PickVariant(steel, random));
+                tileSystem.ReplaceTile(tileRef, steel, gridUid, grid, tileSystem.PickVariant(steel, random));
             }
         }
 
-        transformSystem.SetCoordinates(player, mapSystem.GridTileToLocal(mapUid, grid, Vector2i.Zero));
+        transformSystem.SetCoordinates(player, mapSystem.GridTileToLocal(gridUid, grid, Vector2i.Zero));
         shell.WriteLine("Generated a 49x49 planet test map. The center 7x7 steel platform can be removed with the RCD to reveal its original terrain.");
     }
 }
