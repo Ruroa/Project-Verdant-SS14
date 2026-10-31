@@ -6,6 +6,8 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -53,6 +55,7 @@ public sealed partial class RCDSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedRoofSystem _roof = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private TileSystem _tile = default!;
@@ -616,6 +619,38 @@ public sealed partial class RCDSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("rcd-component-must-build-on-subfloor-message"), uid, user);
 
             return false;
+        }
+
+        var requiresRoof = prototype.ConstructionRules.Contains(RcdConstructionRule.MustBeRoofed);
+        var requiresNoRoof = prototype.ConstructionRules.Contains(RcdConstructionRule.MustBeUnroofed);
+        if (requiresRoof || requiresNoRoof)
+        {
+            if (HasComp<ImplicitRoofComponent>(gridUid))
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-roof-implicit-grid-message"), uid, user);
+
+                return false;
+            }
+
+            var hasRoof = TryComp<RoofComponent>(gridUid, out var roofComponent) &&
+                          _roof.IsRooved((gridUid, mapGrid, roofComponent), position);
+
+            if (requiresRoof && !hasRoof)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-roof-not-present-message"), uid, user);
+
+                return false;
+            }
+
+            if (requiresNoRoof && hasRoof)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-roof-already-present-message"), uid, user);
+
+                return false;
+            }
         }
 
         // Tile specific rules
