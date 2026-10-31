@@ -155,10 +155,10 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         if (!HasComp<ShuttleComponent>(uid) || !IsOnPlanetaryMap(uid))
             return;
 
-        foreach (var fixture in args.NewFixtures.Values)
+        foreach (var (fixtureId, fixture) in args.NewFixtures)
         {
-            fixture.CollisionLayer |= (int) CollisionGroup.Impassable;
-            fixture.CollisionMask |= (int) CollisionGroup.WallLayer;
+            _physics.AddCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.Impassable, fixtures);
+            _physics.AddCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.WallLayer, fixtures);
         }
     }
 
