@@ -110,6 +110,9 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         if (HasComp<MapComponent>(ev.EntityUid))
             return;
 
+        if (HasComp<PlanetaryWallCollisionGridComponent>(ev.EntityUid))
+            return;
+
         EnsureComp<ShuttleComponent>(ev.EntityUid);
 
         if (HasComp<PlanetarySurfaceComponent>(ev.EntityUid))
@@ -155,29 +158,34 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     private void OnPlanetaryShuttleGridFixtureChange(EntityUid uid, ShuttleComponent component, GridFixtureChangeEvent args)
     {
-        if (HasComp<PlanetarySurfaceComponent>(uid) ||
-            !IsOnPlanetaryMap(uid) ||
+        if (HasComp<PlanetarySurfaceComponent>(uid) || HasComp<PlanetaryWallCollisionGridComponent>(uid))
+            return;
+
+        if (!IsOnPlanetaryMap(uid) ||
             !TryComp(uid, out FixturesComponent? fixtures))
             return;
 
         foreach (var (fixtureId, fixture) in args.NewFixtures)
         {
-            _physics.AddCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryShuttle, fixtures);
-            _physics.AddCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryWall, fixtures);
+            _physics.SetCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryShuttle, fixtures);
+            _physics.SetCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryWall, fixtures);
         }
     }
 
     private void ApplyPlanetaryShuttleWallCollision(EntityUid uid)
     {
         if (HasComp<PlanetarySurfaceComponent>(uid) ||
-            !IsOnPlanetaryMap(uid) ||
             !TryComp(uid, out FixturesComponent? fixtures))
             return;
 
+        var planetaryMap = IsOnPlanetaryMap(uid);
+
         foreach (var (fixtureId, fixture) in fixtures.Fixtures)
         {
-            _physics.AddCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryShuttle, fixtures);
-            _physics.AddCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryWall, fixtures);
+            var layer = planetaryMap ? (int) CollisionGroup.PlanetaryShuttle : (int) CollisionGroup.MapGrid;
+            var mask = planetaryMap ? (int) CollisionGroup.PlanetaryWall : (int) CollisionGroup.MapGrid;
+            _physics.SetCollisionLayer(uid, fixtureId, fixture, layer, fixtures);
+            _physics.SetCollisionMask(uid, fixtureId, fixture, mask, fixtures);
         }
     }
 
