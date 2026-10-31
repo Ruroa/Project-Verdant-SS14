@@ -42,6 +42,7 @@ public sealed partial class DockingSystem
     private bool CanDock(
         DockingComponent shuttleDock,
         TransformComponent shuttleDockXform,
+        EntityUid gridDockUid,
         DockingComponent gridDock,
         TransformComponent gridDockXform,
         Box2 shuttleAABB,
@@ -49,6 +50,7 @@ public sealed partial class DockingSystem
         FixturesComponent shuttleFixtures,
         Entity<MapGridComponent> gridEntity,
         bool isMap,
+        bool allowTerrainOverlap,
         out Matrix3x2 matty,
         out Box2 shuttleDockedAABB,
         out Angle gridRotation)
@@ -78,7 +80,7 @@ public sealed partial class DockingSystem
         var gridXformMatrix = Matrix3Helpers.CreateTransform(gridDockXform.LocalPosition, gridDockAngle);
         matty = Matrix3x2.Multiply(stationDockMatrix, gridXformMatrix);
 
-        if (!ValidSpawn(gridEntity, matty, offsetAngle, shuttleFixtures, isMap))
+        if (!ValidSpawn(gridEntity, matty, offsetAngle, shuttleFixtures, isMap, allowTerrainOverlap, gridDockUid))
             return false;
 
         shuttleDockedAABB = matty.TransformBox(shuttleAABB);
@@ -173,6 +175,7 @@ public sealed partial class DockingSystem
         var shuttleAABB = _gridQuery.GetComponent(shuttleUid).LocalAABB;
 
         var isMap = HasComp<MapComponent>(targetGrid);
+        var allowTerrainOverlap = HasComp<PlanetarySurfaceComponent>(targetGrid);
 
         var grids = new List<Entity<MapGridComponent>>();
         if (shuttleDocks.Count > 0)
@@ -188,12 +191,13 @@ public sealed partial class DockingSystem
 
                     if (!CanDock(
                             shuttleDock, shuttleDockXform,
-                            gridDock, gridXform,
+                            gridDockUid, gridDock, gridXform,
                             shuttleAABB,
                             targetGridAngle,
                             shuttleFixturesComp,
                             (targetGrid, targetGridGrid),
                             isMap,
+                            allowTerrainOverlap,
                             out var matty,
                             out var dockedAABB,
                             out var targetAngle))
@@ -241,13 +245,14 @@ public sealed partial class DockingSystem
                             if (!CanDock(
                                     other,
                                     _xformQuery.GetComponent(otherUid),
-                                    otherGrid,
+                                    otherGridUid, otherGrid,
                                     _xformQuery.GetComponent(otherGridUid),
                                     shuttleAABB,
                                     targetGridAngle,
                                     shuttleFixturesComp,
                                     (targetGrid, targetGridGrid),
                                     isMap,
+                                    allowTerrainOverlap,
                                     out _,
                                     out var otherdockedAABB,
                                     out var otherTargetAngle))
@@ -350,7 +355,7 @@ public sealed partial class DockingSystem
     /// <summary>
     /// Checks whether the shuttle can warp to the specified position.
     /// </summary>
-    private bool ValidSpawn(Entity<MapGridComponent> gridEntity, Matrix3x2 matty, Angle angle, FixturesComponent shuttleFixturesComp, bool isMap)
+    private bool ValidSpawn(Entity<MapGridComponent> gridEntity, Matrix3x2 matty, Angle angle, FixturesComponent shuttleFixturesComp, bool isMap, bool allowTerrainOverlap, EntityUid landingDock)
     {
         var transform = new Transform(Vector2.Transform(Vector2.Zero, matty), angle);
 
@@ -362,7 +367,7 @@ public sealed partial class DockingSystem
             aabb = aabb.Enlarged(-0.01f);
 
             // If it's a map check no hard collidable anchored entities overlap
-            if (isMap)
+            if (isMap || allowTerrainOverlap)
             {
                 var localTiles = _mapSystem.GetLocalTilesEnumerator(gridEntity.Owner, gridEntity.Comp, aabb);
 
@@ -372,6 +377,9 @@ public sealed partial class DockingSystem
 
                     while (anchoredEnumerator.MoveNext(out var anc))
                     {
+                        if (allowTerrainOverlap && anc == landingDock)
+                            continue;
+
                         if (!_physicsQuery.TryGetComponent(anc, out var physics) ||
                             !physics.CanCollide ||
                             !physics.Hard)
