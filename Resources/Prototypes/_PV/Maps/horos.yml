@@ -2,6 +2,8 @@
   id: Horos
   mapName: 'Horos Station'
   mapPath: /Maps/_PV/Stations/Horos.yml
+  randomRotation: false
+  randomRotation: false
   minPlayers: 50
   maxPlayers: 180
   stations:
@@ -15,6 +17,21 @@
             prefixCreator: 'HR'
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/_Starlight/Shuttles/Evac/emergency_manor.yml
+        - type: StationBiome
+          biome: PVVerdantPlanet
+          mapLightColor: "#D8B059"
+          oreMarkers:
+            - OreIron
+            - OreQuartz
+            - OreCoal
+            - OreSalt
+            - OreGold
+            - OreSilver
+            - PVPlanetOrePlasma
+            - OreUranium
+            - OreDiamond
+            - OreArtifactFragment
+            - PVPlanetOreBananium
         - type: StationJobs
           availableJobs:
             #service

@@ -1,9 +1,7 @@
 using System.Linq;
 using System.Numerics;
-using System.Threading.Tasks;
 using Content.Server.Salvage.Magnet;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Procedural;
 using Content.Shared.Radio;
 using Content.Shared.Salvage.Magnet;
 using Robust.Shared.Exceptions;
@@ -50,18 +48,14 @@ public sealed partial class SalvageSystem
         }
 
         var index = args.Index;
-        async void TryTakeMagnetOffer()
+        try
         {
-            try
-            {
-                await TakeMagnetOffer((station.Value, dataComp), index, (uid, component));
-            }
-            catch (Exception e)
-            {
-                _runtimeLog.LogException(e, $"{nameof(SalvageSystem)}.{nameof(TakeMagnetOffer)}");
-            }
+            TakeMagnetOffer((station.Value, dataComp), index, (uid, component));
         }
-        TryTakeMagnetOffer();
+        catch (Exception e)
+        {
+            _runtimeLog.LogException(e, $"{nameof(SalvageSystem)}.{nameof(TakeMagnetOffer)}");
+        }
     }
 
     private void OnMagnetStartup(EntityUid uid, SalvageMagnetComponent component, ComponentStartup args)
@@ -280,7 +274,7 @@ public sealed partial class SalvageSystem
         }
     }
 
-    private async Task TakeMagnetOffer(Entity<SalvageMagnetDataComponent> data, int index, Entity<SalvageMagnetComponent> magnet)
+    private void TakeMagnetOffer(Entity<SalvageMagnetDataComponent> data, int index, Entity<SalvageMagnetComponent> magnet)
     {
         var seed = data.Comp.Offered[index];
 
@@ -288,7 +282,7 @@ public sealed partial class SalvageSystem
         var salvMap = _mapSystem.CreateMap();
         var salvMapXform = Transform(salvMap);
 
-        // Set values while awaiting asteroid dungeon if relevant so we can't double-take offers.
+        // Reserve the offer before loading its wreck.
         data.Comp.ActiveSeed = seed;
         data.Comp.EndTime = _timing.CurTime + data.Comp.ActiveTime;
         data.Comp.NextOffer = data.Comp.EndTime.Value;
@@ -296,15 +290,6 @@ public sealed partial class SalvageSystem
 
         switch (offering)
         {
-            case AsteroidOffering asteroid:
-                var grid = _mapSystem.CreateGridEntity(salvMap);
-                await _dungeon.GenerateDungeonAsync(asteroid.DungeonConfig, grid.Owner, grid.Comp, Vector2i.Zero, seed);
-                break;
-            case DebrisOffering debris:
-                var debrisProto = _prototypeManager.Index<DungeonConfigPrototype>(debris.Id);
-                var debrisGrid = _mapSystem.CreateGridEntity(salvMap);
-                await _dungeon.GenerateDungeonAsync(debrisProto, debrisGrid.Owner, debrisGrid.Comp, Vector2i.Zero, seed);
-                break;
             case SalvageOffering wreck:
                 var salvageProto = wreck.SalvageMap;
 
@@ -339,12 +324,6 @@ public sealed partial class SalvageSystem
             var childAABB = _transform.GetWorldMatrix(mapChild).TransformBox(childGrid.LocalAABB);
             bounds = bounds?.Union(childAABB) ?? childAABB;
 
-            // Update mass scanner names as relevant.
-            if (offering is AsteroidOffering or DebrisOffering)
-            {
-                _metaData.SetEntityName(mapChild, Loc.GetString("salvage-asteroid-name"));
-                _gravity.EnableGravity(mapChild);
-            }
         }
 
         var magnetXform = _xformQuery.GetComponent(magnet.Owner);

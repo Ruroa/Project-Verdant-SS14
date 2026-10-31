@@ -57,13 +57,6 @@
   mapPath: /Maps/Salvage/small-tesla.yml
   sizeString: salvage-map-wreck-size-small
 
-# Small - Asteroids
-
-- type: salvageMap
-  id: SmallA1
-  mapPath: /Maps/Salvage/small-a-1.yml
-  sizeString: salvage-map-wreck-size-small
-
 # "Medium"-class maps - Max size square: 15x15, indicated size: 7.5
 
 - type: salvageMap
@@ -153,11 +146,6 @@
 - type: salvageMap
   id: StationStation
   mapPath: /Maps/Salvage/stationstation.yml
-  sizeString: salvage-map-wreck-size-large
-
-- type: salvageMap
-  id: AsteroidBase
-  mapPath: /Maps/Salvage/asteroid-base.yml
   sizeString: salvage-map-wreck-size-large
 
 - type: salvageMap

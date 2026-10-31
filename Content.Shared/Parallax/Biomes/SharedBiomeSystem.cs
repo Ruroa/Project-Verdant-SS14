@@ -235,6 +235,14 @@ public abstract partial class SharedBiomeSystem : EntitySystem
                     continue;
             }
 
+            if (layer is BiomeEntityLayer { ExcludeCenterRadius: > 0 } entityLayer)
+            {
+                var radiusSquared = entityLayer.ExcludeCenterRadius * entityLayer.ExcludeCenterRadius;
+                var distanceSquared = (long) indices.X * indices.X + (long) indices.Y * indices.Y;
+                if (distanceSquared < radiusSquared)
+                    continue;
+            }
+
             var noiseCopy = GetNoise(layer.Noise, seed);
 
             var invert = layer.Invert;

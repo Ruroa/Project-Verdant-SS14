@@ -1,0 +1,19 @@
+- type: biomeMarkerLayer
+  id: PVPlanetOrePlasma
+  entityMask:
+    AsteroidRock: AsteroidRockPlasma
+    WallRock: WallRockPlasma
+  maxCount: 24
+  minGroupSize: 5
+  maxGroupSize: 10
+  radius: 4
+
+- type: biomeMarkerLayer
+  id: PVPlanetOreBananium
+  entityMask:
+    AsteroidRock: AsteroidRockBananium
+    WallRock: WallRockBananium
+  maxCount: 8
+  minGroupSize: 1
+  maxGroupSize: 2
+  radius: 8

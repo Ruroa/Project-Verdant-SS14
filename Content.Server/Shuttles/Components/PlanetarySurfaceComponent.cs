@@ -1,4 +1,6 @@
 namespace Content.Server.Shuttles.Components;
 
 [RegisterComponent]
-public sealed partial class PlanetarySurfaceComponent : Component;
+public sealed partial class PlanetarySurfaceComponent : Component
+{
+}

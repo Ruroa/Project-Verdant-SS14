@@ -37,6 +37,7 @@
 
 - type: tile
   id: FloorLowDesert
+  parent: BaseFloorPlanet
   name: tiles-low-desert-floor
   sprite: /Textures/Tiles/Planet/Desert/low_desert.png
   variants: 6

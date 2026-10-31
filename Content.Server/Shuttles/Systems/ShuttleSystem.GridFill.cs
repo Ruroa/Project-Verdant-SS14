@@ -7,6 +7,7 @@ using Content.Shared.Station.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 #region Starlight
@@ -21,6 +22,21 @@ namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class ShuttleSystem
 {
+    private Angle GetPlanetarySpawnRotation(EntityUid targetGrid)
+    {
+        var mapId = Transform(targetGrid).MapID;
+        var mapUid = _mapSystem.GetMapOrInvalid(mapId);
+        if (HasComp<PlanetarySurfaceComponent>(mapUid))
+            return _transform.GetWorldRotation(mapUid);
+
+        return _transform.GetWorldRotation(targetGrid);
+    }
+
+    private void AlignSpawnedGrid(EntityUid targetGrid, EntityUid spawnedGrid)
+    {
+        _transform.SetWorldRotation(spawnedGrid, GetPlanetarySpawnRotation(targetGrid));
+    }
+
     private void InitializeGridFills()
     {
         SubscribeLocalEvent<GridSpawnComponent, StationPostInitEvent>(OnGridSpawnPostInit);
@@ -85,6 +101,8 @@ public sealed partial class ShuttleSystem
 
         if (_loader.TryLoadGrid(mapId, component.Path, out var ent))
         {
+            AlignSpawnedGrid(targetGrid.Value, ent.Value);
+
             if (HasComp<ShuttleComponent>(ent))
                 TryFTLProximity(ent.Value, targetGrid.Value);
 
@@ -271,6 +289,8 @@ public sealed partial class ShuttleSystem
                         throw new NotImplementedException();
                 }
 
+                AlignSpawnedGrid(targetGrid.Value, spawned);
+
                 if (_protoManager.Resolve(group.Value.NameDataset, out var dataset)) // SL edit
                 {
                     _metadata.SetEntityName(spawned, _salvage.GetFTLName(dataset, _random.Next()));
@@ -314,6 +334,8 @@ public sealed partial class ShuttleSystem
 
         if (_loader.TryLoadGrid(mapId, component.Path, out var grid))
         {
+            AlignSpawnedGrid(xform.GridUid.Value, grid.Value);
+
             var escape = GetSingleDock(grid.Value);
 
             if (escape != null)

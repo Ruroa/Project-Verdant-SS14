@@ -1,0 +1,49 @@
+- type: biomeTemplate
+  id: PVVerdantPlanet
+  layers:
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      threshold: -0.25
+      noise:
+        seed: 0
+        noiseType: Cellular
+        frequency: 0.04
+        fractalType: FBm
+        octaves: 4
+        lacunarity: 2
+        cellularDistanceFunction: Euclidean
+        cellularReturnType: Distance2
+      entities:
+        - WallRock
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      threshold: 0.58
+      noise:
+        seed: 2
+        noiseType: OpenSimplex2
+        frequency: 0.035
+        fractalType: FBm
+        octaves: 3
+        lacunarity: 2
+      entities:
+        - FloraDeadTreeSL
+        - FloraDeadTreeSmallSL
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      threshold: 0.94
+      excludeCenterRadius: 80
+      noise:
+        seed: 3
+        noiseType: OpenSimplex2
+        frequency: 0.003
+        lacunarity: 1.5
+        fractalType: Ridged
+        octaves: 1
+      entities:
+        - FloorWaterEntity
+    - !type:BiomeTileLayer
+      threshold: -1
+      tile: FloorAsteroidSand

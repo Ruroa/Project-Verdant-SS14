@@ -1,5 +1,6 @@
 using Content.Server.Station.Systems;
 using Content.Shared.Parallax.Biomes;
+using Content.Shared.Parallax.Biomes.Markers;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Station.Components;
@@ -19,4 +20,7 @@ public sealed partial class StationBiomeComponent : Component
 
     [DataField]
     public Color MapLightColor = Color.Black;
+
+    [DataField]
+    public List<ProtoId<BiomeMarkerLayerPrototype>> OreMarkers = new();
 }

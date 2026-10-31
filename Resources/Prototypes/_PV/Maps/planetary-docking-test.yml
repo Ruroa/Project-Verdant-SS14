@@ -2,6 +2,7 @@
   id: PVPlanetaryDockingTest
   mapName: Planetary Docking Test
   mapPath: /Maps/_PV/planetary-docking-test.yml
+  randomRotation: false
   minPlayers: 0
   stations:
     PVPlanetaryDockingTest:
@@ -10,8 +11,20 @@
       - type: StationNameSetup
         mapNameTemplate: Planetary Docking Test
       - type: StationBiome
-        biome: LowDesert
+        biome: PVVerdantPlanet
         mapLightColor: "#D8B059"
+        oreMarkers:
+          - OreIron
+          - OreQuartz
+          - OreCoal
+          - OreSalt
+          - OreGold
+          - OreSilver
+          - PVPlanetOrePlasma
+          - OreUranium
+          - OreDiamond
+          - OreArtifactFragment
+          - PVPlanetOreBananium
       - type: StationJobs
         availableJobs:
           Assistant: [ -1, -1 ]

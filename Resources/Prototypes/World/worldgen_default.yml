@@ -4,6 +4,4 @@
     - type: WorldController
     - type: BiomeSelection
       biomes:
-        - AsteroidsFallback
         - Failsafe
-        - AsteroidsStandard
