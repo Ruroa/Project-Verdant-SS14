@@ -16,6 +16,7 @@ public sealed class PlanetShuttleTestCommand : IConsoleCommand
 {
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private ITileDefinitionManager _tileDefinitions = default!;
+    [Dependency] private ThrusterSystem _thrusterSystem = default!;
 
     public string Command => "pvplanetshuttle_test";
     public string Description => "Spawns and pilots a test shuttle over a planet surface.";
@@ -94,18 +95,29 @@ public sealed class PlanetShuttleTestCommand : IConsoleCommand
         var thrusters = new (Vector2 Position, Angle Rotation)[]
         {
             (new Vector2(0.5f, 3.5f), Angle.Zero),
-            (new Vector2(3.5f, 0.5f), Angle.FromDegrees(90)),
+            (new Vector2(3.5f, 0.5f), Angle.FromDegrees(270)),
             (new Vector2(0.5f, -2.5f), Angle.FromDegrees(180)),
-            (new Vector2(-2.5f, 0.5f), Angle.FromDegrees(270)),
+            (new Vector2(-2.5f, 0.5f), Angle.FromDegrees(90)),
         };
 
         foreach (var (position, rotation) in thrusters)
         {
-            var thrusterUid = _entityManager.SpawnEntity("DebugThruster", new EntityCoordinates(shuttleUid, position));
+            var thrusterUid = _entityManager.SpawnEntity("Thruster", new EntityCoordinates(shuttleUid, position));
             transform.SetLocalRotation(thrusterUid, rotation);
+            if (_entityManager.TryGetComponent(thrusterUid, out ApcPowerReceiverComponent? thrusterPower))
+                thrusterPower.NeedsPower = false;
+
+            if (_entityManager.TryGetComponent(thrusterUid, out ThrusterComponent? thrusterComponent) &&
+                _thrusterSystem.CanEnable(thrusterUid, thrusterComponent))
+                _thrusterSystem.EnableThruster(thrusterUid, thrusterComponent);
         }
 
-        _entityManager.SpawnEntity("DebugGyroscope", new EntityCoordinates(shuttleUid, new Vector2(2.5f, 2.5f)));
+        var gyroscopeUid = _entityManager.SpawnEntity("Gyroscope", new EntityCoordinates(shuttleUid, new Vector2(2.5f, 2.5f)));
+        if (_entityManager.TryGetComponent(gyroscopeUid, out ApcPowerReceiverComponent? gyroscopePower))
+            gyroscopePower.NeedsPower = false;
+        if (_entityManager.TryGetComponent(gyroscopeUid, out ThrusterComponent? gyroscopeComponent) &&
+            _thrusterSystem.CanEnable(gyroscopeUid, gyroscopeComponent))
+            _thrusterSystem.EnableThruster(gyroscopeUid, gyroscopeComponent);
 
         transform.SetCoordinates(player, new EntityCoordinates(shuttleUid, new Vector2(0.5f, -0.5f)));
         if (!_entityManager.TryGetComponent(consoleUid, out ShuttleConsoleComponent? shuttleConsole))
