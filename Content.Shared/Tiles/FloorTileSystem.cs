@@ -8,6 +8,7 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
+using Content.Shared.Station.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -38,6 +39,14 @@ public sealed partial class FloorTileSystem : EntitySystem
     [Dependency] private TurfSystem _turf = default!;
 
     private static readonly Vector2 CheckRange = new(1f, 1f);
+    private static readonly ProtoId<ContentTileDefinition> LatticeTile = "Lattice";
+    private static readonly Vector2i[] LatticeSupportOffsets =
+    [
+        new(1, 0),
+        new(-1, 0),
+        new(0, 1),
+        new(0, -1),
+    ];
 
     /// <summary>
     ///     A recycled hashset used to check for walls when trying to place tiles on turfs.
@@ -61,8 +70,25 @@ public sealed partial class FloorTileSystem : EntitySystem
         if (component.Outputs == null)
             return;
 
-        // this looks a bit sussy but it might be because it needs to be able to place off of grids and expand them
-        var location = args.ClickLocation.AlignWithClosestGridTile();
+        var latticePlacement = component.Outputs.Contains(LatticeTile);
+        var location = args.ClickLocation;
+        if (latticePlacement && !TryGetLayerOneCoordinates(location, out location))
+        {
+            if (_netManager.IsClient && _timing.IsFirstTimePredicted)
+                _popup.PopupEntity(Loc.GetString("invalid-floor-placement"), args.User);
+
+            return;
+        }
+
+        location = location.AlignWithClosestGridTile();
+        if (latticePlacement && !HasLayerOneSupport(location))
+        {
+            if (_netManager.IsClient && _timing.IsFirstTimePredicted)
+                _popup.PopupEntity(Loc.GetString("invalid-floor-placement"), args.User);
+
+            return;
+        }
+
         var locationMap = _transform.ToMapCoordinates(location);
         if (locationMap.MapId == MapId.Nullspace)
             return;
@@ -77,10 +103,14 @@ public sealed partial class FloorTileSystem : EntitySystem
         // While you may already have a tile close you want to replace when we get half-tiles that may also be finnicky
         // so we're just gon with this for now.
         const bool inRange = true;
-        var state = (inRange, location.EntityId);
+        var mapRoot = _map.GetMapOrInvalid(map.MapId);
+        var state = (inRange, location.EntityId, mapRoot, latticePlacement);
         _map.FindGridsIntersecting(map.MapId, new Box2(map.Position - CheckRange, map.Position + CheckRange), ref state,
-            static (EntityUid entityUid, MapGridComponent grid, ref (bool weh, EntityUid EntityId) tuple) =>
+            static (EntityUid entityUid, MapGridComponent grid, ref (bool weh, EntityUid EntityId, EntityUid MapRoot, bool IgnoreMapRoot) tuple) =>
             {
+                if (tuple.IgnoreMapRoot && entityUid == tuple.MapRoot)
+                    return true;
+
                 if (tuple.EntityId == entityUid)
                     return true;
 
@@ -174,6 +204,60 @@ public sealed partial class FloorTileSystem : EntitySystem
     public bool HasBaseTurf(ContentTileDefinition tileDef, ProtoId<ContentTileDefinition> baseTurf)
     {
         return tileDef.BaseTurf == baseTurf;
+    }
+
+    private bool TryGetLayerOneCoordinates(EntityCoordinates coordinates, out EntityCoordinates layerOneCoordinates)
+    {
+        layerOneCoordinates = default;
+        var mapCoordinates = _transform.ToMapCoordinates(coordinates);
+        var mapUid = _map.GetMapOrInvalid(mapCoordinates.MapId);
+        EntityCoordinates? fallback = null;
+
+        foreach (var grid in _map.GetAllGrids(mapCoordinates.MapId))
+        {
+            if (grid.Owner == mapUid)
+                continue;
+
+            var localPosition = _map.WorldToLocal(grid.Owner, grid.Comp, mapCoordinates.Position);
+            var bounds = grid.Comp.LocalAABB;
+            var padding = grid.Comp.TileSize;
+            if (localPosition.X < bounds.Left - padding || localPosition.X > bounds.Right + padding ||
+                localPosition.Y < bounds.Bottom - padding || localPosition.Y > bounds.Top + padding)
+                continue;
+
+            var candidate = new EntityCoordinates(grid.Owner, localPosition);
+            if (HasComp<StationMemberComponent>(grid.Owner))
+            {
+                layerOneCoordinates = candidate;
+                return true;
+            }
+
+            fallback ??= candidate;
+        }
+
+        if (fallback is not { } fallbackCoordinates)
+            return false;
+
+        layerOneCoordinates = fallbackCoordinates;
+        return true;
+    }
+
+    private bool HasLayerOneSupport(EntityCoordinates coordinates)
+    {
+        if (!TryComp<MapGridComponent>(coordinates.EntityId, out var grid))
+            return false;
+
+        var gridIndices = _map.TileIndicesFor(coordinates.EntityId, grid, coordinates);
+        foreach (var offset in LatticeSupportOffsets)
+        {
+            if (_map.TryGetTileRef(coordinates.EntityId, grid, gridIndices + offset, out var tile) &&
+                !tile.Tile.IsEmpty)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private bool CanPlaceOn(ContentTileDefinition tileDef, ProtoId<ContentTileDefinition> currentTurfId)

@@ -1,1 +1,1 @@
-mapping-target-upper-grid-only = Target layer 1 only
+mapping-target-upper-grid-only = Ignore layer 0

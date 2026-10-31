@@ -58,7 +58,6 @@ public sealed partial class MappingState : GameplayStateBase
     private SpriteSystem _sprite = default!;
     private TransformSystem _transform = default!;
     private VerbSystem _verbs = default!;
-
     private readonly ISawmill _sawmill;
     private readonly GameplayStateLoadController _loadController;
     private bool _setup;
@@ -116,8 +115,7 @@ public sealed partial class MappingState : GameplayStateBase
         Screen.EntityPlacementMode.OnItemSelected += OnEntityPlacementSelected;
         Screen.IgnorePlanetRootGrid.Pressed = _gridTargeting.IgnoreMapRootGrid;
         Screen.IgnorePlanetRootGrid.OnToggled += OnIgnorePlanetRootGridToggled;
-        Screen.IgnorePlanetRootGridTiles.Pressed = _gridTargeting.IgnoreMapRootGrid;
-        Screen.IgnorePlanetRootGridTiles.OnToggled += OnIgnorePlanetRootGridToggled;
+        _gridTargeting.IgnoreMapRootGridChanged += OnGridTargetModeChanged;
         Screen.EraseEntityButton.OnToggled += OnEraseEntityPressed;
         Screen.EraseDecalButton.OnToggled += OnEraseDecalPressed;
         _placement.PlacementChanged += OnPlacementChanged;
@@ -178,7 +176,7 @@ public sealed partial class MappingState : GameplayStateBase
         Screen.EntityReplaceButton.OnToggled -= OnEntityReplacePressed;
         Screen.EntityPlacementMode.OnItemSelected -= OnEntityPlacementSelected;
         Screen.IgnorePlanetRootGrid.OnToggled -= OnIgnorePlanetRootGridToggled;
-        Screen.IgnorePlanetRootGridTiles.OnToggled -= OnIgnorePlanetRootGridToggled;
+        _gridTargeting.IgnoreMapRootGridChanged -= OnGridTargetModeChanged;
         Screen.EraseEntityButton.OnToggled -= OnEraseEntityPressed;
         Screen.EraseDecalButton.OnToggled -= OnEraseDecalPressed;
         _placement.PlacementChanged -= OnPlacementChanged;
@@ -683,15 +681,18 @@ public sealed partial class MappingState : GameplayStateBase
 
     private void OnIgnorePlanetRootGridToggled(ButtonToggledEventArgs args)
     {
-        _gridTargeting.IgnoreMapRootGrid = args.Pressed;
-        Screen.IgnorePlanetRootGrid.Pressed = args.Pressed;
-        Screen.IgnorePlanetRootGridTiles.Pressed = args.Pressed;
+        _gridTargeting.SetIgnoreMapRootGrid(args.Pressed);
+    }
+
+    private void OnGridTargetModeChanged(bool enabled)
+    {
+        Screen.IgnorePlanetRootGrid.Pressed = enabled;
         if (_placement.CurrentPermission is not { } current)
             return;
 
         _placement.BeginPlacing(new PlacementInformation
         {
-            PlacementOption = args.Pressed ? nameof(AlignPVStationGrid) : _mappingPlacementOption ?? current.PlacementOption,
+            PlacementOption = enabled ? nameof(AlignPVStationGrid) : _mappingPlacementOption ?? current.PlacementOption,
             EntityType = current.EntityType,
             TileType = current.TileType,
             IsTile = current.IsTile,
