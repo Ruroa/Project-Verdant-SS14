@@ -363,6 +363,8 @@
     - PlanetaryFloorSteel
     - PlanetaryPlating
     - PlanetaryWall
+    - BuildRoof
+    - RemoveRoof
     - Catwalk
     - Grille
     - Window
