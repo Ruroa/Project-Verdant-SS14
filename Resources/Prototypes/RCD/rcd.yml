@@ -30,6 +30,35 @@
   rotation: Camera
   fx: EffectRCDDeconstruct4
 
+# Roofing
+- type: rcd
+  id: BuildRoof
+  name: rcd-component-build-roof
+  category: Roofing
+  sprite: /Textures/Interface/Radial/RCD/plating.png
+  mode: ConstructObject
+  prototype: PVRoof
+  cost: 1
+  delay: 1
+  rules:
+    - MustBeUnroofed
+  rotation: Fixed
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: RemoveRoof
+  name: rcd-component-remove-roof
+  category: Roofing
+  sprite: /Textures/Interface/Radial/RCD/deconstruct.png
+  mode: ConstructObject
+  prototype: PVNoRoof
+  cost: 1
+  delay: 1
+  rules:
+    - MustBeRoofed
+  rotation: Fixed
+  fx: EffectRCDDeconstruct2
+
 # Flooring
 - type: rcd
   id: Plating
