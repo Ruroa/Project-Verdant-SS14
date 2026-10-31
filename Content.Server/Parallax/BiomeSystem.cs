@@ -6,6 +6,8 @@ using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Decals;
 using Content.Server.Ghost.Roles.Components;
+using Content.Server.Parallax.Components;
+using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.Atmos;
@@ -1045,6 +1047,51 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         var mixture = new GasMixture(moles, Atmospherics.T20C);
 
         _atmos.SetMapAtmosphere(mapUid, false, mixture);
+    }
+
+    public void EnsurePlanetarySurface(EntityUid mapUid, BiomeTemplatePrototype biomeTemplate, int? seed,
+        Color? mapLight, List<ProtoId<BiomeMarkerLayerPrototype>> oreMarkers)
+    {
+        EnsurePlanet(mapUid, biomeTemplate, seed, mapLight: mapLight);
+
+        if (!TryComp(mapUid, out BiomeComponent? biome))
+            return;
+
+        EnsureComp<PlanetarySurfaceComponent>(mapUid);
+        foreach (var marker in oreMarkers)
+        {
+            if (!biome.MarkerLayers.Contains(marker))
+                AddMarkerLayer(mapUid, biome, marker);
+        }
+
+        var moles = new float[Atmospherics.AdjustedNumberOfGases];
+        moles[(int) Gas.Oxygen] = 5f;
+        moles[(int) Gas.Nitrogen] = 5f;
+        moles[(int) Gas.CarbonDioxide] = 100f;
+        var atmosphere = new GasMixture(moles, 288f, 2500f);
+        atmosphere.MarkImmutable();
+        _atmos.SetMapAtmosphere(mapUid, false, atmosphere);
+    }
+
+    public void EnsureVerdantPlanet(EntityUid mapUid, int? seed = null)
+    {
+        var markers = new List<ProtoId<BiomeMarkerLayerPrototype>>
+        {
+            "OreIron",
+            "OreQuartz",
+            "OreCoal",
+            "OreSalt",
+            "OreGold",
+            "OreSilver",
+            "PVPlanetOrePlasma",
+            "OreUranium",
+            "OreDiamond",
+            "OreArtifactFragment",
+            "PVPlanetOreBananium",
+        };
+
+        EnsurePlanetarySurface(mapUid, _proto.Index<BiomeTemplatePrototype>("PVVerdantPlanet"), seed,
+            Color.FromHex("#D8B059"), markers);
     }
 
     /// <summary>

@@ -3,8 +3,7 @@
   mapName: 'Horos Station'
   mapPath: /Maps/_PV/Stations/Horos.yml
   randomRotation: false
-  randomRotation: false
-  minPlayers: 50
+  minPlayers: 0
   maxPlayers: 180
   stations:
     Horos:
