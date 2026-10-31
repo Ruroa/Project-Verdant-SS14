@@ -1,0 +1,9 @@
+- type: tile
+  id: PVPlanetaryWallCollision
+  name: tiles-planetary-wall-collision
+  sprite: /Textures/_PV/Objects/Weapons/Guns/Ammo/Casings/pistol_casing.rsi/tip.png
+  isSubfloor: true
+  friction: 0
+  sturdy: false
+  thermalConductivity: 0.4
+  heatCapacity: 700000
