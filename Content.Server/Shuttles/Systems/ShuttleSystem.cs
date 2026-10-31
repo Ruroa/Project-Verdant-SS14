@@ -85,7 +85,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         InitializeGridFills();
         InitializeIFF();
         InitializeImpact();
-        SubscribeLocalEvent<FixturesComponent, GridFixtureChangeEvent>(OnPlanetaryShuttleGridFixtureChange);
+        SubscribeLocalEvent<ShuttleComponent, GridFixtureChangeEvent>(OnPlanetaryShuttleGridFixtureChange);
 
         SubscribeLocalEvent<ShuttleComponent, ComponentStartup>(OnShuttleStartup);
         SubscribeLocalEvent<ShuttleComponent, ComponentShutdown>(OnShuttleShutdown);
@@ -150,9 +150,9 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         ApplyPlanetaryShuttleWallCollision(uid);
     }
 
-    private void OnPlanetaryShuttleGridFixtureChange(EntityUid uid, FixturesComponent fixtures, GridFixtureChangeEvent args)
+    private void OnPlanetaryShuttleGridFixtureChange(EntityUid uid, ShuttleComponent component, GridFixtureChangeEvent args)
     {
-        if (!HasComp<ShuttleComponent>(uid) || !IsOnPlanetaryMap(uid))
+        if (!IsOnPlanetaryMap(uid) || !TryComp(uid, out FixturesComponent? fixtures))
             return;
 
         foreach (var (fixtureId, fixture) in args.NewFixtures)
