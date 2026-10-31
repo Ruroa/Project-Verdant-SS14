@@ -52,7 +52,7 @@ public sealed partial class AlignRCDConstruction : PlacementMode
 
         var player = _playerManager.LocalSession?.AttachedEntity;
         var heldEntity = player is { } playerUid ? _handsSystem.GetActiveItem(playerUid) : null;
-        var ignoreRoot = heldEntity is { } heldUid && TryComp<RCDComponent>(heldUid, out var heldRcd) && heldRcd.IgnorePlanetRootGrid;
+        var ignoreRoot = heldEntity is { } heldUid && _entityManager.TryGetComponent<RCDComponent>(heldUid, out var heldRcd) && heldRcd.IgnorePlanetRootGrid;
         _stationGridSelected = !ignoreRoot;
 
         if (ignoreRoot)
@@ -65,7 +65,7 @@ public sealed partial class AlignRCDConstruction : PlacementMode
             else
             {
                 _stationGridSelected = false;
-                MouseCoords = _transformSystem.ToMapCoordinates(_unalignedMouseCoords);
+                MouseCoords = _transformSystem.ToCoordinates(_transformSystem.ToMapCoordinates(_unalignedMouseCoords));
                 return;
             }
         }

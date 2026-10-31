@@ -27,7 +27,7 @@ public sealed class AlignPVStationGrid : PlacementMode
         var rawCoordinates = ScreenToCursorGrid(mouseScreen);
         if (!_targeting.TryGetStationGridCoordinates(rawCoordinates, out var stationCoordinates))
         {
-            MouseCoords = _transform.ToMapCoordinates(rawCoordinates);
+            MouseCoords = _transform.ToCoordinates(_transform.ToMapCoordinates(rawCoordinates));
             GridDistancing = 1f;
             return;
         }

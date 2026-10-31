@@ -120,13 +120,13 @@ public sealed partial class AlignRPDAtmosPipeLayers : PlacementMode
         _mouseCoordsRaw = ScreenToCursorGrid(mouseScreen);
 
         var attachedPlayer = _playerManager.LocalSession?.AttachedEntity;
-        if (attachedPlayer is { } playerUid && _handsSystem.TryGetActiveItem(playerUid, out var heldEntity) &&
-            _entityManager.TryGetComponent<RCDComponent>(heldEntity, out var heldRcd) && heldRcd.IgnorePlanetRootGrid)
+        if (attachedPlayer is { } playerUid && _handsSystem.TryGetActiveItem(playerUid, out var activeHeldItem) &&
+            _entityManager.TryGetComponent<RCDComponent>(activeHeldItem, out var heldRcd) && heldRcd.IgnorePlanetRootGrid)
         {
             if (!_gridTargeting.TryGetStationGridCoordinates(_mouseCoordsRaw, out var stationCoordinates))
             {
                 _stationGridSelected = false;
-                MouseCoords = _transformSystem.ToMapCoordinates(_mouseCoordsRaw);
+                MouseCoords = _transformSystem.ToCoordinates(_transformSystem.ToMapCoordinates(_mouseCoordsRaw));
                 return;
             }
 
