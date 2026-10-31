@@ -31,6 +31,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Maps;
 using Content.Shared._Starlight.Shuttles.Components;
+using Content.Shared.Physics;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -84,6 +85,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         InitializeGridFills();
         InitializeIFF();
         InitializeImpact();
+        SubscribeLocalEvent<FixturesComponent, GridFixtureChangeEvent>(OnPlanetaryShuttleGridFixtureChange);
 
         SubscribeLocalEvent<ShuttleComponent, ComponentStartup>(OnShuttleStartup);
         SubscribeLocalEvent<ShuttleComponent, ComponentShutdown>(OnShuttleShutdown);
@@ -145,6 +147,48 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         }
 
         component.DampingModifier = component.BodyModifier;
+        ApplyPlanetaryShuttleWallCollision(uid);
+    }
+
+    private void OnPlanetaryShuttleGridFixtureChange(EntityUid uid, FixturesComponent fixtures, GridFixtureChangeEvent args)
+    {
+        if (!HasComp<ShuttleComponent>(uid) || !IsOnPlanetaryMap(uid))
+            return;
+
+        foreach (var fixture in args.NewFixtures.Values)
+        {
+            fixture.CollisionLayer |= (int) CollisionGroup.Impassable;
+            fixture.CollisionMask |= (int) CollisionGroup.WallLayer;
+        }
+    }
+
+    private void ApplyPlanetaryShuttleWallCollision(EntityUid uid)
+    {
+        if (!IsOnPlanetaryMap(uid) || !TryComp(uid, out FixturesComponent? fixtures))
+            return;
+
+        foreach (var (fixtureId, fixture) in fixtures.Fixtures)
+        {
+            _physics.AddCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.Impassable, fixtures);
+            _physics.AddCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.WallLayer, fixtures);
+        }
+    }
+
+    private bool IsOnPlanetaryMap(EntityUid uid)
+    {
+        if (!TryComp(uid, out TransformComponent? xform) || xform.MapUid is not { } mapUid)
+            return false;
+
+        if (HasComp<PlanetarySurfaceComponent>(mapUid))
+            return true;
+
+        foreach (var grid in _mapManager.GetAllGrids(xform.MapID))
+        {
+            if (HasComp<PlanetarySurfaceComponent>(grid.Owner))
+                return true;
+        }
+
+        return false;
     }
 
     public void Toggle(EntityUid uid, ShuttleComponent component)
