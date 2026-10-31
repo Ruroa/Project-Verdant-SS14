@@ -34,7 +34,7 @@
       allowedTiles:
         - FloorAsteroidSand
       threshold: 0.94
-      excludeCenterRadius: 80
+      excludeCenterRadius: 240
       noise:
         seed: 3
         noiseType: OpenSimplex2

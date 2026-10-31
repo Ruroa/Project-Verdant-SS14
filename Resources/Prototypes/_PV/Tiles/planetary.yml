@@ -1,0 +1,6 @@
+- type: tile
+  id: PVPlanetDockClearance
+  parent: BaseStationTile
+  name: tiles-pv-planet-dock-clearance
+  sprite: /Textures/Tiles/shuttlered.png
+  baseTurf: FloorSteel

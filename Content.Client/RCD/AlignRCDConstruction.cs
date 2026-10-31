@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Client.Hands.Systems;
+using Content.Client.Maps;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.RCD.Components;
@@ -20,6 +21,7 @@ public sealed partial class AlignRCDConstruction : PlacementMode
     private readonly HandsSystem _handsSystem;
     private readonly RCDSystem _rcdSystem;
     private readonly SharedTransformSystem _transformSystem;
+    private readonly PlanetaryGridTargetSystem _gridTargeting;
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private IStateManager _stateManager = default!;
 
@@ -27,6 +29,7 @@ public sealed partial class AlignRCDConstruction : PlacementMode
     private const float PlaceColorBaseAlpha = 0.5f;
 
     private EntityCoordinates _unalignedMouseCoords = default;
+    private bool _stationGridSelected;
 
     /// <summary>
     /// This placement mode is not on the engine because it is content specific (i.e., for the RCD)
@@ -38,6 +41,7 @@ public sealed partial class AlignRCDConstruction : PlacementMode
         _handsSystem = _entityManager.System<HandsSystem>();
         _rcdSystem = _entityManager.System<RCDSystem>();
         _transformSystem = _entityManager.System<SharedTransformSystem>();
+        _gridTargeting = _entityManager.System<PlanetaryGridTargetSystem>();
 
         ValidPlaceColor = ValidPlaceColor.WithAlpha(PlaceColorBaseAlpha);
     }
@@ -45,6 +49,27 @@ public sealed partial class AlignRCDConstruction : PlacementMode
     public override void AlignPlacementMode(ScreenCoordinates mouseScreen)
     {
         _unalignedMouseCoords = ScreenToCursorGrid(mouseScreen);
+
+        var player = _playerManager.LocalSession?.AttachedEntity;
+        var heldEntity = player is { } playerUid ? _handsSystem.GetActiveItem(playerUid) : null;
+        var ignoreRoot = heldEntity is { } heldUid && TryComp<RCDComponent>(heldUid, out var heldRcd) && heldRcd.IgnorePlanetRootGrid;
+        _stationGridSelected = !ignoreRoot;
+
+        if (ignoreRoot)
+        {
+            if (_gridTargeting.TryGetStationGridCoordinates(_unalignedMouseCoords, out var stationCoordinates))
+            {
+                _unalignedMouseCoords = stationCoordinates;
+                _stationGridSelected = true;
+            }
+            else
+            {
+                _stationGridSelected = false;
+                MouseCoords = _transformSystem.ToMapCoordinates(_unalignedMouseCoords);
+                return;
+            }
+        }
+
         MouseCoords = _unalignedMouseCoords.AlignWithClosestGridTile(SearchBoxSize, _entityManager);
 
         var gridId = _transformSystem.GetGrid(MouseCoords);
@@ -71,6 +96,9 @@ public sealed partial class AlignRCDConstruction : PlacementMode
 
     public override bool IsValidPosition(EntityCoordinates position)
     {
+        if (!_stationGridSelected)
+            return false;
+
         var player = _playerManager.LocalSession?.AttachedEntity;
 
         // If the destination is out of interaction range, set the placer alpha to zero

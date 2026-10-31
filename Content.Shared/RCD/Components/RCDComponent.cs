@@ -53,6 +53,9 @@ public sealed partial class RCDComponent : Component
     [AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
     public bool UseMirrorPrototype = false;
 
+    [DataField, AutoNetworkedField]
+    public bool IgnorePlanetRootGrid;
+
     /// <summary>
     /// Indicates whether this is an RCD or an RPD
     /// </summary>

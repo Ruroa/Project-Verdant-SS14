@@ -12,6 +12,7 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.RCD.Components;
+using Content.Shared.Station.Components;
 using Content.Shared.Tag;
 using Content.Shared.Tiles;
 using Robust.Shared.Audio.Systems;
@@ -90,6 +91,7 @@ public sealed partial class RCDSystem : EntitySystem
         SubscribeLocalEvent<RCDComponent, RCDDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<RCDComponent, DoAfterAttemptEvent<RCDDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<RCDComponent, RCDSystemMessage>(OnRCDSystemMessage);
+        SubscribeLocalEvent<RCDComponent, RCDGridTargetMessage>(OnRCDGridTargetMessage);
         SubscribeNetworkEvent<RCDConstructionGhostRotationEvent>(OnRCDconstructionGhostRotationEvent);
         // Starlight Start
         SubscribeLocalEvent<RCDComponent, ComponentStartup>(OnStartup);
@@ -148,6 +150,15 @@ public sealed partial class RCDSystem : EntitySystem
 
         _adminLogger.Add(LogType.RCD, LogImpact.Low, $"{args.Actor} set RCD mode to: {prototype.Mode} : {prototype.Prototype}");
 
+        Dirty(uid, component);
+    }
+
+    private void OnRCDGridTargetMessage(EntityUid uid, RCDComponent component, RCDGridTargetMessage args)
+    {
+        if (_hands.GetActiveItem(args.Actor) != uid)
+            return;
+
+        component.IgnorePlanetRootGrid = args.IgnorePlanetRootGrid;
         Dirty(uid, component);
     }
 
@@ -258,6 +269,14 @@ public sealed partial class RCDSystem : EntitySystem
         if (!location.IsValid(EntityManager))
             return;
 
+        if (component.IgnorePlanetRootGrid)
+        {
+            if (!TryGetNonRootGridCoordinates(location, out var gridLocation))
+                return;
+
+            location = gridLocation;
+        }
+
         var gridUid = _transform.GetGrid(location);
 
         if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
@@ -265,6 +284,7 @@ public sealed partial class RCDSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rcd-component-no-valid-grid"), uid, user);
             return;
         }
+
         var tile = _mapSystem.GetTileRef(gridUid.Value, mapGrid, location);
         var position = _mapSystem.TileIndicesFor(gridUid.Value, mapGrid, location);
 
@@ -404,6 +424,17 @@ public sealed partial class RCDSystem : EntitySystem
         // Ensure the RCD operation is still valid
         var location = GetCoordinates(args.Event.Location);
 
+        if (component.IgnorePlanetRootGrid)
+        {
+            if (!TryGetNonRootGridCoordinates(location, out var gridLocation))
+            {
+                args.Cancel();
+                return;
+            }
+
+            location = gridLocation;
+        }
+
         var gridUid = _transform.GetGrid(location);
 
         if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
@@ -436,6 +467,14 @@ public sealed partial class RCDSystem : EntitySystem
         args.Handled = true;
 
         var location = GetCoordinates(args.Location);
+
+        if (component.IgnorePlanetRootGrid)
+        {
+            if (!TryGetNonRootGridCoordinates(location, out var gridLocation))
+                return;
+
+            location = gridLocation;
+        }
 
         var gridUid = _transform.GetGrid(location);
 
@@ -543,6 +582,9 @@ public sealed partial class RCDSystem : EntitySystem
 
     public bool IsRCDOperationStillValid(EntityUid uid, RCDComponent component, EntityUid gridUid, MapGridComponent mapGrid, TileRef tile, Vector2i position, Direction direction, EntityUid? target, EntityUid user, bool popMsgs = true)
     {
+        if (component.IgnorePlanetRootGrid && gridUid == _mapSystem.GetMapOrInvalid(Transform(gridUid).MapID))
+            return false;
+
         UpdateCachedPrototype(uid, component); // Starlight
 
         var prototype = component.CachedPrototype; // Starlight Edit: _protoManager.Index(component.ProtoId) -> component.CachedPrototype
@@ -586,6 +628,40 @@ public sealed partial class RCDSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private bool TryGetNonRootGridCoordinates(EntityCoordinates location, out EntityCoordinates gridCoordinates)
+    {
+        gridCoordinates = default;
+        var mapId = _transform.GetMapId(location);
+        var mapUid = _mapSystem.GetMapOrInvalid(mapId);
+        var mapCoordinates = _transform.ToMapCoordinates(location);
+        EntityCoordinates? fallback = null;
+
+        foreach (var grid in _mapSystem.GetAllGrids(mapId))
+        {
+            if (grid.Owner == mapUid)
+                continue;
+
+            var localPosition = _mapSystem.WorldToLocal(grid.Owner, grid.Comp, mapCoordinates.Position);
+            if (!_mapSystem.TryGetTileRef(grid.Owner, grid.Comp, localPosition, out var tile) || tile.Tile.IsEmpty)
+                continue;
+
+            var candidate = new EntityCoordinates(grid.Owner, localPosition);
+            if (HasComp<StationMemberComponent>(grid.Owner))
+            {
+                gridCoordinates = candidate;
+                return true;
+            }
+
+            fallback ??= candidate;
+        }
+
+        if (fallback is not { } fallbackCoordinates)
+            return false;
+
+        gridCoordinates = fallbackCoordinates;
+        return true;
     }
 
     private bool IsConstructionLocationValid(EntityUid uid, RCDComponent component, EntityUid gridUid, MapGridComponent mapGrid, TileRef tile, Vector2i position, Direction direction, EntityUid user, bool popMsgs = true)

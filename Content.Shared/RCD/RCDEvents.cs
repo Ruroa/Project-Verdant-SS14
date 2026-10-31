@@ -10,6 +10,12 @@ public sealed class RCDSystemMessage(ProtoId<RCDPrototype> protoId) : BoundUserI
 }
 
 [Serializable, NetSerializable]
+public sealed class RCDGridTargetMessage(bool ignorePlanetRootGrid) : BoundUserInterfaceMessage
+{
+    public bool IgnorePlanetRootGrid = ignorePlanetRootGrid;
+}
+
+[Serializable, NetSerializable]
 public sealed class RCDConstructionGhostRotationEvent(NetEntity netEntity, Direction direction) : EntityEventArgs
 {
     public readonly NetEntity NetEntity = netEntity;

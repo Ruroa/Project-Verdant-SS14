@@ -18,6 +18,7 @@
     sprite: Markers/cross.rsi
     state: green
   - type: Sprite
+    sprite: /Textures/Markers/cross.rsi
     layers:
     - state: green
       shader: unshaded
@@ -37,6 +38,7 @@
     sprite: Markers/cross.rsi
     state: red
   - type: Sprite
+    sprite: /Textures/Markers/cross.rsi
     layers:
     - state: red
       shader: unshaded

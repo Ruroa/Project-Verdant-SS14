@@ -1,5 +1,6 @@
 using Content.Client.Gameplay;
 using Content.Client.Hands.Systems;
+using Content.Client.Maps;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Interaction;
 using Content.Shared.RCD;
@@ -43,6 +44,7 @@ public sealed partial class AlignRPDAtmosPipeLayers : PlacementMode
     private readonly SpriteSystem _spriteSystem;
     private readonly RCDSystem _rcdSystem;
     private readonly HandsSystem _handsSystem;
+    private readonly PlanetaryGridTargetSystem _gridTargeting;
 
     private const float SearchBoxSize = 2f;
     private const float MouseDeadzoneRadius = 0.25f;
@@ -53,6 +55,7 @@ public sealed partial class AlignRPDAtmosPipeLayers : PlacementMode
     private EntityCoordinates _mouseCoordsRaw;
     private AtmosPipeLayer _currentLayer = AtmosPipeLayer.Primary;
     private Color _guideColor = new(0, 0, 0.5785f);
+    private bool _stationGridSelected;
 
     public AlignRPDAtmosPipeLayers(PlacementManager pMan) : base(pMan)
     {
@@ -63,6 +66,7 @@ public sealed partial class AlignRPDAtmosPipeLayers : PlacementMode
         _rcdSystem = _entityManager.System<RCDSystem>();
         _pipeLayersSystem = _entityManager.System<SharedAtmosPipeLayersSystem>();
         _handsSystem = _entityManager.System<HandsSystem>();
+        _gridTargeting = _entityManager.System<PlanetaryGridTargetSystem>();
         ValidPlaceColor = ValidPlaceColor.WithAlpha(PlaceColorBaseAlpha);
     }
 
@@ -114,6 +118,22 @@ public sealed partial class AlignRPDAtmosPipeLayers : PlacementMode
     public override void AlignPlacementMode(ScreenCoordinates mouseScreen)
     {
         _mouseCoordsRaw = ScreenToCursorGrid(mouseScreen);
+
+        var attachedPlayer = _playerManager.LocalSession?.AttachedEntity;
+        if (attachedPlayer is { } playerUid && _handsSystem.TryGetActiveItem(playerUid, out var heldEntity) &&
+            _entityManager.TryGetComponent<RCDComponent>(heldEntity, out var heldRcd) && heldRcd.IgnorePlanetRootGrid)
+        {
+            if (!_gridTargeting.TryGetStationGridCoordinates(_mouseCoordsRaw, out var stationCoordinates))
+            {
+                _stationGridSelected = false;
+                MouseCoords = _transformSystem.ToMapCoordinates(_mouseCoordsRaw);
+                return;
+            }
+
+            _mouseCoordsRaw = stationCoordinates;
+        }
+
+        _stationGridSelected = true;
         MouseCoords = _mouseCoordsRaw.AlignWithClosestGridTile(SearchBoxSize, _entityManager);
 
         var gridId = _transformSystem.GetGrid(MouseCoords);
@@ -278,6 +298,9 @@ public sealed partial class AlignRPDAtmosPipeLayers : PlacementMode
 
     public override bool IsValidPosition(EntityCoordinates position)
     {
+        if (!_stationGridSelected)
+            return false;
+
         var player = _playerManager.LocalSession?.AttachedEntity;
 
         // If the destination is out of interaction range, set the placer alpha to zero

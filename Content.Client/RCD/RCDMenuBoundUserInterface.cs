@@ -103,6 +103,16 @@ public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
             list.Add(actionOption);
         }
 
+        var currentRootIgnore = EntMan.GetComponent<RCDComponent>(Owner).IgnorePlanetRootGrid;
+        topLevelActions.Add(new RadialMenuActionOption<bool>(HandleGridTargetToggle, !currentRootIgnore)
+        {
+            IconSpecifier = RadialMenuIconSpecifier.With(new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png"))),
+            ToolTip = Loc.GetString(currentRootIgnore
+                ? "rcd-ignore-planet-root-grid-enabled"
+                : "rcd-ignore-planet-root-grid-disabled"),
+            BackgroundColor = currentRootIgnore ? Color.Green : Color.Gray
+        });
+
         var models = new RadialMenuOptionBase[buttonsByCategory.Count + topLevelActions.Count];
         var i = 0;
         foreach (var (key, list) in buttonsByCategory)
@@ -123,6 +133,11 @@ public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
         }
 
         return models;
+    }
+
+    private void HandleGridTargetToggle(bool ignorePlanetRootGrid)
+    {
+        SendMessage(new RCDGridTargetMessage(ignorePlanetRootGrid));
     }
 
     private void HandleMenuOptionClick(RCDPrototype proto)

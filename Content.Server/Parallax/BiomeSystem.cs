@@ -15,6 +15,7 @@ using Content.Shared.Decals;
 using Content.Shared.Ghost;
 using Content.Shared.Gravity;
 using Content.Shared.Light.Components;
+using Content.Shared.Maps;
 using Content.Shared.Parallax.Biomes;
 using Content.Shared.Parallax.Biomes.Layers;
 using Content.Shared.Parallax.Biomes.Markers;
@@ -49,6 +50,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private DecalSystem _decals = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitions = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ShuttleSystem _shuttles = default!;
@@ -1057,6 +1059,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         if (!TryComp(mapUid, out BiomeComponent? biome))
             return;
 
+        ClearPlanetDockMarkers(mapUid, biome);
         EnsureComp<PlanetarySurfaceComponent>(mapUid);
         foreach (var marker in oreMarkers)
         {
@@ -1071,6 +1074,57 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         var atmosphere = new GasMixture(moles, 288f, 2500f);
         atmosphere.MarkImmutable();
         _atmos.SetMapAtmosphere(mapUid, false, atmosphere);
+    }
+
+    private void ClearPlanetDockMarkers(EntityUid mapUid, BiomeComponent biome)
+    {
+        if (!TryComp<MapGridComponent>(mapUid, out var planetGrid))
+            return;
+
+        var markerTile = _tileDefinitions["PVPlanetDockClearance"].TileId;
+        var stationFloor = _tileDefinitions["FloorSteel"].TileId;
+        var mapId = Transform(mapUid).MapID;
+
+        ClearPlanetDockMarkersOnGrid(mapUid, planetGrid, biome, mapUid, planetGrid, markerTile, stationFloor, true);
+        foreach (var grid in _mapSystem.GetAllGrids(mapId))
+        {
+            if (grid.Owner == mapUid)
+                continue;
+
+            ClearPlanetDockMarkersOnGrid(mapUid, planetGrid, biome, grid.Owner, grid.Comp, markerTile, stationFloor, false);
+        }
+    }
+
+    private void ClearPlanetDockMarkersOnGrid(EntityUid mapUid, MapGridComponent planetGrid, BiomeComponent biome,
+        EntityUid targetGridUid, MapGridComponent targetGrid, ushort markerTile, ushort stationFloor, bool isPlanetGrid)
+    {
+        var markers = _mapSystem.GetAllTiles(targetGridUid, targetGrid)
+            .Where(tile => tile.Tile.TypeId == markerTile)
+            .ToList();
+
+        foreach (var marker in markers)
+        {
+            var planetIndex = marker.GridIndices;
+            if (!isPlanetGrid)
+            {
+                var worldCoordinates = _mapSystem.GridTileToWorld(targetGridUid, targetGrid, marker.GridIndices);
+                planetIndex = _mapSystem.TileIndicesFor(mapUid, planetGrid, worldCoordinates);
+            }
+
+            var chunk = SharedMapSystem.GetChunkIndices(planetIndex, ChunkSize) * ChunkSize;
+            biome.ModifiedTiles.GetOrNew(chunk).Add(planetIndex);
+
+            Tile? surfaceTile;
+            var foundSurface = isPlanetGrid
+                ? TryGetTile(planetIndex, biome.Layers, biome.Seed, (mapUid, planetGrid), out surfaceTile)
+                : TryGetBiomeTile(planetIndex, biome.Layers, biome.Seed, (mapUid, planetGrid), out surfaceTile);
+
+            var clearTile = foundSurface ? surfaceTile!.Value : new Tile(_tileDefinitions["FloorAsteroidSand"].TileId);
+            _mapSystem.SetTile(mapUid, planetGrid, planetIndex, clearTile);
+
+            if (!isPlanetGrid)
+                _mapSystem.SetTile(targetGridUid, targetGrid, marker.GridIndices, new Tile(stationFloor));
+        }
     }
 
     public void EnsureVerdantPlanet(EntityUid mapUid, int? seed = null)

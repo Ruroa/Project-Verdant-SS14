@@ -4,6 +4,7 @@ using Content.Client.Administration.Managers;
 using Content.Client.ContextMenu.UI;
 using Content.Client.Decals;
 using Content.Client.Gameplay;
+using Content.Client.Maps;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.Verbs;
@@ -48,6 +49,7 @@ public sealed partial class MappingState : GameplayStateBase
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IResourceCache _resources = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PlanetaryGridTargetSystem _gridTargeting = default!;
 
     private EntityMenuUIController _entityMenuController = default!;
 
@@ -68,6 +70,7 @@ public sealed partial class MappingState : GameplayStateBase
     private Control? _scrollTo;
     private bool _updatePlacement;
     private bool _updateEraseDecal;
+    private string? _mappingPlacementOption;
 
     private MappingScreen Screen => (MappingScreen) UserInterfaceManager.ActiveScreen!;
     private MainViewport Viewport => UserInterfaceManager.ActiveScreen!.GetWidget<MainViewport>()!;
@@ -111,6 +114,8 @@ public sealed partial class MappingState : GameplayStateBase
         Screen.Delete.OnPressed += OnDeletePressed;
         Screen.EntityReplaceButton.OnToggled += OnEntityReplacePressed;
         Screen.EntityPlacementMode.OnItemSelected += OnEntityPlacementSelected;
+        Screen.IgnorePlanetRootGrid.Pressed = _gridTargeting.IgnoreMapRootGrid;
+        Screen.IgnorePlanetRootGrid.OnToggled += OnIgnorePlanetRootGridToggled;
         Screen.EraseEntityButton.OnToggled += OnEraseEntityPressed;
         Screen.EraseDecalButton.OnToggled += OnEraseDecalPressed;
         _placement.PlacementChanged += OnPlacementChanged;
@@ -170,6 +175,7 @@ public sealed partial class MappingState : GameplayStateBase
         Screen.Delete.OnPressed -= OnDeletePressed;
         Screen.EntityReplaceButton.OnToggled -= OnEntityReplacePressed;
         Screen.EntityPlacementMode.OnItemSelected -= OnEntityPlacementSelected;
+        Screen.IgnorePlanetRootGrid.OnToggled -= OnIgnorePlanetRootGridToggled;
         Screen.EraseEntityButton.OnToggled -= OnEraseEntityPressed;
         Screen.EraseDecalButton.OnToggled -= OnEraseDecalPressed;
         _placement.PlacementChanged -= OnPlacementChanged;
@@ -554,10 +560,11 @@ public sealed partial class MappingState : GameplayStateBase
             case EntityPrototype entity:
             {
                 var placementId = Screen.EntityPlacementMode.SelectedId;
+                _mappingPlacementOption = placementId > 0 ? EntitySpawnWindow.InitOpts[placementId] : entity.PlacementMode;
 
                 var placement = new PlacementInformation
                 {
-                    PlacementOption = placementId > 0 ? EntitySpawnWindow.InitOpts[placementId] : entity.PlacementMode,
+                    PlacementOption = _gridTargeting.IgnoreMapRootGrid ? nameof(AlignPVStationGrid) : _mappingPlacementOption!,
                     EntityType = entity.ID,
                     IsTile = false
                 };
@@ -568,6 +575,7 @@ public sealed partial class MappingState : GameplayStateBase
                 break;
             }
             case DecalPrototype decal:
+                _mappingPlacementOption = null;
                 _placement.Clear();
 
                 _decal.SetActive(true);
@@ -576,9 +584,10 @@ public sealed partial class MappingState : GameplayStateBase
                 break;
             case ContentTileDefinition tile:
             {
+                _mappingPlacementOption = "AlignTileAny";
                 var placement = new PlacementInformation
                 {
-                    PlacementOption = "AlignTileAny",
+                    PlacementOption = _gridTargeting.IgnoreMapRootGrid ? nameof(AlignPVStationGrid) : _mappingPlacementOption!,
                     TileType = tile.TileId,
                     IsTile = true
                 };
@@ -652,11 +661,13 @@ public sealed partial class MappingState : GameplayStateBase
     {
         Screen.EntityPlacementMode.SelectId(args.Id);
 
+        _mappingPlacementOption = EntitySpawnWindow.InitOpts[args.Id];
+
         if (_placement.CurrentMode != null)
         {
             var placement = new PlacementInformation
             {
-                PlacementOption = EntitySpawnWindow.InitOpts[args.Id],
+                PlacementOption = _gridTargeting.IgnoreMapRootGrid ? nameof(AlignPVStationGrid) : _mappingPlacementOption,
                 EntityType = _placement.CurrentPermission!.EntityType,
                 TileType = _placement.CurrentPermission.TileType,
                 Range = 2,
@@ -665,6 +676,21 @@ public sealed partial class MappingState : GameplayStateBase
 
             _placement.BeginPlacing(placement);
         }
+    }
+
+    private void OnIgnorePlanetRootGridToggled(ButtonToggledEventArgs args)
+    {
+        _gridTargeting.IgnoreMapRootGrid = args.Pressed;
+        if (_placement.CurrentPermission is not { } current)
+            return;
+
+        _placement.BeginPlacing(new PlacementInformation
+        {
+            PlacementOption = args.Pressed ? nameof(AlignPVStationGrid) : _mappingPlacementOption ?? current.PlacementOption,
+            EntityType = current.EntityType,
+            TileType = current.TileType,
+            IsTile = current.IsTile,
+        });
     }
 
     private void OnEraseEntityPressed(ButtonEventArgs args)

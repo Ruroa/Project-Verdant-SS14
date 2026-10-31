@@ -75,6 +75,7 @@
                     <graphics:StyleBoxFlat BackgroundColor="#222222AA" />
                 </PanelContainer.PanelOverride>
                 <BoxContainer Orientation="Horizontal" Margin="15 10">
+                    <CheckBox Name="IgnorePlanetRootGrid" Text="{Loc mapping-ignore-planet-root-grid}" />
                     <mapping:MappingActionsButton
                         Name="Add" Access="Public" Disabled="True" ToolTip="" Visible="False" />
                     <mapping:MappingActionsButton Name="Fill" Access="Public"
