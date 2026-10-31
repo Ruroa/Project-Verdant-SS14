@@ -37,7 +37,6 @@
     damageModifierSet: StructuralMetallic
   - type: Physics
     bodyType: Static
-  - type: PlanetaryWallCollision
   - type: Fixtures
     fixtures:
       fix1:
