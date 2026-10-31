@@ -6,6 +6,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Systems;
 using Content.Server.Stunnable;
+using Content.Server._PV.PlanetaryLayer;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;
@@ -64,6 +65,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private StunSystem _stuns = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private ThrusterSystem _thruster = default!;
+    [Dependency] private PlanetaryWallCollisionSystem _planetaryWallCollision = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private TurfSystem _turf = default!;
 
@@ -106,6 +108,9 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     private void OnGridInit(GridInitializeEvent ev)
     {
         if (HasComp<MapComponent>(ev.EntityUid))
+            return;
+
+        if (HasComp<PlanetaryWallCollisionGridComponent>(ev.EntityUid))
             return;
 
         EnsureComp<ShuttleComponent>(ev.EntityUid);
@@ -153,7 +158,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     private void OnPlanetaryShuttleGridFixtureChange(EntityUid uid, ShuttleComponent component, GridFixtureChangeEvent args)
     {
-        if (HasComp<PlanetarySurfaceComponent>(uid))
+        if (HasComp<PlanetarySurfaceComponent>(uid) || HasComp<PlanetaryWallCollisionGridComponent>(uid))
             return;
 
         if (!IsOnPlanetaryMap(uid) ||
@@ -163,7 +168,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         foreach (var (fixtureId, fixture) in args.NewFixtures)
         {
             _physics.SetCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryShuttle, fixtures);
-            _physics.SetCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.WallLayer, fixtures);
+            _physics.SetCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryWall, fixtures);
         }
     }
 
@@ -178,7 +183,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         foreach (var (fixtureId, fixture) in fixtures.Fixtures)
         {
             var layer = planetaryMap ? (int) CollisionGroup.PlanetaryShuttle : (int) CollisionGroup.MapGrid;
-            var mask = planetaryMap ? (int) CollisionGroup.WallLayer : (int) CollisionGroup.MapGrid;
+            var mask = planetaryMap ? (int) CollisionGroup.PlanetaryWall : (int) CollisionGroup.MapGrid;
             _physics.SetCollisionLayer(uid, fixtureId, fixture, layer, fixtures);
             _physics.SetCollisionMask(uid, fixtureId, fixture, mask, fixtures);
         }
@@ -186,6 +191,8 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     private void OnPlanetarySurfaceStartup(EntityUid uid, PlanetarySurfaceComponent component, ComponentStartup args)
     {
+        _planetaryWallCollision.RefreshGrid(uid);
+
         var mapId = Transform(uid).MapID;
         var query = EntityQueryEnumerator<ShuttleComponent, TransformComponent>();
         while (query.MoveNext(out var shuttle, out _, out var xform))
