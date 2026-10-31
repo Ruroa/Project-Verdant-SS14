@@ -86,6 +86,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         InitializeIFF();
         InitializeImpact();
         SubscribeLocalEvent<ShuttleComponent, GridFixtureChangeEvent>(OnPlanetaryShuttleGridFixtureChange);
+        SubscribeLocalEvent<PlanetarySurfaceComponent, ComponentStartup>(OnPlanetarySurfaceStartup);
 
         SubscribeLocalEvent<ShuttleComponent, ComponentStartup>(OnShuttleStartup);
         SubscribeLocalEvent<ShuttleComponent, ComponentShutdown>(OnShuttleShutdown);
@@ -152,25 +153,40 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     private void OnPlanetaryShuttleGridFixtureChange(EntityUid uid, ShuttleComponent component, GridFixtureChangeEvent args)
     {
-        if (!IsOnPlanetaryMap(uid) || !TryComp(uid, out FixturesComponent? fixtures))
+        if (HasComp<PlanetarySurfaceComponent>(uid) ||
+            !IsOnPlanetaryMap(uid) ||
+            !TryComp(uid, out FixturesComponent? fixtures))
             return;
 
         foreach (var (fixtureId, fixture) in args.NewFixtures)
         {
-            _physics.AddCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.Impassable, fixtures);
-            _physics.AddCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.WallLayer, fixtures);
+            _physics.AddCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryShuttle, fixtures);
+            _physics.AddCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryWall, fixtures);
         }
     }
 
     private void ApplyPlanetaryShuttleWallCollision(EntityUid uid)
     {
-        if (!IsOnPlanetaryMap(uid) || !TryComp(uid, out FixturesComponent? fixtures))
+        if (HasComp<PlanetarySurfaceComponent>(uid) ||
+            !IsOnPlanetaryMap(uid) ||
+            !TryComp(uid, out FixturesComponent? fixtures))
             return;
 
         foreach (var (fixtureId, fixture) in fixtures.Fixtures)
         {
-            _physics.AddCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.Impassable, fixtures);
-            _physics.AddCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.WallLayer, fixtures);
+            _physics.AddCollisionLayer(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryShuttle, fixtures);
+            _physics.AddCollisionMask(uid, fixtureId, fixture, (int) CollisionGroup.PlanetaryWall, fixtures);
+        }
+    }
+
+    private void OnPlanetarySurfaceStartup(EntityUid uid, PlanetarySurfaceComponent component, ComponentStartup args)
+    {
+        var mapId = Transform(uid).MapID;
+        var query = EntityQueryEnumerator<ShuttleComponent, TransformComponent>();
+        while (query.MoveNext(out var shuttle, out _, out var xform))
+        {
+            if (xform.MapID == mapId)
+                ApplyPlanetaryShuttleWallCollision(shuttle);
         }
     }
 
@@ -250,5 +266,6 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     private void OnFTLCompleted(Entity<ShuttleComponent> ent, ref FTLCompletedEvent args)
     {
         ent.Comp.DampingModifier = ent.Comp.BodyModifier;
+        ApplyPlanetaryShuttleWallCollision(ent.Owner);
     }
 }
