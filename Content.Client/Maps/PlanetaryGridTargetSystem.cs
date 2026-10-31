@@ -24,7 +24,8 @@ public sealed class PlanetaryGridTargetSystem : EntitySystem
                 continue;
 
             var localPosition = _map.WorldToLocal(grid.Owner, grid.Comp, mapCoordinates.Position);
-            if (!_map.TryGetTileRef(grid.Owner, grid.Comp, localPosition, out var tile) || tile.Tile.IsEmpty)
+            // Include empty grid cells.
+            if (!grid.Comp.LocalAABB.Contains(localPosition))
                 continue;
 
             var candidate = new EntityCoordinates(grid.Owner, localPosition);

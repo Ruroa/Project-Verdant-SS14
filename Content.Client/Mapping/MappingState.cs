@@ -116,6 +116,8 @@ public sealed partial class MappingState : GameplayStateBase
         Screen.EntityPlacementMode.OnItemSelected += OnEntityPlacementSelected;
         Screen.IgnorePlanetRootGrid.Pressed = _gridTargeting.IgnoreMapRootGrid;
         Screen.IgnorePlanetRootGrid.OnToggled += OnIgnorePlanetRootGridToggled;
+        Screen.IgnorePlanetRootGridTiles.Pressed = _gridTargeting.IgnoreMapRootGrid;
+        Screen.IgnorePlanetRootGridTiles.OnToggled += OnIgnorePlanetRootGridToggled;
         Screen.EraseEntityButton.OnToggled += OnEraseEntityPressed;
         Screen.EraseDecalButton.OnToggled += OnEraseDecalPressed;
         _placement.PlacementChanged += OnPlacementChanged;
@@ -176,6 +178,7 @@ public sealed partial class MappingState : GameplayStateBase
         Screen.EntityReplaceButton.OnToggled -= OnEntityReplacePressed;
         Screen.EntityPlacementMode.OnItemSelected -= OnEntityPlacementSelected;
         Screen.IgnorePlanetRootGrid.OnToggled -= OnIgnorePlanetRootGridToggled;
+        Screen.IgnorePlanetRootGridTiles.OnToggled -= OnIgnorePlanetRootGridToggled;
         Screen.EraseEntityButton.OnToggled -= OnEraseEntityPressed;
         Screen.EraseDecalButton.OnToggled -= OnEraseDecalPressed;
         _placement.PlacementChanged -= OnPlacementChanged;
@@ -681,6 +684,8 @@ public sealed partial class MappingState : GameplayStateBase
     private void OnIgnorePlanetRootGridToggled(ButtonToggledEventArgs args)
     {
         _gridTargeting.IgnoreMapRootGrid = args.Pressed;
+        Screen.IgnorePlanetRootGrid.Pressed = args.Pressed;
+        Screen.IgnorePlanetRootGridTiles.Pressed = args.Pressed;
         if (_placement.CurrentPermission is not { } current)
             return;
 

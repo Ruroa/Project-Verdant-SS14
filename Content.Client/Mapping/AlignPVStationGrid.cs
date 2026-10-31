@@ -13,6 +13,7 @@ public sealed class AlignPVStationGrid : PlacementMode
     private readonly PlanetaryGridTargetSystem _targeting;
     private readonly SharedMapSystem _map;
     private readonly SharedTransformSystem _transform;
+    private bool _upperGridSelected;
 
     public AlignPVStationGrid(PlacementManager manager) : base(manager)
     {
@@ -27,11 +28,13 @@ public sealed class AlignPVStationGrid : PlacementMode
         var rawCoordinates = ScreenToCursorGrid(mouseScreen);
         if (!_targeting.TryGetStationGridCoordinates(rawCoordinates, out var stationCoordinates))
         {
+            _upperGridSelected = false;
             MouseCoords = _transform.ToCoordinates(_transform.ToMapCoordinates(rawCoordinates));
             GridDistancing = 1f;
             return;
         }
 
+        _upperGridSelected = true;
         MouseCoords = stationCoordinates.AlignWithClosestGridTile(2f, _entities);
         var gridUid = _transform.GetGrid(MouseCoords);
         if (!_entities.TryGetComponent<MapGridComponent>(gridUid, out var grid))
@@ -55,6 +58,7 @@ public sealed class AlignPVStationGrid : PlacementMode
 
     public override bool IsValidPosition(EntityCoordinates position)
     {
-        return !pManager.CurrentPermission!.IsTile || _targeting.TryGetStationGridCoordinates(position, out _);
+        return _upperGridSelected &&
+               (!pManager.CurrentPermission!.IsTile || _targeting.TryGetStationGridCoordinates(position, out _));
     }
 }

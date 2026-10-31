@@ -644,7 +644,8 @@ public sealed partial class RCDSystem : EntitySystem
                 continue;
 
             var localPosition = _mapSystem.WorldToLocal(grid.Owner, grid.Comp, mapCoordinates.Position);
-            if (!_mapSystem.TryGetTileRef(grid.Owner, grid.Comp, localPosition, out var tile) || tile.Tile.IsEmpty)
+            // Include empty grid cells.
+            if (!grid.Comp.LocalAABB.Contains(localPosition))
                 continue;
 
             var candidate = new EntityCoordinates(grid.Owner, localPosition);
