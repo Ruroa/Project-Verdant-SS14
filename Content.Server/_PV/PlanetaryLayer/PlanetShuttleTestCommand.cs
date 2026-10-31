@@ -133,4 +133,3 @@ public sealed class PlanetShuttleTestCommand : IConsoleCommand
         shell.WriteLine($"Test shuttle {shuttleUid} spawned over the planetary surface. You are piloting it. Use your shuttle movement bindings; run 'pvplanetshuttle_test stop' to stop piloting.");
     }
 }
-c82940c8a5de30b413acd19eb1d9b6ea4f048977
