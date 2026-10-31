@@ -1,3 +1,9 @@
 rcd-component-planetary-construction = planetary construction
 rcd-component-planetary-floor-steel = steel platform
 rcd-component-planetary-plating = planetary underplating
+rcd-component-roofing = roofing
+rcd-component-build-roof = build roof
+rcd-component-remove-roof = remove roof
+rcd-component-roof-not-present-message = This tile has no removable roof.
+rcd-component-roof-already-present-message = This tile already has a roof.
+rcd-component-roof-implicit-grid-message = This grid has an implicit roof and cannot be changed tile by tile.
