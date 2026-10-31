@@ -2,6 +2,7 @@ using Content.Server.Administration;
 using Content.Server.Power.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
+using Content.Shared.Administration;
 using Content.Shared.Maps;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Console;
@@ -132,3 +133,4 @@ public sealed class PlanetShuttleTestCommand : IConsoleCommand
         shell.WriteLine($"Test shuttle {shuttleUid} spawned over the planetary surface. You are piloting it. Use your shuttle movement bindings; run 'pvplanetshuttle_test stop' to stop piloting.");
     }
 }
+c82940c8a5de30b413acd19eb1d9b6ea4f048977
