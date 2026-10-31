@@ -4,6 +4,7 @@ using Content.Shared.Station.Components;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers.Implementations;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 
 namespace Content.Client.Maps;
 
@@ -75,6 +76,20 @@ public sealed class PlanetaryGridTargetSystem : EntitySystem
             return false;
 
         stationCoordinates = fallbackCoordinates;
+        return true;
+    }
+
+    public bool TryGetStationGridTile(EntityCoordinates coordinates, out EntityUid gridUid, out TileRef tile)
+    {
+        gridUid = EntityUid.Invalid;
+        tile = default;
+
+        if (!TryGetStationGridCoordinates(coordinates, out var stationCoordinates) ||
+            !TryComp<MapGridComponent>(stationCoordinates.EntityId, out var grid))
+            return false;
+
+        gridUid = stationCoordinates.EntityId;
+        tile = _map.GetTileRef(gridUid, grid, stationCoordinates);
         return true;
     }
 }

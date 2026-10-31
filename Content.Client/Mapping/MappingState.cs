@@ -822,10 +822,12 @@ public sealed partial class MappingState : GameplayStateBase
         // TODO: Separate mode for decals.
         if (!uid.IsValid())
         {
-            var mapPos = _transform.ToMapCoordinates(coords);
+            TileRef tileRef;
+            var foundTile = _gridTargeting.IgnoreMapRootGrid
+                ? _gridTargeting.TryGetStationGridTile(coords, out _, out tileRef)
+                : TryGetTileAt(coords, out tileRef);
 
-            if (_map.TryFindGridAt(mapPos, out var gridUid, out var grid) &&
-                _entityManager.System<SharedMapSystem>().TryGetTileRef(gridUid, grid, coords, out var tileRef) &&
+            if (foundTile &&
                 _allPrototypesDict.TryGetValue(_entityManager.System<TurfSystem>().GetContentTileDefinition(tileRef), out button))
             {
                 OnSelected(button);
@@ -853,6 +855,17 @@ public sealed partial class MappingState : GameplayStateBase
         }
 
         return true;
+    }
+
+    private bool TryGetTileAt(EntityCoordinates coordinates, out TileRef tile)
+    {
+        var mapPos = _transform.ToMapCoordinates(coordinates);
+        if (_map.TryFindGridAt(mapPos, out var gridUid, out var grid) &&
+            _entityManager.System<SharedMapSystem>().TryGetTileRef(gridUid, grid, coordinates, out tile))
+            return true;
+
+        tile = default;
+        return false;
     }
 
     private bool HandleEditorCancelPlace(ICommonSession? session, EntityCoordinates coords, EntityUid uid)

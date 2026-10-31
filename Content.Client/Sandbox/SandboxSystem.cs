@@ -1,4 +1,6 @@
 using Content.Client.Administration.Managers;
+using Content.Client.Maps;
+using Content.Client.Mapping;
 using Content.Client.Movement.Systems;
 using Content.Shared.Sandbox;
 using Robust.Client.Console;
@@ -17,6 +19,7 @@ namespace Content.Client.Sandbox
         [Dependency] private ContentEyeSystem _contentEye = default!;
         [Dependency] private SharedTransformSystem _transform = default!;
         [Dependency] private SharedMapSystem _mapSystem = default!;
+        [Dependency] private PlanetaryGridTargetSystem _gridTargeting = default!;
 
         private bool _sandboxEnabled;
         public bool SandboxAllowed { get; private set; }
@@ -103,15 +106,26 @@ namespace Content.Client.Sandbox
                     EntityType = comp.EntityPrototype.ID,
                     IsTile = false,
                     TileType = 0,
-                    PlacementOption = comp.EntityPrototype.PlacementMode
+                    PlacementOption = _gridTargeting.IgnoreMapRootGrid
+                        ? nameof(AlignPVStationGrid)
+                        : comp.EntityPrototype.PlacementMode
                 });
                 return true;
             }
 
             // Try copy tile.
 
-            if (!_mapSystem.TryFindGridAt(_transform.ToMapCoordinates(coords), out var gridUid, out var grid) || !_mapSystem.TryGetTileRef(gridUid, grid, coords, out var tileRef))
+            TileRef tileRef;
+            if (_gridTargeting.IgnoreMapRootGrid)
+            {
+                if (!_gridTargeting.TryGetStationGridTile(coords, out _, out tileRef))
+                    return false;
+            }
+            else if (!_mapSystem.TryFindGridAt(_transform.ToMapCoordinates(coords), out var gridUid, out var grid) ||
+                     !_mapSystem.TryGetTileRef(gridUid, grid, coords, out tileRef))
+            {
                 return false;
+            }
 
             if (_placement.Eraser)
                 _placement.ToggleEraser();
@@ -121,7 +135,9 @@ namespace Content.Client.Sandbox
                 EntityType = null,
                 IsTile = true,
                 TileType = tileRef.Tile.TypeId,
-                PlacementOption = nameof(AlignTileAny)
+                PlacementOption = _gridTargeting.IgnoreMapRootGrid
+                    ? nameof(AlignPVStationGrid)
+                    : nameof(AlignTileAny)
             });
             return true;
         }

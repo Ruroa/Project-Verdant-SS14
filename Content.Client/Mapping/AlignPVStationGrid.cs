@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Client.Maps;
 using Robust.Client.Placement;
 using Robust.Shared.Map;
@@ -35,24 +34,18 @@ public sealed class AlignPVStationGrid : PlacementMode
         }
 
         _upperGridSelected = true;
-        MouseCoords = stationCoordinates.AlignWithClosestGridTile(2f, _entities);
-        var gridUid = _transform.GetGrid(MouseCoords);
+        var gridUid = stationCoordinates.EntityId;
         if (!_entities.TryGetComponent<MapGridComponent>(gridUid, out var grid))
             return;
 
-        CurrentTile = _map.GetTileRef(gridUid!.Value, grid, MouseCoords);
+        var tileIndices = _map.CoordinatesToTile(gridUid, grid, stationCoordinates);
+        CurrentTile = _map.GetTileRef(gridUid, grid, tileIndices);
         GridDistancing = grid.TileSize;
+        MouseCoords = _map.GridTileToLocal(gridUid, grid, tileIndices);
 
-        if (pManager.CurrentPermission!.IsTile)
+        if (!pManager.CurrentPermission!.IsTile)
         {
-            MouseCoords = new EntityCoordinates(MouseCoords.EntityId,
-                new Vector2(CurrentTile.X + grid.TileSize / 2, CurrentTile.Y + grid.TileSize / 2));
-        }
-        else
-        {
-            MouseCoords = new EntityCoordinates(MouseCoords.EntityId,
-                new Vector2(CurrentTile.X + grid.TileSize / 2 + pManager.PlacementOffset.X,
-                    CurrentTile.Y + grid.TileSize / 2 + pManager.PlacementOffset.Y));
+            MouseCoords = new EntityCoordinates(MouseCoords.EntityId, MouseCoords.Position + pManager.PlacementOffset);
         }
     }
 
