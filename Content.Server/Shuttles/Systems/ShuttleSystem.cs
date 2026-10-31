@@ -6,6 +6,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Systems;
 using Content.Server.Stunnable;
+using Content.Server._PV.PlanetaryLayer;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;
@@ -64,6 +65,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private StunSystem _stuns = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private ThrusterSystem _thruster = default!;
+    [Dependency] private PlanetaryWallCollisionSystem _planetaryWallCollision = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private TurfSystem _turf = default!;
 
@@ -181,6 +183,8 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     private void OnPlanetarySurfaceStartup(EntityUid uid, PlanetarySurfaceComponent component, ComponentStartup args)
     {
+        _planetaryWallCollision.RefreshGrid(uid);
+
         var mapId = Transform(uid).MapID;
         var query = EntityQueryEnumerator<ShuttleComponent, TransformComponent>();
         while (query.MoveNext(out var shuttle, out _, out var xform))

@@ -17,7 +17,6 @@ public sealed partial class PlanetaryWallCollisionSystem : EntitySystem
         SubscribeLocalEvent<PlanetaryWallCollisionComponent, MapInitEvent>(OnWallMapInit);
         SubscribeLocalEvent<PlanetaryWallCollisionComponent, AnchorStateChangedEvent>(OnWallAnchorChanged);
         SubscribeLocalEvent<PlanetaryWallCollisionComponent, ComponentShutdown>(OnWallShutdown);
-        SubscribeLocalEvent<PlanetarySurfaceComponent, ComponentStartup>(OnPlanetarySurfaceStartup);
     }
 
     private void OnWallStartup(EntityUid uid, PlanetaryWallCollisionComponent component, ComponentStartup args)
@@ -40,7 +39,7 @@ public sealed partial class PlanetaryWallCollisionSystem : EntitySystem
         RemoveProxy(component);
     }
 
-    private void OnPlanetarySurfaceStartup(EntityUid uid, PlanetarySurfaceComponent component, ComponentStartup args)
+    public void RefreshGrid(EntityUid uid)
     {
         var query = EntityQueryEnumerator<PlanetaryWallCollisionComponent, TransformComponent>();
         while (query.MoveNext(out var wall, out var wallComponent, out var xform))
