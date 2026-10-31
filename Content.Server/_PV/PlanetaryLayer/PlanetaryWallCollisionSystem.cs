@@ -24,13 +24,14 @@ public sealed partial class PlanetaryWallCollisionSystem : EntitySystem
     private readonly Dictionary<EntityUid, EntityUid> _collisionGrids = new();
     private readonly Dictionary<(EntityUid Surface, Vector2i Tile), int> _wallCounts = new();
     private readonly HashSet<(EntityUid Surface, Vector2i Tile)> _dirtyTiles = new();
-    private ContentTileDefinition _spaceTile = default!;
+    private ContentTileDefinition _wallCollisionTile = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _spaceTile = (ContentTileDefinition) _tileDefinitions["Space"];
+        // Space is tile ID 0, which the map engine treats as empty and excludes from grid fixtures.
+        _wallCollisionTile = (ContentTileDefinition) _tileDefinitions["PVPlanetaryWallCollision"];
 
         SubscribeLocalEvent<PlanetaryWallCollisionComponent, ComponentStartup>(OnWallStartup);
         SubscribeLocalEvent<PlanetaryWallCollisionComponent, MapInitEvent>(OnWallMapInit);
@@ -59,7 +60,7 @@ public sealed partial class PlanetaryWallCollisionSystem : EntitySystem
             foreach (var entry in group)
             {
                 var tile = _wallCounts.ContainsKey(entry)
-                    ? new Tile(_spaceTile.TileId)
+                    ? new Tile(_wallCollisionTile.TileId)
                     : Tile.Empty;
                 tiles.Add((entry.Tile, tile));
             }
