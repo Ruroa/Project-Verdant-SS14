@@ -5,7 +5,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server._PV.PlanetaryLayer;
 
-public sealed class PlanetaryWallCollisionSystem : EntitySystem
+public sealed partial class PlanetaryWallCollisionSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
 
@@ -69,7 +69,7 @@ public sealed class PlanetaryWallCollisionSystem : EntitySystem
             return;
         }
 
-        component.Proxy = SpawnEntity("PVPlanetaryWallCollisionProxy", mapCoordinates);
+        component.Proxy = Spawn("PVPlanetaryWallCollisionProxy", mapCoordinates);
     }
 
     private void RemoveProxy(PlanetaryWallCollisionComponent component)
