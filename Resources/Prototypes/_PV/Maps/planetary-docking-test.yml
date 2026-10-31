@@ -1,0 +1,14 @@
+- type: gameMap
+  id: PVPlanetaryDockingTest
+  mapName: Planetary Docking Test
+  mapPath: /Maps/_PV/planetary-docking-test.yml
+  minPlayers: 0
+  stations:
+    PVPlanetaryDockingTest:
+      stationProto: StandardNanotrasenStationTestOnly
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: Planetary Docking Test
+      - type: StationJobs
+        availableJobs:
+          Assistant: [ -1, -1 ]
