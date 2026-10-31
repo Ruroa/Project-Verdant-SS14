@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.Maps;
+using Content.Shared.Light.Components;
 using Content.Server.Shuttles.Components;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Physics;
