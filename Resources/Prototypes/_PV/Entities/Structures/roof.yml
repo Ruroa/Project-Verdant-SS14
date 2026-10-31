@@ -17,3 +17,26 @@
   - type: Icon
     sprite: Markers/cross.rsi
     state: green
+  - type: Sprite
+    layers:
+    - state: green
+      shader: unshaded
+
+- type: entity
+  id: PVNoRoof
+  name: roof removal marker
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: SetRoof
+    value: false
+  - type: Icon
+    sprite: Markers/cross.rsi
+    state: red
+  - type: Sprite
+    layers:
+    - state: red
+      shader: unshaded
