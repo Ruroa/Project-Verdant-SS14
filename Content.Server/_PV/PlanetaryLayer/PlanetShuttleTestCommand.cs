@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Server.Administration;
 using Content.Server.Power.Components;
 using Content.Server.Shuttles.Components;
@@ -40,8 +41,8 @@ public sealed class PlanetShuttleTestCommand : IConsoleCommand
         var shuttleConsoleSystem = _entityManager.System<ShuttleConsoleSystem>();
         if (args.Length == 1)
         {
-            if (_entityManager.TryGetComponent(player, out PilotComponent? activePilot))
-                shuttleConsoleSystem.RemovePilot(player, activePilot);
+            if (_entityManager.TryGetComponent(player, out PilotComponent? pilotToStop))
+                shuttleConsoleSystem.RemovePilot(player, pilotToStop);
 
             shell.WriteLine("Stopped piloting. The test shuttle grid remains on the map.");
             return;
@@ -57,8 +58,15 @@ public sealed class PlanetShuttleTestCommand : IConsoleCommand
         }
 
         var mapUid = map.GetMap(playerMapCoordinates.MapId);
-        var hasPlanetSurface = _entityManager.HasComponent<PlanetarySurfaceComponent>(mapUid) ||
-            map.GetAllGrids(playerMapCoordinates.MapId).Any(grid => _entityManager.HasComponent<PlanetarySurfaceComponent>(grid.Owner));
+        var hasPlanetSurface = _entityManager.HasComponent<PlanetarySurfaceComponent>(mapUid);
+        foreach (var grid in map.GetAllGrids(playerMapCoordinates.MapId))
+        {
+            if (_entityManager.HasComponent<PlanetarySurfaceComponent>(grid.Owner))
+            {
+                hasPlanetSurface = true;
+                break;
+            }
+        }
         if (!hasPlanetSurface)
         {
             shell.WriteError("No PlanetarySurfaceComponent found on this map. Run this on the planetary test map.");
