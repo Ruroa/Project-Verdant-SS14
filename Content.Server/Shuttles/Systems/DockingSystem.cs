@@ -265,7 +265,8 @@ namespace Content.Server.Shuttles.Systems
                 joint.LocalAnchorA = anchorA;
                 joint.LocalAnchorB = anchorB;
                 joint.ReferenceAngle = (float)(_transform.GetWorldRotation(gridBXform) - _transform.GetWorldRotation(gridAXform));
-                joint.CollideConnected = true;
+                joint.CollideConnected = !HasComp<PlanetarySurfaceComponent>(gridA) &&
+                                         !HasComp<PlanetarySurfaceComponent>(gridB);
                 joint.Stiffness = stiffness;
                 joint.Damping = damping;
 
