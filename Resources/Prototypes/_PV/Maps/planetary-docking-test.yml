@@ -9,6 +9,9 @@
       components:
       - type: StationNameSetup
         mapNameTemplate: Planetary Docking Test
+      - type: StationBiome
+        biome: LowDesert
+        mapLightColor: "#D8B059"
       - type: StationJobs
         availableJobs:
           Assistant: [ -1, -1 ]
