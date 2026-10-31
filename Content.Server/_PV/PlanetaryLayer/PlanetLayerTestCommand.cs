@@ -1,5 +1,7 @@
 using Content.Server.Administration;
+using Content.Server.Shuttles.Components;
 using Content.Shared.Administration;
+using Content.Shared.Light.Components;
 using Content.Shared.Maps;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
@@ -38,6 +40,8 @@ public sealed class PlanetLayerTestCommand : IConsoleCommand
         var gridEntity = mapSystem.CreateGridEntity(mapUid);
         var gridUid = gridEntity.Owner;
         var grid = gridEntity.Comp;
+        _entityManager.EnsureComponent<PlanetarySurfaceComponent>(gridUid);
+        _entityManager.RemoveComponent<ImplicitRoofComponent>(gridUid);
 
         var grass = (ContentTileDefinition)_tileDefinitions["FloorPlanetGrass"];
         var desert = (ContentTileDefinition)_tileDefinitions["FloorDesert"];
