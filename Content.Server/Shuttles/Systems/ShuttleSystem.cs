@@ -107,6 +107,19 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
         EnsureComp<ShuttleComponent>(ev.EntityUid);
 
+        if (HasComp<PlanetarySurfaceComponent>(ev.EntityUid))
+        {
+            RemComp<ImplicitRoofComponent>(ev.EntityUid);
+
+            if (TryComp<ShuttleComponent>(ev.EntityUid, out var surfaceShuttle))
+            {
+                surfaceShuttle.Enabled = false;
+                Disable(ev.EntityUid);
+            }
+
+            return;
+        }
+
         // This and RoofComponent should be mutually exclusive, so ImplicitRoof should be removed if the grid has RoofComponent
         if (HasComp<RoofComponent>(ev.EntityUid))
             RemComp<ImplicitRoofComponent>(ev.EntityUid);
