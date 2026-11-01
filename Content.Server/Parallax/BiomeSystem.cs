@@ -1082,21 +1082,23 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
             return;
 
         var markerTile = _tileDefinitions["PVPlanetDockClearance"].TileId;
-        var stationFloor = _tileDefinitions["FloorSteel"].TileId;
         var mapId = Transform(mapUid).MapID;
 
-        ClearPlanetDockMarkersOnGrid(mapUid, planetGrid, biome, mapUid, planetGrid, markerTile, stationFloor, true);
+        // StationPostInit runs after the station map has completed MapInit and grid
+        // spawns. Keep clearance markers through planetary setup, then clear the
+        // marker cells on the station grid so shuttles have empty docking space.
+        ClearPlanetDockMarkersOnGrid(mapUid, planetGrid, biome, mapUid, planetGrid, markerTile, true);
         foreach (var grid in _mapSystem.GetAllGrids(mapId))
         {
             if (grid.Owner == mapUid)
                 continue;
 
-            ClearPlanetDockMarkersOnGrid(mapUid, planetGrid, biome, grid.Owner, grid.Comp, markerTile, stationFloor, false);
+            ClearPlanetDockMarkersOnGrid(mapUid, planetGrid, biome, grid.Owner, grid.Comp, markerTile, false);
         }
     }
 
     private void ClearPlanetDockMarkersOnGrid(EntityUid mapUid, MapGridComponent planetGrid, BiomeComponent biome,
-        EntityUid targetGridUid, MapGridComponent targetGrid, ushort markerTile, ushort stationFloor, bool isPlanetGrid)
+        EntityUid targetGridUid, MapGridComponent targetGrid, ushort markerTile, bool isPlanetGrid)
     {
         var markers = _mapSystem.GetAllTiles(targetGridUid, targetGrid)
             .Where(tile => tile.Tile.TypeId == markerTile)
@@ -1123,7 +1125,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
             _mapSystem.SetTile(mapUid, planetGrid, planetIndex, clearTile);
 
             if (!isPlanetGrid)
-                _mapSystem.SetTile(targetGridUid, targetGrid, marker.GridIndices, new Tile(stationFloor));
+                _mapSystem.SetTile(targetGridUid, targetGrid, marker.GridIndices, Tile.Empty);
         }
     }
 
