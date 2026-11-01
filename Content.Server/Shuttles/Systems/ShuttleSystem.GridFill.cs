@@ -317,7 +317,7 @@ public sealed partial class ShuttleSystem
                         throw new NotImplementedException();
                 }
 
-                AlignSpawnedGrid(targetGrid.Value, spawned);
+                AlignSpawnedGrid(targetGrid, spawned);
 
                 if (_protoManager.Resolve(group.Value.NameDataset, out var dataset)) // SL edit
                 {
