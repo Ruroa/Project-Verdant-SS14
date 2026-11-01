@@ -43,7 +43,7 @@
         fractalType: Ridged
         octaves: 1
       entities:
-        - FloorWaterEntity
+        - PVPlanetRiverWaterEntity
     - !type:BiomeTileLayer
       threshold: -1
       tile: FloorAsteroidSand
