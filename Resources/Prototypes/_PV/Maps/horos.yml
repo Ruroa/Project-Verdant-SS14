@@ -7,7 +7,7 @@
   maxPlayers: 180
   stations:
     Horos:
-      stationProto: StandardNanotrasenStation
+      stationProto: PVPlanetaryStation
       components:
         - type: StationNameSetup
           mapNameTemplate: '{0} Horos Station {1}'
