@@ -551,8 +551,8 @@ public sealed partial class RadioSystem : EntitySystem
     private bool HasActiveServer(EntityUid radioSource, string channelId)
     {
         var sourceMapId = Transform(radioSource).MapID;
-        var servers = EntityQuery<TelecomServerComponent, EncryptionKeyHolderComponent, ApcPowerReceiverComponent, TransformComponent>();
-        foreach (var (server, keys, power, transform) in servers)
+        var servers = EntityQueryEnumerator<TelecomServerComponent, EncryptionKeyHolderComponent, ApcPowerReceiverComponent, TransformComponent>();
+        while (servers.MoveNext(out var server, out _, out var keys, out var power, out var transform))
         {
             if ((transform.MapID == sourceMapId || BelongsToSameStation(radioSource, server)) &&
                 power.Powered &&

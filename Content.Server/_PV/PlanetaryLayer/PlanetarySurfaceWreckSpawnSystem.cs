@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Server._PV.OrbitalAccessPoint;
 using Content.Server.Parallax;
 using Content.Server.Shuttles.Components;
+using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Events;
 using Content.Server.Station.Systems;
 using Robust.Shared.EntitySerialization.Systems;
@@ -23,7 +24,7 @@ public sealed class PlanetarySurfaceWreckSpawnSystem : EntitySystem
     [Dependency] private StationSystem _station = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    private readonly List<Entity<MapGridComponent>> _candidateGrids = new();
+    private List<Entity<MapGridComponent>> _candidateGrids = new();
 
     public override void Initialize()
     {
