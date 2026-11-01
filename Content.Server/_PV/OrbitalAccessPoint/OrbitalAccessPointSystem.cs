@@ -1,3 +1,4 @@
+using Content.Server.Cargo.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Events;
 using Content.Server.Station.Systems;
@@ -48,6 +49,9 @@ public sealed class OrbitalAccessPointSystem : EntitySystem
         // Keep the orbital point station-owned so its consoles and shuttles belong to
         // the same station, while its separate MapId keeps its spawns in orbit.
         _station.AddGridToStation(station, accessPoint.AccessGrid.Value);
+        // Approved cargo orders search station-owned TradeStation grids and place
+        // deliveries on their buy pallets. The OAP is the station's trade station.
+        EnsureComp<TradeStationComponent>(accessPoint.AccessGrid.Value);
         _map.InitializeMap(mapUid);
 
         // Make the separate orbital map selectable through shuttle consoles.
