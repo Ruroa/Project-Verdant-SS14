@@ -59,6 +59,11 @@ public interface IGridSpawnGroup
     /// Should we add this to the station's grids (if possible / relevant).
     /// </summary>
     public bool StationGrid { get; set; }
+
+    /// <summary>
+    /// Whether the spawned grid should use a random world rotation instead of matching the target grid.
+    /// </summary>
+    public bool RandomRotation { get; set; }
 }
 
 [DataRecord]
@@ -95,6 +100,9 @@ public sealed partial class DungeonSpawnGroup : IGridSpawnGroup
     /// <inheritdoc />
     public bool StationGrid { get; set; } = false;
 
+    /// <inheritdoc />
+    public bool RandomRotation { get; set; } = false;
+
     // Starlight Start
     /// <summary>
     /// Generate this dungeon directly on the target station map instead of generating it
@@ -121,6 +129,9 @@ public sealed partial class GridSpawnGroup : IGridSpawnGroup
     public bool Hide { get; set; } = false;
     public bool NameGrid { get; set; } = true;
     public bool StationGrid { get; set; } = true;
+
+    /// <inheritdoc />
+    public bool RandomRotation { get; set; } = false;
 }
 
 

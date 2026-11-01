@@ -319,6 +319,9 @@ public sealed partial class ShuttleSystem
 
                 AlignSpawnedGrid(targetGrid, spawned);
 
+                if (group.Value.RandomRotation)
+                    _transform.SetWorldRotation(spawned, _random.NextAngle());
+
                 if (_protoManager.Resolve(group.Value.NameDataset, out var dataset)) // SL edit
                 {
                     _metadata.SetEntityName(spawned, _salvage.GetFTLName(dataset, _random.Next()));

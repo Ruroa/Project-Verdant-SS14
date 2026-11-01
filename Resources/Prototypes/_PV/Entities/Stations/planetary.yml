@@ -16,24 +16,15 @@
   - type: OrbitalAccessPoint
     mapPath: /Maps/_PV/Orbitalaccesspoint/Orbitalaccesspoint.yml
     spawnGroups:
-      trade: !type:GridSpawnGroup
-        addComponents:
-        - type: ProtectedGrid
-        - type: TradeStation
-        paths:
-        - /Maps/_Starlight/trading_outpost.yml
       cargo_salvage_shuttle: !type:GridSpawnGroup
         nameGrid: false
         paths:
         - /Maps/_Starlight/Shuttles/Salvage/expeditioneer.yml
-      cargo_mining_shuttle: !type:GridSpawnGroup
-        nameGrid: false
-        paths:
-        - /Maps/_Starlight/Shuttles/Mining/asteroidcracker.yml
       orbital_derelicts: !type:GridSpawnGroup
         minCount: 1
         maxCount: 2
         stationGrid: false
+        randomRotation: true
         paths:
         - /Maps/Ruins/derelict.yml
       orbital_asteroids: !type:DungeonSpawnGroup
@@ -42,6 +33,8 @@
         minCount: 2
         maxCount: 4
         stationGrid: false
+        directDungeonSpawn: true
+        randomRotation: true
         addComponents:
         - type: Gravity
           enabled: true
