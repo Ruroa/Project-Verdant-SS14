@@ -43,6 +43,13 @@ public sealed partial class BiomeComponent : Component
     public Dictionary<Vector2i, HashSet<Vector2i>> ModifiedTiles = new();
 
     /// <summary>
+    /// Locations where biome entities, decals, and marker entities must not spawn.
+    /// Biome tile layers still generate at these positions.
+    /// </summary>
+    [DataField("excludedEntityTiles")]
+    public HashSet<Vector2i> ExcludedEntityTiles = new();
+
+    /// <summary>
     /// Decals that have been loaded as a part of this biome.
     /// </summary>
     [DataField("decals")]

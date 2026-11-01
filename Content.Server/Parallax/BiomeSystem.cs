@@ -83,6 +83,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 
     private readonly Dictionary<BiomeComponent,
         Dictionary<string, HashSet<Vector2i>>> _markerChunks = new();
+    private readonly HashSet<EntityUid> _pendingDockClearanceMaps = new();
 
     public override void Initialize()
     {
@@ -333,6 +334,19 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        // StationPostInit handlers can spawn additional grids after the biome
+        // handler runs. Defer the sweep until Update, after the full event has
+        // finished, so every station-layer marker grid is included.
+        foreach (var mapUid in _pendingDockClearanceMaps.ToArray())
+        {
+            _pendingDockClearanceMaps.Remove(mapUid);
+            if (Deleted(mapUid) || !TryComp(mapUid, out BiomeComponent? biome))
+                continue;
+
+            ClearPlanetDockMarkers(mapUid, biome);
+        }
+
         var biomes = AllEntityQuery<BiomeComponent>();
 
         while (biomes.MoveNext(out var biome))
@@ -726,7 +740,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 
             foreach (var node in nodes)
             {
-                if (modified.Contains(node))
+                if (modified.Contains(node) || component.ExcludedEntityTiles.Contains(node))
                     continue;
 
                 // Need to ensure the tile under it has loaded for anchoring.
@@ -789,7 +803,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
                 var indices = new Vector2i(x + chunk.X, y + chunk.Y);
 
                 // Pass in null so we don't try to get the tileref.
-                if (modified.Contains(indices))
+                if (modified.Contains(indices) || component.ExcludedEntityTiles.Contains(indices))
                     continue;
 
                 // If there's existing data then don't overwrite it.
@@ -816,7 +830,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
             {
                 var indices = new Vector2i(x + chunk.X, y + chunk.Y);
 
-                if (modified.Contains(indices))
+                if (modified.Contains(indices) || component.ExcludedEntityTiles.Contains(indices))
                     continue;
 
                 // Don't mess with anything that's potentially anchored.
@@ -1059,7 +1073,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         if (!TryComp(mapUid, out BiomeComponent? biome))
             return;
 
-        ClearPlanetDockMarkers(mapUid, biome);
+        _pendingDockClearanceMaps.Add(mapUid);
         EnsureComp<PlanetarySurfaceComponent>(mapUid);
         foreach (var marker in oreMarkers)
         {
@@ -1108,25 +1122,41 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
             }
         }
 
-        var planetTiles = new List<(Vector2i Index, Tile Tile)>(clearance.Count);
-        var reservedPlanetIndices = new HashSet<Vector2i>();
         foreach (var marker in clearance)
         {
-            if (!reservedPlanetIndices.Add(marker.PlanetIndex))
-                continue;
-
-            var chunkOrigin = SharedMapSystem.GetChunkIndices(marker.PlanetIndex, ChunkSize) * ChunkSize;
-            biome.ModifiedTiles.GetOrNew(chunkOrigin).Add(marker.PlanetIndex);
-            planetTiles.Add((marker.PlanetIndex, new Tile(spaceTile)));
+            biome.ExcludedEntityTiles.Add(marker.PlanetIndex);
         }
 
-        // Reserve and clear the planet cells before any biome chunk can generate
-        // into them. Then consume every marker tile on the station grids as Space.
-        if (planetTiles.Count > 0)
-            _mapSystem.SetTiles(mapUid, planetGrid, planetTiles);
-        foreach (var marker in clearance)
+        // Remove biome entities and decals that may already have loaded in those
+        // positions. Keep the generated planet tiles themselves intact.
+        foreach (var loadedChunk in biome.LoadedEntities.Values)
         {
-            _mapSystem.SetTile(marker.Grid, marker.Component, marker.Index, new Tile(spaceTile));
+            foreach (var entity in loadedChunk.Where(pair => biome.ExcludedEntityTiles.Contains(pair.Value)).Select(pair => pair.Key).ToArray())
+            {
+                QueueDel(entity);
+                loadedChunk.Remove(entity);
+            }
+        }
+
+        foreach (var loadedChunk in biome.LoadedDecals.Values)
+        {
+            foreach (var decal in loadedChunk.Where(pair => biome.ExcludedEntityTiles.Contains(pair.Value)).Select(pair => pair.Key).ToArray())
+            {
+                _decals.RemoveDecal(mapUid, decal);
+                loadedChunk.Remove(decal);
+            }
+        }
+
+        // These markers are mapped on station grids. Convert all of them in one
+        // batch per grid to Space; the corresponding planet floor remains present.
+        foreach (var grid in stationGrids)
+        {
+            var markers = clearance
+                .Where(marker => marker.Grid == grid.Owner)
+                .Select(marker => (marker.Index, new Tile(spaceTile)))
+                .ToList();
+            if (markers.Count > 0)
+                _mapSystem.SetTiles(grid.Owner, grid.Comp, markers);
         }
     }
 
