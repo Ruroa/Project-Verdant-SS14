@@ -1090,6 +1090,52 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         _atmos.SetMapAtmosphere(mapUid, false, atmosphere);
     }
 
+    /// <summary>
+    /// Keeps procedural biome entities out of a placed structure's footprint without
+    /// changing the planet's underlying floor tiles.
+    /// </summary>
+    public void ExcludePlanetaryEntities(EntityUid mapUid, Box2 worldBounds)
+    {
+        if (!TryComp(mapUid, out BiomeComponent? biome) ||
+            !TryComp(mapUid, out MapGridComponent? planetGrid))
+        {
+            return;
+        }
+
+        var excludedTiles = _mapSystem.GetLocalTilesIntersecting(mapUid, planetGrid, worldBounds, false)
+            .Select(tile => tile.GridIndices)
+            .ToHashSet();
+
+        if (excludedTiles.Count == 0)
+            return;
+
+        biome.ExcludedEntityTiles.UnionWith(excludedTiles);
+
+        foreach (var loadedChunk in biome.LoadedEntities.Values)
+        {
+            foreach (var entity in loadedChunk
+                         .Where(pair => excludedTiles.Contains(pair.Value))
+                         .Select(pair => pair.Key)
+                         .ToArray())
+            {
+                QueueDel(entity);
+                loadedChunk.Remove(entity);
+            }
+        }
+
+        foreach (var loadedChunk in biome.LoadedDecals.Values)
+        {
+            foreach (var decal in loadedChunk
+                         .Where(pair => excludedTiles.Contains(pair.Value))
+                         .Select(pair => pair.Key)
+                         .ToArray())
+            {
+                _decals.RemoveDecal(mapUid, decal);
+                loadedChunk.Remove(decal);
+            }
+        }
+    }
+
     private void ClearPlanetDockMarkers(EntityUid mapUid, BiomeComponent biome)
     {
         var markerTile = _tileDefinitions["PVPlanetDockClearance"].TileId;

@@ -4,6 +4,7 @@ using Content.Server._Starlight.Radio.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
+using Content.Server.Station.Systems;
 using Content.Server.VoiceMask;
 using Content.Shared;
 using Content.Shared._Starlight.Language;
@@ -57,6 +58,7 @@ public sealed partial class RadioSystem : EntitySystem
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private RadioChimeSystem _chime = default!; //🌟Starlight🌟
     [Dependency] private LanguageSystem _language = default!; // Starlight
+    [Dependency] private StationSystem _station = default!;
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -207,7 +209,7 @@ public sealed partial class RadioSystem : EntitySystem
         var canSend = !sendAttemptEv.Cancelled;
 
         var sourceMapId = Transform(radioSource).MapID;
-        var hasActiveServer = HasActiveServer(sourceMapId, channel.ID);
+        var hasActiveServer = HasActiveServer(radioSource, channel.ID);
         var sourceServerExempt = _exemptQuery.HasComp(radioSource);
 
         // Starlight - Start - Languages - Radio
@@ -248,7 +250,8 @@ public sealed partial class RadioSystem : EntitySystem
                     continue;
             }
 
-            if (!channel.LongRange && transform.MapID != sourceMapId && !radio.GlobalReceive)
+            if (!channel.LongRange && transform.MapID != sourceMapId && !radio.GlobalReceive &&
+                !BelongsToSameStation(radioSource, receiver))
                 continue;
 
             // don't need telecom server for long range channels or handheld radios and intercoms
@@ -354,7 +357,7 @@ public sealed partial class RadioSystem : EntitySystem
         var canSend = !sendAttemptEv.Cancelled;
 
         var sourceMapId = Transform(radioSource).MapID;
-        var hasActiveServer = HasActiveServer(sourceMapId, channel.Id);
+        var hasActiveServer = HasActiveServer(radioSource, channel.Id);
         var sourceServerExempt = _exemptQuery.HasComp(radioSource);
 
         var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
@@ -368,7 +371,8 @@ public sealed partial class RadioSystem : EntitySystem
                     continue;
             }
 
-            if (!channel.LongRange && transform.MapID != sourceMapId && !radio.GlobalReceive)
+            if (!channel.LongRange && transform.MapID != sourceMapId && !radio.GlobalReceive &&
+                !BelongsToSameStation(radioSource, receiver))
                 continue;
 
             var needServer = !channel.LongRange && !sourceServerExempt;
@@ -544,12 +548,13 @@ public sealed partial class RadioSystem : EntitySystem
     // Starlight - End
 
     /// <inheritdoc cref="TelecomServerComponent"/>
-    private bool HasActiveServer(MapId mapId, string channelId)
+    private bool HasActiveServer(EntityUid radioSource, string channelId)
     {
+        var sourceMapId = Transform(radioSource).MapID;
         var servers = EntityQuery<TelecomServerComponent, EncryptionKeyHolderComponent, ApcPowerReceiverComponent, TransformComponent>();
-        foreach (var (_, keys, power, transform) in servers)
+        foreach (var (server, keys, power, transform) in servers)
         {
-            if (transform.MapID == mapId &&
+            if ((transform.MapID == sourceMapId || BelongsToSameStation(radioSource, server)) &&
                 power.Powered &&
                 (keys.Channels.Contains(channelId) || keys.CustomChannels.Any(channel => channel.Id == channelId))) //Starlight edit
             {
@@ -557,6 +562,16 @@ public sealed partial class RadioSystem : EntitySystem
             }
         }
         return false;
+    }
+
+    /// <summary>
+    /// Station-owned grids can live on separate maps (for example, the orbital access point).
+    /// Treat those grids as one radio network while leaving unrelated maps isolated.
+    /// </summary>
+    private bool BelongsToSameStation(EntityUid first, EntityUid second)
+    {
+        var firstStation = _station.GetOwningStation(first);
+        return firstStation != null && firstStation == _station.GetOwningStation(second);
     }
 
     #region Starlight

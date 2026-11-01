@@ -3,6 +3,16 @@
   parent: StandardNanotrasenStation
   categories: [ HideSpawnMenu ]
   components:
+  - type: PlanetarySurfaceWreckSpawn
+    minCount: 1
+    maxCount: 2
+    minimumDistance: 140
+    maximumDistance: 260
+    paths:
+    - /Maps/Ruins/derelict.yml
+    - /Maps/Ruins/ruined_prison_ship.yml
+    - /Maps/Ruins/syndicate_dropship.yml
+    - /Maps/Salvage/medium-crashed-shuttle.yml
   - type: OrbitalAccessPoint
     mapPath: /Maps/_PV/Orbitalaccesspoint/Orbitalaccesspoint.yml
     spawnGroups:

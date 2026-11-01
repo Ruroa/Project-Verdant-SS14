@@ -10,6 +10,7 @@
     sprite: Objects/Decoration/Flora/flora_rockssolid.rsi
   - type: Physics
     bodyType: Static
+  - type: PlanetaryWallCollision
   - type: Fixtures
     fixtures:
       fix1:
@@ -47,6 +48,7 @@
     offset: 0,0.9
   - type: Physics
     bodyType: Static
+  - type: PlanetaryWallCollision
   - type: Fixtures
     fixtures:
       fix1:
