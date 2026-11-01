@@ -1059,7 +1059,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         if (!TryComp(mapUid, out BiomeComponent? biome))
             return;
 
-        ClearPlanetDockMarkers(mapUid);
+        ClearPlanetDockMarkers(mapUid, biome);
         EnsureComp<PlanetarySurfaceComponent>(mapUid);
         foreach (var marker in oreMarkers)
         {
@@ -1076,31 +1076,57 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         _atmos.SetMapAtmosphere(mapUid, false, atmosphere);
     }
 
-    private void ClearPlanetDockMarkers(EntityUid mapUid)
+    private void ClearPlanetDockMarkers(EntityUid mapUid, BiomeComponent biome)
     {
         var markerTile = _tileDefinitions["PVPlanetDockClearance"].TileId;
         var spaceTile = _tileDefinitions["Space"].TileId;
         var mapId = Transform(mapUid).MapID;
-        // Clearing a marker can create or remove grid chunks. Snapshot the map's
-        // grids before changing any tiles so the grid enumerator remains valid.
+        if (!TryComp(mapUid, out MapGridComponent? planetGrid))
+            return;
+
+        // Snapshot the station grids before editing tiles. SetTile can create or
+        // remove chunks, invalidating the map grid enumerator.
         var stationGrids = _mapSystem.GetAllGrids(mapId)
             .Where(grid => grid.Owner != mapUid)
             .ToList();
+        var clearance = new List<(EntityUid Grid, MapGridComponent Component, Vector2i Index, Vector2i PlanetIndex)>();
 
-        // StationPostInit runs after the station map has completed MapInit and grid
-        // spawns. These markers live on the station layer, so only replace those
-        // cells with Space. Leave the planet grid's terrain below them unchanged.
         foreach (var grid in stationGrids)
         {
             var markers = _mapSystem.GetAllTiles(grid.Owner, grid.Comp)
                 .Where(tile => tile.Tile.TypeId == markerTile)
-                .Select(tile => tile.GridIndices)
                 .ToList();
 
             foreach (var marker in markers)
             {
-                _mapSystem.SetTile(grid.Owner, grid.Comp, marker, new Tile(spaceTile));
+                // The marker is on the station layer. Translate its position into
+                // the planet grid so procedural biome loading can leave that cell
+                // empty too; otherwise rocks appear under the newly cleared tile.
+                var worldPosition = _mapSystem.GridTileToWorldPos(grid.Owner, grid.Comp, marker.GridIndices);
+                var planetIndex = _mapSystem.WorldToTile(mapUid, planetGrid, worldPosition);
+                clearance.Add((grid.Owner, grid.Comp, marker.GridIndices, planetIndex));
             }
+        }
+
+        var planetTiles = new List<(Vector2i Index, Tile Tile)>(clearance.Count);
+        var reservedPlanetIndices = new HashSet<Vector2i>();
+        foreach (var marker in clearance)
+        {
+            if (!reservedPlanetIndices.Add(marker.PlanetIndex))
+                continue;
+
+            var chunkOrigin = SharedMapSystem.GetChunkIndices(marker.PlanetIndex, ChunkSize) * ChunkSize;
+            biome.ModifiedTiles.GetOrNew(chunkOrigin).Add(marker.PlanetIndex);
+            planetTiles.Add((marker.PlanetIndex, new Tile(spaceTile)));
+        }
+
+        // Reserve and clear the planet cells before any biome chunk can generate
+        // into them. Then consume every marker tile on the station grids as Space.
+        if (planetTiles.Count > 0)
+            _mapSystem.SetTiles(mapUid, planetGrid, planetTiles);
+        foreach (var marker in clearance)
+        {
+            _mapSystem.SetTile(marker.Grid, marker.Component, marker.Index, new Tile(spaceTile));
         }
     }
 
