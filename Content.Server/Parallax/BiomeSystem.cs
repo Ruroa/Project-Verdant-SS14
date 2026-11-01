@@ -1083,12 +1083,15 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 
         var markerTile = _tileDefinitions["PVPlanetDockClearance"].TileId;
         var mapId = Transform(mapUid).MapID;
+        // Clearing a marker can create or remove grid chunks. Snapshot the map's
+        // grids before changing any tiles so the grid enumerator remains valid.
+        var grids = _mapSystem.GetAllGrids(mapId).ToList();
 
         // StationPostInit runs after the station map has completed MapInit and grid
         // spawns. Keep clearance markers through planetary setup, then clear the
         // marker cells on the station grid so shuttles have empty docking space.
         ClearPlanetDockMarkersOnGrid(mapUid, planetGrid, biome, mapUid, planetGrid, markerTile, true);
-        foreach (var grid in _mapSystem.GetAllGrids(mapId))
+        foreach (var grid in grids)
         {
             if (grid.Owner == mapUid)
                 continue;
