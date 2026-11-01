@@ -1,0 +1,181 @@
+- type: entity
+  parent: BaseStructure
+  id: BasePVTWall
+  abstract: true
+  name: concrete T-wall
+  description: A sturdy waist-high concrete barrier. You can see over it and climb across it.
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Walls/twalls.rsi
+    drawdepth: WallTops
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Climbable
+    delay: 2.0
+  - type: RCDDeconstructable
+    cost: 2
+    delay: 2
+    fx: EffectRCDDeconstruct2
+
+- type: entity
+  parent: BasePVTWall
+  id: PVTWallStraight
+  suffix: Straight
+  components:
+  - type: Icon
+    sprite: _PV/Structures/Walls/twalls.rsi
+    state: icon_straight
+  - type: Sprite
+    sprite: _PV/Structures/Walls/twalls.rsi
+    state: straight
+    drawdepth: WallTops
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.10,-0.5,0.10,0.5"
+        density: 1000
+        mask:
+        - FullTileMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+        - BulletImpassable
+  - type: Construction
+    graph: PVTWall
+    node: straight
+
+- type: entity
+  parent: BasePVTWall
+  id: PVTWallCorner
+  suffix: Corner
+  components:
+  - type: Icon
+    sprite: _PV/Structures/Walls/twalls.rsi
+    state: icon_straight
+  - type: Sprite
+    sprite: _PV/Structures/Walls/twalls.rsi
+    state: corner
+    drawdepth: WallTops
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.5"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+        - BulletImpassable
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.1,-0.1,0.1"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+        - BulletImpassable
+  - type: Construction
+    graph: PVTWall
+    node: corner
+
+- type: entity
+  parent: BasePVTWall
+  id: PVTWallEnd
+  suffix: End
+  components:
+  - type: Icon
+    sprite: _PV/Structures/Walls/twalls.rsi
+    state: icon_end
+  - type: Sprite
+    sprite: _PV/Structures/Walls/twalls.rsi
+    state: end
+    drawdepth: WallTops
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.5,0.1,0.0"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+        - BulletImpassable
+  - type: Construction
+    graph: PVTWall
+    node: end
+
+- type: entity
+  parent: BasePVTWall
+  id: PVTWallGate
+  name: concrete T-wall gate
+  components:
+  - type: Sprite
+    layers:
+    - state: door_closed
+      map: [ "enum.DoorVisualLayers.Base" ]
+    drawdepth: WallTops
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.1,0.5,0.1"
+        density: 1000
+        mask:
+        - FullTileMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+        - BulletImpassable
+  - type: InteractionOutline
+  - type: Door
+    openSpriteState: door_opened
+    closedSpriteState: door_closed
+    canPry: false
+    occludes: false
+    changeAirtight: false
+    bumpOpen: false
+    clickOpen: true
+    canCrush: false
+    closeTimeOne: 0
+    closeTimeTwo: 0
+    openTimeOne: 0
+    openTimeTwo: 0
+    openingAnimationTime: 0
+    closingAnimationTime: 0
+    openSound:
+      path: /Audio/Effects/door_open.ogg
+    closeSound:
+      path: /Audio/Effects/door_close.ogg
+  - type: Construction
+    graph: PVTWall
+    node: gate
