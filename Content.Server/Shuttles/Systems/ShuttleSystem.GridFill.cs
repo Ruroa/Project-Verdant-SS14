@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Server._PV.OrbitalAccessPoint;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Events;
 using Content.Shared.CCVar;
@@ -222,38 +221,11 @@ public sealed partial class ShuttleSystem
         if (targetGrid == null)
             return;
 
-        SpawnGridGroups(uid, targetGrid.Value, component.Groups, skipOrbitalGroups: true);
-    }
-
-    /// <summary>
-    /// Spawns configured grids around a specific grid instead of the station's largest grid.
-    /// Used by separate orbital access maps so their shuttles and salvage sites do not spawn
-    /// around the planet-side station.
-    /// </summary>
-    public void SpawnGridGroups(
-        EntityUid uid,
-        EntityUid targetGrid,
-        IReadOnlyDictionary<string, IGridSpawnGroup> groups,
-        bool skipOrbitalGroups = false)
-    {
-        if (!_cfg.GetCVar(CCVars.GridFill))
-            return;
-
         // Spawn on a dummy map and try to FTL if possible, otherwise dump it.
         _mapSystem.CreateMap(out var mapId);
 
-        foreach (var group in groups) // SL edit
+        foreach (var group in component.Groups) // SL edit
         {
-            // Planetary stations spawn these groups around their separate orbital map.
-            if (skipOrbitalGroups &&
-                HasComp<OrbitalAccessPointComponent>(uid) &&
-                (group.Key == "trade" ||
-                 group.Key == "cargo_salvage_shuttle" ||
-                 group.Key == "cargo_mining_shuttle"))
-            {
-                continue;
-            }
-
             var count = _random.Next(group.Value.MinCount, group.Value.MaxCount + 1); // SL edit
 
             // Starlight start
@@ -279,7 +251,7 @@ public sealed partial class ShuttleSystem
                             if (!station.AllowDungeonSpawn)
                                 continue;
                         // Starlight end
-                        if (!TryDungeonSpawn(targetGrid, dungeon, out spawned))
+                        if (!TryDungeonSpawn(targetGrid.Value, dungeon, out spawned))
                             continue;
 
                         break;
@@ -291,7 +263,7 @@ public sealed partial class ShuttleSystem
                             if (!station.AllowedGridSpawns.Contains(group.Key)) continue; // group name must be whitelisted
                         }
                         // Starlight end
-                        if (!TryGridSpawn(targetGrid, uid, mapId, grid, out spawned))
+                        if (!TryGridSpawn(targetGrid.Value, uid, mapId, grid, out spawned))
                             continue;
 
                         break;

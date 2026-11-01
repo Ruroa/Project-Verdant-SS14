@@ -13,7 +13,6 @@ using Content.Shared.Station.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Content.Server.NPC.HTN;
-using Content.Server._PV.OrbitalAccessPoint;
 using Content.Shared._Starlight.Shuttles.Components;
 
 namespace Content.Server.Salvage;
@@ -186,33 +185,21 @@ public sealed partial class SalvageSystem
                 }
 
                 ftlTime = MathF.Min(ftlTime, _shuttle.DefaultStartupTime);
-                EntityUid? returnGrid = null;
+                var shuttleQuery = AllEntityQuery<ShuttleComponent, TransformComponent>();
 
-                // Stations with an orbital access point return salvage shuttles there
-                // instead of to the planet-side station grid.
-                if (TryComp(comp.Station, out OrbitalAccessPointComponent? accessPoint) &&
-                    accessPoint.AccessGrid is { } orbitalGrid && Exists(orbitalGrid))
-                {
-                    returnGrid = orbitalGrid;
-                }
-                else if (TryComp<StationDataComponent>(comp.Station, out var data))
+                if (TryComp<StationDataComponent>(comp.Station, out var data))
                 {
                     foreach (var member in data.Grids)
                     {
-                        returnGrid = member;
+                        while (shuttleQuery.MoveNext(out var shuttleUid, out var shuttle, out var shuttleXform))
+                        {
+                            if (shuttleXform.MapUid != uid || HasComp<FTLComponent>(shuttleUid))
+                                continue;
+
+                            _shuttle.FTLToDock(shuttleUid, shuttle, member, ftlTime);
+                        }
+
                         break;
-                    }
-                }
-
-                if (returnGrid is { } targetGrid)
-                {
-                    var shuttleQuery = AllEntityQuery<ShuttleComponent, TransformComponent>();
-                    while (shuttleQuery.MoveNext(out var shuttleUid, out var shuttle, out var shuttleXform))
-                    {
-                        if (shuttleXform.MapUid != uid || HasComp<FTLComponent>(shuttleUid))
-                            continue;
-
-                        _shuttle.FTLToDock(shuttleUid, shuttle, targetGrid, ftlTime);
                     }
                 }
             }
