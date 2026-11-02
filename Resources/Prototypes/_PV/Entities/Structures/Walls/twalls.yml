@@ -176,6 +176,7 @@
       path: /Audio/Effects/door_open.ogg
     closeSound:
       path: /Audio/Effects/door_close.ogg
+  - type: Appearance
   - type: Construction
     graph: PVTWall
     node: gate
