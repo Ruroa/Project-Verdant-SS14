@@ -1,0 +1,100 @@
+- type: entity
+  parent: BaseStructure
+  id: PVRoverWheel
+  name: rover wheel assembly
+  description: A powered wheel assembly for a surface rover. It rolls while the rover moves and glows when it is providing drive.
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Rovers/Wheels.rsi
+    drawdepth: SmallObjects
+    layers:
+    - state: base
+    - state: wheels-drive
+      map: [ "enum.RoverWheelLayers.Wheels" ]
+      visible: false
+    - state: thrust
+      map: [ "enum.RoverWheelLayers.Drive" ]
+      shader: unshaded
+      visible: false
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Electronic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: RoverWheel
+    driveDirection: Any
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RoverWheelVisuals.Moving:
+        enum.RoverWheelLayers.Wheels:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RoverWheelVisuals.DriveActive:
+        enum.RoverWheelLayers.Drive:
+          True: { visible: true }
+          False: { visible: false }
+  - type: RCDDeconstructable
+    cost: 2
+    delay: 2
+    fx: EffectRCDDeconstruct2
+  placement:
+    mode: SnapgridCenter
+
+- type: entity
+  parent: PVRoverWheel
+  id: PVRoverWheelNorth
+  suffix: North drive
+  components:
+  - type: RoverWheel
+    driveDirection: North
+
+- type: entity
+  parent: PVRoverWheel
+  id: PVRoverWheelEast
+  suffix: East drive
+  components:
+  - type: RoverWheel
+    driveDirection: East
+
+- type: entity
+  parent: PVRoverWheel
+  id: PVRoverWheelSouth
+  suffix: South drive
+  components:
+  - type: RoverWheel
+    driveDirection: South
+
+- type: entity
+  parent: PVRoverWheel
+  id: PVRoverWheelWest
+  suffix: West drive
+  components:
+  - type: RoverWheel
+    driveDirection: West
