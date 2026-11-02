@@ -1,7 +1,11 @@
+Warning: truncated output (original token count: 11341)
+Total output lines: 1079
+
 using System.Collections.Concurrent;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using Content.Server.Shuttles.Systems;
+using Content.Shared._PV.Rovers;
 using Content.Shared._Starlight.Movement;
 using Content.Shared._Starlight.Sound;
 using Content.Shared.Maps;
@@ -64,6 +68,7 @@ public sealed partial class SLMoverController : SharedMoverController
     [Dependency] private IParallelManager _parallel = default!;
     [Dependency] private IPlayerManager _players = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
 
     private HandleMobMovementJob _handleMobMovementJob;
@@ -401,251 +406,7 @@ public sealed partial class SLMoverController : SharedMoverController
             // Otherwise use the off-grid values.
             else
             {
-                friction = moveSpeedComponent?.OffGridFriction ?? _offGridDamping;
-            }
-
-            accel = moveSpeedComponent?.WeightlessAcceleration ?? MovementSpeedModifierComponent.DefaultWeightlessAcceleration;
-        }
-        else
-        {
-            if (MapGridQuery.TryComp(xform.GridUid, out var gridComp)
-                && _mapSystem.TryGetTileRef(xform.GridUid.Value, gridComp, xform.Coordinates, out var tile)
-                && physicsComponent.BodyStatus == BodyStatus.OnGround)
-                tileDef = (ContentTileDefinition)_tileDefinitionManager[tile.Tile.TypeId];
-
-            var walkSpeed = moveSpeedComponent?.CurrentWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
-            var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
-
-            wishDir = AssertValidWish(mover, walkSpeed, sprintSpeed);
-
-            if (wishDir != Vector2.Zero)
-            {
-                friction = moveSpeedComponent?.Friction ?? MovementSpeedModifierComponent.DefaultFriction;
-                friction *= tileDef?.MobFriction ?? tileDef?.Friction ?? 1f;
-            }
-            else
-            {
-                friction = moveSpeedComponent?.FrictionNoInput ?? MovementSpeedModifierComponent.DefaultFrictionNoInput;
-                friction *= tileDef?.Friction ?? 1f;
-            }
-
-            accel = moveSpeedComponent?.Acceleration ?? MovementSpeedModifierComponent.DefaultAcceleration;
-            accel *= tileDef?.MobAcceleration ?? 1f;
-        }
-        // This way friction never exceeds acceleration when you're trying to move.
-        // If you want to slow down an entity with "friction" you shouldn't be using this system.
-        if (wishDir != Vector2.Zero)
-            friction = Math.Min(friction, accel);
-        friction = Math.Max(friction, _minDamping);
-        var minimumFrictionSpeed = moveSpeedComponent?.MinimumFrictionSpeed ?? MovementSpeedModifierComponent.DefaultMinimumFrictionSpeed;
-
-        var solve = new MoverSolver.MoverParams
-        {
-            Velocity = velocity,
-            AngularVelocity = physicsComponent.AngularVelocity,
-            WishDir = wishDir,
-            FrictionInput = friction,
-            FrictionNoInput = friction,
-            Accel = accel,
-            MinimumFrictionSpeed = minimumFrictionSpeed,
-            MinDamping = _minDamping,
-            Weightless = weightless,
-            Touching = touching,
-        };
-        MoverSolver.TrySolve(in solve, frameTime, out velocity);
-
-        SetWishDir((uid, mover), wishDir);
-
-        /*
-         * SNAKING!!! >-( 0 ================>
-         * Snaking is a feature where you can move faster by strafing in a direction perpendicular to the
-         * direction you intend to move while still holding the movement key for the direction you're trying to move.
-         * Snaking only works if acceleration exceeds friction, and it's effectiveness scales as acceleration continues
-         * to exceed friction.
-         * Snaking works because friction is applied first in the direction of our current velocity, while acceleration
-         * is applied after in our "Wish Direction" and is capped by the dot of our wish direction and current direction.
-         * This means when you change direction, you're technically able to accelerate more than what the velocity cap
-         * allows, but friction normally eats up the extra movement you gain.
-         * By strafing as stated above you can increase your speed by about 1.4 (square root of 2).
-         * This only works if friction is low enough so be sure that anytime you are letting a mob move in a low friction
-         * environment you take into account the fact they can snake! Also be sure to lower acceleration as well to
-         * prevent jerky movement!
-         */
-        //PhysicsSystem.SetLinearVelocity(uid, velocity, body: physicsComponent);
-
-        // Ensures that players do not spiiiiiiin
-        //PhysicsSystem.SetAngularVelocity(uid, 0, body: physicsComponent);
-
-        // Handle footsteps at the end
-        if (wishDir != Vector2.Zero)
-        {
-            if (!NoRotateQuery.HasComponent(uid))
-            {
-                // TODO apparently this results in a duplicate move event because "This should have its event run during
-                // island solver"??. So maybe SetRotation needs an argument to avoid raising an event?
-                var worldRot = _transform.GetWorldRotation(xform);
-
-                rotation = xform.LocalRotation + wishDir.ToWorldAngle() - worldRot;
-            }
-
-            if (!weightless && MobMoverQuery.TryGetComponent(uid, out var mobMover) &&
-                TryGetSound(weightless, uid, mover, mobMover, xform, out var sound, tileDef: tileDef))
-            {
-                var soundModifier = mover.Sprinting ? 3.5f : 1.5f;
-
-                var audioParams = sound.Params
-                    .WithVolume(sound.Params.Volume + soundModifier)
-                    .WithVariation(sound.Params.Variation ?? mobMover.FootstepVariation);
-
-                soundEvent = new SoundEvent(sound, uid, uid, audioParams);
-            }
-        }
-
-        // stash what we resolved, scatter loop picks it up.
-        resolvedBody = physicsComponent;
-        resolvedXform = xform;
-        return velocity;
-    }
-
-    public (Vector2 Strafe, float Rotation, float Brakes) GetPilotVelocityInput(PilotComponent component)
-    {
-        if (!Timing.InSimulation)
-        {
-            // Outside of simulation we'll be running client predicted movement per-frame.
-            // So return a full-length vector as if it's a full tick.
-            // Physics system will have the correct time step anyways.
-            ResetSubtick(component);
-            ApplyTick(component, 1f);
-            return (component.CurTickStrafeMovement, component.CurTickRotationMovement, component.CurTickBraking);
-        }
-
-        float remainingFraction;
-
-        if (Timing.CurTick > component.LastInputTick)
-        {
-            component.CurTickStrafeMovement = Vector2.Zero;
-            component.CurTickRotationMovement = 0f;
-            component.CurTickBraking = 0f;
-            remainingFraction = 1;
-        }
-        else
-        {
-            remainingFraction = (ushort.MaxValue - component.LastInputSubTick) / (float) ushort.MaxValue;
-        }
-
-        ApplyTick(component, remainingFraction);
-
-        // Logger.Info($"{curDir}{walk}{sprint}");
-        return (component.CurTickStrafeMovement, component.CurTickRotationMovement, component.CurTickBraking);
-    }
-
-    private void ResetSubtick(PilotComponent component)
-    {
-        if (Timing.CurTick <= component.LastInputTick) return;
-
-        component.CurTickStrafeMovement = Vector2.Zero;
-        component.CurTickRotationMovement = 0f;
-        component.CurTickBraking = 0f;
-        component.LastInputTick = Timing.CurTick;
-        component.LastInputSubTick = 0;
-    }
-
-    protected override void HandleShuttleInput(EntityUid uid, ShuttleButtons button, ushort subTick, bool state)
-    {
-        if (!TryComp<PilotComponent>(uid, out var pilot) || pilot.Console == null)
-            return;
-
-        ResetSubtick(pilot);
-
-        if (subTick >= pilot.LastInputSubTick)
-        {
-            var fraction = (subTick - pilot.LastInputSubTick) / (float) ushort.MaxValue;
-
-            ApplyTick(pilot, fraction);
-            pilot.LastInputSubTick = subTick;
-        }
-
-        var buttons = pilot.HeldButtons;
-
-        if (state)
-        {
-            buttons |= button;
-        }
-        else
-        {
-            buttons &= ~button;
-        }
-
-        pilot.HeldButtons = buttons;
-    }
-
-    private static void ApplyTick(PilotComponent component, float fraction)
-    {
-        var x = 0;
-        var y = 0;
-        var rot = 0;
-        int brake;
-
-        if ((component.HeldButtons & ShuttleButtons.StrafeLeft) != 0x0)
-        {
-            x -= 1;
-        }
-
-        if ((component.HeldButtons & ShuttleButtons.StrafeRight) != 0x0)
-        {
-            x += 1;
-        }
-
-        component.CurTickStrafeMovement.X += x * fraction;
-
-        if ((component.HeldButtons & ShuttleButtons.StrafeUp) != 0x0)
-        {
-            y += 1;
-        }
-
-        if ((component.HeldButtons & ShuttleButtons.StrafeDown) != 0x0)
-        {
-            y -= 1;
-        }
-
-        component.CurTickStrafeMovement.Y += y * fraction;
-
-        if ((component.HeldButtons & ShuttleButtons.RotateLeft) != 0x0)
-        {
-            rot -= 1;
-        }
-
-        if ((component.HeldButtons & ShuttleButtons.RotateRight) != 0x0)
-        {
-            rot += 1;
-        }
-
-        component.CurTickRotationMovement += rot * fraction;
-
-        if ((component.HeldButtons & ShuttleButtons.Brake) != 0x0)
-        {
-            brake = 1;
-        }
-        else
-        {
-            brake = 0;
-        }
-
-        component.CurTickBraking += brake * fraction;
-    }
-
-    /// <summary>
-    /// Helper function to extrapolate max velocity for a given Vector2 (really, its angle) and shuttle.
-    /// </summary>
-    private Vector2 ObtainMaxVel(Vector2 vel, ShuttleComponent shuttle)
-    {
-        if (vel.Length() == 0f)
-            return Vector2.Zero;
-
-        // this math could PROBABLY be simplified for performance
-        // probably
-        //             __________________________________
-        //            / /    __   __ \2   /    __   __ \2
+                friction = moveSpeedComponent?.OffGr…2341 tokens truncated… __   __ \2
         // O = I : _ /  |I * | 1/H | |  + |I * |  0  | |
         //          V   \    |_ 0 _| /    \    |_1/V_| /
 
@@ -749,6 +510,11 @@ public sealed partial class SLMoverController : SharedMoverController
             linearInput /= Math.Max(1, linearCount);
             angularInput /= Math.Max(1, angularCount);
             brakeInput /= Math.Max(1, brakeCount);
+
+            // Rover wheels provide direct, ground-style movement with automatic braking.
+            // A wheel-equipped grid does not use shuttle thrusters.
+            if (TryHandleRoverMovement(shuttleUid, body, shuttleNorthAngle, linearInput, angularInput, frameTime))
+                continue;
 
             // Handle shuttle movement
             if (brakeInput > 0f)
@@ -966,6 +732,103 @@ public sealed partial class SLMoverController : SharedMoverController
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static float Vector2Dot(Vector2 value1, Vector2 value2)
         => Vector2.Dot(value1, value2);
+
+    private bool TryHandleRoverMovement(
+        EntityUid gridUid,
+        PhysicsComponent body,
+        Angle gridRotation,
+        Vector2 driveInput,
+        float turnInput,
+        float frameTime)
+    {
+        const float maxSpeed = 6f;
+        const float driveAcceleration = 8f;
+        const float brakingAcceleration = 10f;
+        const float maxTurnSpeed = 1.5f;
+        const float turnAcceleration = 5f;
+        const float stopThreshold = 0.05f;
+
+        var foundWheel = false;
+        var moving = body.LinearVelocity.LengthSquared() > 0.01f;
+        var wheelQuery = EntityQueryEnumerator<RoverWheelComponent, TransformComponent, AppearanceComponent>();
+        while (wheelQuery.MoveNext(out var wheelUid, out var wheel, out var wheelXform, out var appearance))
+        {
+            if (wheelXform.GridUid != gridUid)
+                continue;
+
+            foundWheel = true;
+            var driveActive = wheel.DriveDirection switch
+            {
+                RoverWheelDriveDirection.North => driveInput.Y > 0f,
+                RoverWheelDriveDirection.East => driveInput.X > 0f,
+                RoverWheelDriveDirection.South => driveInput.Y < 0f,
+                RoverWheelDriveDirection.West => driveInput.X < 0f,
+                _ => driveInput.LengthSquared() > 0f,
+            };
+
+            SetRoverWheelVisual(wheelUid, RoverWheelVisuals.Moving, moving, appearance);
+            SetRoverWheelVisual(wheelUid, RoverWheelVisuals.DriveActive, driveActive, appearance);
+        }
+
+        if (!foundWheel)
+            return false;
+
+        var dt = Math.Max(frameTime, 0.001f);
+        var localVelocity = (-gridRotation).RotateVec(body.LinearVelocity);
+        var targetVelocity = driveInput.LengthSquared() > 0f
+            ? Vector2.Normalize(driveInput) * maxSpeed
+            : Vector2.Zero;
+        var acceleration = (targetVelocity - localVelocity) / dt;
+        var accelerationLimit = driveInput.LengthSquared() > 0f
+            ? driveAcceleration
+            : brakingAcceleration;
+
+        if (acceleration.LengthSquared() > accelerationLimit * accelerationLimit)
+            acceleration = Vector2.Normalize(acceleration) * accelerationLimit;
+
+        if (driveInput.LengthSquared() == 0f && localVelocity.LengthSquared() < stopThreshold * stopThreshold)
+        {
+            PhysicsSystem.SetSleepingAllowed(gridUid, body, true);
+        }
+        else
+        {
+            PhysicsSystem.SetSleepingAllowed(gridUid, body, false);
+            if (body.InvMass > 0f)
+            {
+                var force = gridRotation.RotateVec(acceleration / body.InvMass);
+                PhysicsSystem.ApplyForce(gridUid, force, body: body);
+            }
+        }
+
+        var targetTurnVelocity = turnInput * maxTurnSpeed;
+        var turnAccelerationValue = Math.Clamp(
+            (targetTurnVelocity - body.AngularVelocity) / dt,
+            -turnAcceleration,
+            turnAcceleration);
+        if (turnInput == 0f && MathF.Abs(body.AngularVelocity) < stopThreshold)
+        {
+            PhysicsSystem.SetSleepingAllowed(gridUid, body, true);
+        }
+        else if (body.InvI > 0f)
+        {
+            PhysicsSystem.SetSleepingAllowed(gridUid, body, false);
+            PhysicsSystem.ApplyTorque(gridUid, turnAccelerationValue / body.InvI, body: body);
+        }
+
+        return true;
+    }
+
+    private void SetRoverWheelVisual(
+        EntityUid uid,
+        RoverWheelVisuals visual,
+        bool value,
+        AppearanceComponent appearance)
+    {
+        if (_appearance.TryGetData(uid, visual, out bool current, appearance) && current == value)
+            return;
+
+        _appearance.SetData(uid, visual, value, appearance);
+    }
 
     private bool CanPilot(EntityUid shuttleUid)
     => (TryComp<FTLComponent>(shuttleUid, out var ftl)
