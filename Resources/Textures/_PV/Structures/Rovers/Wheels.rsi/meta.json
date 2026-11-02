@@ -46,7 +46,7 @@
       ]
     },
     {
-      "name": "wheels-drive",
+      "name": "drive-wheel",
       "directions": 4,
       "delays": [
         [

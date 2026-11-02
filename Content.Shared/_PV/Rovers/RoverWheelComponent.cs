@@ -30,6 +30,6 @@ public enum RoverWheelVisuals : byte
 [Serializable, NetSerializable]
 public enum RoverWheelLayers : byte
 {
-    Wheels,
+    DriveWheel,
     Drive,
 }

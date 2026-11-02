@@ -9,8 +9,8 @@
     drawdepth: SmallObjects
     layers:
     - state: base
-    - state: wheels-drive
-      map: [ "enum.RoverWheelLayers.Wheels" ]
+    - state: drive-wheel
+      map: [ "enum.RoverWheelLayers.DriveWheel" ]
       visible: false
     - state: drive
       map: [ "enum.RoverWheelLayers.Drive" ]
@@ -53,7 +53,7 @@
   - type: GenericVisualizer
     visuals:
       enum.RoverWheelVisuals.Moving:
-        enum.RoverWheelLayers.Wheels:
+        enum.RoverWheelLayers.DriveWheel:
           True: { visible: true }
           False: { visible: false }
       enum.RoverWheelVisuals.DriveActive:
