@@ -803,7 +803,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
                 var indices = new Vector2i(x + chunk.X, y + chunk.Y);
 
                 // Pass in null so we don't try to get the tileref.
-                if (modified.Contains(indices) || component.ExcludedEntityTiles.Contains(indices))
+                if (modified.Contains(indices))
                     continue;
 
                 // If there's existing data then don't overwrite it.

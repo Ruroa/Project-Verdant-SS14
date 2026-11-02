@@ -84,6 +84,7 @@ public sealed partial class SLMoverController : SharedMoverController
     private readonly ConcurrentQueue<(EntityUid Uid, InputMoverComponent Mover)> _deferredDirty = new();
 
     private Dictionary<EntityUid, (ShuttleComponent, List<(EntityUid, PilotComponent, TransformComponent)>)> _shuttlePilots = new();
+    private readonly HashSet<EntityUid> _handledUnpilotedRoverGrids = new();
 
     public override void Initialize()
     {
@@ -965,6 +966,41 @@ public sealed partial class SLMoverController : SharedMoverController
                     _thruster.SetAngularThrust(shuttle, true);
                 }
             }
+        }
+
+        ApplyUnpilotedRoverBraking(frameTime);
+    }
+
+    /// <summary>
+    /// Keep rover ground braking active after its last pilot stops controlling the console.
+    /// Normal shuttles retain their space drift when unpiloted.
+    /// </summary>
+    private void ApplyUnpilotedRoverBraking(float frameTime)
+    {
+        _handledUnpilotedRoverGrids.Clear();
+        var wheelQuery = EntityQueryEnumerator<RoverWheelComponent, TransformComponent>();
+
+        while (wheelQuery.MoveNext(out _, out _, out var wheelXform))
+        {
+            if (wheelXform.GridUid is not { } gridUid ||
+                !_handledUnpilotedRoverGrids.Add(gridUid) ||
+                _shuttlePilots.ContainsKey(gridUid) ||
+                Paused(gridUid) ||
+                CanPilot(gridUid) ||
+                !TryComp<ShuttleComponent>(gridUid, out var shuttle) ||
+                !shuttle.Enabled ||
+                !TryComp<PhysicsComponent>(gridUid, out var body))
+            {
+                continue;
+            }
+
+            TryHandleRoverMovement(
+                gridUid,
+                body,
+                _xformSystem.GetWorldRotation(gridUid),
+                Vector2.Zero,
+                0f,
+                frameTime);
         }
     }
 
