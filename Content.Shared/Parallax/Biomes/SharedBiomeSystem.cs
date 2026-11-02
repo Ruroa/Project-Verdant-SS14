@@ -239,7 +239,7 @@ public abstract partial class SharedBiomeSystem : EntitySystem
             {
                 var radiusSquared = entityLayer.ExcludeCenterRadius * entityLayer.ExcludeCenterRadius;
                 var distanceSquared = (long) indices.X * indices.X + (long) indices.Y * indices.Y;
-                if (distanceSquared < radiusSquared)
+                if (distanceSquared <= radiusSquared)
                     continue;
             }
 

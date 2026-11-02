@@ -429,6 +429,9 @@ public sealed partial class ShuttleSystem
 
             // Mark tiles for breaking/effects
             var def = _turf.GetContentTileDefinition(_mapSystem.GetTileRef(uid, grid, tileData.Tile));
+            if (def.Indestructible)
+                continue;
+
             if (tileData.Energy > def.Mass * _tileBreakEnergyMultiplier)
                 brokenTiles.Add((tileData.Tile, Tile.Empty));
 

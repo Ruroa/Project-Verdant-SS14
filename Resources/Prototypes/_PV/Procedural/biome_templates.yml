@@ -5,6 +5,7 @@
       allowedTiles:
         - FloorAsteroidSand
       threshold: -0.25
+      excludeCenterRadius: 100
       noise:
         seed: 0
         noiseType: Cellular
@@ -20,6 +21,7 @@
       allowedTiles:
         - FloorAsteroidSand
       threshold: 0.58
+      excludeCenterRadius: 100
       noise:
         seed: 2
         noiseType: OpenSimplex2
