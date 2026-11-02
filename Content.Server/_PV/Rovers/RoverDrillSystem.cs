@@ -18,6 +18,8 @@ namespace Content.Server._PV.Rovers;
 
 public sealed class RoverDrillSystem : EntitySystem
 {
+    private const float DrillReach = 1.5f;
+
     [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private DamageableSystem _damageable = default!;
@@ -94,8 +96,9 @@ public sealed class RoverDrillSystem : EntitySystem
             return;
 
         var mapCoordinates = _transform.GetMapCoordinates(uid, xform);
-        var forward = _transform.GetWorldRotation(uid).GetCardinalDir().ToIntVec();
-        var targetPosition = mapCoordinates.Position + new Vector2(forward.X, forward.Y);
+        // Rover drill sprites point north in their unrotated state, so local +Y is the tip direction.
+        var forward = _transform.GetWorldRotation(uid).RotateVec(Vector2.UnitY);
+        var targetPosition = mapCoordinates.Position + forward * DrillReach;
 
         EntityUid target = EntityUid.Invalid;
         var mapUid = _map.GetMapOrInvalid(mapCoordinates.MapId);
