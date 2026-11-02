@@ -14,6 +14,9 @@ public sealed partial class StationCargoShuttleComponent : Component
     // If you add more than just make an abstract comp, split them, then use overloads in the system.
     // YAML is filled out so mappers don't have to read here.
 
+    [DataField]
+    public bool Enabled = true;
+
     [DataField(required: true)]
     public ResPath Path = new("/Maps/Shuttles/cargo.yml");
 }

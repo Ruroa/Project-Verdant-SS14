@@ -90,7 +90,7 @@ public sealed partial class ShuttleSystem
 
     private void CargoSpawn(EntityUid uid, StationCargoShuttleComponent component)
     {
-        if (!_cfg.GetCVar(CCVars.GridFill))
+        if (!component.Enabled || !_cfg.GetCVar(CCVars.GridFill))
             return;
 
         var targetGrid = _station.GetLargestGrid(uid);
