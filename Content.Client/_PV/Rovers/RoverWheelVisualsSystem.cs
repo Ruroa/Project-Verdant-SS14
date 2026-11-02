@@ -21,6 +21,6 @@ public sealed class RoverWheelVisualsSystem : EntitySystem
             || rotation is not float radians)
             return;
 
-        _sprite.SetRotation((uid, args.Sprite), Angle.FromRadians(radians));
+        _sprite.SetRotation((uid, args.Sprite), new Angle(radians));
     }
 }

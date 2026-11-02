@@ -996,7 +996,7 @@ public sealed partial class SLMoverController : SharedMoverController
             ? driveInput
             : localVelocity;
         var wheelRotation = wheelDirection.LengthSquared() > stopThreshold * stopThreshold
-            ? wheelDirection.ToWorldAngle().Radians
+            ? (float) wheelDirection.ToWorldAngle().Theta
             : 0f;
         var wheelQuery = EntityQueryEnumerator<RoverWheelComponent, TransformComponent, AppearanceComponent>();
         while (wheelQuery.MoveNext(out var wheelUid, out var wheel, out var wheelXform, out var appearance))
