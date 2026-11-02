@@ -25,6 +25,7 @@ public enum RoverWheelVisuals : byte
 {
     Moving,
     DriveActive,
+    Rotation,
 }
 
 [Serializable, NetSerializable]

@@ -991,6 +991,13 @@ public sealed partial class SLMoverController : SharedMoverController
 
         var foundWheel = false;
         var moving = body.LinearVelocity.LengthSquared() > 0.01f;
+        var localVelocity = (-gridRotation).RotateVec(body.LinearVelocity);
+        var wheelDirection = driveInput.LengthSquared() > 0.0001f
+            ? driveInput
+            : localVelocity;
+        var wheelRotation = wheelDirection.LengthSquared() > stopThreshold * stopThreshold
+            ? wheelDirection.ToWorldAngle().Radians
+            : 0f;
         var wheelQuery = EntityQueryEnumerator<RoverWheelComponent, TransformComponent, AppearanceComponent>();
         while (wheelQuery.MoveNext(out var wheelUid, out var wheel, out var wheelXform, out var appearance))
         {
@@ -1009,13 +1016,13 @@ public sealed partial class SLMoverController : SharedMoverController
 
             SetRoverWheelVisual(wheelUid, RoverWheelVisuals.Moving, moving, appearance);
             SetRoverWheelVisual(wheelUid, RoverWheelVisuals.DriveActive, driveActive, appearance);
+            SetRoverWheelRotation(wheelUid, wheelRotation, appearance);
         }
 
         if (!foundWheel)
             return false;
 
         var dt = Math.Max(frameTime, 0.001f);
-        var localVelocity = (-gridRotation).RotateVec(body.LinearVelocity);
         var targetVelocity = driveInput.LengthSquared() > 0f
             ? Vector2.Normalize(driveInput) * maxSpeed
             : Vector2.Zero;
@@ -1069,6 +1076,15 @@ public sealed partial class SLMoverController : SharedMoverController
             return;
 
         _appearance.SetData(uid, visual, value, appearance);
+    }
+
+    private void SetRoverWheelRotation(EntityUid uid, float rotation, AppearanceComponent appearance)
+    {
+        if (_appearance.TryGetData<float>(uid, RoverWheelVisuals.Rotation, out var current, appearance)
+            && MathF.Abs(MathF.IEEERemainder(rotation - current, MathF.Tau)) < 0.0174533f)
+            return;
+
+        _appearance.SetData(uid, RoverWheelVisuals.Rotation, rotation, appearance);
     }
 
     private bool CanPilot(EntityUid shuttleUid)
