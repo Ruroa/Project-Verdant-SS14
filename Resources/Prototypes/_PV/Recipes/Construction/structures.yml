@@ -11,3 +11,55 @@
   conditions:
   - !type:TileNotBlocked
 
+- type: construction
+  id: PVTWallStraight
+  name: construction-recipe-pv-twall-straight
+  graph: PVTWall
+  startNode: start
+  targetNode: straight
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: PVTWallCorner
+  name: construction-recipe-pv-twall-corner
+  graph: PVTWall
+  startNode: start
+  targetNode: corner
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: PVTWallEnd
+  name: construction-recipe-pv-twall-end
+  graph: PVTWall
+  startNode: start
+  targetNode: end
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: PVTWallGate
+  name: construction-recipe-pv-twall-gate
+  graph: PVTWall
+  startNode: start
+  targetNode: gate
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
