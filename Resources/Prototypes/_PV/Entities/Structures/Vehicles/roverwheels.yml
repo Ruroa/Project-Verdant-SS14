@@ -12,7 +12,7 @@
     - state: wheels-drive
       map: [ "enum.RoverWheelLayers.Wheels" ]
       visible: false
-    - state: thrust
+    - state: drive
       map: [ "enum.RoverWheelLayers.Drive" ]
       shader: unshaded
       visible: false
