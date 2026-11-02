@@ -44,6 +44,10 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: RoverDrill
+    attackInterval: 0.5
+    damage:
+      types:
+        Structural: 15
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -56,6 +60,9 @@
     - Toggle
     - On
     - Off
+  - type: Tag
+    tags:
+    - Pickaxe
   - type: RCDDeconstructable
     cost: 2
     delay: 2
