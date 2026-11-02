@@ -121365,8 +121365,6 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -12.5,35.5
-- proto: ChairPilotSeat
-  entities:
 - proto: ChairWood
   entities:
   - uid: 21141
@@ -125638,8 +125636,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -9.5,30.5
-- proto: ComputerShuttle
-  entities:
 - proto: ComputerShuttleCargo
   entities:
   - uid: 21908
@@ -142797,8 +142793,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 23.5,82.5
-- proto: GasMinerOxygen
-  entities:
 - proto: GasMinerOxygenStationLarge
   entities:
   - uid: 24512
@@ -142815,8 +142809,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 23.5,85.5
-- proto: GasMixer
-  entities:
 - proto: GasOutletInjector
   entities:
   - uid: 24514
@@ -177225,8 +177217,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 34.463604,8.032031
-- proto: GeneratorBasic20kW
-  entities:
 - proto: GeneratorRTG
   entities:
   - uid: 28971
@@ -177311,8 +177301,6 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -12.5,32.5
-- proto: GravityGeneratorMini
-  entities:
 - proto: Grille
   entities:
   - uid: 28986
@@ -186198,8 +186186,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 49.5,46.5
-- proto: Gyroscope
-  entities:
 - proto: Handcuffs
   entities:
   - uid: 30577
@@ -204937,8 +204923,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -41.5,65.5
-- proto: ShuttleWindow
-  entities:
 - proto: SignAi
   entities:
   - uid: 33673
@@ -215243,8 +215227,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -7.1998687,91.34945
-- proto: Thruster
-  entities:
 - proto: ThrusterMachineCircuitboard
   entities:
   - uid: 35389
@@ -229740,8 +229722,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -4.5,76.5
-- proto: WallReinforcedShuttle
-  entities:
 - proto: WallRock
   entities:
   - uid: 37934
@@ -248386,8 +248366,6 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 46.5,2.5
-- proto: WallWeaponCapacitorRecharger
-  entities:
 - proto: WallWood
   entities:
   - uid: 41463
