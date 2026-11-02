@@ -155,39 +155,53 @@ namespace Content.Server.Decals
                 return;
 
             // Transfer decals over to the new grid.
-            var enumerator = _mapSystem.GetAllTilesEnumerator(ev.Grid, Comp<MapGridComponent>(ev.Grid));
+            var oldGrid = Comp<MapGridComponent>(ev.OldGrid);
+            var newGrid = Comp<MapGridComponent>(ev.Grid);
+            var newXform = Comp<TransformComponent>(ev.Grid);
+            var enumerator = _mapSystem.GetAllTilesEnumerator(ev.Grid, newGrid);
 
             var oldChunkCollection = oldComp.ChunkCollection.ChunkCollection;
             var chunkCollection = newComp.ChunkCollection.ChunkCollection;
+            var transferredDecals = new HashSet<uint>();
 
             while (enumerator.MoveNext(out var tile))
             {
-                var tilePos = (Vector2) tile.Value.GridIndices;
-                var chunkIndices = GetChunkIndices(tilePos);
+                var newTileCenter = new EntityCoordinates(ev.Grid, (Vector2) tile.Value.GridIndices + new Vector2(0.5f, 0.5f));
+                var oldTileIndices = _mapSystem.LocalToTile(ev.OldGrid, oldGrid, newTileCenter);
+                var oldTilePos = (Vector2) oldTileIndices;
+                var oldChunkIndices = GetChunkIndices(oldTilePos);
 
-                if (!oldChunkCollection.TryGetValue(chunkIndices, out var oldChunk))
+                if (!oldChunkCollection.TryGetValue(oldChunkIndices, out var oldChunk))
                     continue;
 
-                var bounds = new Box2(tilePos - _boundsMinExpansion, tilePos + _boundsMaxExpansion);
+                var bounds = new Box2(oldTilePos - _boundsMinExpansion, oldTilePos + _boundsMaxExpansion);
                 var toRemove = new RemQueue<uint>();
 
                 // Starlight Start: Only create a chunk if the tile contains decals that need to move.
                 var movedDecals = false;
-                DecalChunk? newChunk = null;
+                var dirtyNewChunks = new HashSet<Vector2i>();
                 // Starlight End
 
                 foreach (var (oldDecalId, decal) in oldChunk.Decals)
                 {
-                    if (!bounds.Contains(decal.Coordinates))
+                    if (transferredDecals.Contains(oldDecalId) || !bounds.Contains(decal.Coordinates))
                         continue;
 
+                    // Decal positions are local to their owning grid. A split grid can have a
+                    // different local origin, so map through map coordinates before storing it.
+                    var mapCoordinates = _transform.ToMapCoordinates(new EntityCoordinates(ev.OldGrid, decal.Coordinates));
+                    var newCoordinates = _transform.ToCoordinates((ev.Grid, newXform), mapCoordinates);
+                    var newChunkIndices = GetChunkIndices(newCoordinates.Position);
                     var newDecalId = newComp.ChunkCollection.NextDecalId++;
-                    newChunk ??= chunkCollection.GetOrNew(chunkIndices); // Starlight Edit: Only create a new chunk if we need to move a decal into it.
-                    newChunk.Decals[newDecalId] = decal;
-                    newComp.DecalIndex[newDecalId] = chunkIndices;
+                    var newChunk = chunkCollection.GetOrNew(newChunkIndices); // Starlight Edit: Only create a new chunk if we need to move a decal into it.
+                    var movedDecal = decal.WithCoordinates(newCoordinates.Position);
+                    newChunk.Decals[newDecalId] = movedDecal;
+                    newComp.DecalIndex[newDecalId] = newChunkIndices;
                     toRemove.Add(oldDecalId);
+                    transferredDecals.Add(oldDecalId);
+                    dirtyNewChunks.Add(newChunkIndices);
                     movedDecals = true; // Starlight
-                    RecordUpsertDelta(ev.Grid, chunkIndices, newDecalId, decal); // Starlight
+                    RecordUpsertDelta(ev.Grid, newChunkIndices, newDecalId, movedDecal); // Starlight
                 }
 
                 // Starlight Start: Avoid creating and dirtying chunks if nothing happened.
@@ -199,17 +213,20 @@ namespace Content.Server.Decals
                 {
                     oldChunk.Decals.Remove(oldDecalId);
                     oldComp.DecalIndex.Remove(oldDecalId);
-                    RecordRemovalDelta(ev.OldGrid, chunkIndices, oldDecalId); // Starlight
+                    RecordRemovalDelta(ev.OldGrid, oldChunkIndices, oldDecalId); // Starlight
                 }
 
-                DirtyChunk(ev.Grid, chunkIndices, newChunk!); // Starlight Edit: Only dirty the new chunk if we moved a decal into it.
+                // A parent chunk may split into several different child chunks. Dirty each
+                // destination chunk when a decal is added to it.
+                foreach (var newChunkIndices in dirtyNewChunks)
+                    DirtyChunk(ev.Grid, newChunkIndices, chunkCollection[newChunkIndices]);
 
                 if (oldChunk.Decals.Count == 0)
-                    oldChunkCollection.Remove(chunkIndices);
+                    oldChunkCollection.Remove(oldChunkIndices);
 
                 // Starlight edit Start: Dirty the old chunk because the moved decals were removed.
                 // if (toRemove.List?.Count > 0)
-                DirtyChunk(ev.OldGrid, chunkIndices, oldChunk);
+                DirtyChunk(ev.OldGrid, oldChunkIndices, oldChunk);
                 // Starlight edit End
             }
         }
