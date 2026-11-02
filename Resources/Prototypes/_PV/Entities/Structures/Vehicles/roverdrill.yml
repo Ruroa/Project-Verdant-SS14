@@ -1,0 +1,64 @@
+- type: entity
+  parent: BaseStructure
+  id: PVRoverDrill
+  name: rover mining drill
+  description: A powered drill assembly for a surface rover.
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Rovers/Roverdrill.rsi
+    drawdepth: SmallObjects
+    layers:
+    - state: Base
+    - state: Drilling
+      map: [ "enum.RoverDrillLayers.Drilling" ]
+      visible: false
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Electronic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: RoverDrill
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RoverDrillVisuals.Enabled:
+        enum.RoverDrillLayers.Drilling:
+          True: { visible: true }
+          False: { visible: false }
+  - type: DeviceLinkSink
+    ports:
+    - Toggle
+    - On
+    - Off
+  - type: RCDDeconstructable
+    cost: 2
+    delay: 2
+    fx: EffectRCDDeconstruct2
+  placement:
+    mode: SnapgridCenter
