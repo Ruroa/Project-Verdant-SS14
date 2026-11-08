@@ -68,6 +68,7 @@
     - sprite: _Carpmosia/Structures/Piping/Atmospherics/thermomachine.rsi
       state: pipe
       map: [ "enum.PipeVisualLayers.Pipe" ]
+      rotation: 270
       renderingStrategy: Default
   - type: NodeContainer
     examinable: true
@@ -214,6 +215,7 @@
     - sprite: _Carpmosia/Structures/Piping/Atmospherics/thermomachine.rsi
       state: pipe
       map: [ "enum.PipeVisualLayers.Pipe" ]
+      rotation: 90
       renderingStrategy: Default
   - type: NodeContainer
     examinable: true

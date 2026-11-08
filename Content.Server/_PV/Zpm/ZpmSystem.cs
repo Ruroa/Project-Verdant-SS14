@@ -19,6 +19,7 @@ using Content.Shared.NodeContainer;
 using Content.Shared.Radio;
 using Content.Shared.UserInterface;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Maths;
 using Robust.Shared.Containers;
 using Robust.Server.GameObjects;
@@ -444,7 +445,7 @@ public sealed class ZpmSystem : EntitySystem
         ZpmPowerLevel.Low => 100_000f,
         ZpmPowerLevel.Medium => 250_000f,
         ZpmPowerLevel.Average => 500_000f,
-        ZpmPowerLevel.High => 1_000_000f,
+        ZpmPowerLevel.High => 2_500_000f,
         _ => 100_000f,
     };
 
@@ -581,7 +582,13 @@ public sealed class ZpmSystem : EntitySystem
     private void AnnounceStation(EntityUid source, string message)
     {
         var station = _station.GetOwningStation(source) ?? source;
-        _chat.DispatchStationAnnouncement(station, message, "ZPM CONTAINMENT", false, null, Color.Red);
+        _chat.DispatchStationAnnouncement(
+            station,
+            message,
+            "ZPM CONTAINMENT",
+            true,
+            new SoundPathSpecifier("/Audio/Machines/alarm.ogg"),
+            Color.Red);
     }
 
     private bool TryGetLinkedReactor(ZpmConsoleComponent console, out EntityUid uid, out ZpmReactorComponent reactor)
