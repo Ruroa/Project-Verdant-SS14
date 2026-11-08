@@ -7,8 +7,22 @@
     "y": 32
   },
   "states": [
-    {
-      "name": "base"
-    }
+    { "name": "control-filled" },
+    { "name": "control" },
+    { "name": "corner-bottomleft" },
+    { "name": "corner-rightbottom" },
+    { "name": "corner-topleft" },
+    { "name": "corner-topright" },
+    { "name": "critical-pulse-high", "delays": [[0.2, 0.2, 0.2, 0.2, 0.2, 0.2]] },
+    { "name": "critical-pulse-low", "delays": [[0.2, 0.2, 0.2, 0.2, 0.2, 0.2]] },
+    { "name": "middle-bottom" },
+    { "name": "middle-leftheatout" },
+    { "name": "middle-rightcoolingin" },
+    { "name": "middle-top" },
+    { "name": "middle" },
+    { "name": "stable-pulse-high", "delays": [[0.2, 0.2, 0.2, 0.2, 0.2, 0.2]] },
+    { "name": "stable-pulse-low", "delays": [[0.2, 0.2, 0.2, 0.2, 0.2, 0.2]] },
+    { "name": "warning-pulse-high", "delays": [[0.2, 0.2, 0.2, 0.2, 0.2, 0.2]] },
+    { "name": "warning-pulse-low", "delays": [[0.2, 0.2, 0.2, 0.2, 0.2, 0.2]] }
   ]
 }

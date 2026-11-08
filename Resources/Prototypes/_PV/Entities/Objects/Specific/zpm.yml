@@ -1,0 +1,12 @@
+- type: entity
+  parent: BaseItem
+  id: ZpmCore
+  name: zero point module core
+  description: A sealed blue-matter cylinder used as the energy core for a Zero Point Module reactor.
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_core.rsi
+    state: base
+  - type: Item
+    size: Normal
+  - type: ZpmCore

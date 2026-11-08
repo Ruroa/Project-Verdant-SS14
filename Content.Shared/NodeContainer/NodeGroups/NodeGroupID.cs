@@ -22,4 +22,9 @@ public enum NodeGroupID : byte
     /// Group used for plumbing (reagent fluid ducts).
     /// </summary>
     Plumbing, // Starlight Plumbing System
+
+    /// <summary>
+    /// Group used by the Project Verdant Zero Point Module socket.
+    /// </summary>
+    Zpm,
 }

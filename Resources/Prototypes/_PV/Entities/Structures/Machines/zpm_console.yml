@@ -1,0 +1,27 @@
+- type: entity
+  id: ZpmConsole
+  parent: BaseComputer
+  name: ZPM control console
+  description: A remote console for monitoring and controlling a linked Zero Point Module reactor.
+  components:
+  - type: ZpmConsole
+  - type: ActivatableUI
+    key: enum.ZpmConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ZpmConsoleUiKey.Key:
+        type: ZpmConsoleBoundUserInterface
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_console.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: zpm-key
+    - map: ["computerLayerScreen"]
+      state: zpm
+    - map: ["computerLayerKeys"]
+      state: zpm-key
+  - type: DeviceLinkSink
+    ports:
+    - Toggle

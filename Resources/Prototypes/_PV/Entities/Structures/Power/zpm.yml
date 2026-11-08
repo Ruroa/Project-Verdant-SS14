@@ -1,0 +1,172 @@
+- type: entity
+  abstract: true
+  id: ZpmSocketVisualPart
+  parent: BaseMachine
+  name: ZPM module socket segment
+  description: A segment of the Zero Point Module containment socket.
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+  - type: Anchorable
+  - type: Pullable
+
+- type: entity
+  parent: ZpmSocketVisualPart
+  id: ZpmSocketTopLeft
+  name: ZPM socket top-left segment
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: corner-topleft
+
+- type: entity
+  parent: ZpmSocketVisualPart
+  id: ZpmSocketTopMiddle
+  name: ZPM socket top segment
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: middle-top
+
+- type: entity
+  parent: ZpmSocketVisualPart
+  id: ZpmSocketTopRight
+  name: ZPM socket top-right segment
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: corner-topright
+
+- type: entity
+  parent: ZpmSocketVisualPart
+  id: ZpmSocketHeatOutlet
+  name: ZPM heat outlet segment
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: middle-leftheatout
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      zpm:
+        !type:ZpmNodeHeatOutlet
+        nodeGroupID: Zpm
+      pipe:
+        !type:PipeNode
+        nodeGroupID: Pipe
+        pipeDirection: West
+        volume: 100
+  - type: AtmosDevice
+    joinSystem: true
+
+- type: entity
+  parent: BaseMachinePowered
+  id: ZpmModuleSocket
+  name: ZPM module socket
+  description: A shielded containment socket for a removable Zero Point Module core.
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: middle
+  - type: Anchorable
+  - type: Pullable
+  - type: ZpmReactor
+    coreSlot:
+      name: ZPM Core
+      whitelist:
+        components:
+        - ZpmCore
+      insertSuccessPopup: zpm-core-inserted
+      lockedFailPopup: zpm-core-locked
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      coreSlot: !type:ContainerSlot
+  - type: AtmosDevice
+    joinSystem: true
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      zpm:
+        !type:ZpmNodeReactor
+        nodeGroupID: Zpm
+      output:
+        !type:CableDeviceNode
+        nodeGroupID: HVPower
+  - type: PowerSupplier
+    supplyRate: 0
+  - type: DeviceLinkSource
+    ports:
+    - Status
+  - type: WiredNetworkConnection
+
+- type: entity
+  parent: ZpmSocketVisualPart
+  id: ZpmSocketCoolingInlet
+  name: ZPM coolant inlet segment
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: middle-rightcoolingin
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      zpm:
+        !type:ZpmNodeCoolingInlet
+        nodeGroupID: Zpm
+      pipe:
+        !type:PipeNode
+        nodeGroupID: Pipe
+        pipeDirection: East
+        volume: 100
+  - type: AtmosDevice
+    joinSystem: true
+
+- type: entity
+  parent: ZpmSocketVisualPart
+  id: ZpmSocketBottomLeft
+  name: ZPM socket bottom-left segment
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: corner-bottomleft
+
+- type: entity
+  parent: ZpmSocketVisualPart
+  id: ZpmSocketBottomMiddle
+  name: ZPM socket bottom segment
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: middle-bottom
+
+- type: entity
+  parent: ZpmSocketVisualPart
+  id: ZpmSocketBottomRight
+  name: ZPM socket bottom-right segment
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: corner-rightbottom
+
+- type: entity
+  parent: GasPressurePump
+  id: ZpmCoolantIntakePump
+  name: ZPM coolant intake pump
+  description: A one-way gas pump for the cold side of a ZPM loop. Orient its outlet toward the reactor.
+
+- type: entity
+  parent: GasPressurePump
+  id: ZpmHeatReturnPump
+  name: ZPM heat return pump
+  description: A one-way gas pump for the hot side of a ZPM loop. Orient its outlet away from the reactor.
+
+- type: entity
+  parent: HeatExchanger
+  id: ZpmLoopRadiator
+  name: ZPM loop radiator
+  description: Transfers heat from the ZPM coolant loop into the surrounding room. A Frezon-cooled radiator room greatly improves cooling.

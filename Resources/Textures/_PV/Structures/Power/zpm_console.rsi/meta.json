@@ -16,29 +16,11 @@
       "directions": 4
     },
     {
-      "name": "Terraform",
-      "directions": 4,
-      "delays": [
-        [
-          0.5,
-          0.5
-        ],
-        [
-          0.5,
-          0.5
-        ],
-        [
-          0.5,
-          0.5
-        ],
-        [
-          0.5,
-          0.5
-        ]
-      ]
+      "name": "zpm",
+      "delays": [[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]]
     },
     {
-      "name": "Terraform_key",
+      "name": "zpm-key",
       "directions": 4
     }
   ]

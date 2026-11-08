@@ -1,0 +1,46 @@
+<ui:ZpmConsoleWindow xmlns="https://spacestation14.io"
+                     xmlns:ui="clr-namespace:Content.Client._PV.Zpm"
+                     MinSize="450 470"
+                     SetSize="520 560"
+                     Title="ZPM Reactor Control">
+    <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
+        <PanelContainer>
+            <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="8">
+                <Label Name="ConnectionLabel" StyleClasses="LabelHeading" Text="No ZPM control linked" />
+                <Label Name="CoreLabel" Text="Core: --" />
+                <Label Name="ConditionLabel" Text="Condition: --" />
+                <Label Name="IntegrityLabel" Text="Integrity: --" />
+                <Label Name="PowerLabel" Text="Power: --" />
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer>
+            <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="8">
+                <Label Text="THERMAL LOOP" StyleClasses="LabelHeading" />
+                <Label Name="CoolingLabel" Text="Cooling efficiency: --" />
+                <Label Name="InletLabel" Text="Coolant inlet: --" />
+                <Label Name="OutletLabel" Text="Heat outlet: --" />
+                <Label Name="VacuumLabel" Text="Chamber pressure: --" />
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer>
+            <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="8">
+                <Label Text="POWER LEVEL" StyleClasses="LabelHeading" />
+                <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                    <Button Name="LowButton" Text="Low" HorizontalExpand="True" />
+                    <Button Name="MediumButton" Text="Medium" HorizontalExpand="True" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                    <Button Name="AverageButton" Text="Average" HorizontalExpand="True" />
+                    <Button Name="HighButton" Text="High" HorizontalExpand="True" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                    <Button Name="StartButton" Text="Start Reactor" HorizontalExpand="True" />
+                    <Button Name="EjectCoreButton" Text="Eject Core" HorizontalExpand="True" />
+                    <Button Name="ShutdownButton" Text="Shutdown" HorizontalExpand="True" />
+                    <Button Name="EmergencyShutdownButton" Text="Emergency Shutdown" HorizontalExpand="True" />
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
+        <Button Name="RefreshButton" Text="Refresh" />
+    </BoxContainer>
+</ui:ZpmConsoleWindow>
