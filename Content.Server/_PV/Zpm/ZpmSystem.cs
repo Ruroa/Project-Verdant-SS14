@@ -11,6 +11,7 @@ using Content.Shared.Atmos.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceLinking;
+using Content.Shared.NodeContainer;
 using Content.Shared.Radio;
 using Content.Shared.UserInterface;
 using Robust.Shared.Containers;
@@ -91,8 +92,8 @@ public sealed class ZpmSystem : EntitySystem
 
     private void OnReactorInit(EntityUid uid, ZpmReactorComponent component, ComponentInit args)
     {
-        component.CoreSlot.DisableEject = true;
         _itemSlots.AddItemSlot(uid, CoreSlotId, component.CoreSlot);
+        _itemSlots.SetLock(uid, CoreSlotId, component.Online);
         UpdatePower(uid, component);
     }
 
@@ -231,7 +232,7 @@ public sealed class ZpmSystem : EntitySystem
         }
 
         reactor.PreviousIntegrity = reactor.Integrity;
-        reactor.CoreSlot.Locked = reactor.Online;
+        _itemSlots.SetLock(uid, CoreSlotId, reactor.Online);
         UpdatePower(uid, reactor);
         PublishStatus(uid);
     }
@@ -353,7 +354,7 @@ public sealed class ZpmSystem : EntitySystem
     private void SetOnline(EntityUid uid, ZpmReactorComponent reactor, bool value)
     {
         reactor.Online = value;
-        reactor.CoreSlot.Locked = value;
+        _itemSlots.SetLock(uid, CoreSlotId, value);
         if (!value)
             reactor.PowerOutput = 0f;
         UpdatePower(uid, reactor);
@@ -416,7 +417,7 @@ public sealed class ZpmSystem : EntitySystem
         if (TryComp<ZpmReactorComponent>(uid, out var reactor))
         {
             UpdatePower(uid, reactor);
-            reactor.CoreSlot.Locked = reactor.Online;
+            _itemSlots.SetLock(uid, CoreSlotId, reactor.Online);
         }
     }
 
@@ -424,10 +425,12 @@ public sealed class ZpmSystem : EntitySystem
     {
         uid = default;
         reactor = default!;
-        if (console.LinkedReactor is not { } linked || !Exists(linked) || !TryComp(linked, out reactor))
+        if (console.LinkedReactor is not { } linked || !Exists(linked) ||
+            !TryComp<ZpmReactorComponent>(linked, out var found) || found == null)
             return false;
 
         uid = linked;
+        reactor = found;
         return true;
     }
 
@@ -477,11 +480,10 @@ public sealed class ZpmSystem : EntitySystem
         foreach (var sourceUid in sink.LinkedSources)
         {
             if (!HasComp<ZpmReactorComponent>(sourceUid) ||
-                !TryComp<DeviceLinkSourceComponent>(sourceUid, out var source) ||
-                !source.LinkedPorts.TryGetValue(consoleUid, out var links))
+                !TryComp<DeviceLinkSourceComponent>(sourceUid, out var source))
                 continue;
 
-            foreach (var (sourcePort, sinkPort) in links)
+            foreach (var (sourcePort, sinkPort) in _deviceLink.GetLinks(sourceUid, consoleUid, source))
             {
                 if (sourcePort != "Status" || sinkPort != "Toggle")
                     continue;

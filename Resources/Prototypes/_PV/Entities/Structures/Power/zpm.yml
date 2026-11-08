@@ -77,6 +77,7 @@
   - type: ZpmReactor
     coreSlot:
       name: ZPM Core
+      disableEject: true
       whitelist:
         components:
         - ZpmCore
