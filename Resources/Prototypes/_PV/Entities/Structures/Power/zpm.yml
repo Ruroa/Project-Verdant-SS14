@@ -45,8 +45,14 @@
   name: ZPM heat outlet segment
   components:
   - type: Sprite
+    granularLayersRendering: true
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
-    state: middle-leftheatout
+    layers:
+    - state: middle-leftheatout
+    - sprite: _Carpmosia/Structures/Piping/Atmospherics/thermomachine.rsi
+      state: pipe
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+      renderingStrategy: Default
   - type: NodeContainer
     examinable: true
     nodes:
@@ -60,6 +66,18 @@
         volume: 100
   - type: AtmosDevice
     joinSystem: true
+  - type: Appearance
+  - type: PipeColorVisuals
+  - type: AtmosPipeColor
+  - type: AtmosPipeLayers
+    spriteLayersRsiPaths:
+      enum.PipeVisualLayers.Pipe:
+        Primary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine.rsi
+        Secondary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt1.rsi
+        Tertiary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt2.rsi
+        Quaternary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt3.rsi
+        Quinary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt4.rsi
+  - type: PipeRestrictOverlap
 
 - type: entity
   parent: BaseMachinePowered
@@ -111,8 +129,14 @@
   name: ZPM coolant inlet segment
   components:
   - type: Sprite
+    granularLayersRendering: true
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
-    state: middle-rightcoolingin
+    layers:
+    - state: middle-rightcoolingin
+    - sprite: _Carpmosia/Structures/Piping/Atmospherics/thermomachine.rsi
+      state: pipe
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+      renderingStrategy: Default
   - type: NodeContainer
     examinable: true
     nodes:
@@ -126,6 +150,18 @@
         volume: 100
   - type: AtmosDevice
     joinSystem: true
+  - type: Appearance
+  - type: PipeColorVisuals
+  - type: AtmosPipeColor
+  - type: AtmosPipeLayers
+    spriteLayersRsiPaths:
+      enum.PipeVisualLayers.Pipe:
+        Primary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine.rsi
+        Secondary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt1.rsi
+        Tertiary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt2.rsi
+        Quaternary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt3.rsi
+        Quinary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt4.rsi
+  - type: PipeRestrictOverlap
 
 - type: entity
   parent: ZpmSocketVisualPart
@@ -153,21 +189,3 @@
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: corner-rightbottom
-
-- type: entity
-  parent: GasPressurePump
-  id: ZpmCoolantIntakePump
-  name: ZPM coolant intake pump
-  description: A one-way gas pump for the cold side of a ZPM loop. Orient its outlet toward the reactor.
-
-- type: entity
-  parent: GasPressurePump
-  id: ZpmHeatReturnPump
-  name: ZPM heat return pump
-  description: A one-way gas pump for the hot side of a ZPM loop. Orient its outlet away from the reactor.
-
-- type: entity
-  parent: HeatExchanger
-  id: ZpmLoopRadiator
-  name: ZPM loop radiator
-  description: Transfers heat from the ZPM coolant loop into the surrounding room. A Frezon-cooled radiator room greatly improves cooling.
