@@ -6,6 +6,7 @@
   description: A segment of the Zero Point Module containment socket.
   components:
   - type: Transform
+    anchored: true
     noRot: true
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
@@ -17,6 +18,11 @@
   id: ZpmSocketTopLeft
   name: ZPM socket top-left segment
   components:
+  - type: NodeContainer
+    nodes:
+      shielding:
+        !type:ZpmNodeShielding
+        nodeGroupID: Zpm
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: corner-topleft
@@ -26,6 +32,11 @@
   id: ZpmSocketTopMiddle
   name: ZPM socket top segment
   components:
+  - type: NodeContainer
+    nodes:
+      shielding:
+        !type:ZpmNodeShielding
+        nodeGroupID: Zpm
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: middle-top
@@ -35,6 +46,11 @@
   id: ZpmSocketTopRight
   name: ZPM socket top-right segment
   components:
+  - type: NodeContainer
+    nodes:
+      shielding:
+        !type:ZpmNodeShielding
+        nodeGroupID: Zpm
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: corner-topright
@@ -58,6 +74,9 @@
     nodes:
       zpm:
         !type:ZpmNodeHeatOutlet
+        nodeGroupID: Zpm
+      shielding:
+        !type:ZpmNodeShielding
         nodeGroupID: Zpm
       pipe:
         !type:PipeNode
@@ -83,28 +102,33 @@
   parent: BaseMachinePowered
   id: ZpmModuleSocket
   name: ZPM module socket
-  description: A shielded containment socket for a removable Zero Point Module core.
+  description: A shielded containment socket for a Zero Point Module core control unit.
   components:
   - type: Transform
+    anchored: true
     noRot: true
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
-    state: middle
+    layers:
+    - state: middle
+    - state: stable-pulse-low
+      map: [ "zpmPulse" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ZpmReactorVisuals.Pulse:
+        zpmPulse:
+          Offline: { visible: false }
+          StableLow: { state: stable-pulse-low, visible: true }
+          StableHigh: { state: stable-pulse-high, visible: true }
+          WarningLow: { state: warning-pulse-low, visible: true }
+          WarningHigh: { state: warning-pulse-high, visible: true }
+          CriticalLow: { state: critical-pulse-low, visible: true }
+          CriticalHigh: { state: critical-pulse-high, visible: true }
   - type: Anchorable
   - type: Pullable
   - type: ZpmReactor
-    coreSlot:
-      name: ZPM Core
-      disableEject: true
-      whitelist:
-        components:
-        - ZpmCore
-      insertSuccessPopup: zpm-core-inserted
-      lockedFailPopup: zpm-core-locked
-  - type: ItemSlots
-  - type: ContainerContainer
-    containers:
-      coreSlot: !type:ContainerSlot
   - type: AtmosDevice
     joinSystem: true
   - type: NodeContainer
@@ -118,13 +142,20 @@
         nodeGroupID: HVPower
   - type: PowerSupplier
     supplyRate: 0
+    supplyRampRate: 100000000
+    supplyRampTolerance: 10000000000
+  - type: PowerMonitoringDevice
+    group: Generator
+    loadNode: output
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: middle
   - type: WiredNetworkConnection
 
 - type: entity
   parent: BaseMachine
   id: ZpmController
-  name: ZPM controller
-  description: Controls and monitors an adjacent Zero Point Module reactor.
+  name: ZPM control
+  description: Holds the removable Zero Point Module core and links it to the socket.
   placement:
     mode: SnapgridCenter
   components:
@@ -149,6 +180,18 @@
   - type: Anchorable
   - type: Pullable
   - type: ZpmController
+    coreSlot:
+      name: ZPM Core
+      disableEject: true
+      whitelist:
+        components:
+        - ZpmCore
+      insertSuccessPopup: zpm-core-inserted
+      lockedFailPopup: zpm-core-locked
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      coreSlot: !type:ContainerSlot
   - type: NodeContainer
     nodes:
       zpm:
@@ -178,6 +221,9 @@
       zpm:
         !type:ZpmNodeCoolingInlet
         nodeGroupID: Zpm
+      shielding:
+        !type:ZpmNodeShielding
+        nodeGroupID: Zpm
       pipe:
         !type:PipeNode
         nodeGroupID: Pipe
@@ -203,6 +249,11 @@
   id: ZpmSocketBottomLeft
   name: ZPM socket bottom-left segment
   components:
+  - type: NodeContainer
+    nodes:
+      shielding:
+        !type:ZpmNodeShielding
+        nodeGroupID: Zpm
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: corner-bottomleft
@@ -212,6 +263,11 @@
   id: ZpmSocketBottomMiddle
   name: ZPM socket bottom segment
   components:
+  - type: NodeContainer
+    nodes:
+      shielding:
+        !type:ZpmNodeShielding
+        nodeGroupID: Zpm
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: middle-bottom
@@ -221,6 +277,11 @@
   id: ZpmSocketBottomRight
   name: ZPM socket bottom-right segment
   components:
+  - type: NodeContainer
+    nodes:
+      shielding:
+        !type:ZpmNodeShielding
+        nodeGroupID: Zpm
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: corner-rightbottom

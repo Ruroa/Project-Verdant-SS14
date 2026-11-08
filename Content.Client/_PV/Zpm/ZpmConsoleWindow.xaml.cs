@@ -35,8 +35,9 @@ public sealed partial class ZpmConsoleWindow : DefaultWindow
         CoreLabel.Text = $"Core: {(state.HasCore ? "Inserted" : "Missing")}";
         ConditionLabel.Text = $"Condition: {(state.Online ? state.Condition.ToString() : "Offline")}";
         IntegrityLabel.Text = $"Integrity: {state.Integrity:0.0}%";
-        PowerLabel.Text = $"Power: {state.PowerOutput / 1000f:0} kW  |  Setting: {state.PowerLevel}";
+        PowerLabel.Text = $"Power: {state.PowerSupplied / 1000f:0} kW supplied / {state.PowerOutput / 1000f:0} kW available  |  Setting: {state.PowerLevel}";
         CoolingLabel.Text = $"Cooling efficiency: {state.CoolingEfficiency:0.0}%";
+        ShieldingLabel.Text = $"Shielding integrity: {state.ShieldingEfficiency:0.0}%";
         InletLabel.Text = $"Coolant inlet: {state.CoolantInletTemperature:0.0} K";
         OutletLabel.Text = $"Heat outlet: {state.HeatOutletTemperature:0.0} K";
         VacuumLabel.Text = $"Chamber pressure: {state.ChamberPressure / 1000f:0.00} kPa";

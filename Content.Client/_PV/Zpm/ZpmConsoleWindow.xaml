@@ -17,6 +17,7 @@
             <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="8">
                 <Label Text="THERMAL LOOP" StyleClasses="LabelHeading" />
                 <Label Name="CoolingLabel" Text="Cooling efficiency: --" />
+                <Label Name="ShieldingLabel" Text="Shielding integrity: --" />
                 <Label Name="InletLabel" Text="Coolant inlet: --" />
                 <Label Name="OutletLabel" Text="Heat outlet: --" />
                 <Label Name="VacuumLabel" Text="Chamber pressure: --" />

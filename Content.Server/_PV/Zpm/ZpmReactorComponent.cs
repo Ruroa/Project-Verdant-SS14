@@ -7,9 +7,6 @@ namespace Content.Server._PV.Zpm;
 public sealed partial class ZpmReactorComponent : Component
 {
     [DataField]
-    public ItemSlot CoreSlot = new();
-
-    [DataField]
     public bool Online;
 
     [DataField]
@@ -20,6 +17,9 @@ public sealed partial class ZpmReactorComponent : Component
 
     [DataField]
     public float CoolingEfficiency;
+
+    [DataField]
+    public float ShieldingEfficiency = 100f;
 
     [DataField]
     public float ChamberPressure;
@@ -43,16 +43,19 @@ public sealed partial class ZpmReactorComponent : Component
     public float MaxReturnTemperature = 600f;
 
     [DataField]
-    public float RequiredPressureDifferential = 25_000f;
-
-    [DataField]
-    public float MinCoolantMoles = 5f;
+    public float RequiredPressureDifferential = 1_000f;
 
     [DataField]
     public float VacuumLimit = 5_000f;
 
     [DataField]
     public float IntegrityLossPerSecond = 0.2f;
+
+    [DataField]
+    public float IntegrityRecoveryPerSecond = 0.5f;
+
+    [DataField]
+    public float ShieldingIntegrityLossPerSecond = 0.5f;
 
     [DataField]
     public float VacuumIntegrityLossPerSecond = 1f;
@@ -86,6 +89,18 @@ public sealed partial class ZpmReactorComponent : Component
 
     [DataField]
     public bool BreachFinalized;
+
+    [DataField]
+    public bool CriticalAnnouncementSent;
+
+    [DataField]
+    public bool ShieldingWarningSent;
+
+    [DataField]
+    public bool ShieldingWarningSent;
+
+    [ViewVariables]
+    public ZpmPulseVisual? CurrentPulseVisual;
 }
 
 [RegisterComponent]
@@ -101,6 +116,12 @@ public sealed partial class ZpmConsoleComponent : Component
 [RegisterComponent]
 public sealed partial class ZpmControllerComponent : Component
 {
+    [DataField]
+    public ItemSlot CoreSlot = new();
+
+    [ViewVariables]
+    public bool CoreSlotInitialized;
+
     [ViewVariables]
     public EntityUid? Reactor;
 }

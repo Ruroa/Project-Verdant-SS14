@@ -1,20 +1,25 @@
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Components;
+using Content.Server.Chat.Systems;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.NodeContainer;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Radio.EntitySystems;
+using Content.Server.Station.Systems;
 using Content.Server.Power.Components;
 using Content.Shared._PV.Zpm;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Damage.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceLinking;
 using Content.Shared.NodeContainer;
 using Content.Shared.Radio;
 using Content.Shared.UserInterface;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Maths;
 using Robust.Shared.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
@@ -36,6 +41,8 @@ public sealed class ZpmSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -44,12 +51,13 @@ public sealed class ZpmSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ZpmReactorComponent, ComponentInit>(OnReactorInit);
-        SubscribeLocalEvent<ZpmReactorComponent, ComponentRemove>(OnReactorRemove);
-        SubscribeLocalEvent<ZpmReactorComponent, ItemSlotEjectAttemptEvent>(OnCoreEjectAttempt);
-        SubscribeLocalEvent<ZpmReactorComponent, ItemSlotInsertAttemptEvent>(OnCoreInsertAttempt);
-        SubscribeLocalEvent<ZpmReactorComponent, EntInsertedIntoContainerMessage>(OnCoreChanged);
-        SubscribeLocalEvent<ZpmReactorComponent, EntRemovedFromContainerMessage>(OnCoreChanged);
         SubscribeLocalEvent<ZpmReactorComponent, AtmosDeviceUpdateEvent>(OnAtmosUpdate);
+        SubscribeLocalEvent<ZpmControllerComponent, ComponentInit>(OnControllerInit);
+        SubscribeLocalEvent<ZpmControllerComponent, ComponentRemove>(OnControllerRemove);
+        SubscribeLocalEvent<ZpmControllerComponent, ItemSlotEjectAttemptEvent>(OnCoreEjectAttempt);
+        SubscribeLocalEvent<ZpmControllerComponent, ItemSlotInsertAttemptEvent>(OnCoreInsertAttempt);
+        SubscribeLocalEvent<ZpmControllerComponent, EntInsertedIntoContainerMessage>(OnCoreChanged);
+        SubscribeLocalEvent<ZpmControllerComponent, EntRemovedFromContainerMessage>(OnCoreChanged);
         SubscribeLocalEvent<ZpmConsoleComponent, NewLinkEvent>(OnNewLink);
         SubscribeLocalEvent<ZpmConsoleComponent, PortDisconnectedEvent>(OnPortDisconnected);
         SubscribeLocalEvent<ZpmConsoleComponent, BoundUIOpenedEvent>(OnConsoleOpened);
@@ -94,39 +102,51 @@ public sealed class ZpmSystem : EntitySystem
 
     private void OnReactorInit(EntityUid uid, ZpmReactorComponent component, ComponentInit args)
     {
-        _itemSlots.AddItemSlot(uid, CoreSlotId, component.CoreSlot);
-        _itemSlots.SetLock(uid, CoreSlotId, component.Online);
         UpdatePower(uid, component);
+        UpdateReactorAppearance(uid, component);
     }
 
-    private void OnReactorRemove(EntityUid uid, ZpmReactorComponent component, ComponentRemove args)
+    private void OnControllerInit(EntityUid uid, ZpmControllerComponent component, ComponentInit args)
+    {
+        _itemSlots.AddItemSlot(uid, CoreSlotId, component.CoreSlot);
+        component.CoreSlotInitialized = true;
+        UpdateControllerAppearance(uid, component);
+        if (component.Reactor is { } reactorUid)
+            RefreshReactor(reactorUid);
+    }
+
+    private void OnControllerRemove(EntityUid uid, ZpmControllerComponent component, ComponentRemove args)
     {
         _itemSlots.RemoveItemSlot(uid, component.CoreSlot);
+        component.CoreSlotInitialized = false;
     }
 
-    private void OnCoreChanged(EntityUid uid, ZpmReactorComponent component, ContainerModifiedMessage args)
+    private void OnCoreChanged(EntityUid uid, ZpmControllerComponent component, ContainerModifiedMessage args)
     {
         if (args.Container.ID != component.CoreSlot.ID)
             return;
 
-        RefreshReactor(uid);
+        UpdateControllerAppearance(uid, component);
+        if (component.Reactor is { } reactorUid)
+            RefreshReactor(reactorUid);
     }
 
-    private void OnCoreEjectAttempt(EntityUid uid, ZpmReactorComponent component, ref ItemSlotEjectAttemptEvent args)
+    private void OnCoreEjectAttempt(EntityUid uid, ZpmControllerComponent component, ref ItemSlotEjectAttemptEvent args)
     {
-        if (component.Online)
+        if (component.Reactor is { } reactorUid && TryComp<ZpmReactorComponent>(reactorUid, out var reactor) && reactor.Online)
             args.Cancelled = true;
     }
 
-    private void OnCoreInsertAttempt(EntityUid uid, ZpmReactorComponent component, ref ItemSlotInsertAttemptEvent args)
+    private void OnCoreInsertAttempt(EntityUid uid, ZpmControllerComponent component, ref ItemSlotInsertAttemptEvent args)
     {
-        if (component.Online)
+        if (component.Reactor is { } reactorUid && TryComp<ZpmReactorComponent>(reactorUid, out var reactor) && reactor.Online)
             args.Cancelled = true;
     }
 
     private void OnAtmosUpdate(EntityUid uid, ZpmReactorComponent component, ref AtmosDeviceUpdateEvent args)
     {
-        if (!component.Online || component.CoreSlot.Item == null || !TryGetPorts(uid, out var inlet, out var outlet))
+        if (!component.Online || !TryGetCoreController(uid, out _, out var coreController) ||
+            coreController.CoreSlot.Item == null || !TryGetPorts(uid, out var inlet, out var outlet))
             return;
 
         var input = inlet.Air;
@@ -144,8 +164,10 @@ public sealed class ZpmSystem : EntitySystem
             (component.SafeInletTemperature - component.IdealInletTemperature), 0f, 1f);
         var pressureFactor = Math.Clamp(
             (input.Pressure - output.Pressure) / component.RequiredPressureDifferential, 0f, 1f);
-        var flowFactor = Math.Clamp(transfer.TotalMoles / component.MinCoolantMoles, 0f, 1f);
-        var availableCooling = heatCapacity * heatHeadroom * inletTemperatureFactor * pressureFactor * flowFactor;
+        // Heat capacity already scales with the amount of gas transferred. Applying a second
+        // flow multiplier here counted low flow twice and made normal pump circulation appear
+        // ineffective.
+        var availableCooling = heatCapacity * heatHeadroom * inletTemperatureFactor * pressureFactor;
         var requestedHeat = GetHeatDemand(component.PowerLevel) * args.dt;
         component.CoolingEfficiency = requestedHeat <= 0f
             ? 100f
@@ -180,7 +202,7 @@ public sealed class ZpmSystem : EntitySystem
         var air = _atmosphere.GetContainingMixture(uid);
         reactor.ChamberPressure = air?.Pressure ?? 0f;
         var vacuumLost = reactor.ChamberPressure > reactor.VacuumLimit;
-        var hasCore = reactor.CoreSlot.Item != null;
+        var hasCore = TryGetCoreController(uid, out _, out var coreController) && coreController.CoreSlot.Item != null;
 
         if (reactor.Online && vacuumLost && !reactor.VacuumBreached)
         {
@@ -196,7 +218,19 @@ public sealed class ZpmSystem : EntitySystem
         if (reactor.Online && (!hasCore || reactor.BreachFinalized))
             SetOnline(uid, reactor, false);
 
+        reactor.ShieldingEfficiency = GetShieldingEfficiency(uid);
         var coolingDeficit = MathF.Max(0f, 100f - reactor.CoolingEfficiency) / 100f;
+        var shieldingDeficit = MathF.Max(0f, 100f - reactor.ShieldingEfficiency) / 100f;
+        if (reactor.Online && reactor.ShieldingEfficiency <= 50f && !reactor.ShieldingWarningSent)
+        {
+            SendEngineeringMessage(uid, "ZPM shielding efficiency is at or below 50%. Repair the containment socket before the shielding fails.");
+            reactor.ShieldingWarningSent = true;
+        }
+        else if (reactor.ShieldingEfficiency > 50f && reactor.ShieldingWarningSent)
+        {
+            SendEngineeringMessage(uid, $"ZPM shielding repaired to {reactor.ShieldingEfficiency:0}%; integrity recovery can resume when all other systems are stable.");
+            reactor.ShieldingWarningSent = false;
+        }
         if (reactor.Online && coolingDeficit > 0f)
         {
             var levelMultiplier = reactor.PowerLevel switch
@@ -213,17 +247,34 @@ public sealed class ZpmSystem : EntitySystem
         if (reactor.Online && vacuumLost)
             reactor.Integrity -= reactor.VacuumIntegrityLossPerSecond * seconds;
 
+        if (reactor.Online && shieldingDeficit > 0f)
+            reactor.Integrity -= reactor.ShieldingIntegrityLossPerSecond * shieldingDeficit * seconds;
+
+        if (!vacuumLost && shieldingDeficit <= 0f && (!reactor.Online || coolingDeficit <= 0f))
+            reactor.Integrity += reactor.IntegrityRecoveryPerSecond * seconds;
+
         reactor.Integrity = Math.Clamp(reactor.Integrity, 0f, 100f);
         HandleIntegrityWarnings(uid, reactor);
+
+        if (reactor.Integrity > 25f)
+            reactor.CriticalAnnouncementSent = false;
 
         if (reactor.Integrity <= 0f && reactor.BreachTime == TimeSpan.Zero)
         {
             reactor.BreachTime = _timing.CurTime + TimeSpan.FromSeconds(BreachGraceSeconds);
             reactor.FinalBreachWarningSent = true;
             SendEngineeringMessage(uid, "ZPM INTEGRITY FIELD REACHED 0% — EVENT HORIZON COLLAPSE UNAVOIDABLE. Core breach in 10 seconds.");
+            AnnounceStation(uid, "ZPM integrity has reached 0%. EVENT HORIZON COLLAPSE IS IMMINENT. Evacuate the reactor area immediately.");
+        }
+        else if (reactor.Integrity > 0f && reactor.BreachTime != TimeSpan.Zero)
+        {
+            reactor.BreachTime = TimeSpan.Zero;
+            reactor.FinalBreachWarningSent = false;
         }
 
-        if (reactor.Online && (coolingDeficit > 0f || vacuumLost))
+        UpdateReactorAppearance(uid, reactor);
+
+        if (reactor.Online && (coolingDeficit > 0f || vacuumLost || shieldingDeficit > 0f))
         {
             reactor.WasUnstable = true;
         }
@@ -234,7 +285,8 @@ public sealed class ZpmSystem : EntitySystem
         }
 
         reactor.PreviousIntegrity = reactor.Integrity;
-        _itemSlots.SetLock(uid, CoreSlotId, reactor.Online);
+        if (TryGetCoreController(uid, out var controllerUid, out _))
+            _itemSlots.SetLock(controllerUid, CoreSlotId, reactor.Online);
         UpdatePower(uid, reactor);
         PublishStatus(uid);
     }
@@ -243,6 +295,12 @@ public sealed class ZpmSystem : EntitySystem
     {
         if (reactor.Integrity <= 25f)
         {
+            if (!reactor.CriticalAnnouncementSent)
+            {
+                AnnounceStation(uid, "ZPM containment integrity has fallen to 25%. Things are FUCKED: engineering response is required immediately.");
+                reactor.CriticalAnnouncementSent = true;
+            }
+
             while (reactor.Integrity <= reactor.NextCriticalIntegrity && reactor.NextCriticalIntegrity > 0f)
             {
                 SendEngineeringMessage(uid, $"ZPM CRITICAL: integrity at {reactor.NextCriticalIntegrity:0}%.");
@@ -318,7 +376,8 @@ public sealed class ZpmSystem : EntitySystem
 
         var air = _atmosphere.GetContainingMixture(reactorUid);
         var group = GetNodeGroup(reactorUid);
-        if (reactor.CoreSlot.Item == null || air == null || air.Pressure > reactor.VacuumLimit || group is not { IsComplete: true })
+        if (!TryGetCoreController(reactorUid, out _, out var coreController) || coreController.CoreSlot.Item == null ||
+            air == null || air.Pressure > reactor.VacuumLimit || group is not { IsComplete: true })
             return;
 
         if (reactor.Integrity <= 25f)
@@ -335,15 +394,17 @@ public sealed class ZpmSystem : EntitySystem
 
         reactor.PowerLevel = args.Level;
         UpdatePower(reactorUid, reactor);
+        UpdateReactorAppearance(reactorUid, reactor);
         UpdateConsole(uid, component);
     }
 
     private void OnEjectCore(EntityUid uid, ZpmConsoleComponent component, ZpmEjectCoreMessage args)
     {
-        if (!TryGetLinkedReactor(component, out var reactorUid, out var reactor) || reactor.Online)
+        if (!TryGetLinkedReactor(component, out var reactorUid, out var reactor) || reactor.Online ||
+            !TryGetCoreController(reactorUid, out var controllerUid, out var coreController))
             return;
 
-        _itemSlots.TryEject(reactorUid, reactor.CoreSlot, null, out _);
+        _itemSlots.TryEject(controllerUid, coreController.CoreSlot, null, out _);
         UpdateConsole(uid, component);
     }
 
@@ -362,15 +423,18 @@ public sealed class ZpmSystem : EntitySystem
     private void SetOnline(EntityUid uid, ZpmReactorComponent reactor, bool value)
     {
         reactor.Online = value;
-        _itemSlots.SetLock(uid, CoreSlotId, value);
+        if (TryGetCoreController(uid, out var controllerUid, out _))
+            _itemSlots.SetLock(controllerUid, CoreSlotId, value);
         if (!value)
             reactor.PowerOutput = 0f;
         UpdatePower(uid, reactor);
+        UpdateReactorAppearance(uid, reactor);
     }
 
     private void UpdatePower(EntityUid uid, ZpmReactorComponent reactor)
     {
-        reactor.PowerOutput = reactor.Online && reactor.CoreSlot.Item != null ? GetPowerOutput(reactor.PowerLevel) : 0f;
+        reactor.PowerOutput = reactor.Online && TryGetCoreController(uid, out _, out var controller) &&
+                              controller.CoreSlot.Item != null ? GetPowerOutput(reactor.PowerLevel) : 0f;
         if (TryComp<PowerSupplierComponent>(uid, out var supplier))
             supplier.MaxSupply = reactor.PowerOutput;
     }
@@ -424,8 +488,12 @@ public sealed class ZpmSystem : EntitySystem
     {
         if (TryComp<ZpmReactorComponent>(uid, out var reactor))
         {
+            if (reactor.Online && (!TryGetCoreController(uid, out _, out var coreController) || coreController.CoreSlot.Item == null))
+                SetOnline(uid, reactor, false);
+
             UpdatePower(uid, reactor);
-            _itemSlots.SetLock(uid, CoreSlotId, reactor.Online);
+            if (TryGetCoreController(uid, out var controllerUid, out _))
+                _itemSlots.SetLock(controllerUid, CoreSlotId, reactor.Online);
 
             if (GetNodeGroup(uid) is { } group)
             {
@@ -441,10 +509,79 @@ public sealed class ZpmSystem : EntitySystem
             return;
 
         controller.Reactor = reactorUid;
-        var hasCore = reactorUid is { } reactor &&
-                      TryComp<ZpmReactorComponent>(reactor, out var reactorComp) &&
-                      reactorComp.CoreSlot.Item != null;
-        _appearance.SetData(controllerUid, ZpmControllerVisuals.CoreInserted, hasCore);
+        UpdateControllerAppearance(controllerUid, controller);
+        if (controller.CoreSlotInitialized)
+            _itemSlots.SetLock(controllerUid, CoreSlotId,
+                reactorUid is { } reactor && TryComp<ZpmReactorComponent>(reactor, out var reactorComp) && reactorComp.Online);
+    }
+
+    private bool TryGetCoreController(EntityUid reactorUid, out EntityUid controllerUid, out ZpmControllerComponent controller)
+    {
+        controllerUid = default;
+        controller = default!;
+        if (GetNodeGroup(reactorUid) is not { } group)
+            return false;
+
+        foreach (var node in group.Controllers)
+        {
+            if (!TryComp<ZpmControllerComponent>(node.Owner, out var found) || found == null || !found.CoreSlotInitialized)
+                continue;
+
+            controllerUid = node.Owner;
+            controller = found;
+            return true;
+        }
+
+        return false;
+    }
+
+    private float GetShieldingEfficiency(EntityUid reactorUid)
+    {
+        if (GetNodeGroup(reactorUid) is not { } group)
+            return 100f;
+
+        const int expectedShieldingParts = 8;
+        var efficiency = 0f;
+        foreach (var part in group.ShieldingParts)
+        {
+            if (!TryComp<DamageableComponent>(part.Owner, out var damageable))
+            {
+                efficiency += 1f;
+                continue;
+            }
+
+            efficiency += Math.Clamp(1f - damageable.TotalDamage.Float() / 100f, 0f, 1f);
+        }
+
+        return Math.Clamp(efficiency / expectedShieldingParts * 100f, 0f, 100f);
+    }
+
+    private void UpdateControllerAppearance(EntityUid uid, ZpmControllerComponent controller)
+    {
+        _appearance.SetData(uid, ZpmControllerVisuals.CoreInserted, controller.CoreSlot.Item != null);
+    }
+
+    private void UpdateReactorAppearance(EntityUid uid, ZpmReactorComponent reactor)
+    {
+        var low = reactor.PowerLevel is ZpmPowerLevel.Low or ZpmPowerLevel.Medium;
+        var state = !reactor.Online ? ZpmPulseVisual.Offline
+            : reactor.Integrity <= 25f
+                ? low ? ZpmPulseVisual.CriticalLow : ZpmPulseVisual.CriticalHigh
+            : reactor.Integrity <= 50f
+                ? low ? ZpmPulseVisual.WarningLow : ZpmPulseVisual.WarningHigh
+            : low ? ZpmPulseVisual.StableLow : ZpmPulseVisual.StableHigh;
+
+        if (reactor.CurrentPulseVisual == state)
+            return;
+
+        reactor.CurrentPulseVisual = state;
+        _appearance.SetData(uid, ZpmReactorVisuals.Pulse, state);
+    }
+
+    private void AnnounceStation(EntityUid source, string message)
+    {
+        var station = _station.GetOwningStation(source) ?? source;
+        _chat.DispatchStationAnnouncement(station, message, "ZPM CONTAINMENT", false, null, Color.Red);
     }
 
     private bool TryGetLinkedReactor(ZpmConsoleComponent console, out EntityUid uid, out ZpmReactorComponent reactor)
@@ -467,7 +604,7 @@ public sealed class ZpmSystem : EntitySystem
 
         ResolveLinkedReactor(uid, component);
 
-        if (!TryGetLinkedReactor(component, out _, out var reactor))
+        if (!TryGetLinkedReactor(component, out var reactorUid, out var reactor))
         {
             _ui.SetUiState(uid, ZpmConsoleUiKey.Key, new ZpmConsoleBoundInterfaceState(false));
             return;
@@ -481,16 +618,18 @@ public sealed class ZpmSystem : EntitySystem
 
         var state = new ZpmConsoleBoundInterfaceState(
             true,
-            reactor.CoreSlot.Item != null,
+            TryGetCoreController(reactorUid, out _, out var coreController) && coreController.CoreSlot.Item != null,
             reactor.Online,
             condition,
             reactor.PowerLevel,
             reactor.Integrity,
             reactor.CoolingEfficiency,
+            reactor.ShieldingEfficiency,
             reactor.ChamberPressure,
             reactor.CoolantInletTemperature,
             reactor.HeatOutletTemperature,
-            reactor.PowerOutput);
+            reactor.PowerOutput,
+            TryComp<PowerSupplierComponent>(reactorUid, out var supplier) ? supplier.CurrentSupply : 0f);
         _ui.SetUiState(uid, ZpmConsoleUiKey.Key, state);
     }
 

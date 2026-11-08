@@ -18,8 +18,9 @@ public sealed class ZpmNodeGroup : BaseNodeGroup
     public ZpmNodeCoolingInlet? CoolingInlet { get; private set; }
     public ZpmNodeHeatOutlet? HeatOutlet { get; private set; }
     public List<ZpmNodeController> Controllers { get; private set; } = new();
+    public List<ZpmNodeShielding> ShieldingParts { get; private set; } = new();
 
-    public bool IsComplete => Reactor != null && CoolingInlet != null && HeatOutlet != null;
+    public bool IsComplete => Reactor != null && CoolingInlet != null && HeatOutlet != null && ShieldingParts.Count == 8;
 
     public override void Initialize(Node sourceNode, IEntityManager entMan)
     {
@@ -35,6 +36,7 @@ public sealed class ZpmNodeGroup : BaseNodeGroup
         CoolingInlet = groupNodes.OfType<ZpmNodeCoolingInlet>().SingleOrDefault();
         HeatOutlet = groupNodes.OfType<ZpmNodeHeatOutlet>().SingleOrDefault();
         Controllers = groupNodes.OfType<ZpmNodeController>().ToList();
+        ShieldingParts = groupNodes.OfType<ZpmNodeShielding>().ToList();
 
         if (_entityManager == null)
             return;
@@ -56,6 +58,35 @@ public sealed class ZpmNodeGroup : BaseNodeGroup
         {
             foreach (var controller in Controllers)
                 system.RefreshController(controller.Owner, null);
+        }
+    }
+}
+
+[DataDefinition]
+public sealed partial class ZpmNodeShielding : Node
+{
+    public override IEnumerable<Node> GetReachableNodes(
+        Entity<TransformComponent> xform,
+        EntityQuery<NodeContainerComponent> nodeQuery,
+        EntityQuery<TransformComponent> xformQuery,
+        Entity<MapGridComponent>? grid,
+        IEntityManager entMan)
+    {
+        if (!xform.Comp.Anchored || grid is not { } gridEnt)
+            yield break;
+
+        var map = entMan.System<SharedMapSystem>();
+        var tile = map.TileIndicesFor(gridEnt, xform.Comp.Coordinates);
+        foreach (var direction in new[] { Direction.North, Direction.East, Direction.South, Direction.West })
+        {
+            foreach (var node in NodeHelpers.GetNodesInTile(nodeQuery, gridEnt, tile.Offset(direction), map))
+            {
+                if (node is ZpmNodeReactor)
+                {
+                    yield return node;
+                    yield break;
+                }
+            }
         }
     }
 }
@@ -89,6 +120,7 @@ public sealed partial class ZpmNodeController : Node
                 }
             }
         }
+
     }
 }
 
@@ -122,6 +154,21 @@ public sealed partial class ZpmNodeReactor : Node
             {
                 if (node is ZpmNodeController)
                     yield return node;
+            }
+        }
+
+        for (var x = -1; x <= 1; x++)
+        {
+            for (var y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0)
+                    continue;
+
+                foreach (var node in NodeHelpers.GetNodesInTile(nodeQuery, gridEnt, tile + new Vector2i(x, y), map))
+                {
+                    if (node is ZpmNodeShielding)
+                        yield return node;
+                }
             }
         }
 
