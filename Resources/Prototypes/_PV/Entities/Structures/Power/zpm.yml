@@ -118,10 +118,45 @@
         nodeGroupID: HVPower
   - type: PowerSupplier
     supplyRate: 0
+  - type: WiredNetworkConnection
+
+- type: entity
+  parent: BaseMachine
+  id: ZpmController
+  name: ZPM controller
+  description: Controls and monitors an adjacent Zero Point Module reactor.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Sprite
+    sprite: _PV/Structures/Power/zpm_module_socket.rsi
+    state: control
+    layers:
+    - state: control
+    - state: control-filled
+      map: [ "zpmControllerFilled" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ZpmControllerVisuals.CoreInserted:
+        zpmControllerFilled:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Anchorable
+  - type: Pullable
+  - type: ZpmController
+  - type: NodeContainer
+    nodes:
+      zpm:
+        !type:ZpmNodeController
+        nodeGroupID: Zpm
   - type: DeviceLinkSource
     ports:
     - Status
-  - type: WiredNetworkConnection
 
 - type: entity
   parent: ZpmSocketVisualPart

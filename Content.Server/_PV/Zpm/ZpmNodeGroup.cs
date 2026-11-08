@@ -17,6 +17,7 @@ public sealed class ZpmNodeGroup : BaseNodeGroup
     public ZpmNodeReactor? Reactor { get; private set; }
     public ZpmNodeCoolingInlet? CoolingInlet { get; private set; }
     public ZpmNodeHeatOutlet? HeatOutlet { get; private set; }
+    public List<ZpmNodeController> Controllers { get; private set; } = new();
 
     public bool IsComplete => Reactor != null && CoolingInlet != null && HeatOutlet != null;
 
@@ -28,16 +29,66 @@ public sealed class ZpmNodeGroup : BaseNodeGroup
 
     public override void LoadNodes(List<Node> groupNodes)
     {
+        var previousControllers = Controllers.Select(node => node.Owner).ToArray();
         base.LoadNodes(groupNodes);
         Reactor = groupNodes.OfType<ZpmNodeReactor>().SingleOrDefault();
         CoolingInlet = groupNodes.OfType<ZpmNodeCoolingInlet>().SingleOrDefault();
         HeatOutlet = groupNodes.OfType<ZpmNodeHeatOutlet>().SingleOrDefault();
+        Controllers = groupNodes.OfType<ZpmNodeController>().ToList();
 
         if (_entityManager == null)
             return;
 
+        var system = _entityManager.EntitySysManager.GetEntitySystem<ZpmSystem>();
+        foreach (var oldController in previousControllers)
+        {
+            if (Controllers.All(node => node.Owner != oldController))
+                system.RefreshController(oldController, null);
+        }
+
         if (Reactor is { } reactor)
-            _entityManager.EntitySysManager.GetEntitySystem<ZpmSystem>().RefreshReactor(reactor.Owner);
+        {
+            system.RefreshReactor(reactor.Owner);
+            foreach (var controller in Controllers)
+                system.RefreshController(controller.Owner, reactor.Owner);
+        }
+        else
+        {
+            foreach (var controller in Controllers)
+                system.RefreshController(controller.Owner, null);
+        }
+    }
+}
+
+[DataDefinition]
+public sealed partial class ZpmNodeController : Node
+{
+    public override IEnumerable<Node> GetReachableNodes(
+        Entity<TransformComponent> xform,
+        EntityQuery<NodeContainerComponent> nodeQuery,
+        EntityQuery<TransformComponent> xformQuery,
+        Entity<MapGridComponent>? grid,
+        IEntityManager entMan)
+    {
+        if (!xform.Comp.Anchored || grid is not { } gridEnt)
+            yield break;
+
+        var map = entMan.System<SharedMapSystem>();
+        var tile = map.TileIndicesFor(gridEnt, xform.Comp.Coordinates);
+        foreach (var direction in new[] { Direction.North, Direction.East, Direction.South, Direction.West })
+        {
+            // The ZPM core is centered in a 3x3 socket, so a controller against
+            // any outside edge is two tiles from the reactor node.
+            var target = tile.Offset(direction).Offset(direction);
+            foreach (var node in NodeHelpers.GetNodesInTile(nodeQuery, gridEnt, target, map))
+            {
+                if (node is ZpmNodeReactor)
+                {
+                    yield return node;
+                    yield break;
+                }
+            }
+        }
     }
 }
 
@@ -63,6 +114,16 @@ public sealed partial class ZpmNodeReactor : Node
             yield return cooling;
         if (heating != null)
             yield return heating;
+
+        foreach (var direction in new[] { Direction.North, Direction.East, Direction.South, Direction.West })
+        {
+            var controllerTile = tile.Offset(direction).Offset(direction);
+            foreach (var node in NodeHelpers.GetNodesInTile(nodeQuery, gridEnt, controllerTile, map))
+            {
+                if (node is ZpmNodeController)
+                    yield return node;
+            }
+        }
 
         Node? FindPort(Vector2i target, bool inlet)
         {

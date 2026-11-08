@@ -34,6 +34,12 @@ public enum ZpmCondition : byte
 }
 
 [Serializable, NetSerializable]
+public enum ZpmControllerVisuals : byte
+{
+    CoreInserted,
+}
+
+[Serializable, NetSerializable]
 public sealed class ZpmConsoleRefreshMessage : BoundUserInterfaceMessage
 {
 }

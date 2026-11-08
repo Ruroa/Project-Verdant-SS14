@@ -93,4 +93,14 @@ public sealed partial class ZpmConsoleComponent : Component
 {
     [ViewVariables]
     public EntityUid? LinkedReactor;
+
+    [ViewVariables]
+    public EntityUid? LinkedController;
+}
+
+[RegisterComponent]
+public sealed partial class ZpmControllerComponent : Component
+{
+    [ViewVariables]
+    public EntityUid? Reactor;
 }

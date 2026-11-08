@@ -14,6 +14,7 @@ using Content.Shared.DeviceLinking;
 using Content.Shared.NodeContainer;
 using Content.Shared.Radio;
 using Content.Shared.UserInterface;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
@@ -32,6 +33,7 @@ public sealed class ZpmSystem : EntitySystem
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -275,27 +277,33 @@ public sealed class ZpmSystem : EntitySystem
 
     private void OnNewLink(EntityUid uid, ZpmConsoleComponent component, NewLinkEvent args)
     {
-        if (args.Sink != uid || !HasComp<ZpmReactorComponent>(args.Source))
+        if (args.Sink != uid || !TryComp<ZpmControllerComponent>(args.Source, out var controller) ||
+            controller.Reactor is not { } reactorUid || !HasComp<ZpmReactorComponent>(reactorUid))
             return;
 
-        component.LinkedReactor = args.Source;
+        component.LinkedController = args.Source;
+        component.LinkedReactor = reactorUid;
         UpdateConsole(uid, component);
     }
 
     private void OnConsoleSignal(EntityUid uid, ZpmConsoleComponent component, ref SignalReceivedEvent args)
     {
-        if (args.Port != "Toggle" || args.Trigger is not { } linked || !HasComp<ZpmReactorComponent>(linked))
+        if (args.Port != "Toggle" || args.Trigger is not { } linked ||
+            !TryComp<ZpmControllerComponent>(linked, out var controller) ||
+            controller.Reactor is not { } reactorUid || !HasComp<ZpmReactorComponent>(reactorUid))
             return;
 
-        component.LinkedReactor = linked;
+        component.LinkedController = linked;
+        component.LinkedReactor = reactorUid;
         UpdateConsole(uid, component);
     }
 
     private void OnPortDisconnected(EntityUid uid, ZpmConsoleComponent component, PortDisconnectedEvent args)
     {
-        if (args.Sink != uid || args.Source != component.LinkedReactor || args.Port != "Toggle")
+        if (args.Sink != uid || args.Source != component.LinkedController || args.Port != "Toggle")
             return;
 
+        component.LinkedController = null;
         component.LinkedReactor = null;
         UpdateConsole(uid, component);
     }
@@ -418,7 +426,25 @@ public sealed class ZpmSystem : EntitySystem
         {
             UpdatePower(uid, reactor);
             _itemSlots.SetLock(uid, CoreSlotId, reactor.Online);
+
+            if (GetNodeGroup(uid) is { } group)
+            {
+                foreach (var controller in group.Controllers)
+                    RefreshController(controller.Owner, uid);
+            }
         }
+    }
+
+    public void RefreshController(EntityUid controllerUid, EntityUid? reactorUid)
+    {
+        if (!TryComp<ZpmControllerComponent>(controllerUid, out var controller))
+            return;
+
+        controller.Reactor = reactorUid;
+        var hasCore = reactorUid is { } reactor &&
+                      TryComp<ZpmReactorComponent>(reactor, out var reactorComp) &&
+                      reactorComp.CoreSlot.Item != null;
+        _appearance.SetData(controllerUid, ZpmControllerVisuals.CoreInserted, hasCore);
     }
 
     private bool TryGetLinkedReactor(ZpmConsoleComponent console, out EntityUid uid, out ZpmReactorComponent reactor)
@@ -470,16 +496,23 @@ public sealed class ZpmSystem : EntitySystem
 
     private void ResolveLinkedReactor(EntityUid consoleUid, ZpmConsoleComponent component)
     {
-        if (component.LinkedReactor is { } linked && Exists(linked))
+        if (component.LinkedController is { } linkedController && Exists(linkedController) &&
+            TryComp<ZpmControllerComponent>(linkedController, out var linkedComp) &&
+            linkedComp.Reactor is { } linkedReactor && Exists(linkedReactor))
+        {
+            component.LinkedReactor = linkedReactor;
             return;
+        }
 
+        component.LinkedController = null;
         component.LinkedReactor = null;
         if (!TryComp<DeviceLinkSinkComponent>(consoleUid, out var sink))
             return;
 
         foreach (var sourceUid in sink.LinkedSources)
         {
-            if (!HasComp<ZpmReactorComponent>(sourceUid) ||
+            if (!TryComp<ZpmControllerComponent>(sourceUid, out var controller) ||
+                controller.Reactor is not { } reactorUid || !HasComp<ZpmReactorComponent>(reactorUid) ||
                 !TryComp<DeviceLinkSourceComponent>(sourceUid, out var source))
                 continue;
 
@@ -488,7 +521,8 @@ public sealed class ZpmSystem : EntitySystem
                 if (sourcePort != "Status" || sinkPort != "Toggle")
                     continue;
 
-                component.LinkedReactor = sourceUid;
+                component.LinkedController = sourceUid;
+                component.LinkedReactor = reactorUid;
                 return;
             }
         }
@@ -496,8 +530,14 @@ public sealed class ZpmSystem : EntitySystem
 
     private void PublishStatus(EntityUid reactorUid)
     {
-        if (HasComp<DeviceLinkSourceComponent>(reactorUid))
-            _deviceLink.SendSignal(reactorUid, "Status", true);
+        if (GetNodeGroup(reactorUid) is not { } group)
+            return;
+
+        foreach (var controller in group.Controllers)
+        {
+            if (HasComp<DeviceLinkSourceComponent>(controller.Owner))
+                _deviceLink.SendSignal(controller.Owner, "Status", true);
+        }
     }
 
     private void SendEngineeringMessage(EntityUid source, string message)
