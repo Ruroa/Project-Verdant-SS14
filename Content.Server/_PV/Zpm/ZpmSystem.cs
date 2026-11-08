@@ -35,7 +35,9 @@ public sealed class ZpmSystem : EntitySystem
     private const string ZpmNodeId = "zpm";
     private static readonly TimeSpan UpdatePeriod = TimeSpan.FromSeconds(1);
     private const float BreachGraceSeconds = 10f;
-    private const float CoreHeatCapacity = 50_000f;
+    // Lower capacity makes the core respond visibly to a working coolant loop instead of
+    // needing several megajoules to move its displayed temperature by a useful amount.
+    private const float CoreHeatCapacity = 10_000f;
     private const float BaseCoreTemperature = 293.15f;
     private const float MaximumCoreTemperature = 2_000f;
     private const float PassiveCoreCoolingPerSecond = 5_000f;
@@ -69,7 +71,7 @@ public sealed class ZpmSystem : EntitySystem
         SubscribeLocalEvent<ZpmConsoleComponent, ZpmConsoleRefreshMessage>(OnConsoleRefresh);
         SubscribeLocalEvent<ZpmConsoleComponent, ZpmStartMessage>(OnStart);
         SubscribeLocalEvent<ZpmConsoleComponent, ZpmEjectCoreMessage>(OnEjectCore);
-        SubscribeLocalEvent<ZpmConsoleComponent, ZpmSetPowerLevelMessage>(OnSetPower);
+        SubscribeLocalEvent<ZpmConsoleComponent, ZpmSetOutputPercentMessage>(OnSetOutputPercent);
         SubscribeLocalEvent<ZpmConsoleComponent, ZpmShutdownMessage>(OnShutdown);
         SubscribeLocalEvent<ZpmConsoleComponent, SignalReceivedEvent>(OnConsoleSignal);
     }
@@ -156,10 +158,10 @@ public sealed class ZpmSystem : EntitySystem
 
         // The core generates heat independently of the plumbing. This makes a disconnected
         // reactor visibly heat up instead of silently producing neither heat nor a failure.
-        var generatedHeat = GetHeatDemand(component.PowerLevel) * args.dt;
+        var generatedHeat = GetHeatDemand(component.OutputPercent) * args.dt;
         component.StoredCoreHeat += generatedHeat;
         var removedHeat = 0f;
-        component.CoolingEfficiency = 0f;
+        component.CoolingEfficiency = generatedHeat <= 0f ? 100f : 0f;
         component.CoolantInletTemperature = 0f;
         component.HeatOutletTemperature = 0f;
 
@@ -177,26 +179,32 @@ public sealed class ZpmSystem : EntitySystem
             if (transfer.TotalMoles > 0f)
             {
                 var heatCapacity = _atmosphere.GetHeatCapacity(transfer, true);
-                var heatHeadroom = MathF.Max(0f, component.MaxReturnTemperature - input.Temperature);
+                var hottestAllowedReturn = MathF.Min(component.MaxReturnTemperature, component.CoreTemperature);
+                var heatHeadroom = MathF.Max(0f, hottestAllowedReturn - input.Temperature);
                 var inletTemperatureFactor = Math.Clamp(
                     (component.SafeInletTemperature - input.Temperature) /
                     (component.SafeInletTemperature - component.IdealInletTemperature), 0f, 1f);
                 var availableCooling = heatCapacity * heatHeadroom * inletTemperatureFactor;
 
-                removedHeat = MathF.Min(availableCooling, component.StoredCoreHeat);
+                // The coolant may chill the core below its ambient starting temperature, but
+                // cannot cool it below the coolant inlet temperature in this exchange.
+                var coreHeatAboveCoolant = MathF.Max(0f, component.CoreTemperature - input.Temperature) * CoreHeatCapacity;
+                removedHeat = MathF.Min(availableCooling, coreHeatAboveCoolant);
                 _atmosphere.AddHeat(transfer, removedHeat);
                 _atmosphere.Merge(output, transfer);
                 component.HeatOutletTemperature = output.Temperature;
                 component.CoolingEfficiency = generatedHeat <= 0f
-                    ? 0f
+                    ? 100f
                     : Math.Clamp(MathF.Min(availableCooling, generatedHeat) / generatedHeat * 100f, 0f, 100f);
             }
         }
 
-        component.StoredCoreHeat = MathF.Max(0f, component.StoredCoreHeat - removedHeat);
+        component.StoredCoreHeat -= removedHeat;
         component.CoreTemperature = Math.Clamp(
             BaseCoreTemperature + component.StoredCoreHeat / CoreHeatCapacity,
-            BaseCoreTemperature, MaximumCoreTemperature);
+            1f, MaximumCoreTemperature);
+        component.StoredCoreHeat = (component.CoreTemperature - BaseCoreTemperature) * CoreHeatCapacity;
+        UpdatePower(uid, component);
 
     }
 
@@ -241,6 +249,13 @@ public sealed class ZpmSystem : EntitySystem
                 BaseCoreTemperature + reactor.StoredCoreHeat / CoreHeatCapacity,
                 BaseCoreTemperature, MaximumCoreTemperature);
         }
+        else if (!reactor.Online && reactor.StoredCoreHeat < 0f)
+        {
+            reactor.StoredCoreHeat = MathF.Min(0f, reactor.StoredCoreHeat + PassiveCoreCoolingPerSecond * seconds);
+            reactor.CoreTemperature = Math.Clamp(
+                BaseCoreTemperature + reactor.StoredCoreHeat / CoreHeatCapacity,
+                1f, BaseCoreTemperature);
+        }
 
         reactor.ShieldingEfficiency = GetShieldingEfficiency(uid);
         var coolingDeficit = MathF.Max(0f, 100f - reactor.CoolingEfficiency) / 100f;
@@ -258,15 +273,7 @@ public sealed class ZpmSystem : EntitySystem
         }
         if (reactor.Online && coolingDeficit > 0f)
         {
-            var levelMultiplier = reactor.PowerLevel switch
-            {
-                ZpmPowerLevel.Low => 0.5f,
-                ZpmPowerLevel.Medium => 0.75f,
-                ZpmPowerLevel.Average => 1f,
-                ZpmPowerLevel.High => 1.5f,
-                _ => 1f,
-            };
-            reactor.Integrity -= reactor.IntegrityLossPerSecond * coolingDeficit * levelMultiplier * seconds;
+            reactor.Integrity -= reactor.IntegrityLossPerSecond * coolingDeficit * (reactor.OutputPercent / 100f) * seconds;
         }
 
         if (reactor.Online && thermalStress > 0f)
@@ -415,12 +422,12 @@ public sealed class ZpmSystem : EntitySystem
         UpdateConsole(uid, component);
     }
 
-    private void OnSetPower(EntityUid uid, ZpmConsoleComponent component, ZpmSetPowerLevelMessage args)
+    private void OnSetOutputPercent(EntityUid uid, ZpmConsoleComponent component, ZpmSetOutputPercentMessage args)
     {
         if (!TryGetLinkedReactor(component, out var reactorUid, out var reactor))
             return;
 
-        reactor.PowerLevel = args.Level;
+        reactor.OutputPercent = Math.Clamp((int) MathF.Round(args.Percent / 5f) * 5, 0, 100);
         UpdatePower(reactorUid, reactor);
         UpdateReactorAppearance(reactorUid, reactor);
         UpdateConsole(uid, component);
@@ -467,28 +474,25 @@ public sealed class ZpmSystem : EntitySystem
     private void UpdatePower(EntityUid uid, ZpmReactorComponent reactor)
     {
         reactor.PowerOutput = reactor.Online && TryGetCoreController(uid, out _, out var controller) &&
-                              controller.CoreSlot.Item != null ? GetPowerOutput(reactor.PowerLevel) : 0f;
+                              controller.CoreSlot.Item != null
+            ? GetMaximumPowerOutput() * (reactor.OutputPercent / 100f) * GetPowerEfficiency(reactor.CoreTemperature)
+            : 0f;
         if (TryComp<PowerSupplierComponent>(uid, out var supplier))
             supplier.MaxSupply = reactor.PowerOutput;
     }
 
-    private static float GetPowerOutput(ZpmPowerLevel level) => level switch
-    {
-        ZpmPowerLevel.Low => 100_000f,
-        ZpmPowerLevel.Medium => 250_000f,
-        ZpmPowerLevel.Average => 500_000f,
-        ZpmPowerLevel.High => 2_500_000f,
-        _ => 100_000f,
-    };
+    private static float GetMaximumPowerOutput() => 2_500_000f;
 
-    private static float GetHeatDemand(ZpmPowerLevel level) => level switch
+    private static float GetPowerEfficiency(float coreTemperature)
     {
-        ZpmPowerLevel.Low => 25_000f,
-        ZpmPowerLevel.Medium => 75_000f,
-        ZpmPowerLevel.Average => 150_000f,
-        ZpmPowerLevel.High => 300_000f,
-        _ => 25_000f,
-    };
+        const float idealTemperature = 150f;
+        const float zeroEfficiencyTemperature = 1_500f;
+        return Math.Clamp(
+            (zeroEfficiencyTemperature - coreTemperature) / (zeroEfficiencyTemperature - idealTemperature),
+            0.25f, 1f);
+    }
+
+    private static float GetHeatDemand(int outputPercent) => 300_000f * (Math.Clamp(outputPercent, 0, 100) / 100f);
 
     private bool TryGetPorts(EntityUid uid, out PipeNode inlet, out PipeNode outlet)
     {
@@ -596,7 +600,7 @@ public sealed class ZpmSystem : EntitySystem
 
     private void UpdateReactorAppearance(EntityUid uid, ZpmReactorComponent reactor)
     {
-        var low = reactor.PowerLevel is ZpmPowerLevel.Low or ZpmPowerLevel.Medium;
+        var low = reactor.OutputPercent <= 50;
         var state = !reactor.Online ? ZpmPulseVisual.Offline
             : reactor.Integrity <= 25f
                 ? low ? ZpmPulseVisual.CriticalLow : ZpmPulseVisual.CriticalHigh
@@ -660,7 +664,7 @@ public sealed class ZpmSystem : EntitySystem
             TryGetCoreController(reactorUid, out _, out var coreController) && coreController.CoreSlot.Item != null,
             reactor.Online,
             condition,
-            reactor.PowerLevel,
+            reactor.OutputPercent,
             reactor.Integrity,
             reactor.CoolingEfficiency,
             reactor.ShieldingEfficiency,
@@ -669,7 +673,8 @@ public sealed class ZpmSystem : EntitySystem
             reactor.HeatOutletTemperature,
             reactor.CoreTemperature,
             reactor.PowerOutput,
-            TryComp<PowerSupplierComponent>(reactorUid, out var supplier) ? supplier.CurrentSupply : 0f);
+            TryComp<PowerSupplierComponent>(reactorUid, out var supplier) ? supplier.CurrentSupply : 0f,
+            GetPowerEfficiency(reactor.CoreTemperature) * 100f);
         _ui.SetUiState(uid, ZpmConsoleUiKey.Key, state);
     }
 

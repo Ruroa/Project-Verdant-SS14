@@ -17,10 +17,9 @@ public sealed class ZpmConsoleBoundUserInterface : BoundUserInterface
     {
         base.Open();
         _window = this.CreateWindow<ZpmConsoleWindow>();
-        _window.RefreshPressed += () => SendMessage(new ZpmConsoleRefreshMessage());
         _window.StartPressed += () => SendMessage(new ZpmStartMessage());
         _window.EjectCorePressed += () => SendMessage(new ZpmEjectCoreMessage());
-        _window.PowerLevelSelected += level => SendMessage(new ZpmSetPowerLevelMessage(level));
+        _window.OutputPercentChanged += percent => SendMessage(new ZpmSetOutputPercentMessage(percent));
         _window.ShutdownPressed += emergency => SendMessage(new ZpmShutdownMessage(emergency));
     }
 

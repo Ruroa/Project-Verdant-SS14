@@ -15,15 +15,6 @@ public enum ZpmConsoleUiKey : byte
 }
 
 [Serializable, NetSerializable]
-public enum ZpmPowerLevel : byte
-{
-    Low,
-    Medium,
-    Average,
-    High,
-}
-
-[Serializable, NetSerializable]
 public enum ZpmCondition : byte
 {
     Offline,
@@ -73,9 +64,9 @@ public sealed class ZpmEjectCoreMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class ZpmSetPowerLevelMessage(ZpmPowerLevel level) : BoundUserInterfaceMessage
+public sealed class ZpmSetOutputPercentMessage(int percent) : BoundUserInterfaceMessage
 {
-    public readonly ZpmPowerLevel Level = level;
+    public readonly int Percent = percent;
 }
 
 [Serializable, NetSerializable]
@@ -91,7 +82,7 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
     public readonly bool HasCore;
     public readonly bool Online;
     public readonly ZpmCondition Condition;
-    public readonly ZpmPowerLevel PowerLevel;
+    public readonly int OutputPercent;
     public readonly float Integrity;
     public readonly float CoolingEfficiency;
     public readonly float ShieldingEfficiency;
@@ -101,13 +92,14 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
     public readonly float CoreTemperature;
     public readonly float PowerOutput;
     public readonly float PowerSupplied;
+    public readonly float PowerEfficiency;
 
     public ZpmConsoleBoundInterfaceState(
         bool linked,
         bool hasCore = false,
         bool online = false,
         ZpmCondition condition = ZpmCondition.Offline,
-        ZpmPowerLevel powerLevel = ZpmPowerLevel.Low,
+        int outputPercent = 0,
         float integrity = 100f,
         float coolingEfficiency = 0f,
         float shieldingEfficiency = 100f,
@@ -116,13 +108,14 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
         float heatOutletTemperature = 0f,
         float coreTemperature = 293.15f,
         float powerOutput = 0f,
-        float powerSupplied = 0f)
+        float powerSupplied = 0f,
+        float powerEfficiency = 0f)
     {
         Linked = linked;
         HasCore = hasCore;
         Online = online;
         Condition = condition;
-        PowerLevel = powerLevel;
+        OutputPercent = outputPercent;
         Integrity = integrity;
         CoolingEfficiency = coolingEfficiency;
         ShieldingEfficiency = shieldingEfficiency;
@@ -132,5 +125,6 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
         CoreTemperature = coreTemperature;
         PowerOutput = powerOutput;
         PowerSupplied = powerSupplied;
+        PowerEfficiency = powerEfficiency;
     }
 }

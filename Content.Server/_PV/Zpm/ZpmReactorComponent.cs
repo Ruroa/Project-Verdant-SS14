@@ -10,7 +10,7 @@ public sealed partial class ZpmReactorComponent : Component
     public bool Online;
 
     [DataField]
-    public ZpmPowerLevel PowerLevel = ZpmPowerLevel.Low;
+    public int OutputPercent;
 
     [DataField]
     public float Integrity = 100f;
@@ -50,7 +50,7 @@ public sealed partial class ZpmReactorComponent : Component
     public float IdealInletTemperature = 253.15f;
 
     [DataField]
-    public float MaxReturnTemperature = 600f;
+    public float MaxReturnTemperature = 1_200f;
 
     [DataField]
     public float RequiredPressureDifferential = 1_000f;
