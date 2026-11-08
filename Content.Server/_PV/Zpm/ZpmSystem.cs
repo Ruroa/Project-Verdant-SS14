@@ -35,6 +35,10 @@ public sealed class ZpmSystem : EntitySystem
     private const string ZpmNodeId = "zpm";
     private static readonly TimeSpan UpdatePeriod = TimeSpan.FromSeconds(1);
     private const float BreachGraceSeconds = 10f;
+    private const float CoreHeatCapacity = 50_000f;
+    private const float BaseCoreTemperature = 293.15f;
+    private const float MaximumCoreTemperature = 2_000f;
+    private const float PassiveCoreCoolingPerSecond = 5_000f;
 
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
@@ -147,41 +151,52 @@ public sealed class ZpmSystem : EntitySystem
     private void OnAtmosUpdate(EntityUid uid, ZpmReactorComponent component, ref AtmosDeviceUpdateEvent args)
     {
         if (!component.Online || !TryGetCoreController(uid, out _, out var coreController) ||
-            coreController.CoreSlot.Item == null || !TryGetPorts(uid, out var inlet, out var outlet))
+            coreController.CoreSlot.Item == null)
             return;
 
-        var input = inlet.Air;
-        var output = outlet.Air;
-        component.CoolantInletTemperature = input.Temperature;
-        component.HeatOutletTemperature = output.Temperature;
+        // The core generates heat independently of the plumbing. This makes a disconnected
+        // reactor visibly heat up instead of silently producing neither heat nor a failure.
+        var generatedHeat = GetHeatDemand(component.PowerLevel) * args.dt;
+        component.StoredCoreHeat += generatedHeat;
+        var removedHeat = 0f;
+        component.CoolingEfficiency = 0f;
+        component.CoolantInletTemperature = 0f;
+        component.HeatOutletTemperature = 0f;
 
-        // The inlet pump points toward the reactor and the outlet pump points away.
-        // Transfer is only possible when that loop has a real pressure gradient and gas flow.
-        var transfer = GetPressureDrivenTransfer(input, output);
-        var heatCapacity = _atmosphere.GetHeatCapacity(transfer, true);
-        var heatHeadroom = MathF.Max(0f, component.MaxReturnTemperature - input.Temperature);
-        var inletTemperatureFactor = Math.Clamp(
-            (component.SafeInletTemperature - input.Temperature) /
-            (component.SafeInletTemperature - component.IdealInletTemperature), 0f, 1f);
-        var pressureFactor = Math.Clamp(
-            (input.Pressure - output.Pressure) / component.RequiredPressureDifferential, 0f, 1f);
-        // Heat capacity already scales with the amount of gas transferred. Applying a second
-        // flow multiplier here counted low flow twice and made normal pump circulation appear
-        // ineffective.
-        var availableCooling = heatCapacity * heatHeadroom * inletTemperatureFactor * pressureFactor;
-        var requestedHeat = GetHeatDemand(component.PowerLevel) * args.dt;
-        component.CoolingEfficiency = requestedHeat <= 0f
-            ? 100f
-            : transfer.TotalMoles <= 0f ? 0f
-            : Math.Clamp(availableCooling / requestedHeat * 100f, 0f, 100f);
-
-        var appliedHeat = MathF.Min(availableCooling, requestedHeat);
-        if (transfer.TotalMoles > 0f)
+        if (TryGetPorts(uid, out var inlet, out var outlet))
         {
-            _atmosphere.AddHeat(transfer, appliedHeat);
-            _atmosphere.Merge(output, transfer);
+            var input = inlet.Air;
+            var output = outlet.Air;
+            component.CoolantInletTemperature = input.Temperature;
             component.HeatOutletTemperature = output.Temperature;
+
+            // The inlet pump moves gas into the reactor and the outlet pump draws it away.
+            // A pressure differential determines whether there is actual flow between the
+            // two networks; availableCooling then limits how much heat that gas can carry.
+            var transfer = GetPressureDrivenTransfer(input, output);
+            if (transfer.TotalMoles > 0f)
+            {
+                var heatCapacity = _atmosphere.GetHeatCapacity(transfer, true);
+                var heatHeadroom = MathF.Max(0f, component.MaxReturnTemperature - input.Temperature);
+                var inletTemperatureFactor = Math.Clamp(
+                    (component.SafeInletTemperature - input.Temperature) /
+                    (component.SafeInletTemperature - component.IdealInletTemperature), 0f, 1f);
+                var availableCooling = heatCapacity * heatHeadroom * inletTemperatureFactor;
+
+                removedHeat = MathF.Min(availableCooling, component.StoredCoreHeat);
+                _atmosphere.AddHeat(transfer, removedHeat);
+                _atmosphere.Merge(output, transfer);
+                component.HeatOutletTemperature = output.Temperature;
+                component.CoolingEfficiency = generatedHeat <= 0f
+                    ? 0f
+                    : Math.Clamp(MathF.Min(availableCooling, generatedHeat) / generatedHeat * 100f, 0f, 100f);
+            }
         }
+
+        component.StoredCoreHeat = MathF.Max(0f, component.StoredCoreHeat - removedHeat);
+        component.CoreTemperature = Math.Clamp(
+            BaseCoreTemperature + component.StoredCoreHeat / CoreHeatCapacity,
+            BaseCoreTemperature, MaximumCoreTemperature);
 
     }
 
@@ -219,8 +234,17 @@ public sealed class ZpmSystem : EntitySystem
         if (reactor.Online && (!hasCore || reactor.BreachFinalized))
             SetOnline(uid, reactor, false);
 
+        if (!reactor.Online && reactor.StoredCoreHeat > 0f)
+        {
+            reactor.StoredCoreHeat = MathF.Max(0f, reactor.StoredCoreHeat - PassiveCoreCoolingPerSecond * seconds);
+            reactor.CoreTemperature = Math.Clamp(
+                BaseCoreTemperature + reactor.StoredCoreHeat / CoreHeatCapacity,
+                BaseCoreTemperature, MaximumCoreTemperature);
+        }
+
         reactor.ShieldingEfficiency = GetShieldingEfficiency(uid);
         var coolingDeficit = MathF.Max(0f, 100f - reactor.CoolingEfficiency) / 100f;
+        var thermalStress = Math.Clamp((reactor.CoreTemperature - 373.15f) / (1_000f - 373.15f), 0f, 1f);
         var shieldingDeficit = MathF.Max(0f, 100f - reactor.ShieldingEfficiency) / 100f;
         if (reactor.Online && reactor.ShieldingEfficiency <= 50f && !reactor.ShieldingWarningSent)
         {
@@ -245,13 +269,16 @@ public sealed class ZpmSystem : EntitySystem
             reactor.Integrity -= reactor.IntegrityLossPerSecond * coolingDeficit * levelMultiplier * seconds;
         }
 
+        if (reactor.Online && thermalStress > 0f)
+            reactor.Integrity -= reactor.IntegrityLossPerSecond * thermalStress * seconds;
+
         if (reactor.Online && vacuumLost)
             reactor.Integrity -= reactor.VacuumIntegrityLossPerSecond * seconds;
 
         if (reactor.Online && shieldingDeficit > 0f)
             reactor.Integrity -= reactor.ShieldingIntegrityLossPerSecond * shieldingDeficit * seconds;
 
-        if (!vacuumLost && shieldingDeficit <= 0f && (!reactor.Online || coolingDeficit <= 0f))
+        if (!vacuumLost && shieldingDeficit <= 0f && thermalStress <= 0f && (!reactor.Online || coolingDeficit <= 0f))
             reactor.Integrity += reactor.IntegrityRecoveryPerSecond * seconds;
 
         reactor.Integrity = Math.Clamp(reactor.Integrity, 0f, 100f);
@@ -427,7 +454,12 @@ public sealed class ZpmSystem : EntitySystem
         if (TryGetCoreController(uid, out var controllerUid, out _))
             _itemSlots.SetLock(controllerUid, CoreSlotId, value);
         if (!value)
+        {
             reactor.PowerOutput = 0f;
+            reactor.CoolingEfficiency = 0f;
+            reactor.CoolantInletTemperature = 0f;
+            reactor.HeatOutletTemperature = 0f;
+        }
         UpdatePower(uid, reactor);
         UpdateReactorAppearance(uid, reactor);
     }
@@ -635,6 +667,7 @@ public sealed class ZpmSystem : EntitySystem
             reactor.ChamberPressure,
             reactor.CoolantInletTemperature,
             reactor.HeatOutletTemperature,
+            reactor.CoreTemperature,
             reactor.PowerOutput,
             TryComp<PowerSupplierComponent>(reactorUid, out var supplier) ? supplier.CurrentSupply : 0f);
         _ui.SetUiState(uid, ZpmConsoleUiKey.Key, state);

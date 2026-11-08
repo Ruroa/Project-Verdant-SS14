@@ -40,6 +40,7 @@ public sealed partial class ZpmConsoleWindow : DefaultWindow
         ShieldingLabel.Text = $"Shielding integrity: {state.ShieldingEfficiency:0.0}%";
         InletLabel.Text = $"Coolant inlet: {state.CoolantInletTemperature:0.0} K";
         OutletLabel.Text = $"Heat outlet: {state.HeatOutletTemperature:0.0} K";
+        CoreTemperatureLabel.Text = $"Core temperature: {state.CoreTemperature:0.0} K";
         VacuumLabel.Text = $"Chamber pressure: {state.ChamberPressure / 1000f:0.00} kPa";
 
         var enabled = state.Linked;

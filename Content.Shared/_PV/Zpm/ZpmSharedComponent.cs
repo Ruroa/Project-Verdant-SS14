@@ -98,6 +98,7 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
     public readonly float ChamberPressure;
     public readonly float CoolantInletTemperature;
     public readonly float HeatOutletTemperature;
+    public readonly float CoreTemperature;
     public readonly float PowerOutput;
     public readonly float PowerSupplied;
 
@@ -113,6 +114,7 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
         float chamberPressure = 0f,
         float coolantInletTemperature = 0f,
         float heatOutletTemperature = 0f,
+        float coreTemperature = 293.15f,
         float powerOutput = 0f,
         float powerSupplied = 0f)
     {
@@ -127,6 +129,7 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
         ChamberPressure = chamberPressure;
         CoolantInletTemperature = coolantInletTemperature;
         HeatOutletTemperature = heatOutletTemperature;
+        CoreTemperature = coreTemperature;
         PowerOutput = powerOutput;
         PowerSupplied = powerSupplied;
     }

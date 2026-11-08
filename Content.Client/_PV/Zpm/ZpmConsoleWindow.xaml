@@ -1,7 +1,7 @@
 <ui:ZpmConsoleWindow xmlns="https://spacestation14.io"
                      xmlns:ui="clr-namespace:Content.Client._PV.Zpm"
-                     MinSize="450 470"
-                     SetSize="520 560"
+                     MinSize="450 490"
+                     SetSize="520 580"
                      Title="ZPM Reactor Control">
     <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
         <PanelContainer>
@@ -20,6 +20,7 @@
                 <Label Name="ShieldingLabel" Text="Shielding integrity: --" />
                 <Label Name="InletLabel" Text="Coolant inlet: --" />
                 <Label Name="OutletLabel" Text="Heat outlet: --" />
+                <Label Name="CoreTemperatureLabel" Text="Core temperature: --" />
                 <Label Name="VacuumLabel" Text="Chamber pressure: --" />
             </BoxContainer>
         </PanelContainer>
