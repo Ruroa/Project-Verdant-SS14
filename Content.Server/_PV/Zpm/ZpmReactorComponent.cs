@@ -96,9 +96,6 @@ public sealed partial class ZpmReactorComponent : Component
     [DataField]
     public bool ShieldingWarningSent;
 
-    [DataField]
-    public bool ShieldingWarningSent;
-
     [ViewVariables]
     public ZpmPulseVisual? CurrentPulseVisual;
 }
