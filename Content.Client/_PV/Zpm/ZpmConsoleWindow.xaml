@@ -36,8 +36,7 @@
                                     <Label Name="PowerAvailableLabel" Text="0 kW available" />
                                     <Label Name="OutputPercentLabel" Text="Setting: 0%" />
                                     <Label Name="PowerEfficiencyLabel" Text="Power efficiency: --" />
-                                    <Label Name="CoolantFlowLabel" Text="Coolant flow: 0 mol/s" />
-                                    <Label Name="HeatTransferLabel" Text="Heat removed: 0 kW" />
+                                    <Label Name="HeatTransferLabel" Text="Heat removed from core: 0 kW" />
                                 </BoxContainer>
                             </PanelContainer>
                             <Button Name="EjectCoreButton" Text="Eject Core" />

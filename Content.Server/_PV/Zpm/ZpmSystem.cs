@@ -156,7 +156,6 @@ public sealed class ZpmSystem : EntitySystem
 
     private void OnAtmosUpdate(EntityUid uid, ZpmReactorComponent component, ref AtmosDeviceUpdateEvent args)
     {
-        component.ActualCoolantFlowMolesPerSecond = 0f;
         component.HeatTransferWatts = 0f;
         if (!component.Online || !TryGetCoreController(uid, out _, out var coreController) ||
             coreController.CoreSlot.Item == null)
@@ -185,8 +184,6 @@ public sealed class ZpmSystem : EntitySystem
                 var transferMoles = MathF.Min(input.TotalMoles,
                     component.CoolantFlowMolesPerSecond * args.dt);
                 var transfer = input.Remove(transferMoles);
-                if (args.dt > 0f)
-                    component.ActualCoolantFlowMolesPerSecond = transferMoles / args.dt;
                 var transferHeatCapacity = _atmosphere.GetHeatCapacity(transfer, true);
                 var hottestAllowedReturn = MathF.Min(component.MaxReturnTemperature, component.CoreTemperature);
                 var heatHeadroom = MathF.Max(0f, hottestAllowedReturn - transfer.Temperature);
@@ -453,7 +450,6 @@ public sealed class ZpmSystem : EntitySystem
             reactor.PowerOutput = 0f;
             reactor.CoolantInletTemperature = 0f;
             reactor.HeatOutletTemperature = 0f;
-            reactor.ActualCoolantFlowMolesPerSecond = 0f;
             reactor.HeatTransferWatts = 0f;
         }
         UpdatePower(uid, reactor);
@@ -673,7 +669,6 @@ public sealed class ZpmSystem : EntitySystem
             reactor.PowerOutput,
             TryComp<PowerSupplierComponent>(reactorUid, out var supplier) ? supplier.CurrentSupply : 0f,
             GetPowerEfficiency(reactor.CoreTemperature) * 100f,
-            reactor.ActualCoolantFlowMolesPerSecond,
             reactor.HeatTransferWatts);
         _ui.SetUiState(uid, ZpmConsoleUiKey.Key, state);
     }

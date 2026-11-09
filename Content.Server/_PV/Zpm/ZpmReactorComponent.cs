@@ -28,9 +28,6 @@ public sealed partial class ZpmReactorComponent : Component
     public float HeatOutletTemperature;
 
     [DataField]
-    public float ActualCoolantFlowMolesPerSecond;
-
-    [DataField]
     public float HeatTransferWatts;
 
     /// <summary>
