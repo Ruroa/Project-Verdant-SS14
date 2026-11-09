@@ -31,6 +31,8 @@ using Content.Shared.Tag;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Maths;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -310,8 +312,9 @@ public sealed class ZpmSystem : EntitySystem
                 1f, BaseCoreTemperature);
         }
 
-        reactor.ShieldingEfficiency = GetShieldingEfficiency(uid);
-        UpdateShieldWear(uid, reactor, seconds);
+        var shieldingCorners = GetShieldingCorners(uid);
+        reactor.ShieldingEfficiency = GetShieldingEfficiency(shieldingCorners);
+        UpdateShieldWear(uid, reactor, seconds, shieldingCorners);
         UpdateRadiationSpill(uid, reactor);
         if (reactor.Online && _timing.CurTime >= reactor.NextChamberDamageUpdate)
         {
@@ -643,16 +646,42 @@ public sealed class ZpmSystem : EntitySystem
         return false;
     }
 
-    private float GetShieldingEfficiency(EntityUid reactorUid)
+    private List<EntityUid> GetShieldingCorners(EntityUid reactorUid)
     {
-        if (GetNodeGroup(reactorUid) is not { } group)
-            return 0f;
+        var corners = new List<EntityUid>();
+        if (!TryComp<TransformComponent>(reactorUid, out var reactorXform) ||
+            reactorXform.GridUid is not { } gridUid ||
+            !TryComp<MapGridComponent>(gridUid, out var grid))
+            return corners;
 
+        var map = EntityManager.System<SharedMapSystem>();
+        var reactorTile = map.TileIndicesFor((gridUid, grid), reactorXform.Coordinates);
+        _nearbyEntities.Clear();
+        _lookup.GetEntitiesInRange(reactorXform.Coordinates, 1.5f, _nearbyEntities, flags: LookupFlags.Static);
+
+        foreach (var entity in _nearbyEntities)
+        {
+            if (!HasComp<ZpmShieldingCornerComponent>(entity) ||
+                !TryComp<TransformComponent>(entity, out var cornerXform) ||
+                cornerXform.GridUid != gridUid ||
+                !cornerXform.Anchored)
+                continue;
+
+            var cornerTile = map.TileIndicesFor((gridUid, grid), cornerXform.Coordinates);
+            if (Math.Abs(cornerTile.X - reactorTile.X) == 1 && Math.Abs(cornerTile.Y - reactorTile.Y) == 1)
+                corners.Add(entity);
+        }
+
+        return corners;
+    }
+
+    private float GetShieldingEfficiency(IReadOnlyList<EntityUid> corners)
+    {
         const int expectedShieldingCorners = 4;
         var efficiency = 0f;
-        foreach (var part in group.ShieldingCorners.Take(expectedShieldingCorners))
+        foreach (var corner in corners.Take(expectedShieldingCorners))
         {
-            if (!TryComp<DamageableComponent>(part.Owner, out var damageable))
+            if (!TryComp<DamageableComponent>(corner, out var damageable))
             {
                 efficiency += 1f;
                 continue;
@@ -666,9 +695,9 @@ public sealed class ZpmSystem : EntitySystem
         return Math.Clamp(efficiency / expectedShieldingCorners * 100f, 0f, 100f);
     }
 
-    private void UpdateShieldWear(EntityUid uid, ZpmReactorComponent reactor, float seconds)
+    private void UpdateShieldWear(EntityUid uid, ZpmReactorComponent reactor, float seconds, IReadOnlyList<EntityUid> corners)
     {
-        if (!reactor.Online || GetNodeGroup(uid) is not { } group || group.ShieldingCorners.Count == 0)
+        if (!reactor.Online || corners.Count == 0)
             return;
 
         reactor.ShieldingWearAccumulator += ShieldWearPerSecond * seconds;
@@ -678,10 +707,10 @@ public sealed class ZpmSystem : EntitySystem
 
         reactor.ShieldingWearAccumulator -= wear;
         var damage = new DamageSpecifier(_prototypes.Index<DamageTypePrototype>(StructuralDamageType), FixedPoint2.New(wear));
-        foreach (var corner in group.ShieldingCorners)
+        foreach (var corner in corners)
         {
-            if (TryComp<DamageableComponent>(corner.Owner, out var damageable) && damageable.TotalDamage.Float() < 100f)
-                _damageable.TryChangeDamage(corner.Owner, damage, ignoreResistances: true, origin: uid);
+            if (TryComp<DamageableComponent>(corner, out var damageable) && damageable.TotalDamage.Float() < 100f)
+                _damageable.TryChangeDamage(corner, damage, ignoreResistances: true, origin: uid);
         }
     }
 
