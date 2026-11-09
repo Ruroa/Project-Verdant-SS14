@@ -1,7 +1,7 @@
 <ui:ZpmConsoleWindow xmlns="https://spacestation14.io"
                      xmlns:ui="clr-namespace:Content.Client._PV.Zpm"
-                     MinSize="900 540"
-                     SetSize="1080 620"
+                     MinSize="900 580"
+                     SetSize="1080 660"
                      Title="ZPM Reactor Control">
     <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
         <Label Name="ConnectionLabel" StyleClasses="LabelHeading" Text="No ZPM control linked" />
@@ -75,12 +75,12 @@
                 </PanelContainer>
                 <PanelContainer StyleClasses="BackgroundPanelDark">
                     <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="8">
-                        <Label Text="THERMAL KEY" StyleClasses="StatusFieldTitle" VerticalAlignment="Center" />
-                        <Label Text="COLD" VerticalAlignment="Center" />
+                        <Label Text="METER SCALE" StyleClasses="StatusFieldTitle" VerticalAlignment="Center" />
+                        <Label Text="COOL (BLUE)" VerticalAlignment="Center" />
                         <Label Text="→" VerticalAlignment="Center" />
-                        <Label Text="NORMAL" VerticalAlignment="Center" />
+                        <Label Text="HOT (RED)" VerticalAlignment="Center" />
                         <Label Text="→" VerticalAlignment="Center" />
-                        <Label Text="HOT" VerticalAlignment="Center" />
+                        <Label Text="HOT (RED)" VerticalAlignment="Center" />
                         <BoxContainer HorizontalExpand="True" />
                         <Button Name="StartShutdownButton" Text="Start Reactor" MinWidth="150" />
                         <Button Name="EmergencyShutdownButton" Text="Emergency Shutdown" StyleClasses="ButtonColorRed" MinWidth="190" />
