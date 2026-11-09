@@ -3,11 +3,14 @@ using Content.Server.Administration.Logs;
 using Content.Server.Singularity.Events;
 using Content.Shared.Database;
 using Content.Shared.Mind.Components;
+using Content.Server.Shuttles.Components;
+using Content.Shared.Maps;
 using Content.Shared.Singularity.Components;
 using Content.Shared.Singularity.EntitySystems;
 using Content.Shared.Station.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
@@ -32,10 +35,12 @@ public sealed partial class EventHorizonSystem : SharedEventHorizonSystem
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _xformSystem = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitions = default!;
     [Dependency] private TagSystem _tagSystem = default!;
     #endregion Dependencies
 
     private static readonly ProtoId<TagPrototype> HighRiskItemTag = "HighRiskItem";
+    private ContentTileDefinition _planetaryScorchedTile = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -44,6 +49,7 @@ public sealed partial class EventHorizonSystem : SharedEventHorizonSystem
         base.Initialize();
 
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        _planetaryScorchedTile = (ContentTileDefinition) _tileDefinitions["FloorCaveDrought"];
 
         SubscribeLocalEvent<MapGridComponent, EventHorizonAttemptConsumeEntityEvent>(PreventConsume);
         SubscribeLocalEvent<StationDataComponent, EventHorizonAttemptConsumeEntityEvent>(PreventConsume);
@@ -253,6 +259,15 @@ public sealed partial class EventHorizonSystem : SharedEventHorizonSystem
     {
         if (tiles.Count <= 0)
             return;
+
+        // A singularity can scar planetary terrain, but it must not turn the layer 0
+        // surface into empty space. Keep a floor tile behind to preserve the planet.
+        if (HasComp<PlanetarySurfaceComponent>(gridId))
+        {
+            var scorched = new Tile(_planetaryScorchedTile.TileId);
+            for (var i = 0; i < tiles.Count; i++)
+                tiles[i] = (tiles[i].Item1, scorched);
+        }
 
         var ev = new TilesConsumedByEventHorizonEvent(tiles, gridId, grid, hungry, eventHorizon);
         RaiseLocalEvent(hungry, ref ev);
