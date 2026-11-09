@@ -1,7 +1,7 @@
 <ui:ZpmConsoleWindow xmlns="https://spacestation14.io"
                      xmlns:ui="clr-namespace:Content.Client._PV.Zpm"
-                     MinSize="760 500"
-                     SetSize="900 560"
+                     MinSize="900 540"
+                     SetSize="1080 620"
                      Title="ZPM Reactor Control">
     <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
         <Label Name="ConnectionLabel" StyleClasses="LabelHeading" Text="No ZPM control linked" />
@@ -15,13 +15,13 @@
                             <ui:ZpmVerticalBar Name="OutputBar"
                                                MinValue="0" MaxValue="100" Value="0"
                                                Step="5" Interactive="True"
-                                               SetWidth="28" SetHeight="255" />
+                                               SetWidth="28" SetHeight="285" />
                             <Label Text="0%" HorizontalAlignment="Center" />
                         </BoxContainer>
                         <BoxContainer Orientation="Vertical" SeparationOverride="5" HorizontalExpand="True">
                             <Label Text="STATUS" StyleClasses="LabelHeading" />
-                            <PanelContainer>
-                                <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="6">
+                            <PanelContainer StyleClasses="BackgroundPanelDark">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="7">
                                     <Label Name="CoreLabel" Text="Core: --" />
                                     <Label Name="ConditionLabel" Text="Condition: --" />
                                     <Label Name="IntegrityLabel" Text="Integrity: --" />
@@ -30,12 +30,12 @@
                                 </BoxContainer>
                             </PanelContainer>
                             <Label Text="POWER" StyleClasses="LabelHeading" />
-                            <PanelContainer>
-                                <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="6">
+                            <PanelContainer StyleClasses="BackgroundPanelDark">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="7">
                                     <Label Name="PowerSuppliedLabel" Text="0 kW supplied" />
                                     <Label Name="PowerAvailableLabel" Text="0 kW available" />
                                     <Label Name="OutputPercentLabel" Text="Setting: 0%" />
-                                    <Label Name="PowerEfficiencyLabel" Text="Efficiency: --" />
+                                    <Label Name="PowerEfficiencyLabel" Text="Power efficiency: --" />
                                 </BoxContainer>
                             </PanelContainer>
                             <Button Name="EjectCoreButton" Text="Eject Core" />
@@ -44,31 +44,49 @@
                 </BoxContainer>
             </PanelContainer>
 
-            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
-                <BoxContainer Orientation="Vertical" SeparationOverride="10" Margin="8">
-                    <BoxContainer Orientation="Horizontal" SeparationOverride="12" HorizontalExpand="True" VerticalExpand="True">
-                        <BoxContainer Orientation="Vertical" SeparationOverride="5" HorizontalExpand="True" HorizontalAlignment="Center">
-                            <Label Text="CORE TEMPERATURE" HorizontalAlignment="Center" />
-                            <ui:ZpmVerticalBar Name="CoreTemperatureBar" MinValue="0" MaxValue="1500" Value="293" SetWidth="48" SetHeight="270" />
-                            <Label Name="CoreTemperatureLabel" Text="--" HorizontalAlignment="Center" />
-                        </BoxContainer>
-                        <BoxContainer Orientation="Vertical" SeparationOverride="5" HorizontalExpand="True" HorizontalAlignment="Center">
-                            <Label Text="COOLANT INLET" HorizontalAlignment="Center" />
-                            <ui:ZpmVerticalBar Name="CoolantInletBar" MinValue="0" MaxValue="600" Value="0" SetWidth="48" SetHeight="270" />
-                            <Label Name="InletLabel" Text="--" HorizontalAlignment="Center" />
-                        </BoxContainer>
-                        <BoxContainer Orientation="Vertical" SeparationOverride="5" HorizontalExpand="True" HorizontalAlignment="Center">
-                            <Label Text="HEAT OUTLET" HorizontalAlignment="Center" />
-                            <ui:ZpmVerticalBar Name="HeatOutletBar" MinValue="0" MaxValue="2000" Value="0" SetWidth="48" SetHeight="270" />
-                            <Label Name="OutletLabel" Text="--" HorizontalAlignment="Center" />
+            <BoxContainer Orientation="Vertical" SeparationOverride="8" HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer StyleClasses="BackgroundPanelDark" HorizontalExpand="True" VerticalExpand="True">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8">
+                        <Label Text="REACTOR TEMPERATURE" StyleClasses="LabelKeyText" />
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="12" HorizontalExpand="True" VerticalExpand="True">
+                            <PanelContainer StyleClasses="BackgroundPanelDark" HorizontalExpand="True" VerticalExpand="True">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="7">
+                                    <Label Text="CORE TEMPERATURE" StyleClasses="StatusFieldTitle" HorizontalAlignment="Center" />
+                                    <ui:ZpmVerticalBar Name="CoreTemperatureBar" MinValue="0" MaxValue="1500" Value="293" SetWidth="56" SetHeight="330" VerticalExpand="True" HorizontalAlignment="Center" />
+                                    <Label Name="CoreTemperatureLabel" Text="--" HorizontalAlignment="Center" />
+                                </BoxContainer>
+                            </PanelContainer>
+                            <PanelContainer StyleClasses="BackgroundPanelDark" HorizontalExpand="True" VerticalExpand="True">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="7">
+                                    <Label Text="COOLANT INLET" StyleClasses="StatusFieldTitle" HorizontalAlignment="Center" />
+                                    <ui:ZpmVerticalBar Name="CoolantInletBar" MinValue="0" MaxValue="600" Value="0" SetWidth="56" SetHeight="330" VerticalExpand="True" HorizontalAlignment="Center" />
+                                    <Label Name="InletLabel" Text="--" HorizontalAlignment="Center" />
+                                </BoxContainer>
+                            </PanelContainer>
+                            <PanelContainer StyleClasses="BackgroundPanelDark" HorizontalExpand="True" VerticalExpand="True">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="7">
+                                    <Label Text="HEAT OUTLET" StyleClasses="StatusFieldTitle" HorizontalAlignment="Center" />
+                                    <ui:ZpmVerticalBar Name="HeatOutletBar" MinValue="0" MaxValue="2000" Value="0" SetWidth="56" SetHeight="330" VerticalExpand="True" HorizontalAlignment="Center" />
+                                    <Label Name="OutletLabel" Text="--" HorizontalAlignment="Center" />
+                                </BoxContainer>
+                            </PanelContainer>
                         </BoxContainer>
                     </BoxContainer>
-                    <BoxContainer Orientation="Vertical" SeparationOverride="6" HorizontalAlignment="Right" SetWidth="310">
-                        <Button Name="StartShutdownButton" Text="Start Reactor" />
-                        <Button Name="EmergencyShutdownButton" Text="Emergency Shutdown" StyleClasses="ButtonColorRed" />
+                </PanelContainer>
+                <PanelContainer StyleClasses="BackgroundPanelDark">
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="8">
+                        <Label Text="THERMAL KEY" StyleClasses="StatusFieldTitle" VerticalAlignment="Center" />
+                        <Label Text="COLD" VerticalAlignment="Center" />
+                        <Label Text="→" VerticalAlignment="Center" />
+                        <Label Text="NORMAL" VerticalAlignment="Center" />
+                        <Label Text="→" VerticalAlignment="Center" />
+                        <Label Text="HOT" VerticalAlignment="Center" />
+                        <BoxContainer HorizontalExpand="True" />
+                        <Button Name="StartShutdownButton" Text="Start Reactor" MinWidth="150" />
+                        <Button Name="EmergencyShutdownButton" Text="Emergency Shutdown" StyleClasses="ButtonColorRed" MinWidth="190" />
                     </BoxContainer>
-                </BoxContainer>
-            </PanelContainer>
+                </PanelContainer>
+            </BoxContainer>
         </BoxContainer>
     </BoxContainer>
 </ui:ZpmConsoleWindow>

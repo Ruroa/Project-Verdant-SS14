@@ -463,7 +463,7 @@ public sealed class ZpmSystem : EntitySystem
             supplier.MaxSupply = reactor.PowerOutput;
     }
 
-    private static float GetMaximumPowerOutput() => 2_500_000f;
+    private static float GetMaximumPowerOutput() => 5_000_000f;
 
     private static float GetPowerEfficiency(float coreTemperature)
     {
@@ -483,7 +483,7 @@ public sealed class ZpmSystem : EntitySystem
             (coreTemperature - CoreRedTemperature) / (MaximumCoreTemperature - CoreRedTemperature), 0f, 1f));
     }
 
-    private static float GetHeatDemand(int outputPercent) => 300_000f * (Math.Clamp(outputPercent, 0, 100) / 100f);
+    private static float GetHeatDemand(int outputPercent) => 600_000f * (Math.Clamp(outputPercent, 0, 100) / 100f);
 
     private bool TryGetPorts(EntityUid uid, out PipeNode inlet, out PipeNode outlet)
     {

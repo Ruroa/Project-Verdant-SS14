@@ -54,11 +54,13 @@ public sealed class ZpmVerticalBar : Range
         if (Segmented && SegmentColors.Count > 0)
         {
             var segmentHeight = height / (float) SegmentColors.Count;
+            var litSegments = (int) MathF.Ceiling(GetAsRatio() * SegmentColors.Count);
             for (var i = 0; i < SegmentColors.Count; i++)
             {
-                var bottom = height - i * segmentHeight;
-                var top = MathF.Max(0f, bottom - segmentHeight + 1f);
-                handle.DrawRect(new UIBox2(1, top, width - 1, bottom), SegmentColors[i]);
+                var bottom = height - i * segmentHeight - 2f;
+                var top = MathF.Max(1f, bottom - segmentHeight + 2f);
+                var color = i < litSegments ? SegmentColors[i] : DimGaugeColor(SegmentColors[i]);
+                handle.DrawRect(new UIBox2(3, top, width - 3, bottom), color);
             }
         }
         else
@@ -68,9 +70,19 @@ public sealed class ZpmVerticalBar : Range
                 handle.DrawRect(new UIBox2(1, height - fillHeight, width - 1, height), FillColor);
         }
 
-        var markerY = height * (1f - GetAsRatio());
-        handle.DrawRect(new UIBox2(0, markerY - 2f, width, markerY + 2f), MarkerColor);
+        if (!Segmented)
+        {
+            var markerY = height * (1f - GetAsRatio());
+            handle.DrawRect(new UIBox2(0, markerY - 2f, width, markerY + 2f), MarkerColor);
+        }
         handle.DrawRect(new UIBox2(0, 0, width, height), BorderColor, filled: false);
+    }
+
+    private static Color DimGaugeColor(Color color)
+    {
+        var hsv = color.ToHsv();
+        hsv.Z /= 5f;
+        return Color.FromHsv(hsv);
     }
 
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)

@@ -34,12 +34,17 @@ public sealed partial class ZpmConsoleWindow : DefaultWindow
         EmergencyShutdownButton.OnPressed += _ => ShutdownPressed?.Invoke(true);
         EjectCoreButton.OnPressed += _ => EjectCorePressed?.Invoke();
 
-        // The spectrum is ordered from the bottom of each meter to the top.
+        // The temperature meters light progressively from cold blue at the bottom
+        // to hot red at the top, matching the segmented meter used by the gas turbine.
         var spectrum = new[]
         {
             Color.FromHex("#075BFF"),
+            Color.FromHex("#075BFF"),
+            Color.FromHex("#00BFFF"),
             Color.FromHex("#00BFFF"),
             Color.FromHex("#00E5D4"),
+            Color.FromHex("#00E5D4"),
+            Color.FromHex("#00E83B"),
             Color.FromHex("#00E83B"),
             Color.FromHex("#D8F000"),
             Color.FromHex("#FFB000"),

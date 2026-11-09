@@ -97,7 +97,7 @@ public sealed class ZpmTestPlatformCommand : IConsoleCommand
         }
 
         transform.SetCoordinates(player, new EntityCoordinates(gridUid, new Vector2(0.5f, -8.5f)));
-        shell.WriteLine($"ZPM test platform spawned on grid {gridUid}. The core is inserted, the console is linked, the chamber is evacuated, and the cooling loop is prefilled with oxygen.");
+        shell.WriteLine($"ZPM test platform spawned on grid {gridUid}. The core is inserted, the console is linked, the chamber is evacuated, and the cooling loop is prefilled with plasma.");
     }
 
     private void BuildPlatform(EntityUid gridUid, MapGridComponent grid)
