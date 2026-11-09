@@ -52,7 +52,6 @@ public sealed partial class ZpmConsoleWindow : DefaultWindow
         CoreTemperatureBar.SegmentColors.AddRange(spectrum);
         CoolantInletBar.SegmentColors.AddRange(spectrum);
         HeatOutletBar.SegmentColors.AddRange(spectrum);
-        CoolingEfficiencyBar.FillColor = Color.FromHex("#075BFF");
     }
 
     private bool _online;
@@ -75,12 +74,10 @@ public sealed partial class ZpmConsoleWindow : DefaultWindow
         CoreTemperatureBar.SetValueWithoutEvent(state.CoreTemperature);
         CoolantInletBar.SetValueWithoutEvent(state.CoolantInletTemperature);
         HeatOutletBar.SetValueWithoutEvent(state.HeatOutletTemperature);
-        CoolingEfficiencyBar.SetValueWithoutEvent(state.CoolingEfficiency);
 
         CoreTemperatureLabel.Text = FormatTemperature(state.CoreTemperature);
         InletLabel.Text = FormatTemperature(state.CoolantInletTemperature);
         OutletLabel.Text = FormatTemperature(state.HeatOutletTemperature);
-        CoolingLabel.Text = $"{state.CoolingEfficiency:0.0}%";
 
         var enabled = state.Linked;
         OutputBar.Disabled = !enabled;

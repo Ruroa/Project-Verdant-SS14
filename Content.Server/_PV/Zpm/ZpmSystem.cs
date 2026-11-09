@@ -42,8 +42,9 @@ public sealed class ZpmSystem : EntitySystem
     private const float MaximumCoreTemperature = 2_000f;
     // The console's 0-1500 K core gauge starts its red band at the final 1/8 of the scale.
     private const float CoreRedTemperature = 1_312.5f;
-    private const float MinimumSafeCoolingEfficiency = 40f;
     private const float PassiveCoreCoolingPerSecond = 5_000f;
+    private const float CoreYellowTemperature = 937.5f;
+    private const float CoreGreenTemperature = 562.5f;
 
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
@@ -161,10 +162,8 @@ public sealed class ZpmSystem : EntitySystem
 
         // The core generates heat independently of the plumbing. This makes a disconnected
         // reactor visibly heat up instead of silently producing neither heat nor a failure.
-        var generatedHeat = GetHeatDemand(component.OutputPercent) * args.dt;
-        component.StoredCoreHeat += generatedHeat;
+        component.StoredCoreHeat += GetHeatDemand(component.OutputPercent) * args.dt;
         var removedHeat = 0f;
-        component.CoolingEfficiency = generatedHeat <= 0f ? 100f : 0f;
         component.CoolantInletTemperature = 0f;
         component.HeatOutletTemperature = 0f;
 
@@ -175,30 +174,25 @@ public sealed class ZpmSystem : EntitySystem
             component.CoolantInletTemperature = input.Temperature;
             component.HeatOutletTemperature = output.Temperature;
 
-            // The inlet pump moves gas into the reactor and the outlet pump draws it away.
-            // A pressure differential determines whether there is actual flow between the
-            // two networks; availableCooling then limits how much heat that gas can carry.
-            var transfer = GetPressureDrivenTransfer(input, output);
-            if (transfer.TotalMoles > 0f)
+            // The pipe pumps move coolant around the loop. The reactor only exchanges
+            // heat: it adds energy to the hot outlet gas and removes the same energy from
+            // the core. Pressure is not used to decide whether thermal exchange happens.
+            if (input.TotalMoles > 0f && output.TotalMoles > 0f && component.StoredCoreHeat > 0f)
             {
-                var heatCapacity = _atmosphere.GetHeatCapacity(transfer, true);
+                var inletHeatCapacity = _atmosphere.GetHeatCapacity(input, true);
+                var outletHeatCapacity = _atmosphere.GetHeatCapacity(output, true);
                 var hottestAllowedReturn = MathF.Min(component.MaxReturnTemperature, component.CoreTemperature);
-                var heatHeadroom = MathF.Max(0f, hottestAllowedReturn - input.Temperature);
-                var inletTemperatureFactor = Math.Clamp(
-                    (component.SafeInletTemperature - input.Temperature) /
-                    (component.SafeInletTemperature - component.IdealInletTemperature), 0f, 1f);
-                var availableCooling = heatCapacity * heatHeadroom * inletTemperatureFactor;
+                var inletHeatHeadroom = MathF.Max(0f, hottestAllowedReturn - input.Temperature);
+                var outletHeatHeadroom = MathF.Max(0f, hottestAllowedReturn - output.Temperature);
+                var heatAvailableToCoolant = inletHeatCapacity * inletHeatHeadroom;
+                var outletHeatCapacityHeadroom = outletHeatCapacity * outletHeatHeadroom;
+                removedHeat = MathF.Min(component.StoredCoreHeat,
+                    MathF.Min(heatAvailableToCoolant, outletHeatCapacityHeadroom));
 
-                // The coolant may chill the core below its ambient starting temperature, but
-                // cannot cool it below the coolant inlet temperature in this exchange.
-                var coreHeatAboveCoolant = MathF.Max(0f, component.CoreTemperature - input.Temperature) * CoreHeatCapacity;
-                removedHeat = MathF.Min(availableCooling, coreHeatAboveCoolant);
-                _atmosphere.AddHeat(transfer, removedHeat);
-                _atmosphere.Merge(output, transfer);
+                if (removedHeat > 0f)
+                    _atmosphere.AddHeat(output, removedHeat);
+
                 component.HeatOutletTemperature = output.Temperature;
-                component.CoolingEfficiency = generatedHeat <= 0f
-                    ? 100f
-                    : Math.Clamp(removedHeat / generatedHeat * 100f, 0f, 100f);
             }
         }
 
@@ -209,19 +203,6 @@ public sealed class ZpmSystem : EntitySystem
         component.StoredCoreHeat = (component.CoreTemperature - BaseCoreTemperature) * CoreHeatCapacity;
         UpdatePower(uid, component);
 
-    }
-
-    private static GasMixture GetPressureDrivenTransfer(GasMixture inlet, GasMixture outlet)
-    {
-        var deltaPressure = inlet.Pressure - outlet.Pressure;
-        var denominator = inlet.Temperature * outlet.Volume + outlet.Temperature * inlet.Volume;
-        if (deltaPressure <= 0f || inlet.Pressure <= 0f || denominator <= 0f || inlet.TotalMoles <= 0f)
-            return new GasMixture();
-
-        var transferMoles = inlet.TotalMoles - (inlet.TotalMoles + outlet.TotalMoles) *
-            outlet.Temperature * inlet.Volume / denominator;
-        transferMoles = Math.Clamp(transferMoles, 0f, inlet.TotalMoles);
-        return inlet.Remove(transferMoles);
     }
 
     private void UpdateReactor(EntityUid uid, ZpmReactorComponent reactor, float seconds)
@@ -261,9 +242,9 @@ public sealed class ZpmSystem : EntitySystem
         }
 
         reactor.ShieldingEfficiency = GetShieldingEfficiency(uid);
-        var coolingInsufficient = reactor.CoolingEfficiency < MinimumSafeCoolingEfficiency;
         var thermalStress = Math.Clamp(
             (reactor.CoreTemperature - CoreRedTemperature) / (MaximumCoreTemperature - CoreRedTemperature), 0f, 1f);
+        var yellowThermalStress = reactor.CoreTemperature >= CoreYellowTemperature;
         var shieldingDeficit = MathF.Max(0f, 100f - reactor.ShieldingEfficiency) / 100f;
         if (reactor.Online && reactor.ShieldingEfficiency <= 50f && !reactor.ShieldingWarningSent)
         {
@@ -276,7 +257,9 @@ public sealed class ZpmSystem : EntitySystem
             reactor.ShieldingWarningSent = false;
         }
         if (reactor.Online && thermalStress > 0f)
-            reactor.Integrity -= reactor.IntegrityLossPerSecond * thermalStress * seconds;
+            reactor.Integrity -= reactor.IntegrityLossPerSecond * (0.125f + 0.875f * thermalStress) * seconds;
+        else if (reactor.Online && yellowThermalStress)
+            reactor.Integrity -= reactor.IntegrityLossPerSecond * 0.125f * seconds;
 
         if (reactor.Online && vacuumLost)
             reactor.Integrity -= reactor.VacuumIntegrityLossPerSecond * seconds;
@@ -284,7 +267,7 @@ public sealed class ZpmSystem : EntitySystem
         if (reactor.Online && shieldingDeficit > 0f)
             reactor.Integrity -= reactor.ShieldingIntegrityLossPerSecond * shieldingDeficit * seconds;
 
-        if (!vacuumLost && shieldingDeficit <= 0f && thermalStress <= 0f)
+        if (!vacuumLost && shieldingDeficit <= 0f && !yellowThermalStress)
             reactor.Integrity += reactor.IntegrityRecoveryPerSecond * seconds;
 
         reactor.Integrity = Math.Clamp(reactor.Integrity, 0f, 100f);
@@ -308,7 +291,7 @@ public sealed class ZpmSystem : EntitySystem
 
         UpdateReactorAppearance(uid, reactor);
 
-        if (reactor.Online && (coolingInsufficient || vacuumLost || shieldingDeficit > 0f || thermalStress > 0f))
+        if (reactor.Online && (vacuumLost || shieldingDeficit > 0f || yellowThermalStress))
         {
             reactor.WasUnstable = true;
         }
@@ -462,7 +445,6 @@ public sealed class ZpmSystem : EntitySystem
         if (!value)
         {
             reactor.PowerOutput = 0f;
-            reactor.CoolingEfficiency = 0f;
             reactor.CoolantInletTemperature = 0f;
             reactor.HeatOutletTemperature = 0f;
         }
@@ -474,7 +456,8 @@ public sealed class ZpmSystem : EntitySystem
     {
         reactor.PowerOutput = reactor.Online && TryGetCoreController(uid, out _, out var controller) &&
                               controller.CoreSlot.Item != null
-            ? GetMaximumPowerOutput() * (reactor.OutputPercent / 100f) * GetPowerEfficiency(reactor.CoreTemperature)
+            ? MathF.Min(GetMaximumPowerOutput(), GetMaximumPowerOutput() * (reactor.OutputPercent / 100f) *
+                GetPowerEfficiency(reactor.CoreTemperature))
             : 0f;
         if (TryComp<PowerSupplierComponent>(uid, out var supplier))
             supplier.MaxSupply = reactor.PowerOutput;
@@ -484,11 +467,20 @@ public sealed class ZpmSystem : EntitySystem
 
     private static float GetPowerEfficiency(float coreTemperature)
     {
-        const float idealTemperature = 150f;
-        const float zeroEfficiencyTemperature = 1_500f;
-        return Math.Clamp(
-            (zeroEfficiencyTemperature - coreTemperature) / (zeroEfficiencyTemperature - idealTemperature),
-            0.25f, 1f);
+        // Blue temperatures provide a modest output bonus; green gives normal
+        // output, and hotter bands progressively reduce it.
+        if (coreTemperature < CoreGreenTemperature)
+            return 1f + 0.25f * Math.Clamp((CoreGreenTemperature - coreTemperature) / CoreGreenTemperature, 0f, 1f);
+
+        if (coreTemperature < CoreYellowTemperature)
+            return 1f;
+
+        if (coreTemperature < CoreRedTemperature)
+            return 0.75f + 0.25f * (CoreRedTemperature - coreTemperature) /
+                (CoreRedTemperature - CoreYellowTemperature);
+
+        return 0.25f + 0.5f * (1f - Math.Clamp(
+            (coreTemperature - CoreRedTemperature) / (MaximumCoreTemperature - CoreRedTemperature), 0f, 1f));
     }
 
     private static float GetHeatDemand(int outputPercent) => 300_000f * (Math.Clamp(outputPercent, 0, 100) / 100f);
@@ -665,7 +657,6 @@ public sealed class ZpmSystem : EntitySystem
             condition,
             reactor.OutputPercent,
             reactor.Integrity,
-            reactor.CoolingEfficiency,
             reactor.ShieldingEfficiency,
             reactor.ChamberPressure,
             reactor.CoolantInletTemperature,

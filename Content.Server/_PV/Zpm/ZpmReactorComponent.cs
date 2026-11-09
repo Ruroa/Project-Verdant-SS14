@@ -16,9 +16,6 @@ public sealed partial class ZpmReactorComponent : Component
     public float Integrity = 100f;
 
     [DataField]
-    public float CoolingEfficiency;
-
-    [DataField]
     public float ShieldingEfficiency = 100f;
 
     [DataField]
@@ -42,12 +39,6 @@ public sealed partial class ZpmReactorComponent : Component
 
     [DataField]
     public float PowerOutput;
-
-    [DataField]
-    public float SafeInletTemperature = 293.15f;
-
-    [DataField]
-    public float IdealInletTemperature = 253.15f;
 
     [DataField]
     public float MaxReturnTemperature = 2_000f;

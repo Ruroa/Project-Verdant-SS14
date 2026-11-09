@@ -62,11 +62,6 @@
                             <ui:ZpmVerticalBar Name="HeatOutletBar" MinValue="0" MaxValue="2000" Value="0" SetWidth="48" SetHeight="270" />
                             <Label Name="OutletLabel" Text="--" HorizontalAlignment="Center" />
                         </BoxContainer>
-                        <BoxContainer Orientation="Vertical" SeparationOverride="5" HorizontalExpand="True" HorizontalAlignment="Center">
-                            <Label Text="COOLING EFFICIENCY" HorizontalAlignment="Center" />
-                            <ui:ZpmVerticalBar Name="CoolingEfficiencyBar" MinValue="0" MaxValue="100" Value="0" SetWidth="48" SetHeight="270" />
-                            <Label Name="CoolingLabel" Text="--" HorizontalAlignment="Center" />
-                        </BoxContainer>
                     </BoxContainer>
                     <BoxContainer Orientation="Vertical" SeparationOverride="6" HorizontalAlignment="Right" SetWidth="310">
                         <Button Name="StartShutdownButton" Text="Start Reactor" />

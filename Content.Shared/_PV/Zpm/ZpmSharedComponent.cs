@@ -84,7 +84,6 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
     public readonly ZpmCondition Condition;
     public readonly int OutputPercent;
     public readonly float Integrity;
-    public readonly float CoolingEfficiency;
     public readonly float ShieldingEfficiency;
     public readonly float ChamberPressure;
     public readonly float CoolantInletTemperature;
@@ -101,7 +100,6 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
         ZpmCondition condition = ZpmCondition.Offline,
         int outputPercent = 0,
         float integrity = 100f,
-        float coolingEfficiency = 0f,
         float shieldingEfficiency = 100f,
         float chamberPressure = 0f,
         float coolantInletTemperature = 0f,
@@ -117,7 +115,6 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
         Condition = condition;
         OutputPercent = outputPercent;
         Integrity = integrity;
-        CoolingEfficiency = coolingEfficiency;
         ShieldingEfficiency = shieldingEfficiency;
         ChamberPressure = chamberPressure;
         CoolantInletTemperature = coolantInletTemperature;
