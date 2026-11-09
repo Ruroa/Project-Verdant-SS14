@@ -72,6 +72,7 @@ public sealed partial class ZpmConsoleWindow : DefaultWindow
         VacuumLabel.Text = $"Chamber pressure: {state.ChamberPressure / 1000f:0.00} kPa";
         PowerSuppliedLabel.Text = $"{state.PowerSupplied / 1000f:0} kW supplied";
         PowerAvailableLabel.Text = $"{state.PowerOutput / 1000f:0} kW available";
+        OutputPercentLabel.Text = $"{state.OutputPercent}%";
 
         PowerEfficiencyLabel.Text = $"Power efficiency: {state.PowerEfficiency:0.0}%";
         CoolantFlowLabel.Text = $"Coolant flow: {state.CoolantFlowMolesPerSecond:0.0} mol/s";
