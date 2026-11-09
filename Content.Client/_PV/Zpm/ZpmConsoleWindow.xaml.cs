@@ -75,8 +75,7 @@ public sealed partial class ZpmConsoleWindow : DefaultWindow
         OutputPercentLabel.Text = $"{state.OutputPercent}%";
         PowerEfficiencyLabel.Text = $"Power efficiency: {state.PowerEfficiency:0.0}%";
         CoolantFlowLabel.Text = $"Coolant flow: {state.CoolantFlowMolesPerSecond:0.0} mol/s";
-        var outletCelsius = state.HeatOutletTemperature - 273.15f;
-        HeatTransferLabel.Text = $"Heat removed: {state.HeatTransferWatts / 1000f:0} kW | outlet {state.HeatOutletTemperature:0.0} K ({outletCelsius:0.0} °C)";
+        HeatTransferLabel.Text = $"Heat removed from core: {state.HeatTransferWatts / 1000f:0} kW\nOutlet gas: {FormatTemperature(state.HeatOutletTemperature).Replace('\n', ' ')}";
 
         OutputBar.SetValueWithoutEvent(state.OutputPercent);
         CoreTemperatureBar.SetValueWithoutEvent(state.CoreTemperature);
