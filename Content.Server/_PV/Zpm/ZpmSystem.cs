@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Chat.Systems;
@@ -169,7 +170,7 @@ public sealed class ZpmSystem : EntitySystem
             component.SteelRepairReady)
             return;
 
-        args.Cancelled = true;
+        args.Cancel();
         args.Message = "This shield corner is fully depleted. Apply one steel sheet before welding it.";
     }
 
