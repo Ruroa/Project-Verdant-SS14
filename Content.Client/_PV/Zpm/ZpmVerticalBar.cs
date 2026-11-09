@@ -27,6 +27,7 @@ public sealed class ZpmVerticalBar : Range
     }
 
     public bool Segmented { get; set; }
+    public bool Disabled { get; set; }
     public float Step { get; set; } = 5f;
     public Color FillColor { get; set; } = Color.Orange;
     public Color TrackColor { get; set; } = Color.FromHex("#17191F");
@@ -75,12 +76,12 @@ public sealed class ZpmVerticalBar : Range
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)
     {
         base.KeyBindDown(args);
-        if (args.Handled || !Interactive || args.Function != EngineKeyFunctions.UIClick)
+        if (args.Handled || !Interactive || Disabled || args.Function != EngineKeyFunctions.UIClick)
             return;
 
         _dragging = true;
         SetValueFromY(args.RelativePosition.Y);
-        args.Handled = true;
+        args.Handle();
     }
 
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
@@ -93,7 +94,7 @@ public sealed class ZpmVerticalBar : Range
     protected override void MouseMove(GUIMouseMoveEventArgs args)
     {
         base.MouseMove(args);
-        if (_dragging && Interactive)
+        if (_dragging && Interactive && !Disabled)
             SetValueFromY(args.RelativePosition.Y);
     }
 
