@@ -15,14 +15,42 @@
 
 - type: entity
   parent: ZpmSocketVisualPart
-  id: ZpmSocketTopLeft
-  name: ZPM socket top-left segment
+  abstract: true
+  id: ZpmSocketShieldCorner
   components:
   - type: NodeContainer
     nodes:
       shielding:
-        !type:ZpmNodeShielding
+        !type:ZpmNodeShieldingCorner
         nodeGroupID: Zpm
+  - type: ZpmShieldingCorner
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Repairable
+    fuelCost: 10
+    doAfterDelay: 2
+  - type: DamageVisuals
+    thresholds: [5, 10, 20, 40, 80]
+    damageDivisor: 2
+    trackAllDamage: true
+    damageOverlay:
+      sprite: Structures/Windows/cracks.rsi
+  # Keep a depleted corner present so it can be rebuilt with steel and welded.
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: ZpmSocketShieldCorner
+  id: ZpmSocketTopLeft
+  name: ZPM socket top-left segment
+  components:
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: corner-topleft
@@ -42,15 +70,10 @@
     state: middle-top
 
 - type: entity
-  parent: ZpmSocketVisualPart
+  parent: ZpmSocketShieldCorner
   id: ZpmSocketTopRight
   name: ZPM socket top-right segment
   components:
-  - type: NodeContainer
-    nodes:
-      shielding:
-        !type:ZpmNodeShielding
-        nodeGroupID: Zpm
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: corner-topright
@@ -247,15 +270,10 @@
   - type: PipeRestrictOverlap
 
 - type: entity
-  parent: ZpmSocketVisualPart
+  parent: ZpmSocketShieldCorner
   id: ZpmSocketBottomLeft
   name: ZPM socket bottom-left segment
   components:
-  - type: NodeContainer
-    nodes:
-      shielding:
-        !type:ZpmNodeShielding
-        nodeGroupID: Zpm
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: corner-bottomleft
@@ -275,15 +293,10 @@
     state: middle-bottom
 
 - type: entity
-  parent: ZpmSocketVisualPart
+  parent: ZpmSocketShieldCorner
   id: ZpmSocketBottomRight
   name: ZPM socket bottom-right segment
   components:
-  - type: NodeContainer
-    nodes:
-      shielding:
-        !type:ZpmNodeShielding
-        nodeGroupID: Zpm
   - type: Sprite
     sprite: _PV/Structures/Power/zpm_module_socket.rsi
     state: corner-rightbottom

@@ -2,6 +2,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.DeviceLinking.Systems;
+using Content.Server.Radiation.Systems;
 using Content.Server.NodeContainer;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Radio.EntitySystems;
@@ -12,19 +13,27 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceLinking;
 using Content.Shared.NodeContainer;
 using Content.Shared.Radio;
 using Content.Shared.UserInterface;
+using Content.Shared.Repairable;
+using Content.Shared.Radiation.Components;
+using Content.Shared.Stacks;
+using Content.Shared.Tag;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Maths;
 using Robust.Shared.Containers;
-using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Random;
+using Robust.Server.GameObjects;
 
 namespace Content.Server._PV.Zpm;
 
@@ -45,6 +54,15 @@ public sealed class ZpmSystem : EntitySystem
     private const float PassiveCoreCoolingPerSecond = 5_000f;
     private const float CoreYellowTemperature = 937.5f;
     private const float CoreGreenTemperature = 562.5f;
+    private const float ShieldWearPerSecond = 0.003f;
+    private const float RadiationIntegrityLossPerSecond = 5f;
+    private const float ChamberDamageRadius = 8f;
+    private const float ChamberDamageIntervalSeconds = 30f;
+    private const float ChamberStructuralDamage = 50f;
+    private static readonly ProtoId<DamageTypePrototype> StructuralDamageType = "Structural";
+    private static readonly ProtoId<StackPrototype> SteelStack = "Steel";
+    private static readonly ProtoId<TagPrototype> WindowTag = "Window";
+    private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
@@ -56,6 +74,13 @@ public sealed class ZpmSystem : EntitySystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly RadiationSystem _radiation = default!;
+    [Dependency] private readonly SharedStackSystem _stacks = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
+    private readonly HashSet<EntityUid> _nearbyEntities = new();
 
     public override void Initialize()
     {
@@ -78,6 +103,9 @@ public sealed class ZpmSystem : EntitySystem
         SubscribeLocalEvent<ZpmConsoleComponent, ZpmSetOutputPercentMessage>(OnSetOutputPercent);
         SubscribeLocalEvent<ZpmConsoleComponent, ZpmShutdownMessage>(OnShutdown);
         SubscribeLocalEvent<ZpmConsoleComponent, SignalReceivedEvent>(OnConsoleSignal);
+        SubscribeLocalEvent<ZpmShieldingCornerComponent, InteractUsingEvent>(OnShieldingCornerInteractUsing);
+        SubscribeLocalEvent<ZpmShieldingCornerComponent, CanRepairEvent>(OnShieldingCornerCanRepair);
+        SubscribeLocalEvent<ZpmShieldingCornerComponent, RepairedEvent>(OnShieldingCornerRepaired);
     }
 
     public override void Update(float frameTime)
@@ -113,8 +141,41 @@ public sealed class ZpmSystem : EntitySystem
 
     private void OnReactorInit(EntityUid uid, ZpmReactorComponent component, ComponentInit args)
     {
+        component.NextChamberDamageUpdate = _timing.CurTime + TimeSpan.FromSeconds(ChamberDamageIntervalSeconds);
+        _radiation.SetSourceEnabled((uid, EnsureComp<RadiationSourceComponent>(uid)), false);
         UpdatePower(uid, component);
         UpdateReactorAppearance(uid, component);
+    }
+
+    private void OnShieldingCornerInteractUsing(EntityUid uid, ZpmShieldingCornerComponent component, InteractUsingEvent args)
+    {
+        if (args.Handled || !TryComp<DamageableComponent>(uid, out var damageable) ||
+            damageable.TotalDamage.Float() < 100f ||
+            !TryComp<StackComponent>(args.Used, out var stack) || stack.StackTypeId != SteelStack)
+            return;
+
+        if (!_stacks.TryUse((args.Used, stack), 1))
+            return;
+
+        component.SteelRepairReady = true;
+        args.Handled = true;
+        Dirty(uid, component);
+    }
+
+    private void OnShieldingCornerCanRepair(EntityUid uid, ZpmShieldingCornerComponent component, ref CanRepairEvent args)
+    {
+        if (!TryComp<DamageableComponent>(uid, out var damageable) || damageable.TotalDamage.Float() < 100f ||
+            component.SteelRepairReady)
+            return;
+
+        args.Cancelled = true;
+        args.Message = "This shield corner is fully depleted. Apply one steel sheet before welding it.";
+    }
+
+    private void OnShieldingCornerRepaired(EntityUid uid, ZpmShieldingCornerComponent component, RepairedEvent args)
+    {
+        component.SteelRepairReady = false;
+        Dirty(uid, component);
     }
 
     private void OnControllerInit(EntityUid uid, ZpmControllerComponent component, ComponentInit args)
@@ -248,6 +309,13 @@ public sealed class ZpmSystem : EntitySystem
         }
 
         reactor.ShieldingEfficiency = GetShieldingEfficiency(uid);
+        UpdateShieldWear(uid, reactor, seconds);
+        UpdateRadiationSpill(uid, reactor);
+        if (reactor.Online && _timing.CurTime >= reactor.NextChamberDamageUpdate)
+        {
+            reactor.NextChamberDamageUpdate = _timing.CurTime + TimeSpan.FromSeconds(ChamberDamageIntervalSeconds);
+            DamageChamber(uid);
+        }
         var thermalStress = Math.Clamp(
             (reactor.CoreTemperature - CoreRedTemperature) / (MaximumCoreTemperature - CoreRedTemperature), 0f, 1f);
         var yellowThermalStress = reactor.CoreTemperature >= CoreYellowTemperature;
@@ -270,8 +338,8 @@ public sealed class ZpmSystem : EntitySystem
         if (reactor.Online && vacuumLost)
             reactor.Integrity -= reactor.VacuumIntegrityLossPerSecond * seconds;
 
-        if (reactor.Online && shieldingDeficit > 0f)
-            reactor.Integrity -= reactor.ShieldingIntegrityLossPerSecond * shieldingDeficit * seconds;
+        if (reactor.Online && reactor.ShieldingEfficiency <= 0f)
+            reactor.Integrity -= RadiationIntegrityLossPerSecond * seconds;
 
         if (!vacuumLost && shieldingDeficit <= 0f && !yellowThermalStress)
             reactor.Integrity += reactor.IntegrityRecoveryPerSecond * seconds;
@@ -446,6 +514,8 @@ public sealed class ZpmSystem : EntitySystem
     private void SetOnline(EntityUid uid, ZpmReactorComponent reactor, bool value)
     {
         reactor.Online = value;
+        if (value)
+            reactor.NextChamberDamageUpdate = _timing.CurTime + TimeSpan.FromSeconds(ChamberDamageIntervalSeconds);
         if (TryGetCoreController(uid, out var controllerUid, out _))
             _itemSlots.SetLock(controllerUid, CoreSlotId, value);
         if (!value)
@@ -574,11 +644,11 @@ public sealed class ZpmSystem : EntitySystem
     private float GetShieldingEfficiency(EntityUid reactorUid)
     {
         if (GetNodeGroup(reactorUid) is not { } group)
-            return 100f;
+            return 0f;
 
-        const int expectedShieldingParts = 8;
+        const int expectedShieldingCorners = 4;
         var efficiency = 0f;
-        foreach (var part in group.ShieldingParts)
+        foreach (var part in group.ShieldingCorners.Take(expectedShieldingCorners))
         {
             if (!TryComp<DamageableComponent>(part.Owner, out var damageable))
             {
@@ -589,7 +659,82 @@ public sealed class ZpmSystem : EntitySystem
             efficiency += Math.Clamp(1f - damageable.TotalDamage.Float() / 100f, 0f, 1f);
         }
 
-        return Math.Clamp(efficiency / expectedShieldingParts * 100f, 0f, 100f);
+        // Absent corners count as lost shielding, so each of the four corners is
+        // always worth exactly one quarter of the reactor's total protection.
+        return Math.Clamp(efficiency / expectedShieldingCorners * 100f, 0f, 100f);
+    }
+
+    private void UpdateShieldWear(EntityUid uid, ZpmReactorComponent reactor, float seconds)
+    {
+        if (!reactor.Online || GetNodeGroup(uid) is not { } group || group.ShieldingCorners.Count == 0)
+            return;
+
+        reactor.ShieldingWearAccumulator += ShieldWearPerSecond * seconds;
+        var wear = MathF.Floor(reactor.ShieldingWearAccumulator * 100f) / 100f;
+        if (wear <= 0f)
+            return;
+
+        reactor.ShieldingWearAccumulator -= wear;
+        var damage = new DamageSpecifier(_prototypes.Index<DamageTypePrototype>(StructuralDamageType), FixedPoint2.New(wear));
+        foreach (var corner in group.ShieldingCorners)
+        {
+            if (TryComp<DamageableComponent>(corner.Owner, out var damageable) && damageable.TotalDamage.Float() < 100f)
+                _damageable.TryChangeDamage(corner.Owner, damage, ignoreResistances: true, origin: uid);
+        }
+    }
+
+    private void UpdateRadiationSpill(EntityUid uid, ZpmReactorComponent reactor)
+    {
+        var spilling = reactor.Online && reactor.ShieldingEfficiency <= 0f;
+        var source = EnsureComp<RadiationSourceComponent>(uid);
+        source.Intensity = 8f;
+        source.Slope = 0.5f;
+        _radiation.SetSourceEnabled((uid, source), spilling);
+
+        if (spilling && !reactor.RadiationSpillWarningSent)
+        {
+            SendEngineeringMessage(uid, "ZPM shielding has failed completely. Radiation is spilling from the reactor and core integrity is falling rapidly.");
+            reactor.RadiationSpillWarningSent = true;
+        }
+        else if (!spilling && reactor.RadiationSpillWarningSent)
+        {
+            SendEngineeringMessage(uid, "ZPM radiation leak contained; shielding has been restored.");
+            reactor.RadiationSpillWarningSent = false;
+        }
+    }
+
+    private void DamageChamber(EntityUid reactorUid)
+    {
+        if (!TryComp<TransformComponent>(reactorUid, out var reactorXform) || reactorXform.GridUid is not { } reactorGrid)
+            return;
+
+        _nearbyEntities.Clear();
+        _lookup.GetEntitiesInRange(reactorXform.Coordinates, ChamberDamageRadius, _nearbyEntities, flags: LookupFlags.Static);
+        var windows = new List<EntityUid>();
+        var walls = new List<EntityUid>();
+        foreach (var entity in _nearbyEntities)
+        {
+            if (entity == reactorUid || !TryComp<TransformComponent>(entity, out var xform) ||
+                xform.GridUid != reactorGrid || !xform.Anchored || !HasComp<DamageableComponent>(entity))
+                continue;
+
+            if (_tags.HasTag(entity, WindowTag))
+                windows.Add(entity);
+            else if (_tags.HasTag(entity, WallTag))
+                walls.Add(entity);
+        }
+
+        // Windows always take the reactor's wear first. Walls are only exposed when
+        // there are no chamber windows left to absorb the repeated damage.
+        var targets = windows.Count > 0 ? windows : walls;
+        if (targets.Count == 0)
+            return;
+
+        var target = _random.Pick(targets);
+        var damage = new DamageSpecifier(
+            _prototypes.Index<DamageTypePrototype>(StructuralDamageType),
+            FixedPoint2.New(ChamberStructuralDamage));
+        _damageable.TryChangeDamage(target, damage, origin: reactorUid);
     }
 
     private void UpdateControllerAppearance(EntityUid uid, ZpmControllerComponent controller)

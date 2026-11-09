@@ -105,8 +105,24 @@ public sealed partial class ZpmReactorComponent : Component
     [DataField]
     public bool ShieldingWarningSent;
 
+    [DataField]
+    public float ShieldingWearAccumulator;
+
+    [DataField]
+    public TimeSpan NextChamberDamageUpdate;
+
+    [DataField]
+    public bool RadiationSpillWarningSent;
+
     [ViewVariables]
     public ZpmPulseVisual? CurrentPulseVisual;
+}
+
+[RegisterComponent]
+public sealed partial class ZpmShieldingCornerComponent : Component
+{
+    [ViewVariables]
+    public bool SteelRepairReady;
 }
 
 [RegisterComponent]
