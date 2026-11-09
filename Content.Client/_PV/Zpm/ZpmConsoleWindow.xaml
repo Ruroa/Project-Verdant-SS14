@@ -59,7 +59,7 @@
                         </BoxContainer>
                         <BoxContainer Orientation="Vertical" SeparationOverride="5" HorizontalExpand="True" HorizontalAlignment="Center">
                             <Label Text="HEAT OUTLET" HorizontalAlignment="Center" />
-                            <ui:ZpmVerticalBar Name="HeatOutletBar" MinValue="0" MaxValue="1200" Value="0" SetWidth="48" SetHeight="270" />
+                            <ui:ZpmVerticalBar Name="HeatOutletBar" MinValue="0" MaxValue="2000" Value="0" SetWidth="48" SetHeight="270" />
                             <Label Name="OutletLabel" Text="--" HorizontalAlignment="Center" />
                         </BoxContainer>
                         <BoxContainer Orientation="Vertical" SeparationOverride="5" HorizontalExpand="True" HorizontalAlignment="Center">

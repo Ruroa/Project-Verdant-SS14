@@ -40,6 +40,9 @@ public sealed class ZpmSystem : EntitySystem
     private const float CoreHeatCapacity = 10_000f;
     private const float BaseCoreTemperature = 293.15f;
     private const float MaximumCoreTemperature = 2_000f;
+    // The console's 0-1500 K core gauge starts its red band at the final 1/8 of the scale.
+    private const float CoreRedTemperature = 1_312.5f;
+    private const float MinimumSafeCoolingEfficiency = 40f;
     private const float PassiveCoreCoolingPerSecond = 5_000f;
 
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
@@ -195,7 +198,7 @@ public sealed class ZpmSystem : EntitySystem
                 component.HeatOutletTemperature = output.Temperature;
                 component.CoolingEfficiency = generatedHeat <= 0f
                     ? 100f
-                    : Math.Clamp(MathF.Min(availableCooling, generatedHeat) / generatedHeat * 100f, 0f, 100f);
+                    : Math.Clamp(removedHeat / generatedHeat * 100f, 0f, 100f);
             }
         }
 
@@ -258,8 +261,9 @@ public sealed class ZpmSystem : EntitySystem
         }
 
         reactor.ShieldingEfficiency = GetShieldingEfficiency(uid);
-        var coolingDeficit = MathF.Max(0f, 100f - reactor.CoolingEfficiency) / 100f;
-        var thermalStress = Math.Clamp((reactor.CoreTemperature - 373.15f) / (1_000f - 373.15f), 0f, 1f);
+        var coolingInsufficient = reactor.CoolingEfficiency < MinimumSafeCoolingEfficiency;
+        var thermalStress = Math.Clamp(
+            (reactor.CoreTemperature - CoreRedTemperature) / (MaximumCoreTemperature - CoreRedTemperature), 0f, 1f);
         var shieldingDeficit = MathF.Max(0f, 100f - reactor.ShieldingEfficiency) / 100f;
         if (reactor.Online && reactor.ShieldingEfficiency <= 50f && !reactor.ShieldingWarningSent)
         {
@@ -271,11 +275,6 @@ public sealed class ZpmSystem : EntitySystem
             SendEngineeringMessage(uid, $"ZPM shielding repaired to {reactor.ShieldingEfficiency:0}%; integrity recovery can resume when all other systems are stable.");
             reactor.ShieldingWarningSent = false;
         }
-        if (reactor.Online && coolingDeficit > 0f)
-        {
-            reactor.Integrity -= reactor.IntegrityLossPerSecond * coolingDeficit * (reactor.OutputPercent / 100f) * seconds;
-        }
-
         if (reactor.Online && thermalStress > 0f)
             reactor.Integrity -= reactor.IntegrityLossPerSecond * thermalStress * seconds;
 
@@ -285,7 +284,7 @@ public sealed class ZpmSystem : EntitySystem
         if (reactor.Online && shieldingDeficit > 0f)
             reactor.Integrity -= reactor.ShieldingIntegrityLossPerSecond * shieldingDeficit * seconds;
 
-        if (!vacuumLost && shieldingDeficit <= 0f && thermalStress <= 0f && (!reactor.Online || coolingDeficit <= 0f))
+        if (!vacuumLost && shieldingDeficit <= 0f && thermalStress <= 0f)
             reactor.Integrity += reactor.IntegrityRecoveryPerSecond * seconds;
 
         reactor.Integrity = Math.Clamp(reactor.Integrity, 0f, 100f);
@@ -309,7 +308,7 @@ public sealed class ZpmSystem : EntitySystem
 
         UpdateReactorAppearance(uid, reactor);
 
-        if (reactor.Online && (coolingDeficit > 0f || vacuumLost || shieldingDeficit > 0f))
+        if (reactor.Online && (coolingInsufficient || vacuumLost || shieldingDeficit > 0f || thermalStress > 0f))
         {
             reactor.WasUnstable = true;
         }

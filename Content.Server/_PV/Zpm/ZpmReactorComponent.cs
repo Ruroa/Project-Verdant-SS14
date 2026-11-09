@@ -50,7 +50,7 @@ public sealed partial class ZpmReactorComponent : Component
     public float IdealInletTemperature = 253.15f;
 
     [DataField]
-    public float MaxReturnTemperature = 1_200f;
+    public float MaxReturnTemperature = 2_000f;
 
     [DataField]
     public float RequiredPressureDifferential = 1_000f;
