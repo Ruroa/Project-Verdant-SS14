@@ -174,24 +174,24 @@ public sealed class ZpmSystem : EntitySystem
             component.CoolantInletTemperature = input.Temperature;
             component.HeatOutletTemperature = output.Temperature;
 
-            // The pipe pumps move coolant around the loop. The reactor only exchanges
-            // heat: it adds energy to the hot outlet gas and removes the same energy from
-            // the core. Pressure is not used to decide whether thermal exchange happens.
-            if (input.TotalMoles > 0f && output.TotalMoles > 0f && component.StoredCoreHeat > 0f)
+            // Move a controlled amount of coolant through the reactor each atmosphere
+            // update. The external pumps then circulate it through the rest of the loop.
+            // This flow rate is independent of pressure; pressure pumps do not decide
+            // whether the reactor transfers heat.
+            if (!input.Immutable && !output.Immutable && input.TotalMoles > 0f && component.StoredCoreHeat > 0f)
             {
-                var inletHeatCapacity = _atmosphere.GetHeatCapacity(input, true);
-                var outletHeatCapacity = _atmosphere.GetHeatCapacity(output, true);
+                var transferMoles = MathF.Min(input.TotalMoles,
+                    component.CoolantFlowMolesPerSecond * args.dt);
+                var transfer = input.Remove(transferMoles);
+                var transferHeatCapacity = _atmosphere.GetHeatCapacity(transfer, true);
                 var hottestAllowedReturn = MathF.Min(component.MaxReturnTemperature, component.CoreTemperature);
-                var inletHeatHeadroom = MathF.Max(0f, hottestAllowedReturn - input.Temperature);
-                var outletHeatHeadroom = MathF.Max(0f, hottestAllowedReturn - output.Temperature);
-                var heatAvailableToCoolant = inletHeatCapacity * inletHeatHeadroom;
-                var outletHeatCapacityHeadroom = outletHeatCapacity * outletHeatHeadroom;
-                removedHeat = MathF.Min(component.StoredCoreHeat,
-                    MathF.Min(heatAvailableToCoolant, outletHeatCapacityHeadroom));
+                var heatHeadroom = MathF.Max(0f, hottestAllowedReturn - transfer.Temperature);
+                removedHeat = MathF.Min(component.StoredCoreHeat, transferHeatCapacity * heatHeadroom);
 
                 if (removedHeat > 0f)
-                    _atmosphere.AddHeat(output, removedHeat);
+                    _atmosphere.AddHeat(transfer, removedHeat);
 
+                _atmosphere.Merge(output, transfer);
                 component.HeatOutletTemperature = output.Temperature;
             }
         }

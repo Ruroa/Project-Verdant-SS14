@@ -44,7 +44,7 @@ public sealed partial class ZpmReactorComponent : Component
     public float MaxReturnTemperature = 2_000f;
 
     [DataField]
-    public float RequiredPressureDifferential = 1_000f;
+    public float CoolantFlowMolesPerSecond = 100f;
 
     [DataField]
     public float VacuumLimit = 5_000f;
