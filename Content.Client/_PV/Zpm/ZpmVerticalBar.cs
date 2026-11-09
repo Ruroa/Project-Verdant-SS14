@@ -80,7 +80,7 @@ public sealed class ZpmVerticalBar : Range
 
     private static Color DimGaugeColor(Color color)
     {
-        var hsv = color.ToHsv();
+        var hsv = Color.ToHsv(color);
         hsv.Z /= 5f;
         return Color.FromHsv(hsv);
     }
