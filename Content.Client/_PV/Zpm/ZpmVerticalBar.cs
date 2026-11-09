@@ -3,6 +3,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input;
 using Robust.Shared.Maths;
+using Range = Robust.Client.UserInterface.Controls.Range;
 
 namespace Content.Client._PV.Zpm;
 
