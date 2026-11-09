@@ -44,7 +44,9 @@ public sealed partial class ZpmReactorComponent : Component
     public float MaxReturnTemperature = 2_000f;
 
     [DataField]
-    public float CoolantFlowMolesPerSecond = 100f;
+    // Oxygen is the common starting coolant. At 500 mol/s it can carry the reactor's
+    // maximum 300 kW heat load while keeping the core in the blue/green range.
+    public float CoolantFlowMolesPerSecond = 500f;
 
     [DataField]
     public float VacuumLimit = 5_000f;
