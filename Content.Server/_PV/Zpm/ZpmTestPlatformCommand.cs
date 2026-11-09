@@ -77,7 +77,7 @@ public sealed class ZpmTestPlatformCommand : IConsoleCommand
 
         var core = _entities.SpawnEntity("ZpmCore", new EntityCoordinates(gridUid, new Vector2(0.5f, 0.5f)));
         var itemSlots = _entities.System<ItemSlotsSystem>();
-        if (!itemSlots.TryInsert(controller, "coreSlot", core, null, excludeUserAudio: true, suppressSound: true))
+        if (!itemSlots.TryInsert(controller, "coreSlot", core, null, excludeUserAudio: true))
             shell.WriteError("The ZPM platform spawned, but the core could not be inserted into its controller.");
 
         _entities.System<DeviceLinkSystem>().LinkDefaults(null, controller, console);

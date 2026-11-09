@@ -1,9 +1,0 @@
-- type: entity
-  parent: GasPipeFourway
-  id: PVZpmTestPipe
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: PipePrefill
-    targetPressure: 101.325
-    mixture:
-      Oxygen: 1
