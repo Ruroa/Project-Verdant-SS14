@@ -92,6 +92,8 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
     public readonly float PowerOutput;
     public readonly float PowerSupplied;
     public readonly float PowerEfficiency;
+    public readonly float CoolantFlowMolesPerSecond;
+    public readonly float HeatTransferWatts;
 
     public ZpmConsoleBoundInterfaceState(
         bool linked,
@@ -107,7 +109,9 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
         float coreTemperature = 293.15f,
         float powerOutput = 0f,
         float powerSupplied = 0f,
-        float powerEfficiency = 0f)
+        float powerEfficiency = 0f,
+        float coolantFlowMolesPerSecond = 0f,
+        float heatTransferWatts = 0f)
     {
         Linked = linked;
         HasCore = hasCore;
@@ -123,5 +127,7 @@ public sealed class ZpmConsoleBoundInterfaceState : BoundUserInterfaceState
         PowerOutput = powerOutput;
         PowerSupplied = powerSupplied;
         PowerEfficiency = powerEfficiency;
+        CoolantFlowMolesPerSecond = coolantFlowMolesPerSecond;
+        HeatTransferWatts = heatTransferWatts;
     }
 }

@@ -27,6 +27,12 @@ public sealed partial class ZpmReactorComponent : Component
     [DataField]
     public float HeatOutletTemperature;
 
+    [DataField]
+    public float ActualCoolantFlowMolesPerSecond;
+
+    [DataField]
+    public float HeatTransferWatts;
+
     /// <summary>
     /// Heat stored in the reactor core. The core continues heating while online even if the
     /// coolant loop is disconnected; coolant flow removes this stored heat.
