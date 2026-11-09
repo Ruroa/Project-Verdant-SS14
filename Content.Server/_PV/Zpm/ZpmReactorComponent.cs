@@ -10,7 +10,7 @@ public sealed partial class ZpmReactorComponent : Component
     public bool Online;
 
     [DataField]
-    public int OutputPercent;
+    public int OutputPercent = 5;
 
     [DataField]
     public float Integrity = 100f;

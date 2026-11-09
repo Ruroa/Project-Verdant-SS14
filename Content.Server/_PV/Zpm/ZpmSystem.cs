@@ -17,6 +17,7 @@ using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceLinking;
 using Content.Shared.NodeContainer;
 using Content.Shared.Radio;
+using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Audio;
@@ -52,6 +53,7 @@ public sealed class ZpmSystem : EntitySystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -407,19 +409,39 @@ public sealed class ZpmSystem : EntitySystem
     private void OnStart(EntityUid uid, ZpmConsoleComponent component, ZpmStartMessage args)
     {
         if (!TryGetLinkedReactor(component, out var reactorUid, out var reactor))
+        {
+            PopupStartFailure(uid, args.Actor, "The ZPM control is not linked to a reactor.");
             return;
+        }
 
         var air = _atmosphere.GetContainingMixture(reactorUid);
-        var group = GetNodeGroup(reactorUid);
-        if (!TryGetCoreController(reactorUid, out _, out var coreController) || coreController.CoreSlot.Item == null ||
-            air == null || air.Pressure > reactor.VacuumLimit || group is not { IsComplete: true })
+        if (!TryGetCoreController(reactorUid, out _, out var coreController) || coreController.CoreSlot.Item == null)
+        {
+            PopupStartFailure(uid, args.Actor, "Insert a ZPM core into the linked controller before starting.");
             return;
+        }
+
+        var chamberPressure = air?.Pressure ?? 0f;
+        if (chamberPressure > reactor.VacuumLimit)
+        {
+            PopupStartFailure(uid, args.Actor, $"The ZPM chamber vacuum is insufficient ({chamberPressure / 1000f:0.0} kPa). Evacuate the chamber first.");
+            return;
+        }
 
         if (reactor.Integrity <= 25f)
+        {
+            PopupStartFailure(uid, args.Actor, "The ZPM integrity is critical. Repair it above 25% before restarting.");
             return;
+        }
 
         SetOnline(reactorUid, reactor, true);
         UpdateConsole(uid, component);
+    }
+
+    private void PopupStartFailure(EntityUid consoleUid, EntityUid actor, string message)
+    {
+        if (actor.IsValid())
+            _popup.PopupEntity(message, consoleUid, actor);
     }
 
     private void OnSetOutputPercent(EntityUid uid, ZpmConsoleComponent component, ZpmSetOutputPercentMessage args)
