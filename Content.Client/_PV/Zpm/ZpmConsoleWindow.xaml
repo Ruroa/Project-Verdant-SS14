@@ -6,7 +6,7 @@
     <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
         <Label Name="ConnectionLabel" StyleClasses="LabelHeading" Text="No ZPM control linked" />
         <BoxContainer Orientation="Horizontal" SeparationOverride="10" VerticalExpand="True">
-            <PanelContainer SetWidth="275" VerticalExpand="True">
+            <PanelContainer SetWidth="350" VerticalExpand="True">
                 <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8">
                     <Label Text="OUTPUT SETTING" StyleClasses="LabelHeading" />
                     <BoxContainer Orientation="Horizontal" SeparationOverride="8" VerticalExpand="True">
@@ -38,6 +38,7 @@
                                     <Label Name="PowerEfficiencyLabel" Text="Power efficiency: --" />
                                     <Label Name="CoolantFlowLabel" Text="Coolant flow: 0 mol/s" />
                                     <Label Name="HeatTransferLabel" Text="Heat removed from core: 0 kW" />
+                                    <Label Name="OutletGasReadoutLabel" Text="Outlet gas: --" />
                                 </BoxContainer>
                             </PanelContainer>
                             <Button Name="EjectCoreButton" Text="Eject Core" />
@@ -77,12 +78,6 @@
                 </PanelContainer>
                 <PanelContainer StyleClasses="BackgroundPanelDark">
                     <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="8">
-                        <Label Text="METER SCALE" StyleClasses="StatusFieldTitle" VerticalAlignment="Center" />
-                        <Label Text="COOL (BLUE)" VerticalAlignment="Center" />
-                        <Label Text="→" VerticalAlignment="Center" />
-                        <Label Text="HOT (RED)" VerticalAlignment="Center" />
-                        <Label Text="→" VerticalAlignment="Center" />
-                        <Label Text="HOT (RED)" VerticalAlignment="Center" />
                         <BoxContainer HorizontalExpand="True" />
                         <Button Name="StartShutdownButton" Text="Start Reactor" MinWidth="150" />
                         <Button Name="EmergencyShutdownButton" Text="Emergency Shutdown" StyleClasses="ButtonColorRed" MinWidth="190" />
