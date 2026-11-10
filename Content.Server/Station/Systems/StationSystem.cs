@@ -367,6 +367,7 @@ public sealed partial class StationSystem : SharedStationSystem
         RenameStation(station, MetaData(gridId).EntityName, false);
         var name = MetaData(station).EntityName;
         AddGridToStation(station, gridId, null, data, name);
+        CenterPlanetaryStationOnOrigin(station, data);
         var ev = new StationPostInitEvent((station, data));
         RaiseLocalEvent(station, ref ev, true);
         if (!comp.AllowEvents)
@@ -434,10 +435,34 @@ public sealed partial class StationSystem : SharedStationSystem
             AddMainGridToStation(station, grid, null, data, name); // Starlight-edit
         }
 
+        CenterPlanetaryStationOnOrigin(station, data);
         var ev = new StationPostInitEvent((station, data));
         RaiseLocalEvent(station, ref ev, true);
 
         return station;
+    }
+
+    private void CenterPlanetaryStationOnOrigin(EntityUid station, StationDataComponent data)
+    {
+        if (!HasComp<StationBiomeComponent>(station) ||
+            GetLargestGrid(station) is not { } mainGrid)
+            return;
+
+        var mainCoordinates = _transform.ToMapCoordinates(new EntityCoordinates(mainGrid, Vector2.Zero));
+        var offset = -mainCoordinates.Position;
+        if (offset.LengthSquared() <= 0.0001f)
+            return;
+
+        foreach (var grid in data.Grids)
+        {
+            if (!TryComp<MapGridComponent>(grid, out _) ||
+                !TryComp<TransformComponent>(grid, out var gridXform) ||
+                gridXform.MapID != mainCoordinates.MapId)
+                continue;
+
+            var coordinates = _transform.ToMapCoordinates(new EntityCoordinates(grid, Vector2.Zero));
+            _transform.SetMapCoordinates(grid, new MapCoordinates(coordinates.Position + offset, coordinates.MapId));
+        }
     }
 
     /// <summary>
