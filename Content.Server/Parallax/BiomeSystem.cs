@@ -162,6 +162,15 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
                 }
             }
         }
+
+        // Grids are frozen while reserving the initial biome footprint. Restore shuttles
+        // that are configured as enabled once this setup pass is complete.
+        var shuttleQuery = EntityQueryEnumerator<ShuttleComponent, TransformComponent>();
+        while (shuttleQuery.MoveNext(out var shuttle, out var shuttleComp, out var shuttleXform))
+        {
+            if (shuttleXform.MapID == mapId && shuttleComp.Enabled)
+                _shuttles.Enable(shuttle);
+        }
     }
 
     public void SetEnabled(Entity<BiomeComponent?> ent, bool enabled = true)
