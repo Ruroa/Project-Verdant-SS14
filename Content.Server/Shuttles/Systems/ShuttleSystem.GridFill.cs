@@ -108,6 +108,8 @@ public sealed partial class ShuttleSystem
                 TryFTLProximity(ent.Value, targetGrid.Value);
 
             _station.AddGridToStation(uid, ent.Value);
+            if (HasComp<ShuttleComponent>(ent.Value))
+                ApplyPlanetaryShuttleWallCollision(ent.Value);
         }
 
         _mapSystem.DeleteMap(mapId);
@@ -341,6 +343,8 @@ public sealed partial class ShuttleSystem
 
                 EntityManager.AddComponents(spawned, group.Value.AddComponents); // SL edit
                 ApplySpawnMarkerConfig(spawned, group.Value); // Starlight
+                if (HasComp<ShuttleComponent>(spawned))
+                    ApplyPlanetaryShuttleWallCollision(spawned);
             }
         }
 
@@ -377,6 +381,8 @@ public sealed partial class ShuttleSystem
                 {
                     var shuttleXform = Transform(grid.Value);
                     FTLDock((grid.Value, shuttleXform), config);
+                    if (HasComp<ShuttleComponent>(grid.Value))
+                        ApplyPlanetaryShuttleWallCollision(grid.Value);
 
                     if (TryComp<StationMemberComponent>(xform.GridUid, out var stationMember))
                     {
@@ -445,6 +451,8 @@ public sealed partial class ShuttleSystem
                     {
                         var shuttleXform = Transform(grid.Value);
                         FTLDock((grid.Value, shuttleXform), config);
+                        if (HasComp<ShuttleComponent>(grid.Value))
+                            ApplyPlanetaryShuttleWallCollision(grid.Value);
 
                         if (TryComp<StationMemberComponent>(xform.GridUid, out var stationMember))
                         {
