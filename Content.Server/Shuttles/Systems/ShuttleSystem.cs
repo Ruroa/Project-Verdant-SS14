@@ -180,6 +180,11 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
         var planetaryMap = IsOnPlanetaryMap(uid);
 
+        // Planet generation can temporarily make round-start grids static. Restore enabled shuttles
+        // when the planetary surface is ready so they remain piloted grids after collision refresh.
+        if (planetaryMap && TryComp(uid, out ShuttleComponent? shuttle) && shuttle.Enabled)
+            Enable(uid, shuttle: shuttle);
+
         foreach (var (fixtureId, fixture) in fixtures.Fixtures)
         {
             var layer = planetaryMap ? (int) CollisionGroup.PlanetaryShuttle : (int) CollisionGroup.MapGrid;
