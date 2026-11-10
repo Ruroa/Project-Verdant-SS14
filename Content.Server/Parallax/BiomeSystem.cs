@@ -85,6 +85,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
     private readonly Dictionary<BiomeComponent,
         Dictionary<string, HashSet<Vector2i>>> _markerChunks = new();
     private readonly HashSet<EntityUid> _pendingDockClearanceMaps = new();
+    private readonly HashSet<EntityUid> _pendingPlanetaryShuttleRestores = new();
 
     public override void Initialize()
     {
@@ -166,6 +167,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 
         // Grids are frozen while reserving the initial biome footprint. Restore shuttles
         // that are configured as enabled once this setup pass is complete.
+        _pendingPlanetaryShuttleRestores.Add(uid);
         var shuttleQuery = EntityQueryEnumerator<ShuttleComponent, TransformComponent>();
         while (shuttleQuery.MoveNext(out var shuttle, out var shuttleComp, out var shuttleXform))
         {
@@ -359,6 +361,25 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
                 continue;
 
             ClearPlanetDockMarkers(mapUid, biome);
+        }
+
+        // Station post-init can change physics after biome map-init. Restore enabled
+        // round-start shuttles once more on the first update, after setup has finished.
+        foreach (var mapUid in _pendingPlanetaryShuttleRestores.ToArray())
+        {
+            _pendingPlanetaryShuttleRestores.Remove(mapUid);
+            if (Deleted(mapUid))
+                continue;
+
+            var mapId = Transform(mapUid).MapID;
+            var shuttles = EntityQueryEnumerator<ShuttleComponent, TransformComponent>();
+            while (shuttles.MoveNext(out var shuttle, out var shuttleComp, out var shuttleXform))
+            {
+                if (shuttle == mapUid || shuttleXform.MapID != mapId || !shuttleComp.Enabled)
+                    continue;
+
+                _shuttles.Enable(shuttle);
+            }
         }
 
         var biomes = AllEntityQuery<BiomeComponent>();
