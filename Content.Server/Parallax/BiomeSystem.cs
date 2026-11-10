@@ -17,6 +17,7 @@ using Content.Shared.Gravity;
 using Content.Shared.Light.Components;
 using Content.Shared.Maps;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Station.Components;
 using Content.Shared.Parallax.Biomes;
 using Content.Shared.Parallax.Biomes.Layers;
 using Content.Shared.Parallax.Biomes.Markers;
@@ -372,13 +373,51 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
                 continue;
 
             var mapId = Transform(mapUid).MapID;
+
+            // Station main grids share ShuttleComponent with movable grids, but must stay fixed.
+            // Station-linked shuttle grids (such as the Sec Cruiser) are smaller than the station grid.
+            var stationMainGrids = new HashSet<EntityUid>();
+            var stations = EntityQueryEnumerator<StationDataComponent>();
+            while (stations.MoveNext(out _, out var stationData))
+            {
+                var candidates = stationData.MainGrids.Count > 0 ? stationData.MainGrids : stationData.Grids;
+                EntityUid? largestGrid = null;
+                var largestArea = -1f;
+                foreach (var candidate in candidates)
+                {
+                    if (!TryComp<MapGridComponent>(candidate, out var candidateGrid) ||
+                        !TryComp<TransformComponent>(candidate, out var candidateXform) ||
+                        candidateXform.MapID != mapId)
+                    {
+                        continue;
+                    }
+
+                    var area = candidateGrid.LocalAABB.Area;
+                    if (area <= largestArea)
+                        continue;
+
+                    largestArea = area;
+                    largestGrid = candidate;
+                }
+
+                if (largestGrid is { } mainGrid)
+                    stationMainGrids.Add(mainGrid);
+            }
+
             var shuttles = EntityQueryEnumerator<ShuttleComponent, TransformComponent>();
             while (shuttles.MoveNext(out var shuttle, out var shuttleComp, out var shuttleXform))
             {
-                if (shuttle == mapUid || shuttleXform.MapID != mapId || !shuttleComp.Enabled)
+                if (shuttle == mapUid || shuttleXform.MapID != mapId)
                     continue;
 
-                _shuttles.Enable(shuttle);
+                if (stationMainGrids.Contains(shuttle))
+                {
+                    _shuttles.Disable(shuttle);
+                    continue;
+                }
+
+                if (shuttleComp.Enabled)
+                    _shuttles.Enable(shuttle);
             }
         }
 
