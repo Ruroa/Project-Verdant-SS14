@@ -10695,6 +10695,8 @@ entities:
       name: Sec-Cruiser VTS-01
     - type: Transform
       parent: 1
+    - type: BecomesStation
+      id: Horos
     - type: MapGrid
       chunks:
         5,0:
