@@ -168,8 +168,12 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         var shuttleQuery = EntityQueryEnumerator<ShuttleComponent, TransformComponent>();
         while (shuttleQuery.MoveNext(out var shuttle, out var shuttleComp, out var shuttleXform))
         {
-            if (shuttleXform.MapID == mapId && shuttleComp.Enabled)
+            if (shuttleXform.MapID == mapId &&
+                shuttleComp.Enabled &&
+                !HasComp<PlanetarySurfaceComponent>(shuttle))
+            {
                 _shuttles.Enable(shuttle);
+            }
         }
     }
 
