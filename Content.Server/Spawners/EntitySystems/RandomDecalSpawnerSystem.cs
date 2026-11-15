@@ -1,9 +1,12 @@
 using System.Numerics;
 using Content.Server.Decals;
+using Content.Server.Light.EntitySystems;
 using Content.Server.Spawners.Components;
+using Content.Shared.Light.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Random;
 
 namespace Content.Server.Spawners.EntitySystems;
@@ -11,6 +14,7 @@ namespace Content.Server.Spawners.EntitySystems;
 public sealed partial class RandomDecalSpawnerSystem : EntitySystem
 {
     [Dependency] private DecalSystem _decal = default!;
+    [Dependency] private RoofSystem _roof = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private IRobustRandom _random = default!;
@@ -25,6 +29,22 @@ public sealed partial class RandomDecalSpawnerSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, RandomDecalSpawnerComponent component, MapInitEvent args)
     {
+        if (component.RequireRoof)
+        {
+            // PV roof markers apply their tile flags on the next timer tick.
+            var deleteSpawner = component.DeleteSpawnerAfterSpawn;
+            Timer.Spawn(0.1f, () =>
+            {
+                if (TerminatingOrDeleted(uid) || !Exists(uid))
+                    return;
+
+                TrySpawn(uid);
+                if (deleteSpawner)
+                    QueueDel(uid);
+            });
+            return;
+        }
+
         TrySpawn(uid);
         if (component.DeleteSpawnerAfterSpawn)
             QueueDel(uid);
@@ -60,6 +80,10 @@ public sealed partial class RandomDecalSpawnerSystem : EntitySystem
         if (!TryComp<MapGridComponent>(xform.GridUid, out var grid))
             return false;
 
+        RoofComponent? roof = null;
+        if (comp.RequireRoof && !TryComp(xform.GridUid.Value, out roof))
+            return false;
+
         var addedDecals = new Dictionary<string, int>();
 
         for (var i = 0; i < comp.MaxDecals; i++)
@@ -72,6 +96,9 @@ public sealed partial class RandomDecalSpawnerSystem : EntitySystem
             var position = new EntityCoordinates(xform.GridUid.Value, localPos);
 
             var tileRef = _map.GetTileRef(xform.GridUid.Value, grid, position);
+
+            if (comp.RequireRoof && !_roof.IsRooved((xform.GridUid.Value, grid, roof!), tileRef.GridIndices))
+                continue;
 
             if (tileWhitelist.Count > 0)
             {
