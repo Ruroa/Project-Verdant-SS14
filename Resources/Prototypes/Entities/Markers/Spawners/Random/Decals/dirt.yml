@@ -4,6 +4,7 @@
   abstract: true
   components:
   - type: RandomDecalSpawner
+    requireRoof: true
     decals:
     - DirtLight
     - DirtMedium
