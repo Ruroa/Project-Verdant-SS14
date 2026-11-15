@@ -63,6 +63,7 @@
         - sprite: Objects/Consumable/Food/snacks.rsi
           state: pistachio-trash
     - type: EntityTableSpawner
+      requireRoof: true
       offset: 0.2
       table: !type:NestedSelector
         tableId: GenericTrashItems
@@ -78,6 +79,7 @@
     mode: AlignTileAny
   components:
   - type: EntityTableSpawner
+    requireRoof: true
     offset: 0.2
     table: !type:NestedSelector
       tableId: GenericTrashItems
@@ -93,6 +95,7 @@
     - sprite: Objects/Specific/Hydroponics/banana.rsi
       state: peel
   - type: EntityTableSpawner
+    requireRoof: true
     table: !type:NestedSelector
       tableId: AllBananaPeelsTable
       prob: 0.9
