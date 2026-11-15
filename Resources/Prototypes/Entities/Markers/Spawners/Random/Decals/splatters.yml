@@ -4,6 +4,7 @@
   suffix: Blood Splatters, Footprints
   components:
   - type: RandomDecalSpawner
+    requireRoof: true
     decals:
     - footprint
     - splatter
@@ -22,6 +23,7 @@
   suffix: Graffiti
   components:
   - type: RandomDecalSpawner
+    requireRoof: true
     decals:
     - Blasto
     - Clandestine
