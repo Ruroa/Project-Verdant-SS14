@@ -20,6 +20,12 @@ public sealed partial class EntityTableSpawnerComponent : Component
     public float Offset = 0.2f;
 
     /// <summary>
+    /// Only spawn the table contents when this marker is on a roofed tile.
+    /// </summary>
+    [DataField]
+    public bool RequireRoof = false;
+
+    /// <summary>
     /// A variable meaning whether the spawn will
     /// be able to be used again or whether
     /// it will be destroyed after the first use
