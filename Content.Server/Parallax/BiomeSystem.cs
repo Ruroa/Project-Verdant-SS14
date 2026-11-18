@@ -392,7 +392,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
                         continue;
                     }
 
-                    var area = candidateGrid.LocalAABB.Area;
+                    var area = Box2.Area(candidateGrid.LocalAABB);
                     if (area <= largestArea)
                         continue;
 
