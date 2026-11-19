@@ -3,6 +3,11 @@
   parent: BaseWeaponSubMachineGun
   id: BasePVSMG
   components:
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -109,6 +114,10 @@
       - state: wielded-inhand-left
       right:
       - state: wielded-inhand-right
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: true
   - type: ItemSlots
     slots:
       gun_magazine:
