@@ -3,6 +3,11 @@
   parent: BaseWeaponPistol
   id: BasePVPistol
   components:
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
   - type: ItemSlots
     slots:
       gun_magazine:
