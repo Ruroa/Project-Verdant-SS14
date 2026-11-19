@@ -285,9 +285,9 @@
     - id: WeaponRifleM4
       amount: 5
     - id: MagazinePV556
-      amount: 5
+      amount: 15
     - id: PVAmmoBox556
-      amount: 4
+      amount: 5
     - id: WeaponPistolFL57
     - id: MagazinePV57
     - id: WeaponPistolLA2
@@ -312,9 +312,9 @@
     - id: WeaponSMGMP5
       amount: 5
     - id: MagazinePVMP5
-      amount: 5
+      amount: 15
     - id: PVAmmoBox9x19
-      amount: 4
+      amount: 5
     - id: WeaponPistolM1984
       amount: 4
     - id: MagazinePV45ACP
@@ -339,7 +339,10 @@
       amount: 2
     - id: WeaponShotgunM890
     - id: BoxLethalshot
-      amount: 4
+      amount: 2
+    - id: BoxShotgunSlug
+    - id: BoxBeanbag
+    - id: BoxShotgunIncendiary
 - type: entity
   parent: [PVGunSafeShotgunGrid, BaseSecurityContraband]
   id: GunSafeShotgunKammerer
@@ -360,7 +363,10 @@
       amount: 2
     - id: WeaponShotgunM890
     - id: BoxLethalshot
-      amount: 4
+      amount: 2
+    - id: BoxShotgunSlug
+    - id: BoxBeanbag
+    - id: BoxShotgunIncendiary
 - type: entityTable
   id: FillPVGunSafeShotguns
   table: !type:AllSelector
@@ -372,7 +378,10 @@
       amount: 2
     - id: WeaponShotgunM890
     - id: BoxLethalshot
-      amount: 4
+      amount: 2
+    - id: BoxShotgunSlug
+    - id: BoxBeanbag
+    - id: BoxShotgunIncendiary
 
 - type: entity
   parent: [PVGunSafeDMRGrid, BaseSecurityContraband]
@@ -391,9 +400,9 @@
     - id: WeaponRifleSR32
       amount: 5
     - id: MagazinePV762x51
-      amount: 5
+      amount: 15
     - id: PVAmmoBox762x51
-      amount: 4
+      amount: 5
 
 - type: entity
   parent: [PVGunSafeDTMDRGrid, BaseSecurityContraband]
@@ -412,13 +421,13 @@
     - id: WeaponRifleDTMDR556
       amount: 2
     - id: MagazinePV556
-      amount: 2
+      amount: 6
     - id: PVAmmoBox556
       amount: 2
     - id: WeaponRifleDTMDR762
       amount: 2
     - id: MagazinePV762x51
-      amount: 2
+      amount: 6
     - id: PVAmmoBox762x51
       amount: 2
 
