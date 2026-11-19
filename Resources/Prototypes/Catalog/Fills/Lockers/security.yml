@@ -222,175 +222,221 @@
       prob: 0.5
 
 - type: entity
-  parent: [GunSafeBaseSecuritySL, BaseSecurityContraband] #SL parenting
+  parent: [PVGunSafeDisablerGrid, BaseSecurityContraband]
   id: GunSafeDisabler
-  name: disabler safe
+  name: disabler, taser, and flash safe
   components:
-  #Starlight Start
   - type: EntityStorageVisuals
     stateDoorClosed: disabler_gunsafe_doors
-  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:NestedSelector
+      storagebase: !type:NestedSelector
         tableId: FillGunSafeDisabler
-
 - type: entityTable
   id: FillGunSafeDisabler
   table: !type:AllSelector
     children:
     - id: WeaponDisabler
       amount: 5
-
+    - id: WeaponTaser
+      amount: 5
+    - id: Flash
+      amount: 5
 - type: entity
-  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
+  parent: [PVGunSafePistolGrid, BaseSecurityContraband]
   id: GunSafePistolMk58
   name: pistol safe
   components:
-  #Starlight Start
   - type: EntityStorageVisuals
     stateDoorClosed: pistol_gunsafe_doors
-  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:NestedSelector
+      storagebase: !type:NestedSelector
         tableId: FillGunSafePistolMk58
-
 - type: entityTable
   id: FillGunSafePistolMk58
   table: !type:AllSelector
     children:
-    - id: BoxFiringPinPistol # Starlight, firing pins
-    - id: WeaponPistolMk58
+    - id: WeaponPistolFL57
       amount: 2
-    - id: WeaponPistolEnforcer
-      amount: 1
-    - id: MagazinePistolSP
-      amount: 4
-    - id: MagazinePistolHP
+    - id: MagazinePV57
       amount: 2
-    - id: MagazinePistolFMJ
+    - id: WeaponPistolLA2
       amount: 2
-
+    - id: MagazinePV9x19
+      amount: 2
+    - id: WeaponPistolM1984
+      amount: 2
+    - id: MagazinePV45ACP
+      amount: 2
+    - id: WeaponPistolM1911
+      amount: 2
+    - id: MagazinePV45ACP
+      amount: 2
 - type: entity
-  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
+  parent: [PVGunSafeM4Grid, BaseSecurityContraband]
   id: GunSafeRifleLecter
-  name: rifle safe
+  name: M4 rifle safe
   components:
-  #Starlight Start
   - type: EntityStorageVisuals
     stateDoorClosed: lecter_gunsafe_doors
-  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:NestedSelector
+      storagebase: !type:NestedSelector
         tableId: FillGunSafeRifleLecter
-
 - type: entityTable
   id: FillGunSafeRifleLecter
   table: !type:AllSelector
-# Starlight-start
     children:
-    - id: BoxFiringPin # Starlight, firing pins
-    - id: WeaponRifleLecter
-      amount: 2
-    - id: WeaponRifleLeikha
-      amount: 1
-    - id: WeaponRifleLawbringer
-      amount: 1
-    - id: MagazinePV762x51
-      amount: 2
-    - id: MagazineRifleHP
+    - id: WeaponRifleM4
+      amount: 5
+    - id: MagazinePV556
+      amount: 5
+    - id: PVAmmoBox556
       amount: 4
-    - id: MagazineRifleSP
-      amount: 4
-    - id: MagazineLightRifleSP
-      amount: 1
-    - id: MagazineLightRifleHP
-      amount: 1
-# Starlight-end
-
+    - id: WeaponPistolFL57
+    - id: MagazinePV57
+    - id: WeaponPistolLA2
+    - id: MagazinePV9x19
+    - id: WeaponPistolM1984
+    - id: MagazinePV45ACP
+    - id: WeaponPistolM1911
+    - id: MagazinePV45ACP
 - type: entity
-  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
+  parent: [PVGunSafeSMGGrid, BaseSecurityContraband]
   id: GunSafeSubMachineGunDrozd
-  name: smg safe
+  name: MP5 submachine gun safe
   components:
-  #Starlight Start
   - type: EntityStorageVisuals
     stateDoorClosed: drozd_gunsafe_doors
-  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:NestedSelector
+      storagebase: !type:NestedSelector
         tableId: FillGunSafeSubMachineGunDrozd
-
 - type: entityTable
   id: FillGunSafeSubMachineGunDrozd
   table: !type:AllSelector
     children:
-    - id: BoxFiringPinPistol # Starlight, firing pins
-    - id: WeaponSubMachineGunDrozd
-      amount: 2 # Starlight
-    - id: WeaponSubMachineGunSP91RC
-      amount: 2
-    - id: MagazinePistolSubMachineGunSP
-      amount: 5 # Starlight
-
+    - id: WeaponSMGMP5
+      amount: 5
+    - id: MagazinePVMP5
+      amount: 5
+    - id: PVAmmoBox9x19
+      amount: 4
+    - id: WeaponPistolM1984
+      amount: 4
+    - id: MagazinePV45ACP
+      amount: 4
 - type: entity
-  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
+  parent: [PVGunSafeShotgunGrid, BaseSecurityContraband]
   id: GunSafeShotgunEnforcer
-  name: heavy shotgun safe
+  name: shotgun safe
   components:
-  #Starlight Start
   - type: EntityStorageVisuals
     stateDoorClosed: enforcer_gunsafe_doors
-  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:NestedSelector
-        tableId: FillGunSafeShotgunEnforcer
-
+      storagebase: !type:NestedSelector
+        tableId: FillPVGunSafeShotguns
 - type: entityTable
   id: FillGunSafeShotgunEnforcer
   table: !type:AllSelector
     children:
-    - id: BoxFiringPin # Starlight, firing pins
-    - id: SpeedLoaderMagnumBasic
-      amount: 2
+    - id: BoxFiringPin
     - id: WeaponShotgunEnforcer
       amount: 2
-    - id: WeaponShotgunRiot
-      amount: 1
+    - id: WeaponShotgunKammerer
+      amount: 2
+    - id: WeaponShotgunM890
     - id: BoxLethalshot
       amount: 4
-
 - type: entity
-  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
+  parent: [PVGunSafeShotgunGrid, BaseSecurityContraband]
   id: GunSafeShotgunKammerer
   name: shotgun safe
   components:
-  #Starlight Start
   - type: EntityStorageVisuals
     stateDoorClosed: kammerer_gunsafe_doors
-  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:NestedSelector
-        tableId: FillGunSafeShotgunKammerer
-
+      storagebase: !type:NestedSelector
+        tableId: FillPVGunSafeShotguns
 - type: entityTable
   id: FillGunSafeShotgunKammerer
   table: !type:AllSelector
     children:
-    - id: BoxFiringPin # Starlight, firing pins
-    - id: SpeedLoaderMagnumBasic
+    - id: BoxFiringPin
+    - id: WeaponShotgunEnforcer
       amount: 2
     - id: WeaponShotgunKammerer
       amount: 2
-    - id: WeaponShotgunRiot
-      amount: 1
+    - id: WeaponShotgunM890
     - id: BoxLethalshot
       amount: 4
+- type: entityTable
+  id: FillPVGunSafeShotguns
+  table: !type:AllSelector
+    children:
+    - id: BoxFiringPin
+    - id: WeaponShotgunEnforcer
+      amount: 2
+    - id: WeaponShotgunKammerer
+      amount: 2
+    - id: WeaponShotgunM890
+    - id: BoxLethalshot
+      amount: 4
+
+- type: entity
+  parent: [PVGunSafeDMRGrid, BaseSecurityContraband]
+  id: GunSafePVDMR
+  name: SR32 DMR safe
+  components:
+  - type: EntityStorageVisuals
+    stateDoorClosed: dmr_gunsafe_doors
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: FillGunSafePVDMR
+
+- type: entityTable
+  id: FillGunSafePVDMR
+  table: !type:AllSelector
+    children:
+    - id: WeaponRifleSR32
+      amount: 5
+    - id: MagazinePV762x51
+      amount: 5
+    - id: PVAmmoBox762x51
+      amount: 4
+
+- type: entity
+  parent: [PVGunSafeDTMDRGrid, BaseSecurityContraband]
+  id: GunSafePVDTMDR
+  name: DT MDR safe
+  components:
+  - type: EntityStorageVisuals
+    stateDoorClosed: rifle_gunsafe_doors
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: FillGunSafePVDTMDR
+
+- type: entityTable
+  id: FillGunSafePVDTMDR
+  table: !type:AllSelector
+    children:
+    - id: WeaponRifleDTMDR556
+      amount: 2
+    - id: MagazinePV556
+      amount: 2
+    - id: PVAmmoBox556
+      amount: 2
+    - id: WeaponRifleDTMDR762
+      amount: 2
+    - id: MagazinePV762x51
+      amount: 2
+    - id: PVAmmoBox762x51
+      amount: 2
 
 - type: entity
   id: GunSafeSubMachineGunWt550
@@ -418,27 +464,19 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
+  parent: [PVGunSafeLaserGrid, BaseSecurityContraband]
   id: GunSafeLaserCarbine
-  name: laser safe
+  name: laser rifle safe
   components:
-  #Starlight Start
   - type: EntityStorageVisuals
     stateDoorClosed: laser_gunsafe_doors
-  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:NestedSelector
+      storagebase: !type:NestedSelector
         tableId: FillGunSafeLaserCarbine
-
 - type: entityTable
   id: FillGunSafeLaserCarbine
   table: !type:AllSelector
     children:
-    - id: BoxFiringPinLaser # Starlight, firing pins
     - id: WeaponLaserCarbine
-      amount: 3
-    - id: WeaponLr30
-      amount: 1
-    - id: MagazineBatteryLr30
-      amount: 2
+      amount: 10
