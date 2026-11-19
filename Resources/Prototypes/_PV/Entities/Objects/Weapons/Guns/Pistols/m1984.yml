@@ -11,5 +11,10 @@
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Pistols/m1984.rsi
