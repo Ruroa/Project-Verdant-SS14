@@ -1,0 +1,329 @@
+- type: entity
+  id: PVGunSafeStorageBase
+  abstract: true
+  parent: BaseStructure
+  name: security gun safe
+  components:
+  - type: Sprite
+    sprite: _PV/Structures/Storage/gunsafe.rsi
+    noRot: true
+    layers:
+    - state: gunsafe
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: gunsafe
+      visible: false
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: gunsafe
+    stateBaseOpen: gunsafe_open
+  - type: LockVisuals
+    stateLocked: locked
+  - type: Lock
+    unlockOnClick: false
+    useAccess: true
+    autoUnlock: false
+    autoLock: false
+    popupMessage: false
+  - type: LockedStorage
+  - type: AccessReader
+    access: [["Armory"]]
+  - type: Storage
+    maxItemSize: Ginormous
+    openOnActivate: true
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: Weldable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
+  - type: InteractionOutline
+  - type: StaticPrice
+    price: 660
+
+- type: entity
+  id: PVGunSafeSecurityStorageBase
+  abstract: true
+  parent: PVGunSafeStorageBase
+  components:
+  - type: AccessReader
+    access: [["Security"]]
+- type: entity
+  id: PVGunSafeM4Grid
+  abstract: true
+  parent: PVGunSafeStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 1,1,6,2
+    - 9,1,11,2
+    - 14,1,19,2
+    - 14,4,15,4
+    - 1,4,6,5
+    - 9,4,11,5
+    - 17,4,19,5
+    - 14,5,14,5
+    - 14,7,15,7
+    - 1,7,6,8
+    - 9,7,11,8
+    - 17,7,19,8
+    - 14,8,14,8
+    - 14,10,15,10
+    - 1,10,6,11
+    - 9,10,11,11
+    - 17,10,19,11
+    - 14,11,14,11
+    - 14,13,15,13
+    - 1,13,6,14
+    - 9,13,11,14
+    - 17,13,19,14
+    - 14,14,14,14
+    maxItemSize: Ginormous
+- type: entity
+  id: PVGunSafeSMGGrid
+  abstract: true
+  parent: PVGunSafeStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 10,1,15,2
+    - 1,1,3,2
+    - 5,1,7,2
+    - 10,4,11,4
+    - 13,4,15,5
+    - 1,4,3,5
+    - 5,4,7,5
+    - 10,5,10,5
+    - 10,7,11,7
+    - 13,7,15,8
+    - 1,7,3,8
+    - 5,7,7,8
+    - 10,8,10,8
+    - 10,10,11,10
+    - 13,10,15,11
+    - 1,10,3,11
+    - 5,10,7,11
+    - 10,11,10,11
+    - 10,13,11,13
+    - 13,13,15,14
+    - 1,13,3,14
+    - 5,13,7,14
+    - 10,14,10,14
+    maxItemSize: Ginormous
+- type: entity
+  id: PVGunSafeShotgunGrid
+  abstract: true
+  parent: PVGunSafeStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 1,2,5,2
+    - 11,2,12,3
+    - 8,2,9,3
+    - 14,2,16,3
+    - 1,4,5,4
+    - 11,5,12,6
+    - 8,5,9,6
+    - 14,5,16,6
+    - 1,6,5,6
+    - 1,8,5,8
+    - 11,8,12,9
+    - 8,8,9,9
+    - 14,8,16,9
+    - 1,10,5,10
+    - 11,11,12,12
+    - 8,11,9,12
+    - 14,11,16,12
+    - 1,12,5,12
+    - 1,14,5,14
+    - 11,14,12,15
+    - 8,14,9,15
+    - 14,14,16,15
+    maxItemSize: Ginormous
+- type: entity
+  id: PVGunSafeDMRGrid
+  abstract: true
+  parent: PVGunSafeStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 9,1,11,2
+    - 1,1,7,2
+    - 14,1,19,2
+    - 14,4,15,4
+    - 9,4,11,5
+    - 1,4,7,5
+    - 17,4,19,5
+    - 14,5,14,5
+    - 14,7,15,7
+    - 9,7,11,8
+    - 1,7,7,8
+    - 17,7,19,8
+    - 14,8,14,8
+    - 14,10,15,10
+    - 9,10,11,11
+    - 1,10,7,11
+    - 17,10,19,11
+    - 14,11,14,11
+    - 14,13,15,13
+    - 9,13,11,14
+    - 1,13,7,14
+    - 17,13,19,14
+    - 14,14,14,14
+    maxItemSize: Ginormous
+- type: entity
+  id: PVGunSafePistolGrid
+  abstract: true
+  parent: PVGunSafeStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 8,1,9,1
+    - 1,1,2,1
+    - 4,1,6,2
+    - 11,1,13,2
+    - 8,2,8,2
+    - 1,2,1,2
+    - 8,4,9,4
+    - 1,4,2,4
+    - 4,4,6,5
+    - 11,4,13,5
+    - 8,5,8,5
+    - 1,5,1,5
+    - 8,7,9,7
+    - 1,7,2,7
+    - 4,7,6,8
+    - 11,7,13,8
+    - 8,8,8,8
+    - 1,8,1,8
+    - 8,10,9,10
+    - 1,10,2,10
+    - 4,10,6,11
+    - 11,10,13,11
+    - 8,11,8,11
+    - 1,11,1,11
+    - 8,13,9,13
+    - 1,13,2,13
+    - 4,13,6,14
+    - 11,13,13,14
+    - 8,14,8,14
+    - 1,14,1,14
+    maxItemSize: Ginormous
+- type: entity
+  id: PVGunSafeDisablerGrid
+  abstract: true
+  parent: PVGunSafeSecurityStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 4,1,5,1
+    - 1,1,2,1
+    - 8,1,11,2
+    - 4,2,4,2
+    - 1,2,1,2
+    - 4,4,5,4
+    - 1,4,2,4
+    - 8,4,11,5
+    - 4,5,4,5
+    - 1,5,1,5
+    - 4,7,5,7
+    - 1,7,2,7
+    - 8,7,11,8
+    - 4,8,4,8
+    - 1,8,1,8
+    - 4,10,5,10
+    - 1,10,2,10
+    - 8,10,11,11
+    - 4,11,4,11
+    - 1,11,1,11
+    - 4,13,5,13
+    - 1,13,2,13
+    - 8,13,11,14
+    - 4,14,4,14
+    - 1,14,1,14
+    maxItemSize: Ginormous
+- type: entity
+  id: PVGunSafeLaserGrid
+  abstract: true
+  parent: PVGunSafeStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 7,1,10,2
+    - 1,1,4,2
+    - 7,4,10,5
+    - 1,4,4,5
+    - 7,7,10,8
+    - 1,7,4,8
+    - 7,10,10,11
+    - 1,10,4,11
+    - 7,13,10,14
+    - 1,13,4,14
+    maxItemSize: Ginormous
+- type: entity
+  id: PVGunSafeDTMDRGrid
+  abstract: true
+  parent: PVGunSafeStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 1,1,6,2
+    - 8,1,10,2
+    - 13,1,18,2
+    - 13,4,14,4
+    - 1,4,6,5
+    - 8,4,10,5
+    - 16,4,18,5
+    - 13,5,13,5
+    - 13,7,14,7
+    - 1,7,6,8
+    - 8,7,10,8
+    - 16,7,18,8
+    - 13,8,13,8
+    - 13,10,14,10
+    - 1,10,6,11
+    - 8,10,10,11
+    - 16,10,18,11
+    - 13,11,13,11
+    - 13,13,14,13
+    - 1,13,6,14
+    - 8,13,10,14
+    - 16,13,18,14
+    - 13,14,13,14
+    maxItemSize: Ginormous

@@ -44,6 +44,8 @@
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Rifles/DTMDR556.rsi
   - type: Item
+    shape:
+    - 0,0,5,1
     inhandVisuals:
       left:
       - state: inhand-left
@@ -147,6 +149,8 @@
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Rifles/DTMDR762.rsi
   - type: Item
+    shape:
+    - 0,0,5,1
     inhandVisuals:
       left:
       - state: inhand-left
@@ -177,6 +181,9 @@
   id: WeaponRifleSR32
   description: A semiautomatic 7.62x51mm designated marksman rifle.
   components:
+  - type: Item
+    shape:
+    - 0,0,6,1
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Dmr/SR32.rsi
     scale: 0.75, 0.75
