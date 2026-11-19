@@ -3,6 +3,11 @@
   parent: BaseWeaponRifle
   id: BasePVRifle556
   components:
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -71,6 +76,11 @@
   components:
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Rifles/m4.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Rifles/m4.rsi
 
@@ -82,6 +92,11 @@
   components:
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Rifles/m16.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _PV/Objects/Weapons/Guns/Rifles/m16.rsi
 
@@ -90,6 +105,11 @@
   parent: BaseWeaponRifle
   id: BasePVRifle762x51
   components:
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
   - type: ItemSlots
     slots:
       gun_magazine:
