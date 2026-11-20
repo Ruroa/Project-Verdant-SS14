@@ -357,7 +357,7 @@
     - id: BoxLethalshot
       amount: 3
     - id: BoxBeanbag
-      amount: 3
+      amount: 2
 - type: entity
   parent: [PVGunSafeDMRGrid, BaseSecurityContraband]
   id: GunSafePVDMR
