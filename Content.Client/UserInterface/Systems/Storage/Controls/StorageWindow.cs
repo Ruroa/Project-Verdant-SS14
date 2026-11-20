@@ -382,7 +382,13 @@ public sealed partial class StorageWindow : BaseWindow
 
     private int GetGridIndex(ItemGridPiece piece)
     {
-        return piece.Location.Position.X + piece.Location.Position.Y * _pieceGrid.Columns;
+        if (StorageEntity is not { } storageEntity ||
+            !_entity.TryGetComponent<StorageComponent>(storageEntity, out var storage))
+            return 0;
+
+        var gridOrigin = storage.Grid.GetBoundingBox().BottomLeft;
+        var position = piece.Location.Position - gridOrigin;
+        return position.X + position.Y * _pieceGrid.Columns;
     }
 
     public void FlagDirty()
