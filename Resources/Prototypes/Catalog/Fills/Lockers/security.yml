@@ -220,208 +220,175 @@
     - id: Screwdriver
     - id: Multitool
       prob: 0.5
-
 - type: entity
-  parent: [PVGunSafeDisablerGrid, BaseSecurityContraband]
+  parent: [GunSafeBaseSecuritySL, BaseSecurityContraband] #SL parenting
   id: GunSafeDisabler
-  name: disabler, taser, and flash safe
+  name: disabler safe
   components:
+  #Starlight Start
+  - type: EntityStorageVisuals
+    stateDoorClosed: disabler_gunsafe_doors
+  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      storagebase: !type:NestedSelector
+      entity_storage: !type:NestedSelector
         tableId: FillGunSafeDisabler
+
 - type: entityTable
   id: FillGunSafeDisabler
   table: !type:AllSelector
     children:
     - id: WeaponDisabler
       amount: 5
-    - id: WeaponTaser
-      amount: 5
-    - id: Flash
-      amount: 5
+
 - type: entity
-  parent: [PVGunSafePistolGrid, BaseSecurityContraband]
+  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
   id: GunSafePistolMk58
   name: pistol safe
   components:
+  #Starlight Start
+  - type: EntityStorageVisuals
+    stateDoorClosed: pistol_gunsafe_doors
+  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      storagebase: !type:NestedSelector
+      entity_storage: !type:NestedSelector
         tableId: FillGunSafePistolMk58
+
 - type: entityTable
   id: FillGunSafePistolMk58
   table: !type:AllSelector
     children:
-    - id: WeaponPistolFL57
+    - id: BoxFiringPinPistol # Starlight, firing pins
+    - id: WeaponPistolMk58
       amount: 2
-    - id: MagazinePV57Rubber
-      amount: 2
-    - id: MagazinePV57
+    - id: WeaponPistolEnforcer
+      amount: 1
+    - id: MagazinePistolSP
       amount: 4
-    - id: WeaponPistolLA2
+    - id: MagazinePistolHP
       amount: 2
-    - id: MagazinePV9x19Rubber
+    - id: MagazinePistolFMJ
       amount: 2
-    - id: MagazinePV9x19
-      amount: 4
-    - id: WeaponPistolM1984
-      amount: 2
-    - id: MagazinePV45ACPRubber
-      amount: 2
-    - id: MagazinePV45ACP
-      amount: 4
-    - id: WeaponPistolM1911
-      amount: 2
-    - id: MagazinePV45ACPRubber
-      amount: 2
-    - id: MagazinePV45ACP
-      amount: 4
+
 - type: entity
-  parent: [PVGunSafeM4Grid, BaseSecurityContraband]
+  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
   id: GunSafeRifleLecter
-  name: M4 rifle safe
+  name: rifle safe
   components:
+  #Starlight Start
+  - type: EntityStorageVisuals
+    stateDoorClosed: lecter_gunsafe_doors
+  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      storagebase: !type:NestedSelector
+      entity_storage: !type:NestedSelector
         tableId: FillGunSafeRifleLecter
+
 - type: entityTable
   id: FillGunSafeRifleLecter
   table: !type:AllSelector
+# Starlight-start
     children:
-    - id: WeaponRifleM4
-      amount: 5
-    - id: MagazinePV556Rubber
-      amount: 5
-    - id: MagazinePV556
-      amount: 10
-    - id: PVAmmoBox556
-      amount: 6
-    - id: WeaponPistolLA2
+    - id: BoxFiringPin # Starlight, firing pins
+    - id: WeaponRifleLecter
+      amount: 2
+    - id: WeaponRifleLeikha
+      amount: 1
+    - id: WeaponRifleLawbringer
+      amount: 1
+    - id: MagazineRifleHP
       amount: 4
-    - id: MagazinePV9x19Rubber
+    - id: MagazineRifleSP
       amount: 4
-    - id: MagazinePV9x19
-      amount: 8
+    - id: MagazineLightRifleSP
+      amount: 1
+    - id: MagazineLightRifleHP
+      amount: 1
+# Starlight-end
+
 - type: entity
-  parent: [PVGunSafeSMGGrid, BaseSecurityContraband]
+  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
   id: GunSafeSubMachineGunDrozd
-  name: MP5 submachine gun safe
+  name: smg safe
   components:
+  #Starlight Start
+  - type: EntityStorageVisuals
+    stateDoorClosed: drozd_gunsafe_doors
+  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      storagebase: !type:NestedSelector
+      entity_storage: !type:NestedSelector
         tableId: FillGunSafeSubMachineGunDrozd
+
 - type: entityTable
   id: FillGunSafeSubMachineGunDrozd
   table: !type:AllSelector
     children:
-    - id: WeaponSMGMP5
-      amount: 5
-    - id: MagazinePVMP5Rubber
-      amount: 5
-    - id: MagazinePVMP5
-      amount: 10
-    - id: PVAmmoBox9x19
-      amount: 6
-    - id: WeaponPistolM1984
-      amount: 4
-    - id: MagazinePV45ACPRubber
-      amount: 4
-    - id: MagazinePV45ACP
-      amount: 8
+    - id: BoxFiringPinPistol # Starlight, firing pins
+    - id: WeaponSubMachineGunDrozd
+      amount: 2 # Starlight
+    - id: WeaponSubMachineGunSP91RC
+      amount: 2
+    - id: MagazinePistolSubMachineGunSP
+      amount: 5 # Starlight
+
 - type: entity
-  parent: [PVGunSafeShotgunGrid, BaseSecurityContraband]
+  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
   id: GunSafeShotgunEnforcer
-  name: shotgun safe
+  name: heavy shotgun safe
   components:
+  #Starlight Start
+  - type: EntityStorageVisuals
+    stateDoorClosed: enforcer_gunsafe_doors
+  #Starlight End
   - type: EntityTableContainerFill
     containers:
-      storagebase: !type:NestedSelector
-        tableId: FillPVGunSafeShotguns
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafeShotgunEnforcer
+
 - type: entityTable
-  id: FillPVGunSafeShotguns
+  id: FillGunSafeShotgunEnforcer
   table: !type:AllSelector
     children:
+    - id: BoxFiringPin # Starlight, firing pins
+    - id: SpeedLoaderMagnumBasic
+      amount: 2
     - id: WeaponShotgunEnforcer
+      amount: 2
+    - id: WeaponShotgunRiot
+      amount: 1
+    - id: BoxLethalshot
+      amount: 4
+
+- type: entity
+  parent: [GunSafeBaseArmorySL, BaseSecurityContraband] #SL parenting
+  id: GunSafeShotgunKammerer
+  name: shotgun safe
+  components:
+  #Starlight Start
+  - type: EntityStorageVisuals
+    stateDoorClosed: kammerer_gunsafe_doors
+  #Starlight End
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafeShotgunKammerer
+
+- type: entityTable
+  id: FillGunSafeShotgunKammerer
+  table: !type:AllSelector
+    children:
+    - id: BoxFiringPin # Starlight, firing pins
+    - id: SpeedLoaderMagnumBasic
       amount: 2
     - id: WeaponShotgunKammerer
       amount: 2
-    - id: WeaponShotgunM890
-      amount: 2
-    - id: SpeedLoaderMagnumBasic
-      amount: 10
-    - id: SpeedLoaderShotgunBeanbag
-      amount: 10
+    - id: WeaponShotgunRiot
+      amount: 1
     - id: BoxLethalshot
-      amount: 3
-    - id: BoxBeanbag
-      amount: 2
-- type: entity
-  parent: [PVGunSafeDMRGrid, BaseSecurityContraband]
-  id: GunSafePVDMR
-  name: SR32 DMR safe
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:NestedSelector
-        tableId: FillGunSafePVDMR
+      amount: 4
 
-- type: entityTable
-  id: FillGunSafePVDMR
-  table: !type:AllSelector
-    children:
-    - id: WeaponRifleSR32
-      amount: 5
-    - id: MagazinePV762x51Rubber
-      amount: 5
-    - id: MagazinePV762x51
-      amount: 10
-    - id: PVAmmoBox762x51
-      amount: 6
-    - id: WeaponPistolFL57
-      amount: 4
-    - id: MagazinePV57Rubber
-      amount: 4
-    - id: MagazinePV57
-      amount: 8
-- type: entity
-  parent: [PVGunSafeDTMDRGrid, BaseSecurityContraband]
-  id: GunSafePVDTMDR
-  name: DT MDR safe
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:NestedSelector
-        tableId: FillGunSafePVDTMDR
-
-- type: entityTable
-  id: FillGunSafePVDTMDR
-  table: !type:AllSelector
-    children:
-    - id: WeaponRifleDTMDR556
-      amount: 2
-    - id: MagazinePV556Rubber
-      amount: 2
-    - id: MagazinePV556
-      amount: 4
-    - id: PVAmmoBox556
-      amount: 3
-    - id: WeaponRifleDTMDR762
-      amount: 2
-    - id: MagazinePV762x51Rubber
-      amount: 2
-    - id: MagazinePV762x51
-      amount: 4
-    - id: PVAmmoBox762x51
-      amount: 3
-    - id: WeaponPistolM1984
-      amount: 4
-    - id: MagazinePV45ACPRubber
-      amount: 4
-    - id: MagazinePV45ACP
-      amount: 8
 - type: entity
   id: GunSafeSubMachineGunWt550
   suffix: Wt550

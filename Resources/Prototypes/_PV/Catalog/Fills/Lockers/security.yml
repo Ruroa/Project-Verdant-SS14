@@ -1,0 +1,203 @@
+# PV custom armory safe loadouts. These use their own prototypes so the standard safes remain available.
+
+- type: entity
+  parent: [PVGunSafePVDisablerGrid, BaseSecurityContraband]
+  id: GunSafePVDisabler
+  name: disabler, taser, and flash safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: FillGunSafePVDisabler
+- type: entityTable
+  id: FillGunSafePVDisabler
+  table: !type:AllSelector
+    children:
+    - id: WeaponDisabler
+      amount: 5
+    - id: WeaponTaser
+      amount: 5
+    - id: Flash
+      amount: 5
+- type: entity
+  parent: [PVGunSafePistolGrid, BaseSecurityContraband]
+  id: GunSafePVPistol
+  name: pistol safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: FillGunSafePVPistol
+- type: entityTable
+  id: FillGunSafePVPistol
+  table: !type:AllSelector
+    children:
+    - id: WeaponPistolFL57
+      amount: 2
+    - id: MagazinePV57Rubber
+      amount: 2
+    - id: MagazinePV57
+      amount: 4
+    - id: WeaponPistolLA2
+      amount: 2
+    - id: MagazinePV9x19Rubber
+      amount: 2
+    - id: MagazinePV9x19
+      amount: 4
+    - id: WeaponPistolM1984
+      amount: 2
+    - id: MagazinePV45ACPRubber
+      amount: 2
+    - id: MagazinePV45ACP
+      amount: 4
+    - id: WeaponPistolM1911
+      amount: 2
+    - id: MagazinePV45ACPRubber
+      amount: 2
+    - id: MagazinePV45ACP
+      amount: 4
+- type: entity
+  parent: [PVGunSafeM4Grid, BaseSecurityContraband]
+  id: GunSafePVM4
+  name: M4 rifle safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: FillGunSafePVM4
+- type: entityTable
+  id: FillGunSafePVM4
+  table: !type:AllSelector
+    children:
+    - id: WeaponRifleM4
+      amount: 5
+    - id: MagazinePV556Rubber
+      amount: 5
+    - id: MagazinePV556
+      amount: 10
+    - id: PVAmmoBox556
+      amount: 6
+    - id: WeaponPistolLA2
+      amount: 4
+    - id: MagazinePV9x19Rubber
+      amount: 4
+    - id: MagazinePV9x19
+      amount: 8
+- type: entity
+  parent: [PVGunSafeSMGGrid, BaseSecurityContraband]
+  id: GunSafePVMP5
+  name: MP5 submachine gun safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: FillGunSafePVMP5
+- type: entityTable
+  id: FillGunSafePVMP5
+  table: !type:AllSelector
+    children:
+    - id: WeaponSMGMP5
+      amount: 5
+    - id: MagazinePVMP5Rubber
+      amount: 5
+    - id: MagazinePVMP5
+      amount: 10
+    - id: PVAmmoBox9x19
+      amount: 6
+    - id: WeaponPistolM1984
+      amount: 4
+    - id: MagazinePV45ACPRubber
+      amount: 4
+    - id: MagazinePV45ACP
+      amount: 8
+- type: entity
+  parent: [PVGunSafeShotgunGrid, BaseSecurityContraband]
+  id: GunSafePVShotgun
+  name: shotgun safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: FillGunSafePVShotgun
+- type: entityTable
+  id: FillGunSafePVShotgun
+  table: !type:AllSelector
+    children:
+    - id: WeaponShotgunEnforcer
+      amount: 2
+    - id: WeaponShotgunKammerer
+      amount: 2
+    - id: WeaponShotgunM890
+      amount: 2
+    - id: SpeedLoaderMagnumBasic
+      amount: 10
+    - id: SpeedLoaderShotgunBeanbag
+      amount: 10
+    - id: BoxLethalshot
+      amount: 3
+    - id: BoxBeanbag
+      amount: 2
+- type: entity
+  parent: [PVGunSafeDMRGrid, BaseSecurityContraband]
+  id: GunSafePVDMR
+  name: SR32 DMR safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: FillGunSafePVDMR
+
+- type: entityTable
+  id: FillGunSafePVDMR
+  table: !type:AllSelector
+    children:
+    - id: WeaponRifleSR32
+      amount: 5
+    - id: MagazinePV762x51Rubber
+      amount: 5
+    - id: MagazinePV762x51
+      amount: 10
+    - id: PVAmmoBox762x51
+      amount: 6
+    - id: WeaponPistolFL57
+      amount: 4
+    - id: MagazinePV57Rubber
+      amount: 4
+    - id: MagazinePV57
+      amount: 8
+- type: entity
+  parent: [PVGunSafeDTMDRGrid, BaseSecurityContraband]
+  id: GunSafePVDTMDR
+  name: DT MDR safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: FillGunSafePVDTMDR
+
+- type: entityTable
+  id: FillGunSafePVDTMDR
+  table: !type:AllSelector
+    children:
+    - id: WeaponRifleDTMDR556
+      amount: 2
+    - id: MagazinePV556Rubber
+      amount: 2
+    - id: MagazinePV556
+      amount: 4
+    - id: PVAmmoBox556
+      amount: 3
+    - id: WeaponRifleDTMDR762
+      amount: 2
+    - id: MagazinePV762x51Rubber
+      amount: 2
+    - id: MagazinePV762x51
+      amount: 4
+    - id: PVAmmoBox762x51
+      amount: 3
+    - id: WeaponPistolM1984
+      amount: 4
+    - id: MagazinePV45ACPRubber
+      amount: 4
+    - id: MagazinePV45ACP
+      amount: 8
