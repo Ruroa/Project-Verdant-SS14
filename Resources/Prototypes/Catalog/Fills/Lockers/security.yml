@@ -339,7 +339,9 @@
       amount: 2
     - id: WeaponShotgunM890
     - id: BoxLethalshot
-      amount: 5
+      amount: 3
+    - id: BoxBeanbag
+      amount: 2
 - type: entity
   parent: [PVGunSafeShotgunGrid, BaseSecurityContraband]
   id: GunSafeShotgunKammerer
@@ -360,7 +362,9 @@
       amount: 2
     - id: WeaponShotgunM890
     - id: BoxLethalshot
-      amount: 5
+      amount: 3
+    - id: BoxBeanbag
+      amount: 2
 - type: entityTable
   id: FillPVGunSafeShotguns
   table: !type:AllSelector
@@ -372,7 +376,9 @@
       amount: 2
     - id: WeaponShotgunM890
     - id: BoxLethalshot
-      amount: 5
+      amount: 3
+    - id: BoxBeanbag
+      amount: 2
 
 - type: entity
   parent: [PVGunSafeDMRGrid, BaseSecurityContraband]
