@@ -145,28 +145,27 @@
         - position: 16, 1
         - position: 17, 1
         - position: 18, 1
-      "FL57":
-        - position: 14, 4
+        - position: 19, 1
       "LA2":
+        - position: 14, 4
         - position: 14, 7
-      "M1984 service pistol":
         - position: 14, 10
-      "m1911":
         - position: 14, 13
-      "pistol magazine (5.7x26mm rubber)":
-        - position: 17, 4
-      "pistol magazine (5.7x26mm)":
-        - position: 18, 4
       "pistol magazine (9x19mm rubber)":
+        - position: 17, 4
         - position: 17, 7
-      "pistol magazine (9x19mm)":
-        - position: 18, 7
-      "pistol magazine (.45 ACP rubber)":
         - position: 17, 10
         - position: 17, 13
-      "pistol magazine (.45 ACP)":
+      "pistol magazine (9x19mm)":
+        - position: 18, 4
+        - position: 19, 4
+        - position: 18, 7
+        - position: 19, 7
         - position: 18, 10
+        - position: 19, 10
         - position: 18, 13
+        - position: 19, 13
+
 - type: entity
   id: PVGunSafeSMGGrid
   abstract: true
@@ -228,6 +227,7 @@
         - position: 12, 1
         - position: 13, 1
         - position: 14, 1
+        - position: 15, 1
       "M1984 service pistol":
         - position: 10, 4
         - position: 10, 7
@@ -235,10 +235,19 @@
         - position: 10, 13
       "pistol magazine (.45 ACP rubber)":
         - position: 13, 4
+        - position: 13, 7
         - position: 13, 10
+        - position: 13, 13
       "pistol magazine (.45 ACP)":
+        - position: 14, 4
+        - position: 15, 4
         - position: 14, 7
+        - position: 15, 7
+        - position: 14, 10
+        - position: 15, 10
         - position: 14, 13
+        - position: 15, 13
+
 - type: entity
   id: PVGunSafeShotgunGrid
   abstract: true
@@ -268,6 +277,7 @@
     - 11,14,12,15
     - 8,14,9,15
     - 14,14,16,15
+    - 14,17,16,18
     maxItemSize: Ginormous
     savedLocations:
       "Sentiel":
@@ -278,6 +288,30 @@
         - position: 1, 8
       "M890":
         - position: 1, 10
+      "riot shotgun":
+        - position: 1, 12
+      "12 gauge buckshot speedloader":
+        - position: 8, 2
+        - position: 9, 2
+        - position: 8, 5
+        - position: 9, 5
+        - position: 8, 8
+        - position: 9, 8
+        - position: 8, 11
+        - position: 9, 11
+        - position: 8, 14
+        - position: 9, 14
+      "12 gauge beanbag speedloader":
+        - position: 11, 2
+        - position: 12, 2
+        - position: 11, 5
+        - position: 12, 5
+        - position: 11, 8
+        - position: 12, 8
+        - position: 11, 11
+        - position: 12, 11
+        - position: 11, 14
+        - position: 12, 14
       "box of 12 gauge buckshot":
         - position: 14, 2
         - position: 14, 5
@@ -285,6 +319,8 @@
       "box of 12 gauge beanbag slugs":
         - position: 14, 11
         - position: 14, 14
+        - position: 14, 17
+
 - type: entity
   id: PVGunSafeDMRGrid
   abstract: true
@@ -346,6 +382,8 @@
         - position: 16, 1
         - position: 17, 1
         - position: 18, 1
+        - position: 19, 1
+
 - type: entity
   id: PVGunSafePistolGrid
   abstract: true
@@ -550,6 +588,27 @@
       "ammunition box (5.56x45mm)":
         - position: 13, 1
         - position: 14, 1
-      "ammunition box (7.62x51mm NATO)":
         - position: 15, 1
+      "ammunition box (7.62x51mm NATO)":
         - position: 16, 1
+        - position: 17, 1
+        - position: 18, 1
+      "M1984 service pistol":
+        - position: 13, 4
+        - position: 13, 7
+        - position: 13, 10
+        - position: 13, 13
+      "pistol magazine (.45 ACP rubber)":
+        - position: 16, 4
+        - position: 16, 7
+        - position: 16, 10
+        - position: 16, 13
+      "pistol magazine (.45 ACP)":
+        - position: 17, 4
+        - position: 18, 4
+        - position: 17, 7
+        - position: 18, 7
+        - position: 17, 10
+        - position: 18, 10
+        - position: 17, 13
+        - position: 18, 13

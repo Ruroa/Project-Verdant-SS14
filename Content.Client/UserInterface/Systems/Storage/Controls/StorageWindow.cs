@@ -494,7 +494,7 @@ public sealed partial class StorageWindow : BaseWindow
                 };
                 gridPiece.OnPiecePressed += OnPiecePressed;
                 gridPiece.OnPieceUnpressed += OnPieceUnpressed;
-                var controlIndex = loc.Position.X + loc.Position.Y * (boundingGrid.Width + 1);
+                var controlIndex = GetGridIndex(gridPiece);
 
                 _controlGrid[controlIndex].AddChild(gridPiece);
                 _pieces[ent] = (loc, gridPiece);
