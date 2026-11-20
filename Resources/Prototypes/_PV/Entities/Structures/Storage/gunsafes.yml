@@ -288,7 +288,6 @@
         - position: 1, 8
       "M890":
         - position: 1, 10
-      "riot shotgun":
         - position: 1, 12
       "12 gauge buckshot speedloader":
         - position: 8, 2
@@ -383,6 +382,25 @@
         - position: 17, 1
         - position: 18, 1
         - position: 19, 1
+      "FL57":
+        - position: 14, 4
+        - position: 14, 7
+        - position: 14, 10
+        - position: 14, 13
+      "pistol magazine (5.7x26mm rubber)":
+        - position: 17, 4
+        - position: 17, 7
+        - position: 17, 10
+        - position: 17, 13
+      "pistol magazine (5.7x26mm)":
+        - position: 18, 4
+        - position: 19, 4
+        - position: 18, 7
+        - position: 19, 7
+        - position: 18, 10
+        - position: 19, 10
+        - position: 18, 13
+        - position: 19, 13
 
 - type: entity
   id: PVGunSafePistolGrid
@@ -437,18 +455,34 @@
         - position: 8, 10
       "pistol magazine (5.7x26mm rubber)":
         - position: 4, 1
-      "pistol magazine (5.7x26mm)":
         - position: 11, 1
+      "pistol magazine (5.7x26mm)":
+        - position: 5, 1
+        - position: 6, 1
+        - position: 12, 1
+        - position: 13, 1
       "pistol magazine (9x19mm rubber)":
         - position: 4, 4
-      "pistol magazine (9x19mm)":
         - position: 11, 4
+      "pistol magazine (9x19mm)":
+        - position: 5, 4
+        - position: 6, 4
+        - position: 12, 4
+        - position: 13, 4
       "pistol magazine (.45 ACP rubber)":
         - position: 4, 7
-        - position: 4, 10
-      "pistol magazine (.45 ACP)":
         - position: 11, 7
+        - position: 4, 10
         - position: 11, 10
+      "pistol magazine (.45 ACP)":
+        - position: 5, 7
+        - position: 6, 7
+        - position: 12, 7
+        - position: 13, 7
+        - position: 5, 10
+        - position: 6, 10
+        - position: 12, 10
+        - position: 13, 10
 - type: entity
   id: PVGunSafeDisablerGrid
   abstract: true

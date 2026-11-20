@@ -256,27 +256,27 @@
     - id: WeaponPistolFL57
       amount: 2
     - id: MagazinePV57Rubber
-      amount: 1
+      amount: 2
     - id: MagazinePV57
-      amount: 1
+      amount: 4
     - id: WeaponPistolLA2
       amount: 2
     - id: MagazinePV9x19Rubber
-      amount: 1
+      amount: 2
     - id: MagazinePV9x19
-      amount: 1
+      amount: 4
     - id: WeaponPistolM1984
       amount: 2
     - id: MagazinePV45ACPRubber
-      amount: 1
+      amount: 2
     - id: MagazinePV45ACP
-      amount: 1
+      amount: 4
     - id: WeaponPistolM1911
       amount: 2
     - id: MagazinePV45ACPRubber
-      amount: 1
+      amount: 2
     - id: MagazinePV45ACP
-      amount: 1
+      amount: 4
 - type: entity
   parent: [PVGunSafeM4Grid, BaseSecurityContraband]
   id: GunSafeRifleLecter
@@ -349,7 +349,7 @@
     - id: WeaponShotgunKammerer
       amount: 2
     - id: WeaponShotgunM890
-    - id: WeaponShotgunRiot
+      amount: 2
     - id: SpeedLoaderMagnumBasic
       amount: 10
     - id: SpeedLoaderShotgunBeanbag
@@ -380,6 +380,12 @@
       amount: 10
     - id: PVAmmoBox762x51
       amount: 6
+    - id: WeaponPistolFL57
+      amount: 4
+    - id: MagazinePV57Rubber
+      amount: 4
+    - id: MagazinePV57
+      amount: 8
 - type: entity
   parent: [PVGunSafeDTMDRGrid, BaseSecurityContraband]
   id: GunSafePVDTMDR
