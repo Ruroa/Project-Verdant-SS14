@@ -1,7 +1,7 @@
 # PV custom armory safe loadouts. These use their own prototypes so the standard safes remain available.
 
 - type: entity
-  parent: [PVGunSafePVDisablerGrid, BaseSecurityContraband]
+  parent: [PVGunSafeDisablerGrid, BaseSecurityContraband]
   id: GunSafePVDisabler
   name: disabler, taser, and flash safe
   components:
