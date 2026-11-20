@@ -347,43 +347,6 @@
       storagebase: !type:NestedSelector
         tableId: FillPVGunSafeShotguns
 - type: entityTable
-  id: FillGunSafeShotgunEnforcer
-  table: !type:AllSelector
-    children:
-    - id: BoxFiringPin
-    - id: WeaponShotgunEnforcer
-      amount: 2
-    - id: WeaponShotgunKammerer
-      amount: 2
-    - id: WeaponShotgunM890
-    - id: BoxLethalshot
-      amount: 3
-    - id: BoxBeanbag
-      amount: 2
-- type: entity
-  parent: [PVGunSafeShotgunGrid, BaseSecurityContraband]
-  id: GunSafeShotgunKammerer
-  name: shotgun safe
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:NestedSelector
-        tableId: FillPVGunSafeShotguns
-- type: entityTable
-  id: FillGunSafeShotgunKammerer
-  table: !type:AllSelector
-    children:
-    - id: BoxFiringPin
-    - id: WeaponShotgunEnforcer
-      amount: 2
-    - id: WeaponShotgunKammerer
-      amount: 2
-    - id: WeaponShotgunM890
-    - id: BoxLethalshot
-      amount: 3
-    - id: BoxBeanbag
-      amount: 2
-- type: entityTable
   id: FillPVGunSafeShotguns
   table: !type:AllSelector
     children:
