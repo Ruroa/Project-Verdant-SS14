@@ -255,20 +255,28 @@
     children:
     - id: WeaponPistolFL57
       amount: 2
+    - id: MagazinePV57Rubber
+      amount: 1
     - id: MagazinePV57
-      amount: 2
+      amount: 1
     - id: WeaponPistolLA2
       amount: 2
+    - id: MagazinePV9x19Rubber
+      amount: 1
     - id: MagazinePV9x19
-      amount: 2
+      amount: 1
     - id: WeaponPistolM1984
       amount: 2
+    - id: MagazinePV45ACPRubber
+      amount: 1
     - id: MagazinePV45ACP
-      amount: 2
+      amount: 1
     - id: WeaponPistolM1911
       amount: 2
+    - id: MagazinePV45ACPRubber
+      amount: 1
     - id: MagazinePV45ACP
-      amount: 2
+      amount: 1
 - type: entity
   parent: [PVGunSafeM4Grid, BaseSecurityContraband]
   id: GunSafeRifleLecter
@@ -284,17 +292,23 @@
     children:
     - id: WeaponRifleM4
       amount: 5
+    - id: MagazinePV556Rubber
+      amount: 5
     - id: MagazinePV556
-      amount: 15
+      amount: 10
     - id: PVAmmoBox556
       amount: 5
     - id: WeaponPistolFL57
+    - id: MagazinePV57Rubber
     - id: MagazinePV57
     - id: WeaponPistolLA2
+    - id: MagazinePV9x19Rubber
     - id: MagazinePV9x19
     - id: WeaponPistolM1984
+    - id: MagazinePV45ACPRubber
     - id: MagazinePV45ACP
     - id: WeaponPistolM1911
+    - id: MagazinePV45ACPRubber
     - id: MagazinePV45ACP
 - type: entity
   parent: [PVGunSafeSMGGrid, BaseSecurityContraband]
@@ -311,14 +325,18 @@
     children:
     - id: WeaponSMGMP5
       amount: 5
+    - id: MagazinePVMP5Rubber
+      amount: 5
     - id: MagazinePVMP5
-      amount: 15
+      amount: 10
     - id: PVAmmoBox9x19
       amount: 5
     - id: WeaponPistolM1984
       amount: 4
     - id: MagazinePV45ACP
-      amount: 4
+      amount: 2
+    - id: MagazinePV45ACPRubber
+      amount: 2
 - type: entity
   parent: [PVGunSafeShotgunGrid, BaseSecurityContraband]
   id: GunSafeShotgunEnforcer
@@ -396,8 +414,10 @@
     children:
     - id: WeaponRifleSR32
       amount: 5
+    - id: MagazinePV762x51Rubber
+      amount: 5
     - id: MagazinePV762x51
-      amount: 15
+      amount: 10
     - id: PVAmmoBox762x51
       amount: 5
 
@@ -417,14 +437,18 @@
     children:
     - id: WeaponRifleDTMDR556
       amount: 2
+    - id: MagazinePV556Rubber
+      amount: 2
     - id: MagazinePV556
-      amount: 6
+      amount: 4
     - id: PVAmmoBox556
       amount: 2
     - id: WeaponRifleDTMDR762
       amount: 2
+    - id: MagazinePV762x51Rubber
+      amount: 2
     - id: MagazinePV762x51
-      amount: 6
+      amount: 4
     - id: PVAmmoBox762x51
       amount: 2
 
