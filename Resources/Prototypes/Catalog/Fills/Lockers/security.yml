@@ -350,7 +350,6 @@
   id: FillPVGunSafeShotguns
   table: !type:AllSelector
     children:
-    - id: BoxFiringPin
     - id: WeaponShotgunEnforcer
       amount: 2
     - id: WeaponShotgunKammerer
