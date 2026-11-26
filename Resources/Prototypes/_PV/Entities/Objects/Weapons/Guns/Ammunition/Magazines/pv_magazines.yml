@@ -5,6 +5,8 @@
   components:
   - type: Item
     size: Small
+    shape:
+    - 0,0,0,1
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -283,3 +285,51 @@
       tags: [ CartridgeMagnum ]
   - type: Sprite
     sprite: _PV/Objects/Weapons/Guns/Ammo/Magazines/SMG/Vector45acp.rsi
+
+- type: entity
+  parent: MagazinePV9x19
+  id: MagazinePV9x19Rubber
+  name: pistol magazine (9x19mm less-lethal)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV9x19Rubber
+
+- type: entity
+  parent: MagazinePV45ACP
+  id: MagazinePV45ACPRubber
+  name: pistol magazine (.45 ACP less-lethal)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV45ACPRubber
+
+- type: entity
+  parent: MagazinePV57
+  id: MagazinePV57Rubber
+  name: pistol magazine (5.7x26mm less-lethal)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV57Rubber
+
+- type: entity
+  parent: MagazinePV556
+  id: MagazinePV556Rubber
+  name: rifle magazine (5.56x45mm less-lethal)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV556Rubber
+
+- type: entity
+  parent: MagazinePV762x51
+  id: MagazinePV762x51Rubber
+  name: rifle magazine (7.62x51mm less-lethal)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV762x51Rubber
+
+- type: entity
+  parent: MagazinePVMP5
+  id: MagazinePVMP5Rubber
+  name: MP5 magazine (9x19mm less-lethal)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePV9x19Rubber
