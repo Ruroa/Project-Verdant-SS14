@@ -1,9 +1,14 @@
 using Content.Server.GameTicking;
+using Content.Server.Light.EntitySystems;
 using Content.Server.Spawners.Components;
 using Content.Shared.EntityTable;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Light.Components;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -19,6 +24,8 @@ namespace Content.Server.Spawners.EntitySystems
         [Dependency] private GameTicker _ticker = default!;
         [Dependency] private EntityTableSystem _entityTable = default!;
         [Dependency] private TransformSystem _xform = default!;
+        [Dependency] private RoofSystem _roof = default!;
+        [Dependency] private SharedMapSystem _map = default!;
 
         public override void Initialize()
         {
@@ -44,6 +51,23 @@ namespace Content.Server.Spawners.EntitySystems
 
         private void OnEntityTableSpawnMapInit(Entity<EntityTableSpawnerComponent> ent, ref MapInitEvent args)
         {
+            if (ent.Comp.RequireRoof)
+            {
+                // PV roof markers apply their tile flags on the next timer tick.
+                Timer.Spawn(0.1f, () =>
+                {
+                    if (TerminatingOrDeleted(ent) || !Exists(ent))
+                        return;
+
+                    if (IsRoofed(ent.Owner))
+                        Spawn(ent);
+
+                    if (ent.Comp.DeleteSpawnerAfterSpawn)
+                        QueueDel(ent);
+                });
+                return;
+            }
+
             Spawn(ent);
             if (ent.Comp.DeleteSpawnerAfterSpawn && !TerminatingOrDeleted(ent) && Exists(ent))
                 QueueDel(ent);
@@ -79,6 +103,20 @@ namespace Content.Server.Spawners.EntitySystems
                 Spawn(uid, component);
                 return;
             }
+        }
+
+        private bool IsRoofed(EntityUid uid)
+        {
+            var xform = Transform(uid);
+            if (xform.GridUid is not { } gridUid ||
+                !TryComp<MapGridComponent>(gridUid, out var grid) ||
+                !TryComp<RoofComponent>(gridUid, out var roof))
+            {
+                return false;
+            }
+
+            var tile = _map.LocalToTile(gridUid, grid, xform.Coordinates);
+            return _roof.IsRooved((gridUid, grid, roof), tile);
         }
 
         private void Spawn(EntityUid uid, ConditionalSpawnerComponent component)
