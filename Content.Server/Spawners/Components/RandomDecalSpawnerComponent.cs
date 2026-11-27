@@ -93,6 +93,12 @@ public sealed partial class RandomDecalSpawnerComponent : Component
     public bool? Cleanable = null;
 
     /// <summary>
+    /// Only spawn decals on tiles covered by a roof.
+    /// </summary>
+    [DataField]
+    public bool RequireRoof = false;
+
+    /// <summary>
     /// A list of tile prototype IDs to only place decals on.
     /// </summary>
     /// <remarks>
