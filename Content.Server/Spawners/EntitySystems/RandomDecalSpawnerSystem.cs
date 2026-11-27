@@ -33,7 +33,7 @@ public sealed partial class RandomDecalSpawnerSystem : EntitySystem
         {
             // PV roof markers apply their tile flags on the next timer tick.
             var deleteSpawner = component.DeleteSpawnerAfterSpawn;
-            Timer.Spawn(0.1f, () =>
+            Timer.Spawn(100, () =>
             {
                 if (TerminatingOrDeleted(uid) || !Exists(uid))
                     return;
