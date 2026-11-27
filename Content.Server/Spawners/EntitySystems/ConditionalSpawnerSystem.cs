@@ -54,7 +54,7 @@ namespace Content.Server.Spawners.EntitySystems
             if (ent.Comp.RequireRoof)
             {
                 // PV roof markers apply their tile flags on the next timer tick.
-                Timer.Spawn(0.1f, () =>
+                Timer.Spawn(100, () =>
                 {
                     if (TerminatingOrDeleted(ent) || !Exists(ent))
                         return;
