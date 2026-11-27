@@ -408,11 +408,9 @@ public partial class SharedGunSystem
                 args.Ammo.Add((ammoEnt.Value, EnsureComp<AmmoComponent>(ammoEnt.Value)));
             }
 
-            // Delete the cartridge entity on client
+            // Remove the predicted cartridge on the client without queuing deletion of its networked entity.
             if (_netManager.IsClient)
-            {
-                QueueDel(ammoEnt);
-            }
+                EntityManager.PredictedDeleteEntity(ammoEnt.Value);
         }
 
         UpdateAmmoCount(ent, prediction: false);
